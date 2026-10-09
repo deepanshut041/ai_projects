@@ -11,3 +11,8 @@ dist/
 runs/
 data/
 weights/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.safetensors

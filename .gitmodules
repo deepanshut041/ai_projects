@@ -1,5 +1,5 @@
 [submodule "project_docs"]
-	path = project_docs
+	path = docs
 	url = ../.ai/repositories/project_docs.git
 [submodule "projects/linear-model-lab"]
 	path = projects/linear-model-lab

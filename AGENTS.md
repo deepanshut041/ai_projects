@@ -1,9 +1,28 @@
-# AI projects
+# AI Projects
 
-This umbrella owns `cli/`, project templates, workspace tools, and implementation/verification records. Independent implementations are submodules under `projects/`; the independent `project_docs/` submodule owns the Projects website. Research belongs in sibling `../ai_research/`.
+All shared Projects documentation belongs under `docs/`. Begin with docs/README.md, docs/resume.md, docs/progress.md, docs/roadmap.md and docs/decisions.md. README.md and AGENTS.md are the only visible regular files permitted in this root. Do not create root-level tracking/setup/tutorial files, legacy roadmap copies or a duplicate launcher. Use the shared ../ai launcher from this directory, or ./ai from workspace home. Preserve the hidden Git/skill configuration and independent repository directories.
 
-Read each child's instructions before editing. Preserve child history and unrelated edits. Submodule commits and parent pointers are separate decisions. Local initialization snapshots are part of setup; do not push or publish without a user request.
+## Roadmap and continuation context
 
-For CLI changes run `cd cli && uv run --frozen pytest -q` and `../ai tui --smoke`. For numerical changes compare with analytic answers or an independent reference. Test failure cases and state tolerances. Do not judge a model using its training loss alone.
+Paths in this file are relative to the Projects root. Current embedded checkpoint: **2026-10-09 — P01 GPT-1, P01-M1 not started**. Workspace/docs cleanup, roadmap consolidation, shared CLI, seven skills and the reference-only P01 tutorial are verified preparation; Colab Free training/recovery requirements are recorded. No GPT repository/model/notebook/training exists yet; seed labs do not complete a roadmap project. Adaptive tutorial/live-teaching guidance and the P01 prerequisite/transfer route are implemented; learner understanding remains unassessed. The [pre-P01 local commit review](docs/implementation/2026-10/ai-workspace-setup/07-pre-p01-commit-review.md) records repository preparation and current checks.
 
-Use `../ai task new TITLE --owner projects` for substantial work. The shared AI workflow is `../ai_research/research_docs/WORKFLOW.md`. Runtime state belongs in ignored `../.ai/`. Stop only processes whose recorded identity belongs to this manager.
+At the start of every project session:
+
+1. Read [docs/resume.md](docs/resume.md) for the current project, milestone and next action, then [docs/progress.md](docs/progress.md) for completed work, evidence and pending learning gates.
+2. Read the relevant part of [docs/roadmap.md](docs/roadmap.md) and [docs/decisions.md](docs/decisions.md). Follow its sequence/prerequisites and the complete-model learning cycle; keep narrow Research separate.
+3. Inspect current Git state, the target child's README/AGENTS, and its existing package's resume/tracker. Reconcile those with the canonical checkpoint and the latest user instruction. Continue existing work; do not recreate a repository/package or redo setup just because this chat is new.
+4. State briefly which project/milestone is active, what relevant work is already done and the concrete next action. Read the linked evidence before treating a gate as passed; separate implemented/tested/trained work from learner understanding.
+
+For the current P01-M1, use [docs/START_HERE.md](docs/START_HERE.md): create/resume projects/gpt-lab, pin sources, map shapes, declare tiny config/tokenizer/data/targets plus Colab Free setup/storage/budgets. The tutorial is preparation, not completed M1.
+
+Develop/check locally; P01–P04 must provide complete miniature-model training on Colab Free. Read [docs/COLAB.md](docs/COLAB.md) and carry its thin common-trainer notebook, complete persistent training-state checkpoints, interrupted-save fallback and recovery after runtime deletion into the child's package. Actual notebooks and hosted proof remain pending; later tiers are chosen from evidence, with Pro later when requested.
+
+Before ending meaningful work, update the child package plus docs/progress.md and docs/resume.md with actual changes, checks, learner observations, unresolved questions and one next action. Append durable changes to docs/decisions.md. When the current project, milestone/status, completed-work summary or next action changes, refresh the compact snapshots in Projects README/AGENTS, docs README/AGENTS and workspace-home README/AGENTS. Canonical docs prevail over stale embedded snapshots; keep detailed history/evidence under docs/.
+
+The independent `docs/` submodule owns the documentation tree and website. Independent model implementations are submodules under `projects/`. Research belongs in ../ai_research/; shared CLI tooling belongs in ../cli/. Preserve existing edits and repository history, and read each child's AGENTS.md before editing.
+
+C++ and Python are the project and tutorial programming choices. Preserve hands-on implementation, small-model training, inspection/debugging and explanation as separate learning gates. Numerical changes need analytic answers or an independent reference, failure checks and stated tolerances; training loss alone does not establish model quality or understanding.
+
+Use the shared planning skill at .agents/skills/planning/SKILL.md for substantial work. The collection links to ../ai_research/research_docs/.agents/skills/; do not duplicate it. Create/resume shared documentation work under docs/implementation/ with ../ai task new TITLE --owner projects or --owner project-docs. CLI and child work use their own owners. Update docs/progress.md and docs/resume.md after meaningful work.
+
+Tutorials belong in docs/tutorials/ and are Git-eligible. Follow the shared developer-learning-tutorials and feature-whiteboard-defense skills. Runtime state, environments, weights, datasets and generated runs stay ignored. Local work is authorized; remote publication and deployment need a user instruction.
