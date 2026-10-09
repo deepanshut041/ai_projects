@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+project_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+cli_dir="$project_dir/cli"
+export AI_WORKSPACE="${AI_WORKSPACE:-$(dirname -- "$project_dir")}"
+export PYTHONPATH="$cli_dir/src"
+if ! command -v uv >/dev/null 2>&1; then
+  printf '%s\n' 'AI needs uv. Install it from https://docs.astral.sh/uv/getting-started/installation/ and rerun this command.' >&2
+  exit 1
+fi
+# uv performs a fast lock/environment check on each launch, updating only when needed.
+uv sync --project "$cli_dir" --frozen --quiet
+exec "$cli_dir/.venv/bin/python" -m ai_cli "$@"
