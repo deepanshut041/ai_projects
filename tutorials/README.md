@@ -2,7 +2,7 @@
 
 All tutorials live here, inside the consolidated Projects docs repository. They are eligible for Git. Use C++ and Python; preserve editable diagrams, sources, examples, scenarios, retrieval exercises and whiteboard preparation beside each lesson.
 
-Start with [P01 GPT-1 foundations](projects/p01/gpt-1-foundations/v1/lesson.md). It is a reference-design orientation with runnable toy examples, not a completed model or demonstrated learner mastery. The remaining projects are planned in index.json; add their lessons as actual project work proceeds.
+Start the learning route with [P00 in the roadmap](../roadmap.md#project-0-tokenization-and-transformer-foundations) and [START_HERE.md](../START_HERE.md). P00 lessons are planned, not authored yet. Preserve [P01 GPT-1 foundations](projects/p01/gpt-1-foundations/v1/lesson.md) as a historical architecture reference with runnable toy examples; it does not describe the required pre-norm Small GPT model. index.json tracks P00–P19; add new lessons from actual milestone work. Tutorial availability never establishes model completion or learner mastery.
 
 The P01 route now includes a prerequisite check, concept-dependency map, motivated masking/target derivations and a misconception check. Try each prediction before revealing its worked answer. For live teaching, ask the agent to work through one question at a time; learner knowledge remains unchecked until an actual answer is given. See the [improvement plan](../implementation/2026-10/learn-inspired-adaptive-tutorial-improvements/02-human-plan.md) for the source comparison and scope.
 

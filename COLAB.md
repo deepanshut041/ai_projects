@@ -1,11 +1,11 @@
 # Colab training and recovery contract
 
 Updated: 2026-10-09
-Status: requirements recorded; model notebooks, training and hosted recovery checks are pending. Current project: P01 GPT-1 / P01-M1 not-started. Read [resume.md](resume.md), [roadmap.md](roadmap.md) and [START_HERE.md](START_HERE.md) before implementation.
+Status: requirements recorded; model notebooks, training and hosted recovery checks are pending. Current project: P00 Tokenization and Transformer Foundations / P00-M1 not-started; P01 is the later Small GPT Language Model. Read [resume.md](resume.md), [roadmap.md](roadmap.md) and [START_HERE.md](START_HERE.md) before implementation.
 
 ## Free first, Pro later
 
-Develop and check models locally; run bounded training through Google Colab. Initially **P01–P04** (GPT-1, GPT-2, Llama 2/3, Qwen Dense) must supply a Colab Free learning profile and recovery workflow. These are complete miniature architecture implementations, not full-size pretrained models. Each named variant needs coverage. This initial interpretation of “first few” can change with measured evidence. P05 onward gets a compute decision at kickoff; Free feasibility is not assumed for the whole roadmap.
+Develop and check models locally; run bounded training through Google Colab. Initially **P00–P04** (tokenizer/Transformer foundations, small GPT, GPT-2, Llama 2/3, Qwen Dense) must supply a Colab Free learning profile and recovery workflow. These are complete miniature architecture implementations, not full-size pretrained models. Each named variant needs coverage. P00 joins the earlier group because it ends in a complete trained conditional model. The tier choice can change with measured evidence. P05 onward gets a compute decision at kickoff; Free feasibility is not assumed for the whole roadmap.
 
 Colab resources and timeouts vary; GPUs are not guaranteed. VMs are temporary. Free notebooks may run for at most 12 hours depending on availability and usage; design much shorter sessions. Paid plans also have resource constraints. These are service facts from the [Google Colab FAQ](https://research.google.com/colaboratory/faq.html), checked 2026-10-09; the budgets and recovery protocol below are workspace design requirements.
 
@@ -20,7 +20,7 @@ Colab resources and timeouts vary; GPUs are not guaranteed. VMs are temporary. F
 
 Keep C++/Python learning examples and native correctness paths. Python/PyTorch supplies the first Colab training entry point. Optional C++ extensions need a reproducible Colab build before they can become required; they must not block the reference training path.
 
-Start P01's Colab smoke run with M1's 2-layer, width-64, context-64, V260 configuration. Scale toward the saved small CPU model only after measuring. Keep architecture mechanisms intact when sizing a Free profile. At each project kickoff record actual parameters, system RAM, GPU/VRAM if available, peak memory, step time, dataset/token budget, checkpoint bytes and persistence time. Proposed budgets are not hardware-fit evidence.
+Start P00's model smoke with 1 encoder + 1 decoder layer, width 32, 4 heads, FFN 128, source/target limit 32 and V260; its proposed Free profile is up to 2+2 layers/width 64/limit 64/V≤512. P01's correctness model remains 2 decoder layers/width 64/context 64/V260, with the actual frozen vocabulary in its BPE profile. Scale toward the saved small CPU model only after measuring. Keep architecture mechanisms intact when sizing a Free profile. At each project kickoff record actual parameters, system RAM, GPU/VRAM if available, peak memory, step time, dataset/token budget, checkpoint bytes and persistence time. Proposed budgets are not hardware-fit evidence.
 
 ## Child-owned artifacts and notebook flow
 
@@ -32,7 +32,7 @@ Each early independent model repository must include:
 - A documented, tested Colab dependency setup alongside the local lock, plus a captured runtime environment manifest. Check the actual Python/PyTorch/CUDA environment; a local CPU wheel lock is not Colab GPU compatibility proof.
 - A README quickstart, data acquisition/provenance instructions, checkpoint/recovery tests and a small authored verification report.
 
-Create these with P01 model implementation; they do not exist yet. The notebook must run top-to-bottom on a fresh runtime and also recover an existing run without depending on hidden cell state:
+Create these with P00-M5 model training/recovery and again for P01; neither model repository/notebook exists yet. Tokenizer-only exercises need artifact determinism/save-load checks; hosted training/recovery gates apply to the complete P00 model, not every tokenization exercise. The notebook must run top-to-bottom on a fresh runtime and also recover an existing run without depending on hidden cell state:
 
 1. Obtain the exact child source, install its declared dependencies and print source/config/environment identity. Call commands with argument arrays, explicit working directories and checked exit status.
 2. Let the user mount Drive and select a persistent run root and stable run ID. Verify read/write access, storage space and the intended run's manifest before training.

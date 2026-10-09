@@ -11,7 +11,7 @@ Read [roadmap.md](roadmap.md), [progress.md](progress.md) and [resume.md](resume
 | `research-docs` | `ai_research/research_docs` | npm content/build/browser | Local Research site, four authored records |
 | `generalization-lab` | `ai_research/generalization-lab` | pytest; known parameters; repeatable aggregates | Small synthetic protocol with five seeds |
 
-P01 GPT-1 and the other roadmap models are not started; retained seed examples do not complete them.
+P00 Tokenization and Transformer Foundations, P01 Small GPT Language Model and later models are not started. Proposed transformer-foundations-lab and gpt-lab are not registered/created yet; retained seed examples do not complete them.
 
 Each code example has a standalone README, public Python package, demo, meaningful tests, pinned environment and wheel/sdist build. None needs credentials, a GPU, provider calls or downloaded models. Initial dependency installation may need network/cache access.
 

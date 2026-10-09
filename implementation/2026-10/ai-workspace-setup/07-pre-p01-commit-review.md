@@ -41,3 +41,11 @@ The first CLI run was 63 passed / 1 failed: the test still expected six SVG diag
 Selected authored reports, diagrams and verification artifacts are eligible for Git. New test screenshots, builds, environments and process state remain ignored. Earlier dated package statements about no commits describe their original sessions; this explicit user request authorizes the pre-P01 local commits. No external publication or paid compute is claimed.
 
 Next project action: create/resume gpt-lab and complete P01-M1 source/config/tokenizer/data and Colab Free setup/storage/budget contracts.
+
+## Included completed Project Zero revision
+
+While the baseline commits were being finalized, the separate “Add a Project Zero foundation” chat revised the same workspace. The user explicitly chose to wait and include its completed revision. That task has now finished: P00 Tokenization and Transformer Foundations / P00-M1 is the canonical not-started checkpoint, followed by P01 Small GPT Language Model. The original P01 baseline described above is historical.
+
+The P00 documentation/website and CLI-owned architecture changes are saved as separate commits, followed by the Projects umbrella's updated child revision. Its [delivery review](../project-zero-foundations-and-small-gpt-roadmap/06-review.md), verification manifest and preservation report record 7 documentation tests, build/browser checks for 15 records / 13 sources, 64 CLI tests, TUI, local-site inspection and preserved earlier model notes/tutorial assets. No P00/GPT implementation or training began.
+
+Final repository audit checks all nine Git working trees, all six committed submodule pointers and staged whitespace after this delivery. The resulting commit identities are recorded in Git history; no push or publication is included. Workspace-home entry points remain outside Git by the established ownership layout.

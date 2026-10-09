@@ -53,15 +53,3 @@ Record whether the actual user instruction authorizes planning only or also exec
 
 | Source/path and version | Finding | Impact on the task | Limitation |
 | --- | --- | --- | --- |
-
-## Requirements, constraints, and non-goals
-
-Not assessed yet. Include destination, available inputs, budget, and applicable repository instructions.
-
-## Assumptions and open questions
-
-Separate evidence-backed facts from assumptions; identify which dependent action each material question affects.
-
-## Research readiness
-
-Not assessed. Record enough evidence to choose the next approach; record missing access or evidence explicitly.

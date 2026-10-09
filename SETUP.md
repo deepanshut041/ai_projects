@@ -2,7 +2,7 @@
 
 Start with [resume.md](resume.md), [progress.md](progress.md) and [roadmap.md](roadmap.md). The workspace CLI lives independently at [../cli](../../cli/README.md), outside Projects and Research.
 
-For the first model follow [START_HERE.md](START_HERE.md). The generic repository scaffold has no model runtime; add and lock CPU PyTorch in the independent GPT project during kickoff, not in the shared CLI environment. Its placeholder tests intentionally fail until actual implementation tests exist.
+For the first model follow [START_HERE.md](START_HERE.md). The generic repository scaffold has no model runtime; add and lock CPU PyTorch in the independent P00 foundations project during kickoff, not in the shared CLI environment. Its placeholder tests intentionally fail until actual implementation tests exist.
 
 This workspace supports Linux process supervision through `/proc`, process groups and `fcntl`. The CLI uses Python 3.12 and the committed uv lock; documentation requires Node 22+ and npm. A C++20 compiler is used for tutorial examples and future native projects. C++ and Python are the learning languages. No GPU or model credentials are required for the seeded examples.
 
@@ -31,9 +31,9 @@ Aggregate commands operate on entries supporting that action, summarize failures
 
 ## Colab for model training
 
-Develop and verify locally, then train complete miniature models on Colab Free for P01–P04. [COLAB.md](COLAB.md) defines required child notebooks/configs, dependency setup, persistent full-state checkpoints, bounded sessions and recovery after runtime deletion. Later projects decide their compute tier from evidence; Pro remains a later user-directed choice.
+Develop and verify locally, then train complete miniature models on Colab Free for P00–P04. [COLAB.md](COLAB.md) defines required child notebooks/configs, dependency setup, persistent full-state checkpoints, bounded sessions and recovery after runtime deletion. Later projects decide their compute tier from evidence; Pro remains a later user-directed choice.
 
-Current remotes are local snapshots. The first notebook needs an exact, reproducible child-source ZIP upload path until hosted source publication is separately requested. Keep notebook outputs clear and datasets/weights/checkpoints ignored. Use Drive for verified run recovery and runtime-local disk for data access; the notebook calls the child's trainer without the workspace's Linux controller. Notebook implementation/training is pending P01, not established by these documentation checks.
+Current remotes are local snapshots. The first notebook needs an exact, reproducible child-source ZIP upload path until hosted source publication is separately requested. Keep notebook outputs clear and datasets/weights/checkpoints ignored. Use Drive for verified run recovery and runtime-local disk for data access; the notebook calls the child's trainer without the workspace's Linux controller. Notebook implementation/training is pending P00/P01, not established by these documentation checks.
 
 ## Websites
 
@@ -150,7 +150,7 @@ The canonical collection is in ai_research/research_docs/.agents/skills/. Projec
 | `$developer-learning-tutorials` | Create diagram-rich lessons, worked examples and practice | [tutorials](../../ai_research/research_docs/.agents/skills/developer-learning-tutorials/SKILL.md) |
 | `$feature-whiteboard-defense` | Build an evidence-backed explanation or rehearse when requested | [whiteboard defense](../../ai_research/research_docs/.agents/skills/feature-whiteboard-defense/SKILL.md) |
 
-For the first project, ask to use the workspace-local developer-learning-tutorials skill to extend P01 at its current milestone. Use --level introductory for a new introductory lesson. Ask for a whiteboard rehearsal when you want live questions; it presents one question at a time. Ordinary project learning remains in Projects even when it uses papers or bounded experiments.
+For the first project, ask to use the workspace-local developer-learning-tutorials skill to create/extend P00 at its current milestone; the existing P01 GPT-1 orientation stays a historical reference. Use --level introductory for a new introductory lesson. Ask for a whiteboard rehearsal when you want live questions; it presents one question at a time. Ordinary project learning remains in Projects even when it uses papers or bounded experiments.
 
 From workspace home, the reusable commands are:
 

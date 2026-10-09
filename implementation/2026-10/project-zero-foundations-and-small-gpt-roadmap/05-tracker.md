@@ -1,33 +1,19 @@
 # Tracker — Project Zero foundations and small GPT roadmap
 
-Created: 2026-10-09T23:21:45.966765+00:00
-Lead: ai-project-workflow
-Selected skills: ai-project-workflow, ai-paper-review
+Updated: 2026-10-09
+Lead: ai-project-workflow; supporting: ai-paper-review.
 
-## Current state
+- Scope: primary-source recommendation and local roadmap/state/site updates.
+- Model execution: not started; no child repository or training created.
+- Phase: documentation delivery complete; locally verified.
+- Next action: future learner session starts P00-M1; no roadmap-model milestone is complete.
+- Blockers: none known.
 
-- Planning status: not-started; scaffold only.
-- Execution status: not-started; scope must be established from the user request.
-- Current phase: intake/research.
-- Next action: inspect relevant context and establish acceptance criteria.
-- Blockers: not assessed.
-
-## Package
-
-- [01-research.md](01-research.md)
-- [02-human-plan.md](02-human-plan.md)
-- [02-implementation-plan.md](02-implementation-plan.md)
-- [03-tasks.md](03-tasks.md)
-- [04-diagrams.md](04-diagrams.md)
-- [05-tracker.md](05-tracker.md)
-- [06-review.md](06-review.md)
-- [00-resume.md](00-resume.md)
-
-## Dated decisions and progress
-
-| Date | Decision or change | Evidence | Remaining action |
+| Date | Work / finding | Evidence | Next |
 | --- | --- | --- | --- |
+| 2026-10-09 | Inspected canonical state/Git and sources; selected full miniature encoder–decoder P00 then small GPT P01 | 01-research.md, source-provenance.json | Define coherent milestones |
+| 2026-10-09 | Added P00 and clarified P01; six snapshots, live ledger/decisions, setup and tutorial membership updated | roadmap.md/progress.md/resume.md; D022–D025 | Finish COLAB/site/current diagrams and verify |
 
-## Validation and outcome
+Verification results are recorded as executed in 06-review.md/verification.json. Training, task thresholds, resource fit, learner understanding and hosted recovery remain pending. Preserve historical tutorial/package evidence and later roadmap details.
 
-No checks run yet. Distinguish passed, failed, skipped, and inconclusive results; link actual artifacts.
+2026-10-09 verification: existing Docs/CLI checks passed; inspected four selected live screenshots and refreshed architecture views. Fixed P00 heading-anchor punctuation and restarted the manager-owned Projects site to load changed renderer definitions. Preserved all prior roadmap URLs, later P03–P19 notes, existing tutorial revision, repository ownership/root layout and historical logs. See 06-review.md and verification.json.

@@ -14,7 +14,7 @@ test('tutorial exports preserve prefixes and reject changed or escaping artifact
   try {
     await fs.cp(path.join(root, 'tutorials'), path.join(temp, 'tutorials'), { recursive: true });
     const tutorial = await tutorialRecords(temp);
-    assert.equal(tutorial.index.projects.length, 19);
+    assert.equal(tutorial.index.projects.length, 20);
     assert.equal(tutorial.records.length, 1);
     const records = await readRecords(path.join(temp, 'content'), '/nested/', tutorial.records);
     assert.match(records[0].html, /href="\/nested\/tutorial-assets\/p01/);

@@ -28,7 +28,7 @@ try {
     assert.ok((await page.locator('article').innerText()).includes('P19'));
     await page.screenshot({ path: 'test-results/roadmap-desktop.png', fullPage: true });
     await page.getByRole('link', { name: 'resume.md', exact: true }).first().click(); await ready();
-    assert.ok((await page.locator('article').innerText()).includes('P01-M1'));
+    assert.ok((await page.locator('article').innerText()).includes('P00-M1'));
   }
   for (const record of records) {
     await page.goto(origin + record.url); await ready();

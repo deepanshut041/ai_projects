@@ -17,7 +17,7 @@ The consolidated docs/ repository owns roadmap.md, progress.md, resume.md and de
 ./ai roadmap projects --section decisions
 ```
 
-The default shows the current checkpoint and all four paths. Read the owner's AGENTS.md/Git state and topic package before editing. Project 1 is GPT-1; existing seed labs are supporting context, not completion of the full model.
+The default shows the current checkpoint and all four paths. Read the owner's AGENTS.md/Git state and topic package before editing. Start with P00 Tokenization and Transformer Foundations, then P01 Small GPT Language Model. Existing seed labs are supporting context, not completion of either model.
 
 When starting the first model, open the Start your first project record in the complete workspace, or read the owning START_HERE.md file. It explains the one-time repository/package creation and which runtime setup belongs in the child.
 
@@ -39,6 +39,6 @@ The shared CLI lives in workspace cli/, outside both umbrellas. Use --owner cli 
 
 ## Tutorials alongside project work
 
-All shared documentation lives under ai_projects/docs/. Tutorials live under docs/tutorials/ and are eligible for Git. Use C++ and Python, complementary diagrams, worked traces, declarative scenarios, retrieval checks and whiteboard preparation. The first GPT-1 orientation is in the Project tutorials section.
+All shared documentation lives under ai_projects/docs/. Tutorials live under docs/tutorials/ and are eligible for Git. Use C++ and Python, complementary diagrams, worked traces, declarative scenarios, retrieval checks and whiteboard preparation. The earlier GPT-1 orientation remains in Project tutorials as historical reference; P00 lessons are planned as milestone work proceeds.
 
 Run ./ai learn list, validate, examples and render from workspace home. Model code, training evidence and demonstrated learner understanding remain separate from the lesson being available. Extend each project’s tutorials from actual implementation work. Shared planning and tutorial skills point to the canonical collection in Research Docs.

@@ -1,17 +1,12 @@
-# Resume — Project Zero foundations and small GPT roadmap
+# Resume — Project Zero roadmap revision
 
-Updated: 2026-10-09T23:21:45.966765+00:00
-Checkpoint state: uninitialized scaffold.
+Updated: 2026-10-09
+State: implementation of documentation complete and locally verified.
 
-- Objective: Recommend a ground-up Project Zero covering tokenization and Attention Is All You Need implementation before a small GPT-style language model, then update the roadmap and related state docs.
-- Actual execution scope: not assessed; inspect the user instruction.
-- Lead: ai-project-workflow
-- Selected skills: ai-project-workflow, ai-paper-review
-- Current phase: intake/research.
-- Target repositories/files: not assessed.
-- Verified work and evidence: package scaffold only.
-- Open decisions or blocked work: not assessed.
-- External actions with unknown outcomes: none performed by this helper.
-- Next action: read the tracker, inspect sources/targets, then fill the plan.
+Objective: source-backed P00 tokenizer/Transformer foundations before P01 small GPT. Scope: local roadmap/state/site/architecture documents and their validation; no model creation/training or publication. Lead: AI project workflow; supporting: source review.
 
-Read `05-tracker.md` and the current target state before continuing. Replace this scaffold with a concise evidence-backed checkpoint after useful progress.
+Sources and pinned file hashes are saved in 01-research.md/source-provenance.json. P00 has six planned milestones ending in complete conditional-model training/recovery/transfer. P01 is a pre-norm decoder text LM, exact GPT-1/classification optional. Current canonical checkpoint is P00-M1 not-started; P01–P19 IDs and earlier evidence remain.
+
+Targets: ai_projects/docs canonical guides/state/site/catalog/tutorial index; workspace/Projects/Docs snapshots; existing CLI-owned architecture status labels. Current phase: delivery complete. Checks: Docs 7 content tests, build/browser across 15 records/13 sources, CLI 64 tests/TUI, preservation/local links/diagram source/XML and selected desktop/mobile views pass. The managed local Projects site was restarted to load updated renderer metadata. Next learning action: begin P00-M1 under the canonical checkpoint; no model work was executed. No external outcome is unknown; no blocker known.
+
+Read tracker and actual source/Git status before continuing. The canonical ../../../resume.md owns the next learning session; this package owns completion of this documentation task.

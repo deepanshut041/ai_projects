@@ -1,6 +1,6 @@
 ---
 title: "Deferred starter-lab ideas"
-description: "Preserved extensions to the seed examples; the current learning path starts with GPT-1."
+description: "Preserved extensions to the seed examples; the current learning path starts with P00 tokenizer/Transformer foundations."
 updated: "2026-10-09"
 status: "deferred reference"
 tags: ["questions", "next-project-directions"]
@@ -9,7 +9,7 @@ sources: []
 
 ## Current direction
 
-The selected next learning project is P01 GPT-1. Follow the canonical Projects resume/roadmap and START_HERE.md, or [the roadmap workflow](../guides/roadmap-workflow.md). The seed-lab ideas below are retained references; they do not replace that checkpoint or represent active research.
+The selected next learning project is P00 Tokenization and Transformer Foundations, followed by P01 Small GPT Language Model. Follow the canonical Projects resume/roadmap and START_HERE.md, or [the roadmap workflow](../guides/roadmap-workflow.md). The seed-lab ideas below are retained references; they do not replace that checkpoint or represent active research.
 
 ## Retained extension ideas
 

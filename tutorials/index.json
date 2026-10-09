@@ -6,9 +6,15 @@
   ],
   "projects": [
     {
+      "id": "P00",
+      "title": "Tokenization and Transformer Foundations",
+      "status": "planned",
+      "lessons": []
+    },
+    {
       "id": "P01",
-      "title": "GPT-1",
-      "status": "orientation-available",
+      "title": "Small GPT Language Model",
+      "status": "historical-reference-available",
       "lessons": [
         "projects/p01/gpt-1-foundations/v1"
       ]
@@ -21,7 +27,7 @@
     },
     {
       "id": "P03",
-      "title": "Llama 2 \u2192 Llama 3",
+      "title": "Llama 2 → Llama 3",
       "status": "planned",
       "lessons": []
     },
@@ -33,7 +39,7 @@
     },
     {
       "id": "P05",
-      "title": "Switch-style routing \u2192 Qwen3 MoE",
+      "title": "Switch-style routing → Qwen3 MoE",
       "status": "planned",
       "lessons": []
     },
@@ -69,7 +75,7 @@
     },
     {
       "id": "P11",
-      "title": "DeepSeek V3 \u2192 V3.2",
+      "title": "DeepSeek V3 → V3.2",
       "status": "planned",
       "lessons": []
     },
@@ -87,7 +93,7 @@
     },
     {
       "id": "P14",
-      "title": "Kimi Linear \u2192 Kimi K3-style model",
+      "title": "Kimi Linear → Kimi K3-style model",
       "status": "planned",
       "lessons": []
     },
@@ -99,7 +105,7 @@
     },
     {
       "id": "P16",
-      "title": "Mamba 2 \u2192 Mamba 3",
+      "title": "Mamba 2 → Mamba 3",
       "status": "planned",
       "lessons": []
     },
@@ -111,7 +117,7 @@
     },
     {
       "id": "P18",
-      "title": "LLaDA \u2192 iLLaDA; optional editing extension",
+      "title": "LLaDA → iLLaDA; optional editing extension",
       "status": "planned",
       "lessons": []
     },

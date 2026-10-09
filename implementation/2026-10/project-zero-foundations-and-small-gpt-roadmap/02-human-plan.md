@@ -1,32 +1,14 @@
-# Plan — Project Zero foundations and small GPT roadmap
+# Project Zero before a small GPT model
 
-Created: 2026-10-09T23:21:45.966765+00:00
-Task: 2026-10/project-zero-foundations-and-small-gpt-roadmap
-Package: full
-Lead: ai-project-workflow
-Selected skills: ai-project-workflow, ai-paper-review
-Status: scaffold; no completed plan or execution is implied.
+Updated: 2026-10-09
+Status: approach selected; documentation delivered and locally verified.
 
-## Requested outcome
+Begin with **P00 Tokenization and Transformer Foundations**, a single independent learning project, then **P01 Small GPT Language Model**. P00 ends with a complete tiny conditional Transformer trained on generated copy sequences. It builds tensor/gradient basics, character/byte/BPE tokenization, attention, masks and the encoder–decoder rather than requiring the learner to jump directly into an LLM.
 
-Recommend a ground-up Project Zero covering tokenization and Attention Is All You Need implementation before a small GPT-style language model, then update the roadmap and related state docs.
+Keep P01–P19 IDs and later architecture notes. P01 is a small decoder-only text model; exact GPT-1 architecture/classification is optional. Keep historical tutorials/plans intact and label them as references. P02 advances into GPT-2-specific coverage and cache verification without rebuilding the tokenizer fundamentals.
 
-## Scope and authorization
+Use Python/PyTorch for complete training and selected C++/Python traces. Local correctness comes first; P00–P04 require Free training and full persistent recovery. Compute profiles are proposed until measured. Source/task success, learning mastery and hosted recovery are distinct.
 
-Record deliverables, destination, constraints, and exclusions. Identify planning-only versus execution from the actual request. Record existing user decisions; do not manufacture an approval requirement.
+This request authorizes source research and local roadmap/state/site changes. Finish the reviewable documentation and local checks. Model repository creation, implementation and training remain future learner-session work, not deliverables of this roadmap update. No new remote/paid/deployment action is required.
 
-## Chosen approach and phases
-
-Not assessed yet. Explain the proposal in plain language and why the main tradeoff fits the request.
-
-## Acceptance criteria
-
-- [ ] Define observable evidence for the requested outcome.
-
-## Priorities and open decisions
-
-Use Must/Should/Could/Won't where useful. Record unanswered questions and safe assumptions explicitly.
-
-## Evidence and checks
-
-Link sources and actual validation. For a compact package, keep relevant research and verification here or in the tracker.
+Completion: canonical roadmap has a coherent P00/P01 path, six P00 milestones and observable gates; resume/progress/kickoff/decisions/compute/tutorial membership/six snapshots/site all agree; preserve historical/later content; pass existing content/build/browser checks and inspect representative desktop/mobile views. See [research](01-research.md), [detailed plan](02-implementation-plan.md) and [review](06-review.md).

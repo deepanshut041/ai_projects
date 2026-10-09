@@ -5,13 +5,14 @@ import path from 'node:path';
 export async function workspaceRecords(siteRoot, companionUrl) {
   const owner = path.resolve(siteRoot);
   const definitions = [
-    ['START_HERE.md', 'start-here', 'Start your first project', 'The GPT-1 kickoff commands, first learning milestone and session workflow.'],
+    ['START_HERE.md', 'start-here', 'Start your first project', 'P00 tokenizer/Transformer foundations kickoff, then a small GPT language model.'],
     ['COLAB.md', 'colab', 'Colab training and recovery', 'Free-first early-model training, persistent checkpoints and recovery after runtime termination.'],
     ['roadmap.md', 'roadmap', 'Projects learning roadmap', 'The complete known-model learning path, prerequisites and completion gates.'],
     ['progress.md', 'progress', 'Projects progress', 'Evidence and milestone states from the canonical learning ledger.'],
     ['resume.md', 'resume', 'Resume Projects', 'The current project and concrete next action.'],
     ['decisions.md', 'decisions', 'Projects decisions', 'Durable learning and ownership choices.'],
-    ['implementation/2026-10/llm-roadmap-review-and-gpt-1-starting-plan/02-implementation-plan.md', 'gpt-1-starting-plan', 'GPT-1 starting plan', 'Hands-on first-model scope and proposed verification/learning milestones.'],
+    ['implementation/2026-10/project-zero-foundations-and-small-gpt-roadmap/02-implementation-plan.md', 'project-zero-plan', 'Project Zero and small GPT plan', 'Ground-up tokenizer, attention and complete Transformer milestones before a decoder-only text model.'],
+    ['implementation/2026-10/llm-roadmap-review-and-gpt-1-starting-plan/02-implementation-plan.md', 'gpt-1-starting-plan', 'GPT-1 starting plan (historical reference)', 'Preserved earlier plan; the live P00-first roadmap supersedes this exact GPT-1 starting scope.'],
   ];
   const sources = [];
   for (const [file, id, title, description] of definitions) {
@@ -30,6 +31,9 @@ export async function workspaceRecords(siteRoot, companionUrl) {
   const targets = new Map(sources.map(source => [source.absolute, `guides/${source.id}.md`]));
   return sources.map(({ absolute, id, title, description, body, updated }) => {
     body = body.replace(/^# [^\n]*\n(?:\n)?/, ''); // recordPage supplies the page's H1.
+    if (id === 'gpt-1-starting-plan') {
+      body = '**Historical reference:** the [current roadmap](roadmap.md#project-0-tokenization-and-transformer-foundations) starts with P00, then a small GPT-style model. This preserved plan is optional GPT-1 study and does not define the current checkpoint.\n\n' + body;
+    }
     body = body.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (original, label, href) => {
       if (/^(?:https?:|mailto:|#)/i.test(href)) return original;
       const [file, fragment] = href.split('#');
