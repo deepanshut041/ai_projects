@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "updated": "2026-10-09",
+  "collections": [
+    {
+      "id": "attention",
+      "title": "Attention"
+    },
+    {
+      "id": "modeling",
+      "title": "Modeling and evaluation"
+    },
+    {
+      "id": "retrieval",
+      "title": "Retrieval"
+    },
+    {
+      "id": "tooling",
+      "title": "Workspace tooling"
+    }
+  ],
+  "archive": {
+    "files": 0,
+    "bytes": 0
+  },
+  "sources": [
+    {
+      "id": "attention-paper",
+      "title": "Attention Is All You Need \u2014 arXiv v7, section 3.2.1",
+      "url": "https://arxiv.org/html/1706.03762v7",
+      "collection": "attention",
+      "kind": "Paper",
+      "access": "link-checked",
+      "review": "section 3.2.1 inspected",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "linear-models",
+      "title": "scikit-learn: Linear models",
+      "url": "https://scikit-learn.org/stable/modules/linear_model.html",
+      "collection": "modeling",
+      "kind": "Documentation",
+      "access": "link-checked",
+      "review": "relevant section inspected",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "numpy-lstsq",
+      "title": "NumPy: numpy.linalg.lstsq",
+      "url": "https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html",
+      "collection": "modeling",
+      "kind": "Documentation",
+      "access": "link-checked",
+      "review": "API reference inspected",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "tfidf",
+      "title": "scikit-learn: Text feature extraction",
+      "url": "https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction",
+      "collection": "retrieval",
+      "kind": "Documentation",
+      "access": "link-checked",
+      "review": "relevant section inspected",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "ranking-metrics",
+      "title": "scikit-learn: Model evaluation",
+      "url": "https://scikit-learn.org/stable/modules/model_evaluation.html#ranking-metrics",
+      "collection": "retrieval",
+      "kind": "Documentation",
+      "access": "link-checked",
+      "review": "metric context inspected",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "uv-sync",
+      "title": "uv: Locking and syncing",
+      "url": "https://docs.astral.sh/uv/concepts/projects/sync/",
+      "collection": "tooling",
+      "kind": "Documentation",
+      "access": "link-checked",
+      "review": "workflow inspected",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "textual-table",
+      "title": "Textual: DataTable",
+      "url": "https://textual.textualize.io/widgets/data_table/",
+      "collection": "tooling",
+      "kind": "Documentation",
+      "access": "link-checked",
+      "review": "API reference inspected",
+      "checked": "2026-10-09"
+    }
+  ]
+}
