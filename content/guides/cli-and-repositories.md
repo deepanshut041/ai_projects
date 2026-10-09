@@ -11,12 +11,14 @@ sources: [{"title": "uv: Locking and syncing", "url": "https://docs.astral.sh/uv
 
 ```bash
 ./ai
+./ai roadmap
+./ai roadmap projects --section progress
 ./ai list
 ./ai doctor --json
 ./ai check
 ```
 
-Projects and Research are the only terminal groups. Each independent implementation is a Git submodule; the umbrellas own membership and project pointers. Projects Documentation uses port 4273 and Research Documentation uses 4274.
+Projects and Research are the only terminal groups. The shared CLI lives in the independent workspace cli/ repository, outside both umbrellas. Projects owns complete known-model implementation/training for understanding; Research owns narrow reproductions and improvements. Each independent implementation is a Git submodule; the umbrellas own membership and project pointers. Projects Documentation uses port 4273 and Research Documentation uses 4274.
 
 ## Sites, jobs and logs
 
@@ -31,6 +33,10 @@ Projects and Research are the only terminal groups. Each independent implementat
 ```
 
 Closing the TUI leaves managed jobs/sites running. Stop commands verify PID start time, launch token, command line and process group. A port conflict is reported without killing another listener. Change a site's port while it is stopped with `./ai port research-docs 4294`.
+
+## Follow the current learning checkpoint
+
+Use ./ai roadmap to read the canonical resume, then roadmap/progress/decisions. Implement, train, inspect/debug and explain each small model; update evidence and the next action at session end. Focused research protocols/results stay in Research rather than this learning ledger. See [the roadmap workflow](roadmap-workflow.md).
 
 ## Add work with documentation first
 

@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "languages": [
+    "cpp",
+    "python"
+  ],
+  "projects": [
+    {
+      "id": "P01",
+      "title": "GPT-1",
+      "status": "orientation-available",
+      "lessons": [
+        "projects/p01/gpt-1-foundations/v1"
+      ]
+    },
+    {
+      "id": "P02",
+      "title": "GPT-2",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P03",
+      "title": "Llama 2 \u2192 Llama 3",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P04",
+      "title": "Qwen3 Dense",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P05",
+      "title": "Switch-style routing \u2192 Qwen3 MoE",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P06",
+      "title": "Qwen3-Next",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P07",
+      "title": "PaliGemma",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P08",
+      "title": "Qwen3.5",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P09",
+      "title": "Qwen3.8 dense VLM",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P10",
+      "title": "Gemma 4 E2B text model",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P11",
+      "title": "DeepSeek V3 \u2192 V3.2",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P12",
+      "title": "DeepSeek V4-Flash-style model",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P13",
+      "title": "Qwen3.8-Flash-Next-style model",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P14",
+      "title": "Kimi Linear \u2192 Kimi K3-style model",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P15",
+      "title": "DeepSeek V4.1-Flash-style model",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P16",
+      "title": "Mamba 2 \u2192 Mamba 3",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P17",
+      "title": "RWKV-7",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P18",
+      "title": "LLaDA \u2192 iLLaDA; optional editing extension",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P19",
+      "title": "Gemma 4 unified multimodal",
+      "status": "planned",
+      "lessons": []
+    }
+  ]
+}

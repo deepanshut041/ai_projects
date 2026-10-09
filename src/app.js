@@ -29,6 +29,23 @@ for (const control of [sourceQuery, collection, kind]) {
   control?.addEventListener('change', filterSources);
 }
 document.querySelector('.print-button')?.addEventListener('click', () => window.print());
+for(const button of document.querySelectorAll('.practice-reveal')) button.addEventListener('click',()=>{
+  const answer=button.parentElement.querySelector('.practice-answer');answer.hidden=!answer.hidden;
+  button.setAttribute('aria-expanded',String(!answer.hidden));
+});
+for(const section of document.querySelectorAll('.tutorial-scenario')) {
+  const data=JSON.parse(section.dataset.scenario);
+  const update=()=>{
+    const values=Object.fromEntries([...section.querySelectorAll('[data-variable]')].map(input=>[input.dataset.variable,input.value]));
+    const selected=data.cases.find(item=>Object.entries(values).every(([key,value])=>item.when[key]===value));
+    section.querySelector('[data-outcome]').textContent=selected.outcome;
+    section.querySelector('[data-narrative]').textContent=selected.narrative;
+  };
+  section.addEventListener('change',update);update();
+}
+let printAnswers=[];
+window.addEventListener('beforeprint',()=>{printAnswers=[...document.querySelectorAll('.practice-answer')].map(answer=>[answer,answer.hidden]);for(const [answer] of printAnswers)answer.hidden=false;});
+window.addEventListener('afterprint',()=>{for(const [answer,hidden] of printAnswers)answer.hidden=hidden;});
 document.addEventListener('keydown', event => {
   if (event.key === '/' && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) {
     const search = query ?? sourceQuery;

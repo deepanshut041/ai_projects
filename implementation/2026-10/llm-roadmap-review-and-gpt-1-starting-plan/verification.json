@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-09",
+  "scope": "document/source-plan verification; no model execution",
+  "markdown_files": 9,
+  "local_links_checked": 15,
+  "roadmap_sha256": {
+    "/mnt/projects/ai/ai_projects/llm-implementation-research-roadmap.md": "9c13778c3fa3c318f8bdc8bdfdbbd3080d52f4acc28fd9c487193fcf91fbc77a",
+    "/mnt/projects/ai/ai_research/llm-implementation-research-roadmap.md": "9c13778c3fa3c318f8bdc8bdfdbbd3080d52f4acc28fd9c487193fcf91fbc77a"
+  },
+  "proposed_parameter_arithmetic": [
+    {
+      "layers": 2,
+      "width": 64,
+      "context": 64,
+      "proposed_parameters": 120834
+    },
+    {
+      "layers": 4,
+      "width": 128,
+      "context": 128,
+      "proposed_parameters": 843010
+    },
+    {
+      "layers": 6,
+      "width": 128,
+      "context": 128,
+      "proposed_parameters": 1239554
+    }
+  ],
+  "issues": [],
+  "passed": true
+}

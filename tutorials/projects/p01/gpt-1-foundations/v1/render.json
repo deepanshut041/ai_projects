@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "project_id": "P01",
+  "slug": "gpt-1-foundations",
+  "revision": "v1",
+  "files": {
+    "chapters/orientation.md": "44c19ae2db96356795fb71881068f9d1c2223523c07769a10d189c4628d28067",
+    "chapters/training-memory.md": "d7bcd86260027ea657c6a4dc9359e94e81e859960d7e25f971f62dc4c5ccf105",
+    "chapters/worked-attention.md": "22bd8c781727d49ddc6399f58c920a5fd064d820c0e5792650f6b950f21ffb60",
+    "diagrams/attention.svg": "a6ad38edafa61048c9d29d055b5952065d73b2c082ccfacaefcd2519f4142a45",
+    "diagrams/decoder.svg": "1e726217f3532b19be85079ac80010dd890904d7b84f85f7a37bb9a0ca12c291",
+    "diagrams/learning-path.svg": "2ca0061654aef1cd8d53c214c33eff11ffccd09824481f507f64a9c78d53d29d",
+    "diagrams/memory.svg": "fec5a331e954295d8ba77ec83654b8abd81661b1c20c9af6be29c7ea617a3e97",
+    "diagrams/postnorm.svg": "4a358ee8b3c46ac37bd6ea81e1d54dd18d89f5f8cd70af6d5444cef0ea742b2f",
+    "diagrams/targets.svg": "d24b7f45b12dafdf8128060bfe8ea63568b75dba6057a71f7678d4b794a75733",
+    "diagrams/training.svg": "07d23b2ada3c9b8e150aa90c0e49716f62b5ea1dfcb2189680541106480c9e93",
+    "example-checks.json": "52c78242d76dd25fc2bde82154123e099fe3befd16feb7dba73787afd16214a0",
+    "examples/causal_trace.cpp": "fe6aa940fd899cd197772a52ea3da620154a9fc466a11ffacd3f6ceb3cefaaa7",
+    "examples/causal_trace.py": "e7373023f2c34c1a26deaf28661d9a8ec287af7e0aa3f706bdd7f85a87f6afce",
+    "lesson.json": "05d95a547181ed02e36dee6a62732e124cff6fc8f80ee2ae98026947092f2807",
+    "lesson.md": "1131e6665f36de9c84b4a21d03aff33d1a2f0ad50e1055ebe4745e210fb74128",
+    "research.md": "6bc7e113ed706fec74a85ba45f278b7900dfbd0dde8ee3d00361c3a9f3d2fec2",
+    "whiteboard/defense.md": "a3e472e2b0d57e679768eb1c1f809f39453bd8fb862076cffed7320730638baf",
+    "whiteboard/questions.md": "1d84673e84ce18dcd0494b3de3f852b1c37483a9b8da64f8ebd573632349d025"
+  },
+  "validated_at": "2026-10-09T23:06:21.794359+00:00",
+  "fingerprint": "173244006cca7b375b36e841716a937931ee83a33b0db93467181e0dea982e9f"
+}

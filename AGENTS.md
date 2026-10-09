@@ -1,5 +1,15 @@
 # AI documentation ownership
 
+Read README.md, resume.md, progress.md, roadmap.md and decisions.md here before substantial work. This repository owns all shared Projects documentation. Render these canonical sources directly. Keep tutorials in tutorials/, plans in implementation/ and verification in verification/. Do not create a separate documentation tree or additional root-level files in ../. CLI tooling is in ../../cli/.
+
+Current context (2026-10-09): P01 GPT-1 / P01-M1 not-started. Completed work is workspace/roadmap/CLI/skill/tutorial preparation; Colab Free training/recovery requirements are recorded for P01–P04. No GPT implementation/notebook/training, hosted recovery or learner mastery is established. Next: gpt-lab M1 source/config/data plus Free setup/storage/budget contracts. Read latest resume/progress before using this snapshot, then the [Projects session contract](../AGENTS.md) and child package. Adaptive tutorial/live-teaching guidance and the P01 prerequisite/transfer route are implemented; learner understanding remains unassessed. The [pre-P01 local commit review](implementation/2026-10/ai-workspace-setup/07-pre-p01-commit-review.md) records repository preparation and current checks.
+
+Read [COLAB.md](COLAB.md) for local development plus Free-first early-model training. Carry its thin common-trainer notebook, full-state persistent checkpoints and fresh-runtime recovery gates into model packages. Later projects decide their compute tier at kickoff; Pro requires the user's later instruction. Docs verification does not prove hosted training/recovery.
+
+After meaningful work update progress/resume and the owning package; update decisions for durable choices. When project, milestone/status, completed-work summary or next action changes refresh all six compact snapshots: README/AGENTS here, in the Projects root and at workspace home. Preserve detailed completed/pending evidence here rather than adding root tracking files.
+
+Use C++ and Python for project/tutorial examples. Tutorials, editable diagrams, selected safe evidence and whiteboard preparation are Git-eligible. Use the shared developer-learning-tutorials and feature-whiteboard-defense skills exposed through ../.agents/skills/. Tutorial availability, implemented/trained models and demonstrated learner understanding are separate states.
+
 Author Markdown in content/ and record primary-source provenance in catalog/sources.json. Preserve the distinction between source claims, interpretations, planned protocols, tests and measured results. Read WORKFLOW.md in the Research documentation repository for substantial work. Do not publish source archives, raw datasets, weights or credentials.
 
 Keep content links and assets compatible with root or repository-prefix hosting. After meaningful rendering/content changes run npm test, npm run build and npm run test:browser. Inspect representative desktop/mobile screenshots. Ordinary builds must work without sources/. Keep dependencies and generated output ignored. No external publication is implied by a passing build.

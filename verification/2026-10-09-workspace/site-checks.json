@@ -1,0 +1,62 @@
+[
+  [
+    "projects",
+    [
+      {
+        "check": "content",
+        "exit": 0
+      },
+      {
+        "check": "root-build",
+        "exit": 0
+      },
+      {
+        "check": "root-browser",
+        "exit": 0
+      },
+      {
+        "check": "prefixed-build",
+        "exit": 0
+      },
+      {
+        "check": "browser",
+        "exit": 0
+      },
+      {
+        "check": "archive-sync",
+        "exit": 0
+      }
+    ],
+    "passed"
+  ],
+  [
+    "research",
+    [
+      {
+        "check": "content",
+        "exit": 0
+      },
+      {
+        "check": "root-build",
+        "exit": 0
+      },
+      {
+        "check": "root-browser",
+        "exit": 0
+      },
+      {
+        "check": "prefixed-build",
+        "exit": 0
+      },
+      {
+        "check": "browser",
+        "exit": 0
+      },
+      {
+        "check": "archive-sync",
+        "exit": 0
+      }
+    ],
+    "passed"
+  ]
+]

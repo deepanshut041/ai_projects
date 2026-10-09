@@ -1,0 +1,15 @@
+{
+  "seed": 42,
+  "train_samples": 120,
+  "test_samples": 40,
+  "weights": [
+    1.4904363253187587,
+    1.999030585127368,
+    -0.9879942440329564,
+    0.48440054311063596
+  ],
+  "held_out_mse": 0.010899796762890794,
+  "constant_baseline_mse": 5.054740705761597,
+  "reference_max_error": 8.881784197001252e-16,
+  "scope": "synthetic CPU demonstration"
+}

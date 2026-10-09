@@ -1,0 +1,10 @@
+# Implementation contracts
+
+1. Snapshot source inventories, parent index/module config and Git HEADs. Move the documentation repository to docs without a reset; merge existing docs records and remove the internal docs/docs nesting. Preserve every source byte before targeted link edits. Update submodule membership and core.worktree; retain parent/child HEADs.
+2. Canonical Projects records resolve under ai_projects/docs. Registry keeps project-docs identity and port 4273. Both Projects and Docs planning targets resolve to docs/implementation; standalone helper recognizes the Docs owner. Project scaffolds link checkpoint files through ../../docs.
+3. Shared skill adapter stores lesson.json, chapters, evidence, examples, whiteboard and rendered outputs under docs/tutorials/projects/pXX/topic/revision. Schema validates references, coverage, complete scenario combinations and language declarations. No arbitrary shell strings; example compiler/interpreter and argv are explicit.
+4. Render semantic SVG/Markdown and bind exports to content hashes. Site rejects changed or escaping artifacts and active SVG. Existing reader handles download links, horizontal diagram inspection, declared scenario inputs, prediction-before-reveal and printable answers. No new service.
+5. Author P01 reference-only material. Expected causal [2,3,14/3], unmasked [14/3]*3 and unchanged prefix [2,3]; target shift [10,20,30] -> [20,30,40]. C++20/Python stdout agrees to the declared nine-decimal JSON values. No learned model, gradients or training claimed.
+6. Run native CLI and Docs checks, inspect screenshots, verify ignore boundaries and current Git paths, update docs checkpoint and restore managed Docs service.
+
+Recovery: source heads/history are preserved, original index/config and hash manifest are saved in ignored .ai/relocation/docs-consolidation. Do not restore a saved index wholesale over newer unrelated changes. Generated dependencies/build/browser output remain ignored. No commit/push/deployment is inferred.

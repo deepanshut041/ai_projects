@@ -1,0 +1,46 @@
+[
+  [
+    "projects",
+    [
+      {
+        "check": "root-build",
+        "exit": 0
+      },
+      {
+        "check": "root-browser",
+        "exit": 0
+      },
+      {
+        "check": "prefixed-build",
+        "exit": 0
+      },
+      {
+        "check": "browser",
+        "exit": 0
+      }
+    ],
+    "passed including print appearance and zero minimum page height"
+  ],
+  [
+    "research",
+    [
+      {
+        "check": "root-build",
+        "exit": 0
+      },
+      {
+        "check": "root-browser",
+        "exit": 0
+      },
+      {
+        "check": "prefixed-build",
+        "exit": 0
+      },
+      {
+        "check": "browser",
+        "exit": 0
+      }
+    ],
+    "passed including print appearance and zero minimum page height"
+  ]
+]

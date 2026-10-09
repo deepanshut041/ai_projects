@@ -1,0 +1,50 @@
+{
+  "checks": [
+    {
+      "check": "snapshot",
+      "exit": 0,
+      "output": "{\n  \"path\": \"/tmp/ai-planning-relocation-al3t_lus/source.tar.gz\",\n  \"bytes\": 2145678,\n  \"includes\": \"editable source and Git histories\",\n  \"excludes\": [\n    \".ai\",\n    \".playwright-cli\",\n    \".pytest_cache\",\n    \".ruff_cache\",\n    \".venv\",\n    \"__pycache__\",\n    \"data\",\n    \"dist\",\n    \"node_modules\",\n    \"output\",\n    \"runs\",\n    \"sources\",\n    \"test-results\",\n    \"weights\"\n  ],\n  \"restore\": \"Extract to a new directory, then run ./ai relink and ./ai doctor\"\n}\n"
+    },
+    {
+      "check": "projects-context",
+      "exit": 0,
+      "output": "[\n  {\n    \"path\": \"/tmp/ai-planning-relocation-al3t_lus/ai/ai_projects/docs/implementation/2026-10/ai-workspace-setup\",\n    \"month\": \"2026-10\",\n    \"slug\": \"ai-workspace-setup\",\n    \"has_resume\": true\n  }\n]\n"
+    },
+    {
+      "check": "research-context",
+      "exit": 0,
+      "output": "[]\n"
+    },
+    {
+      "check": "relocated-cli",
+      "exit": 0,
+      "output": "[\n  \"/tmp/ai-planning-relocation-al3t_lus/ai/ai_projects/docs/implementation/2026-10/ai-workspace-setup\"\n]\n"
+    },
+    {
+      "check": "relocated-tui",
+      "exit": 0,
+      "output": "{\"ui\": \"ok\", \"projects\": [\"project-docs\", \"linear-model-lab\", \"retrieval-lab\", \"attention-lab\", \"research-docs\", \"generalization-lab\"], \"markdown_browser\": false}\n"
+    }
+  ],
+  "temporary_checkout_removed": true,
+  "cli_tests_passed": 42,
+  "site_content_tests_passed": 10,
+  "validated_skills": [
+    "planning",
+    "ai-project-workflow",
+    "ai-paper-review",
+    "ai-experiment-planning",
+    "ai-reproduction-planning"
+  ],
+  "roadmap_sha256": "9c13778c3fa3c318f8bdc8bdfdbbd3080d52f4acc28fd9c487193fcf91fbc77a",
+  "root_entries": [
+    ".ai",
+    ".gitignore",
+    "AGENTS.md",
+    "README.md",
+    "ai",
+    "ai.code-workspace",
+    "ai_projects",
+    "ai_research"
+  ]
+}

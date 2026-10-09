@@ -1,0 +1,28 @@
+{
+  "test": {
+    "entries": 4,
+    "passed": true
+  },
+  "build": {
+    "entries": 4,
+    "passed": true
+  },
+  "run": {
+    "entries": 3,
+    "passed": true
+  },
+  "preflight": true,
+  "kickoff": true,
+  "cli_tests": {
+    "passed": 48
+  },
+  "docs": {
+    "content_tests_passed": 6,
+    "records": 13,
+    "browser_passed": true
+  },
+  "ready_for": "P01-M1 kickoff; project/runtime setup and model work start in the learner session",
+  "actual_model_or_training_started": false,
+  "stale_starter_choices_marked_deferred": true,
+  "project_docs_service_restored": true
+}

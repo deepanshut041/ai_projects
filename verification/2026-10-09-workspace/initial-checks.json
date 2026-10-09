@@ -1,0 +1,17 @@
+[
+  {
+    "check": "cli-tests",
+    "exit": 0,
+    "elapsed_seconds": 13.19
+  },
+  {
+    "check": "tui-smoke",
+    "exit": 0,
+    "elapsed_seconds": 0.35
+  },
+  {
+    "check": "doctor",
+    "exit": 0,
+    "elapsed_seconds": 0.06
+  }
+]

@@ -1,0 +1,36 @@
+{
+  "kind": "manual instruction walkthrough, not independent agent or learner evaluation",
+  "cases": [
+    {
+      "request": "Create a P01 artifact; no learner replies available",
+      "reviewed_route": "Author a proposed route, mark assumptions unchecked, finish local artifacts",
+      "result": "instruction contract satisfied; P01 pilot demonstrates artifact route"
+    },
+    {
+      "request": "Teach causal masking interactively",
+      "reviewed_route": "One relevant knowledge question in chat, stop before answer, adapt after real reply",
+      "result": "instruction walkthrough only; no human session performed"
+    },
+    {
+      "request": "Explain directly; no quiz today",
+      "reviewed_route": "Motivated worked derivation with optional practice; no diagnostic gate",
+      "result": "instruction walkthrough only"
+    },
+    {
+      "request": "Correct prerequisite answer",
+      "reviewed_route": "Proceed or use changed-case transfer; no requirement to force a failure",
+      "result": "instruction walkthrough only"
+    },
+    {
+      "request": "Misconception, unknown or skipped answer",
+      "reviewed_route": "Nearby simpler trace or explanation; unknown/skip remains unassessed; no global mastery score",
+      "result": "instruction walkthrough only"
+    },
+    {
+      "request": "Model design choice mistaken for universal truth",
+      "reviewed_route": "Use pinned source for GPT-1 order; state task/math conditions and proof limits",
+      "result": "P01 distinguishes architecture convention from prefix-only task premise"
+    }
+  ],
+  "learning_effectiveness": "not measured"
+}

@@ -4,7 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../dist', import.meta.url));
-const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.md': 'text/markdown; charset=utf-8', '.svg': 'image/svg+xml', '.woff': 'font/woff', '.woff2': 'font/woff2', '.ttf': 'font/ttf' };
+const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.md': 'text/markdown; charset=utf-8', '.txt':'text/plain; charset=utf-8', '.cpp':'text/plain; charset=utf-8', '.hpp':'text/plain; charset=utf-8', '.py':'text/plain; charset=utf-8', '.svg': 'image/svg+xml', '.woff': 'font/woff', '.woff2': 'font/woff2', '.ttf': 'font/ttf' };
 export async function serve(port = 4273, { liveReload = false } = {}) {
   const { base } = JSON.parse(await fs.readFile(path.join(root, 'build.json'), 'utf8'));
   const clients = new Set();

@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-09",
+  "state": "implemented and locally verified",
+  "upstream_revision": "7cfd8942f82ab9476e63572387e1fe9bcea5082c",
+  "checks": [
+    {
+      "argv": [
+        "python3",
+        "/home/lucifer/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "/mnt/projects/ai/ai_research/research_docs/.agents/skills/developer-learning-tutorials"
+      ],
+      "result": "passed"
+    },
+    {
+      "argv": [
+        "python3",
+        "/home/lucifer/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "/mnt/projects/ai/ai_research/research_docs/.agents/skills/feature-whiteboard-defense"
+      ],
+      "result": "passed"
+    },
+    {
+      "argv": [
+        "./ai",
+        "learn",
+        "validate",
+        "--lesson",
+        "projects/p01/gpt-1-foundations/v1"
+      ],
+      "result": "passed; 2 sources, 5 claims"
+    },
+    {
+      "argv": [
+        "./ai",
+        "learn",
+        "examples",
+        "--lesson",
+        "projects/p01/gpt-1-foundations/v1"
+      ],
+      "result": "passed; C++ and Python declared JSON outputs match"
+    },
+    {
+      "argv": [
+        "./ai",
+        "learn",
+        "render",
+        "--lesson",
+        "projects/p01/gpt-1-foundations/v1"
+      ],
+      "result": "passed; frozen artifacts match hashes"
+    },
+    {
+      "argv": [
+        "npm",
+        "test"
+      ],
+      "cwd": "ai_projects/docs",
+      "result": "7 passed; former hard-coded six-diagram assertion repaired to compare exported diagrams with authored declarations"
+    },
+    {
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "ai_projects/docs",
+      "result": "passed; 14 records, 7 source references at /project_docs/"
+    },
+    {
+      "argv": [
+        "npm",
+        "run",
+        "test:browser"
+      ],
+      "cwd": "ai_projects/docs",
+      "result": "passed; 14 records, 7 sources, links/downloads/print/search/filter/mobile; all 7 diagrams decode; 6 answers hidden initially and available for print"
+    },
+    {
+      "kind": "visual inspection",
+      "result": "all 7 diagram PNGs reviewed; correct meanings/directions, legible labels; desktop/mobile screenshots reviewed"
+    },
+    {
+      "kind": "workspace audit",
+      "result": "skill references resolve through both umbrellas; no broken local skill links; Projects visible root files README.md/AGENTS.md; repository HEADs unchanged; gpt-lab absent"
+    },
+    {
+      "kind": "instruction walkthrough",
+      "result": "author/live/direct/correct/misconception/unknown/skip routes reviewed; see instruction-review.json; not a human-learning or independent agent evaluation"
+    }
+  ],
+  "lesson_fingerprint": "173244006cca7b375b36e841716a937931ee83a33b0db93467181e0dea982e9f",
+  "diagrams": 7,
+  "practice": 6,
+  "screenshots": [
+    "ai_projects/docs/test-results/tutorial-top-desktop.png",
+    "ai_projects/docs/test-results/tutorial-top-mobile.png",
+    "ai_projects/docs/test-results/diagram-learning-path.png",
+    "ai_projects/docs/test-results/diagram-decoder.png",
+    "ai_projects/docs/test-results/diagram-postnorm.png",
+    "ai_projects/docs/test-results/diagram-attention.png",
+    "ai_projects/docs/test-results/diagram-targets.png",
+    "ai_projects/docs/test-results/diagram-training.png",
+    "ai_projects/docs/test-results/diagram-memory.png"
+  ],
+  "limits": [
+    "No learner answer or effectiveness measurement",
+    "P01-M1 not-started; no GPT model/training",
+    "No dedicated quiz UI, learner-profile store, pi setup or imported source code",
+    "No commit, push, hosted job, paid provider or external publication"
+  ]
+}

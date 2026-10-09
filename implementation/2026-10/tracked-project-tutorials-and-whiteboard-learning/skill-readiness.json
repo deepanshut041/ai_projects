@@ -1,0 +1,142 @@
+{
+  "phase": "complete",
+  "skills": [
+    {
+      "name": "ai-experiment-planning",
+      "status": "validated",
+      "local_references": 1,
+      "both_umbrella_links": "verified",
+      "optional_ui_metadata": "not required"
+    },
+    {
+      "name": "ai-paper-review",
+      "status": "validated",
+      "local_references": 1,
+      "both_umbrella_links": "verified",
+      "optional_ui_metadata": "not required"
+    },
+    {
+      "name": "ai-project-workflow",
+      "status": "validated",
+      "local_references": 1,
+      "both_umbrella_links": "verified",
+      "optional_ui_metadata": "not required"
+    },
+    {
+      "name": "ai-reproduction-planning",
+      "status": "validated",
+      "local_references": 1,
+      "both_umbrella_links": "verified",
+      "optional_ui_metadata": "not required"
+    },
+    {
+      "name": "developer-learning-tutorials",
+      "status": "validated",
+      "local_references": 5,
+      "both_umbrella_links": "verified",
+      "optional_ui_metadata": "valid"
+    },
+    {
+      "name": "feature-whiteboard-defense",
+      "status": "validated",
+      "local_references": 1,
+      "both_umbrella_links": "verified",
+      "optional_ui_metadata": "valid"
+    },
+    {
+      "name": "planning",
+      "status": "validated",
+      "local_references": 8,
+      "both_umbrella_links": "verified",
+      "optional_ui_metadata": "valid"
+    }
+  ],
+  "cli_tests": 64,
+  "docs_tests": 7,
+  "site_records": 13,
+  "tutorial_examples": [
+    "cpp passed",
+    "python passed"
+  ],
+  "fixed_gaps": [
+    "referenced objective checks",
+    "example fingerprint coverage",
+    "stale example proof",
+    "failed-render output preservation",
+    "snapshot provenance preservation",
+    "unique practice IDs",
+    "one renderer",
+    "CLI level option",
+    "Projects versus Research scope"
+  ],
+  "limits": "Instruction skills validated by inspection and helper exercises; learner mastery and research results remain separate.",
+  "behavioral_exercise": {
+    "file": "skill-workflow-exercise.json",
+    "state": "passed",
+    "tutorial_flow": [
+      "init",
+      "duplicate-preservation",
+      "foreign registered snapshot",
+      "author",
+      "validate",
+      "cpp/python examples",
+      "render",
+      "index",
+      "list",
+      "stale-source rejection",
+      "site build",
+      "browser"
+    ],
+    "planning_routes": [
+      "project",
+      "paper",
+      "experiment",
+      "reproduction",
+      "combined"
+    ],
+    "research_record_commands": [
+      "paper record",
+      "experiment record",
+      "source registration"
+    ],
+    "disposable_site_records": 12
+  },
+  "usage_guide": "ai_projects/docs/SETUP.md#using-the-workspace-skills",
+  "project_root_clean": true,
+  "local_site": "running; tutorial responds HTTP 200",
+  "tutorial_source_not_ignored": 21,
+  "diff_check": "passed",
+  "root_layout": "README.md and AGENTS.md only; no root skills link created",
+  "human_rehearsal": "not run; starts only on request",
+  "roadmap_entry_context": {
+    "state": "context embedded; links verified",
+    "current_project": "P01 GPT-1",
+    "milestone": "P01-M1 not-started",
+    "preparation": "roadmap/docs/CLI/skills/P01 reference tutorial",
+    "model_repository": "not created",
+    "context_files": [
+      "README.md",
+      "AGENTS.md",
+      "ai_projects/README.md",
+      "ai_projects/AGENTS.md",
+      "ai_projects/docs/README.md",
+      "ai_projects/docs/AGENTS.md"
+    ],
+    "local_links_verified": 70,
+    "root_layout": "unchanged: README.md and AGENTS.md only visible files",
+    "session_contract": [
+      "read canonical checkpoint/progress/roadmap/decisions",
+      "reconcile child package and actual Git state",
+      "state current milestone/prior evidence/next action",
+      "resume existing work",
+      "update canonical records and refresh changed snapshots"
+    ],
+    "verification": {
+      "content_tests": 7,
+      "build": "passed",
+      "browser": "13 records passed",
+      "local_links": 70,
+      "snapshot_refresh": "all six entry points on project/milestone/status/prior-work/next-action change"
+    }
+  }
+}

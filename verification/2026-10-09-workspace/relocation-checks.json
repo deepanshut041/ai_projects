@@ -1,0 +1,44 @@
+{
+  "path_with_spaces": true,
+  "invoked_from": "/tmp",
+  "checks": [
+    {
+      "check": "snapshot",
+      "exit": 0
+    },
+    {
+      "check": "relocated-relink",
+      "exit": 0
+    },
+    {
+      "check": "relocated-doctor",
+      "exit": 0
+    },
+    {
+      "check": "relocated-tui",
+      "exit": 0
+    },
+    {
+      "check": "relocated-attention-test",
+      "exit": 0
+    },
+    {
+      "check": "relocated-retrieval-run",
+      "exit": 0
+    },
+    {
+      "check": "relocated-source-list",
+      "exit": 0
+    },
+    {
+      "check": "relocated-research-site",
+      "exit": 0
+    },
+    {
+      "check": "relocated-stop-all",
+      "exit": 0
+    }
+  ],
+  "archive_bytes": 510326,
+  "temporary_files_removed": true
+}

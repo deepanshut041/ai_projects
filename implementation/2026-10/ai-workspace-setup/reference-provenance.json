@@ -1,0 +1,222 @@
+[
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/cli/src/quantum_cli/tui.py",
+    "target": "ai_projects/cli/src/ai_cli/tui.py",
+    "reference_sha256": "4fce7e8ac659f0b6739f11cd4c0f759edfb0a2a54940ca3620a4b7998ca6bf7a"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/cli/src/quantum_cli/native_tests.py",
+    "target": "ai_projects/cli/src/ai_cli/native_tests.py",
+    "reference_sha256": "0545f406de508fbd7d01bfde2585e08236652173a5b5dc9a0c6e1a5e76873890"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/cli/src/quantum_cli/__init__.py",
+    "target": "ai_projects/cli/src/ai_cli/__init__.py",
+    "reference_sha256": "e14848275f585032a74e90b254798230285c9a45e92168cfc65b4ff021552042"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/cli/src/quantum_cli/manager.py",
+    "target": "ai_projects/cli/src/ai_cli/manager.py",
+    "reference_sha256": "5aaf07b1266d72ea65abdc2f0eb764f8858dcd17de178bf95202881ff4926234"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/cli/src/quantum_cli/__main__.py",
+    "target": "ai_projects/cli/src/ai_cli/__main__.py",
+    "reference_sha256": "2082191c23df648685fd8d8ced24e3df1e3dd37c4c5bd367d582ec26f1d0a719"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/cli/src/quantum_cli/runner.py",
+    "target": "ai_projects/cli/src/ai_cli/runner.py",
+    "reference_sha256": "cf2e9e0d538409d9c6b14873bfa5053cb494c66204ffcee8101eaf93115beef3"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/cli/src/quantum_cli/registry.py",
+    "target": "ai_projects/cli/src/ai_cli/registry.py",
+    "reference_sha256": "c3ee5cbe81867e47036f3d6ae1188734f3fc936e93c3cffcd40730f5e475ebf9"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/cli/tests/test_output.py",
+    "target": "ai_projects/cli/tests/test_output.py",
+    "reference_sha256": "f3aa158b5862d5cb87b464ce21bd7fe786f05bd1fbce06f63831a8fd661e9c40"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/cli/tests/test_manager.py",
+    "target": "ai_projects/cli/tests/test_manager.py",
+    "reference_sha256": "efb7bfb9e5f15cfd4015d0e1766b6de1dc9bd2e1794c9eb7855b0c412c275ebf"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/cli/tests/conftest.py",
+    "target": "ai_projects/cli/tests/conftest.py",
+    "reference_sha256": "dd4a13ea3e53003577d3bbabbe9f3acfb34d21515f1cf6170a443c439bdcfda2"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/cli/tests/test_tui.py",
+    "target": "ai_projects/cli/tests/test_tui.py",
+    "reference_sha256": "4243257d279e434e351307c7fb7cd1f586adca34d583001abee8ba2c5044d063"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/cli/tests/test_registry.py",
+    "target": "ai_projects/cli/tests/test_registry.py",
+    "reference_sha256": "96064fdc77d12a13443a71bdba32ccf7ae181f4efe9176374d170644e277cf0a"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/cli/tests/test_cli.py",
+    "target": "ai_projects/cli/tests/test_cli.py",
+    "reference_sha256": "d9387646f178d976a0383502e5792ff5020699ffbfdaf1c32683eb437ff1bfb7"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/cli/pyproject.toml",
+    "target": "ai_projects/cli/pyproject.toml",
+    "reference_sha256": "1c9b2728f62e48554707a28aa55cf5320e9113f3ed80ae7041166bc0de867bb8"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/cli/uv.lock",
+    "target": "ai_projects/cli/uv.lock",
+    "reference_sha256": "1c6e40a331051ee38292bb40c5418e3e6337c4b250e459a89cf67fc947a2a795"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/cli/.python-version",
+    "target": "ai_projects/cli/.python-version",
+    "reference_sha256": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_projects/quantum",
+    "target": "ai_projects/ai",
+    "reference_sha256": "5f9c12f49c1f53b67d06a59728ef3b5ec3da8830ba4293bb47dbbea92c59007a"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum",
+    "target": "ai",
+    "reference_sha256": "5e5622abd1e2abecf0d27721f26fdc2aa5c5d3522913dcc12e4dd33c84db04b7"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/scripts/dev.mjs",
+    "target": "ai_research/research_docs/scripts/dev.mjs",
+    "reference_sha256": "baea3136f23658153c13014519a71b68ebdd37f4de9de792e9bd201b97129d35"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/scripts/sync-catalog.mjs",
+    "target": "ai_research/research_docs/scripts/sync-catalog.mjs",
+    "reference_sha256": "97ad72af08c57b09ff53525428d07f577e0ac9f353eddde72a09a747d3a07d22"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/scripts/templates.mjs",
+    "target": "ai_research/research_docs/scripts/templates.mjs",
+    "reference_sha256": "47a6c3a48500da95949e06ca974162e44572ddc0b77f281992cea077705d1851"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/scripts/serve.mjs",
+    "target": "ai_research/research_docs/scripts/serve.mjs",
+    "reference_sha256": "cec1d4fee457e1274fc8f984647714575c5e037f0b2fb4b27f0ed9f1ae52288f"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/scripts/content.mjs",
+    "target": "ai_research/research_docs/scripts/content.mjs",
+    "reference_sha256": "433371caaaf37a352f12a7d23eed14af749d9cb07c7b005b780a0f5a83bee115"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/scripts/build.mjs",
+    "target": "ai_research/research_docs/scripts/build.mjs",
+    "reference_sha256": "70c85104bf789b2e71266cc3ef5acf5d95e3354a9ec3df9afdee723a782a7117"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/src/styles.css",
+    "target": "ai_research/research_docs/src/styles.css",
+    "reference_sha256": "65b415ea3443f9b52692263e2b5a795c5edce953845a3fab679aff380615bcd9"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/src/app.js",
+    "target": "ai_research/research_docs/src/app.js",
+    "reference_sha256": "54cd8fe90f1e9610494ac9f3942db123ffd5abbce3fdd405aa7e14ad82dfd4b8"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/public/favicon.svg",
+    "target": "ai_research/research_docs/public/favicon.svg",
+    "reference_sha256": "79a1b9d57a681b466fa235614f74162a763d0f381bcbf416331fe72a7415d4d8"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/templates/record.md",
+    "target": "ai_research/research_docs/templates/record.md",
+    "reference_sha256": "26d8e13430205516570b9d9d6f907d415c7c59b814dd0067c244229c12a50ef9"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/package.json",
+    "target": "ai_research/research_docs/package.json",
+    "reference_sha256": "e23e9aba833a04cd4d7d5144aa4717d0cfd29f8dcfbe221090ba7e346566934c"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/package-lock.json",
+    "target": "ai_research/research_docs/package-lock.json",
+    "reference_sha256": "6f3e7786655ec6aefd40cbdc8907168f01f9dc8fa42bb820a18e63698013eeb8"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/.gitignore",
+    "target": "ai_research/research_docs/.gitignore",
+    "reference_sha256": "f9d0b9c7f7d69fc956ba7120817f8bf40eee63e7dd60814d23a96fcdaf6cd897"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/scripts/dev.mjs",
+    "target": "ai_projects/project_docs/scripts/dev.mjs",
+    "reference_sha256": "baea3136f23658153c13014519a71b68ebdd37f4de9de792e9bd201b97129d35"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/scripts/sync-catalog.mjs",
+    "target": "ai_projects/project_docs/scripts/sync-catalog.mjs",
+    "reference_sha256": "97ad72af08c57b09ff53525428d07f577e0ac9f353eddde72a09a747d3a07d22"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/scripts/templates.mjs",
+    "target": "ai_projects/project_docs/scripts/templates.mjs",
+    "reference_sha256": "47a6c3a48500da95949e06ca974162e44572ddc0b77f281992cea077705d1851"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/scripts/serve.mjs",
+    "target": "ai_projects/project_docs/scripts/serve.mjs",
+    "reference_sha256": "cec1d4fee457e1274fc8f984647714575c5e037f0b2fb4b27f0ed9f1ae52288f"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/scripts/content.mjs",
+    "target": "ai_projects/project_docs/scripts/content.mjs",
+    "reference_sha256": "433371caaaf37a352f12a7d23eed14af749d9cb07c7b005b780a0f5a83bee115"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/scripts/build.mjs",
+    "target": "ai_projects/project_docs/scripts/build.mjs",
+    "reference_sha256": "70c85104bf789b2e71266cc3ef5acf5d95e3354a9ec3df9afdee723a782a7117"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/src/styles.css",
+    "target": "ai_projects/project_docs/src/styles.css",
+    "reference_sha256": "65b415ea3443f9b52692263e2b5a795c5edce953845a3fab679aff380615bcd9"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/src/app.js",
+    "target": "ai_projects/project_docs/src/app.js",
+    "reference_sha256": "54cd8fe90f1e9610494ac9f3942db123ffd5abbce3fdd405aa7e14ad82dfd4b8"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/public/favicon.svg",
+    "target": "ai_projects/project_docs/public/favicon.svg",
+    "reference_sha256": "79a1b9d57a681b466fa235614f74162a763d0f381bcbf416331fe72a7415d4d8"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/templates/record.md",
+    "target": "ai_projects/project_docs/templates/record.md",
+    "reference_sha256": "26d8e13430205516570b9d9d6f907d415c7c59b814dd0067c244229c12a50ef9"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/package.json",
+    "target": "ai_projects/project_docs/package.json",
+    "reference_sha256": "e23e9aba833a04cd4d7d5144aa4717d0cfd29f8dcfbe221090ba7e346566934c"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/package-lock.json",
+    "target": "ai_projects/project_docs/package-lock.json",
+    "reference_sha256": "6f3e7786655ec6aefd40cbdc8907168f01f9dc8fa42bb820a18e63698013eeb8"
+  },
+  {
+    "reference": "/mnt/projects/quantum/quantum_research/research_docs/.gitignore",
+    "target": "ai_projects/project_docs/.gitignore",
+    "reference_sha256": "f9d0b9c7f7d69fc956ba7120817f8bf40eee63e7dd60814d23a96fcdaf6cd897"
+  }
+]

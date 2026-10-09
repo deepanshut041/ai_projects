@@ -1,0 +1,171 @@
+{
+  "protocol": "synthetic-ols-v1",
+  "features": 8,
+  "test_samples": 256,
+  "noise_std": 0.2,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "results": [
+    {
+      "train_samples": 16,
+      "mean_test_mse": 0.08530835575219757,
+      "standard_error": 0.01576243735821853,
+      "runs": [
+        {
+          "seed": 0,
+          "train_mse": 0.01856936106042689,
+          "test_mse": 0.14473710280112748,
+          "parameter_error": 0.31271009254042625
+        },
+        {
+          "seed": 1,
+          "train_mse": 0.017497713400015928,
+          "test_mse": 0.08442295059413771,
+          "parameter_error": 0.22769441481065975
+        },
+        {
+          "seed": 2,
+          "train_mse": 0.012381357665670724,
+          "test_mse": 0.07475517603746105,
+          "parameter_error": 0.18345795131003428
+        },
+        {
+          "seed": 3,
+          "train_mse": 0.021508287709235425,
+          "test_mse": 0.051995783682157085,
+          "parameter_error": 0.10397001837316547
+        },
+        {
+          "seed": 4,
+          "train_mse": 0.013469638661067977,
+          "test_mse": 0.07063076564610452,
+          "parameter_error": 0.18771044332948866
+        }
+      ]
+    },
+    {
+      "train_samples": 32,
+      "mean_test_mse": 0.05512731155804176,
+      "standard_error": 0.003235029206081468,
+      "runs": [
+        {
+          "seed": 0,
+          "train_mse": 0.01682584019785021,
+          "test_mse": 0.05076765595193494,
+          "parameter_error": 0.11919197586412496
+        },
+        {
+          "seed": 1,
+          "train_mse": 0.01385933262162415,
+          "test_mse": 0.048669857892448466,
+          "parameter_error": 0.1081392782645796
+        },
+        {
+          "seed": 2,
+          "train_mse": 0.026769781050202328,
+          "test_mse": 0.05710925422110514,
+          "parameter_error": 0.13539961096930922
+        },
+        {
+          "seed": 3,
+          "train_mse": 0.02521929256083805,
+          "test_mse": 0.06681279666466881,
+          "parameter_error": 0.1644855470000827
+        },
+        {
+          "seed": 4,
+          "train_mse": 0.02858113601913307,
+          "test_mse": 0.052276993060051485,
+          "parameter_error": 0.10067904728878634
+        }
+      ]
+    },
+    {
+      "train_samples": 64,
+      "mean_test_mse": 0.045218231672469814,
+      "standard_error": 0.0014798358608571149,
+      "runs": [
+        {
+          "seed": 0,
+          "train_mse": 0.04127379287177993,
+          "test_mse": 0.04438691773371648,
+          "parameter_error": 0.07297682858689172
+        },
+        {
+          "seed": 1,
+          "train_mse": 0.031345308233420875,
+          "test_mse": 0.04069376955926013,
+          "parameter_error": 0.07553202531569787
+        },
+        {
+          "seed": 2,
+          "train_mse": 0.05275963394846283,
+          "test_mse": 0.04408808177519798,
+          "parameter_error": 0.10678607744835743
+        },
+        {
+          "seed": 3,
+          "train_mse": 0.04433873688952987,
+          "test_mse": 0.04805771805349315,
+          "parameter_error": 0.05039202273286115
+        },
+        {
+          "seed": 4,
+          "train_mse": 0.03816593207733317,
+          "test_mse": 0.04886467124068131,
+          "parameter_error": 0.076532822310345
+        }
+      ]
+    },
+    {
+      "train_samples": 128,
+      "mean_test_mse": 0.04595237219306721,
+      "standard_error": 0.0023572841601561313,
+      "runs": [
+        {
+          "seed": 0,
+          "train_mse": 0.044356819374283624,
+          "test_mse": 0.05165448189527913,
+          "parameter_error": 0.08704518098055322
+        },
+        {
+          "seed": 1,
+          "train_mse": 0.0361009377935858,
+          "test_mse": 0.04978037094026954,
+          "parameter_error": 0.05532583450825649
+        },
+        {
+          "seed": 2,
+          "train_mse": 0.04067241394443983,
+          "test_mse": 0.04751301560316348,
+          "parameter_error": 0.04550321389413953
+        },
+        {
+          "seed": 3,
+          "train_mse": 0.03883091030763397,
+          "test_mse": 0.04052976945200359,
+          "parameter_error": 0.028264175031032242
+        },
+        {
+          "seed": 4,
+          "train_mse": 0.03822066464442975,
+          "test_mse": 0.04028422307462031,
+          "parameter_error": 0.049395202290607385
+        }
+      ]
+    }
+  ],
+  "limitations": "Five toy seeds; standard errors are descriptive. Not a confidence interval or evidence about real datasets.",
+  "provenance": {
+    "revision": "75130e5f8e0224737299103e3155b653cdd27243",
+    "dirty": false,
+    "python": "3.12.13",
+    "numpy": "2.3.3",
+    "implementation_sha256": "0853701ab2b25727998a98ca04b78818b3958e375595b25538f2ddeb26998c85"
+  }
+}

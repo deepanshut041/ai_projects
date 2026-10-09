@@ -1,0 +1,74 @@
+{
+  "checked_at": "2026-10-09T23:05:55.161255+00:00",
+  "results": [
+    {
+      "id": "causal-cpp",
+      "language": "cpp",
+      "path": "examples/causal_trace.cpp",
+      "sha256": "fe6aa940fd899cd197772a52ea3da620154a9fc466a11ffacd3f6ceb3cefaaa7",
+      "output": {
+        "causal": [
+          2.0,
+          3.0,
+          4.666666667
+        ],
+        "unmasked": [
+          4.666666667,
+          4.666666667,
+          4.666666667
+        ],
+        "changed_prefix": [
+          2.0,
+          3.0
+        ],
+        "inputs": [
+          10,
+          20,
+          30
+        ],
+        "targets": [
+          20,
+          30,
+          40
+        ]
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "causal-python",
+      "language": "python",
+      "path": "examples/causal_trace.py",
+      "sha256": "e7373023f2c34c1a26deaf28661d9a8ec287af7e0aa3f706bdd7f85a87f6afce",
+      "output": {
+        "causal": [
+          2.0,
+          3.0,
+          4.666666667
+        ],
+        "unmasked": [
+          4.666666667,
+          4.666666667,
+          4.666666667
+        ],
+        "changed_prefix": [
+          2.0,
+          3.0
+        ],
+        "inputs": [
+          10,
+          20,
+          30
+        ],
+        "targets": [
+          20,
+          30,
+          40
+        ]
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    }
+  ],
+  "passed": true
+}

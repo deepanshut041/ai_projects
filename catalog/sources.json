@@ -26,7 +26,7 @@
   "sources": [
     {
       "id": "attention-paper",
-      "title": "Attention Is All You Need \u2014 arXiv v7, section 3.2.1",
+      "title": "Attention Is All You Need — arXiv v7, section 3.2.1",
       "url": "https://arxiv.org/html/1706.03762v7",
       "collection": "attention",
       "kind": "Paper",
