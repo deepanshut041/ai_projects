@@ -9,10 +9,11 @@ from pathlib import Path
 def main(project_root: Path) -> int:
     required = (
         "README.md", "pyproject.toml", "uv.lock", ".python-version", ".gitignore",
-        "demo.py", "prepare_data.py", "train.py", "compare.py", "inference.py",
+        "demo.py", "linear_example.py", "prepare_data.py", "train.py", "compare.py", "inference.py",
         "src/bike_demand_planner/__init__.py",
         "src/bike_demand_planner/__main__.py",
         "src/bike_demand_planner/project.py",
+        "src/bike_demand_planner/linear.py",
     )
     missing = [name for name in required if not (project_root / name).is_file()]
     nested_repository = (project_root / ".git").exists()

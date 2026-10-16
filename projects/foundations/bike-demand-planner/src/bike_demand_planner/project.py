@@ -10,8 +10,9 @@ def project_info() -> dict[str, str]:
     return {
         "project": "Bike Demand Planner",
         "version": __version__,
-        "status": "scaffold",
+        "status": "single-observation arithmetic",
         "target": "hourly rental count",
+        "numerics": "linear prediction, half squared error, gradients and one SGD step",
         "data_preparation": "not implemented",
         "training": "not implemented",
         "evaluation": "not implemented",

@@ -4,7 +4,7 @@ Bike Demand Planner is a Python project for hourly bike rental demand estimation
 
 Planned functionality includes historical replay, comparisons of calendar baselines, linear regression and tree-based models, and a local application backed by a saved predictor.
 
-**Current status:** the Python package and standalone entry points are set up. Data preparation, estimators, training, evaluation and the application are not implemented yet.
+**Current status:** the package includes linear prediction, half squared error, analytic gradients and a single-observation SGD update, with an executable numerical example. Data preparation, fitted demand estimators, batch training, evaluation and the application remain pending.
 
 ## Setup
 
@@ -15,6 +15,7 @@ cd ai_projects/projects/foundations/bike-demand-planner
 uv sync --frozen
 uv run --frozen python check_setup.py
 uv run --frozen python demo.py
+uv run --frozen python linear_example.py
 ```
 
 Python is pinned to 3.12.13. The package currently uses the standard library; numerical and modelling dependencies will be added when needed.
@@ -25,12 +26,21 @@ The setup check reports `status: ok`. The demo prints project information and th
 uv run --frozen python -m bike_demand_planner
 ```
 
+The numerical example uses illustrative values and compares targets of 45 and 35 from the same starting parameters. The initial prediction is 40.00 in both cases; one update moves it to 40.30 for target 45 and to 39.70 for target 35. Half squared error decreases from 12.5 to approximately 11.045 in each case. The example does not load bike-sharing data or measure forecast quality.
+
+Run the numerical checks with:
+
+```bash
+uv run --frozen python -m unittest discover -s tests -v
+```
+
 ## Entry points
 
 | File | Purpose | Current behavior |
 | --- | --- | --- |
 | `check_setup.py` | Check the source checkout and installed package | Runs the setup check |
 | `demo.py` | Show project information | Reports the current status |
+| `linear_example.py` | Compare prediction, gradient and update directions | Runs two illustrative targets from the same starting parameters |
 | `prepare_data.py` | Acquire and validate hourly records | Returns `not_implemented` with exit code 2 |
 | `train.py` | Fit an estimator and save run state | Returns `not_implemented` with exit code 2 |
 | `compare.py` | Compare evaluation results | Returns `not_implemented` with exit code 2 |
@@ -54,13 +64,16 @@ bike-demand-planner/
 ├── uv.lock
 ├── check_setup.py
 ├── demo.py
+├── linear_example.py
 ├── prepare_data.py
 ├── train.py
 ├── compare.py
 ├── inference.py
+├── tests/test_linear.py
 └── src/bike_demand_planner/
     ├── __init__.py
     ├── __main__.py
+    ├── linear.py
     └── project.py
 ```
 
