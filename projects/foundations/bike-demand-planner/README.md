@@ -4,7 +4,7 @@ Bike Demand Planner is a Python project for hourly bike rental demand estimation
 
 Planned functionality includes historical replay, comparisons of calendar baselines, linear regression and tree-based models, and a local application backed by a saved predictor.
 
-**Current status:** the package includes official dataset acquisition, hourly structural checks, fixed calendar encoding and frozen chronological membership. Linear prediction, half squared error, analytic gradients and a single-observation SGD example are also available. Fitted demand estimators, batch training, evaluation and the application remain pending.
+**Current status:** the package includes official dataset acquisition, hourly structural checks, fixed calendar encoding, frozen chronological membership and fitted global/calendar-group demand baselines with aligned training/validation metrics. Calendar groups use hour and working-day status, with a training-only global-mean fallback. Linear prediction, half squared error, analytic gradients and a single-observation SGD example are also available. Optimized estimators, batch training and the application remain pending.
 
 ## Setup
 
@@ -18,6 +18,8 @@ uv run --frozen python demo.py
 uv run --frozen python linear_example.py
 uv run --frozen python prepare_data.py
 uv run --frozen python calendar_example.py
+uv run --frozen python baseline_example.py
+uv run --frozen python group_baseline_example.py
 ```
 
 Python is pinned to 3.12.13. The package currently uses the standard library; numerical and modelling dependencies will be added when needed.
@@ -40,6 +42,10 @@ The data command downloads and caches the official archive, retains SHA-256 iden
 
 The calendar example traces record 54 at `2011-01-03 08:00` into its 45 ordered binary features and training membership, keeping its observed target of 154 separate.
 
+The baseline command fits the mean of training targets and repeats that value without using future outcomes. It saves `model.json`, row-aligned training/validation predictions and `run.json` in a new directory under `runs/`. The run record retains source/dependency/data identities, the fit policy, metric definitions, timings and completion/failure status. It does not read the test partition. Predictions remain real-valued; they are not rounded or clipped.
+
+The group-baseline command compares that constant with a separate training mean for each `(hour, workingday)` pair. A valid pair absent from training falls back to the global training mean. Both predictors use the same frozen validation hours and metric definitions, with group counts and fallback usage saved alongside the run records. On the current 4,357-hour validation window, MAE is 154.2452 for the constant and 91.5729 for the group predictor; this is a development comparison rather than final-test performance.
+
 ## Entry points
 
 | File | Purpose | Current behavior |
@@ -49,11 +55,13 @@ The calendar example traces record 54 at `2011-01-03 08:00` into its 45 ordered 
 | `linear_example.py` | Compare prediction, gradient and update directions | Runs two illustrative targets from the same starting parameters |
 | `prepare_data.py` | Acquire, validate and partition hourly records | Writes the audit, calendar schema and frozen chronological exports |
 | `calendar_example.py` | Inspect one real calendar encoding | Reports active features and membership for a training observation |
+| `baseline_example.py` | Fit and evaluate a constant demand predictor | Saves the training mean, aligned predictions and error summaries |
+| `group_baseline_example.py` | Compare global and calendar-group predictors | Saves matched train/validation results, group counts and fallback usage |
 | `train.py` | Fit an estimator and save run state | Returns `not_implemented` with exit code 2 |
 | `compare.py` | Compare evaluation results | Returns `not_implemented` with exit code 2 |
 | `inference.py` | Load a saved estimator and predict | Returns `not_implemented` with exit code 2 |
 
-Inputs are declared in each file's main block. Training, comparison and inference entry points remain unavailable.
+Inputs are declared in each file's main block. General training, comparison and inference entry points remain unavailable.
 
 ## Data and prediction contract
 
@@ -65,7 +73,7 @@ The first schema has 45 binary columns: one-hot hour, weekday and month, then ho
 
 Training uses 2011 (8,645 rows), validation uses 2012-01-01 01:00 through June (4,357 rows), and the reserved test uses 2012-07-01 01:00 through December (4,375 rows). The two midnight boundary rows are excluded because their one-hour-ahead issue times precede preceding-stage label availability. The protocol assumes interval-start labels, outcomes available at interval end and zero reporting/model-build delay. Source timezone/DST semantics remain unspecified. Reserved-test targets are omitted from the exported test CSV.
 
-Evaluation will use MAE in rentals per hour, supported by RMSE and error slices. Model settings remain pending. Any future learned preprocessing must fit only the relevant training partition. The tool estimates observed system-wide rentals; station inventory and unmet demand require other data.
+Evaluation uses MAE in rentals per hour as its primary summary, alongside RMSE and mean signed error (`prediction - target`). Mean underprediction is the sum of hourly deficits divided by all evaluated rows; the underprediction count and its conditional mean are reported separately. An identity/order check precedes scoring. Any future learned preprocessing must fit only the relevant training partition. The tool estimates observed system-wide rentals; station inventory and unmet demand require other data.
 
 ## Layout
 
@@ -77,6 +85,8 @@ bike-demand-planner/
 ├── demo.py
 ├── linear_example.py
 ├── calendar_example.py
+├── baseline_example.py
+├── group_baseline_example.py
 ├── prepare_data.py
 ├── train.py
 ├── compare.py
@@ -85,13 +95,18 @@ bike-demand-planner/
 │   ├── test_data.py
 │   ├── test_features.py
 │   ├── test_splits.py
+│   ├── test_baselines.py
+│   ├── test_evaluation.py
 │   └── test_linear.py
 └── src/bike_demand_planner/
     ├── __init__.py
     ├── __main__.py
     ├── data.py
+    ├── baselines.py
+    ├── evaluation.py
     ├── features.py
     ├── linear.py
+    ├── metrics.py
     ├── splits.py
     └── project.py
 ```
