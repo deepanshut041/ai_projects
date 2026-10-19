@@ -10,12 +10,12 @@ def project_info() -> dict[str, str]:
     return {
         "project": "Bike Demand Planner",
         "version": __version__,
-        "status": "calendar dataset preparation and comparable demand baselines",
+        "status": "calendar demand baselines and full-batch linear regression",
         "target": "hourly rental count",
         "numerics": "linear prediction, half squared error, gradients and one SGD step",
         "data_preparation": "official audit, fixed calendar encoding and frozen chronological membership",
-        "training": "global and hour/working-day means; optimized estimators not implemented",
-        "evaluation": "aligned train/validation errors and versioned baseline run records",
+        "training": "training-only baselines and standardized full-batch linear regression",
+        "evaluation": "aligned train/validation errors, convergence history and versioned run records",
         "inference": "not implemented",
     }
 

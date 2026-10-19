@@ -4,7 +4,7 @@ Bike Demand Planner is a Python project for hourly bike rental demand estimation
 
 Planned functionality includes historical replay, comparisons of calendar baselines, linear regression and tree-based models, and a local application backed by a saved predictor.
 
-**Current status:** the package includes official dataset acquisition, hourly structural checks, fixed calendar encoding, frozen chronological membership and fitted global/calendar-group demand baselines with aligned training/validation metrics. Calendar groups use hour and working-day status, with a training-only global-mean fallback. Linear prediction, half squared error, analytic gradients and a single-observation SGD example are also available. Optimized estimators, batch training and the application remain pending.
+**Current status:** the package includes official dataset acquisition, hourly structural checks, fixed calendar encoding, frozen chronological membership, global/calendar-group demand baselines and full-batch linear regression. Linear fitting uses training-only feature standardization, checked analytic gradients and a stable least-squares reference. All predictors retain aligned training/validation results. Optimizer comparisons, stronger estimators, saved-model inference and the application remain pending.
 
 ## Setup
 
@@ -20,9 +20,11 @@ uv run --frozen python prepare_data.py
 uv run --frozen python calendar_example.py
 uv run --frozen python baseline_example.py
 uv run --frozen python group_baseline_example.py
+uv run --frozen python regression_example.py
+uv run --frozen python train.py
 ```
 
-Python is pinned to 3.12.13. The package currently uses the standard library; numerical and modelling dependencies will be added when needed.
+Python is pinned to 3.12.13 and NumPy to 2.5.4. Dependencies are recorded in `uv.lock`.
 
 The setup check reports `status: ok`. The demo prints project information and the availability of each operation. The package can also be run with:
 
@@ -46,6 +48,10 @@ The baseline command fits the mean of training targets and repeats that value wi
 
 The group-baseline command compares that constant with a separate training mean for each `(hour, workingday)` pair. A valid pair absent from training falls back to the global training mean. Both predictors use the same frozen validation hours and metric definitions, with group counts and fallback usage saved alongside the run records. On the current 4,357-hour validation window, MAE is 154.2452 for the constant and 91.5729 for the group predictor; this is a development comparison rather than final-test performance.
 
+The regression example traces a small matrix calculation and two updates for a real training hour, then compares all three models on the same frozen membership. Linear regression fits the 45 calendar features with an intercept, using float64 full-batch gradients on mean half squared error. Column means and population standard deviations are fitted on training only; constant columns use scale one. Targets remain in rentals/hour. Weights start at zero and the intercept starts at the training target mean. The fixed learning rate is 0.1, with a 10,000-update limit and a training-gradient norm tolerance of 1e-7. Validation does not choose preprocessing or the stopping point.
+
+The current linear fit converges in 200 updates and agrees with the stable least-squares reference within 1e-6 rentals/hour on the observed train/validation inputs. Validation MAE is 116.7312 and RMSE is 157.9791, worse than the hour/working-day baseline. The additive calendar model does not learn separate working-day and nonworking-day hourly curves. Its 724 negative validation forecasts are retained without clipping, so the reported metrics describe the actual unconstrained model. The run saves standardized and equivalent raw parameters, feature order, convergence history, prediction ranges and reference agreement alongside the common evaluation artifacts. `train.py` fits this same bounded linear model without rerunning the baselines.
+
 ## Entry points
 
 | File | Purpose | Current behavior |
@@ -57,11 +63,12 @@ The group-baseline command compares that constant with a separate training mean 
 | `calendar_example.py` | Inspect one real calendar encoding | Reports active features and membership for a training observation |
 | `baseline_example.py` | Fit and evaluate a constant demand predictor | Saves the training mean, aligned predictions and error summaries |
 | `group_baseline_example.py` | Compare global and calendar-group predictors | Saves matched train/validation results, group counts and fallback usage |
-| `train.py` | Fit an estimator and save run state | Returns `not_implemented` with exit code 2 |
+| `regression_example.py` | Trace full-batch updates and compare three predictors | Saves checked updates, linear fitting history and matched results |
+| `train.py` | Fit calendar linear regression | Saves fitted parameters, history, aligned predictions and run state |
 | `compare.py` | Compare evaluation results | Returns `not_implemented` with exit code 2 |
 | `inference.py` | Load a saved estimator and predict | Returns `not_implemented` with exit code 2 |
 
-Inputs are declared in each file's main block. General training, comparison and inference entry points remain unavailable.
+Inputs are declared in each file's main block. The general comparison and saved-model inference entry points remain unavailable.
 
 ## Data and prediction contract
 
@@ -69,7 +76,7 @@ The source is the [UCI Bike Sharing dataset](https://archive.ics.uci.edu/dataset
 
 The target is total rentals in an hour (`cnt`). The initial predictor will use calendar information available in advance. `casual` and `registered` are excluded because together they reveal the target; row identifiers are kept separately from predictive features. Observed weather will require a separately labelled historical comparison.
 
-The first schema has 45 binary columns: one-hot hour, weekday and month, then holiday and working-day flags. Year and season are omitted. Domains are fixed calendar definitions, with no fitted scaler. Feature order is saved; invalid, missing and extra input fields are rejected.
+The first schema has 45 binary columns: one-hot hour, weekday and month, then holiday and working-day flags. Year and season are omitted. Domains are fixed calendar definitions, with no fitted scaler in the data exports. Linear regression applies a separate training-fitted scaler without changing those exports. Feature order is saved; invalid, missing and extra input fields are rejected. Full one-hot groups and flags create dependent columns with an intercept, so individual coefficients need not be unique.
 
 Training uses 2011 (8,645 rows), validation uses 2012-01-01 01:00 through June (4,357 rows), and the reserved test uses 2012-07-01 01:00 through December (4,375 rows). The two midnight boundary rows are excluded because their one-hour-ahead issue times precede preceding-stage label availability. The protocol assumes interval-start labels, outcomes available at interval end and zero reporting/model-build delay. Source timezone/DST semantics remain unspecified. Reserved-test targets are omitted from the exported test CSV.
 
@@ -87,6 +94,7 @@ bike-demand-planner/
 ├── calendar_example.py
 ├── baseline_example.py
 ├── group_baseline_example.py
+├── regression_example.py
 ├── prepare_data.py
 ├── train.py
 ├── compare.py
@@ -97,6 +105,8 @@ bike-demand-planner/
 │   ├── test_splits.py
 │   ├── test_baselines.py
 │   ├── test_evaluation.py
+│   ├── test_regression.py
+│   ├── test_linear_evaluation.py
 │   └── test_linear.py
 └── src/bike_demand_planner/
     ├── __init__.py
@@ -106,6 +116,8 @@ bike-demand-planner/
     ├── evaluation.py
     ├── features.py
     ├── linear.py
+    ├── regression.py
+    ├── linear_evaluation.py
     ├── metrics.py
     ├── splits.py
     └── project.py
