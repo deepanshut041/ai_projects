@@ -10,7 +10,7 @@ def main(project_root: Path) -> int:
     required = (
         "README.md", "pyproject.toml", "uv.lock", ".python-version", ".gitignore",
         "demo.py", "linear_example.py", "calendar_example.py", "baseline_example.py", "group_baseline_example.py", "regression_example.py",
-        "optimization_example.py", "objective_example.py", "prepare_data.py", "train.py", "compare.py", "inference.py",
+        "optimization_example.py", "objective_example.py", "tree_example.py", "prepare_data.py", "train.py", "compare.py", "inference.py",
         "src/bike_demand_planner/__init__.py",
         "src/bike_demand_planner/__main__.py",
         "src/bike_demand_planner/project.py",
@@ -28,6 +28,9 @@ def main(project_root: Path) -> int:
         "src/bike_demand_planner/optimizer_evaluation.py",
         "src/bike_demand_planner/objectives.py",
         "src/bike_demand_planner/objective_evaluation.py",
+        "src/bike_demand_planner/trees.py",
+        "src/bike_demand_planner/tree_evaluation.py",
+        "src/bike_demand_planner/comparison.py",
     )
     missing = [name for name in required if not (project_root / name).is_file()]
     nested_repository = (project_root / ".git").exists()

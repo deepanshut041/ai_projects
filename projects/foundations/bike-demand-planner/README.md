@@ -4,7 +4,7 @@ Bike Demand Planner is a Python project for hourly bike rental demand estimation
 
 Planned functionality includes historical replay, comparisons of calendar baselines, linear regression and tree-based models, and a local application backed by a saved predictor.
 
-**Current status:** the package includes official dataset acquisition, hourly checks, frozen chronological membership, calendar baselines, full-batch linear regression, controlled SGD/momentum/Adam comparisons, and separate loss/regularization/calendar-structure studies. Linear fitting uses training-only feature standardization and checked analytic gradients. Optimizer, batch-size and rate-schedule studies are separate, with aligned train/validation results and saved algorithm/order state. Stronger estimators, saved-model inference and the application remain pending.
+**Current status:** the package includes official dataset acquisition, hourly checks, frozen chronological membership, calendar baselines, full-batch linear regression, controlled optimizer/objective/calendar-structure studies and bounded decision-tree, random-forest and gradient-boosting comparisons. Fits use training only, with aligned train/validation results and retained numerical model state. Saved-model inference and the application remain pending.
 
 ## Setup
 
@@ -24,9 +24,11 @@ uv run --frozen python regression_example.py
 uv run --frozen python train.py
 uv run --frozen python optimization_example.py
 uv run --frozen python objective_example.py
+uv run --frozen python tree_example.py
+uv run --frozen python compare.py
 ```
 
-Python is pinned to 3.12.13 and NumPy to 2.5.4. Dependencies are recorded in `uv.lock`.
+Python is pinned to 3.12.13, NumPy to 2.5.4 and scikit-learn to 1.9.1. Dependencies are recorded in `uv.lock`.
 
 The setup check reports `status: ok`. The demo prints project information and the availability of each operation. The package can also be run with:
 
@@ -77,10 +79,15 @@ Raw predictions and a declared nonnegative policy are scored separately. On the 
 | `train.py` | Fit calendar linear regression | Saves fitted parameters, history, aligned predictions and run state |
 | `optimization_example.py` | Compare batching, optimizer rules and one rate schedule | Saves a training-only pilot, frozen comparison protocol, paired trials and continuation state |
 | `objective_example.py` | Compare loss, L2, scaling, calendar structure and output policy | Saves training-only pilots, separate fitted comparisons and a validation-led reference selection |
-| `compare.py` | Compare evaluation results | Returns `not_implemented` with exit code 2 |
+| `tree_example.py` | Trace a small tree and compare practical calendar estimators | Saves bounded candidates, numerical snapshots, seed-aggregated validation results and selection identity |
+| `compare.py` | Summarize a saved practical-model study | Verifies protocol/artifact identities and writes the latest compatible comparison summary |
 | `inference.py` | Load a saved estimator and predict | Returns `not_implemented` with exit code 2 |
 
-Inputs are declared in each file's main block. The general comparison and saved-model inference entry points remain unavailable.
+Inputs are declared in each file's main block. The comparison command requires a completed `tree_example.py` run; it does not combine incompatible older study formats. Saved-model inference remains unavailable.
+
+The tree comparison retains the same 45 raw calendar columns and identity rental target. Each of three model families receives three configurations and seeds 17, 29 and 43. Configuration selection uses mean validation MAE across the declared seeds, with the first seed retained as the representative artifact. It never selects the luckiest seed. Simple deterministic references receive one fit each. Raw and nonnegative output policies are reported separately; final-test evaluation remains reserved.
+
+Each tree is bounded to 1,024 leaves. Forests contain 64 bootstrap trees with 70% of features considered at a split and one fitting job. Boosting uses depth-three squared-error residual trees, learning rate 0.1 and 100/200/300 stages, without validation-based early stopping. Training-only timing pilots check feasibility. Post-fit time guards stop later work when exceeded; they are not hard interrupts. Fitted numerical snapshots preserve tree tests, leaf values, support and aggregation rules as JSON. Reported prediction timings measure this transparent replay, not an optimized serving deployment.
 
 ## Data and prediction contract
 
@@ -109,6 +116,7 @@ bike-demand-planner/
 ├── regression_example.py
 ├── optimization_example.py
 ├── objective_example.py
+├── tree_example.py
 ├── prepare_data.py
 ├── train.py
 ├── compare.py
@@ -125,6 +133,8 @@ bike-demand-planner/
 │   ├── test_optimizer_evaluation.py
 │   ├── test_objectives.py
 │   ├── test_objective_evaluation.py
+│   ├── test_trees.py
+│   ├── test_tree_evaluation.py
 │   └── test_linear.py
 └── src/bike_demand_planner/
     ├── __init__.py
@@ -141,6 +151,9 @@ bike-demand-planner/
     ├── optimizer_evaluation.py
     ├── objectives.py
     ├── objective_evaluation.py
+    ├── trees.py
+    ├── tree_evaluation.py
+    ├── comparison.py
     ├── metrics.py
     ├── splits.py
     └── project.py
