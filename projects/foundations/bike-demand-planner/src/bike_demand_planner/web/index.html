@@ -14,7 +14,7 @@
         <section id="observation-panel" class="panel observation" hidden><p class="eyebrow">AFTER THE TARGET HOUR</p><h2>Compare the recorded outcome</h2><p class="hint">The observed count stays separate from the request and prediction.</p><button id="show-observation" class="secondary">Show recorded outcome</button><div id="observed-result" aria-live="polite"></div></section>
       </div>
     </div>
-    <section class="panel limits"><h2>Read the estimate in context</h2><p>The chosen model has the lowest overall development MAE. Its errors are much larger during working-day rush hours and later in the validation period. Equal hour/day-type keys return the same estimate in January and June.</p><ul id="limits-list"></ul><p class="hint">The final test remains reserved. A valid hour without a recorded observation can receive an estimate; it does not receive an invented zero target.</p></section>
+    <section class="panel limits"><h2>Read the estimate in context</h2><p>The chosen model has the lowest overall development MAE. Its errors are much larger during working-day rush hours and later in the validation period. Equal hour/day-type keys return the same estimate in January and June.</p><ul id="limits-list"></ul><p class="hint">This view shows validation evidence. A valid hour without a recorded observation can receive an estimate; it does not receive an invented zero target.</p></section>
   </section>
   <section id="benchmarks-view" hidden>
     <div class="benchmark-heading"><div><p class="eyebrow">SAME 4,357 OBSERVED VALIDATION HOURS</p><h2>The candidate and its alternatives</h2></div><label>Sort by <select id="benchmark-sort"><option value="overall">Overall MAE</option><option value="june">June MAE</option></select></label></div>

@@ -46,6 +46,12 @@ def main(project_root: Path) -> int:
         "src/bike_demand_planner/web/index.html",
         "src/bike_demand_planner/web/app.js",
         "src/bike_demand_planner/web/style.css",
+        "final_evaluation_example.py", "serve_final.py",
+        "src/bike_demand_planner/final_evaluation.py",
+        "src/bike_demand_planner/final_application.py",
+        "src/bike_demand_planner/web/final.html",
+        "src/bike_demand_planner/web/final.js",
+        "src/bike_demand_planner/web/final.css",
     )
     missing = [name for name in required if not (project_root / name).is_file()]
     nested_repository = (project_root / ".git").exists()

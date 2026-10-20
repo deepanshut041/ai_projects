@@ -1,7 +1,4 @@
-"""Project metadata and availability of unfinished operations."""
-
-import json
-from pathlib import Path
+"""Project metadata for the local modelling and replay application."""
 
 from . import __version__
 
@@ -10,22 +7,11 @@ def project_info() -> dict[str, str]:
     return {
         "project": "Bike Demand Planner",
         "version": __version__,
-        "status": "saved calendar predictor, local training recovery and historical replay",
+        "status": "saved calendar predictor, local recovery, historical replay and frozen final assessment",
         "target": "hourly rental count",
         "numerics": "linear prediction, half squared error, gradients and one SGD step",
         "data_preparation": "official audit, fixed calendar encoding and frozen chronological membership",
         "training": "training-only fits; explicit linear studies and library-backed tree estimators",
-        "evaluation": "aligned slices, temporal diagnostics, input-domain probes and versioned candidate configuration",
+        "evaluation": "development comparisons and protocol-gated held-out assessment with persisted pre-label forecasts",
         "inference": "verified JSON export and fresh-process parity; local replay and benchmark views",
     }
-
-
-def unavailable(operation: str, **inputs: str | Path) -> int:
-    """Report an unavailable operation without creating output files."""
-    print(json.dumps({
-        "operation": operation,
-        "status": "not_implemented",
-        "inputs": {key: str(value) for key, value in inputs.items()},
-        "message": "This operation is not implemented. No output was created.",
-    }, indent=2))
-    return 2

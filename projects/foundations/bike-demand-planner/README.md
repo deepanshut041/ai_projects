@@ -4,9 +4,9 @@ Bike Demand Planner is a Python project for hourly bike rental demand estimation
 
 The local application provides historical replay and comparisons of calendar baselines, linear regression and tree-based models, backed by a verified saved predictor.
 
-**Current status:** the package includes official dataset acquisition, frozen chronological membership, calendar baselines, linear regression, controlled numerical studies and bounded tree/forest/boosting comparisons. Saved training/validation forecasts feed aligned error diagnostics, calendar/time slices, request-contract probes and a versioned development-candidate record. Saved-model inference, fresh-process prediction parity, complete local training recovery and the historical-replay application are implemented. Final held-out evaluation remains reserved.
+**Current status:** the package includes dataset preparation, calendar baselines, linear regression, controlled numerical studies, tree/forest/boosting comparisons, saved-model inference and local training recovery. A frozen seven-model assessment covers the later 4,375 observed hours. The validation-selected hour/working-day predictor has final MAE 125.4167 rentals/hour; the retained forest scores 103.6474. The assessment preserves the original selection and its underprediction limits. Historical replay and final results are available locally.
 
-## Setup
+## Run locally
 
 From the workspace root:
 
@@ -14,6 +14,18 @@ From the workspace root:
 cd ai_projects/projects/foundations/bike-demand-planner
 uv sync --frozen
 uv run --frozen python check_setup.py
+uv run --frozen python serve_final.py
+```
+
+Open [the application](http://127.0.0.1:8504/) to inspect the final assessment and use historical replay. The server stays running until stopped with Ctrl+C. It verifies saved evidence on startup and does not train a model. If the generated data and models are absent, prepare them with the commands below first.
+
+Python is pinned to 3.12.13, NumPy to 2.5.4, scikit-learn to 1.9.1 and Matplotlib to 3.11.2. Dependencies are recorded in `uv.lock`.
+
+## Prepare data and results
+
+From the project directory, run these commands in order for a new checkout. They use the fixed configurations described below and retain unique run records. The final command freezes that checkout's reviewed models before assessing later outcomes. Rebuilding these historical results is reproduction, not new independent performance evidence.
+
+```bash
 uv run --frozen python demo.py
 uv run --frozen python linear_example.py
 uv run --frozen python prepare_data.py
@@ -29,10 +41,10 @@ uv run --frozen python compare.py
 uv run --frozen python error_review_example.py
 uv run --frozen python application_example.py
 uv run --frozen python inference.py
-uv run --frozen python serve_app.py
+uv run --frozen python final_evaluation_example.py
 ```
 
-Python is pinned to 3.12.13, NumPy to 2.5.4, scikit-learn to 1.9.1 and Matplotlib to 3.11.2. Dependencies are recorded in `uv.lock`.
+Then start `serve_final.py` as shown above. The separate validation-only benchmark page is available with `uv run --frozen python serve_app.py` at port 8503. Keep these server commands separate from the finite preparation commands.
 
 The setup check reports `status: ok`. The demo prints project information and the availability of each operation. The package can also be run with:
 
@@ -89,6 +101,8 @@ Raw predictions and a declared nonnegative policy are scored separately. On the 
 | `application_example.py` | Export the selected predictor and prepare replay evidence | Verifies fresh-process parity on all validation hours and complete training recovery |
 | `inference.py` | Load a saved estimator and predict | Validates the bundle and target-free request, then returns the unchanged group estimate |
 | `serve_app.py` | Start historical replay and model comparisons | Serves the local application at `http://127.0.0.1:8503/` |
+| `final_evaluation_example.py` | Assess seven frozen artifacts on later hours | Persists the protocol and target-free forecasts before accessing test outcomes; repeats show the saved receipt |
+| `serve_final.py` | Show final evidence beside historical replay | Serves the assessment at `http://127.0.0.1:8504/`; requests retain the January–June domain |
 
 Inputs are declared in each file's main block. The comparison command requires a completed `tree_example.py` run; it does not combine incompatible older study formats. The inference and application commands require a completed `application_example.py` run; missing prerequisites return `needs_run` with exit code 2.
 
@@ -96,7 +110,7 @@ The error-review command consumes the latest practical-model study and verifies 
 
 The candidate record retains the selected group model's exact bytes/hash, schema/order, raw output policy, training-only absent-group fallback, dataset/protocol identities and known failures. Review requests use the existing one-hour lead within the historical validation replay window, 2012-01-01 01:00 through June 30 23:00. Unsupported schemas, feature orders, dates and malformed calendar fields are rejected. Valid estimates do not supply missing observed labels. Holiday metadata must come from a trusted calendar; structural checks do not establish holiday authority. The original candidate record is preserved. The inference bundle adds a versioned adapter and recorded holiday-calendar authority; final-test evaluation remains separate.
 
-The tree comparison retains the same 45 raw calendar columns and identity rental target. Each of three model families receives three configurations and seeds 17, 29 and 43. Configuration selection uses mean validation MAE across the declared seeds, with the first seed retained as the representative artifact. It never selects the luckiest seed. Simple deterministic references receive one fit each. Raw and nonnegative output policies are reported separately; final-test evaluation remains reserved.
+The tree comparison retains the same 45 raw calendar columns and identity rental target. Each of three model families receives three configurations and seeds 17, 29 and 43. Configuration selection uses mean validation MAE across the declared seeds, with the first seed retained as the representative artifact. It never selects the luckiest seed. Simple deterministic references receive one fit each. Raw and nonnegative output policies are reported separately; the later final assessment retains seven already selected representative model/policy pairs.
 
 Each tree is bounded to 1,024 leaves. Forests contain 64 bootstrap trees with 70% of features considered at a split and one fitting job. Boosting uses depth-three squared-error residual trees, learning rate 0.1 and 100/200/300 stages, without validation-based early stopping. Training-only timing pilots check feasibility. Post-fit time guards stop later work when exceeded; they are not hard interrupts. Fitted numerical snapshots preserve tree tests, leaf values, support and aggregation rules as JSON. Reported prediction timings measure this transparent replay, not an optimized serving deployment.
 
@@ -112,11 +126,19 @@ Training recovery uses a separate bounded linear-regression demonstration: Adam,
 
 Fresh-process continuation reproduces the uninterrupted numerical state under the declared local CPU/runtime conditions, including the next batch and common monitoring observations. Wall-clock fields are excluded from numerical parity and the time budget remains a guard. Corrupt/incomplete-save behavior is exercised through deliberate fault injection. This recovery demonstration neither replaces the selected group predictor nor supplies a new validation result or hosted recovery claim. Existing exports are reused only when their members match; changed exports and run directories are not overwritten.
 
+## Final assessment
+
+`final_evaluation_example.py` freezes the retained model bytes, transforms, output policies, metrics, slice definitions, examples, source/data/dependency identities and no-refit policy. It checks saved-state replay against all 4,357 validation predictions per model. It then saves every target-free final forecast before a separate guarded join with the official source outcomes. The development loader still rejects test access. Failed attempts retain their receipts; an existing assessment is shown rather than silently rerun or replaced.
+
+The selected group predictor has final MAE 125.4167, RMSE 174.4702 and mean signed error −111.3563 across 4,375 hours. Working-day rush MAE is 265.4320 across 741 hours. Forty unrecorded slots remain missing. The retained forest has lower final MAE, 103.6474, despite its worse validation score; the report records this reversal without selecting a new model from the test. These results describe the fixed historical task, without a specified operational acceptance threshold, causal interpretation or calibrated predictive interval.
+
+`serve_final.py` shows the fixed results, monthly counts, predeclared examples, costs, provenance and artifact identities. Its optional observed-outcome action remains separate from prediction. Test evaluation uses the frozen later calendar features in a batch; it does not extend the interactive predictor's recorded holiday authority beyond January–June. Any subsequent model change informed by this assessment needs new independent held-out evidence for a fresh quality claim.
+
 ## Data and prediction contract
 
 The source is the [UCI Bike Sharing dataset](https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset), using `hour.csv` for hourly Capital Bikeshare records from 2011–2012. The dataset is attributed to Hadi Fanaee-T under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), with [DOI 10.24432/C5W894](https://doi.org/10.24432/C5W894). The acquired hourly file contains 17,379 rows, spanning 2011-01-01 through 2012-12-31. It has 165 unrecorded slots against a naive hourly grid; no zero counts are inferred for those slots. Source timestamps remain date/hour labels because the archive does not specify timezone or daylight-saving semantics.
 
-The target is total rentals in an hour (`cnt`). The initial predictor will use calendar information available in advance. `casual` and `registered` are excluded because together they reveal the target; row identifiers are kept separately from predictive features. Observed weather will require a separately labelled historical comparison.
+The target is total rentals in an hour (`cnt`). The predictor uses calendar information available in advance. `casual` and `registered` are excluded because together they reveal the target; row identifiers are kept separately from predictive features. Observed weather would require a separately labelled historical comparison.
 
 The first schema has 45 binary columns: one-hot hour, weekday and month, then holiday and working-day flags. Year and season are omitted. Domains are fixed calendar definitions, with no fitted scaler in the data exports. Linear regression applies a separate training-fitted scaler without changing those exports. Feature order is saved; invalid, missing and extra input fields are rejected. Full one-hot groups and flags create dependent columns with an intercept, so individual coefficients need not be unique.
 
@@ -143,6 +165,8 @@ bike-demand-planner/
 ├── error_review_example.py
 ├── application_example.py
 ├── serve_app.py
+├── final_evaluation_example.py
+├── serve_final.py
 ├── prepare_data.py
 ├── train.py
 ├── compare.py
@@ -199,6 +223,8 @@ bike-demand-planner/
     ├── application_data.py
     ├── application_run.py
     ├── application.py
+    ├── final_evaluation.py
+    ├── final_application.py
     ├── web/                 # local replay interface
     ├── metrics.py
     ├── splits.py
