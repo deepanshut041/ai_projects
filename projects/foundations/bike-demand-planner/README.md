@@ -4,7 +4,7 @@ Bike Demand Planner is a Python project for hourly bike rental demand estimation
 
 Planned functionality includes historical replay, comparisons of calendar baselines, linear regression and tree-based models, and a local application backed by a saved predictor.
 
-**Current status:** the package includes official dataset acquisition, hourly checks, frozen chronological membership, calendar baselines, full-batch linear regression and controlled SGD/momentum/Adam comparisons. Linear fitting uses training-only feature standardization and checked analytic gradients. Optimizer, batch-size and rate-schedule studies are separate, with aligned train/validation results and saved algorithm/order state. Stronger estimators, saved-model inference and the application remain pending.
+**Current status:** the package includes official dataset acquisition, hourly checks, frozen chronological membership, calendar baselines, full-batch linear regression, controlled SGD/momentum/Adam comparisons, and separate loss/regularization/calendar-structure studies. Linear fitting uses training-only feature standardization and checked analytic gradients. Optimizer, batch-size and rate-schedule studies are separate, with aligned train/validation results and saved algorithm/order state. Stronger estimators, saved-model inference and the application remain pending.
 
 ## Setup
 
@@ -23,6 +23,7 @@ uv run --frozen python group_baseline_example.py
 uv run --frozen python regression_example.py
 uv run --frozen python train.py
 uv run --frozen python optimization_example.py
+uv run --frozen python objective_example.py
 ```
 
 Python is pinned to 3.12.13 and NumPy to 2.5.4. Dependencies are recorded in `uv.lock`.
@@ -57,6 +58,10 @@ The optimization example first repeats two updates on one real training hour, th
 
 Across the three seeds at batch 32, validation MAE averages 116.1661 for SGD, 116.6027 for momentum and 114.3608 for Adam. Adam has greater seed variation and remains worse than the group baseline. Decay brings training squared error closer to the least-squares optimum without improving mean validation MAE in this comparison. Failed excessive-rate pilots remain recorded. Each main run retains aligned predictions, training history, optimizer moments/index, rate policy, epoch permutation/cursor, RNG state and source/config/data identity. Local continuation checks reproduce a paused numerical run exactly; application recovery in a fresh process remains separate work.
 
+The objective example compares mean half squared error, absolute error and Huber losses with training-only rate pilots, then runs separate L2, scaling and calendar-structure studies. L2 excludes the intercept and uses the explicit objective `mean(data_loss) + lambda * sum(weights**2) / 2`. Penalty and representation comparisons use stable training-only least-squares solves; the scaling comparison fixes SGD rate and work. Calendar variants retain all 45 original columns, replace cyclic categories with eight sine/cosine/flag columns, or append 24 hour/working-day products.
+
+Raw predictions and a declared nonnegative policy are scored separately. On the frozen validation window, the exact additive model has MAE 116.7312 raw and 109.1436 clipped; the interaction model improves those to 108.6937 and 100.5164. The group baseline remains the selected simple reference at 91.5729, with raw output retained on an exact policy tie. Each study saves its protocol, candidate results and validation-led selection identity; the final test and serving API remain separate. These deterministic full-batch studies add no dependencies.
+
 ## Entry points
 
 | File | Purpose | Current behavior |
@@ -71,6 +76,7 @@ Across the three seeds at batch 32, validation MAE averages 116.1661 for SGD, 11
 | `regression_example.py` | Trace full-batch updates and compare three predictors | Saves checked updates, linear fitting history and matched results |
 | `train.py` | Fit calendar linear regression | Saves fitted parameters, history, aligned predictions and run state |
 | `optimization_example.py` | Compare batching, optimizer rules and one rate schedule | Saves a training-only pilot, frozen comparison protocol, paired trials and continuation state |
+| `objective_example.py` | Compare loss, L2, scaling, calendar structure and output policy | Saves training-only pilots, separate fitted comparisons and a validation-led reference selection |
 | `compare.py` | Compare evaluation results | Returns `not_implemented` with exit code 2 |
 | `inference.py` | Load a saved estimator and predict | Returns `not_implemented` with exit code 2 |
 
@@ -102,6 +108,7 @@ bike-demand-planner/
 ├── group_baseline_example.py
 ├── regression_example.py
 ├── optimization_example.py
+├── objective_example.py
 ├── prepare_data.py
 ├── train.py
 ├── compare.py
@@ -116,6 +123,8 @@ bike-demand-planner/
 │   ├── test_linear_evaluation.py
 │   ├── test_optimization.py
 │   ├── test_optimizer_evaluation.py
+│   ├── test_objectives.py
+│   ├── test_objective_evaluation.py
 │   └── test_linear.py
 └── src/bike_demand_planner/
     ├── __init__.py
@@ -130,6 +139,8 @@ bike-demand-planner/
     ├── optimizers.py
     ├── optimization.py
     ├── optimizer_evaluation.py
+    ├── objectives.py
+    ├── objective_evaluation.py
     ├── metrics.py
     ├── splits.py
     └── project.py
