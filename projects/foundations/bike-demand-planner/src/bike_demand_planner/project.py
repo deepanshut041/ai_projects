@@ -10,12 +10,12 @@ def project_info() -> dict[str, str]:
     return {
         "project": "Bike Demand Planner",
         "version": __version__,
-        "status": "calendar baselines, linear regression and bounded tree/forest/boosting comparisons",
+        "status": "calendar estimators, aligned error diagnostics and a frozen development candidate",
         "target": "hourly rental count",
         "numerics": "linear prediction, half squared error, gradients and one SGD step",
         "data_preparation": "official audit, fixed calendar encoding and frozen chronological membership",
         "training": "training-only fits; explicit linear studies and library-backed tree estimators",
-        "evaluation": "aligned raw/nonnegative errors, seed-aggregated comparisons and validation-led selection",
+        "evaluation": "aligned slices, temporal diagnostics, input-domain probes and versioned candidate configuration",
         "inference": "not implemented",
     }
 

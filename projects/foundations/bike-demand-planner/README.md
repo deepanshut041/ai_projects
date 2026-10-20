@@ -4,7 +4,7 @@ Bike Demand Planner is a Python project for hourly bike rental demand estimation
 
 Planned functionality includes historical replay, comparisons of calendar baselines, linear regression and tree-based models, and a local application backed by a saved predictor.
 
-**Current status:** the package includes official dataset acquisition, hourly checks, frozen chronological membership, calendar baselines, full-batch linear regression, controlled optimizer/objective/calendar-structure studies and bounded decision-tree, random-forest and gradient-boosting comparisons. Fits use training only, with aligned train/validation results and retained numerical model state. Saved-model inference and the application remain pending.
+**Current status:** the package includes official dataset acquisition, frozen chronological membership, calendar baselines, linear regression, controlled numerical studies and bounded tree/forest/boosting comparisons. Saved training/validation forecasts feed aligned error diagnostics, calendar/time slices, request-contract probes and a versioned development-candidate record. Saved-model inference and the application remain pending.
 
 ## Setup
 
@@ -26,9 +26,10 @@ uv run --frozen python optimization_example.py
 uv run --frozen python objective_example.py
 uv run --frozen python tree_example.py
 uv run --frozen python compare.py
+uv run --frozen python error_review_example.py
 ```
 
-Python is pinned to 3.12.13, NumPy to 2.5.4 and scikit-learn to 1.9.1. Dependencies are recorded in `uv.lock`.
+Python is pinned to 3.12.13, NumPy to 2.5.4, scikit-learn to 1.9.1 and Matplotlib to 3.11.2. Dependencies are recorded in `uv.lock`.
 
 The setup check reports `status: ok`. The demo prints project information and the availability of each operation. The package can also be run with:
 
@@ -81,9 +82,14 @@ Raw predictions and a declared nonnegative policy are scored separately. On the 
 | `objective_example.py` | Compare loss, L2, scaling, calendar structure and output policy | Saves training-only pilots, separate fitted comparisons and a validation-led reference selection |
 | `tree_example.py` | Trace a small tree and compare practical calendar estimators | Saves bounded candidates, numerical snapshots, seed-aggregated validation results and selection identity |
 | `compare.py` | Summarize a saved practical-model study | Verifies protocol/artifact identities and writes the latest compatible comparison summary |
+| `error_review_example.py` | Review saved hourly forecasts and freeze their supported candidate | Saves slices, chronological figures, large misses, input probes and candidate/model identities without refitting |
 | `inference.py` | Load a saved estimator and predict | Returns `not_implemented` with exit code 2 |
 
 Inputs are declared in each file's main block. The comparison command requires a completed `tree_example.py` run; it does not combine incompatible older study formats. Saved-model inference remains unavailable.
+
+The error-review command consumes the latest practical-model study and verifies saved targets, row order, error arithmetic and artifact identities against the frozen training/validation exports. It retains seven representative model/output-policy pairs, with each individual artifact's score kept separate from the earlier mean over training seeds. Calendar slice dimensions partition the actual observations; empty slices have undefined metrics rather than zero error. Daily/weekly summaries preserve counts and time gaps. Retrospective observed-demand bands and calendar-matched level comparisons are diagnostics, not issue-time features or causal effects.
+
+The candidate record retains the selected group model's exact bytes/hash, schema/order, raw output policy, training-only absent-group fallback, dataset/protocol identities and known failures. Review requests use the existing one-hour lead within the historical validation replay window, 2012-01-01 01:00 through June 30 23:00. Unsupported schemas, feature orders, dates and malformed calendar fields are rejected. Valid estimates do not supply missing observed labels. Holiday metadata must come from a trusted calendar; structural checks do not establish holiday authority. This configuration handoff does not implement a serving API, model recovery or final-test evaluation.
 
 The tree comparison retains the same 45 raw calendar columns and identity rental target. Each of three model families receives three configurations and seeds 17, 29 and 43. Configuration selection uses mean validation MAE across the declared seeds, with the first seed retained as the representative artifact. It never selects the luckiest seed. Simple deterministic references receive one fit each. Raw and nonnegative output policies are reported separately; final-test evaluation remains reserved.
 
@@ -117,6 +123,7 @@ bike-demand-planner/
 ├── optimization_example.py
 ├── objective_example.py
 ├── tree_example.py
+├── error_review_example.py
 ├── prepare_data.py
 ├── train.py
 ├── compare.py
@@ -135,6 +142,9 @@ bike-demand-planner/
 │   ├── test_objective_evaluation.py
 │   ├── test_trees.py
 │   ├── test_tree_evaluation.py
+│   ├── test_error_analysis.py
+│   ├── test_review_contract.py
+│   ├── test_error_review.py
 │   └── test_linear.py
 └── src/bike_demand_planner/
     ├── __init__.py
@@ -154,6 +164,10 @@ bike-demand-planner/
     ├── trees.py
     ├── tree_evaluation.py
     ├── comparison.py
+    ├── error_analysis.py
+    ├── error_review.py
+    ├── error_plots.py
+    ├── review_contract.py
     ├── metrics.py
     ├── splits.py
     └── project.py
