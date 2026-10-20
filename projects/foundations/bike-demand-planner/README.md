@@ -4,7 +4,7 @@ Bike Demand Planner is a Python project for hourly bike rental demand estimation
 
 Planned functionality includes historical replay, comparisons of calendar baselines, linear regression and tree-based models, and a local application backed by a saved predictor.
 
-**Current status:** the package includes official dataset acquisition, hourly structural checks, fixed calendar encoding, frozen chronological membership, global/calendar-group demand baselines and full-batch linear regression. Linear fitting uses training-only feature standardization, checked analytic gradients and a stable least-squares reference. All predictors retain aligned training/validation results. Optimizer comparisons, stronger estimators, saved-model inference and the application remain pending.
+**Current status:** the package includes official dataset acquisition, hourly checks, frozen chronological membership, calendar baselines, full-batch linear regression and controlled SGD/momentum/Adam comparisons. Linear fitting uses training-only feature standardization and checked analytic gradients. Optimizer, batch-size and rate-schedule studies are separate, with aligned train/validation results and saved algorithm/order state. Stronger estimators, saved-model inference and the application remain pending.
 
 ## Setup
 
@@ -22,6 +22,7 @@ uv run --frozen python baseline_example.py
 uv run --frozen python group_baseline_example.py
 uv run --frozen python regression_example.py
 uv run --frozen python train.py
+uv run --frozen python optimization_example.py
 ```
 
 Python is pinned to 3.12.13 and NumPy to 2.5.4. Dependencies are recorded in `uv.lock`.
@@ -52,6 +53,10 @@ The regression example traces a small matrix calculation and two updates for a r
 
 The current linear fit converges in 200 updates and agrees with the stable least-squares reference within 1e-6 rentals/hour on the observed train/validation inputs. Validation MAE is 116.7312 and RMSE is 157.9791, worse than the hour/working-day baseline. The additive calendar model does not learn separate working-day and nonworking-day hourly curves. Its 724 negative validation forecasts are retained without clipping, so the reported metrics describe the actual unconstrained model. The run saves standardized and equivalent raw parameters, feature order, convergence history, prediction ranges and reference agreement alongside the common evaluation artifacts. `train.py` fits this same bounded linear model without rerunning the baselines.
 
+The optimization example first repeats two updates on one real training hour, then runs separate controlled comparisons. A training-only pilot gives each optimizer the same four rates and 200-update allowance at batch 32. The selected rates are 0.01 for SGD, 0.001 for classical momentum and 1.0 for Adam. Main runs use paired seeds 17/29/43 and ten training passes (86,450 processed examples), with safety limits of 100,000 updates or five minutes. Batch-size comparisons hold SGD and rate 0.01 fixed; the schedule comparison changes only constant versus inverse-time decay by processed examples. Exact matching configurations reuse their trial rather than fitting twice.
+
+Across the three seeds at batch 32, validation MAE averages 116.1661 for SGD, 116.6027 for momentum and 114.3608 for Adam. Adam has greater seed variation and remains worse than the group baseline. Decay brings training squared error closer to the least-squares optimum without improving mean validation MAE in this comparison. Failed excessive-rate pilots remain recorded. Each main run retains aligned predictions, training history, optimizer moments/index, rate policy, epoch permutation/cursor, RNG state and source/config/data identity. Local continuation checks reproduce a paused numerical run exactly; application recovery in a fresh process remains separate work.
+
 ## Entry points
 
 | File | Purpose | Current behavior |
@@ -65,6 +70,7 @@ The current linear fit converges in 200 updates and agrees with the stable least
 | `group_baseline_example.py` | Compare global and calendar-group predictors | Saves matched train/validation results, group counts and fallback usage |
 | `regression_example.py` | Trace full-batch updates and compare three predictors | Saves checked updates, linear fitting history and matched results |
 | `train.py` | Fit calendar linear regression | Saves fitted parameters, history, aligned predictions and run state |
+| `optimization_example.py` | Compare batching, optimizer rules and one rate schedule | Saves a training-only pilot, frozen comparison protocol, paired trials and continuation state |
 | `compare.py` | Compare evaluation results | Returns `not_implemented` with exit code 2 |
 | `inference.py` | Load a saved estimator and predict | Returns `not_implemented` with exit code 2 |
 
@@ -95,6 +101,7 @@ bike-demand-planner/
 ├── baseline_example.py
 ├── group_baseline_example.py
 ├── regression_example.py
+├── optimization_example.py
 ├── prepare_data.py
 ├── train.py
 ├── compare.py
@@ -107,6 +114,8 @@ bike-demand-planner/
 │   ├── test_evaluation.py
 │   ├── test_regression.py
 │   ├── test_linear_evaluation.py
+│   ├── test_optimization.py
+│   ├── test_optimizer_evaluation.py
 │   └── test_linear.py
 └── src/bike_demand_planner/
     ├── __init__.py
@@ -118,6 +127,9 @@ bike-demand-planner/
     ├── linear.py
     ├── regression.py
     ├── linear_evaluation.py
+    ├── optimizers.py
+    ├── optimization.py
+    ├── optimizer_evaluation.py
     ├── metrics.py
     ├── splits.py
     └── project.py
