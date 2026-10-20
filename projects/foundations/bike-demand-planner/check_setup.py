@@ -10,7 +10,7 @@ def main(project_root: Path) -> int:
     required = (
         "README.md", "pyproject.toml", "uv.lock", ".python-version", ".gitignore",
         "demo.py", "linear_example.py", "calendar_example.py", "baseline_example.py", "group_baseline_example.py", "regression_example.py",
-        "optimization_example.py", "objective_example.py", "tree_example.py", "error_review_example.py", "prepare_data.py", "train.py", "compare.py", "inference.py",
+        "optimization_example.py", "objective_example.py", "tree_example.py", "error_review_example.py", "application_example.py", "serve_app.py", "prepare_data.py", "train.py", "compare.py", "inference.py",
         "src/bike_demand_planner/__init__.py",
         "src/bike_demand_planner/__main__.py",
         "src/bike_demand_planner/project.py",
@@ -35,6 +35,17 @@ def main(project_root: Path) -> int:
         "src/bike_demand_planner/error_review.py",
         "src/bike_demand_planner/error_plots.py",
         "src/bike_demand_planner/review_contract.py",
+        "src/bike_demand_planner/artifacts.py",
+        "src/bike_demand_planner/saved_predictor.py",
+        "src/bike_demand_planner/prediction_worker.py",
+        "src/bike_demand_planner/checkpoints.py",
+        "src/bike_demand_planner/recovery.py",
+        "src/bike_demand_planner/application_data.py",
+        "src/bike_demand_planner/application_run.py",
+        "src/bike_demand_planner/application.py",
+        "src/bike_demand_planner/web/index.html",
+        "src/bike_demand_planner/web/app.js",
+        "src/bike_demand_planner/web/style.css",
     )
     missing = [name for name in required if not (project_root / name).is_file()]
     nested_repository = (project_root / ".git").exists()
