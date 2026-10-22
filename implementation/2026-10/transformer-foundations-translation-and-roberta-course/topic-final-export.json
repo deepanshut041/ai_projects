@@ -1,0 +1,19 @@
+{
+  "source_zip": "/mnt/projects/ai/.ai/course-exports/2026-10-13/tutorial1-topic-final/tutorial1-source.zip",
+  "source_sha256": "78bc63c28cc1c686f1d1151024ffeb63a93f3cd5a65fa9c5c4f8d0c22650da13",
+  "study_notebook": "/mnt/projects/ai/.ai/course-exports/2026-10-13/tutorial1-topic-final/study/study.ipynb",
+  "notes": "/mnt/projects/ai/.ai/course-exports/2026-10-13/tutorial1-topic-final/study/study-notes.md",
+  "members": 27,
+  "runtime": {
+    "python": [
+      3,
+      12,
+      13
+    ],
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "study_cells": 46,
+  "study_code_cells": 13,
+  "cleared": true
+}

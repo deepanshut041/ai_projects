@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "run_directory": "/mnt/projects/ai/ai_projects/projects/foundations/bike-demand-planner/runs/objectives-20261020T002938229644Z",
+  "pilot_count": 12,
+  "fitted_comparison_models": 12,
+  "baseline_models": 2,
+  "model_policy_comparisons": 28,
+  "maximum_independent_prediction_difference": 0.0,
+  "maximum_scalar_metric_difference": 0.0,
+  "direct_solve_stationarity_norms": {
+    "l2-0": 4.477608333740108e-13,
+    "l2-0.1": 5.990711384159989e-13,
+    "l2-1": 4.827043011941476e-13,
+    "l2-10": 1.8498486885776413e-12,
+    "structure-cyclic8": 1.6885849083375369e-13,
+    "structure-hour_workingday69": 6.828235890308944e-13
+  },
+  "protocol_rate_choices_artifact_hashes_and_source_match": true,
+  "scaler_fit_only_on_training_verified": true,
+  "pointwise_clipping_and_alignment_verified": true,
+  "frozen_selection": "groups/raw",
+  "all_four_indexes_preserved": true,
+  "frozen_non_test_bytes_preserved": true,
+  "reserved_test_targets_opened": false
+}

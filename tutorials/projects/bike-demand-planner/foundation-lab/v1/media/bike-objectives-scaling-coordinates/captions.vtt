@@ -1,0 +1,247 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:04.590
+The Monday at eight vector has
+four active raw indicators.
+
+00:00:05.300 --> 00:00:09.900
+Training standardization maps the hour
+eight entry to about four point seven
+
+00:00:09.900 --> 00:00:13.470
+eight and also centers
+the inactive entries.
+
+00:00:14.480 --> 00:00:16.850
+The target remains in rentals per hour.
+
+00:00:17.500 --> 00:00:20.950
+No weather, interaction or new
+observation has been added.
+
+00:00:22.040 --> 00:00:25.530
+The fitted weights now operate in
+different numerical coordinates.
+
+00:00:26.360 --> 00:00:31.060
+We save the training statistics and
+reuse them at prediction time rather than
+
+00:00:31.060 --> 00:00:33.410
+recomputing them for each request batch.
+
+00:00:34.180 --> 00:00:38.040
+The question is how this changes
+optimization under a declared allowance,
+
+00:00:38.040 --> 00:00:40.890
+while keeping the input information fixed.
+
+00:00:43.108 --> 00:00:47.288
+The implementation fits means and
+population deviations on training
+
+00:00:47.288 --> 00:00:48.038
+features.
+
+00:00:48.608 --> 00:00:51.998
+The raw branch instead stores
+zero means and unit scales.
+
+00:00:52.648 --> 00:00:55.718
+This excerpt calls that
+stored raw scaler identity.
+
+00:00:56.368 --> 00:01:00.458
+Both paths then use the same
+transform and prediction interface.
+
+00:01:00.968 --> 00:01:04.998
+Constant training columns receive
+unit scale in the standardized branch,
+
+00:01:05.208 --> 00:01:06.698
+preventing division by zero.
+
+00:01:07.288 --> 00:01:09.958
+Neither branch fits its
+transformation on validation.
+
+00:01:10.688 --> 00:01:14.098
+A later request batch cannot change
+the meaning of the saved coefficients.
+
+00:01:15.068 --> 00:01:19.988
+That fit and predict separation makes
+coordinate changes reproducible instead of
+
+00:01:19.988 --> 00:01:22.678
+silently refitting the
+model when requests arrive.
+
+00:01:24.900 --> 00:01:26.290
+To compare conditioning,
+
+00:01:26.700 --> 00:01:32.170
+both paths use full batch SGD at rate
+zero point one for two hundred updates.
+
+00:01:32.780 --> 00:01:38.030
+They share half squared error, no penalty
+and the same initial prediction function.
+
+00:01:38.460 --> 00:01:42.330
+We do not give one path a new
+optimizer or extra passes.
+
+00:01:43.000 --> 00:01:45.570
+The parameter arrays are
+in different coordinates,
+
+00:01:46.080 --> 00:01:51.200
+so the same numerical step has different
+effects on the represented function.
+
+00:01:51.200 --> 00:01:55.350
+Raw and standardized gradient norms
+also have coordinate dependent units.
+
+00:01:55.980 --> 00:02:00.310
+A lower norm alone is not an
+invariant distance between predictors;
+
+00:02:00.640 --> 00:02:04.610
+training loss and an independent
+solve help interpret the trajectory.
+
+00:02:06.858 --> 00:02:08.128
+At the fixed allowance,
+
+00:02:08.498 --> 00:02:12.741
+raw indicators leave training half
+squared error around four thousand,
+
+00:02:12.741 --> 00:02:14.848
+one hundred and fourteen point five.
+
+00:02:15.258 --> 00:02:18.185
+Standardized coordinates
+reach about three thousand,
+
+00:02:18.185 --> 00:02:20.768
+one hundred and sixty
+seven point five three.
+
+00:02:22.018 --> 00:02:25.748
+Later absolute error is also
+lower for this standardized fit.
+
+00:02:26.378 --> 00:02:28.608
+Its final gradient is very small,
+
+00:02:28.898 --> 00:02:32.048
+but the configured stopping rule
+was still the update budget.
+
+00:02:32.578 --> 00:02:36.928
+We do not relabel the run as an early
+convergence experiment afterward.
+
+00:02:37.558 --> 00:02:40.488
+This is evidence of faster
+progress under these settings,
+
+00:02:40.758 --> 00:02:44.788
+not proof that raw indicators
+represent a permanently weaker family.
+
+00:02:47.147 --> 00:02:51.747
+A stable training least squares solve
+in each coordinate system provides the
+
+00:02:51.747 --> 00:02:52.737
+missing comparison.
+
+00:02:53.467 --> 00:02:56.607
+On every observed training
+and validation input,
+
+00:02:56.607 --> 00:03:00.217
+their forecasts agree within
+a few trillionths of a rental.
+
+00:03:01.047 --> 00:03:04.817
+The raw model can represent the same
+fitted function on these inputs;
+
+00:03:05.267 --> 00:03:07.797
+its two hundred update
+result is unfinished.
+
+00:03:08.707 --> 00:03:11.917
+Dependent columns mean individual
+coefficients can differ.
+
+00:03:12.487 --> 00:03:16.567
+Coordinate dependent minimum norm
+solutions can also disagree on unsupported
+
+00:03:16.567 --> 00:03:17.457
+inputs.
+
+00:03:18.167 --> 00:03:21.197
+We therefore state the checked
+prediction agreement precisely.
+
+00:03:21.867 --> 00:03:25.367
+The result separates numerical
+conditioning from the additional feature
+
+00:03:25.367 --> 00:03:27.657
+capacity studied in the other families.
+
+00:03:29.817 --> 00:03:33.447
+The quiet Monday hour makes
+the distinction tangible.
+
+00:03:34.077 --> 00:03:39.117
+The raw two hundred step fit predicts
+about four point three nine against target
+
+00:03:39.117 --> 00:03:39.787
+five.
+
+00:03:40.397 --> 00:03:45.587
+The nearly optimized standardized function
+predicts minus seventy point six eight.
+
+00:03:46.257 --> 00:03:49.407
+The unfinished function is much
+closer on that observation,
+
+00:03:49.677 --> 00:03:53.507
+despite worse overall training
+loss and later absolute error.
+
+00:03:54.417 --> 00:03:57.847
+Optimizing the shared objective
+moves many rows together;
+
+00:03:58.317 --> 00:04:01.067
+it does not promise every
+individual row improves.
+
+00:04:01.897 --> 00:04:04.987
+Scaling also has not
+enforced nonnegative counts.
+
+00:04:05.697 --> 00:04:07.147
+Keep the single hour,
+
+00:04:07.237 --> 00:04:11.457
+the optimized training quantity and the
+later aggregate metric separate when
+
+00:04:11.457 --> 00:04:13.347
+explaining why the numbers changed.
+

@@ -1,0 +1,22 @@
+{
+  "protected_course_files": 133,
+  "changed_protected_files": [],
+  "children": {
+    "transformer-foundations-lab": {
+      "head_unchanged": true,
+      "status_unchanged": true,
+      "changed_files": []
+    },
+    "attention-is-all-you-need": {
+      "head_unchanged": true,
+      "status_unchanged": true,
+      "changed_files": []
+    }
+  },
+  "old_source_changes": [
+    "examples/study_notebook.py",
+    "examples/prerequisite_export.py"
+  ],
+  "stable_old_lesson_paths_preserved": true,
+  "archive_hash_verified": true
+}

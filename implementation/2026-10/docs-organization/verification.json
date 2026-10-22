@@ -1,0 +1,82 @@
+{
+  "root_before": 25,
+  "root_after": 8,
+  "root_regular_files": [
+    "AGENTS.md",
+    "README.md"
+  ],
+  "compatibility_links": {
+    "roadmap.md": "guide/roadmap.md",
+    "START_HERE.md": "guide/getting-started.md"
+  },
+  "tutorial_files_unchanged": 62,
+  "original_tracked_destinations_preserved": 168,
+  "broken_non_tutorial_markdown_links": [],
+  "generated_paths_ignored": [
+    "website/node_modules/example",
+    "website/dist/index.html",
+    "website/test-results/record.pdf",
+    "website/.cache/check",
+    "website/coverage/index.html",
+    "website/playwright-report/index.html",
+    "website/output/run.json",
+    "website/.playwright-cli/state.yml"
+  ],
+  "date": "2026-10-09",
+  "content_tests": {
+    "passed": 8
+  },
+  "cli_tests": {
+    "passed": 68
+  },
+  "build": {
+    "records": 40,
+    "sources": 13,
+    "bases": [
+      "/",
+      "/project_docs/"
+    ]
+  },
+  "browser": {
+    "bases": [
+      "/",
+      "/project_docs/"
+    ],
+    "passed": true,
+    "coverage": [
+      "all record links/downloads",
+      "search and filters",
+      "tutorial chapter/support/complete routes",
+      "interactive tutorial controls",
+      "print and mobile layouts"
+    ],
+    "visual_inspection": [
+      "desktop workbench",
+      "mobile tutorial chapter"
+    ]
+  },
+  "relocation": {
+    "content_tests": 8,
+    "build_records": 40,
+    "relative_links_valid": true,
+    "temporary_copy_removed": true
+  },
+  "cli_smoke": {
+    "tui": true,
+    "absolute_launcher_from_unrelated_cwd": true,
+    "all_four_canonical_sections": true
+  },
+  "external_publication": false,
+  "learning_milestone": "P00-M1 not-started",
+  "managed_service": {
+    "running": true,
+    "cwd": "website/",
+    "url": "http://127.0.0.1:4273/project_docs/",
+    "checked_routes": 4,
+    "combined_guide_anchors_valid": true
+  },
+  "disposable_browser_output_removed": {
+    "files": 45,
+    "bytes": 28882260
+  }
+}

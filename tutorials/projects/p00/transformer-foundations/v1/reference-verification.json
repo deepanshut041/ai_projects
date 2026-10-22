@@ -1,0 +1,195 @@
+{
+  "phase": "complete-topic-rewrite-2026-10-12",
+  "source_tests": 114,
+  "existing_suite": {
+    "runtime": "2.14.1+cpu",
+    "device": "cpu",
+    "tests": 80,
+    "passed": true,
+    "source_sha256": {
+      "prerequisite_mlp.py": "30071122b9cb8f7ced4a126d95e40f9cc034252763647279da82cd14c46acc40",
+      "study_notebook.py": "bb9ba137a8c97cc770365df427725515f85bcc5319fd36ed59132c7cfc84aa8e",
+      "prerequisite_export.py": "8882c69ca581ce0754cbe8169a124032f4af3de6359d336837318b7243808183",
+      "fresh_process_resume.py": "4cf54ce15acd6356fc7a04993d2a075d9914ab2ec884594a54ca982a134faaa5",
+      "prerequisite_tensors.py": "10ea67eaedbf0aec7ea8cd6f45924ba658c6e543facea30d3747e70122d94ae3",
+      "test_prerequisite_text.py": "d8441ee65e49b55a34b5f3a2626466ca9b91e266e6727e4050ee9bb60fb62630",
+      "test_deep_learning_math.py": "38b1c8cdf69a967901e5eeae17403d6af5d5503f5949ca34b41dfa28efca02b5",
+      "byte_bpe.py": "5adcd5044d52d541dc729554a3f6d184ff0d53d2704122d0b37f4dd51e6db190",
+      "first_session.py": "7c2fc16ad94edadeeecec4e901c6beeed07d27919687ced003e42dad532d0548",
+      "test_prerequisite_math.py": "a93d345f769ad6ff8ee2a0f5a6b236588d869e7a1567982617872426aca3dae9",
+      "tiny_transformer.py": "0e4073ce2595c1170a5184247a8d2b2467d1b2f7a4059d9dc8019a296be90635",
+      "numerical_trace.py": "bd276de5aafd7e31eff80b89b367ca9859940aa752baff1c1939b70ba4b17d43",
+      "prerequisite_mlp_checks.py": "fb281f713c91f67d2b15c4c741d206a06b541db8e3bd425069a1f0a04ed3bdfb",
+      "make_colab_notebook.py": "dd60c2f59334b49918039d32b46b3e3ecae8bbcb35cabc673092b95df2dc8a61",
+      "deep_learning_math.py": "b6d07e8e5180d477ba13ddef68eb8aed3984eabeb26a16f93f82c86829ea8f8d",
+      "tensor_autograd.py": "27798d9f9fbb1eeeb888367a2e4a5bd199ec2c79b5822e8569309315575e56c3",
+      "prerequisite_math.py": "b7d2fb4cef5edfbffb716482a096aafa54d17508a27308ebd0d8ecf69885ee62",
+      "math_checks.py": "a7dd57cc0d62176ee50967900df7a96f1d00b72399ee6529c81f55c59502a9d3",
+      "prerequisite_checkpoint.py": "5affe55623c57b1433dae54594890d5e51cec929faaa97a0525f3197e9733151",
+      "test_prerequisite_tensors.py": "cbfa82433884375e54be3d7961c10553ca8561264245f3a3f1534773b0453da3",
+      "prerequisite_text.py": "7abae1a1c052d20d23380419c86a41a5c89209bec576c54ad016c90a0031f4ab"
+    },
+    "learner": "unchanged",
+    "hosted_recovery": "pending"
+  },
+  "new_probe_suite": {
+    "recorded_date": "2026-10-12",
+    "python_version": "3.12.13",
+    "torch_version": "2.14.1+cpu",
+    "device": "cpu",
+    "dtype": "torch.float64",
+    "command": "python -m unittest test_transformer_foundation_probes -v",
+    "working_directory": "tutorials/projects/p00/transformer-foundations/v1/examples",
+    "tests_run": 34,
+    "failures": 0,
+    "errors": 0,
+    "successful": true,
+    "test_output": "..................................\n----------------------------------------------------------------------\nRan 34 tests in 0.519s\n\nOK\n",
+    "expected_stdout": "{\"attention\":{\"empty_output\":[[0.0,0.0]],\"masked_output\":[[3.0,1.5]],\"output\":[[4.0,1.0]],\"score_gradient\":[[-0.666667,0.666667,0.0]],\"weights\":[[0.166667,0.333333,0.5]]},\"embedding_lookup_gradient\":[[0.0,0.0],[2.0,2.0],[4.0,4.0],[0.0,0.0]],\"ffn_outputs\":[[3.0,-1.0],[3.0,4.0]],\"position_width_5_at_zero\":[0.0,1.0,0.0,1.0,0.0],\"schedule_peak_step_4_width_4\":0.25,\"small_counts\":{\"ffn\":17,\"multihead\":24,\"one_tied_vocabulary_matrix\":8,\"three_untied_vocabulary_matrices\":24},\"smoothed_target_class_1\":[[0.025,0.925,0.025,0.025]],\"tied_pad_output_gradient_nonzero\":true}\n",
+    "report": {
+      "attention": {
+        "weights": [
+          [
+            0.166667,
+            0.333333,
+            0.5
+          ]
+        ],
+        "output": [
+          [
+            4.0,
+            1.0
+          ]
+        ],
+        "masked_output": [
+          [
+            3.0,
+            1.5
+          ]
+        ],
+        "empty_output": [
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        "score_gradient": [
+          [
+            -0.666667,
+            0.666667,
+            0.0
+          ]
+        ]
+      },
+      "embedding_lookup_gradient": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          2.0,
+          2.0
+        ],
+        [
+          4.0,
+          4.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      "tied_pad_output_gradient_nonzero": true,
+      "position_width_5_at_zero": [
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "ffn_outputs": [
+        [
+          3.0,
+          -1.0
+        ],
+        [
+          3.0,
+          4.0
+        ]
+      ],
+      "small_counts": {
+        "three_untied_vocabulary_matrices": 24,
+        "one_tied_vocabulary_matrix": 8,
+        "multihead": 24,
+        "ffn": 17
+      },
+      "schedule_peak_step_4_width_4": 0.25,
+      "smoothed_target_class_1": [
+        [
+          0.025,
+          0.925,
+          0.025,
+          0.025
+        ]
+      ]
+    },
+    "source_sha256": {
+      "transformer_foundation_probes.py": "80151cc7f474497a67fe7d99113b064bef1a9993c4e879060abc13c468ee8e50",
+      "test_transformer_foundation_probes.py": "01861d222cd344871a1de5cbd02302e0b3a7709f8f5810a2450c105c6acd11f5"
+    },
+    "scope": "Educational component checks. No child implementation edits, learner completion, model training, hosted recovery or publication."
+  },
+  "export": {
+    "members_verified": 22,
+    "notebooks": {
+      "study.ipynb": {
+        "cells": 35,
+        "code_cells": 9,
+        "cleared": true,
+        "syntax": true
+      },
+      "colab.ipynb": {
+        "cells": 8,
+        "code_cells": 5,
+        "cleared": true,
+        "syntax": true
+      }
+    },
+    "study_notes_topics": 25,
+    "study_code_cells_executed": 9,
+    "study_stdout_sha256": "0fc41a5b50cd4468aefa0dec7a356e2fd8614ce3d7b1ab2374cd3d3341c9e18b",
+    "personal_notebook_overwrite_rejected": true,
+    "hosted_execution": "pending",
+    "archive": "/mnt/projects/ai/.ai/course-exports/2026-10-12/topic-foundations-final/tutorial0-source.zip",
+    "archive_sha256": "b3f5ac884815e25f79d567a70d23c0140e4c4b994e497058de3f5ec1e65cf0ef"
+  },
+  "examples": {
+    "prerequisite_mlp.py": "30071122b9cb8f7ced4a126d95e40f9cc034252763647279da82cd14c46acc40",
+    "study_notebook.py": "bb9ba137a8c97cc770365df427725515f85bcc5319fd36ed59132c7cfc84aa8e",
+    "prerequisite_export.py": "8882c69ca581ce0754cbe8169a124032f4af3de6359d336837318b7243808183",
+    "numerical_trace.cpp": "989dce03c34f5b799a83aab2078dd641f04f47d6dd989883542b17ea6891d78f",
+    "fresh_process_resume.py": "4cf54ce15acd6356fc7a04993d2a075d9914ab2ec884594a54ca982a134faaa5",
+    "prerequisite_tensors.py": "10ea67eaedbf0aec7ea8cd6f45924ba658c6e543facea30d3747e70122d94ae3",
+    "test_prerequisite_text.py": "d8441ee65e49b55a34b5f3a2626466ca9b91e266e6727e4050ee9bb60fb62630",
+    "test_deep_learning_math.py": "38b1c8cdf69a967901e5eeae17403d6af5d5503f5949ca34b41dfa28efca02b5",
+    "byte_bpe.py": "5adcd5044d52d541dc729554a3f6d184ff0d53d2704122d0b37f4dd51e6db190",
+    "first_session.py": "7c2fc16ad94edadeeecec4e901c6beeed07d27919687ced003e42dad532d0548",
+    "test_prerequisite_math.py": "a93d345f769ad6ff8ee2a0f5a6b236588d869e7a1567982617872426aca3dae9",
+    "tiny_transformer.py": "0e4073ce2595c1170a5184247a8d2b2467d1b2f7a4059d9dc8019a296be90635",
+    "numerical_trace.py": "bd276de5aafd7e31eff80b89b367ca9859940aa752baff1c1939b70ba4b17d43",
+    "prerequisite_mlp_checks.py": "fb281f713c91f67d2b15c4c741d206a06b541db8e3bd425069a1f0a04ed3bdfb",
+    "transformer_foundation_probes.py": "80151cc7f474497a67fe7d99113b064bef1a9993c4e879060abc13c468ee8e50",
+    "make_colab_notebook.py": "dd60c2f59334b49918039d32b46b3e3ecae8bbcb35cabc673092b95df2dc8a61",
+    "deep_learning_math.py": "b6d07e8e5180d477ba13ddef68eb8aed3984eabeb26a16f93f82c86829ea8f8d",
+    "tensor_autograd.py": "27798d9f9fbb1eeeb888367a2e4a5bd199ec2c79b5822e8569309315575e56c3",
+    "prerequisite_math.cpp": "123bf8e2c25d2afc267d097c2f2434cd8f0252793d76723f8a61accd47ac179e",
+    "prerequisite_math.py": "b7d2fb4cef5edfbffb716482a096aafa54d17508a27308ebd0d8ecf69885ee62",
+    "math_checks.py": "a7dd57cc0d62176ee50967900df7a96f1d00b72399ee6529c81f55c59502a9d3",
+    "prerequisite_checkpoint.py": "5affe55623c57b1433dae54594890d5e51cec929faaa97a0525f3197e9733151",
+    "test_prerequisite_tensors.py": "cbfa82433884375e54be3d7961c10553ca8561264245f3a3f1534773b0453da3",
+    "prerequisite_text.py": "7abae1a1c052d20d23380419c86a41a5c89209bec576c54ad016c90a0031f4ab",
+    "test_transformer_foundation_probes.py": "01861d222cd344871a1de5cbd02302e0b3a7709f8f5810a2450c105c6acd11f5"
+  },
+  "learner": "P00-M1 in-progress; setup complete, linear() next",
+  "hosted_recovery": "pending"
+}

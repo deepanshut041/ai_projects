@@ -1,0 +1,9 @@
+{
+  "live": "http://127.0.0.1:4273/project_docs/records/tutorials/p00-transformer-foundations-v1/",
+  "course": "overview -> Lesson 1 -> Lesson 2 -> Lesson 3",
+  "integrated_derivation_and_implementation": true,
+  "integrated_attention": true,
+  "canonical_start_link": true,
+  "mobile_overflow": false,
+  "errors": []
+}

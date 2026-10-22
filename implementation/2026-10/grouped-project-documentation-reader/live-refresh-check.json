@@ -1,0 +1,17 @@
+{
+  "new_doc_discovered": true,
+  "removed_doc_disappeared": true,
+  "page_responses_during_rebuild": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+  ],
+  "all_page_responses_ok": true
+}

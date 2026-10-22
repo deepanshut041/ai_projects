@@ -1,0 +1,156 @@
+[
+  {
+    "chapter_id": "bert-to-roberta",
+    "id": "bert-to-roberta-practice-1",
+    "question": "Change a real token to the right of an MLM target. Can the earlier prediction change? Compare this with next-token generation, and explain the intentional unchanged-input corruption branch.",
+    "answer": "Right context is legal for the bidirectional MLM encoder, so its earlier prediction can change. The same future access violates a causal next-token contract. Selected unchanged inputs retain original labels by an explicit denoising branch; they do not justify exposing every hidden target or treating MLM as an ordinary left-to-right sequence likelihood.",
+    "rubric": "Draw both visibility matrices; identify the objective and distinguish an intentional corruption branch from accidental target exposure."
+  },
+  {
+    "chapter_id": "bert-to-roberta",
+    "id": "bert-to-roberta-transfer",
+    "question": "A tiny encoder has the same hidden width as a pretrained RoBERTa model. Does changing the configuration name make it a compatible official checkpoint or reproduce the pretraining recipe?",
+    "answer": "No. Tokenizer row meanings, special IDs, position rules, parameter names/tables and configuration must match; hidden width alone is insufficient. Corpus, corruption, optimization and training budget define the measured recipe separately. The course's own-format tiny fixture establishes mechanics rather than official checkpoint interoperability or paper-scale quality.",
+    "rubric": "List at least two architecture/artifact contracts and two training-recipe contracts, with a concrete compatibility check."
+  },
+  {
+    "chapter_id": "roberta-tokens-and-positions",
+    "id": "roberta-tokens-and-positions-practice-1",
+    "question": "Predict positions for [1,1,0,7,2] with PAD 1. For capacity 64, how many position-table rows are needed, and does a wider padded physical row bypass the model's capacity guard?",
+    "answer": "Positions are [1,1,2,3,4]. Real tokens count cumulatively while pads retain1. The largest address for 64 real tokens is65, requiring66 rows. The current model also rejects physical width greater than 64; padding does not bypass that guard. This numbering belongs to the declared artifact/model profile.",
+    "rubric": "Derive real flags/cumulative counts, maximum address and row count; distinguish real counts from physical tensor width."
+  },
+  {
+    "chapter_id": "roberta-tokens-and-positions",
+    "id": "roberta-tokens-and-positions-transfer",
+    "question": "Keep an interior key blocked but replace its PAD ID with an ordinary ID: [0,7,1,8,2] becomes [0,7,9,8,2]. Must later real outputs stay fixed? What does the byte tokenizer imply for caf\u00e9 offsets?",
+    "answer": "Not necessarily: position_ids reads token IDs, so [2,3,1,4,5] becomes [2,3,4,5,6]. Later real position rows changed despite the false key mask. A clean mask-only test preserves position addresses. Byte-only caf\u00e9 has five symbols but four code points; its two \u00e9 symbols share [3,4). This own-format mapping is not an official tokenizer conversion.",
+    "rubric": "Calculate both position rows and name the confound; distinguish character/byte intervals and the artifact identity."
+  },
+  {
+    "chapter_id": "dynamic-mlm-corruption",
+    "id": "dynamic-mlm-corruption-practice-1",
+    "question": "Twelve selected positions contain9 MASK replacements,1 random replacement and2 unchanged inputs. What labels/count are used, and can unselected context positions receive gradients?",
+    "answer": "All12 positions retain their original IDs as supervised labels, including random and unchanged branches; denominator 12. Unselected direct vocabulary-logit gradients are zero, but contextual attention can carry selected-loss gradients into unselected keys/values and embedding rows. Visible MASK count is not the supervised count.",
+    "rubric": "Separate original labels, corrupted inputs, selected-logit derivatives and upstream contextual gradients."
+  },
+  {
+    "chapter_id": "dynamic-mlm-corruption",
+    "id": "dynamic-mlm-corruption-transfer",
+    "question": "With3 eligible tokens and rate 0.15, calculate zero-target probability. Does the reference force a target? What changes if a policy adds one whenever selection is empty?",
+    "answer": "P(K=0)=.85\u00b3=.614125. The reference does not force a target; zero-target groups consume RNG draws but do not advance optimizer/scheduler/global update. Adding one only when empty raises expected count from 0.45 to 1.064125, a changed distribution. The actual tiny trainer uses rate 0.35 and ordinary-only random replacements; those are declared departures.",
+    "rubric": "Work the probability and expected-count change, then identify the unchanged optimization state and advanced RNG state."
+  },
+  {
+    "chapter_id": "roberta-encoder-and-mlm-head",
+    "id": "roberta-encoder-and-mlm-head-practice-1",
+    "question": "Why can a tied PAD embedding row receive gradient even though padding_idx suppresses lookup gradients? Does selected-only vocabulary loss restrict all backbone gradients to selected positions?",
+    "answer": "The shared table also scores every vocabulary class. Its output contribution sums (p_j\u2212target_j) times transformed hidden vectors over selected targets, including the PAD class. Lookup suppression affects only that path. Attention carries selected-loss signals into unselected context. Tying must be the same Parameter object, not two equal-valued tables.",
+    "rubric": "Derive both gradient paths and distinguish selected output positions from vocabulary rows and contextual input positions."
+  },
+  {
+    "chapter_id": "roberta-encoder-and-mlm-head",
+    "id": "roberta-encoder-and-mlm-head-transfer",
+    "question": "The V=30, D=8, C=8, one-layer model has 1326 parameters with a tied decoder. What count results if the vocabulary matrix is untied? Does this enable an official RoBERTa checkpoint to load?",
+    "answer": "Untying adds VD=240 independent scalars, giving 1566 under the same biases/norms. It changes parameter ownership and gradient paths, not just count. Official compatibility still requires matching vocabulary/positions/configuration/names and any embedding details; an untied table alone is not a conversion.",
+    "rubric": "Count the added table, explain ownership/gradients and identify the remaining artifact contracts."
+  },
+  {
+    "chapter_id": "mlm-training-and-counting",
+    "id": "mlm-training-and-counting-practice-1",
+    "question": "Two microbatches have selected counts 2 and 6 and mean losses 1 and 3. Calculate the combined objective and place optimizer/scheduler steps. What if one has zero targets?",
+    "answer": "The sums are 2 and 18, so combined mean 20/8=2.5; equal mean averaging gives 2 and the wrong weighting. Backpropagate each sum/common count, accumulate and step optimizer/scheduler once. A zero-target microbatch contributes zero sum; if the whole group is empty, skip both steps while retaining consumed RNG/progress attempts.",
+    "rubric": "Calculate sums/counts and distinguish one update group from microbatch count and input-token count."
+  },
+  {
+    "chapter_id": "mlm-training-and-counting",
+    "id": "mlm-training-and-counting-transfer",
+    "question": "A fill_mask call returns five ordinary-token probabilities totaling 0.6. Must you renormalize them or call each candidate a complete word? Does repeating fixed-corruption evaluation cover all possible masks?",
+    "answer": "No. Returned probabilities retain the full-vocabulary normalization; omitted specials and unreturned ordinary classes hold remaining mass. Candidates may be byte/subword fragments, not whole words. The seed900 evaluation fixes a small corruption fixture, not an expectation over all patterns. Additional seeds/documents and an explicit official-source profile require separate measurements.",
+    "rubric": "Identify both omitted probability masses, token granularity and the scope of a fixed-mask measurement."
+  },
+  {
+    "chapter_id": "backbone-transfer",
+    "id": "backbone-transfer-transfer",
+    "question": "After one MLM update, copy its backbone into QA. Which tensors should match, which parameters/state should remain new, and how does this differ from QA resume?",
+    "answer": "Every backbone embedding/norm/encoder tensor must match exactly under the declared compatible CPU profile. The new 66-parameter D=32 QA head remains its own initialization; QA AdamW moments/schedule/counters start fresh. Resume instead restores QA backbone/head plus optimizer/schedule/generators/progress and identity. Transfer equality is not proof of downstream quality improvement.",
+    "rubric": "Compare all registered tensors and inspect head ownership, optimizer state and stage counters."
+  },
+  {
+    "chapter_id": "backbone-transfer",
+    "id": "backbone-transfer-resume-case",
+    "question": "Two byte-BPE artifacts have 341 IDs but different merges. Can a backbone transfer use them interchangeably? What does the direct in-memory loader check, and can resume accept another --backbone?",
+    "answer": "No: equal size does not preserve row meanings. The checked artifact loader compares format/configuration/tokenizer fingerprint before strict backbone loading. load_mlm_backbone receives models only, so it checks architecture but cannot independently inspect tokenizer identity. The session rejects a new backbone during resume; its own full state is authoritative. Official artifacts need a separate compatible mapping.",
+    "rubric": "Distinguish size versus semantic identity, the two loader scopes and fresh initialization versus full-state continuation."
+  },
+  {
+    "chapter_id": "qa-offsets-and-windows",
+    "id": "qa-offsets-and-windows-practice-1",
+    "question": "Offsets are[(0,4),(4,8),(8,12)] and the answer interval is[4,8). Which inclusive token endpoints result? What label applies when a window contains only the first token?",
+    "answer": "Both endpoints are token 1: start uses left\u22644<right, end uses left<8\u2264right. The first token ends at4 and cannot contain the start. A first-token-only window has both labels \u2212100, not a fabricated token 0 or a learned no-answer target. Original context slicing remains half-open.",
+    "rubric": "Work both boundary inequalities and distinguish unavailable supervision from an answerability label."
+  },
+  {
+    "chapter_id": "qa-offsets-and-windows",
+    "id": "qa-offsets-and-windows-transfer",
+    "question": "For context a caf\u00e9 b, compare character/byte answer coordinates and duplicate offsets. With budget 11 and overlap 5, give the window stride and guaranteed maximum answer-token length under fixed-window coverage.",
+    "answer": "caf\u00e9 is character[2,6) and byte[2,7); the two \u00e9 bytes share character[5,6). Original slicing is authoritative; a window split between those byte symbols need not decode independently as valid UTF8. Stride 11\u22125=6. Worst-case containment requires L\u2264overlap+1=6, assuming ordinary end coverage; longer spans need another policy. Official-tokenizer offsets require their own profile checks.",
+    "rubric": "Name all coordinates and derive the stride/overlap condition without conflating tokens and characters."
+  },
+  {
+    "chapter_id": "qa-head-and-fine-tuning",
+    "id": "qa-head-and-fine-tuning-practice-1",
+    "question": "One four-position window has uniform start/end scores and gold endpoints1 and2. Calculate the loss and both logit gradients. If only two positions belong to context, is the current loss log 2?",
+    "answer": "Loss is log 4\u22481.386294. Start derivatives[.125,\u2212.375,.125,.125], end[.125,.125,\u2212.375,.125]. The current QA CE normalizes over all four packed positions, so it remains log 4; context-only restriction is decoding. A context-only loss is a distinct implementation/objective. Both endpoint contributions backpropagate into the shared backbone.",
+    "rubric": "Derive the half-averaged losses/gradients and identify current training versus decoding domains."
+  },
+  {
+    "chapter_id": "qa-head-and-fine-tuning",
+    "id": "qa-head-and-fine-tuning-transfer",
+    "question": "A QA batch has one supervised window and one unavailable window. What count/loss weighting applies, and does setting unavailable labels to BOS train the same objective? Can an official tokenizer be substituted under these weights?",
+    "answer": "Count 1, with the supervised start/end sums averaged by 2; the ignored window has zero direct endpoint derivative. BOS labels invent a different target and do not implement the declared ignored-window or no-answer policy. Tokenizer substitution requires matching row/position/layout identity or a separately tested conversion; the own-format weights are not automatically official-compatible.",
+    "rubric": "Show the denominator and ignored row derivative, then state the annotation/compatibility invariants."
+  },
+  {
+    "chapter_id": "span-decoding-and-metrics",
+    "id": "span-decoding-and-metrics-practice-1",
+    "question": "A gold span contains 20 tokens but the decoder permits16. Can better weights recover it? How do unseen QA quality and perfect seen-fixture EM differ?",
+    "answer": "No allowed candidate contains the full 20-token span. Change and report the cap/window policy, then rerun evaluation; separate coverage exclusion from learned scoring errors. Perfect EM on the eight training questions demonstrates fitting/decoding mechanics, not held-out or official SQuAD quality.",
+    "rubric": "Identify the excluded search set and separate task coverage, scoring and held-out evidence."
+  },
+  {
+    "chapter_id": "span-decoding-and-metrics",
+    "id": "span-decoding-and-metrics-transfer",
+    "question": "Why can adding a constant to all endpoint logits change the chosen overflow window without changing its endpoint probabilities? Compute F1 for red red blue versus red blue blue.",
+    "answer": "Within a window, softmax and pair ranking are invariant to endpoint-wide constants. The reference compares raw start+end scores across windows, which shift by both constants and can reorder candidates; calibration is not guaranteed. Multiset overlap2 over lengths3/3 gives precision/recall/F1=2/3 and EM 0 under the declared normalization. Official metric/data signatures remain separate.",
+    "rubric": "Prove the normalization cancellation only within a window and count duplicate tokens with multiset intersection."
+  },
+  {
+    "chapter_id": "diagnosis",
+    "id": "diagnosis-transfer",
+    "question": "Evaluation changes when a trailing blocked key is perturbed. Which conditions must be fixed before concluding a mask bug? Does no_grad disable dropout, and does clipping repair NaNs?",
+    "answer": "Fix source/config/weights, evaluation mode, masks and real-token position addresses; trailing tests avoid the interior PAD-to-real position confound. no_grad controls graph recording, not dropout mode. Clipping a finite vector limits norm but does not repair NaNs; the MLM/QA step lacks translation's explicit finite guard. Inspect the first invalid tensor before stepping.",
+    "rubric": "Choose an isolating perturbation and distinguish mode/graph/position and finite-gradient behavior."
+  },
+  {
+    "chapter_id": "diagnosis",
+    "id": "diagnosis-contract-case",
+    "question": "For B1,T5,D8,H2,V30 FP32, calculate hidden/explicit-score/logit storage. What changes when T doubles, and can these counts establish Colab GPU fit or official-model throughput?",
+    "answer": "Hidden 160 bytes, one explicit score array 200 bytes, logits 600 bytes. DoublingT doubles hidden/logits and quadruples explicit scores while parameters stay fixed. SDPA storage, backward/optimizer/runtime allocations and device peak memory are additional; actual throughput/hosted fit require measured resource/runtime profiles. These miniature counts do not describe official-scale performance.",
+    "rubric": "Calculate each named tensor and distinguish analytical size from measured peak memory/time."
+  },
+  {
+    "chapter_id": "ready-for-gpt",
+    "id": "ready-for-gpt-practice-1",
+    "question": "Remove the translation encoder and cross-attention. Have you automatically obtained Course2's Small GPT, or a checkpoint compatible with an official GPT tokenizer?",
+    "answer": "No. Specify one text tokenizer/corpus, next-token shift, causal visibility, learned positions, pre-norm/GELU blocks, tying and bounded generation/recovery. Deleting source memory does not select those contracts or map vocabulary/parameter identities. Course2 is a new decoder-only experiment; official artifact conversion and instruction-following stages remain separate.",
+    "rubric": "Trace what is removed and name the remaining objective/architecture/artifact decisions."
+  },
+  {
+    "chapter_id": "ready-for-gpt",
+    "id": "ready-for-gpt-transfer",
+    "question": "Translation sum 10/count 5, MLM sum 6/selected 3 and QA start sum 6/end sum 2/window count 2 all give loss 2. Does this prove comparable quality? Which evidence advances learner or hosted gates?",
+    "answer": "No: objectives and prediction units differ. QA divides (6+2) by 2\u00d72; translation/MLM count their own valid targets. Author source checks and tiny outcomes establish stated local behavior. Learner implementation/explanation and held-out task evidence need their own records; deleted-runtime Drive recovery needs actual hosted restored/advanced updates. Tokenizer/source identity must remain explicit.",
+    "rubric": "Calculate the three denominators, distinguish evidence classes and name one concrete remaining acceptance check."
+  }
+]

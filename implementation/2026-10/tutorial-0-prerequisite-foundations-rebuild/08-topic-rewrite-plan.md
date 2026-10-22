@@ -1,0 +1,11 @@
+# Topic-based complete rewrite — 2026-10-12
+
+The user rejects the eleven-page narrative structure and requests comprehensive topic lessons for the prerequisites of Attention Is All You Need. Explicit scope includes losses, optimizers, feedforward networks, text encoding and embeddings, with all other necessary foundations selected by technical coverage. Their latest instruction is to create the outline first, then write the lessons one by one.
+
+The [25-topic outline](../../../tutorials/projects/p00/transformer-foundations/v1/project/course-outline.md) is the authoring contract. This supersedes the former eleven-lesson/story constraint, including D049/D050's structure where inconsistent. Preserve useful original numerical source and prior personal notes; rewrite the actual explanations, not just titles. No fixed word/diagram count proves coverage.
+
+Preserve: current learner P00-M1 setup complete and linear() next; both implementation children; Course 1 translation/RoBERTa; Course 2 Small GPT; existing TUI reference-row removal; current Git edits and no-commit/publication boundary. Keep stable old chapter IDs/URLs while adding topic IDs. Legacy Lesson 3A's affine implementation contract must remain reachable.
+
+Sequence: outline → lessons 1–25 in order → numerical/probe checks and integrated coverage review → manifest/notes/export reconciliation → publisher validation → independent root/prefix reader/browser review → canonical state and six snapshots. Do not publish a partly rewritten manifest into the reader.
+
+Status: completed locally. Outline preceded all25 topic lessons; three explicitly requested agents supplied bounded authoring, numerical checks and independent coverage review.114 source tests,26 standalone blocks, corrected transfer answers, notes/export/publisher/content checks and final isolated root/prefix browser/visual review pass. No commits/publication; actual learner and hosted gates remain unchanged. Source research will use the original paper, primary optimizer papers, official PyTorch API contracts, Unicode documentation and written Nielsen/D2L references. Mathematical fixtures and prose are original; local reference checks are separate from learner/hosted evidence.

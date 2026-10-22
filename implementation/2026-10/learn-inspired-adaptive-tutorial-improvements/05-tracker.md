@@ -1,5 +1,7 @@
 # Tracker
 
+2026-10-09, latest follow-up: Completed [the P00 course standard](07-p00-course-standard.md) in the canonical workspace skill, related references/UI metadata, lesson/project templates and initializer. Isolated new-topic authoring exposed and fixed shared-reader P00 assumptions. Two skill validators, 77 CLI tests, TUI smoke, 9 site tests and both root/prefix browser suites pass; 66 tutorial files remain unchanged. Selected sample screenshots and verification are saved. Six compact snapshots and canonical preparation state refreshed; actual P00-M1 remains not-started. Earlier entries below describe the prior P01 preparation.
+
 2026-10-09: Read owning instructions, canonical Projects/Research records, local skills, prior tutorial package and Git state. Existing changes preserved. P01-M1 not-started, Research deferred intake.
 
 2026-10-09: Pinned upstream HEAD/main to 7cfd8942f82ab9476e63572387e1fe9bcea5082c and inspected teach/visual/quiz/logging/agent contracts. Saved comparison/provenance and implementation plan before skill edits. No upstream code executed/redistributed; no LICENSE in inspected tree.

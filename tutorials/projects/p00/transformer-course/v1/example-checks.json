@@ -1,0 +1,50 @@
+{
+  "checked_at": "2026-10-13T04:32:33.925168+00:00",
+  "results": [
+    {
+      "id": "first-retrieval",
+      "language": "python",
+      "path": "examples/first_retrieval.py",
+      "sha256": "c18bba06e120528790bc0943f2de0afd19569acc955f1afeae547ebf893d211e",
+      "output": {
+        "context": [
+          2.5,
+          3.25
+        ],
+        "single": [
+          2.0,
+          0.0
+        ]
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "matrix-cpp",
+      "language": "cpp",
+      "path": "examples/foundation_math.cpp",
+      "sha256": "81c1dd9980c68f50d3c3c031617a851cadad0decc60b7d37f533395f3a5a51ab",
+      "output": {
+        "matrix_product": [
+          [
+            58,
+            64
+          ],
+          [
+            139,
+            154
+          ]
+        ],
+        "probabilities": [
+          0.25,
+          0.75
+        ],
+        "central_differences": true,
+        "adam_steps": 2
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    }
+  ],
+  "passed": true
+}

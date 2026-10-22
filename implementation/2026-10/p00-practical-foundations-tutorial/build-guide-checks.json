@@ -1,0 +1,321 @@
+{
+  "files": [
+    {
+      "path": "src/transformer_foundations_lab/numerics.py",
+      "page": "02-numbers.md",
+      "sha256": "90ea440b476a6fa7fecc7c577bdef72c09013d7a762d66c1a2875a0bd7c9aed6"
+    },
+    {
+      "path": "tests/test_numerics.py",
+      "page": "02-numbers.md",
+      "sha256": "b95d3ff179db363ea5279cbce1bf12129c722b354814e4de30c5f6d845ba2f25"
+    },
+    {
+      "path": "demo.py",
+      "page": "02-numbers.md",
+      "sha256": "92f44ffe3ae86624b0e4875ce4496f5abed482b96465b10056fc9db8babd5c82"
+    },
+    {
+      "path": "src/transformer_foundations_lab/autograd_lab.py",
+      "page": "03-autograd.md",
+      "sha256": "b1bd29cdf31f4fb1f588f0d004bf3441b86e72eb1309015b1264f3da926645b9"
+    },
+    {
+      "path": "tests/test_autograd.py",
+      "page": "03-autograd.md",
+      "sha256": "59fe5f55020ad6aace832636275eaca8436d37d6d73fb6df8ff0c62db16bba54"
+    },
+    {
+      "path": "src/transformer_foundations_lab/tokenizer.py",
+      "page": "04-tokenizer.md",
+      "sha256": "daf28ac74efa91b7dacd9665c8ae3dce1147633ef9242c371bb02d141f6a7a0a"
+    },
+    {
+      "path": "tests/test_tokenizer.py",
+      "page": "04-tokenizer.md",
+      "sha256": "61195c6f076c0b21ee139f4002b9ce798fc1b4c08c6c58d6ca8cd51797e9f109"
+    },
+    {
+      "path": "src/transformer_foundations_lab/data.py",
+      "page": "05-data.md",
+      "sha256": "e3df76f4c5fac7550b0b1746d490cf94a29f84511501fe170bfde7199e8c5685"
+    },
+    {
+      "path": "src/transformer_foundations_lab/losses.py",
+      "page": "05-data.md",
+      "sha256": "4c67732a449b128c16e4b296567d1581c7fc97af958dd6eb9f5f8a89b9f06b7a"
+    },
+    {
+      "path": "tests/test_data.py",
+      "page": "05-data.md",
+      "sha256": "5554e5d8c49db6aaf5282604b41ff33b317d59aea26e813c82d6b328f23fc37b"
+    },
+    {
+      "path": "src/transformer_foundations_lab/config.py",
+      "page": "06-attention.md",
+      "sha256": "aa38c460d612a2e618423d4f189fca63ee96d548fc7ff01108d5dc3f1b49e20c"
+    },
+    {
+      "path": "src/transformer_foundations_lab/masks.py",
+      "page": "06-attention.md",
+      "sha256": "ad050791ae609b669c5de4e85e35b9026fa296d28c2de39a7b3e8bb448bc47e3"
+    },
+    {
+      "path": "src/transformer_foundations_lab/positions.py",
+      "page": "06-attention.md",
+      "sha256": "889b45f2876c90233d451e83b0b7c6e58eee1ef3cfe1281aa0da5cfcad3cb10e"
+    },
+    {
+      "path": "src/transformer_foundations_lab/attention.py",
+      "page": "06-attention.md",
+      "sha256": "42ac9b0de7471c82e0906802c2a24d2b922d89edbb86d005be3fa567136fb61d"
+    },
+    {
+      "path": "tests/test_attention.py",
+      "page": "06-attention.md",
+      "sha256": "b0605acfe2c71292c023b89ae3c6b17b46723cee36d93315ae7ffe022855e1af"
+    },
+    {
+      "path": "src/transformer_foundations_lab/blocks.py",
+      "page": "07-model.md",
+      "sha256": "75e95298282d2b34cc6261d2259d71241b263e1a0effea537b278986392095d9"
+    },
+    {
+      "path": "src/transformer_foundations_lab/model.py",
+      "page": "07-model.md",
+      "sha256": "7dc18da2f70eb457d264cc5a4eda25ec4d7d0e82b1b053aa96c6218d5710211b"
+    },
+    {
+      "path": "tests/test_model.py",
+      "page": "07-model.md",
+      "sha256": "838a6b4c4762e95d73d55846f7d4809b12bbd924d16b345b79d1e35376b1b45c"
+    },
+    {
+      "path": "src/transformer_foundations_lab/sampling.py",
+      "page": "08-training.md",
+      "sha256": "54561f7b0299971ade9bfe0bef777d81def88a15e44743d7c45a98d8a1926c1f"
+    },
+    {
+      "path": "src/transformer_foundations_lab/trainer.py",
+      "page": "08-training.md",
+      "sha256": "6c292781a893e5e844b16c6617ebd5198c77a1f415b8f4da73928fe10d0f6a81"
+    },
+    {
+      "path": "tests/test_training.py",
+      "page": "08-training.md",
+      "sha256": "3fd331abd610176de145c3c6b12c05716cbcfafb777b5d9b0de45e785247b78b"
+    },
+    {
+      "path": "src/transformer_foundations_lab/checkpoint.py",
+      "page": "09-recovery.md",
+      "sha256": "c70d59640af96a172794966fb4c4a192b4bedf07c1219036f41d20dfd1ced9c9"
+    },
+    {
+      "path": "src/transformer_foundations_lab/train.py",
+      "page": "09-recovery.md",
+      "sha256": "a59c52fe1285d040ac9d061a5e1e30fb06814aba64a4ef4fb5c9434d9cdf278a"
+    },
+    {
+      "path": "tests/test_recovery.py",
+      "page": "09-recovery.md",
+      "sha256": "251fcd347e08f9b40143de973dd83cbe34ce6032540ab4bf063f7d39db74696a"
+    },
+    {
+      "path": "tools/export_source.py",
+      "page": "10-colab-and-handoff.md",
+      "sha256": "864c67bdbe36f0140656c1c6fcdf31871824b60af4832b1ade81bada237b4839"
+    }
+  ],
+  "stages": [
+    {
+      "page": "02-numbers.md",
+      "test_file": "test_numerics.py",
+      "returncode": 0,
+      "output": "test_gradient_and_a_changed_case (test_numerics.NumericsTests.test_gradient_and_a_changed_case) ... ok\ntest_stability_and_translation (test_numerics.NumericsTests.test_stability_and_translation) ... ok\ntest_unequal_matrix_dimensions (test_numerics.NumericsTests.test_unequal_matrix_dimensions) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "page": "03-autograd.md",
+      "test_file": "test_autograd.py",
+      "returncode": 0,
+      "output": "test_scalar_matches_hand_derivative (test_autograd.AutogradTests.test_scalar_matches_hand_derivative) ... ok\ntest_xor_fit (test_autograd.AutogradTests.test_xor_fit) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.888s\n\nOK\n"
+    },
+    {
+      "page": "04-tokenizer.md",
+      "test_file": "test_tokenizer.py",
+      "returncode": 0,
+      "output": "test_byte_baseline_and_unicode (test_tokenizer.TokenizerTests.test_byte_baseline_and_unicode) ... ok\ntest_nonoverlapping_merge (test_tokenizer.TokenizerTests.test_nonoverlapping_merge) ... ok\ntest_reload_identity_and_corruption (test_tokenizer.TokenizerTests.test_reload_identity_and_corruption) ... ok\ntest_training_boundaries_and_frozen_rank (test_tokenizer.TokenizerTests.test_training_boundaries_and_frozen_rank) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "page": "05-data.md",
+      "test_file": "test_data.py",
+      "returncode": 0,
+      "output": "test_loss_ignores_padding_and_uses_valid_denominator (test_data.DataTests.test_loss_ignores_padding_and_uses_valid_denominator) ... ok\ntest_shift_and_right_padding (test_data.DataTests.test_shift_and_right_padding) ... ok\ntest_split_is_deterministic_and_disjoint (test_data.DataTests.test_split_is_deterministic_and_disjoint) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.259s\n\nOK\n"
+    },
+    {
+      "page": "06-attention.md",
+      "test_file": "test_attention.py",
+      "returncode": 0,
+      "output": "test_attention_against_independent_sdpa_and_gradients (test_attention.AttentionTests.test_attention_against_independent_sdpa_and_gradients) ... ok\ntest_masks_have_different_roles (test_attention.AttentionTests.test_masks_have_different_roles) ... ok\ntest_positions_and_head_ownership (test_attention.AttentionTests.test_positions_and_head_ownership) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.273s\n\nOK\n"
+    },
+    {
+      "page": "07-model.md",
+      "test_file": "test_model.py",
+      "returncode": 0,
+      "output": "test_full_shape_and_gradient_path (test_model.ModelTests.test_full_shape_and_gradient_path) ... ok\ntest_future_target_and_extra_source_pad_do_not_change_earlier_logits (test_model.ModelTests.test_future_target_and_extra_source_pad_do_not_change_earlier_logits) ... ok\ntest_generation_stops_on_forced_eos_and_resets (test_model.ModelTests.test_generation_stops_on_forced_eos_and_resets) ... ok\ntest_layernorm_matches_library (test_model.ModelTests.test_layernorm_matches_library) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.269s\n\nOK\n"
+    },
+    {
+      "page": "08-training.md",
+      "test_file": "test_training.py",
+      "returncode": 0,
+      "output": "test_one_update_changes_parameters_and_keeps_full_state (test_training.TrainingTests.test_one_update_changes_parameters_and_keeps_full_state) ... ok\ntest_sampler_restores_the_next_indices_across_a_shuffle (test_training.TrainingTests.test_sampler_restores_the_next_indices_across_a_shuffle) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.503s\n\nOK\n"
+    },
+    {
+      "page": "09-recovery.md",
+      "test_file": "test_recovery.py",
+      "returncode": 0,
+      "output": "test_bad_newest_generation_falls_back_and_identity_mismatch_fails (test_recovery.RecoveryTests.test_bad_newest_generation_falls_back_and_identity_mismatch_fails) ... ok\ntest_fresh_process_matches_uninterrupted_training (test_recovery.RecoveryTests.test_fresh_process_matches_uninterrupted_training) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 2.113s\n\nOK\n"
+    }
+  ],
+  "notebook": {
+    "cells": 8,
+    "output_cleared": true,
+    "code_syntax": "passed",
+    "hosted_execution": "not run"
+  },
+  "combined": {
+    "returncode": 0,
+    "output": "test_attention_against_independent_sdpa_and_gradients (test_attention.AttentionTests.test_attention_against_independent_sdpa_and_gradients) ... ok\ntest_masks_have_different_roles (test_attention.AttentionTests.test_masks_have_different_roles) ... ok\ntest_positions_and_head_ownership (test_attention.AttentionTests.test_positions_and_head_ownership) ... ok\ntest_scalar_matches_hand_derivative (test_autograd.AutogradTests.test_scalar_matches_hand_derivative) ... ok\ntest_xor_fit (test_autograd.AutogradTests.test_xor_fit) ... ok\ntest_loss_ignores_padding_and_uses_valid_denominator (test_data.DataTests.test_loss_ignores_padding_and_uses_valid_denominator) ... ok\ntest_shift_and_right_padding (test_data.DataTests.test_shift_and_right_padding) ... ok\ntest_split_is_deterministic_and_disjoint (test_data.DataTests.test_split_is_deterministic_and_disjoint) ... ok\ntest_full_shape_and_gradient_path (test_model.ModelTests.test_full_shape_and_gradient_path) ... ok\ntest_future_target_and_extra_source_pad_do_not_change_earlier_logits (test_model.ModelTests.test_future_target_and_extra_source_pad_do_not_change_earlier_logits) ... ok\ntest_generation_stops_on_forced_eos_and_resets (test_model.ModelTests.test_generation_stops_on_forced_eos_and_resets) ... ok\ntest_layernorm_matches_library (test_model.ModelTests.test_layernorm_matches_library) ... ok\ntest_gradient_and_a_changed_case (test_numerics.NumericsTests.test_gradient_and_a_changed_case) ... ok\ntest_stability_and_translation (test_numerics.NumericsTests.test_stability_and_translation) ... ok\ntest_unequal_matrix_dimensions (test_numerics.NumericsTests.test_unequal_matrix_dimensions) ... ok\ntest_bad_newest_generation_falls_back_and_identity_mismatch_fails (test_recovery.RecoveryTests.test_bad_newest_generation_falls_back_and_identity_mismatch_fails) ... ok\ntest_fresh_process_matches_uninterrupted_training (test_recovery.RecoveryTests.test_fresh_process_matches_uninterrupted_training) ... ok\ntest_byte_baseline_and_unicode (test_tokenizer.TokenizerTests.test_byte_baseline_and_unicode) ... ok\ntest_nonoverlapping_merge (test_tokenizer.TokenizerTests.test_nonoverlapping_merge) ... ok\ntest_reload_identity_and_corruption (test_tokenizer.TokenizerTests.test_reload_identity_and_corruption) ... ok\ntest_training_boundaries_and_frozen_rank (test_tokenizer.TokenizerTests.test_training_boundaries_and_frozen_rank) ... ok\ntest_one_update_changes_parameters_and_keeps_full_state (test_training.TrainingTests.test_one_update_changes_parameters_and_keeps_full_state) ... ok\ntest_sampler_restores_the_next_indices_across_a_shuffle (test_training.TrainingTests.test_sampler_restores_the_next_indices_across_a_shuffle) ... ok\n\n----------------------------------------------------------------------\nRan 23 tests in 2.378s\n\nOK\n"
+  },
+  "installation": {
+    "scaffold": "actual new_repository in disposable workspace",
+    "install": "uv lock, sync --frozen, installed package import passed",
+    "tests": 23,
+    "smoke_steps": [
+      20,
+      40
+    ],
+    "resume_from": 20,
+    "parameters": 54916,
+    "source_export": {
+      "files": 33,
+      "extraction_hashes": "passed",
+      "excluded_runtime_data": true
+    },
+    "hosted_execution": "not run"
+  },
+  "smoke_reports": [
+    {
+      "step": 20,
+      "restored": null,
+      "checkpoint": "runs/copy-smoke/step-000000020-1791596390755520913-3be0a75d",
+      "updates_this_session": 20,
+      "training_seconds": 0.09373324000262073,
+      "parameters": 54916,
+      "first_loss": 5.663539409637451,
+      "last_loss": 4.235488414764404,
+      "held_out": {
+        "records": 128,
+        "target_tokens_including_eos": 666,
+        "loss": 4.1048898324594125,
+        "teacher_token_accuracy": 0.1921921921921922,
+        "generated_reference_token_accuracy": 0.0,
+        "generated_exact_match": 0.0,
+        "eos_rate": 1.0
+      },
+      "source_shuffle": {
+        "records": 128,
+        "target_tokens_including_eos": 666,
+        "loss": 4.133823108386707,
+        "teacher_token_accuracy": 0.1921921921921922,
+        "generated_reference_token_accuracy": 0.0,
+        "generated_exact_match": 0.0,
+        "eos_rate": 1.0
+      },
+      "identity": {
+        "schema": 1,
+        "config": {
+          "vocab": 260,
+          "width": 32,
+          "heads": 4,
+          "hidden": 128,
+          "layers": 1,
+          "limit": 32,
+          "dropout": 0.0
+        },
+        "seed": 17,
+        "tokenizer": "f02c710e789f1edcf9fc543eb42a66b6077addac86d7fcaa1f2df332abc6380d",
+        "split": "a91b3387ffaf571cb41eda7837e1c6711a52231b9804a8021f806698ffc65ac0",
+        "source_sha256": "fe7f42d4e5b9dc9464d7729884e727a763984f9e87a23fc4f4279e146579c8a0",
+        "torch": "2.14.1+cpu",
+        "python": "3.12.13",
+        "device": "cpu",
+        "precision": "fp32",
+        "task": "copy",
+        "optimizer": "Adam-lr0.002-warmup20",
+        "batch": 16,
+        "deterministic": true,
+        "threads": 1
+      }
+    },
+    {
+      "step": 40,
+      "restored": {
+        "selected_step": 20,
+        "generation": "step-000000020-1791596390755520913-3be0a75d",
+        "rejected_newer": [],
+        "rollback_report_required": false
+      },
+      "checkpoint": "runs/copy-smoke/step-000000040-1791596392433913267-22230e95",
+      "updates_this_session": 20,
+      "training_seconds": 0.0880722309993871,
+      "parameters": 54916,
+      "first_loss": 4.160251140594482,
+      "last_loss": 2.5808019638061523,
+      "held_out": {
+        "records": 128,
+        "target_tokens_including_eos": 666,
+        "loss": 2.629584303847304,
+        "teacher_token_accuracy": 0.1921921921921922,
+        "generated_reference_token_accuracy": 0.0,
+        "generated_exact_match": 0.0,
+        "eos_rate": 1.0
+      },
+      "source_shuffle": {
+        "records": 128,
+        "target_tokens_including_eos": 666,
+        "loss": 2.644337399227841,
+        "teacher_token_accuracy": 0.1921921921921922,
+        "generated_reference_token_accuracy": 0.0,
+        "generated_exact_match": 0.0,
+        "eos_rate": 1.0
+      },
+      "identity": {
+        "schema": 1,
+        "config": {
+          "vocab": 260,
+          "width": 32,
+          "heads": 4,
+          "hidden": 128,
+          "layers": 1,
+          "limit": 32,
+          "dropout": 0.0
+        },
+        "seed": 17,
+        "tokenizer": "f02c710e789f1edcf9fc543eb42a66b6077addac86d7fcaa1f2df332abc6380d",
+        "split": "a91b3387ffaf571cb41eda7837e1c6711a52231b9804a8021f806698ffc65ac0",
+        "source_sha256": "fe7f42d4e5b9dc9464d7729884e727a763984f9e87a23fc4f4279e146579c8a0",
+        "torch": "2.14.1+cpu",
+        "python": "3.12.13",
+        "device": "cpu",
+        "precision": "fp32",
+        "task": "copy",
+        "optimizer": "Adam-lr0.002-warmup20",
+        "batch": 16,
+        "deterministic": true,
+        "threads": 1
+      }
+    }
+  ],
+  "preserved_files": 19,
+  "scope": "Author tutorial verification in ignored disposable projects; learner P00-M1 remains not-started; no hosted execution."
+}

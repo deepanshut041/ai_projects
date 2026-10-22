@@ -4,7 +4,7 @@ Status: proposed; no model implementation or run.
 Updated: 2026-10-09
 Lead: AI project workflow; supporting AI experiment planning for proposed pilots. This umbrella package owns the roadmap review. When Project 1 begins, create/resume its child-owned package before implementation/runs.
 
-Colab amendment (2026-10-09): local correctness remains first; P01 now also requires the [Colab Free training and recovery contract](../../../COLAB.md). This extends the earlier CPU-only starting scope. Shared requirement/evidence ownership is in the [Colab package](../colab-free-training-and-recovery-requirements/00-resume.md); actual notebooks, trainer and recovery proof will be child-owned. Pro is deferred until requested.
+Colab amendment (2026-10-09): local correctness remains first; P01 now also requires the [Colab Free training and recovery contract](../../../guide/COLAB.md). This extends the earlier CPU-only starting scope. Shared requirement/evidence ownership is in the [Colab package](../colab-free-training-and-recovery-requirements/00-resume.md); actual notebooks, trainer and recovery proof will be child-owned. Pro is deferred until requested.
 
 ## Ownership and proposed files
 

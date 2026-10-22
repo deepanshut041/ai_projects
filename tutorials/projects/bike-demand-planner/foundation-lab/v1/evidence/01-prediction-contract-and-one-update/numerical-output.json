@@ -1,0 +1,38 @@
+{
+  "illustrative_example": true,
+  "feature_order": [
+    "working_day",
+    "hour_divided_by_four"
+  ],
+  "features": [
+    1.0,
+    2.0
+  ],
+  "target": 45.0,
+  "learning_rate": 0.01,
+  "before": {
+    "weights": [
+      10.0,
+      5.0
+    ],
+    "bias": 20.0,
+    "prediction": 40.0,
+    "loss": 12.5
+  },
+  "gradients": {
+    "weights": [
+      -5.0,
+      -10.0
+    ],
+    "bias": -5.0
+  },
+  "after": {
+    "weights": [
+      10.05,
+      5.1
+    ],
+    "bias": 20.05,
+    "prediction": 40.3,
+    "loss": 11.045000000000014
+  }
+}

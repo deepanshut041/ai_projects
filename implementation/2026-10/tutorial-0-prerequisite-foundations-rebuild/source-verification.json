@@ -1,0 +1,303 @@
+{
+  "checked_at": "2026-10-12T09:07:27.417367+00:00",
+  "scope": "Local author reference verification; advanced Python assumed; learner and hosted gates remain pending.",
+  "source_sha256": {
+    "byte_bpe.py": "5adcd5044d52d541dc729554a3f6d184ff0d53d2704122d0b37f4dd51e6db190",
+    "first_session.py": "7c2fc16ad94edadeeecec4e901c6beeed07d27919687ced003e42dad532d0548",
+    "prerequisite_checkpoint.py": "5affe55623c57b1433dae54594890d5e51cec929faaa97a0525f3197e9733151",
+    "prerequisite_export.py": "fea1241053be9eb3cf3241c250b0b57a643e5dd24378225c3d45395e14c26d2a",
+    "prerequisite_math.cpp": "123bf8e2c25d2afc267d097c2f2434cd8f0252793d76723f8a61accd47ac179e",
+    "prerequisite_math.py": "b7d2fb4cef5edfbffb716482a096aafa54d17508a27308ebd0d8ecf69885ee62",
+    "prerequisite_mlp.py": "30071122b9cb8f7ced4a126d95e40f9cc034252763647279da82cd14c46acc40",
+    "prerequisite_mlp_checks.py": "fb281f713c91f67d2b15c4c741d206a06b541db8e3bd425069a1f0a04ed3bdfb",
+    "prerequisite_tensors.py": "10ea67eaedbf0aec7ea8cd6f45924ba658c6e543facea30d3747e70122d94ae3",
+    "prerequisite_text.py": "7abae1a1c052d20d23380419c86a41a5c89209bec576c54ad016c90a0031f4ab",
+    "test_prerequisite_math.py": "a93d345f769ad6ff8ee2a0f5a6b236588d869e7a1567982617872426aca3dae9",
+    "test_prerequisite_tensors.py": "cbfa82433884375e54be3d7961c10553ca8561264245f3a3f1534773b0453da3",
+    "test_prerequisite_text.py": "d8441ee65e49b55a34b5f3a2626466ca9b91e266e6727e4050ee9bb60fb62630"
+  },
+  "runtime": {
+    "python": "3.12.13",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4",
+    "threads": 1,
+    "parameter_devices": [
+      "cpu"
+    ],
+    "parameter_dtypes": [
+      "torch.float32"
+    ]
+  },
+  "tests": {
+    "test_prerequisite_math.py": {
+      "passed": true,
+      "checks": 15
+    },
+    "test_prerequisite_text.py": {
+      "passed": true,
+      "checks": 10
+    },
+    "test_prerequisite_tensors.py": {
+      "passed": true,
+      "checks": 26
+    },
+    "prerequisite_mlp_checks.py": {
+      "passed": true,
+      "checks": 23
+    }
+  },
+  "checks": 74,
+  "python_cpp_known_answers_match": true,
+  "numerical_known_answers": {
+    "adam_moments_after_two": [
+      2.7,
+      0.8991
+    ],
+    "adam_parameters": [
+      1.99,
+      1.983299417
+    ],
+    "affine_gradient_bias": [
+      2.0,
+      3.0
+    ],
+    "affine_gradient_weights": [
+      [
+        5.0,
+        7.0
+      ],
+      [
+        7.0,
+        10.0
+      ]
+    ],
+    "finite_difference_matches": true,
+    "linear": [
+      [
+        1,
+        2,
+        9
+      ],
+      [
+        3,
+        4,
+        19
+      ]
+    ],
+    "mean": 2.0,
+    "nll": 0.287682072,
+    "norm": 5.0,
+    "probabilities": [
+      0.25,
+      0.75
+    ],
+    "rectangular": [
+      [
+        58,
+        64
+      ],
+      [
+        139,
+        154
+      ]
+    ],
+    "scalar_gradient": [
+      30.0,
+      10.0
+    ],
+    "sgd_loss": 16.0,
+    "sgd_parameters": [
+      1.7,
+      -0.1
+    ],
+    "variance": 1.0
+  },
+  "torch_math_probe": {
+    "gradient": 30.0,
+    "linear_orientation_matches": true,
+    "loss_after_sgd": 16.81,
+    "weight_after_sgd": 1.7
+  },
+  "fresh_process_session_recovery": {
+    "saved_update": 25,
+    "restored_update": 25,
+    "advanced_update": 50
+  },
+  "training": {
+    "identity": {
+      "schema": 1,
+      "task": "opposite-sign-classification-v1",
+      "config": {
+        "input_features": 2,
+        "hidden_features": 8,
+        "num_classes": 2,
+        "batch_size": 16,
+        "accumulation_steps": 1,
+        "learning_rate": 0.03,
+        "warmup_steps": 20,
+        "total_steps": 1000,
+        "gradient_norm_limit": 1.0,
+        "seed": 7
+      },
+      "data_sha256": "39f1e7722ad285448f668112976a4de2b65c32533298c6ad558a65184a4f2b03",
+      "source_sha256": {
+        "prerequisite_mlp.py": "30071122b9cb8f7ced4a126d95e40f9cc034252763647279da82cd14c46acc40",
+        "prerequisite_checkpoint.py": "5affe55623c57b1433dae54594890d5e51cec929faaa97a0525f3197e9733151"
+      },
+      "python": "3.12.13",
+      "torch": "2.14.1+cpu",
+      "numpy": "2.5.4",
+      "parameter_devices": [
+        "cpu"
+      ],
+      "parameter_dtypes": [
+        "torch.float32"
+      ],
+      "platform": "Linux",
+      "machine": "x86_64",
+      "threads": 1,
+      "matmul_precision": "highest",
+      "deterministic_algorithms": false,
+      "optimizer": {
+        "name": "Adam",
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08
+      },
+      "schedule": "linear-warmup-then-constant-v1"
+    },
+    "before": {
+      "split": "validation",
+      "loss": 0.7687182426452637,
+      "correct": 18,
+      "count": 36,
+      "accuracy": 0.5
+    },
+    "after": {
+      "split": "validation",
+      "loss": 0.00012999554423408376,
+      "correct": 36,
+      "count": 36,
+      "accuracy": 1.0
+    },
+    "last_update": {
+      "step": 1000,
+      "examples": 16,
+      "examples_seen": 16000,
+      "loss": 0.00323665514588356,
+      "correct": 16,
+      "accuracy": 1.0,
+      "learning_rate_used": 0.03,
+      "gradient_norm_before_clip": 0.013405286706984043
+    },
+    "resources": {
+      "device": "cpu",
+      "precision": "fp32",
+      "parameters": 42,
+      "parameter_bytes": 168,
+      "process_peak_rss_bytes": 313974784,
+      "elapsed_seconds": 0.4465363449999131,
+      "completed_updates": 1000
+    },
+    "remaining_updates": 0
+  },
+  "checkpoint": {
+    "bytes": 26040,
+    "storage_preflight": {
+      "storage_budget_bytes": 8388608,
+      "free_reserve_bytes": 1048576,
+      "required_capacity_bytes": 90408
+    },
+    "persistence_seconds": [
+      0.013225922999481554,
+      0.011801329999798327,
+      0.012229453999680118,
+      0.012325724999755039,
+      0.012345881999863195,
+      0.012261633999514743,
+      0.012245072999576223,
+      0.012404421999235637,
+      0.012300617001528735,
+      0.01223710799968103,
+      0.012573619000249892
+    ]
+  },
+  "export": {
+    "archive": ".ai/course-exports/2026-10-12/tutorial0-prerequisites.zip",
+    "sha256": "c5fe21d865d5f13b36113be860d6624f6c8b00e7fef96b5ea9c3fcd0c30eabc0",
+    "members": 16,
+    "member_hashes_verified": true,
+    "cleared_syntax_checked_notebook_code_cells": 5,
+    "manifest": {
+      "files": {
+        "byte_bpe.py": {
+          "bytes": 5238,
+          "sha256": "5adcd5044d52d541dc729554a3f6d184ff0d53d2704122d0b37f4dd51e6db190"
+        },
+        "colab.ipynb": {
+          "bytes": 8360,
+          "sha256": "abb235927d23f1d02ece4fb3c1c91b7d5f4f98b0b8f9d75818ffe4ffb7b877df"
+        },
+        "first_session.py": {
+          "bytes": 4008,
+          "sha256": "7c2fc16ad94edadeeecec4e901c6beeed07d27919687ced003e42dad532d0548"
+        },
+        "prerequisite_checkpoint.py": {
+          "bytes": 10842,
+          "sha256": "5affe55623c57b1433dae54594890d5e51cec929faaa97a0525f3197e9733151"
+        },
+        "prerequisite_export.py": {
+          "bytes": 9336,
+          "sha256": "fea1241053be9eb3cf3241c250b0b57a643e5dd24378225c3d45395e14c26d2a"
+        },
+        "prerequisite_math.cpp": {
+          "bytes": 6864,
+          "sha256": "123bf8e2c25d2afc267d097c2f2434cd8f0252793d76723f8a61accd47ac179e"
+        },
+        "prerequisite_math.py": {
+          "bytes": 8533,
+          "sha256": "b7d2fb4cef5edfbffb716482a096aafa54d17508a27308ebd0d8ecf69885ee62"
+        },
+        "prerequisite_mlp.py": {
+          "bytes": 13640,
+          "sha256": "30071122b9cb8f7ced4a126d95e40f9cc034252763647279da82cd14c46acc40"
+        },
+        "prerequisite_mlp_checks.py": {
+          "bytes": 18837,
+          "sha256": "fb281f713c91f67d2b15c4c741d206a06b541db8e3bd425069a1f0a04ed3bdfb"
+        },
+        "prerequisite_tensors.py": {
+          "bytes": 8759,
+          "sha256": "10ea67eaedbf0aec7ea8cd6f45924ba658c6e543facea30d3747e70122d94ae3"
+        },
+        "prerequisite_text.py": {
+          "bytes": 3310,
+          "sha256": "7abae1a1c052d20d23380419c86a41a5c89209bec576c54ad016c90a0031f4ab"
+        },
+        "requirements.txt": {
+          "bytes": 31,
+          "sha256": "33a39f5d3044dc5b7deca4ce703a08f02c2f72cf8b5cc0e49a2574f05ed3e715"
+        },
+        "test_prerequisite_math.py": {
+          "bytes": 6969,
+          "sha256": "a93d345f769ad6ff8ee2a0f5a6b236588d869e7a1567982617872426aca3dae9"
+        },
+        "test_prerequisite_tensors.py": {
+          "bytes": 13212,
+          "sha256": "cbfa82433884375e54be3d7961c10553ca8561264245f3a3f1534773b0453da3"
+        },
+        "test_prerequisite_text.py": {
+          "bytes": 3573,
+          "sha256": "d8441ee65e49b55a34b5f3a2626466ca9b91e266e6727e4050ee9bb60fb62630"
+        }
+      },
+      "format": "tutorial0-prerequisite-source-v1",
+      "source_revision": "34334e3fd681dcdc98e55efd6c14856830ec7558",
+      "working_tree_snapshot": true
+    }
+  },
+  "hosted_execution": "unverified",
+  "passed": true
+}

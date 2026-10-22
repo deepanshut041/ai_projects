@@ -1,0 +1,5 @@
+# Frozen tutorial manifests hash these files. Keep their authored EOF separators.
+/tutorials/**/media/**/captions.vtt whitespace=-blank-at-eof
+/tutorials/**/media/**/transcript.md whitespace=-blank-at-eof
+/tutorials/projects/bike-demand-planner/foundation-lab/v1/project/setup.md whitespace=-blank-at-eof
+/tutorials/projects/p00/transformer-course/v1/project/study-notes.md whitespace=-blank-at-eof

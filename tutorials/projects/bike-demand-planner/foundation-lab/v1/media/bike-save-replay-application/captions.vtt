@@ -1,0 +1,274 @@
+WEBVTT
+
+00:00:00.500 --> 00:00:04.930
+The replay interface starts with the
+same Monday eight o’clock request.
+
+00:00:05.440 --> 00:00:08.170
+It first resolves consistent
+calendar metadata,
+
+00:00:08.600 --> 00:00:11.310
+then sends a target free
+request to prediction.
+
+00:00:12.100 --> 00:00:16.890
+The response contains the estimate, simple
+baseline, support and model identities.
+
+00:00:17.420 --> 00:00:20.370
+It contains no observed count or residual.
+
+00:00:20.920 --> 00:00:25.810
+A separate show outcome action retrieves
+a historical observation for comparison.
+
+00:00:26.900 --> 00:00:29.410
+The server holds that
+separate record for replay,
+
+00:00:29.800 --> 00:00:31.770
+while the predictor can run without it.
+
+00:00:32.280 --> 00:00:37.080
+Browser checks confirm the client makes
+no observation request before the explicit
+
+00:00:37.080 --> 00:00:37.990
+action.
+
+00:00:38.540 --> 00:00:42.640
+This gives the information boundary
+visible behavior instead of leaving it
+
+00:00:42.640 --> 00:00:43.710
+only in a comment.
+
+00:00:45.900 --> 00:00:51.010
+This screenshot shows the completed
+comparison after the outcome action.
+
+00:00:51.620 --> 00:00:55.860
+The forecast card displays three hundred
+and forty nine point five rentals per
+
+00:00:55.860 --> 00:00:56.430
+hour.
+
+00:00:57.020 --> 00:01:00.220
+The global training mean is one
+hundred and forty three point eight,
+
+00:01:00.220 --> 00:01:04.310
+and the fitted group has two hundred
+and forty eight supporting hours.
+
+00:01:05.000 --> 00:01:09.600
+The separate outcome card displays four
+hundred and twenty with signed error
+
+00:01:09.600 --> 00:01:11.610
+negative seventy point five zero.
+
+00:01:12.360 --> 00:01:14.500
+The interface rounds for reading,
+
+00:01:14.500 --> 00:01:18.450
+while the API retains the
+full floating point values.
+
+00:01:19.520 --> 00:01:20.070
+Issue time,
+
+00:01:20.480 --> 00:01:20.780
+schema,
+
+00:01:21.360 --> 00:01:21.910
+used fields
+
+00:01:22.380 --> 00:01:26.660
+and model and bundle hashes remain
+inspectable so the estimate has an
+
+00:01:26.660 --> 00:01:28.050
+identifiable contract.
+
+00:01:30.232 --> 00:01:35.422
+The adapter obtains a consistent request
+and sends it through the saved predictor.
+
+00:01:36.132 --> 00:01:38.502
+Prediction reuses fitted state,
+
+00:01:38.892 --> 00:01:42.482
+and no button click or server
+startup fits another model.
+
+00:01:43.032 --> 00:01:48.212
+The separate observation lookup validates
+the same historical date boundary and can
+
+00:01:48.212 --> 00:01:49.402
+return unavailable.
+
+00:01:50.172 --> 00:01:54.952
+Application data is checked against the
+predictor and dataset identities before
+
+00:01:54.952 --> 00:01:55.822
+serving.
+
+00:01:56.372 --> 00:01:59.362
+Preparation is an
+explicit earlier command,
+
+00:01:59.572 --> 00:02:02.482
+separate from loading and
+serving the saved state.
+
+00:02:03.132 --> 00:02:08.692
+The HTTP server binds to loopback
+and serves fixed packaged assets and
+
+00:02:08.692 --> 00:02:09.162
+routes.
+
+00:02:09.672 --> 00:02:14.482
+It does not turn a browser supplied string
+into a file path or training command.
+
+00:02:16.608 --> 00:02:19.858
+Change to January second
+at three in the morning,
+
+00:02:20.088 --> 00:02:22.818
+a genuinely unrecorded validation hour.
+
+00:02:23.508 --> 00:02:27.758
+The recorded date metadata still
+supplies a valid calendar request.
+
+00:02:28.368 --> 00:02:31.818
+The model can therefore produce
+an estimate from its fitted group.
+
+00:02:32.288 --> 00:02:36.238
+The observation lookup returns
+unavailable with no target,
+
+00:02:36.748 --> 00:02:40.078
+and the interface says an actual
+count and error are absent.
+
+00:02:40.848 --> 00:02:45.468
+It does not treat the missing count as
+zero rentals or add a row to the benchmark
+
+00:02:45.468 --> 00:02:46.538
+denominator.
+
+00:02:47.148 --> 00:02:51.198
+An available estimate and unavailable
+observed evidence can coexist.
+
+00:02:51.908 --> 00:02:56.488
+Handling both explicitly keeps the
+replay faithful to the source rather than
+
+00:02:56.488 --> 00:02:58.938
+manufacturing a complete calendar grid.
+
+00:03:00.983 --> 00:03:04.233
+Now change to a future
+twenty thirteen date.
+
+00:03:04.723 --> 00:03:07.353
+That is outside the
+historical validation domain,
+
+00:03:07.543 --> 00:03:09.593
+even though its hour could be encoded.
+
+00:03:10.183 --> 00:03:11.763
+The backend rejects it,
+
+00:03:11.763 --> 00:03:16.003
+and the browser clears the old forecast
+instead of leaving three hundred and forty
+
+00:03:16.003 --> 00:03:18.793
+nine point five looking
+like the new answer.
+
+00:03:19.423 --> 00:03:22.613
+Reserved test dates,
+non hourly timestamps,
+
+00:03:22.923 --> 00:03:26.953
+unknown schema and a request
+containing an outcome also fail.
+
+00:03:27.503 --> 00:03:30.553
+These errors differ from a
+valid missing observation.
+
+00:03:31.223 --> 00:03:34.843
+The working application preserves
+the earlier information and support
+
+00:03:34.843 --> 00:03:35.553
+boundaries,
+
+00:03:35.843 --> 00:03:40.363
+while the explicit message helps the
+user understand why no forecast is being
+
+00:03:40.363 --> 00:03:40.993
+displayed.
+
+00:03:43.150 --> 00:03:48.460
+Actual browser checks exercise quiet
+Monday, Sunday and June requests,
+
+00:03:49.190 --> 00:03:53.000
+the observed comparison,
+missing evidence and rejected dates.
+
+00:03:54.530 --> 00:03:58.823
+The layout passes at four widths from
+fourteen hundred and forty to three
+
+00:03:58.823 --> 00:04:03.280
+hundred and twenty pixels without
+document overflow or JavaScript errors.
+
+00:04:04.210 --> 00:04:08.080
+An isolated installed wheel
+serves its packaged HTML,
+
+00:04:08.650 --> 00:04:09.960
+JavaScript and CSS
+
+00:04:10.490 --> 00:04:13.520
+while an audit hook denies
+all source project access.
+
+00:04:14.430 --> 00:04:18.610
+The user can run the application from
+saved assets rather than an active
+
+00:04:18.610 --> 00:04:19.600
+training notebook.
+
+00:04:20.070 --> 00:04:21.960
+That is implemented local behavior.
+
+00:04:22.410 --> 00:04:24.380
+It does not establish hosted recovery,
+
+00:04:24.810 --> 00:04:25.920
+operational usefulness
+
+00:04:26.330 --> 00:04:28.100
+or a final held out assessment.
+

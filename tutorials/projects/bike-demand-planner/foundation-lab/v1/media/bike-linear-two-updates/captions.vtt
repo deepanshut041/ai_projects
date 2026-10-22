@@ -1,0 +1,284 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:05.270
+Before trusting the real matrix,
+use four rows and two features.
+
+00:00:05.720 --> 00:00:07.930
+These values are an illustrative fixture.
+
+00:00:08.520 --> 00:00:10.690
+The targets are five, two,
+
+00:00:11.400 --> 00:00:12.390
+four and eight.
+
+00:00:12.800 --> 00:00:16.370
+Initial weights are one and one,
+with bias zero.
+
+00:00:17.220 --> 00:00:20.870
+Matrix times weights plus
+bias gives predictions one,
+
+00:00:21.440 --> 00:00:21.740
+one,
+
+00:00:22.160 --> 00:00:23.290
+two and one.
+
+00:00:23.860 --> 00:00:29.570
+The first row calculation is one times
+one, plus zero times one, plus zero.
+
+00:00:29.900 --> 00:00:33.690
+Its target is five,
+so its residual is negative four.
+
+00:00:34.280 --> 00:00:37.390
+Residual always means
+prediction minus target.
+
+00:00:38.300 --> 00:00:41.150
+Batch size four differs
+from feature count two.
+
+00:00:41.460 --> 00:00:45.730
+That makes incorrect transpositions easier
+to catch than a square fixture would.
+
+00:00:47.817 --> 00:00:51.587
+All four residuals are negative four,
+negative one,
+
+00:00:51.657 --> 00:00:54.087
+negative two and negative seven.
+
+00:00:54.537 --> 00:00:56.507
+Squaring and adding gives seventy.
+
+00:00:57.357 --> 00:01:01.647
+Mean half squared error divides by twice
+the batch count, which is eight here.
+
+00:01:02.017 --> 00:01:04.427
+The initial objective is
+eight point seven five.
+
+00:01:05.257 --> 00:01:09.287
+The factor one half cancels the
+two when differentiating a square.
+
+00:01:09.937 --> 00:01:14.097
+Averaging prevents the update magnitude
+from growing merely because the batch
+
+00:01:14.097 --> 00:01:16.547
+contains more copies of
+the same observations.
+
+00:01:17.317 --> 00:01:20.747
+This objective has squared units
+on the real rental problem.
+
+00:01:20.997 --> 00:01:25.107
+It is different from the reported mean
+absolute error in rentals per hour.
+
+00:01:25.537 --> 00:01:29.197
+A training objective and a validation
+reporting metric can serve different
+
+00:01:29.197 --> 00:01:29.747
+roles.
+
+00:01:31.942 --> 00:01:36.572
+Each row contributes its residual
+times its feature to a weight gradient.
+
+00:01:37.122 --> 00:01:39.752
+Add those contributions,
+then divide by four.
+
+00:01:40.602 --> 00:01:42.532
+The first coordinate gives negative five.
+
+00:01:42.862 --> 00:01:44.592
+The second gives positive one.
+
+00:01:45.122 --> 00:01:49.272
+The bias gradient is the average residual,
+negative three point five.
+
+00:01:49.742 --> 00:01:51.112
+Notice the last row.
+
+00:01:51.682 --> 00:01:55.912
+Its residual is negative seven and
+its second feature is negative one,
+
+00:01:56.242 --> 00:01:59.172
+so its contribution to that
+weight is positive seven.
+
+00:01:59.662 --> 00:02:03.552
+All predictions are too low,
+yet one weight gradient is positive.
+
+00:02:04.042 --> 00:02:05.232
+Feature signs matter.
+
+00:02:06.062 --> 00:02:07.782
+At learning rate zero point one,
+
+00:02:07.782 --> 00:02:12.202
+subtracting these gradients gives weights
+one point five and zero point nine,
+
+00:02:12.202 --> 00:02:14.112
+with bias zero point three five.
+
+00:02:16.483 --> 00:02:21.633
+This shortened source trace calculates
+residuals, averages both gradients,
+
+00:02:21.763 --> 00:02:23.713
+then subtracts the selected step.
+
+00:02:24.323 --> 00:02:25.653
+After the first update,
+
+00:02:26.023 --> 00:02:27.933
+predictions are one point eight five,
+
+00:02:28.523 --> 00:02:29.493
+one point two five,
+
+00:02:30.123 --> 00:02:31.093
+two point seven five
+
+00:02:31.583 --> 00:02:32.713
+and two point four five.
+
+00:02:33.603 --> 00:02:36.773
+The objective falls to five
+point three five six two five.
+
+00:02:37.583 --> 00:02:41.933
+For the second update, recalculate
+residuals from those predictions.
+
+00:02:42.803 --> 00:02:46.563
+They are negative three point one five,
+negative zero point seven five,
+
+00:02:46.563 --> 00:02:48.953
+negative one point two five
+
+00:02:49.483 --> 00:02:51.293
+and negative five point five five.
+
+00:02:51.743 --> 00:02:55.273
+Reusing the first gradient
+would apply a different update.
+
+00:02:55.863 --> 00:02:59.863
+The new weight gradients are negative
+three point eight seven five and positive
+
+00:02:59.863 --> 00:03:02.173
+zero point eight eight seven five.
+
+00:03:04.643 --> 00:03:06.853
+Add the four new residuals.
+
+00:03:06.883 --> 00:03:09.713
+Their sum is negative ten point seven,
+
+00:03:09.823 --> 00:03:13.733
+so the new bias gradient is
+negative two point six seven five.
+
+00:03:14.723 --> 00:03:19.903
+Subtracting one tenth of that from zero
+point three five gives bias zero point six
+
+00:03:19.903 --> 00:03:21.113
+one seven five.
+
+00:03:22.283 --> 00:03:24.593
+The updated weights are shown beside it.
+
+00:03:25.483 --> 00:03:29.371
+These parameters produce the four
+displayed predictions and objective three
+
+00:03:29.371 --> 00:03:32.333
+point three one eight zero two seven.
+
+00:03:33.443 --> 00:03:37.683
+Independent decimal arithmetic caught a
+mistaken hand expectation for this bias
+
+00:03:37.683 --> 00:03:38.933
+before acceptance.
+
+00:03:39.803 --> 00:03:43.463
+Central finite differences separately
+check the analytic derivatives,
+
+00:03:43.463 --> 00:03:46.873
+with a discrepancy below one billionth.
+
+00:03:47.463 --> 00:03:51.203
+Known arithmetic and derivative checks
+help establish different parts of the
+
+00:03:51.203 --> 00:03:51.873
+implementation.
+
+00:03:54.275 --> 00:03:59.665
+Now return to the original parameters
+and change only the learning rate to one.
+
+00:04:00.155 --> 00:04:05.445
+The same gradients give weights six
+and zero, with bias three point five.
+
+00:04:05.835 --> 00:04:09.485
+Predictions become nine point five,
+three point five,
+
+00:04:09.495 --> 00:04:12.385
+nine point five and fifteen point five.
+
+00:04:12.855 --> 00:04:16.245
+Their mean half squared error
+is thirteen point six two five,
+
+00:04:16.775 --> 00:04:19.185
+higher than the initial
+eight point seven five.
+
+00:04:19.795 --> 00:04:23.365
+The derivative was correct,
+but the step overshot.
+
+00:04:23.935 --> 00:04:27.365
+As another check,
+duplicate every fixture row.
+
+00:04:27.795 --> 00:04:33.055
+The averaged objective and gradients stay
+unchanged because their sums and row count
+
+00:04:33.055 --> 00:04:34.325
+double together.
+
+00:04:34.795 --> 00:04:35.965
+Correct gradients,
+
+00:04:36.075 --> 00:04:40.245
+appropriate reduction and a usable
+step size are separate requirements.
+

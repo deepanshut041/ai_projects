@@ -1,0 +1,105 @@
+{
+  "status": "completed",
+  "run_directory": "/mnt/projects/ai/ai_projects/projects/foundations/bike-demand-planner/runs/calendar-comparison-20261019T222526166388Z",
+  "test_evaluated": false,
+  "validation": {
+    "global": {
+      "count": 4357,
+      "mae": 154.24520535816333,
+      "rmse": 208.1723211740595,
+      "mean_signed_error": -71.40569005182753,
+      "mean_underprediction": 112.82544770499543,
+      "underprediction_count": 2391,
+      "mean_underprediction_when_under": 205.59618387731706
+    },
+    "hour-workingday": {
+      "count": 4357,
+      "mae": 91.57293961909762,
+      "rmse": 137.39003528616394,
+      "mean_signed_error": -72.34218040584457,
+      "mean_underprediction": 81.95756001247109,
+      "underprediction_count": 3143,
+      "mean_underprediction_when_under": 113.61409130586591
+    }
+  },
+  "training": {
+    "global": {
+      "count": 8645,
+      "mae": 106.59349137179827,
+      "rmse": 133.79011546148726,
+      "mean_signed_error": 8.669525479233703e-15,
+      "mean_underprediction": 53.296745685899126,
+      "underprediction_count": 3524,
+      "mean_underprediction_when_under": 130.7464149984671
+    },
+    "hour-workingday": {
+      "count": 8645,
+      "mae": 55.42804007456469,
+      "rmse": 78.83940946119479,
+      "mean_signed_error": 5.120510403453353e-16,
+      "mean_underprediction": 27.714020037282346,
+      "underprediction_count": 4478,
+      "mean_underprediction_when_under": 53.503283435083944
+    }
+  },
+  "mae_reduction": 62.67226573906571,
+  "mae_reduction_percent": 40.631581120164014,
+  "group_coverage": {
+    "observed": 48,
+    "possible": 48,
+    "fallback_counts": {
+      "train": 0,
+      "validation": 0
+    }
+  },
+  "examples": {
+    "global": [
+      {
+        "record_id": "8839",
+        "target_time": "2012-01-09T02:00:00",
+        "forecast_issue_time": "2012-01-09T01:00:00",
+        "target": "5.0",
+        "prediction": "143.79444765760556",
+        "residual": "138.79444765760556",
+        "absolute_error": "138.79444765760556",
+        "squared_error": "19263.898700579808",
+        "underprediction": "0.0"
+      },
+      {
+        "record_id": "8845",
+        "target_time": "2012-01-09T08:00:00",
+        "forecast_issue_time": "2012-01-09T07:00:00",
+        "target": "420.0",
+        "prediction": "143.79444765760556",
+        "residual": "-276.2055523423944",
+        "absolute_error": "276.2055523423944",
+        "squared_error": "76289.50714476718",
+        "underprediction": "276.2055523423944"
+      }
+    ],
+    "hour-workingday": [
+      {
+        "record_id": "8839",
+        "target_time": "2012-01-09T02:00:00",
+        "forecast_issue_time": "2012-01-09T01:00:00",
+        "target": "5.0",
+        "prediction": "7.514644351464435",
+        "residual": "2.514644351464435",
+        "absolute_error": "2.514644351464435",
+        "squared_error": "6.323436214351989",
+        "underprediction": "0.0"
+      },
+      {
+        "record_id": "8845",
+        "target_time": "2012-01-09T08:00:00",
+        "forecast_issue_time": "2012-01-09T07:00:00",
+        "target": "420.0",
+        "prediction": "349.5040322580645",
+        "residual": "-70.49596774193549",
+        "absolute_error": "70.49596774193549",
+        "squared_error": "4969.681467872008",
+        "underprediction": "70.49596774193549"
+      }
+    ]
+  }
+}

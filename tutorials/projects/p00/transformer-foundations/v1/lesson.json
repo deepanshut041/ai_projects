@@ -1,0 +1,2777 @@
+{
+  "schema_version": 1,
+  "project_id": "P00",
+  "languages": [
+    "cpp",
+    "python"
+  ],
+  "examples": [
+    {
+      "id": "first-session",
+      "language": "python",
+      "path": "examples/first_session.py",
+      "purpose": "Annotated standard-library first session: matrix arithmetic, one gradient update, a changed input and overshoot",
+      "expected_output": {
+        "linear": [
+          [
+            1,
+            2,
+            9
+          ],
+          [
+            3,
+            4,
+            19
+          ]
+        ],
+        "prediction": 6.0,
+        "loss_before": 25.0,
+        "gradient": 30.0,
+        "new_weight": 1.7,
+        "loss_after": 16.81,
+        "changed_loss_after": 0.16,
+        "overshoot_loss": 169.0,
+        "shape_rejection": true
+      }
+    },
+    {
+      "id": "byte-bpe",
+      "language": "python",
+      "path": "examples/byte_bpe.py",
+      "purpose": "Deterministic merges, Unicode, document boundaries, frozen ranks and artifact reload",
+      "expected_output": {
+        "merges": [
+          [
+            97,
+            98
+          ],
+          [
+            260,
+            260
+          ]
+        ],
+        "encoded": [
+          261
+        ],
+        "unicode_roundtrip": true,
+        "boundary_safe": true,
+        "rank_safe": true,
+        "size": 262
+      }
+    },
+    {
+      "id": "prerequisite-math-python",
+      "language": "python",
+      "path": "examples/prerequisite_math.py",
+      "purpose": "Known affine, statistics, probability, gradient and optimizer fixtures.",
+      "expected_output": {
+        "adam_moments_after_two": [
+          2.7,
+          0.8991
+        ],
+        "adam_parameters": [
+          1.99,
+          1.983299417
+        ],
+        "affine_gradient_bias": [
+          2.0,
+          3.0
+        ],
+        "affine_gradient_weights": [
+          [
+            5.0,
+            7.0
+          ],
+          [
+            7.0,
+            10.0
+          ]
+        ],
+        "finite_difference_matches": true,
+        "linear": [
+          [
+            1,
+            2,
+            9
+          ],
+          [
+            3,
+            4,
+            19
+          ]
+        ],
+        "mean": 2.0,
+        "nll": 0.287682072,
+        "norm": 5.0,
+        "probabilities": [
+          0.25,
+          0.75
+        ],
+        "rectangular": [
+          [
+            58,
+            64
+          ],
+          [
+            139,
+            154
+          ]
+        ],
+        "scalar_gradient": [
+          30.0,
+          10.0
+        ],
+        "sgd_loss": 16.0,
+        "sgd_parameters": [
+          1.7,
+          -0.1
+        ],
+        "variance": 1.0
+      }
+    },
+    {
+      "id": "prerequisite-math-cpp",
+      "language": "cpp",
+      "path": "examples/prerequisite_math.cpp",
+      "purpose": "Explicit C++ arithmetic and optimizer state with the same known answers.",
+      "expected_output": {
+        "adam_moments_after_two": [
+          2.7,
+          0.8991
+        ],
+        "adam_parameters": [
+          1.99,
+          1.983299417
+        ],
+        "affine_gradient_bias": [
+          2.0,
+          3.0
+        ],
+        "affine_gradient_weights": [
+          [
+            5.0,
+            7.0
+          ],
+          [
+            7.0,
+            10.0
+          ]
+        ],
+        "finite_difference_matches": true,
+        "linear": [
+          [
+            1,
+            2,
+            9
+          ],
+          [
+            3,
+            4,
+            19
+          ]
+        ],
+        "mean": 2.0,
+        "nll": 0.287682072,
+        "norm": 5.0,
+        "probabilities": [
+          0.25,
+          0.75
+        ],
+        "rectangular": [
+          [
+            58,
+            64
+          ],
+          [
+            139,
+            154
+          ]
+        ],
+        "scalar_gradient": [
+          30.0,
+          10.0
+        ],
+        "sgd_loss": 16.0,
+        "sgd_parameters": [
+          1.7,
+          -0.1
+        ],
+        "variance": 1.0
+      }
+    },
+    {
+      "id": "prerequisite-text",
+      "language": "python",
+      "path": "examples/prerequisite_text.py",
+      "purpose": "Byte/character coordinates, saved character IDs and document-bounded merge fixture.",
+      "expected_output": {
+        "utf8": [
+          99,
+          97,
+          102,
+          195,
+          169
+        ],
+        "characters": 4,
+        "bytes": 5,
+        "byte_character_offsets": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "cat_ids": [
+          3,
+          2,
+          5
+        ],
+        "unseen_ids": [
+          3,
+          2,
+          1
+        ],
+        "unseen_decode": "ca<UNK>",
+        "original_span": "café",
+        "merged_abab": [
+          261
+        ]
+      }
+    },
+    {
+      "id": "deep-learning-math",
+      "language": "python",
+      "path": "examples/deep_learning_math.py",
+      "purpose": "Original shared-weight, binary cross-entropy and complete two-layer Tanh forward/backward calculations.",
+      "expected_output": {
+        "shared_gradient": 16.0,
+        "binary_probability": 0.01,
+        "binary_cross_entropy_gradient": -0.99,
+        "binary_half_squared_gradient": -0.009801,
+        "hidden": [
+          0.0,
+          0.5
+        ],
+        "probabilities": [
+          0.25,
+          0.75
+        ],
+        "loss": 0.287682072,
+        "grad_hidden_weights": [
+          [
+            0.5,
+            -0.411979608
+          ],
+          [
+            1.0,
+            -0.823959217
+          ]
+        ],
+        "grad_output_weights": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.125,
+            -0.125
+          ]
+        ]
+      }
+    }
+  ],
+  "slug": "transformer-foundations",
+  "revision": "v1",
+  "title": "Tutorial 0 — Deep learning foundations for Attention Is All You Need",
+  "question": "Which mathematical, representation, architecture and training foundations explain every core operation in the original Transformer?",
+  "topic_kind": "concept",
+  "level": "introductory",
+  "prerequisites": [
+    "Advanced Python programming is assumed; general Python syntax/classes/collections are omitted.",
+    "Mathematical notation, derivatives, probability and PyTorch contracts are developed through original worked examples and exercises."
+  ],
+  "created_at": "2026-10-09T23:39:58.156965+00:00",
+  "repository": {
+    "base_sha": "34334e3fd681dcdc98e55efd6c14856830ec7558",
+    "name": "docs"
+  },
+  "objectives": [
+    {
+      "id": "route",
+      "text": "Explain, calculate and check linear algebra and neural maps."
+    },
+    {
+      "id": "workspace",
+      "text": "Explain, calculate and check pytorch tensors, storage and module state."
+    },
+    {
+      "id": "numbers",
+      "text": "Explain, calculate and check derivatives, gradients and local descent."
+    },
+    {
+      "id": "probability",
+      "text": "Explain, calculate and check probability, statistics and information."
+    },
+    {
+      "id": "model",
+      "text": "Explain, calculate and check feedforward networks and nonlinear activations."
+    },
+    {
+      "id": "initialization",
+      "text": "Explain, calculate and check initialization, symmetry and signal scale."
+    },
+    {
+      "id": "autograd",
+      "text": "Explain, calculate and check backpropagation and automatic differentiation."
+    },
+    {
+      "id": "losses",
+      "text": "Explain, calculate and check loss functions, logits and stable arithmetic."
+    },
+    {
+      "id": "optimizers",
+      "text": "Explain, calculate and check sgd, momentum, adam and weight decay."
+    },
+    {
+      "id": "steps",
+      "text": "Explain, calculate and check training updates, schedules and gradient scale."
+    },
+    {
+      "id": "data",
+      "text": "Explain, calculate and check datasets, batching and supervision contracts."
+    },
+    {
+      "id": "tokenizer",
+      "text": "Explain, calculate and check text encoding, tokenization and vocabulary identity."
+    },
+    {
+      "id": "embeddings",
+      "text": "Explain, calculate and check embeddings, lookup gradients and weight tying."
+    },
+    {
+      "id": "position",
+      "text": "Explain, calculate and check sequence order and positional encoding."
+    },
+    {
+      "id": "attention",
+      "text": "Explain, calculate and check queries, keys, values and scaled attention."
+    },
+    {
+      "id": "masks",
+      "text": "Explain, calculate and check padding masks, causal masks and empty rows."
+    },
+    {
+      "id": "multihead",
+      "text": "Explain, calculate and check multi-head projections, splitting and concatenation."
+    },
+    {
+      "id": "ffn",
+      "text": "Explain, calculate and check the position-wise feedforward sublayer."
+    },
+    {
+      "id": "residual",
+      "text": "Explain, calculate and check residual connections, depth and normalization order."
+    },
+    {
+      "id": "normalization",
+      "text": "Explain, calculate and check layer normalization and its gradients."
+    },
+    {
+      "id": "regularization",
+      "text": "Explain, calculate and check regularization and generalization controls."
+    },
+    {
+      "id": "seq2seq",
+      "text": "Explain, calculate and check encoder–decoder learning and inference."
+    },
+    {
+      "id": "training",
+      "text": "Explain, calculate and check evaluation, debugging and a complete small training experiment."
+    },
+    {
+      "id": "recovery",
+      "text": "Explain, calculate and check checkpointing and reproducible recovery."
+    },
+    {
+      "id": "handoff",
+      "text": "Explain, calculate and check read the paper and assemble the foundations."
+    }
+  ],
+  "sources": [
+    {
+      "id": "minbpe",
+      "kind": "external",
+      "title": "minbpe BasicTokenizer source",
+      "url": "https://github.com/karpathy/minbpe/blob/1acefe89412b20245db5a22d2a02001e547dc602/minbpe/basic.py",
+      "accessed_at": "2026-10-09",
+      "locator": "BasicTokenizer train/encode/decode at revision 1acefe89412b20245db5a22d2a02001e547dc602",
+      "proof_limit": "Pinned source reading; educational boundary/special-ID departures; no GPT compatibility."
+    },
+    {
+      "id": "cross-entropy",
+      "kind": "external",
+      "title": "PyTorch 2.14 CrossEntropyLoss",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.CrossEntropyLoss.html",
+      "accessed_at": "2026-10-09",
+      "locator": "Class-index targets, ignore_index, reduction",
+      "proof_limit": "API contract; arithmetic and denominator examples are authored."
+    },
+    {
+      "id": "layernorm",
+      "kind": "external",
+      "title": "PyTorch 2.14 LayerNorm",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.LayerNorm.html",
+      "accessed_at": "2026-10-09",
+      "locator": "Formula and normalized_shape",
+      "proof_limit": "API formula; local finite-difference/reference checks are separate evidence."
+    },
+    {
+      "id": "randomness",
+      "kind": "external",
+      "title": "PyTorch 2.14 reproducibility guidance",
+      "url": "https://docs.pytorch.org/docs/2.14/notes/randomness.html",
+      "accessed_at": "2026-10-09",
+      "locator": "Cross-platform/release and device limits",
+      "proof_limit": "No cross-device bitwise resume claim."
+    },
+    {
+      "id": "checkpoint-docs",
+      "kind": "external",
+      "title": "PyTorch saving and loading models",
+      "url": "https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html",
+      "accessed_at": "2026-10-09",
+      "locator": "General checkpoint for training",
+      "proof_limit": "Workspace extends it with sampler/RNG/identity/persistent generations."
+    },
+    {
+      "id": "colab-faq",
+      "kind": "external",
+      "title": "Google Colab FAQ",
+      "url": "https://research.google.com/colaboratory/faq.html",
+      "accessed_at": "2026-10-09",
+      "locator": "Resource limits, runtime and hardware availability",
+      "proof_limit": "Free resources vary; not hosted proof of this project."
+    },
+    {
+      "id": "broadcasting",
+      "kind": "external",
+      "title": "PyTorch 2.14 broadcasting semantics",
+      "url": "https://docs.pytorch.org/docs/2.14/notes/broadcasting.html",
+      "accessed_at": "2026-10-09",
+      "locator": "General semantics: alignment from trailing dimensions",
+      "proof_limit": "Array alignment rules; does not establish the intended meaning of learner tensor axes."
+    },
+    {
+      "id": "autograd-intro",
+      "kind": "external",
+      "title": "PyTorch introduction to automatic differentiation",
+      "url": "https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html",
+      "accessed_at": "2026-10-09",
+      "locator": "requires_grad, computing gradients and accumulation",
+      "proof_limit": "API teaching reference; learner understanding is not assessed by this source."
+    },
+    {
+      "id": "uv-pytorch",
+      "kind": "external",
+      "title": "uv: using a dedicated PyTorch CPU index",
+      "url": "https://docs.astral.sh/uv/guides/integration/pytorch/",
+      "accessed_at": "2026-10-09",
+      "locator": "Using a PyTorch index: explicit index and torch source mapping",
+      "proof_limit": "Dependency configuration guidance; the learner environment and hosted GPU setup require their own verification."
+    },
+    {
+      "id": "adam-paper",
+      "kind": "external",
+      "title": "Adam: A Method for Stochastic Optimization",
+      "url": "https://arxiv.org/abs/1412.6980",
+      "accessed_at": "2026-10-09",
+      "locator": "Algorithm 1: moments and bias correction",
+      "proof_limit": "Definition/source reading only; authored small calculations are checked separately. No learner or hosted completion."
+    },
+    {
+      "id": "adam",
+      "kind": "external",
+      "title": "PyTorch 2.14 Adam",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.optim.Adam.html",
+      "accessed_at": "2026-10-09",
+      "locator": "Default betas, epsilon, algorithm and optimizer state",
+      "proof_limit": "Definition/source reading only; authored small calculations are checked separately. No learner or hosted completion."
+    },
+    {
+      "id": "gradient-clipping",
+      "kind": "external",
+      "title": "PyTorch 2.14 global gradient norm clipping",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.utils.clip_grad_norm_.html",
+      "accessed_at": "2026-10-09",
+      "locator": "Global norm, in-place scaling and returned norm",
+      "proof_limit": "Definition/source reading only; authored small calculations are checked separately. No learner or hosted completion."
+    },
+    {
+      "id": "dropout",
+      "kind": "external",
+      "title": "PyTorch 2.14 Dropout",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.Dropout.html",
+      "accessed_at": "2026-10-09",
+      "locator": "Training scaling and evaluation identity",
+      "proof_limit": "Definition/source reading only; authored small calculations are checked separately. No learner or hosted completion."
+    },
+    {
+      "id": "python-types",
+      "kind": "external",
+      "title": "Python 3.12 built-in types",
+      "url": "https://docs.python.org/3.12/library/stdtypes.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Sequence indexing/slices and dictionary lookup",
+      "proof_limit": "Inspected API/teaching reference. Worked numbers and local behavior have separate author checks; no learner or hosted proof."
+    },
+    {
+      "id": "torch-linear",
+      "kind": "external",
+      "title": "PyTorch 2.14 Linear",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.Linear.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Affine formula and stored weight[out,in]",
+      "proof_limit": "Inspected API/teaching reference. Worked numbers and local behavior have separate author checks; no learner or hosted proof."
+    },
+    {
+      "id": "torch-modules",
+      "kind": "external",
+      "title": "PyTorch 2.14 Module",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.Module.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Parameter/buffer/submodule registration; train/eval state",
+      "proof_limit": "Inspected API/teaching reference. Worked numbers and local behavior have separate author checks; no learner or hosted proof."
+    },
+    {
+      "id": "torch-embedding",
+      "kind": "external",
+      "title": "PyTorch 2.14 Embedding",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.Embedding.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Integer indices select learned rows; padding behavior",
+      "proof_limit": "Inspected API/teaching reference. Worked numbers and local behavior have separate author checks; no learner or hosted proof."
+    },
+    {
+      "id": "torch-nograd",
+      "kind": "external",
+      "title": "PyTorch 2.14 no_grad",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.no_grad.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Gradient recording is distinct from model evaluation mode",
+      "proof_limit": "Inspected API/teaching reference. Worked numbers and local behavior have separate author checks; no learner or hosted proof."
+    },
+    {
+      "id": "torch-tanh",
+      "kind": "external",
+      "title": "PyTorch 2.14 Tanh",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.Tanh.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Elementwise smooth nonlinearity",
+      "proof_limit": "Inspected API/teaching reference. Worked numbers and local behavior have separate author checks; no learner or hosted proof."
+    },
+    {
+      "id": "torch-views",
+      "kind": "external",
+      "title": "PyTorch 2.14 tensor views",
+      "url": "https://docs.pytorch.org/docs/2.14/tensor_view.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Views, transpose, contiguity and reshape/view copy semantics",
+      "proof_limit": "API storage contract; unequal-shape trace independently executed on the declared CPU runtime."
+    },
+    {
+      "id": "nielsen-foundations",
+      "kind": "external",
+      "title": "Michael Nielsen: Neural Networks and Deep Learning, Chapter 1",
+      "url": "https://neuralnetworksanddeeplearning.com/chap1",
+      "accessed_at": "2026-10-12",
+      "locator": "2015 book / December 2019 site: prediction, learned parameters and gradient descent",
+      "proof_limit": "Teaching reference; original course examples and independent numerical checks are separate. Nielsen inspected through source-domain indexed excerpts after direct HTML retrieval failed."
+    },
+    {
+      "id": "nielsen-backprop",
+      "kind": "external",
+      "title": "Michael Nielsen: Chapter 2, how backpropagation works",
+      "url": "https://neuralnetworksanddeeplearning.com/chap2",
+      "accessed_at": "2026-10-12",
+      "locator": "Reverse chain rule, shared contributions and matrix orientation",
+      "proof_limit": "Teaching reference; original course examples and independent numerical checks are separate. Nielsen inspected through source-domain indexed excerpts after direct HTML retrieval failed."
+    },
+    {
+      "id": "nielsen-cross-entropy",
+      "kind": "external",
+      "title": "Michael Nielsen: Chapter 3, cross-entropy cost",
+      "url": "https://neuralnetworksanddeeplearning.com/chap3.html#the_cross-entropy_cost_function",
+      "accessed_at": "2026-10-12",
+      "locator": "Sigmoid/cross-entropy derivative cancellation at the output",
+      "proof_limit": "Teaching reference; original course examples and independent numerical checks are separate. Nielsen inspected through source-domain indexed excerpts after direct HTML retrieval failed."
+    },
+    {
+      "id": "d2l-backprop",
+      "kind": "external",
+      "title": "Dive into Deep Learning 1.0.3, section 5.3",
+      "url": "https://d2l.ai/chapter_multilayer-perceptrons/backprop.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Forward values, computational graph and reverse derivative order",
+      "proof_limit": "Direct source reading; column-oriented/no-bias source differs from our original row-oriented Tanh/bias fixture. No reproduced book exercise or training result."
+    },
+    {
+      "id": "transformer-paper",
+      "kind": "external",
+      "title": "Attention Is All You Need, arXiv 1706.03762v7",
+      "url": "https://arxiv.org/html/1706.03762v7",
+      "accessed_at": "2026-10-12",
+      "locator": "Sections3–5; architecture, embedding/position equations, complexity and training settings",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "d2l-probability",
+      "kind": "external",
+      "title": "Dive into Deep Learning1.0.3: probability and statistics",
+      "url": "https://d2l.ai/chapter_preliminaries/probability.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Probability/expectation/variance background; original course calculations",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "d2l-mlp",
+      "kind": "external",
+      "title": "Dive into Deep Learning1.0.3: multilayer perceptrons",
+      "url": "https://d2l.ai/chapter_multilayer-perceptrons/mlp.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Nonlinear hidden layers and activation definitions",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "glorot-paper",
+      "kind": "external",
+      "title": "Glorot and Bengio2010: initialization",
+      "url": "https://proceedings.mlr.press/v9/glorot10a.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Fan-in/fan-out motivation; course variance derivation states its assumptions",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "he-paper",
+      "kind": "external",
+      "title": "He et al.2015: rectifier initialization",
+      "url": "https://arxiv.org/abs/1502.01852",
+      "accessed_at": "2026-10-12",
+      "locator": "Rectifier initialization; course distinguishes second moment and centered variance",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "torch-init",
+      "kind": "external",
+      "title": "PyTorch2.14 initialization",
+      "url": "https://docs.pytorch.org/docs/2.14/nn.init.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Xavier/He functions, gains and weight orientation",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "torch-bce",
+      "kind": "external",
+      "title": "PyTorch2.14 BCEWithLogitsLoss",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.BCEWithLogitsLoss.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Binary floating targets and stable fused logits loss",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "adamw-paper",
+      "kind": "external",
+      "title": "Loshchilov and Hutter: Decoupled Weight Decay Regularization",
+      "url": "https://arxiv.org/abs/1711.05101",
+      "accessed_at": "2026-10-12",
+      "locator": "Separate decay versus adaptive coupled L2",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "unicode-normalization",
+      "kind": "external",
+      "title": "Unicode UAX15 revision58: normalization",
+      "url": "https://www.unicode.org/reports/tr15/tr15-58.html",
+      "accessed_at": "2026-10-12",
+      "locator": "NFC/NFKC and canonical/compatibility distinction; Python fixture independently checked",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "bpe-paper",
+      "kind": "external",
+      "title": "Sennrich et al.2016: subword units",
+      "url": "https://aclanthology.org/P16-1162/",
+      "accessed_at": "2026-10-12",
+      "locator": "BPE source motivation; own byte-level boundary/special-ID rules depart explicitly",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "weight-tying",
+      "kind": "external",
+      "title": "Press and Wolf2017: output embedding",
+      "url": "https://aclanthology.org/E17-2025/",
+      "accessed_at": "2026-10-12",
+      "locator": "Input/output weight sharing; own gradient/count examples",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "d2l-position",
+      "kind": "external",
+      "title": "Dive into Deep Learning1.0.3: positions and self-attention",
+      "url": "https://d2l.ai/chapter_attention-mechanisms-and-transformers/self-attention-and-positional-encoding.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Permutation/position context; original pairwise shift derivation",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "d2l-attention",
+      "kind": "external",
+      "title": "Dive into Deep Learning1.0.3: attention scoring",
+      "url": "https://d2l.ai/chapter_attention-mechanisms-and-transformers/attention-scoring-functions.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Q/K/V and score normalization context",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "torch-sdpa",
+      "kind": "external",
+      "title": "PyTorch2.14 functional SDPA",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Allowed-True Boolean mask, rectangular causality and explicit dropout argument",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "torch-mha",
+      "kind": "external",
+      "title": "PyTorch2.14 MultiheadAttention",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.MultiheadAttention.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Blocked-True Boolean attention mask and ignored-True padding mask",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "d2l-multihead",
+      "kind": "external",
+      "title": "Dive into Deep Learning1.0.3: multi-head attention",
+      "url": "https://d2l.ai/chapter_attention-mechanisms-and-transformers/multihead-attention.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Parallel projections and head shape context",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "d2l-transformer",
+      "kind": "external",
+      "title": "Dive into Deep Learning1.0.3: Transformer architecture",
+      "url": "https://d2l.ai/chapter_attention-mechanisms-and-transformers/transformer.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Position-wise FFN and encoder/decoder integration context",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "residual-paper",
+      "kind": "external",
+      "title": "He et al.2015: Deep Residual Learning",
+      "url": "https://arxiv.org/abs/1512.03385",
+      "accessed_at": "2026-10-12",
+      "locator": "Identity/residual formulation; no training-stability guarantee inferred",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "prenorm-paper",
+      "kind": "external",
+      "title": "Xiong et al.2020: Layer Normalization in the Transformer",
+      "url": "https://proceedings.mlr.press/v119/xiong20b.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Pre-/post-norm distinction; original zero-sublayer counterexample",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "layernorm-paper",
+      "kind": "external",
+      "title": "Ba et al.2016: Layer Normalization",
+      "url": "https://arxiv.org/abs/1607.06450",
+      "accessed_at": "2026-10-12",
+      "locator": "Per-example normalization background; API/math checks separately recorded",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "bleu-reporting",
+      "kind": "external",
+      "title": "Post2018: A Call for Clarity in Reporting BLEU Scores",
+      "url": "https://arxiv.org/abs/1804.08771",
+      "accessed_at": "2026-10-12",
+      "locator": "BLEU comparability/tokenization reporting; no translation score asserted",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "sacrebleu",
+      "kind": "external",
+      "title": "SacreBLEU project README",
+      "url": "https://github.com/mjpost/sacrebleu",
+      "accessed_at": "2026-10-12",
+      "locator": "Corpus evaluation signatures and reproducible score-reporting context",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "d2l-seq2seq",
+      "kind": "external",
+      "title": "D2L1.0.3: sequence-to-sequence learning",
+      "url": "https://d2l.ai/chapter_recurrent-modern/seq2seq.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Teacher forcing and conditional sequence learning",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    },
+    {
+      "id": "d2l-beam-search",
+      "kind": "external",
+      "title": "D2L1.0.3: beam search",
+      "url": "https://d2l.ai/chapter_recurrent-modern/beam-search.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Greedy/beam alternatives and stopping context",
+      "proof_limit": "Primary source/API/teaching context inspected; original calculations and independently executed probes are separate evidence. No learner mastery, benchmark or hosted-recovery claim."
+    }
+  ],
+  "claims": [
+    {
+      "id": "numbers",
+      "text": "Worked arithmetic, matrices, probabilities and gradients are original known-answer fixtures.",
+      "source_ids": [],
+      "status": "illustrative",
+      "proof_limit": "Fixture results and finite differences do not establish learner understanding."
+    },
+    {
+      "id": "tensor-contracts",
+      "text": "Affine storage, broadcast dimensions, registered module state and evaluation/gradient modes have explicit API contracts.",
+      "source_ids": [
+        "torch-linear",
+        "broadcasting",
+        "torch-modules",
+        "torch-embedding",
+        "torch-nograd",
+        "torch-tanh",
+        "torch-views"
+      ],
+      "status": "documented",
+      "proof_limit": "API contracts are tested on the declared CPU runtime; tensor axes still require task interpretation."
+    },
+    {
+      "id": "text-contracts",
+      "text": "Text bytes, original character offsets and saved vocabulary identity are separate coordinate contracts.",
+      "source_ids": [
+        "python-types",
+        "minbpe"
+      ],
+      "status": "documented",
+      "proof_limit": "Own-format character/byte/BPE probes are not official pretrained tokenizer compatibility."
+    },
+    {
+      "id": "learning-state",
+      "text": "The tiny classifier and full-state continuation are bounded local prerequisites for later models.",
+      "source_ids": [
+        "adam",
+        "checkpoint-docs",
+        "randomness"
+      ],
+      "status": "documented",
+      "proof_limit": "Exact local continuation requires matching source/config/data/runtime and all optimizer/sampler/random state."
+    },
+    {
+      "id": "scope",
+      "text": "Tutorial authoring/reference runs do not advance learner, complete-model or hosted recovery gates.",
+      "source_ids": [
+        "colab-faq"
+      ],
+      "status": "inference",
+      "proof_limit": "The structured grid has a declared narrow domain; deleted-runtime Drive recovery remains unverified."
+    },
+    {
+      "id": "original-transformer",
+      "text": "The original post-norm/ReLU/Adam encoder–decoder and its explicit attention/position/training equations are distinguished from later variants.",
+      "source_ids": [
+        "transformer-paper"
+      ],
+      "status": "documented",
+      "proof_limit": "Original source design; small course fixtures do not reproduce its corpus/scale/results."
+    },
+    {
+      "id": "mask-contract",
+      "text": "SDPA allowed-True and MultiheadAttention blocked-True Boolean conventions are different; empty rows require a declared tested policy.",
+      "source_ids": [
+        "torch-sdpa",
+        "torch-mha"
+      ],
+      "status": "documented",
+      "proof_limit": "API conventions verified; zero-empty-row behavior is this educational explicit-probe policy, not a universal backend claim."
+    },
+    {
+      "id": "later-variants",
+      "text": "AdamW and pre-norm are comparisons with different update/forward contracts.",
+      "source_ids": [
+        "adamw-paper",
+        "prenorm-paper"
+      ],
+      "status": "documented",
+      "proof_limit": "Recognition/comparison; no new full variant model or training benchmark."
+    }
+  ],
+  "entities": [
+    {
+      "id": "prereq-linear-1",
+      "label": "X: [1,2] [3,4]",
+      "description": "Two examples, two features each.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-linear-2",
+      "label": "W: [1,0,2] [0,1,3]",
+      "description": "Each output column is one recipe.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-linear-3",
+      "label": "Y: [1,2,9] [3,4,19]",
+      "description": "Bias[0,0,1] applies to both rows.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-gradient-1",
+      "label": "w,x → prediction",
+      "description": "Forward calculation.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-gradient-2",
+      "label": "target → squared loss",
+      "description": "One scalar objective.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-gradient-3",
+      "label": "backward → gradient",
+      "description": "Multiply local sensitivities.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-gradient-4",
+      "label": "small update → new w",
+      "description": "Recompute and check the changed loss.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-adam-1",
+      "label": "gradient g at update t",
+      "description": "Fresh loss sensitivity.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-adam-2",
+      "label": "m,v,t are updated",
+      "description": "Exponential histories plus bias correction.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-adam-3",
+      "label": "parameter update",
+      "description": "Current state affects the next step.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-text-1",
+      "label": "text: café",
+      "description": "Python string length 4.",
+      "claim_ids": [
+        "text-contracts"
+      ]
+    },
+    {
+      "id": "prereq-text-2",
+      "label": "bytes: 99 97 102 195 169",
+      "description": "UTF-8 length5.",
+      "claim_ids": [
+        "text-contracts"
+      ]
+    },
+    {
+      "id": "prereq-text-3",
+      "label": "pieces → saved IDs",
+      "description": "The saved mapping names embedding rows.",
+      "claim_ids": [
+        "text-contracts"
+      ]
+    },
+    {
+      "id": "prereq-lookup-1",
+      "label": "IDs [3,2,5]",
+      "description": "Three integer vocabulary references.",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "prereq-lookup-2",
+      "label": "E table [6,2]",
+      "description": "Two learned features per row.",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "prereq-lookup-3",
+      "label": "E[IDs] shape [3,2]",
+      "description": "Rows3,2,5 are retrieved in order.",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "data-roles-1",
+      "label": "records of unequal lengths",
+      "description": "Split before fitting transforms.",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "data-roles-2",
+      "label": "IDs [B,T] + lengths",
+      "description": "PAD aligns storage.",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "data-roles-3",
+      "label": "valid mask [B,T]",
+      "description": "Real input/key positions.",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "data-roles-4",
+      "label": "labels [B,T]",
+      "description": "Ignored supervision uses a declared sentinel.",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "mlp-shapes-1",
+      "label": "X [B,2]",
+      "description": "Numeric input features.",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "mlp-shapes-2",
+      "label": "hidden [B,8]",
+      "description": "Shared first affine map.",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "mlp-shapes-3",
+      "label": "tanh [B,8]",
+      "description": "Smooth nonlinear features.",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "mlp-shapes-4",
+      "label": "logits [B,2]",
+      "description": "One class-score row per example.",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "feature-normalization-1",
+      "label": "features [1,3]",
+      "description": "Two coordinates in one row.",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "feature-normalization-2",
+      "label": "mean 2, variance 1",
+      "description": "Reduce the declared feature axis.",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "feature-normalization-3",
+      "label": "normalize + gain/bias",
+      "description": "Retain the row/feature shape.",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "prereq-recovery-1",
+      "label": "completed update K",
+      "description": "Stable training boundary.",
+      "claim_ids": [
+        "learning-state"
+      ]
+    },
+    {
+      "id": "prereq-recovery-2",
+      "label": "state + identity/hash",
+      "description": "Source/config/data/runtime must agree.",
+      "claim_ids": [
+        "learning-state"
+      ]
+    },
+    {
+      "id": "prereq-recovery-3",
+      "label": "completion record last",
+      "description": "Incomplete writes are ignored.",
+      "claim_ids": [
+        "learning-state"
+      ]
+    },
+    {
+      "id": "prereq-recovery-4",
+      "label": "fresh-process restore",
+      "description": "Resume advanced state before fetching data.",
+      "claim_ids": [
+        "learning-state"
+      ]
+    },
+    {
+      "id": "prereq-handoff-1",
+      "label": "Tutorial 0: small network",
+      "description": "Axes, IDs, gradients, data and state.",
+      "claim_ids": [
+        "scope"
+      ]
+    },
+    {
+      "id": "prereq-handoff-2",
+      "label": "Course 1: translation + RoBERTa",
+      "description": "Attention, positions, MLM and QA.",
+      "claim_ids": [
+        "scope"
+      ]
+    },
+    {
+      "id": "prereq-handoff-3",
+      "label": "Course 2: Small GPT",
+      "description": "Decoder-only text learning/generation.",
+      "claim_ids": [
+        "scope"
+      ]
+    },
+    {
+      "id": "attention-flow-1",
+      "label": "Q[T,d] and K[S,d]",
+      "description": "Queries/keys can have different sequence lengths.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "attention-flow-2",
+      "label": "Scores[T,S] / sqrt(d)",
+      "description": "Each cell compares query/key feature coordinates.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "attention-flow-3",
+      "label": "Row weights A[T,S]",
+      "description": "Normalize across allowed key positions.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "attention-flow-4",
+      "label": "A @ V → O[T,dv]",
+      "description": "Values supply transported information.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "mask-contracts-1",
+      "label": "Encoder key validity",
+      "description": "Each real query sees real source keys.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "mask-contracts-2",
+      "label": "Decoder prefix causality",
+      "description": "Query t sees keys s≤t in shifted input.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "mask-contracts-3",
+      "label": "Cross attention[T,S]",
+      "description": "Decoder queries see real encoder memory.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "mask-contracts-4",
+      "label": "Empty/padded queries",
+      "description": "Zero policy/gating is explicit, not implicit.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "head-shapes-1",
+      "label": "Projected[B,T,D]",
+      "description": "Learned Q/K/V maps combine original features.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "head-shapes-2",
+      "label": "Split[B,T,H,d]",
+      "description": "Divide projected feature coordinates into heads.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "head-shapes-3",
+      "label": "Heads[B,H,T,d]",
+      "description": "Transpose position/head axes for attention.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "head-shapes-4",
+      "label": "Scores[B,H,T,S]",
+      "description": "Normalize over S, transport values.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "head-shapes-5",
+      "label": "Merge[B,T,D] → Wo",
+      "description": "Inverse transpose then merge features.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "residual-path-1",
+      "label": "Input x[B,T,D]",
+      "description": "Identity branch preserves the input.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "residual-path-2",
+      "label": "Sublayer F(x)[B,T,D]",
+      "description": "Learned attention or FFN output.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "residual-path-3",
+      "label": "Sum x+F(x)",
+      "description": "Upstream derivative has direct and sublayer paths.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "residual-path-4",
+      "label": "Post-norm LN(sum)",
+      "description": "Original order normalizes after residual addition.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "seq2seq-contract-1",
+      "label": "Source IDs[B,S]",
+      "description": "Encoder sees valid source tokens.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "seq2seq-contract-2",
+      "label": "Encoder memory[B,S,D]",
+      "description": "Cross-attention keys/values come from here.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "seq2seq-contract-3",
+      "label": "Shifted prefix[B,T]",
+      "description": "BOS and previous target tokens supply decoder input.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "seq2seq-contract-4",
+      "label": "Decoder states[B,T,D]",
+      "description": "Causal self-attention and source retrieval.",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "seq2seq-contract-5",
+      "label": "Logits[B,T,V]",
+      "description": "Supervise next tokens; ignore padded labels.",
+      "claim_ids": [
+        "numbers"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "prereq-linear-edge-1",
+      "from": "prereq-linear-1",
+      "to": "prereq-linear-3",
+      "label": "concern",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-linear-edge-2",
+      "from": "prereq-linear-2",
+      "to": "prereq-linear-3",
+      "label": "concern",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-gradient-edge-1",
+      "from": "prereq-gradient-1",
+      "to": "prereq-gradient-2",
+      "label": "concern",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-gradient-edge-2",
+      "from": "prereq-gradient-2",
+      "to": "prereq-gradient-3",
+      "label": "concern",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-gradient-edge-3",
+      "from": "prereq-gradient-3",
+      "to": "prereq-gradient-4",
+      "label": "concern",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-adam-edge-1",
+      "from": "prereq-adam-1",
+      "to": "prereq-adam-2",
+      "label": "concern",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-adam-edge-2",
+      "from": "prereq-adam-2",
+      "to": "prereq-adam-3",
+      "label": "concern",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "prereq-text-edge-1",
+      "from": "prereq-text-1",
+      "to": "prereq-text-2",
+      "label": "concern",
+      "claim_ids": [
+        "text-contracts"
+      ]
+    },
+    {
+      "id": "prereq-text-edge-2",
+      "from": "prereq-text-2",
+      "to": "prereq-text-3",
+      "label": "concern",
+      "claim_ids": [
+        "text-contracts"
+      ]
+    },
+    {
+      "id": "prereq-lookup-edge-1",
+      "from": "prereq-lookup-1",
+      "to": "prereq-lookup-3",
+      "label": "concern",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "prereq-lookup-edge-2",
+      "from": "prereq-lookup-2",
+      "to": "prereq-lookup-3",
+      "label": "concern",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "data-roles-edge-1",
+      "from": "data-roles-1",
+      "to": "data-roles-2",
+      "label": "concern",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "data-roles-edge-2",
+      "from": "data-roles-2",
+      "to": "data-roles-3",
+      "label": "concern",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "data-roles-edge-3",
+      "from": "data-roles-2",
+      "to": "data-roles-4",
+      "label": "concern",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "mlp-shapes-edge-1",
+      "from": "mlp-shapes-1",
+      "to": "mlp-shapes-2",
+      "label": "concern",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "mlp-shapes-edge-2",
+      "from": "mlp-shapes-2",
+      "to": "mlp-shapes-3",
+      "label": "concern",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "mlp-shapes-edge-3",
+      "from": "mlp-shapes-3",
+      "to": "mlp-shapes-4",
+      "label": "concern",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "feature-normalization-edge-1",
+      "from": "feature-normalization-1",
+      "to": "feature-normalization-2",
+      "label": "concern",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "feature-normalization-edge-2",
+      "from": "feature-normalization-2",
+      "to": "feature-normalization-3",
+      "label": "concern",
+      "claim_ids": [
+        "tensor-contracts"
+      ]
+    },
+    {
+      "id": "prereq-recovery-edge-1",
+      "from": "prereq-recovery-1",
+      "to": "prereq-recovery-2",
+      "label": "concern",
+      "claim_ids": [
+        "learning-state"
+      ]
+    },
+    {
+      "id": "prereq-recovery-edge-2",
+      "from": "prereq-recovery-2",
+      "to": "prereq-recovery-3",
+      "label": "concern",
+      "claim_ids": [
+        "learning-state"
+      ]
+    },
+    {
+      "id": "prereq-recovery-edge-3",
+      "from": "prereq-recovery-3",
+      "to": "prereq-recovery-4",
+      "label": "concern",
+      "claim_ids": [
+        "learning-state"
+      ]
+    },
+    {
+      "id": "prereq-handoff-edge-1",
+      "from": "prereq-handoff-1",
+      "to": "prereq-handoff-2",
+      "label": "concern",
+      "claim_ids": [
+        "scope"
+      ]
+    },
+    {
+      "id": "prereq-handoff-edge-2",
+      "from": "prereq-handoff-2",
+      "to": "prereq-handoff-3",
+      "label": "concern",
+      "claim_ids": [
+        "scope"
+      ]
+    },
+    {
+      "id": "attention-flow-edge-1",
+      "from": "attention-flow-1",
+      "to": "attention-flow-2",
+      "label": "dot products",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "attention-flow-edge-2",
+      "from": "attention-flow-2",
+      "to": "attention-flow-3",
+      "label": "softmax over S",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "attention-flow-edge-3",
+      "from": "attention-flow-3",
+      "to": "attention-flow-4",
+      "label": "weighted sum",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "head-shapes-edge-1",
+      "from": "head-shapes-1",
+      "to": "head-shapes-2",
+      "label": "reshape",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "head-shapes-edge-2",
+      "from": "head-shapes-2",
+      "to": "head-shapes-3",
+      "label": "transpose",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "head-shapes-edge-3",
+      "from": "head-shapes-3",
+      "to": "head-shapes-4",
+      "label": "attention",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "head-shapes-edge-4",
+      "from": "head-shapes-4",
+      "to": "head-shapes-5",
+      "label": "values / merge",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "residual-path-edge-1",
+      "from": "residual-path-1",
+      "to": "residual-path-2",
+      "label": "learned branch",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "residual-path-edge-2",
+      "from": "residual-path-1",
+      "to": "residual-path-3",
+      "label": "identity branch",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "residual-path-edge-3",
+      "from": "residual-path-2",
+      "to": "residual-path-3",
+      "label": "residual addition",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "residual-path-edge-4",
+      "from": "residual-path-3",
+      "to": "residual-path-4",
+      "label": "original order",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "seq2seq-contract-edge-1",
+      "from": "seq2seq-contract-1",
+      "to": "seq2seq-contract-2",
+      "label": "encode",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "seq2seq-contract-edge-2",
+      "from": "seq2seq-contract-2",
+      "to": "seq2seq-contract-4",
+      "label": "K / V",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "seq2seq-contract-edge-3",
+      "from": "seq2seq-contract-3",
+      "to": "seq2seq-contract-4",
+      "label": "Q / causal prefix",
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "seq2seq-contract-edge-4",
+      "from": "seq2seq-contract-4",
+      "to": "seq2seq-contract-5",
+      "label": "vocabulary map",
+      "claim_ids": [
+        "numbers"
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "id": "route",
+      "title": "Lesson 1 — Linear algebra and neural maps",
+      "content_path": "lessons/01-prediction.md",
+      "diagram_ids": [
+        "prereq-linear"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "linear-transfer"
+      ],
+      "objective_ids": [
+        "route"
+      ]
+    },
+    {
+      "id": "workspace",
+      "title": "Lesson 2 — PyTorch tensors, storage and module state",
+      "content_path": "lessons/02-workspace.md",
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "tensor-transfer"
+      ],
+      "objective_ids": [
+        "workspace"
+      ]
+    },
+    {
+      "id": "numbers",
+      "title": "Lesson 3 — Derivatives, gradients and local descent",
+      "content_path": "lessons/03-numbers.md",
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [
+        "gradient-step"
+      ],
+      "practice_ids": [
+        "calculus-transfer"
+      ],
+      "objective_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "probability",
+      "title": "Lesson 4 — Probability, statistics and information",
+      "content_path": "lessons/04-probability.md",
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "probability-transfer"
+      ],
+      "objective_ids": [
+        "probability"
+      ]
+    },
+    {
+      "id": "model",
+      "title": "Lesson 5 — Feedforward networks and nonlinear activations",
+      "content_path": "lessons/08-model.md",
+      "diagram_ids": [
+        "mlp-shapes"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "feedforward-transfer"
+      ],
+      "objective_ids": [
+        "model"
+      ]
+    },
+    {
+      "id": "initialization",
+      "title": "Lesson 6 — Initialization, symmetry and signal scale",
+      "content_path": "lessons/06-initialization.md",
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "initialization-transfer"
+      ],
+      "objective_ids": [
+        "initialization"
+      ]
+    },
+    {
+      "id": "autograd",
+      "title": "Lesson 7 — Backpropagation and automatic differentiation",
+      "content_path": "lessons/04-autograd.md",
+      "diagram_ids": [
+        "prereq-gradient"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "backprop-transfer"
+      ],
+      "objective_ids": [
+        "autograd"
+      ]
+    },
+    {
+      "id": "losses",
+      "title": "Lesson 8 — Loss functions, logits and stable arithmetic",
+      "content_path": "lessons/08-losses.md",
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "loss-transfer"
+      ],
+      "objective_ids": [
+        "losses"
+      ]
+    },
+    {
+      "id": "optimizers",
+      "title": "Lesson 9 — SGD, momentum, Adam and weight decay",
+      "content_path": "lessons/09-optimizers.md",
+      "diagram_ids": [
+        "prereq-adam"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "optimizer-transfer"
+      ],
+      "objective_ids": [
+        "optimizers"
+      ]
+    },
+    {
+      "id": "steps",
+      "title": "Lesson 10 — Training updates, schedules and gradient scale",
+      "content_path": "lessons/10-training-steps.md",
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "training-step-transfer"
+      ],
+      "objective_ids": [
+        "steps"
+      ]
+    },
+    {
+      "id": "data",
+      "title": "Lesson 11 — Datasets, batching and supervision contracts",
+      "content_path": "lessons/06-data.md",
+      "diagram_ids": [
+        "data-roles"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "data-transfer"
+      ],
+      "objective_ids": [
+        "data"
+      ]
+    },
+    {
+      "id": "tokenizer",
+      "title": "Lesson 12 — Text encoding, tokenization and vocabulary identity",
+      "content_path": "lessons/05-tokenizer.md",
+      "diagram_ids": [
+        "prereq-text"
+      ],
+      "table_ids": [],
+      "scenario_ids": [
+        "coordinate-system"
+      ],
+      "practice_ids": [
+        "encoding-transfer"
+      ],
+      "objective_ids": [
+        "tokenizer"
+      ]
+    },
+    {
+      "id": "embeddings",
+      "title": "Lesson 13 — Embeddings, lookup gradients and weight tying",
+      "content_path": "lessons/13-embeddings.md",
+      "diagram_ids": [
+        "prereq-lookup"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "embedding-transfer"
+      ],
+      "objective_ids": [
+        "embeddings"
+      ]
+    },
+    {
+      "id": "position",
+      "title": "Lesson 14 — Sequence order and positional encoding",
+      "content_path": "lessons/14-position.md",
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "position-transfer"
+      ],
+      "objective_ids": [
+        "position"
+      ]
+    },
+    {
+      "id": "attention",
+      "title": "Lesson 15 — Queries, keys, values and scaled attention",
+      "content_path": "lessons/07-attention.md",
+      "diagram_ids": [
+        "attention-flow"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "attention-transfer"
+      ],
+      "objective_ids": [
+        "attention"
+      ]
+    },
+    {
+      "id": "masks",
+      "title": "Lesson 16 — Padding masks, causal masks and empty rows",
+      "content_path": "lessons/16-masks.md",
+      "diagram_ids": [
+        "mask-contracts"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "mask-transfer"
+      ],
+      "objective_ids": [
+        "masks"
+      ]
+    },
+    {
+      "id": "multihead",
+      "title": "Lesson 17 — Multi-head projections, splitting and concatenation",
+      "content_path": "lessons/17-multihead.md",
+      "diagram_ids": [
+        "head-shapes"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "multihead-transfer"
+      ],
+      "objective_ids": [
+        "multihead"
+      ]
+    },
+    {
+      "id": "ffn",
+      "title": "Lesson 18 — The position-wise feedforward sublayer",
+      "content_path": "lessons/18-positionwise-ffn.md",
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "ffn-transfer"
+      ],
+      "objective_ids": [
+        "ffn"
+      ]
+    },
+    {
+      "id": "residual",
+      "title": "Lesson 19 — Residual connections, depth and normalization order",
+      "content_path": "lessons/19-residual.md",
+      "diagram_ids": [
+        "residual-path"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "residual-transfer"
+      ],
+      "objective_ids": [
+        "residual"
+      ]
+    },
+    {
+      "id": "normalization",
+      "title": "Lesson 20 — Layer normalization and its gradients",
+      "content_path": "lessons/20-normalization.md",
+      "diagram_ids": [
+        "feature-normalization"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "normalization-transfer"
+      ],
+      "objective_ids": [
+        "normalization"
+      ]
+    },
+    {
+      "id": "regularization",
+      "title": "Lesson 21 — regularization and generalization controls",
+      "content_path": "lessons/21-regularization.md",
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "regularization-transfer"
+      ],
+      "objective_ids": [
+        "regularization"
+      ]
+    },
+    {
+      "id": "seq2seq",
+      "title": "Lesson 22 — encoder–decoder learning and inference",
+      "content_path": "lessons/22-encoder-decoder.md",
+      "diagram_ids": [
+        "seq2seq-contract"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "seq2seq-transfer"
+      ],
+      "objective_ids": [
+        "seq2seq"
+      ]
+    },
+    {
+      "id": "training",
+      "title": "Lesson 23 — evaluation, debugging and a complete small training experiment",
+      "content_path": "lessons/09-training.md",
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "evaluation-transfer"
+      ],
+      "objective_ids": [
+        "training"
+      ]
+    },
+    {
+      "id": "recovery",
+      "title": "Lesson 24 — checkpointing and reproducible recovery",
+      "content_path": "lessons/10-recovery.md",
+      "diagram_ids": [
+        "prereq-recovery"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "recovery-transfer"
+      ],
+      "objective_ids": [
+        "recovery"
+      ]
+    },
+    {
+      "id": "handoff",
+      "title": "Lesson 25 — read the paper and assemble the foundations",
+      "content_path": "lessons/11-colab-and-handoff.md",
+      "diagram_ids": [
+        "prereq-handoff"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "handoff-transfer"
+      ],
+      "objective_ids": [
+        "handoff"
+      ]
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "prereq-linear",
+      "title": "A row meets every output recipe",
+      "description": "X[2,2] times W[2,3], plus b[3], produces Y[2,3]. The feature axis 2 is contracted; example rows are independent.",
+      "entity_ids": [
+        "prereq-linear-1",
+        "prereq-linear-2",
+        "prereq-linear-3"
+      ],
+      "relationship_ids": [
+        "prereq-linear-edge-1",
+        "prereq-linear-edge-2"
+      ],
+      "layout": "grid"
+    },
+    {
+      "id": "prereq-gradient",
+      "title": "The chain rule joins local sensitivities",
+      "description": "Squared loss L=(wx−y)² has dL/dw=2(wx−y)x. The gradient is local; a large step can overshoot.",
+      "entity_ids": [
+        "prereq-gradient-1",
+        "prereq-gradient-2",
+        "prereq-gradient-3",
+        "prereq-gradient-4"
+      ],
+      "relationship_ids": [
+        "prereq-gradient-edge-1",
+        "prereq-gradient-edge-2",
+        "prereq-gradient-edge-3"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "prereq-adam",
+      "title": "Adam remembers more than weights",
+      "description": "One completed update changes the parameter, first moment m, second moment v and update counter t. Restoring weights alone loses this history.",
+      "entity_ids": [
+        "prereq-adam-1",
+        "prereq-adam-2",
+        "prereq-adam-3"
+      ],
+      "relationship_ids": [
+        "prereq-adam-edge-1",
+        "prereq-adam-edge-2"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "prereq-text",
+      "title": "Text changes coordinate systems",
+      "description": "café has four code points and five UTF-8 bytes. Original-text offsets remain a separate contract for later QA.",
+      "entity_ids": [
+        "prereq-text-1",
+        "prereq-text-2",
+        "prereq-text-3"
+      ],
+      "relationship_ids": [
+        "prereq-text-edge-1",
+        "prereq-text-edge-2"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "prereq-lookup",
+      "title": "Integer IDs select floating-point rows",
+      "description": "For the declared character vocabulary, cat→[3,2,5]. Lookup preserves three positions and changes each ID into two features.",
+      "entity_ids": [
+        "prereq-lookup-1",
+        "prereq-lookup-2",
+        "prereq-lookup-3"
+      ],
+      "relationship_ids": [
+        "prereq-lookup-edge-1",
+        "prereq-lookup-edge-2"
+      ],
+      "layout": "grid"
+    },
+    {
+      "id": "data-roles",
+      "title": "Batch alignment preserves data meaning",
+      "description": "Padding adds positions. The valid mask describes real information; labels/ignore_index describe supervision. Keep both alongside the original lengths.",
+      "entity_ids": [
+        "data-roles-1",
+        "data-roles-2",
+        "data-roles-3",
+        "data-roles-4"
+      ],
+      "relationship_ids": [
+        "data-roles-edge-1",
+        "data-roles-edge-2",
+        "data-roles-edge-3"
+      ],
+      "layout": "grid"
+    },
+    {
+      "id": "mlp-shapes",
+      "title": "Compose two shared maps and a nonlinearity",
+      "description": "The actual tiny classifier uses Linear2→8, tanh, Linear8→2. Tanh has no learned parameters; the two affine maps contain 42.",
+      "entity_ids": [
+        "mlp-shapes-1",
+        "mlp-shapes-2",
+        "mlp-shapes-3",
+        "mlp-shapes-4"
+      ],
+      "relationship_ids": [
+        "mlp-shapes-edge-1",
+        "mlp-shapes-edge-2",
+        "mlp-shapes-edge-3"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "feature-normalization",
+      "title": "Normalize the feature coordinates",
+      "description": "For features[1,3], mean 2 and population variance 1. LayerNorm divides centered features by sqrt(variance+epsilon), then applies learned gain/bias.",
+      "entity_ids": [
+        "feature-normalization-1",
+        "feature-normalization-2",
+        "feature-normalization-3"
+      ],
+      "relationship_ids": [
+        "feature-normalization-edge-1",
+        "feature-normalization-edge-2"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "prereq-recovery",
+      "title": "A complete state survives a fresh process",
+      "description": "Save model, optimizer, schedule, sampler, progress and RNG after a completed update. Verify persisted generations, mark completion last and retain good fallback states.",
+      "entity_ids": [
+        "prereq-recovery-1",
+        "prereq-recovery-2",
+        "prereq-recovery-3",
+        "prereq-recovery-4"
+      ],
+      "relationship_ids": [
+        "prereq-recovery-edge-1",
+        "prereq-recovery-edge-2",
+        "prereq-recovery-edge-3"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "prereq-handoff",
+      "title": "The prerequisites feed the model builds",
+      "description": "Tutorial 0 establishes tools and numerical/learning contracts. Course 1 adds full translation and RoBERTa mechanisms; Course 2 adds causal next-token GPT.",
+      "entity_ids": [
+        "prereq-handoff-1",
+        "prereq-handoff-2",
+        "prereq-handoff-3"
+      ],
+      "relationship_ids": [
+        "prereq-handoff-edge-1",
+        "prereq-handoff-edge-2"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "attention-flow",
+      "title": "Attention matches positions, then transports values",
+      "description": "Separate feature contraction, key-position normalization and value aggregation.",
+      "entity_ids": [
+        "attention-flow-1",
+        "attention-flow-2",
+        "attention-flow-3",
+        "attention-flow-4"
+      ],
+      "relationship_ids": [
+        "attention-flow-edge-1",
+        "attention-flow-edge-2",
+        "attention-flow-edge-3"
+      ],
+      "layout": "grid"
+    },
+    {
+      "id": "mask-contracts",
+      "title": "Three visibility contracts",
+      "description": "Causality, source padding and query output gates have separate meanings.",
+      "entity_ids": [
+        "mask-contracts-1",
+        "mask-contracts-2",
+        "mask-contracts-3",
+        "mask-contracts-4"
+      ],
+      "relationship_ids": [],
+      "layout": "grid"
+    },
+    {
+      "id": "head-shapes",
+      "title": "Split and merge head axes",
+      "description": "Projection width stays D=H×d; transpose and reshape are distinct.",
+      "entity_ids": [
+        "head-shapes-1",
+        "head-shapes-2",
+        "head-shapes-3",
+        "head-shapes-4",
+        "head-shapes-5"
+      ],
+      "relationship_ids": [
+        "head-shapes-edge-1",
+        "head-shapes-edge-2",
+        "head-shapes-edge-3",
+        "head-shapes-edge-4"
+      ],
+      "layout": "grid"
+    },
+    {
+      "id": "residual-path",
+      "title": "Residual identity and learned branches",
+      "description": "Both branches have the same decoder/encoder stream shape.",
+      "entity_ids": [
+        "residual-path-1",
+        "residual-path-2",
+        "residual-path-3",
+        "residual-path-4"
+      ],
+      "relationship_ids": [
+        "residual-path-edge-1",
+        "residual-path-edge-2",
+        "residual-path-edge-3",
+        "residual-path-edge-4"
+      ],
+      "layout": "grid"
+    },
+    {
+      "id": "seq2seq-contract",
+      "title": "Parallel training, autoregressive prediction",
+      "description": "Source memory, shifted target inputs and next-token labels are different streams.",
+      "entity_ids": [
+        "seq2seq-contract-1",
+        "seq2seq-contract-2",
+        "seq2seq-contract-3",
+        "seq2seq-contract-4",
+        "seq2seq-contract-5"
+      ],
+      "relationship_ids": [
+        "seq2seq-contract-edge-1",
+        "seq2seq-contract-edge-2",
+        "seq2seq-contract-edge-3",
+        "seq2seq-contract-edge-4"
+      ],
+      "layout": "grid"
+    }
+  ],
+  "tables": [],
+  "scenarios": [
+    {
+      "id": "coordinate-system",
+      "title": "Change the text coordinate",
+      "description": "Keep the visible word café and change the representation you count.",
+      "variables": [
+        {
+          "id": "representation",
+          "label": "Representation",
+          "options": [
+            "Python code points",
+            "UTF-8 bytes",
+            "saved character IDs",
+            "learned subword IDs"
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "when": {
+            "representation": "Python code points"
+          },
+          "outcome": "4 positions",
+          "narrative": "The composed é is one code point.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "text-contracts"
+          ]
+        },
+        {
+          "when": {
+            "representation": "UTF-8 bytes"
+          },
+          "outcome": "5 positions",
+          "narrative": "é uses two bytes which share one original character interval.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "text-contracts"
+          ]
+        },
+        {
+          "when": {
+            "representation": "saved character IDs"
+          },
+          "outcome": "4 IDs",
+          "narrative": "For a vocabulary retaining all four characters, one ID per character.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "text-contracts"
+          ]
+        },
+        {
+          "when": {
+            "representation": "learned subword IDs"
+          },
+          "outcome": "Depends on merge rules",
+          "narrative": "Count the encoded pieces of the saved artifact, not characters or bytes by assumption.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "text-contracts"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gradient-step",
+      "title": "Change the update size",
+      "description": "For x=3,w=2,target1, squared loss25 and gradient 30, compare two SGD rates.",
+      "variables": [
+        {
+          "id": "rate",
+          "label": "Learning rate",
+          "options": [
+            "0.01",
+            "0.2"
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "when": {
+            "rate": "0.01"
+          },
+          "outcome": "w becomes1.7; loss16.81",
+          "narrative": "A modest step lowers this fixture loss.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "numbers"
+          ]
+        },
+        {
+          "when": {
+            "rate": "0.2"
+          },
+          "outcome": "w becomes−4; loss169",
+          "narrative": "The same local gradient direction can overshoot with a large step.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "numbers"
+          ]
+        }
+      ]
+    }
+  ],
+  "practice": [
+    {
+      "id": "linear-transfer",
+      "question": "For X[2,2], W[2,3], b[3], replace the second row [3,4] with [4,4]. What changes? What is the output on a zero input and the parameter count?",
+      "answer": "Only the second output row changes, to [4,4,21]; the first stays [1,2,9]. Zero input produces [0,0,1], the bias. There are 2×3+3=9 shared parameters, independent of the number of examples. PyTorch stores the same weight map as [3,2] and transposes it in the operation.",
+      "rubric": "Calculate the changed cells, identify the shared output-feature bias and separate data size from parameter count.",
+      "objective_ids": [
+        "route"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "tensor-transfer",
+      "question": "For X[B,T,D] with B=2,T=3,D=4, how do you apply valid[B,T]? Does reshape(2,4,3) perform transpose(1,2)? What enters an embedding?",
+      "answer": "Use valid[...,None] to align token validity with all features. Reshape preserves traversal order and is not the axis permutation; transpose maps coordinates and changes strides. IDs enter a lookup as integer indices, normally int64; learned floating vectors enter affine maps. Shape, dtype, device and axis meaning all require checks.",
+      "rubric": "Explain coordinates and storage independently; show the mask singleton and distinguish IDs from continuous features.",
+      "objective_ids": [
+        "workspace"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "calculus-transfer",
+      "question": "Change the scalar target from1 to2, keeping x3,w2,b0. Derive both gradients and compare a weight-only η.01 step with updating both weight and bias.",
+      "answer": "Prediction6,error4,loss16. dw=2×4×3=24, db=2×4=8. Weight-only update gives w1.76,b0,prediction5.28,loss10.7584. Updating both gives w1.76,b−.08,prediction5.2,loss10.24. The unchanged forward prediction had a different target-dependent loss signal.",
+      "rubric": "Derive both partials, state the fixed variables and compute both distinct updates.",
+      "objective_ids": [
+        "numbers"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "probability-transfer",
+      "question": "Change the lesson to q=[.5,.5] and p=[.25,.75]. Compute entropy, cross-entropy and KL. If successive conditional probabilities are.6,.5,.2, what is sequence NLL, and does the factorization assert independence?",
+      "answer": "H(q)=log2≈.693147; H(q,p)=−.5log(.25)−.5log(.75)≈.836988; KL≈.143841. Conditional product is.06 and total NLL≈2.813411; mean over3 tokens≈.937804. Conditional chain-rule factorization does not assert token independence. Swapping q and p changes KL, so it is not symmetric.",
+      "rubric": "State the distribution order and log units; distinguish conditional factorization from independent records and sum from mean.",
+      "objective_ids": [
+        "probability"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "feedforward-transfer",
+      "question": "Why can't two affine layers without an activation solve the opposite-sign quadrant task? How many parameters do 2→2→2 and 2→8→2 networks have?",
+      "answer": "Composition collapses to x(W1W2)+b1W2+b2, still affine. The averages of the two positive quadrant scores require bias>0, while the two negative quadrant scores require bias<0. A nonlinear hidden layer changes the function family. Counts including both biases are12 and42, respectively.",
+      "rubric": "Derive the collapse and contradiction; count matrix and bias terms rather than using batch size.",
+      "objective_ids": [
+        "model"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "initialization-transfer",
+      "question": "With D independent centered unit-variance inputs, what variance does Σwi xi have for weight variance σ²? Why divide attention scores by sqrt(d) rather than d?",
+      "answer": "Under the stated independence/centering assumptions, output variance is Dσ². For independent centered unit-variance query/key coordinates, the dot-product variance is d. Dividing by sqrt(d) gives variance1, while dividing by d gives variance1/d. The assumptions describe a scale motivation, not a guarantee about learned coordinates.",
+      "rubric": "Name every independence/centering assumption and use variance scaling rather than only quoting a formula.",
+      "objective_ids": [
+        "initialization"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "backprop-transfer",
+      "question": "In the controlled tanh fixture, why is the first row of grad W2 zero? If only the target changes1→0, what changes in the forward/backward trace?",
+      "answer": "The first hidden activation is0, so its outer-product contributions to W2 are0; its local upstream signal and earlier-layer gradients need not be zero. Forward activations/logits/probabilities stay fixed. The logit gradient changes [.25,−.25]→[−.75,.75], multiplying all propagated parameter/input derivatives by−3. Loss changes log(4/3)→log4.",
+      "rubric": "Distinguish zero activation from zero upstream gradient; derive the target change at the output then propagate it.",
+      "objective_ids": [
+        "autograd"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "loss-transfer",
+      "question": "Change the stable fixture to logits[1002,1000], target1. Calculate NLL without large exponentials. How should batches with2 and8 valid labels combine? Why not pass softmax probabilities to CrossEntropyLoss?",
+      "answer": "Subtract1002: target1 NLL=2+log(1+exp(−2))≈2.126928. Sum both unweighted valid-label losses and divide by10; averaging the two means equally overweights the smaller batch. CrossEntropyLoss expects raw logits and applies log-softmax/NLL; passing probabilities as logits changes the objective.",
+      "rubric": "Show stable arithmetic, declare the denominator and identify the API's class axis/target contract.",
+      "objective_ids": [
+        "losses"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "optimizer-transfer",
+      "question": "Reverse the Adam fixture’s first gradient to−30, then give a zero gradient. What moments and parameter movement arise? Why is AdamW different from an adaptive L2 penalty?",
+      "answer": "m1=−3,v1=.9; m2=−2.7,v2=.8991. Starting θ2,η.01,β1.9,β2.999,ε1e−8, θ becomes approximately2.01 then2.016700583: history still moves it upward. Coupled L2 enters gradient moments/adaptive scaling, while AdamW applies separate parameter decay. Resetting moments erases this continuation history.",
+      "rubric": "Calculate stored moments and explain where the penalty enters; include step count in continuation state.",
+      "objective_ids": [
+        "optimizers"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "training-step-transfer",
+      "question": "Micro-batches have2 and6 valid targets. How do their summed losses produce one combined gradient? Compute the paper-style schedule for D4,w4 at s1,4,16 and clip gradient[3,4] to norm2.5.",
+      "answer": "Backpropagate each sum divided by8, accumulate and step once. Rates are.0625,.25,.125. The global gradient norm is5 and scaling by.5 gives[1.5,2], preserving direction. Clearing/optimizer/schedule steps occur at the defined update boundary; per-micro-batch means averaged equally would change weighting.",
+      "rubric": "Work all three calculations and place clear/backward/clip/update/schedule in an explicit order.",
+      "objective_ids": [
+        "steps"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "data-transfer",
+      "question": "Records have token losses[1,2,3] and[4], plus padded labels. Compare token and record means; explain PAD ID, ignored label and attention mask.",
+      "answer": "Token mean is10/4=2.5. Equal-record mean is(2+4)/2=3. PAD is an input vocabulary filler, ignored label −100 excludes a supervised loss, and an attention mask removes permitted-score connections. None automatically performs the others' job; ignored labels must not enter an embedding.",
+      "rubric": "Compute both objectives and assign each mask/ID to the operation it controls.",
+      "objective_ids": [
+        "data"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "encoding-transfer",
+      "question": "In The café is open., which half-open character and UTF-8 byte intervals extract café? Why must BPE encoding use saved merge ranks and document boundaries?",
+      "answer": "Original code-point interval[4,8) and UTF-8 byte interval[4,9) extract the full word. Reusing[4,8) as bytes cuts é in half. Saved ranks define the trained tokenizer; new-input pair frequency does not retrain it. Counting across document boundaries invents pairs. Normalization can change coordinates, so preserve original spans/alignment.",
+      "rubric": "Name coordinate systems and show the multibyte boundary; separate training and encoding rules.",
+      "objective_ids": [
+        "tokenizer"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "embedding-transfer",
+      "question": "IDs[2,1,2] receive upstream rows[1,1],[2,2],[3,3]. What is each table-row gradient? Does padding_idx globally freeze a row when its table is tied to output weights?",
+      "answer": "Lookup contributions: row2[4,4], row1[2,2], unselected rows0. Repeated selections sum. padding_idx suppresses lookup contributions but does not block an output-projection path or explicit decay acting on the same parameter. With shared vocab V4,D2, three untied tables have24 matrix entries versus8 for one fully shared table.",
+      "rubric": "Derive gather-backward accumulation and identify both tied gradient paths and vocabulary-identity conditions.",
+      "objective_ids": [
+        "embeddings"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "position-transfer",
+      "question": "Change sinusoidal width to D8. What are the four frequencies, the position0 row and the slowest pair at position1? Does content-only self-attention establish order?",
+      "answer": "Frequencies are1,.1,.01,.001. Position0 is[0,1,0,1,0,1,0,1]; the last pair at position1 is[sin(.001),cos(.001)]≈[.000999999833,.999999500000]. Unmasked content-only self-attention is permutation equivariant when Q/K/V are permuted together; it has no intrinsic original order without position/mask signals. Fixed encoding does not prove long-context extrapolation.",
+      "rubric": "Calculate frequencies and derive a permutation/shift relationship with its assumptions.",
+      "objective_ids": [
+        "position"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "attention-transfer",
+      "question": "Keep the lesson’s Q/K scores[0,log2,log3] but change only the third value to[−2,4]. Compute weights/output, then change the third key instead. Which stages and backward paths can change?",
+      "answer": "Weights stay[1/6,2/6,3/6]; the value output becomes[0,3]. Changing only V leaves the forward weights fixed, while score-path gradients can change because their upstream derivative depends on V. Changing K can alter all row-normalized weights. Key-position softmax and feature dot products remain separate axes.",
+      "rubric": "Work the score/normalization/value stages separately and identify which gradients/paths each input influences.",
+      "objective_ids": [
+        "attention"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "mask-transfer",
+      "question": "Mask the middle key in the three-key fixture. What weights/output result? Compare all-masked policy and Boolean masks for SDPA versus MultiheadAttention.",
+      "answer": "Allowed keys0,2 renormalize to[1/4,0,3/4], output[3,1.5]. The declared empty-row probe policy is zero weights/output, implemented without softmax of all −inf. SDPA Boolean True means allowed; MultiheadAttention Boolean attention-mask True means blocked and key-padding True means ignored. Source padding and target loss masks remain separate.",
+      "rubric": "Compute renormalization and explain safe empty rows and deliberate API conversion.",
+      "objective_ids": [
+        "masks"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "multihead-transfer",
+      "question": "For B2,T3,S5,D8,H2, give score/head-output/merged shapes and projection parameter count without biases. What changes if H4 but D stays8?",
+      "answer": "Scores[2,2,3,5], head output[2,2,3,4], merged[2,3,8]. Q/K/V/O matrices total4×8²=256 entries. At H4, head width2 and scores[2,4,3,5]; projection total stays256, while explicit score storage doubles. Transpose back before merging heads. Splitting alone does not prove specialization.",
+      "rubric": "Trace all axes and distinguish projection parameters from explicit score storage.",
+      "objective_ids": [
+        "multihead"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "ffn-transfer",
+      "question": "Using the lesson's D2,F3 matrices, work outputs for[2,−1] and[−1,2]. Can changing one position change the other's FFN output? Count parameters at F4D.",
+      "answer": "Outputs[3,−1] and[3,4]. A shared position-wise FFN changes features independently at each position, so the untouched position's FFN output remains fixed. Including biases, count2DF+F+D; at F4D this is8D²+5D. Earlier attention can mix token information, but the FFN itself does not mix positions.",
+      "rubric": "Show preactivation/ReLU/output and derive count while distinguishing feature and token mixing.",
+      "objective_ids": [
+        "ffn"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "residual-transfer",
+      "question": "Derive the residual input gradient. With a zero sublayer, do original post-norm and pre-norm produce the same result? Can an identity path guarantee nonzero gradients?",
+      "answer": "For y=x+F(x), upstream g gives g+JFᵀg. Zero F gives LN(x) under post-norm and x under pre-norm, generally different. F=−x cancels both output and derivative, so an identity branch is not a guarantee. Cross-attention adds to the decoder query stream, not encoder memory.",
+      "rubric": "Derive the two branches and give the cancellation example and shape/stream contract.",
+      "objective_ids": [
+        "residual"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "normalization-transfer",
+      "question": "Shift the lesson’s token[1,3] to[11,13] and use constant[−2,−2]. Compute statistics and outputs for gamma[2,1],beta[0,1],epsilon1e−5. Which B×T×D axes reduce?",
+      "answer": "The shifted token has μ12,v1 and the same normalized coordinates as[1,3], approximately[−.999995,.999995]; affine output[−1.999990,1.999995]. The constant has μ−2,v0 and output beta[0,1]. LayerNorm(D) reduces D independently at each batch/position, using population variance in train/eval. A common shift cancels; epsilon makes scale invariance approximate.",
+      "rubric": "Calculate epsilon placement and named axes; explain constant rows and gradient coupling.",
+      "objective_ids": [
+        "normalization"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "regularization-transfer",
+      "question": "With dropout p=.5 on scalar2, list training outputs/expectation/variance. Does eval disable gradients? What target does uniform-mixture smoothing ε.1,V4 produce for class2?",
+      "answer": "Inverted-dropout outputs0 or4 with equal chance, expectation2, variance4. eval switches dropout to identity but does not disable autograd; no_grad separately controls recording. Uniform-mixture smoothing gives [.025,.025,.925,.025]. An exclude-gold convention gives a different distribution and must be declared; the original paper reports its smoothing value without defining every implementation convention.",
+      "rubric": "Derive expectation/variance, distinguish modes and declare the smoothing target convention.",
+      "objective_ids": [
+        "regularization"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "seq2seq-transfer",
+      "question": "For target[a,b,EOS], create teacher-forced decoder input/labels with BOS. Can all training positions run together? What does inference consume?",
+      "answer": "Inputs[BOS,a,b], labels[a,b,EOS]. A causal mask lets each prediction use only its input prefix, so parallel training computes all conditionals without future answers. Inference consumes previously generated tokens, not unknown future ground-truth tokens; append EOS and stop for that sequence. Cross-attention keys/values come from real encoder source positions.",
+      "rubric": "Draw the shift and mask and distinguish teacher forcing from autoregressive generation and EOS/padding roles.",
+      "objective_ids": [
+        "seq2seq"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "evaluation-transfer",
+      "question": "Training loss falls but validation does not improve. What checks come before increasing model size? Does small-grid classification establish translation or calibrated confidence?",
+      "answer": "Check splits/duplicates, target alignment, mask conventions, token denominators, eval/no_grad mode, gradients, a tiny overfit case and simple baselines. Inspect held-out errors and likelihood separately from accuracy. The structured classifier tests nonlinear learning on its declared grid, not translation/general text or calibrated probabilities. Hard-target perplexity needs fixed tokenizer/data/objective.",
+      "rubric": "Choose falsifiable probes and separate task evidence from broader claims.",
+      "objective_ids": [
+        "training"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "recovery-transfer",
+      "question": "Why do weights alone not reproduce the next update? What should happen when the newest checkpoint is corrupt or has incompatible source/tokenizer identity?",
+      "answer": "Continuation also needs optimizer moments/step, schedule position, RNG, sampler order/cursor and matching source/config/data/tokenizer/runtime/precision contract. Verify a complete compatible generation before mutating state; fall back to a prior verified generation on corruption and reject incompatibility. Compare the same next batch/update in a new process. Local recovery does not prove deleted Colab runtime/Drive survival.",
+      "rubric": "List state and update boundary, define fallback/identity checks and distinguish storage durability from verification.",
+      "objective_ids": [
+        "recovery"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    },
+    {
+      "id": "handoff-transfer",
+      "question": "Map the paper's attention, FFN, position and schedule equations to their required tensors/state. Which original choices must not be silently replaced when beginning Course1?",
+      "answer": "Attention needs Q/K feature widths, allowed key/query connections, head split/merge and value width; FFN needs shared D→F→D maps with ReLU; positions add same-width sine/cosine features; schedule needs positive optimizer-update index/warmup. Original post-norm/Adam/ReLU choices differ from later pre-norm/AdamW/GELU. Readiness requires independent calculations, runnable checks and an honest remaining learner/hosted record, not merely authored source tests.",
+      "rubric": "Connect equations to concrete contracts and preserve architecture/evidence boundaries.",
+      "objective_ids": [
+        "handoff"
+      ],
+      "claim_ids": [
+        "numbers"
+      ]
+    }
+  ],
+  "scenes": [],
+  "media": {},
+  "approval": null
+}

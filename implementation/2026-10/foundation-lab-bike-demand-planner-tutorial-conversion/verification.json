@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "title": "Foundation Lab: Bike Demand Planner",
+  "url": "http://127.0.0.1:4273/project_docs/records/tutorials/bike-demand-planner-foundation-lab-v1/",
+  "lessons": 10,
+  "section_movies": 47,
+  "learning_points": 10,
+  "comparisons": 10,
+  "frozen_files": 272,
+  "fingerprint": "70f2b99b5893cff8c915b8d764d92f42789c779b4667d794e5bbe32bf874e712",
+  "reader_tests": 13,
+  "authoring_tests": 19,
+  "native_browser_suite": "passed",
+  "inline_play_pause_seeking_captions": "47 movies in each of root and prefixed local readers",
+  "responsive_layouts": [
+    1440,
+    768,
+    390,
+    320
+  ],
+  "diagrams": "natural-size labels, container scrolling; all ten lessons checked at root and prefix",
+  "managed_mobile_frame_and_legacy_entry": "passed",
+  "other_courses_original_records_and_four_repository_indexes": "unchanged",
+  "original_video_packages": 48,
+  "original_source_pins": 233,
+  "generated_movies_in_tutorial_source": false,
+  "source_commit": "0b49c0aafe154888929d8b22dbe6637ba2e56661",
+  "new_model_fits_or_provider_calls": 0,
+  "learner_or_hosted_completion_inferred": false
+}

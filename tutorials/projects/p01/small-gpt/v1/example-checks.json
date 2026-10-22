@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-10-12T07:49:41.184564+00:00",
+  "results": [
+    {
+      "id": "math-python",
+      "language": "python",
+      "path": "examples/math_trace.py",
+      "sha256": "e96a8410b4c8081e2a73a9be366556577c5548ef2ce5563dcf2f49a07f3c5f46",
+      "output": {
+        "x": [
+          257,
+          104,
+          105
+        ],
+        "y": [
+          104,
+          105,
+          258
+        ],
+        "perplexity": 4.0,
+        "unequal_batch_nll": 2.0,
+        "gelu_minus_one": -0.158808,
+        "cold_probability": 0.9
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "math-cpp",
+      "language": "cpp",
+      "path": "examples/math_trace.cpp",
+      "sha256": "b27fcf045ce995db744edc63c573a97597485b5e07c3daf1c5b31b6646b17daa",
+      "output": {
+        "offset": 38,
+        "perplexity": 4,
+        "weighted_mean": 2
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    }
+  ],
+  "passed": true
+}

@@ -58,3 +58,7 @@ Validation: 42 CLI tests passed, including owner context, CLI/standalone preserv
 ## Pre-P01 repository review — 2026-10-09
 
 The user explicitly requested clean local commits before Project 1. The current [commit review](07-pre-p01-commit-review.md) records scope, child-first ordering, checks and the stale diagram-count test correction. All current CLI/site/skill/example checks pass. Final Git identities and umbrella alignment are verified after committing. P01-M1 remains not-started; next action is gpt-lab M1. Earlier no-commit statements are historical.
+
+## Docs cleanup — completed 2026-10-09
+
+Removed 69 disposable generated files and two empty obsolete source folders; retained six selected reader screenshots in verification/. Protected source hashes and every tracked file survived. Canonical project/milestone/next action unchanged: P00-M1 kickoff remains next. See 06-review.md for exact scope and verification.

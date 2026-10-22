@@ -1,0 +1,48 @@
+{
+  "website_unit_checks": 11,
+  "helper_and_learning_planning_checks": 35,
+  "cli_suite_checks": 127,
+  "skill_validation": "project-learning and planning passed",
+  "browser_bases": [
+    "/",
+    "/project_docs/"
+  ],
+  "shared_records_checked": 112,
+  "project_pages_checked": 64,
+  "active_project_links_checked": 218,
+  "missing_active_project_links": 0,
+  "collections": 3,
+  "project_counts": {
+    "foundations": 4,
+    "transformer-labs": 5,
+    "language-models": 0
+  },
+  "layout": "docs/implementation/NN_topic; actual filenames and titles; no month folders",
+  "local_refresh": {
+    "new_doc_discovered": true,
+    "removed_doc_disappeared": true,
+    "page_responses_during_rebuild": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+    ],
+    "all_page_responses_ok": true
+  },
+  "preservation": {
+    "ai_projects": true,
+    "ai_projects/docs": true,
+    "ai_research/research_docs": true,
+    "no_project_month_folders": true,
+    "video_sources_current": true
+  },
+  "publication": "none",
+  "commit": "none",
+  "existing_p00_index": "Original staged delivery records remain unchanged; numbered personal records use the project ignore rule."
+}

@@ -1,7 +1,7 @@
 # P00 foundations and P01 small GPT plan
 
 Updated: 2026-10-09
-Lead: ai-project-workflow; supporting workflow: ai-paper-review. Status: selected design; model execution not started. The [canonical roadmap](../../../roadmap.md#project-0-tokenization-and-transformer-foundations) owns the live milestone and tokenizer/task gates; [research](01-research.md) and [pinned source provenance](source-provenance.json) support the selection.
+Lead: ai-project-workflow; supporting workflow: ai-paper-review. Status: selected design; model execution not started. The [canonical roadmap](../../../guide/roadmap.md#project-0-tokenization-and-transformer-foundations) owns the live milestone and tokenizer/task gates; [research](01-research.md) and [pinned source provenance](source-provenance.json) support the selection.
 
 ## Ownership and scope
 
@@ -38,7 +38,7 @@ Generated digit/text copy pairs are the first required model task, using V260 by
 
 Local proposal: 1 encoder + 1 decoder, D32/H4/FFN128/source-target32/V260, FP32/dropout0. Free proposal: at most 2+2/D64/H4/FFN256/source-target64/V≤512, sized from measurements. Exact parameter/time/memory fit is unmeasured. Preserve paper post-norm, sinusoidal positions, embedding scaling, ReLU and cross-attention; document tying/regularization/scheduler/data deviations. Annotated Transformer's convenience pre-norm is not paper post-norm authority.
 
-Copy [COLAB.md](../../../COLAB.md) into the child package's requirements: thin common-trainer notebook, reproducible source ZIP/dependencies and CPU fallback, explicit new/resume, model/optimizer/scheduler/precision/RNG/data/progress/config identity, verified persistent checkpoint generations, at least two valid retained full states, corruption/interrupted-write fallback and recovery after deleting a Free runtime. Initial sessions cap at 60 minutes or 1,000 additional updates; saves requested at 5 minutes or 100 completed updates, with smaller drills. Final budgets/save latency/storage are measured; docs cannot prove hosted recovery.
+Copy [COLAB.md](../../../guide/COLAB.md) into the child package's requirements: thin common-trainer notebook, reproducible source ZIP/dependencies and CPU fallback, explicit new/resume, model/optimizer/scheduler/precision/RNG/data/progress/config identity, verified persistent checkpoint generations, at least two valid retained full states, corruption/interrupted-write fallback and recovery after deleting a Free runtime. Initial sessions cap at 60 minutes or 1,000 additional updates; saves requested at 5 minutes or 100 completed updates, with smaller drills. Final budgets/save latency/storage are measured; docs cannot prove hosted recovery.
 
 ### P01 transfer
 

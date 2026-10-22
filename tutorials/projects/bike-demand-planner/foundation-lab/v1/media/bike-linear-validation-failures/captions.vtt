@@ -1,0 +1,231 @@
+WEBVTT
+
+00:00:00.520 --> 00:00:03.930
+The later Monday examples
+make the failures concrete.
+
+00:00:04.640 --> 00:00:06.570
+On the ninth of January, twenty twelve,
+
+00:00:07.120 --> 00:00:09.350
+the two oclock target is five rentals.
+
+00:00:10.120 --> 00:00:13.170
+Linear regression predicts
+negative seventy point six eight.
+
+00:00:13.480 --> 00:00:15.650
+At eight, the target is
+four hundred and twenty,
+
+00:00:16.500 --> 00:00:20.250
+but the linear forecast is one hundred
+and seventy four point seven eight.
+
+00:00:21.000 --> 00:00:25.083
+The group predictor gives about seven
+point five one and three hundred and forty
+
+00:00:25.083 --> 00:00:26.350
+nine point five zero.
+
+00:00:27.260 --> 00:00:30.990
+The later eight oclock vector
+matches the earlier training example,
+
+00:00:31.380 --> 00:00:33.270
+so linear prediction is identical.
+
+00:00:33.860 --> 00:00:36.270
+There is no year or demand trend input.
+
+00:00:36.880 --> 00:00:39.850
+The negative quiet hour
+is impossible as a count.
+
+00:00:40.460 --> 00:00:44.430
+Both observations reveal limitations
+of this fitted calendar function.
+
+00:00:46.567 --> 00:00:49.434
+All three predictors score
+the same four thousand,
+
+00:00:49.434 --> 00:00:53.147
+three hundred and fifty
+seven validation identities,
+
+00:00:53.147 --> 00:00:57.297
+with the same metric definitions
+and unclipped prediction policy.
+
+00:00:57.847 --> 00:01:03.137
+The constant mean absolute error is about
+one hundred and fifty four point two five.
+
+00:01:03.867 --> 00:01:06.877
+The group model reaches
+ninety one point five seven.
+
+00:01:07.667 --> 00:01:11.737
+Linear regression gives one hundred
+and sixteen point seven three,
+
+00:01:11.947 --> 00:01:15.217
+about twenty five point
+one six worse than groups.
+
+00:01:16.167 --> 00:01:20.957
+Its root mean squared error is about one
+hundred and fifty seven point nine eight.
+
+00:01:21.507 --> 00:01:25.177
+Linear improves on the constant
+but loses this comparison.
+
+00:01:26.127 --> 00:01:30.557
+Convergence and stable solver
+agreement establish a numerical result,
+
+00:01:30.767 --> 00:01:34.777
+while this matched validation comparison
+measures its practical performance.
+
+00:01:37.150 --> 00:01:42.380
+Why can a model with month and weekday
+inputs lose to a smaller looking baseline?
+
+00:01:43.130 --> 00:01:46.320
+The additive model gives working
+day one shared coefficient.
+
+00:01:46.970 --> 00:01:51.300
+Conditional on the other main effects,
+that shift is the same across hours.
+
+00:01:51.990 --> 00:01:56.020
+The group model has a separate mean
+for every hour and day type pair.
+
+00:01:56.530 --> 00:02:00.080
+Its morning working day gap can
+differ from its nighttime gap.
+
+00:02:00.630 --> 00:02:03.820
+These model families are not
+nested under the current features.
+
+00:02:04.250 --> 00:02:07.880
+More columns do not guarantee that
+the group pattern is included.
+
+00:02:08.550 --> 00:02:12.900
+Even training root mean squared error
+is slightly worse for linear regression,
+
+00:02:13.570 --> 00:02:16.480
+and the stable solver agrees
+with its fitted predictions.
+
+00:02:17.150 --> 00:02:21.160
+Additional identical updates cannot
+create the absent interaction.
+
+00:02:23.483 --> 00:02:28.053
+The runner predicts using saved state,
+attaches the required record,
+
+00:02:28.103 --> 00:02:31.793
+target time and issue time,
+then calls the shared scorer.
+
+00:02:32.063 --> 00:02:35.813
+It does not silently clip
+negative values or round counts.
+
+00:02:36.263 --> 00:02:40.113
+There are seven hundred and twenty
+four negative validation forecasts.
+
+00:02:40.703 --> 00:02:44.173
+The minimum is about negative one
+hundred and three point four three.
+
+00:02:44.783 --> 00:02:46.533
+At the quiet Monday hour,
+
+00:02:46.563 --> 00:02:51.363
+subtracting the target five from negative
+seventy point six eight gives residual
+
+00:02:51.363 --> 00:02:53.793
+negative seventy five point six eight.
+
+00:02:54.283 --> 00:02:57.213
+Clipping could define a
+useful policy comparison,
+
+00:02:57.743 --> 00:03:01.873
+but it would be a changed prediction
+function requiring a retained result.
+
+00:03:02.463 --> 00:03:06.373
+Keeping the raw result visible lets
+us diagnose this model honestly.
+
+00:03:08.525 --> 00:03:14.045
+The linear model underpredicts overall by
+about ninety five point zero eight rentals
+
+00:03:14.045 --> 00:03:14.935
+per hour.
+
+00:03:15.405 --> 00:03:19.334
+Its worst validation miss predicts about
+two hundred and ninety six point four
+
+00:03:19.334 --> 00:03:21.715
+eight against nine
+hundred and fifty seven.
+
+00:03:22.505 --> 00:03:26.515
+Calendar frequencies and average
+demand differ between periods,
+
+00:03:26.705 --> 00:03:29.055
+while omitted conditions may matter too.
+
+00:03:29.705 --> 00:03:32.635
+These observations do not
+isolate a single cause.
+
+00:03:33.165 --> 00:03:36.895
+More updates after convergence should
+give essentially the same solution.
+
+00:03:37.465 --> 00:03:41.685
+Adding interaction features changes the
+representable function and requires a
+
+00:03:41.685 --> 00:03:42.515
+separate comparison.
+
+00:03:43.485 --> 00:03:46.335
+The checked gradient path
+is ready for later studies,
+
+00:03:46.585 --> 00:03:49.595
+and the group model remains the
+stronger observed reference.
+
+00:03:50.005 --> 00:03:51.035
+For review,
+
+00:03:51.165 --> 00:03:55.935
+explain why one training hour can worsen
+while the shared objective improves,
+
+00:03:56.405 --> 00:03:58.795
+then connect that to the
+validation limitation.
+

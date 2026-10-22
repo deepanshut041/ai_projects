@@ -1,0 +1,134 @@
+[
+  [
+    "transformer-paper",
+    "Attention Is All You Need, arXiv 1706.03762v7",
+    "https://arxiv.org/html/1706.03762v7",
+    "Sections3\u20135; architecture, embedding/position equations, complexity and training settings"
+  ],
+  [
+    "d2l-probability",
+    "Dive into Deep Learning1.0.3: probability and statistics",
+    "https://d2l.ai/chapter_preliminaries/probability.html",
+    "Probability/expectation/variance background; original course calculations"
+  ],
+  [
+    "d2l-mlp",
+    "Dive into Deep Learning1.0.3: multilayer perceptrons",
+    "https://d2l.ai/chapter_multilayer-perceptrons/mlp.html",
+    "Nonlinear hidden layers and activation definitions"
+  ],
+  [
+    "glorot-paper",
+    "Glorot and Bengio2010: initialization",
+    "https://proceedings.mlr.press/v9/glorot10a.html",
+    "Fan-in/fan-out motivation; course variance derivation states its assumptions"
+  ],
+  [
+    "he-paper",
+    "He et al.2015: rectifier initialization",
+    "https://arxiv.org/abs/1502.01852",
+    "Rectifier initialization; course distinguishes second moment and centered variance"
+  ],
+  [
+    "torch-init",
+    "PyTorch2.14 initialization",
+    "https://docs.pytorch.org/docs/2.14/nn.init.html",
+    "Xavier/He functions, gains and weight orientation"
+  ],
+  [
+    "torch-bce",
+    "PyTorch2.14 BCEWithLogitsLoss",
+    "https://docs.pytorch.org/docs/2.14/generated/torch.nn.BCEWithLogitsLoss.html",
+    "Binary floating targets and stable fused logits loss"
+  ],
+  [
+    "adamw-paper",
+    "Loshchilov and Hutter: Decoupled Weight Decay Regularization",
+    "https://arxiv.org/abs/1711.05101",
+    "Separate decay versus adaptive coupled L2"
+  ],
+  [
+    "unicode-normalization",
+    "Unicode UAX15 revision58: normalization",
+    "https://www.unicode.org/reports/tr15/tr15-58.html",
+    "NFC/NFKC and canonical/compatibility distinction; Python fixture independently checked"
+  ],
+  [
+    "bpe-paper",
+    "Sennrich et al.2016: subword units",
+    "https://aclanthology.org/P16-1162/",
+    "BPE source motivation; own byte-level boundary/special-ID rules depart explicitly"
+  ],
+  [
+    "weight-tying",
+    "Press and Wolf2017: output embedding",
+    "https://aclanthology.org/E17-2025/",
+    "Input/output weight sharing; own gradient/count examples"
+  ],
+  [
+    "d2l-position",
+    "Dive into Deep Learning1.0.3: positions and self-attention",
+    "https://d2l.ai/chapter_attention-mechanisms-and-transformers/self-attention-and-positional-encoding.html",
+    "Permutation/position context; original pairwise shift derivation"
+  ],
+  [
+    "d2l-attention",
+    "Dive into Deep Learning1.0.3: attention scoring",
+    "https://d2l.ai/chapter_attention-mechanisms-and-transformers/attention-scoring-functions.html",
+    "Q/K/V and score normalization context"
+  ],
+  [
+    "torch-sdpa",
+    "PyTorch2.14 functional SDPA",
+    "https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html",
+    "Allowed-True Boolean mask, rectangular causality and explicit dropout argument"
+  ],
+  [
+    "torch-mha",
+    "PyTorch2.14 MultiheadAttention",
+    "https://docs.pytorch.org/docs/2.14/generated/torch.nn.MultiheadAttention.html",
+    "Blocked-True Boolean attention mask and ignored-True padding mask"
+  ],
+  [
+    "d2l-multihead",
+    "Dive into Deep Learning1.0.3: multi-head attention",
+    "https://d2l.ai/chapter_attention-mechanisms-and-transformers/multihead-attention.html",
+    "Parallel projections and head shape context"
+  ],
+  [
+    "d2l-transformer",
+    "Dive into Deep Learning1.0.3: Transformer architecture",
+    "https://d2l.ai/chapter_attention-mechanisms-and-transformers/transformer.html",
+    "Position-wise FFN and encoder/decoder integration context"
+  ],
+  [
+    "residual-paper",
+    "He et al.2015: Deep Residual Learning",
+    "https://arxiv.org/abs/1512.03385",
+    "Identity/residual formulation; no training-stability guarantee inferred"
+  ],
+  [
+    "prenorm-paper",
+    "Xiong et al.2020: Layer Normalization in the Transformer",
+    "https://proceedings.mlr.press/v119/xiong20b.html",
+    "Pre-/post-norm distinction; original zero-sublayer counterexample"
+  ],
+  [
+    "layernorm-paper",
+    "Ba et al.2016: Layer Normalization",
+    "https://arxiv.org/abs/1607.06450",
+    "Per-example normalization background; API/math checks separately recorded"
+  ],
+  [
+    "bleu-reporting",
+    "Post2018: A Call for Clarity in Reporting BLEU Scores",
+    "https://arxiv.org/abs/1804.08771",
+    "BLEU comparability/tokenization reporting; no translation score asserted"
+  ],
+  [
+    "sacrebleu",
+    "SacreBLEU project README",
+    "https://github.com/mjpost/sacrebleu",
+    "Corpus evaluation signatures and reproducible score-reporting context"
+  ]
+]

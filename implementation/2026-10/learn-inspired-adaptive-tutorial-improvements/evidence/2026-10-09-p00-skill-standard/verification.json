@@ -1,0 +1,54 @@
+{
+  "draft_rejected": true,
+  "completed_smoke_example": true,
+  "completed_smoke_render": true,
+  "project_records_exported": true,
+  "skill_links_checked": 15,
+  "discovery_links": [
+    "ai_projects",
+    "ai_research"
+  ],
+  "existing_tutorial_files_unchanged": 66,
+  "learner_gate_advanced": false,
+  "date": "2026-10-09",
+  "scope": "Workspace tutorial skill and new-topic authoring; P00/P01 sources preserved",
+  "cli_tests": 77,
+  "focused_learning_tests": 16,
+  "native_reader_tests": 9,
+  "skill_validators": 2,
+  "tui_smoke": "passed: p00, project-docs, research-docs",
+  "browser_suites": [
+    {
+      "base": "/project_docs/",
+      "records": 37,
+      "sources": 13,
+      "widths": [
+        1440,
+        768,
+        390,
+        320
+      ],
+      "passed": true
+    },
+    {
+      "base": "/",
+      "records": 43,
+      "sources": 13,
+      "widths": [
+        1440,
+        768,
+        390,
+        320
+      ],
+      "passed": true,
+      "isolated_sample": true
+    }
+  ],
+  "manual_instruction_review": "07-p00-course-standard.md; not independent agent or learner evaluation",
+  "learner_state": "P00-M1 not-started",
+  "sample_in_real_catalog": false,
+  "reviewed_images": {
+    "p99-reader-overview.png": "f593d66684de9c4176bf1f659d816c09b3305e89a2ef3ee8fd544c80f927fc66",
+    "p99-reader-chapter-top-mobile.png": "67094ceee28178acc6c9fe220b76fed75c174540daf0cd1f544e2fa028976a4f"
+  }
+}

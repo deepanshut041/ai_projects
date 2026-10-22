@@ -1,0 +1,458 @@
+WEBVTT
+
+1
+00:00:00.400 --> 00:00:03.650
+Every prepared row retains
+its record identifier,
+
+2
+00:00:04.180 --> 00:00:07.190
+target time and forecast
+issue time as metadata.
+
+3
+00:00:07.960 --> 00:00:12.480
+Training and validation then contain the
+same forty five ordered feature columns
+
+4
+00:00:12.480 --> 00:00:13.970
+and a separate target.
+
+5
+00:00:14.680 --> 00:00:18.570
+The test export has identity and features,
+with targets omitted.
+
+6
+00:00:19.520 --> 00:00:23.370
+The original source remains retained
+for eventual final evaluation.
+
+7
+00:00:24.820 --> 00:00:29.340
+These contracts imply feature shapes of
+eight thousand six hundred forty five by
+
+8
+00:00:29.340 --> 00:00:29.810
+forty five,
+
+9
+00:00:30.580 --> 00:00:33.210
+four thousand three hundred
+fifty seven by forty five,
+
+10
+00:00:33.840 --> 00:00:36.430
+and four thousand three hundred
+seventy five by forty five.
+
+11
+00:00:37.480 --> 00:00:42.360
+Shape and schema preparation do not
+themselves create training arrays or fit a
+
+12
+00:00:42.360 --> 00:00:43.210
+demand model.
+
+13
+00:00:45.109 --> 00:00:48.979
+The calendar schema records input fields,
+category definitions
+
+14
+00:00:49.349 --> 00:00:50.279
+and feature order.
+
+15
+00:00:50.729 --> 00:00:54.959
+Membership records each observation's
+issue time and assigned partition,
+
+16
+00:00:55.089 --> 00:00:56.579
+including exclusions.
+
+17
+00:00:57.509 --> 00:00:59.419
+The split manifest records windows,
+
+18
+00:00:59.809 --> 00:01:00.739
+timing assumptions,
+
+19
+00:01:01.329 --> 00:01:02.319
+counts and hashes.
+
+20
+00:01:03.209 --> 00:01:05.479
+Hashes identify our retained bytes;
+
+21
+00:01:05.909 --> 00:01:07.779
+they are not official signed checksums.
+
+22
+00:01:08.289 --> 00:01:10.659
+Repeating preparation
+checks the same files.
+
+23
+00:01:11.129 --> 00:01:12.759
+If a frozen artifact changes,
+
+24
+00:01:13.149 --> 00:01:16.779
+the command raises an error instead
+of quietly redefining the dataset.
+
+25
+00:01:17.349 --> 00:01:21.409
+This keeps later model comparisons
+attached to the same observations and
+
+26
+00:01:21.409 --> 00:01:22.319
+feature meanings.
+
+27
+00:01:24.359 --> 00:01:28.769
+These two commands run from the
+Bike Demand Planner project folder.
+
+28
+00:01:29.399 --> 00:01:32.889
+The first acquires or
+verifies the retained source,
+
+29
+00:01:33.279 --> 00:01:36.609
+audits the rows and writes
+the frozen calendar exports.
+
+30
+00:01:37.479 --> 00:01:41.959
+The second follows the Monday training
+observation through the existing parser
+
+31
+00:01:41.959 --> 00:01:42.969
+and encoder.
+
+32
+00:01:43.579 --> 00:01:45.729
+Its output includes record fifty four,
+
+33
+00:01:46.139 --> 00:01:50.269
+a seven o'clock issue time, forty
+five features and the separate target.
+
+34
+00:01:50.999 --> 00:01:53.829
+The four active names
+match the vector we traced.
+
+35
+00:01:54.379 --> 00:01:57.989
+You can revisit this runnable example
+while reviewing the explanation.
+
+36
+00:02:00.109 --> 00:02:03.319
+The calendar example
+prints record fifty four,
+
+37
+00:02:03.829 --> 00:02:08.639
+its seven o'clock issue time, training
+membership and four active inputs.
+
+38
+00:02:09.409 --> 00:02:14.489
+A changed hour probe replaces hour eight
+with hour nine while retaining the other
+
+39
+00:02:14.489 --> 00:02:14.979
+groups.
+
+40
+00:02:15.749 --> 00:02:19.879
+Supplying the target to the
+encoder fails its exact field rule.
+
+41
+00:02:20.509 --> 00:02:23.939
+A twenty thirteen target
+fails the supported date rule.
+
+42
+00:02:24.809 --> 00:02:28.399
+The data handoff passed twenty
+two checks before commit.
+
+43
+00:02:29.029 --> 00:02:31.679
+Perturbing held out
+outcomes left training,
+
+44
+00:02:32.169 --> 00:02:33.879
+schema and membership unchanged.
+
+45
+00:02:35.049 --> 00:02:36.579
+These are implementation checks.
+
+46
+00:02:36.889 --> 00:02:40.579
+They do not establish model
+accuracy or learner understanding.
+
+47
+00:02:42.609 --> 00:02:44.859
+Consider three changed conditions.
+
+48
+00:02:45.929 --> 00:02:48.959
+First, move the hour from eight to nine:
+
+49
+00:02:49.289 --> 00:02:53.459
+only the corresponding hour indicators
+change in this controlled probe.
+
+50
+00:02:54.229 --> 00:02:57.339
+Second, add thirty minutes
+of reporting delay:
+
+51
+00:02:57.909 --> 00:03:02.099
+midnight is no longer a ready issue
+time for the newly completed label.
+
+52
+00:03:02.729 --> 00:03:05.599
+The earliest allowed
+hourly issue moves later.
+
+53
+00:03:06.809 --> 00:03:10.559
+Third, request the previous
+clock hour after a source gap.
+
+54
+00:03:10.929 --> 00:03:13.699
+The previous row might
+be two hours earlier.
+
+55
+00:03:14.709 --> 00:03:17.219
+Each case asks the same
+practical question:
+
+56
+00:03:17.709 --> 00:03:20.999
+which information is available
+for this particular forecast?
+
+57
+00:03:21.749 --> 00:03:26.679
+The timeline, feature schema and source
+identities make that question testable.
+
+58
+00:03:28.567 --> 00:03:34.027
+We have followed one real hour from its
+source row to fixed calendar inputs and
+
+59
+00:03:34.027 --> 00:03:35.617
+chronological membership.
+
+60
+00:03:36.047 --> 00:03:39.357
+The important boundaries are
+identity versus features,
+
+61
+00:03:39.947 --> 00:03:42.537
+later outcomes versus available inputs,
+
+62
+00:03:43.027 --> 00:03:45.937
+and label readiness versus
+forecast issue time.
+
+63
+00:03:46.407 --> 00:03:51.817
+The completed data preparation
+is committed as ad1b870.
+
+64
+00:03:52.607 --> 00:03:57.557
+The workspace's later constant baseline
+lives in a separate learning record.
+
+65
+00:03:58.187 --> 00:04:03.057
+This tutorial explains the data handoff
+and preserves the final test boundary.
+
+66
+00:04:03.647 --> 00:04:08.527
+Future predictors can now be compared
+using the same recorded hours and the same
+
+67
+00:04:08.527 --> 00:04:09.897
+explicit assumptions.
+
+68
+00:04:13.740 --> 00:04:17.510
+A reproducible prepared row
+has more than one identity.
+
+69
+00:04:18.220 --> 00:04:21.830
+The retained C S V hash
+identifies exact bytes,
+
+70
+00:04:22.240 --> 00:04:27.260
+so changing line endings can change the
+hash even when parsed numbers appear the
+
+71
+00:04:27.260 --> 00:04:27.790
+same.
+
+72
+00:04:28.640 --> 00:04:31.650
+The schema identifies
+feature meanings and order.
+
+73
+00:04:32.300 --> 00:04:36.540
+Membership connects observation
+identifiers and timestamps to their
+
+74
+00:04:36.540 --> 00:04:37.150
+partitions.
+
+75
+00:04:38.020 --> 00:04:40.130
+These checks answer different questions.
+
+76
+00:04:40.720 --> 00:04:46.320
+A row count or a familiar filename alone
+does not establish that a later run used
+
+77
+00:04:46.320 --> 00:04:47.810
+the same data contract.
+
+78
+00:04:50.313 --> 00:04:53.903
+Replay the running observation
+as a sequence of checks.
+
+79
+00:04:54.153 --> 00:04:56.183
+Locate record fifty four,
+
+80
+00:04:56.793 --> 00:05:00.563
+confirm its eight o’clock target
+label and seven o’clock issue,
+
+81
+00:05:00.733 --> 00:05:03.323
+and select the named calendar fields.
+
+82
+00:05:03.973 --> 00:05:07.623
+Encoding gives the active positions eight,
+twenty five,
+
+83
+00:05:08.173 --> 00:05:09.463
+thirty one and forty four.
+
+84
+00:05:10.593 --> 00:05:12.563
+Compare their meanings
+with the saved schema.
+
+85
+00:05:13.453 --> 00:05:16.903
+The rental total remains separate
+from those forty five values.
+
+86
+00:05:17.493 --> 00:05:20.143
+This trace establishes
+a prepared observation.
+
+87
+00:05:20.733 --> 00:05:23.923
+It does not fit a coefficient
+or measure generalization.
+
+88
+00:05:26.067 --> 00:05:27.917
+If all these checks pass,
+
+89
+00:05:28.287 --> 00:05:29.437
+what can we claim?
+
+90
+00:05:30.127 --> 00:05:34.157
+Pause before turning preparation
+evidence into a model result.
+
+91
+00:05:35.007 --> 00:05:38.097
+We can claim that the prepared
+observation, representation
+
+92
+00:05:38.747 --> 00:05:42.157
+and partition identities agree
+with their declared contracts.
+
+93
+00:05:42.627 --> 00:05:45.897
+We cannot claim that a
+demand predictor is accurate,
+
+94
+00:05:46.187 --> 00:05:48.317
+that the learner has
+mastered the material,
+
+95
+00:05:48.667 --> 00:05:51.117
+or that hosted recovery has succeeded.
+
+96
+00:05:51.727 --> 00:05:55.547
+The next baseline should use the same
+frozen observations and validation
+
+97
+00:05:55.547 --> 00:05:56.457
+contract.
+
+98
+00:05:56.867 --> 00:06:00.157
+The reserved final test
+remains outside tuning.

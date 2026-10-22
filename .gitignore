@@ -14,3 +14,13 @@ __pycache__/
 .DS_Store
 .codex/research-venv-native/
 .playwright-cli/
+.pytest_cache/
+.ruff_cache/
+.venv/
+coverage/
+playwright-report/
+*.tsbuildinfo
+*.tmp
+
+# Local reader output can contain ignored project study notes.
+.local-dist/

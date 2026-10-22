@@ -1,0 +1,270 @@
+WEBVTT
+
+00:00:00.600 --> 00:00:05.060
+Mean absolute error adds the
+magnitude of every aligned residual,
+
+00:00:05.060 --> 00:00:08.540
+preventing positive and
+negative misses from cancelling.
+
+00:00:08.540 --> 00:00:10.520
+For the selected model,
+
+00:00:10.520 --> 00:00:14.413
+total absolute error is five
+hundred and forty eight thousand,
+
+00:00:14.413 --> 00:00:17.640
+six hundred and ninety eight
+point one one one nine.
+
+00:00:17.640 --> 00:00:19.780
+Dividing by four thousand,
+
+00:00:19.780 --> 00:00:24.387
+three hundred and seventy five recorded
+hours gives one hundred and twenty five
+
+00:00:24.387 --> 00:00:27.490
+point four one six seven rentals per hour.
+
+00:00:28.280 --> 00:00:31.230
+The denominator is the
+observed evaluation population,
+
+00:00:31.520 --> 00:00:34.050
+not every expected calendar slot.
+
+00:00:34.460 --> 00:00:37.570
+This definition stayed fixed
+before the test was opened,
+
+00:00:37.780 --> 00:00:41.310
+so it can be compared honestly
+with the prior validation score.
+
+00:00:43.400 --> 00:00:46.770
+Absolute error answers
+average miss magnitude.
+
+00:00:47.260 --> 00:00:51.170
+Root mean squared error squares
+each miss before averaging,
+
+00:00:51.480 --> 00:00:53.850
+then takes the root to
+return to rental units.
+
+00:00:54.260 --> 00:00:57.550
+Here it is one hundred and
+seventy four point four seven.
+
+00:00:58.180 --> 00:01:02.210
+Mean signed error is negative one
+hundred and eleven point three six,
+
+00:01:02.520 --> 00:01:04.790
+showing substantial underprediction.
+
+00:01:05.820 --> 00:01:07.670
+These numbers answer different questions.
+
+00:01:08.240 --> 00:01:12.560
+A near zero signed average could hide
+equally large positive and negative
+
+00:01:12.560 --> 00:01:13.170
+misses,
+
+00:01:13.540 --> 00:01:16.570
+while squaring makes large
+errors more influential.
+
+00:01:17.180 --> 00:01:21.730
+Keeping all three prevents one attractive
+number from substituting for the task.
+
+00:01:22.140 --> 00:01:26.880
+None is a calibrated uncertainty interval
+or a measure of downstream inventory
+
+00:01:26.880 --> 00:01:27.810
+value.
+
+00:01:29.837 --> 00:01:34.961
+The group predictor won validation with
+mean absolute error ninety one point five
+
+00:01:34.961 --> 00:01:39.447
+seven, ahead of the retained forest
+at ninety nine point eight three.
+
+00:01:40.017 --> 00:01:40.607
+Later,
+
+00:01:40.617 --> 00:01:44.027
+the group score rises to one hundred
+and twenty five point four two,
+
+00:01:44.257 --> 00:01:47.547
+while the forest scores one
+hundred and three point six five.
+
+00:01:48.437 --> 00:01:51.917
+Interaction regression also scores
+below groups on the final hours,
+
+00:01:51.917 --> 00:01:54.427
+at one hundred and
+eleven point three zero.
+
+00:01:55.297 --> 00:01:59.787
+All seven rows share the same final
+membership and already selected policies.
+
+00:02:00.437 --> 00:02:04.227
+This is a real negative finding about
+the original selection’s transfer.
+
+00:02:04.737 --> 00:02:08.757
+Hiding the reversal would make the
+project easier to celebrate and harder to
+
+00:02:08.757 --> 00:02:09.527
+understand.
+
+00:02:11.817 --> 00:02:14.987
+The result comes from
+row aligned forecasts.
+
+00:02:15.577 --> 00:02:17.847
+Each prediction carries the same record,
+
+00:02:18.097 --> 00:02:21.007
+target time and issue
+time as its observation.
+
+00:02:21.777 --> 00:02:23.767
+The scorer refuses missing,
+
+00:02:23.937 --> 00:02:27.727
+duplicated or reordered
+identities before reducing errors.
+
+00:02:28.537 --> 00:02:31.424
+Independent verification
+checks all thirty thousand,
+
+00:02:31.424 --> 00:02:34.507
+six hundred and twenty
+five final forecasts,
+
+00:02:35.197 --> 00:02:36.127
+the error arithmetic
+
+00:02:36.777 --> 00:02:37.787
+and the slice totals.
+
+00:02:38.437 --> 00:02:42.237
+Group predictions are also recomputed
+directly from the original training
+
+00:02:42.237 --> 00:02:42.887
+observations.
+
+00:02:43.897 --> 00:02:48.187
+Passing these checks establishes the
+measured values and fixed execution,
+
+00:02:48.557 --> 00:02:51.287
+while a disappointing score
+remains disappointing.
+
+00:02:51.977 --> 00:02:55.507
+Correct code and strong later
+forecasting are separate conclusions.
+
+00:02:57.983 --> 00:03:00.587
+The group artifact uses five thousand,
+
+00:03:00.587 --> 00:03:06.313
+six hundred and forty JSON bytes, while
+the forest uses about sixteen million.
+
+00:03:06.723 --> 00:03:12.283
+Historical fitting took about zero point
+zero one three six seconds for groups and
+
+00:03:12.283 --> 00:03:15.333
+zero point six seven
+six two for the forest.
+
+00:03:16.163 --> 00:03:21.703
+Final saved snapshot replay took roughly
+zero point zero two eight eight and
+
+00:03:21.703 --> 00:03:25.013
+zero point one eight four two
+seconds for the full batches.
+
+00:03:25.743 --> 00:03:29.173
+These costs belong to this local
+implementation and machine.
+
+00:03:29.603 --> 00:03:31.653
+Storage bytes are not peak memory,
+
+00:03:31.763 --> 00:03:36.653
+and batch snapshot traversal is not
+optimized per request production latency.
+
+00:03:36.963 --> 00:03:41.673
+Cost can inform another decision without
+rewriting the fixed quality comparison.
+
+00:03:44.067 --> 00:03:47.867
+The application keeps the
+original selected badge on groups,
+
+00:03:47.867 --> 00:03:51.847
+preserving the distinction between
+the development decision and the final
+
+00:03:51.847 --> 00:03:52.577
+finding.
+
+00:03:53.267 --> 00:03:56.717
+This does not force deployment of
+a model regardless of evidence.
+
+00:03:57.207 --> 00:03:59.517
+Choosing the forest
+next can be reasonable,
+
+00:03:59.787 --> 00:04:02.637
+but the choice now uses
+knowledge from this test.
+
+00:04:03.047 --> 00:04:06.997
+A new independent performance
+claim needs new held out evidence.
+
+00:04:07.347 --> 00:04:12.907
+The task also never supplied an
+operational error threshold or the cost of
+
+00:04:12.907 --> 00:04:15.157
+missed demand versus idle bicycles.
+
+00:04:15.887 --> 00:04:19.557
+Beating a global mean therefore does
+not establish planning readiness.
+
+00:04:20.567 --> 00:04:23.297
+The result supports a more
+informed next conversation,
+
+00:04:23.707 --> 00:04:25.617
+not an invented acceptance gate.
+

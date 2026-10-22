@@ -1,0 +1,61 @@
+{
+  "correction": "Restored original supporting Markdown before applying a label expression that excludes nested brackets and newlines. Complete QA interval questions/answers preserved.",
+  "files": [
+    {
+      "file": "research.md",
+      "baseline_bytes": 4784,
+      "restored_bytes": 4784,
+      "question_count": 0,
+      "answer_count": 0
+    },
+    {
+      "file": "practice/questions.md",
+      "baseline_bytes": 12684,
+      "restored_bytes": 13752,
+      "question_count": 20,
+      "answer_count": 20
+    },
+    {
+      "file": "practice/explain-your-model.md",
+      "baseline_bytes": 11399,
+      "restored_bytes": 11435,
+      "question_count": 0,
+      "answer_count": 0
+    },
+    {
+      "file": "project/translation.md",
+      "baseline_bytes": 16944,
+      "restored_bytes": 17489,
+      "question_count": 0,
+      "answer_count": 0
+    },
+    {
+      "file": "project/roberta.md",
+      "baseline_bytes": 13571,
+      "restored_bytes": 14260,
+      "question_count": 0,
+      "answer_count": 0
+    },
+    {
+      "file": "project/readiness.md",
+      "baseline_bytes": 3375,
+      "restored_bytes": 3375,
+      "question_count": 0,
+      "answer_count": 0
+    },
+    {
+      "file": "project/source-map.md",
+      "baseline_bytes": 21179,
+      "restored_bytes": 25235,
+      "question_count": 0,
+      "answer_count": 0
+    },
+    {
+      "file": "project/reference-runs.md",
+      "baseline_bytes": 3795,
+      "restored_bytes": 4760,
+      "question_count": 0,
+      "answer_count": 0
+    }
+  ]
+}

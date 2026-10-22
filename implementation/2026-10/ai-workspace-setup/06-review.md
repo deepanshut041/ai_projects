@@ -64,3 +64,11 @@ Checks run for this follow-up: 42 CLI tests, 10 site content checks, five skill 
 ## Pre-P01 repository review — 2026-10-09
 
 The user explicitly requested clean local commits before Project 1. The current [commit review](07-pre-p01-commit-review.md) records scope, child-first ordering, checks and the stale diagram-count test correction. All current CLI/site/skill/example checks pass. Final Git identities and umbrella alignment are verified after committing. P01-M1 remains not-started; next action is gpt-lab M1. Earlier no-commit statements are historical.
+
+## Docs cleanup — 2026-10-09
+
+The user requested unwanted file cleanup inside ai_projects/docs. Removed 69 disposable files (temporary browser screenshots/PDF, six exports whose hashes matched retained verification copies, browser snapshots/logs and two Python bytecode caches), reclaiming 31,351,592 bytes. Removed generated test-results/, output/, .playwright-cli/ and the example __pycache__, plus empty obsolete content/papers and content/collections folders. Dependencies and the live dist/ remain because the local Docs site uses them.
+
+Six final P00/P01 reader screenshots were retained under [selected reader evidence](../../evidence/2026-10-09-tutorial-reader/README.md). All tracked files survived; 176 protected tutorial, implementation, content, catalog and site source files were hash-identical immediately after cleanup. Historical verification records/logs, canonical documentation, both tutorial source trees and local edits were preserved. No new cleanup package, repository, commit or publication was created. P00-M1 remains not-started.
+
+Post-cleanup checks: all eight native Docs tests passed; P00 overview, first chapter, workbook, complete lesson and the actual model-source download returned HTTP 200. Six retained screenshot files exist, all four disposable output/cache directories remain absent, and git diff --check passes. The running site and dependency installation were preserved.

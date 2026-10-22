@@ -1,0 +1,107 @@
+{
+  "recorded_date": "2026-10-12",
+  "python_version": "3.12.13",
+  "torch_version": "2.14.1+cpu",
+  "device": "cpu",
+  "dtype": "torch.float64",
+  "command": "python -m unittest test_transformer_foundation_probes -v",
+  "working_directory": "tutorials/projects/p00/transformer-foundations/v1/examples",
+  "tests_run": 34,
+  "failures": 0,
+  "errors": 0,
+  "successful": true,
+  "test_output": "..................................\n----------------------------------------------------------------------\nRan 34 tests in 0.519s\n\nOK\n",
+  "expected_stdout": "{\"attention\":{\"empty_output\":[[0.0,0.0]],\"masked_output\":[[3.0,1.5]],\"output\":[[4.0,1.0]],\"score_gradient\":[[-0.666667,0.666667,0.0]],\"weights\":[[0.166667,0.333333,0.5]]},\"embedding_lookup_gradient\":[[0.0,0.0],[2.0,2.0],[4.0,4.0],[0.0,0.0]],\"ffn_outputs\":[[3.0,-1.0],[3.0,4.0]],\"position_width_5_at_zero\":[0.0,1.0,0.0,1.0,0.0],\"schedule_peak_step_4_width_4\":0.25,\"small_counts\":{\"ffn\":17,\"multihead\":24,\"one_tied_vocabulary_matrix\":8,\"three_untied_vocabulary_matrices\":24},\"smoothed_target_class_1\":[[0.025,0.925,0.025,0.025]],\"tied_pad_output_gradient_nonzero\":true}\n",
+  "report": {
+    "attention": {
+      "weights": [
+        [
+          0.166667,
+          0.333333,
+          0.5
+        ]
+      ],
+      "output": [
+        [
+          4.0,
+          1.0
+        ]
+      ],
+      "masked_output": [
+        [
+          3.0,
+          1.5
+        ]
+      ],
+      "empty_output": [
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      "score_gradient": [
+        [
+          -0.666667,
+          0.666667,
+          0.0
+        ]
+      ]
+    },
+    "embedding_lookup_gradient": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        2.0,
+        2.0
+      ],
+      [
+        4.0,
+        4.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "tied_pad_output_gradient_nonzero": true,
+    "position_width_5_at_zero": [
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    "ffn_outputs": [
+      [
+        3.0,
+        -1.0
+      ],
+      [
+        3.0,
+        4.0
+      ]
+    ],
+    "small_counts": {
+      "three_untied_vocabulary_matrices": 24,
+      "one_tied_vocabulary_matrix": 8,
+      "multihead": 24,
+      "ffn": 17
+    },
+    "schedule_peak_step_4_width_4": 0.25,
+    "smoothed_target_class_1": [
+      [
+        0.025,
+        0.925,
+        0.025,
+        0.025
+      ]
+    ]
+  },
+  "source_sha256": {
+    "transformer_foundation_probes.py": "80151cc7f474497a67fe7d99113b064bef1a9993c4e879060abc13c468ee8e50",
+    "test_transformer_foundation_probes.py": "01861d222cd344871a1de5cbd02302e0b3a7709f8f5810a2450c105c6acd11f5"
+  },
+  "scope": "Educational component checks. No child implementation edits, learner completion, model training, hosted recovery or publication."
+}

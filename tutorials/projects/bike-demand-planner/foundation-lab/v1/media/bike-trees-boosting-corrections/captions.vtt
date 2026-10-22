@@ -1,0 +1,238 @@
+WEBVTT
+
+00:00:00.560 --> 00:00:04.630
+Boosting begins with a prediction
+and asks what it still misses.
+
+00:00:05.360 --> 00:00:10.650
+For squared error, the next tree learns
+observed target minus current prediction.
+
+00:00:11.340 --> 00:00:16.520
+This sign is opposite to the prediction
+minus target residual used by our scoring
+
+00:00:16.520 --> 00:00:17.450
+functions.
+
+00:00:17.520 --> 00:00:20.730
+Return to the four real training rows,
+
+00:00:21.000 --> 00:00:23.630
+whose initial mean is
+ninety four point two five.
+
+00:00:24.240 --> 00:00:29.584
+The two busy residuals are eighty four
+point seven five and one hundred point
+
+00:00:29.584 --> 00:00:30.330
+seven five.
+
+00:00:31.080 --> 00:00:33.590
+Their mean is ninety two point seven five,
+
+00:00:34.000 --> 00:00:37.410
+so the first busy leaf
+stores a positive correction.
+
+00:00:38.200 --> 00:00:41.590
+A target above the forecast
+needs an upward move.
+
+00:00:43.733 --> 00:00:49.183
+We apply one tenth of that correction,
+using learning rate zero point one.
+
+00:00:49.613 --> 00:00:55.136
+Ninety four point two five plus nine point
+two seven five gives one hundred and three
+
+00:00:55.136 --> 00:00:56.563
+point five two five.
+
+00:00:57.373 --> 00:01:02.973
+The quiet branch has correction minus
+ninety two point seven five and moves down
+
+00:01:02.973 --> 00:01:04.963
+to eighty four point nine seven five.
+
+00:01:05.833 --> 00:01:08.563
+These are deliberately partial moves.
+
+00:01:08.913 --> 00:01:13.403
+The first boosted prediction therefore
+differs from the direct stump mean of one
+
+00:01:13.403 --> 00:01:13.863
+hundred and eighty seven.
+
+00:01:15.413 --> 00:01:18.343
+The rate controls the
+contribution of a correction,
+
+00:01:18.793 --> 00:01:22.603
+while the stage count controls how
+many successive corrections are fitted.
+
+00:01:24.775 --> 00:01:26.385
+After the first stage,
+
+00:01:26.555 --> 00:01:29.865
+the busy forecast is one hundred
+and three point five two five.
+
+00:01:30.555 --> 00:01:34.725
+The remaining busy residual mean is
+eighty three point four seven five,
+
+00:01:35.595 --> 00:01:38.205
+not the original ninety
+two point seven five.
+
+00:01:39.175 --> 00:01:43.285
+Applying one tenth of this new correction
+gives one hundred and eleven point eight
+
+00:01:43.285 --> 00:01:44.525
+seven two five.
+
+00:01:45.195 --> 00:01:49.285
+This dependence on the running prediction
+is what makes the fitting sequential.
+
+00:01:50.115 --> 00:01:53.565
+A forest instead averages
+finished component forecasts.
+
+00:01:54.515 --> 00:01:57.745
+Our known answer checks
+independently verify both stages,
+
+00:01:58.015 --> 00:02:01.605
+so the distinction is visible in
+numbers as well as terminology.
+
+00:02:03.983 --> 00:02:09.623
+The snapshot replay starts with the saved
+initial constant and adds each saved
+
+00:02:09.623 --> 00:02:13.193
+tree value multiplied by
+the saved learning rate.
+
+00:02:13.783 --> 00:02:17.933
+These local names abbreviate the
+actual snapshot fields in the source.
+
+00:02:18.683 --> 00:02:22.873
+Prediction performs no residual
+fitting and receives no outcomes.
+
+00:02:23.383 --> 00:02:26.073
+The library constructed the
+residual trees during training.
+
+00:02:27.023 --> 00:02:32.593
+Our full benchmark uses squared error,
+depth three, leaf support ten,
+
+00:02:33.163 --> 00:02:38.233
+rate zero point one and one hundred,
+two hundred or three hundred stages.
+
+00:02:39.043 --> 00:02:41.193
+Validation early stopping is disabled.
+
+00:02:41.683 --> 00:02:44.593
+The declared stage count,
+together with the structural limits,
+
+00:02:44.743 --> 00:02:46.673
+is the actual stopping policy.
+
+00:02:48.900 --> 00:02:52.450
+The full model starts at the
+twenty eleven training mean,
+
+00:02:52.720 --> 00:02:55.170
+about one hundred and forty
+three point seven nine.
+
+00:02:55.780 --> 00:02:57.870
+At the real busy Monday request,
+
+00:02:58.280 --> 00:03:03.046
+its three hundred tree corrections sum to
+about seven hundred and forty seven point
+
+00:03:03.046 --> 00:03:04.050
+three seven.
+
+00:03:04.200 --> 00:03:08.717
+Applying the rate gives a final forecast
+of two hundred and eighteen point five
+
+00:03:08.717 --> 00:03:09.310
+three.
+
+00:03:09.740 --> 00:03:15.570
+At two oclock, the same model instead
+returns minus twenty five point five two.
+
+00:03:16.280 --> 00:03:20.260
+Negative correction leaves can take the
+total outside the nonnegative target
+
+00:03:20.260 --> 00:03:21.070
+range.
+
+00:03:21.680 --> 00:03:26.380
+Our explicit clipping policy changes that
+quiet forecast to zero and leaves the
+
+00:03:26.380 --> 00:03:28.490
+positive busy forecast alone.
+
+00:03:30.668 --> 00:03:35.768
+Increasing the declared stage count lowers
+training error and improves later error
+
+00:03:35.768 --> 00:03:36.648
+within this grid.
+
+00:03:36.648 --> 00:03:42.538
+Raw mean absolute error reaches about
+one hundred and four point eight four;
+
+00:03:43.188 --> 00:03:45.998
+clipping reaches one hundred
+and two point two two.
+
+00:03:46.488 --> 00:03:50.138
+Neither beats the grouped baseline
+at ninety one point five seven.
+
+00:03:50.528 --> 00:03:55.338
+All three declared seeds give
+identical scores in this setup.
+
+00:03:55.728 --> 00:03:58.458
+That is an observed
+lack of variation here,
+
+00:03:58.628 --> 00:04:00.998
+not three independent future periods.
+
+00:04:01.528 --> 00:04:05.058
+A different learning rate or
+loss would be another comparison.
+
+00:04:06.028 --> 00:04:10.148
+We retain the current settings and results
+instead of silently enlarging the search
+
+00:04:10.148 --> 00:04:11.398
+after seeing them.
+

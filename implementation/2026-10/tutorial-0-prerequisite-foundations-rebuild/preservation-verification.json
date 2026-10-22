@@ -1,0 +1,19 @@
+{
+  "protected_later_course_files": 133,
+  "children": {
+    "transformer-foundations-lab": {
+      "head": "b7ffaa6911c305c07823b474cbfbda1169d8e158",
+      "status_preserved": true,
+      "source_files_preserved": 19
+    },
+    "attention-is-all-you-need": {
+      "head": "475c6347104c1de9a8c158171b9f6f3228d1aba3",
+      "status_preserved": true,
+      "source_files_preserved": 30
+    }
+  },
+  "archive_members": 44,
+  "archive_sha256": "8cf638c3f3f38a6a5396d60c17d5114265879cb60a51c3e3b5eecc4843be2f16",
+  "original_source_files_preserved": 9,
+  "passed": true
+}

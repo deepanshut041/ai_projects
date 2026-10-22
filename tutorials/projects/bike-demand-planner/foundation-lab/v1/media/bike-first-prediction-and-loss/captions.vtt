@@ -1,0 +1,227 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:05.250
+Return to the original eight
+o’clock request and inputs one, two.
+
+00:00:05.740 --> 00:00:08.950
+Give the matching positions
+weights ten and five.
+
+00:00:09.380 --> 00:00:10.750
+Add a bias of twenty.
+
+00:00:11.500 --> 00:00:13.000
+The inputs describe the hour,
+
+00:00:13.000 --> 00:00:16.830
+while these three parameters
+define the current prediction rule.
+
+00:00:17.400 --> 00:00:20.590
+All parameter values are
+chosen for arithmetic practice.
+
+00:00:20.880 --> 00:00:23.730
+They are not learned demand
+estimates from the dataset.
+
+00:00:24.140 --> 00:00:28.510
+We will keep this starting state fixed
+when comparing two alternative targets,
+
+00:00:29.060 --> 00:00:31.810
+so the effect of the changed
+outcome stays visible.
+
+00:00:33.900 --> 00:00:37.970
+Take the first input, one,
+and its matching weight, ten.
+
+00:00:38.580 --> 00:00:39.670
+Their product is ten.
+
+00:00:40.600 --> 00:00:43.490
+Pair the second input,
+two, with weight five.
+
+00:00:43.980 --> 00:00:45.670
+That product is also ten.
+
+00:00:46.640 --> 00:00:48.390
+Adding the two products gives twenty.
+
+00:00:49.060 --> 00:00:51.830
+This subtotal contains both
+weighted contributions;
+
+00:00:52.480 --> 00:00:54.250
+the bias still needs to be added.
+
+00:00:56.483 --> 00:01:00.293
+The complete prediction adds a
+bias to the weighted subtotal.
+
+00:01:00.903 --> 00:01:04.573
+Here the subtotal is twenty,
+and the bias is another twenty.
+
+00:01:05.143 --> 00:01:07.493
+The resulting estimate is forty rentals.
+
+00:01:08.543 --> 00:01:13.533
+These arithmetic contributions do not
+establish separate causes of demand.
+
+00:01:14.083 --> 00:01:18.973
+The bias provides a common offset,
+and the calculation needs no later target.
+
+00:01:21.233 --> 00:01:25.603
+The prediction function receives features,
+weights and bias.
+
+00:01:26.353 --> 00:01:30.913
+The source checks that the vectors have
+compatible nonempty shapes and finite
+
+00:01:30.913 --> 00:01:31.843
+values.
+
+00:01:32.553 --> 00:01:33.923
+It then pairs the entries,
+
+00:01:34.433 --> 00:01:37.103
+multiplies each pair
+and sums the products.
+
+00:01:38.173 --> 00:01:40.383
+The final addition supplies the bias.
+
+00:01:40.773 --> 00:01:44.583
+This displayed excerpt
+shortens the validation code,
+
+00:01:44.773 --> 00:01:46.743
+but preserves the executed arithmetic.
+
+00:01:47.813 --> 00:01:51.043
+The full file is linked directly
+below the video in the notes.
+
+00:01:51.633 --> 00:01:54.723
+A real-valued output is a point estimate.
+
+00:01:55.553 --> 00:01:59.603
+It can be fractional even though an
+observed number of rentals is an integer.
+
+00:02:01.775 --> 00:02:04.825
+Suppose the later observed
+count is forty five.
+
+00:02:05.655 --> 00:02:09.225
+This target is illustrative,
+just like the starting parameters.
+
+00:02:09.935 --> 00:02:13.725
+Use prediction minus target
+as the residual convention.
+
+00:02:14.335 --> 00:02:17.285
+Forty minus forty five is negative five.
+
+00:02:17.835 --> 00:02:20.125
+The model is five rentals too low.
+
+00:02:20.875 --> 00:02:25.595
+Keeping this sign matters because the
+update must move the prediction toward the
+
+00:02:25.595 --> 00:02:26.225
+target.
+
+00:02:26.815 --> 00:02:30.875
+Changing the residual convention in one
+function while keeping the old derivative
+
+00:02:30.875 --> 00:02:33.565
+elsewhere would reverse that correction.
+
+00:02:34.015 --> 00:02:38.165
+The target is used after the forecast,
+when we measure its error.
+
+00:02:40.353 --> 00:02:44.143
+Choose half squared error for
+this one-observation calculation.
+
+00:02:44.973 --> 00:02:47.343
+Squaring negative five gives twenty five.
+
+00:02:48.013 --> 00:02:51.143
+Multiplying by one half
+gives twelve point five.
+
+00:02:51.533 --> 00:02:54.543
+The half simplifies the
+derivative we will use next.
+
+00:02:55.173 --> 00:02:59.313
+There is no averaging denominator to
+add because this example contains one
+
+00:02:59.313 --> 00:03:00.083
+observation.
+
+00:03:00.533 --> 00:03:03.663
+This scalar has squared rental units.
+
+00:03:04.033 --> 00:03:05.733
+It is not an accuracy percentage,
+
+00:03:05.733 --> 00:03:11.223
+and it is not the project’s later primary
+evaluation measure, mean absolute error.
+
+00:03:11.693 --> 00:03:15.603
+The loss describes the current error
+size under a particular objective.
+
+00:03:17.732 --> 00:03:22.842
+Keep the inputs and parameters fixed,
+but change only the target to thirty five.
+
+00:03:23.552 --> 00:03:27.982
+The forward function still returns forty,
+because it never receives the target.
+
+00:03:28.532 --> 00:03:30.662
+The residual is now positive five,
+
+00:03:30.792 --> 00:03:33.802
+while half squared error
+remains twelve point five.
+
+00:03:34.452 --> 00:03:37.942
+Equal loss values do not
+mean equal update directions.
+
+00:03:38.752 --> 00:03:41.862
+One estimate is too low
+and the other is too high.
+
+00:03:42.672 --> 00:03:46.612
+Retain the signed residual and the
+dependence of the prediction on each
+
+00:03:46.612 --> 00:03:47.242
+parameter.
+
+00:03:47.832 --> 00:03:51.622
+The chain rule uses those relationships
+to calculate the correction,
+
+00:03:51.932 --> 00:03:53.262
+which is the next step.
+

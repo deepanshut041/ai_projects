@@ -1,0 +1,63 @@
+{
+  "moves": {
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/2026-10/bike-demand-planner-phases-and-boilerplate": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/00_bike-demand-planner-phases-and-boilerplate",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/2026-10/prediction-contract-and-one-update": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/01_prediction-contract-and-one-update",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/2026-10/hourly-data-audit-and-splits": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/02_hourly-data-audit-and-splits",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/2026-10/simple-predictions-and-hourly-error-metrics": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/03_simple-predictions-and-hourly-error-metrics",
+    "ai_projects/projects/transformer-labs/transformer-foundations-lab/docs/implementation/2026-10/p00-foundations-implementation-and-learning": "ai_projects/projects/transformer-labs/transformer-foundations-lab/docs/implementation/00_p00-foundations-implementation-and-learning"
+  },
+  "updated_text_files": [
+    ".ai/videos/projects/bike-hourly-data-calendar-split/transcript.md",
+    "AGENTS.md",
+    "README.md",
+    "ai_projects/AGENTS.md",
+    "ai_projects/README.md",
+    "ai_projects/docs/AGENTS.md",
+    "ai_projects/docs/README.md",
+    "ai_projects/docs/guide/progress.md",
+    "ai_projects/docs/guide/resume.md",
+    "ai_projects/docs/guide/roadmap.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/README.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/00_bike-demand-planner-phases-and-boilerplate/00-resume.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/00_bike-demand-planner-phases-and-boilerplate/01-learning-points.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/00_bike-demand-planner-phases-and-boilerplate/02-notes-to-understanding.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/00_bike-demand-planner-phases-and-boilerplate/03-tasks.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/00_bike-demand-planner-phases-and-boilerplate/phase-arc-review.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/02_hourly-data-audit-and-splits/00-resume.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/02_hourly-data-audit-and-splits/01-learning-points.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/02_hourly-data-audit-and-splits/02-notes-to-understanding.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/02_hourly-data-audit-and-splits/03-tasks.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/02_hourly-data-audit-and-splits/04-comparisons.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/02_hourly-data-audit-and-splits/05-tracker.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/02_hourly-data-audit-and-splits/before-encoding-splits/00-resume.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/02_hourly-data-audit-and-splits/video-production-2026-10-19.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/01_prediction-contract-and-one-update/00-resume.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/01_prediction-contract-and-one-update/02-notes-to-understanding.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/03_simple-predictions-and-hourly-error-metrics/00-resume.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/03_simple-predictions-and-hourly-error-metrics/02-notes-to-understanding.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/03_simple-predictions-and-hourly-error-metrics/05-tracker.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/README.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/phases/00-prediction-contract/README.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/phases/01-data-and-splits/README.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/phases/02-baselines/README.md",
+    "ai_projects/projects/foundations/bike-demand-planner/docs/phases/README.md",
+    "ai_projects/projects/transformer-labs/transformer-foundations-lab/README.md",
+    "ai_projects/projects/transformer-labs/transformer-foundations-lab/docs/implementation/00_p00-foundations-implementation-and-learning/00-resume.md",
+    "ai_projects/projects/transformer-labs/transformer-foundations-lab/docs/implementation/00_p00-foundations-implementation-and-learning/01-research.md",
+    "ai_projects/projects/transformer-labs/transformer-foundations-lab/docs/implementation/00_p00-foundations-implementation-and-learning/02-human-plan.md",
+    "ai_projects/projects/transformer-labs/transformer-foundations-lab/docs/implementation/00_p00-foundations-implementation-and-learning/02-implementation-plan.md",
+    "ai_projects/projects/transformer-labs/transformer-foundations-lab/docs/implementation/00_p00-foundations-implementation-and-learning/03-tasks.md",
+    "ai_projects/projects/transformer-labs/transformer-foundations-lab/docs/implementation/00_p00-foundations-implementation-and-learning/05-tracker.md"
+  ],
+  "video_source_relocation": [
+    {
+      "original": {
+        "path": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/2026-10/hourly-data-audit-and-splits/02-notes-to-understanding.md",
+        "sha256": "89479c3870845c49151a9eeaebf22a6987abf61749db3bea53f5cc8ab5e9e078"
+      },
+      "current_path": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/02_hourly-data-audit-and-splits/02-notes-to-understanding.md",
+      "current_sha256": "e71a4b0cfa57b6e579c9bff8829752e46a940e4ebb163d92459596499b3e1e61",
+      "reason": "Numbered learning-record layout; relative links rebased. Teaching content and model code unchanged."
+    }
+  ]
+}

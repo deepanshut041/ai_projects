@@ -8,15 +8,18 @@
     {
       "id": "P00",
       "title": "Tokenization and Transformer Foundations",
-      "status": "planned",
-      "lessons": []
+      "status": "prerequisite-and-model-courses-available",
+      "lessons": [
+        "projects/p00/transformer-foundations/v1",
+        "projects/p00/transformer-course/v1"
+      ]
     },
     {
       "id": "P01",
       "title": "Small GPT Language Model",
-      "status": "historical-reference-available",
+      "status": "integrated-tutorial-available",
       "lessons": [
-        "projects/p01/gpt-1-foundations/v1"
+        "projects/p01/small-gpt/v1"
       ]
     },
     {
@@ -126,6 +129,21 @@
       "title": "Gemma 4 unified multimodal",
       "status": "planned",
       "lessons": []
+    },
+    {
+      "id": "bike-demand-planner",
+      "title": "Foundation Lab",
+      "status": "integrated-tutorial-available",
+      "lessons": [
+        "projects/bike-demand-planner/foundation-lab/v1"
+      ]
     }
-  ]
+  ],
+  "course_sequence": [
+    "projects/p00/transformer-foundations/v1",
+    "projects/p00/transformer-course/v1",
+    "projects/p01/small-gpt/v1"
+  ],
+  "reference_lessons": [],
+  "course_number_start": 0
 }

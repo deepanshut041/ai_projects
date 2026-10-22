@@ -1,0 +1,273 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:05.510
+The group baseline has the lowest
+overall validation mean absolute error,
+
+00:00:05.900 --> 00:00:07.310
+ninety one point five seven.
+
+00:00:07.960 --> 00:00:12.570
+It also beats the representative forest
+on the defined working day rush slice.
+
+00:00:13.020 --> 00:00:14.770
+But June reverses that comparison:
+
+00:00:15.440 --> 00:00:17.710
+groups has error near one
+hundred and forty three,
+
+00:00:18.280 --> 00:00:20.830
+while the forest is near
+ninety point eight eight.
+
+00:00:21.200 --> 00:00:24.010
+The deep tree is also much better in June.
+
+00:00:24.740 --> 00:00:29.690
+We keep that tradeoff visible rather than
+describing one function as uniformly best.
+
+00:00:30.180 --> 00:00:34.410
+The forest value here belongs to one
+retained seed seventeen artifact,
+
+00:00:34.820 --> 00:00:37.790
+distinct from its earlier three
+seed configuration average.
+
+00:00:40.003 --> 00:00:45.723
+The previous study selected configurations
+using overall validation mean absolute
+
+00:00:45.723 --> 00:00:49.333
+error, giving each
+observed hour equal weight.
+
+00:00:49.983 --> 00:00:52.873
+We have not agreed a June only objective,
+
+00:00:53.443 --> 00:00:54.953
+a special rush penalty
+
+00:00:55.563 --> 00:00:57.473
+or a monetary cost function.
+
+00:00:57.843 --> 00:00:59.453
+Those would be different questions.
+
+00:01:00.443 --> 00:01:05.323
+Selecting a forest just because one
+inspected slice is favorable would
+
+00:01:05.323 --> 00:01:08.693
+silently change the objective
+after seeing its result.
+
+00:01:09.423 --> 00:01:15.073
+Constructing a routed ensemble would also
+be another fitted or selected function,
+
+00:01:15.283 --> 00:01:17.153
+beyond this diagnostic review.
+
+00:01:18.183 --> 00:01:21.303
+We retain the prior groups
+and raw output choice,
+
+00:01:21.303 --> 00:01:26.013
+and record the later period weakness
+as part of the candidate handoff.
+
+00:01:28.400 --> 00:01:33.860
+The handoff copies the exact original
+selected group model into a candidate
+
+00:01:33.860 --> 00:01:34.870
+model file.
+
+00:01:35.400 --> 00:01:38.790
+Its bytes are identical to the
+previously fitted artifact,
+
+00:01:39.260 --> 00:01:42.250
+and the candidate configuration
+records their hash.
+
+00:01:43.000 --> 00:01:45.290
+No fitting call is made
+during this review.
+
+00:01:45.720 --> 00:01:49.930
+The configuration also retains
+data and split identities,
+
+00:01:50.600 --> 00:01:54.110
+model feature order,
+fitting source, review protocol
+
+00:01:54.560 --> 00:01:56.010
+and used calendar fields.
+
+00:01:56.740 --> 00:02:01.340
+The old fit source and the current
+analysis source remain separate provenance
+
+00:02:01.340 --> 00:02:06.030
+records, rather than rewriting history
+as though the review trained the model.
+
+00:02:06.180 --> 00:02:11.570
+This makes the exact function being handed
+forward inspectable and reproducible.
+
+00:02:13.728 --> 00:02:18.738
+The candidate output is a raw floating
+point estimate in rentals per hour.
+
+00:02:19.128 --> 00:02:24.078
+Group means are already nonnegative,
+so no clipping or rounding is added.
+
+00:02:25.228 --> 00:02:29.378
+A valid absent key uses the
+training only global fallback.
+
+00:02:29.808 --> 00:02:32.498
+Invalid inputs are
+rejected before prediction.
+
+00:02:33.628 --> 00:02:36.438
+The same configuration
+carries the known schema,
+
+00:02:37.248 --> 00:02:39.698
+ordered features,
+historical date boundaries
+
+00:02:40.128 --> 00:02:41.498
+and issue lead convention.
+
+00:02:42.588 --> 00:02:44.398
+If one of these policies changed,
+
+00:02:45.088 --> 00:02:49.028
+equal parameter bytes would no longer
+establish identical behavior for all
+
+00:02:49.028 --> 00:02:49.618
+requests.
+
+00:02:50.648 --> 00:02:53.878
+We therefore freeze the contract
+beside the fitted values,
+
+00:02:54.068 --> 00:02:57.398
+rather than leaving future application
+code to guess their meaning.
+
+00:02:59.707 --> 00:03:01.737
+Ninety six source checks pass.
+
+00:03:02.307 --> 00:03:05.757
+The independent audit recomputes
+fourteen prediction files,
+
+00:03:06.027 --> 00:03:09.297
+six hundred and eighty six
+slice summaries, time groups,
+
+00:03:09.607 --> 00:03:10.837
+gap sensitive correlation,
+
+00:03:11.407 --> 00:03:14.297
+largest misses and the
+calendar level comparison.
+
+00:03:15.147 --> 00:03:18.517
+It also verifies candidate
+bytes and source, dependency
+
+00:03:18.887 --> 00:03:20.237
+and artifact identities.
+
+00:03:20.927 --> 00:03:25.987
+An isolated installed wheel check confirms
+package behavior while excluding private
+
+00:03:25.987 --> 00:03:27.157
+notes and runs.
+
+00:03:27.767 --> 00:03:31.507
+These checks establish implemented
+behavior and the retained numerical
+
+00:03:31.507 --> 00:03:32.437
+result.
+
+00:03:32.767 --> 00:03:35.927
+They do not establish that the
+learner has explained the reasoning,
+
+00:03:35.927 --> 00:03:38.837
+or that an operational decision improves.
+
+00:03:39.407 --> 00:03:42.267
+The written records were completed
+before these section companions,
+
+00:03:42.267 --> 00:03:44.877
+and remain the full source for review.
+
+00:03:47.082 --> 00:03:49.112
+The candidate retains its weaknesses:
+
+00:03:49.902 --> 00:03:52.752
+the same hour and day type ignores month,
+
+00:03:53.142 --> 00:03:56.252
+and working day rush
+deficits remain substantial.
+
+00:03:56.982 --> 00:04:01.052
+Observed rentals do not measure
+unmet demand or inventory,
+
+00:04:01.442 --> 00:04:05.212
+and this review adds no
+calibrated predictive interval.
+
+00:04:05.982 --> 00:04:10.012
+Serving and fresh process
+recovery are explicitly pending,
+
+00:04:10.442 --> 00:04:13.352
+while reserved test
+outcomes remain unopened.
+
+00:04:13.942 --> 00:04:17.272
+Repeated validation inspection
+is development evidence
+
+00:04:17.662 --> 00:04:19.952
+and can make selected scores optimistic.
+
+00:04:20.922 --> 00:04:21.912
+Before advancing,
+
+00:04:22.082 --> 00:04:26.852
+explain why the valid June request
+gets the same group mean as January,
+
+00:04:27.142 --> 00:04:30.452
+and why that can coexist
+with the best overall score.
+
+00:04:30.922 --> 00:04:34.612
+Those questions connect the
+fitted function, chosen objective
+
+00:04:35.062 --> 00:04:37.332
+and honest limits of the current evidence.
+

@@ -1,0 +1,81 @@
+{
+  "stages": [
+    {
+      "lesson": "next-token",
+      "stage_passed": true,
+      "commands": 1
+    },
+    {
+      "lesson": "workspace",
+      "stage_passed": true,
+      "commands": 1
+    },
+    {
+      "lesson": "text",
+      "stage_passed": true,
+      "commands": 1
+    },
+    {
+      "lesson": "windows",
+      "stage_passed": true,
+      "commands": 1
+    },
+    {
+      "lesson": "attention",
+      "stage_passed": true,
+      "commands": 1
+    },
+    {
+      "lesson": "model",
+      "stage_passed": true,
+      "commands": 1
+    },
+    {
+      "lesson": "learning",
+      "stage_passed": true,
+      "commands": 2
+    },
+    {
+      "lesson": "generation",
+      "stage_passed": true,
+      "commands": 1
+    },
+    {
+      "lesson": "checkpoint",
+      "stage_passed": true,
+      "commands": 1
+    },
+    {
+      "lesson": "trainer",
+      "stage_passed": true,
+      "commands": 3
+    },
+    {
+      "lesson": "colab",
+      "stage_passed": true,
+      "commands": 1
+    },
+    {
+      "lesson": "handoff",
+      "stage_passed": true,
+      "commands": 1
+    }
+  ],
+  "embedded_files": [
+    "cpu.json",
+    "fit_tiny.py",
+    "gpt_attention.py",
+    "gpt_checkpoint.py",
+    "gpt_config.py",
+    "gpt_data.py",
+    "gpt_model.py",
+    "gpt_objective.py",
+    "gpt_sample.py",
+    "gpt_train.py",
+    "gpt_trainer.py"
+  ],
+  "all_ast_match": true,
+  "notebook_code_compiles": true,
+  "learner_repository_created": false,
+  "hosted_run": false
+}

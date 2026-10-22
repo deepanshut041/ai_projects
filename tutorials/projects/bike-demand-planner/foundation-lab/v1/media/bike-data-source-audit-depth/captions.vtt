@@ -1,0 +1,343 @@
+WEBVTT
+
+1
+00:00:00.460 --> 00:00:05.130
+The source is the University of
+California Irvine Bike Sharing dataset.
+
+2
+00:00:05.420 --> 00:00:08.490
+Its creator and license are
+recorded with the source files.
+
+3
+00:00:09.420 --> 00:00:13.910
+We retain its official archive and
+extract the hourly file and its readme.
+
+4
+00:00:14.360 --> 00:00:16.130
+Daily records remain separate.
+
+5
+00:00:16.820 --> 00:00:20.630
+The acquired hourly file contains
+seventeen thousand three hundred seventy
+
+6
+00:00:20.630 --> 00:00:24.170
+nine observations from twenty
+eleven and twenty twelve.
+
+7
+00:00:24.980 --> 00:00:28.220
+We retain the acquisition details,
+attribution and license,
+
+8
+00:00:28.220 --> 00:00:30.990
+together with hashes
+of the original bytes.
+
+9
+00:00:31.560 --> 00:00:35.900
+This gives later comparisons a specific
+dataset identity rather than only a
+
+10
+00:00:35.900 --> 00:00:36.750
+download link.
+
+11
+00:00:38.609 --> 00:00:43.069
+In the parser,
+the identifier becomes record I D.
+
+12
+00:00:43.069 --> 00:00:45.519
+The date and hour become
+the target timestamp.
+
+13
+00:00:46.289 --> 00:00:50.299
+Validated source calendar fields
+stay together in a dictionary.
+
+14
+00:00:50.789 --> 00:00:54.619
+This intermediate dictionary
+contains seven calendar fields.
+
+15
+00:00:55.549 --> 00:00:58.259
+The observed total becomes
+the separate target.
+
+16
+00:00:59.109 --> 00:01:03.619
+The modelling encoder later selects five
+permitted fields from that dictionary.
+
+17
+00:01:04.369 --> 00:01:09.669
+This split lets the parser validate source
+information without silently making every
+
+18
+00:01:09.669 --> 00:01:11.999
+validated field a model input.
+
+19
+00:01:14.109 --> 00:01:15.879
+Before returning a row,
+
+20
+00:01:16.129 --> 00:01:20.959
+the parser checks all seventeen required
+fields and their allowed values.
+
+21
+00:01:21.509 --> 00:01:23.639
+Numeric values must be finite.
+
+22
+00:01:24.249 --> 00:01:27.819
+The date must agree with year,
+month and weekday codes.
+
+23
+00:01:28.349 --> 00:01:31.639
+Working day must agree with
+the weekend and holiday flags.
+
+24
+00:01:32.789 --> 00:01:34.799
+Component counts must add to the total.
+
+25
+00:01:35.609 --> 00:01:37.939
+The file audit checks unique identifiers,
+
+26
+00:01:38.569 --> 00:01:42.219
+unique hourly labels and
+strict chronological order.
+
+27
+00:01:42.769 --> 00:01:45.879
+These checks establish a
+coherent set of observations.
+
+28
+00:01:46.349 --> 00:01:49.859
+They do not measure how well
+a demand model generalizes.
+
+29
+00:01:51.915 --> 00:01:57.125
+One real source jump goes from January
+second at four in the morning to six.
+
+30
+00:01:57.615 --> 00:02:00.365
+The five o'clock label
+has no row between them.
+
+31
+00:02:00.915 --> 00:02:05.645
+Two hours between recorded
+labels imply one unrecorded slot,
+
+32
+00:02:05.775 --> 00:02:07.965
+calculated as two minus one.
+
+33
+00:02:08.475 --> 00:02:10.125
+We leave that slot absent.
+
+34
+00:02:10.855 --> 00:02:15.765
+Writing a new row with target zero
+would claim that no rentals occurred,
+
+35
+00:02:15.955 --> 00:02:18.025
+which the file does not establish.
+
+36
+00:02:18.435 --> 00:02:24.025
+Complete cells in the rows we have do
+not imply a complete hourly time grid.
+
+37
+00:02:26.002 --> 00:02:30.092
+The source labels span seven
+hundred thirty one calendar days.
+
+38
+00:02:30.582 --> 00:02:33.152
+A naive grid has twenty
+four slots per day.
+
+39
+00:02:33.582 --> 00:02:36.812
+That gives seventeen thousand
+five hundred forty four slots.
+
+40
+00:02:37.482 --> 00:02:41.822
+Subtracting seventeen thousand three
+hundred seventy nine observations leaves
+
+41
+00:02:41.822 --> 00:02:46.292
+one hundred sixty five unrecorded slots,
+across seventy five gaps.
+
+42
+00:02:46.802 --> 00:02:51.532
+Later we deliberately exclude two existing
+boundary rows for forecast timing.
+
+43
+00:02:52.062 --> 00:02:53.592
+Those are a different category.
+
+44
+00:02:54.222 --> 00:02:56.212
+Missing rows are absent observations.
+
+45
+00:02:56.802 --> 00:03:01.122
+Boundary exclusions are recorded
+observations whose evaluation issue times
+
+46
+00:03:01.122 --> 00:03:02.212
+are too early.
+
+47
+00:03:04.108 --> 00:03:07.058
+The audit counts have
+a useful denominator.
+
+48
+00:03:07.328 --> 00:03:12.348
+Seven hundred thirty one days times twenty
+four labels gives seventeen thousand five
+
+49
+00:03:12.348 --> 00:03:15.258
+hundred forty four naive hourly slots.
+
+50
+00:03:15.888 --> 00:03:18.698
+The difference from the recorded
+row count is one hundred sixty five,
+
+51
+00:03:19.708 --> 00:03:21.298
+about zero point nine four percent.
+
+52
+00:03:21.788 --> 00:03:25.798
+That is a missing label fraction
+under this grid convention.
+
+53
+00:03:26.148 --> 00:03:28.538
+It does not identify the missing outcomes,
+
+54
+00:03:29.008 --> 00:03:32.538
+their cause,
+a time zone or a daylight saving policy.
+
+55
+00:03:32.928 --> 00:03:36.398
+Those are additional claims that
+these counts do not establish.
+
+56
+00:03:38.566 --> 00:03:41.416
+Consider an explicitly
+illustrative window:
+
+57
+00:03:41.866 --> 00:03:44.596
+ten, a missing row, and thirty.
+
+58
+00:03:45.346 --> 00:03:47.596
+The two observed values average twenty.
+
+59
+00:03:48.606 --> 00:03:52.981
+Inserting a zero makes three values whose
+average is about thirteen point three
+
+60
+00:03:52.981 --> 00:03:53.576
+three.
+
+61
+00:03:54.046 --> 00:03:58.356
+The code shows that both the
+denominator and the dataset changed.
+
+62
+00:03:58.586 --> 00:04:00.656
+We did not merely tidy a display.
+
+63
+00:04:01.366 --> 00:04:06.206
+A later constant predictor or lag
+calculation can change because of that
+
+64
+00:04:06.206 --> 00:04:07.276
+invented outcome.
+
+65
+00:04:07.786 --> 00:04:11.516
+Keep this separate from the actual
+recorded demand in the source.
+
+66
+00:04:13.650 --> 00:04:18.040
+Suppose every cell in every
+available row passes validation.
+
+67
+00:04:18.770 --> 00:04:21.700
+Does that prove that
+every hourly slot exists?
+
+68
+00:04:22.610 --> 00:04:24.580
+Pause and separate the two questions.
+
+69
+00:04:25.050 --> 00:04:29.300
+A valid row can be followed by
+another valid row two hours later.
+
+70
+00:04:29.750 --> 00:04:34.120
+Cell level consistency and time
+grid coverage are different checks.
+
+71
+00:04:34.690 --> 00:04:39.980
+Preserve the distinction between a
+recorded zero and no recorded observation.
+
+72
+00:04:40.550 --> 00:04:44.110
+Choosing a justified missing
+data policy is later work,
+
+73
+00:04:44.110 --> 00:04:46.780
+rather than a silent parser assumption.

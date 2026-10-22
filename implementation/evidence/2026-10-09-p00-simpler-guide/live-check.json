@@ -1,0 +1,11 @@
+{
+  "overview_to_build_1": "passed",
+  "build_1_to_2_to_3": "passed",
+  "section_index_and_implementation_jump": "passed",
+  "mobile_menu": "collapsed on entry",
+  "viewports": [
+    1440,
+    390
+  ],
+  "errors": []
+}

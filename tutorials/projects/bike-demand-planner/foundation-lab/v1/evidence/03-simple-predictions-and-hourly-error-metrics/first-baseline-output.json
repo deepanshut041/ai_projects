@@ -1,0 +1,57 @@
+{
+  "status": "completed",
+  "model": {
+    "kind": "training_mean",
+    "value": 143.79444765760556,
+    "training_count": 8645,
+    "fit_partition": "train",
+    "fit_objective": "minimum training squared error among constants",
+    "random_seed": null
+  },
+  "metrics": {
+    "train": {
+      "count": 8645,
+      "mae": 106.59349137179827,
+      "rmse": 133.79011546148726,
+      "mean_signed_error": 8.669525479233703e-15,
+      "mean_underprediction": 53.296745685899126,
+      "underprediction_count": 3524,
+      "mean_underprediction_when_under": 130.7464149984671
+    },
+    "validation": {
+      "count": 4357,
+      "mae": 154.24520535816333,
+      "rmse": 208.1723211740595,
+      "mean_signed_error": -71.40569005182753,
+      "mean_underprediction": 112.82544770499543,
+      "underprediction_count": 2391,
+      "mean_underprediction_when_under": 205.59618387731706
+    }
+  },
+  "examples": [
+    {
+      "record_id": "8839",
+      "target_time": "2012-01-09T02:00:00",
+      "forecast_issue_time": "2012-01-09T01:00:00",
+      "target": "5.0",
+      "prediction": "143.79444765760556",
+      "residual": "138.79444765760556",
+      "absolute_error": "138.79444765760556",
+      "squared_error": "19263.898700579808",
+      "underprediction": "0.0"
+    },
+    {
+      "record_id": "8845",
+      "target_time": "2012-01-09T08:00:00",
+      "forecast_issue_time": "2012-01-09T07:00:00",
+      "target": "420.0",
+      "prediction": "143.79444765760556",
+      "residual": "-276.2055523423944",
+      "absolute_error": "276.2055523423944",
+      "squared_error": "76289.50714476718",
+      "underprediction": "276.2055523423944"
+    }
+  ],
+  "run_directory": "/mnt/projects/ai/ai_projects/projects/foundations/bike-demand-planner/runs/training-mean-20261018T052729853988Z",
+  "test_evaluated": false
+}

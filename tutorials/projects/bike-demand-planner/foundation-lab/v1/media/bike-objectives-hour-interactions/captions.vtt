@@ -1,0 +1,235 @@
+WEBVTT
+
+00:00:00.580 --> 00:00:06.120
+The additive calendar model gives each
+hour its own effect and adds one shared
+
+00:00:06.120 --> 00:00:07.650
+working day adjustment.
+
+00:00:08.100 --> 00:00:10.230
+Holding the other inputs fixed,
+
+00:00:10.500 --> 00:00:15.050
+that day type adjustment is the same at
+eight in the morning and two at night.
+
+00:00:15.740 --> 00:00:20.770
+Our observations suggest those differences
+may need distinct hourly shapes.
+
+00:00:21.560 --> 00:00:26.520
+A new optimizer or another scale cannot
+create a product that is absent from the
+
+00:00:26.520 --> 00:00:27.050
+model.
+
+00:00:27.560 --> 00:00:32.540
+We make that relationship explicit in the
+representation and compare it under the
+
+00:00:32.540 --> 00:00:35.130
+same training least squares solver.
+
+00:00:37.192 --> 00:00:42.242
+We retain every original calendar
+column and append twenty four products.
+
+00:00:42.952 --> 00:00:46.682
+Each multiplies one hour
+indicator by the working day flag.
+
+00:00:47.492 --> 00:00:51.842
+For the real Monday at eight,
+the hour eight product is one,
+
+00:00:52.152 --> 00:00:54.102
+and the other new products are zero.
+
+00:00:55.092 --> 00:00:57.272
+Its declared position
+is index fifty three,
+
+00:00:57.272 --> 00:00:59.762
+after the original forty five columns.
+
+00:01:00.292 --> 00:01:04.382
+A nonworking hour has zero
+in every appended product.
+
+00:01:05.212 --> 00:01:08.282
+The original hour indicators
+still remain available.
+
+00:01:09.092 --> 00:01:12.202
+The feature construction
+uses calendar values only;
+
+00:01:12.912 --> 00:01:15.182
+observed rental outcomes do not enter it.
+
+00:01:17.150 --> 00:01:20.140
+The first twenty four
+columns are hour indicators.
+
+00:01:20.970 --> 00:01:23.610
+The last working day flag
+is selected as a column,
+
+00:01:23.610 --> 00:01:26.200
+preserving broadcasting across rows.
+
+00:01:26.830 --> 00:01:29.050
+Multiplication creates
+the twenty four products,
+
+00:01:29.050 --> 00:01:32.800
+and column stacking appends
+them to the original design.
+
+00:01:33.370 --> 00:01:38.430
+We then fit training only scales and
+solve the same unpenalized squared error
+
+00:01:38.430 --> 00:01:39.220
+objective.
+
+00:01:39.730 --> 00:01:44.610
+The saved order matters because valid
+dimensions alone cannot reveal a misplaced
+
+00:01:44.610 --> 00:01:45.640
+coefficient.
+
+00:01:46.290 --> 00:01:48.840
+No weather or demand
+history was introduced,
+
+00:01:49.110 --> 00:01:52.840
+and the split membership and issue
+time contract remain the same.
+
+00:01:54.858 --> 00:01:56.328
+In raw coordinates,
+
+00:01:56.698 --> 00:02:02.138
+the hourly contribution now contains an
+hour effect plus an hour specific product
+
+00:02:02.138 --> 00:02:04.648
+coefficient when the day flag is one.
+
+00:02:05.018 --> 00:02:09.958
+The working day contrast includes the
+shared flag coefficient and that hour
+
+00:02:09.958 --> 00:02:11.188
+specific term.
+
+00:02:11.678 --> 00:02:14.308
+It can therefore differ at eight and two.
+
+00:02:14.738 --> 00:02:17.238
+This is additional
+representational capacity,
+
+00:02:17.238 --> 00:02:20.168
+rather than a faster route
+through the old family.
+
+00:02:20.878 --> 00:02:23.348
+The design still contains
+dependent columns,
+
+00:02:23.718 --> 00:02:27.408
+so individual coefficients
+are not unique causal effects.
+
+00:02:28.098 --> 00:02:31.068
+We assess the fitted function
+and its later predictions,
+
+00:02:31.418 --> 00:02:34.148
+not a story about one isolated weight.
+
+00:02:36.275 --> 00:02:39.602
+Training half squared error
+falls from about three thousand,
+
+00:02:39.602 --> 00:02:43.545
+one hundred and sixty eight to one
+thousand, nine hundred and thirty two.
+
+00:02:44.235 --> 00:02:49.172
+Raw validation absolute error improves
+to about one hundred and eight point six
+
+00:02:49.172 --> 00:02:49.705
+nine.
+
+00:02:50.575 --> 00:02:53.805
+The nonnegative version reaches
+one hundred point five two.
+
+00:02:54.395 --> 00:02:58.225
+Because both representations
+use stable training solves,
+
+00:02:58.715 --> 00:03:01.425
+this supports a concrete
+structural comparison.
+
+00:03:02.095 --> 00:03:07.455
+Extra flexibility does not guarantee every
+validation row improves or that counts
+
+00:03:07.455 --> 00:03:08.785
+become nonnegative.
+
+00:03:09.615 --> 00:03:14.275
+The complete raw and clipped predictions
+remain saved beside the model and its
+
+00:03:14.275 --> 00:03:15.165
+feature schema.
+
+00:03:17.400 --> 00:03:19.330
+At the busy Monday hour,
+
+00:03:19.560 --> 00:03:23.730
+the forecast rises from about one hundred
+and seventy five to two hundred and sixty,
+
+00:03:24.600 --> 00:03:26.570
+closer to target four hundred and twenty.
+
+00:03:27.540 --> 00:03:32.050
+At the quiet target five,
+the raw forecast becomes more negative,
+
+00:03:32.220 --> 00:03:33.690
+around minus eighty four.
+
+00:03:34.680 --> 00:03:39.624
+The group baseline still has lower overall
+absolute error at ninety one point five
+
+00:03:39.624 --> 00:03:40.110
+seven.
+
+00:03:40.400 --> 00:03:43.270
+The expanded model can represent groups,
+
+00:03:43.500 --> 00:03:48.330
+but its extra fitted calendar effects can
+generalize less well to the later period.
+
+00:03:48.980 --> 00:03:53.190
+This observation does not identify
+a single cause of the remaining gap.
+
+00:03:53.540 --> 00:03:58.210
+We retain the stronger reference instead
+of selecting the newest model by default.
+

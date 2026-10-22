@@ -1,0 +1,246 @@
+{
+  "revision": "2f18a5470c4ef0a3d413dd7b18d07941f45779e9",
+  "roberta_files": [
+    {
+      "path": "PyTorch for NLP/RoBERTa for Masked Language Models/README.md",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/RoBERTa%20for%20Masked%20Language%20Models/README.md",
+      "sha256": "560f5a3f200b76827a37a4c0968690e6311735ed9dd0a4165af9a206c3a053ac",
+      "bytes": 8731
+    },
+    {
+      "path": "PyTorch for NLP/RoBERTa for Masked Language Models/evaluate_squad_score.py",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/RoBERTa%20for%20Masked%20Language%20Models/evaluate_squad_score.py",
+      "sha256": "c59c3d18470e009cbfb70771b5a1472fb35d1fbfbaf9bf2c45f329ab25230115",
+      "bytes": 2801
+    },
+    {
+      "path": "PyTorch for NLP/RoBERTa for Masked Language Models/finetune_roberta_qa.py",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/RoBERTa%20for%20Masked%20Language%20Models/finetune_roberta_qa.py",
+      "sha256": "242aa45377f29799cfa7912655f4446f7b1cbc1ddfa45664e7f3aaf593304de8",
+      "bytes": 5350
+    },
+    {
+      "path": "PyTorch for NLP/RoBERTa for Masked Language Models/inference.py",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/RoBERTa%20for%20Masked%20Language%20Models/inference.py",
+      "sha256": "5e92df529b1e8b6f944413c0b4014edba1d2d961cb7755407ade6e00b8e3030c",
+      "bytes": 2618
+    },
+    {
+      "path": "PyTorch for NLP/RoBERTa for Masked Language Models/model.py",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/RoBERTa%20for%20Masked%20Language%20Models/model.py",
+      "sha256": "2d0a98f657bbe7d1cab244e88f64edc21aa04f916a7668ce1297c99afdf7a5dc",
+      "bytes": 16210
+    },
+    {
+      "path": "PyTorch for NLP/RoBERTa for Masked Language Models/prepare_data.py",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/RoBERTa%20for%20Masked%20Language%20Models/prepare_data.py",
+      "sha256": "6947d92270dc554472c8a77af82fdd0ce8033f1c39de66b0b8461f592fff21cc",
+      "bytes": 4397
+    },
+    {
+      "path": "PyTorch for NLP/RoBERTa for Masked Language Models/pretrain_roberta.py",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/RoBERTa%20for%20Masked%20Language%20Models/pretrain_roberta.py",
+      "sha256": "efc145aa83c28b9aa4be8edc4019b22a47ac9725c4e7a9309e1864b77d5f50e3",
+      "bytes": 19342
+    },
+    {
+      "path": "PyTorch for NLP/RoBERTa for Masked Language Models/utils.py",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/RoBERTa%20for%20Masked%20Language%20Models/utils.py",
+      "sha256": "acd955a8e956646bf7c720eaf87427fe007b33b59b923834a61b60ecf7e403a0",
+      "bytes": 12097
+    }
+  ],
+  "translation_files": [
+    {
+      "path": "PyTorch for NLP/Seq2Seq for Neural Machine Translation/README.md",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/Seq2Seq%20for%20Neural%20Machine%20Translation/README.md",
+      "sha256": "24025ef389b6c8c73647a3c267bf20592dedf2dd244c1ca83a102a769a8e522e",
+      "bytes": 5005
+    },
+    {
+      "path": "PyTorch for NLP/Seq2Seq for Neural Machine Translation/compute_bleu.py",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/Seq2Seq%20for%20Neural%20Machine%20Translation/compute_bleu.py",
+      "sha256": "d1c8c6b4b9cee7dd4d8cd5222328bd12fe5be8a11d3096b328708c0c989fb8ff",
+      "bytes": 2950
+    },
+    {
+      "path": "PyTorch for NLP/Seq2Seq for Neural Machine Translation/data.py",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/Seq2Seq%20for%20Neural%20Machine%20Translation/data.py",
+      "sha256": "6c1e3799efada1c7b52242c6b8a0ea853b20088ea5784226a0bd4f6dcca2426d",
+      "bytes": 2607
+    },
+    {
+      "path": "PyTorch for NLP/Seq2Seq for Neural Machine Translation/inference.ipynb",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/Seq2Seq%20for%20Neural%20Machine%20Translation/inference.ipynb",
+      "sha256": "5fc809e1d3ffa5b6f6bc67ed5e049adffb0ca7d6f80b7218e0eccc9f5e3d13ae",
+      "bytes": 3357
+    },
+    {
+      "path": "PyTorch for NLP/Seq2Seq for Neural Machine Translation/model.py",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/Seq2Seq%20for%20Neural%20Machine%20Translation/model.py",
+      "sha256": "916e28b57e74c77f25c3fb7fc3b9805eb0941aa310152353560545511f53fc91",
+      "bytes": 15864
+    },
+    {
+      "path": "PyTorch for NLP/Seq2Seq for Neural Machine Translation/prepare_data.py",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/Seq2Seq%20for%20Neural%20Machine%20Translation/prepare_data.py",
+      "sha256": "c13e6d78667327396b4a370d1e337d7319fd28953dc33c64a4685771b4546340",
+      "bytes": 7024
+    },
+    {
+      "path": "PyTorch for NLP/Seq2Seq for Neural Machine Translation/src/google_translate.png",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/Seq2Seq%20for%20Neural%20Machine%20Translation/src/google_translate.png",
+      "sha256": "ec5e4aad286ecc56e14925a270d16e731c31beb7f04ba4e6c9ceaf3be3bc1cd1",
+      "bytes": 76411
+    },
+    {
+      "path": "PyTorch for NLP/Seq2Seq for Neural Machine Translation/tokenizer.py",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/Seq2Seq%20for%20Neural%20Machine%20Translation/tokenizer.py",
+      "sha256": "18b1e08ef0b32208a6ddbd57c6a81f48d3f1c71f8db3d5438fdb672471888619",
+      "bytes": 5503
+    },
+    {
+      "path": "PyTorch for NLP/Seq2Seq for Neural Machine Translation/train.py",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/Seq2Seq%20for%20Neural%20Machine%20Translation/train.py",
+      "sha256": "5c9c1089aa4d12ca25d96d0f27e5723640d2353f3b63ffbb217d21be20a0922c",
+      "bytes": 12578
+    },
+    {
+      "path": "PyTorch for NLP/Seq2Seq for Neural Machine Translation/trained_tokenizer/.gitignore",
+      "url": "https://raw.githubusercontent.com/priyammaz/PyTorch-Adventures/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/Seq2Seq%20for%20Neural%20Machine%20Translation/trained_tokenizer/.gitignore",
+      "sha256": "5c89a8a9c5af258d02d0bfd3582c75963bea53baa1f5f5132662b80020a63452",
+      "bytes": 13
+    }
+  ],
+  "caption_metadata": [
+    {
+      "id": "Fzv2lSt0Ing",
+      "title": "Lets Reproduce RoBERTa from Scratch!",
+      "url": "https://www.youtube.com/watch?v=Fzv2lSt0Ing",
+      "chapters": [
+        {
+          "start_time": 0,
+          "title": "Introduction",
+          "end_time": 105
+        },
+        {
+          "start_time": 105,
+          "title": "Preparing the Dataset",
+          "end_time": 1500
+        },
+        {
+          "start_time": 1500,
+          "title": "Writing the RoBERTa Config",
+          "end_time": 2100
+        },
+        {
+          "start_time": 2100,
+          "title": "Writing the Collate Function",
+          "end_time": 2655
+        },
+        {
+          "start_time": 2655,
+          "title": "Writing the Masked LM Strategy",
+          "end_time": 4230
+        },
+        {
+          "start_time": 4230,
+          "title": "Huggingface DataCollatorForLanguageModeling",
+          "end_time": 4345
+        },
+        {
+          "start_time": 4345,
+          "title": "Writing the RoBERTa Model",
+          "end_time": 7694
+        },
+        {
+          "start_time": 7694,
+          "title": "Writing the MLM Pretraining Script",
+          "end_time": 10725
+        },
+        {
+          "start_time": 10725,
+          "title": "Testing the training script",
+          "end_time": 11070
+        },
+        {
+          "start_time": 11070,
+          "title": "Taking a look at the results",
+          "end_time": 11250
+        },
+        {
+          "start_time": 11250,
+          "title": "Recap",
+          "end_time": 11529
+        }
+      ],
+      "captions": {
+        "path": ".ai/course-sources/2026-10-12/subtitles/Fzv2lSt0Ing.en-orig.vtt",
+        "bytes": 1605948,
+        "sha256": "f7788cc2c3acf4a291a5b781266ec569948b3a452faf6b58badb96c02def0a7f"
+      }
+    },
+    {
+      "id": "_FVwYFICYuE",
+      "title": "Extractive Question Answering: Getting RoBERTa To Answer Questions",
+      "url": "https://www.youtube.com/watch?v=_FVwYFICYuE",
+      "chapters": [
+        {
+          "start_time": 0,
+          "title": "Introduction",
+          "end_time": 60
+        },
+        {
+          "start_time": 60,
+          "title": "What is Extractive QA?",
+          "end_time": 200
+        },
+        {
+          "start_time": 200,
+          "title": "SQUAD Dataset",
+          "end_time": 570
+        },
+        {
+          "start_time": 570,
+          "title": "Characters to Tokens Processor",
+          "end_time": 2680
+        },
+        {
+          "start_time": 2680,
+          "title": "RoBERTaForExtractiveQA",
+          "end_time": 2780
+        },
+        {
+          "start_time": 2780,
+          "title": "Load RoBERTa Backbone",
+          "end_time": 3290
+        },
+        {
+          "start_time": 3290,
+          "title": "ExtractiveQA Forward Method",
+          "end_time": 4410
+        },
+        {
+          "start_time": 4410,
+          "title": "Training Model",
+          "end_time": 4810
+        },
+        {
+          "start_time": 4810,
+          "title": "Inference Model",
+          "end_time": 5290
+        },
+        {
+          "start_time": 5290,
+          "title": "Recap",
+          "end_time": 5501
+        }
+      ],
+      "captions": {
+        "path": ".ai/course-sources/2026-10-12/subtitles/_FVwYFICYuE.en-orig.vtt",
+        "bytes": 829500,
+        "sha256": "13d4012402fd71124d11e4710f3e5ae1390b3951b9578197aa4dd5771581d38d"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1432 @@
+{
+  "schema_version": 1,
+  "project_id": "P01",
+  "languages": [
+    "cpp",
+    "python"
+  ],
+  "examples": [
+    {
+      "id": "math-python",
+      "language": "python",
+      "path": "examples/math_trace.py",
+      "purpose": "Next-token shift, NLL/perplexity, unequal reduction, GELU and temperature arithmetic",
+      "expected_output": {
+        "x": [
+          257,
+          104,
+          105
+        ],
+        "y": [
+          104,
+          105,
+          258
+        ],
+        "perplexity": 4.0,
+        "unequal_batch_nll": 2.0,
+        "gelu_minus_one": -0.158808,
+        "cold_probability": 0.9
+      }
+    },
+    {
+      "id": "math-cpp",
+      "language": "cpp",
+      "path": "examples/math_trace.cpp",
+      "purpose": "Explicit C++ head-storage indexing and weighted loss",
+      "expected_output": {
+        "offset": 38,
+        "perplexity": 4,
+        "weighted_mean": 2
+      }
+    }
+  ],
+  "slug": "small-gpt",
+  "revision": "v1",
+  "title": "Course 2 — build a small GPT language model",
+  "question": "How do we turn a text prefix into a trainable, recoverable next-token language model?",
+  "topic_kind": "concept",
+  "level": "intermediate",
+  "prerequisites": [],
+  "created_at": "2026-10-10T03:54:06.287025+00:00",
+  "repository": {
+    "base_sha": "34334e3fd681dcdc98e55efd6c14856830ec7558",
+    "name": "docs"
+  },
+  "objectives": [
+    {
+      "id": "next-token",
+      "text": "Explain shifted next-token training and conditional probability."
+    },
+    {
+      "id": "workspace",
+      "text": "Create a bounded independent project and record its P00 handoff."
+    },
+    {
+      "id": "text",
+      "text": "Preserve text provenance, split boundaries and frozen tokenizer identity."
+    },
+    {
+      "id": "windows",
+      "text": "Construct document-bounded windows and account for all valid targets."
+    },
+    {
+      "id": "attention",
+      "text": "Implement and independently check causal attention values and gradients."
+    },
+    {
+      "id": "model",
+      "text": "Explain and build learned positions, pre-norm, GELU and tied output weights."
+    },
+    {
+      "id": "learning",
+      "text": "Derive loss/gradient reductions and a complete optimizer update."
+    },
+    {
+      "id": "generation",
+      "text": "Evaluate held-out likelihood and generate bounded, reproducible requests."
+    },
+    {
+      "id": "checkpoint",
+      "text": "Verify immutable generations, compatible fallback and safe retention."
+    },
+    {
+      "id": "trainer",
+      "text": "Train and restore all state using one explicit common trainer."
+    },
+    {
+      "id": "colab",
+      "text": "Prepare and perform a documented deleted-runtime hosted recovery drill."
+    },
+    {
+      "id": "handoff",
+      "text": "Count/profile the complete model and assess P01 exit/P02 readiness."
+    }
+  ],
+  "sources": [
+    {
+      "id": "nanogpt",
+      "kind": "external",
+      "title": "Pre-norm reference at 6104ab1",
+      "url": "https://github.com/karpathy/build-nanogpt/blob/6104ab1b53920f6e2159749676073ff7d815c1fa/train_gpt2.py",
+      "accessed_at": "2026-10-10",
+      "locator": "CausalSelfAttention, MLP, Block and GPT; inspected raw source",
+      "proof_limit": "Architecture reference; our tutorial is a reduced original teaching implementation, not pretrained compatibility."
+    },
+    {
+      "id": "sdpa",
+      "kind": "external",
+      "title": "PyTorch 2.14 SDPA",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html",
+      "accessed_at": "2026-10-10",
+      "locator": "Boolean attn_mask semantics and dropout_p",
+      "proof_limit": "Independent API/reference; tests establish only the exercised local shapes/dtypes."
+    },
+    {
+      "id": "gelu",
+      "kind": "external",
+      "title": "PyTorch 2.14 GELU",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.GELU.html",
+      "accessed_at": "2026-10-10",
+      "locator": "Exact and tanh approximation definitions",
+      "proof_limit": "Activation definition, not a learning-result guarantee."
+    },
+    {
+      "id": "alice",
+      "kind": "external",
+      "title": "Project Gutenberg ebook 11",
+      "url": "https://www.gutenberg.org/ebooks/11",
+      "accessed_at": "2026-10-10",
+      "locator": "Catalog, UTF-8 text and rights label",
+      "proof_limit": "One-book educational corpus; byte hash/parser/splits in research and code."
+    },
+    {
+      "id": "checkpoint",
+      "kind": "external",
+      "title": "PyTorch saving and loading models",
+      "url": "https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html",
+      "accessed_at": "2026-10-10",
+      "locator": "General checkpoint and optimizer state",
+      "proof_limit": "Workspace adds broader RNG/data/persistent-generation contract; this source does not verify Drive durability."
+    },
+    {
+      "id": "reproducibility",
+      "kind": "external",
+      "title": "PyTorch 2.14 reproducibility",
+      "url": "https://docs.pytorch.org/docs/2.14/notes/randomness.html",
+      "accessed_at": "2026-10-10",
+      "locator": "Releases/platforms, RNG and deterministic algorithms",
+      "proof_limit": "Same-environment parity is distinct from cross-device continuation."
+    },
+    {
+      "id": "colab",
+      "kind": "external",
+      "title": "Google Colab FAQ",
+      "url": "https://research.google.com/colaboratory/faq.html",
+      "accessed_at": "2026-10-10",
+      "locator": "Free resources, runtime lifetime and Drive I/O",
+      "proof_limit": "Availability can change; no hosted run was performed for this tutorial."
+    }
+  ],
+  "claims": [
+    {
+      "id": "design",
+      "text": "This is the authored educational P01 pre-norm text-model design and its explicit proof boundaries.",
+      "source_ids": [
+        "nanogpt",
+        "sdpa",
+        "gelu",
+        "checkpoint",
+        "reproducibility",
+        "colab"
+      ],
+      "status": "documented",
+      "proof_limit": "Concrete formulas and tests are in the lesson/reference records; no learner mastery, full GPT-2 compatibility or hosted recovery is asserted."
+    }
+  ],
+  "entities": [
+    {
+      "id": "prefix-input",
+      "label": "Known prefix",
+      "description": "BOS, h, i: the last input at each position is known.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "prefix-model",
+      "label": "Causal model",
+      "description": "Each query reads only its allowed prefix.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "prefix-scores",
+      "label": "Next-token scores",
+      "description": "Three positions each produce V logits.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "prefix-labels",
+      "label": "Shifted labels",
+      "description": "h, i, EOS measure the corresponding predictions.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "data-flow-raw",
+      "label": "Pinned raw bytes",
+      "description": "Verify raw SHA-256 and inspect source terms.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "data-flow-split",
+      "label": "Chapter partitions",
+      "description": "I-IX train; X validation; XI-XII held-out test.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "data-flow-tokenizer",
+      "label": "Frozen tokenizer",
+      "description": "Fit training chapters only; save identity.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "data-flow-windows",
+      "label": "Separate windows",
+      "description": "Use each retained partition text plus the frozen tokenizer. Encode separately and window within documents.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "attention-x",
+      "label": "X [B,T,D]",
+      "description": "Feature vectors for the current prefix.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "attention-qkv",
+      "label": "Q/K/V [B,H,T,d]",
+      "description": "Project, split, reshape and transpose; d=D/H.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "attention-score",
+      "label": "Scores [B,H,T,T]",
+      "description": "Scaled dot products, causal/key mask, softmax over keys.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "attention-mix",
+      "label": "Mix [B,H,T,d]",
+      "description": "Probability-weighted values.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "attention-out",
+      "label": "Update [B,T,D]",
+      "description": "Concatenate heads then output projection.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "model-ids",
+      "label": "IDs [B,T]",
+      "description": "Right-padded token IDs; position indices are known.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "model-embedding",
+      "label": "E[token] + P[pos]",
+      "description": "Learned token and position vectors [B,T,D].",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "model-blocks",
+      "label": "L pre-norm blocks",
+      "description": "Causal attention and GELU FFN residual branches.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "model-norm",
+      "label": "Final LayerNorm",
+      "description": "Normalize features per position.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "model-logits",
+      "label": "Logits [B,T,V]",
+      "description": "Multiply by tied E transpose; compare with shifted labels.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "prenorm-x",
+      "label": "Input X",
+      "description": "The direct residual stream remains available.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "prenorm-norm",
+      "label": "LayerNorm(X)",
+      "description": "Normalize each position over D features.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "prenorm-attention",
+      "label": "Attention(LN(X))",
+      "description": "Causal sublayer returns an update with the same shape.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "prenorm-sum",
+      "label": "X + update",
+      "description": "Both paths meet in addition, preserving [B,T,D].",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "recovery-update",
+      "label": "Complete update",
+      "description": "Optimizer applied, gradients cleared, next batch state known.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "recovery-local",
+      "label": "Local snapshot",
+      "description": "Serialize model/optimizer/RNG/data/config; reload check.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "recovery-persistent",
+      "label": "New generation",
+      "description": "Copy state; verify hash; write manifest.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "recovery-complete",
+      "label": "Completion record",
+      "description": "Write last; scan valid states and retain older fallback.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "memory-weight",
+      "label": "Parameters",
+      "description": "Persist across updates; tied head shares storage.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "memory-adam",
+      "label": "Adam state",
+      "description": "Moments persist across updates and resume.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "memory-activation",
+      "label": "Activations",
+      "description": "Backward needs forward intermediates during the step.",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "memory-cache",
+      "label": "Optional KV cache",
+      "description": "Would persist across tokens in one request; currently absent.",
+      "claim_ids": [
+        "design"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "prefix-edge-0",
+      "from": "prefix-input",
+      "to": "prefix-model",
+      "label": "allowed context",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "prefix-edge-1",
+      "from": "prefix-model",
+      "to": "prefix-scores",
+      "label": "forward",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "prefix-edge-2",
+      "from": "prefix-scores",
+      "to": "prefix-labels",
+      "label": "compare for loss",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "data-flow-edge-0",
+      "from": "data-flow-raw",
+      "to": "data-flow-split",
+      "label": "parse",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "data-flow-edge-1",
+      "from": "data-flow-split",
+      "to": "data-flow-tokenizer",
+      "label": "training only fits",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "data-flow-edge-3",
+      "from": "data-flow-tokenizer",
+      "to": "data-flow-windows",
+      "label": "frozen encoding",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "attention-edge-0",
+      "from": "attention-x",
+      "to": "attention-qkv",
+      "label": "project / split",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "attention-edge-1",
+      "from": "attention-qkv",
+      "to": "attention-score",
+      "label": "Q times K.T",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "attention-edge-2",
+      "from": "attention-score",
+      "to": "attention-mix",
+      "label": "weights times V",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "attention-edge-3",
+      "from": "attention-mix",
+      "to": "attention-out",
+      "label": "merge heads",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "model-edge-0",
+      "from": "model-ids",
+      "to": "model-embedding",
+      "label": "lookup",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "model-edge-1",
+      "from": "model-embedding",
+      "to": "model-blocks",
+      "label": "residual stream",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "model-edge-2",
+      "from": "model-blocks",
+      "to": "model-norm",
+      "label": "features",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "model-edge-3",
+      "from": "model-norm",
+      "to": "model-logits",
+      "label": "tied projection",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "prenorm-edge-0",
+      "from": "prenorm-x",
+      "to": "prenorm-norm",
+      "label": "sublayer path",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "prenorm-edge-1",
+      "from": "prenorm-norm",
+      "to": "prenorm-attention",
+      "label": "normalized input",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "prenorm-edge-2",
+      "from": "prenorm-attention",
+      "to": "prenorm-sum",
+      "label": "update",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "prenorm-edge-3",
+      "from": "prenorm-x",
+      "to": "prenorm-sum",
+      "label": "direct residual",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "recovery-edge-0",
+      "from": "recovery-update",
+      "to": "recovery-local",
+      "label": "capture",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "recovery-edge-1",
+      "from": "recovery-local",
+      "to": "recovery-persistent",
+      "label": "copy / verify",
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "recovery-edge-2",
+      "from": "recovery-persistent",
+      "to": "recovery-complete",
+      "label": "publish last",
+      "claim_ids": [
+        "design"
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "id": "next-token",
+      "title": "Lesson 1 — predict the next token",
+      "content_path": "lessons/01-next-token.md",
+      "objective_ids": [
+        "next-token"
+      ],
+      "diagram_ids": [
+        "prefix"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "shift",
+        "perplexity"
+      ]
+    },
+    {
+      "id": "workspace",
+      "title": "Lesson 2 — make a project you can return to",
+      "content_path": "lessons/02-workspace.md",
+      "objective_ids": [
+        "workspace"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "heads"
+      ]
+    },
+    {
+      "id": "text",
+      "title": "Lesson 3 — freeze the text and tokenizer",
+      "content_path": "lessons/03-text-and-tokenizer.md",
+      "objective_ids": [
+        "text"
+      ],
+      "diagram_ids": [
+        "data-flow"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "tokenizer"
+      ]
+    },
+    {
+      "id": "windows",
+      "title": "Lesson 4 — make batches that ask the right question",
+      "content_path": "lessons/04-windows.md",
+      "objective_ids": [
+        "windows"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "windows",
+        "batch-rng"
+      ]
+    },
+    {
+      "id": "attention",
+      "title": "Lesson 5 — let each position read its prefix",
+      "content_path": "lessons/05-causal-attention.md",
+      "objective_ids": [
+        "attention"
+      ],
+      "diagram_ids": [
+        "attention"
+      ],
+      "table_ids": [],
+      "scenario_ids": [
+        "visibility"
+      ],
+      "practice_ids": [
+        "mask",
+        "gradient-check"
+      ]
+    },
+    {
+      "id": "model",
+      "title": "Lesson 6 — assemble the whole GPT",
+      "content_path": "lessons/06-complete-gpt.md",
+      "objective_ids": [
+        "model"
+      ],
+      "diagram_ids": [
+        "model",
+        "prenorm"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "positions",
+        "prenorm",
+        "gelu"
+      ]
+    },
+    {
+      "id": "learning",
+      "title": "Lesson 7 — make the model learn from its mistakes",
+      "content_path": "lessons/07-loss-and-learning.md",
+      "objective_ids": [
+        "learning"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [
+        "denominator"
+      ],
+      "practice_ids": [
+        "loss-gradient",
+        "accumulation",
+        "schedule"
+      ]
+    },
+    {
+      "id": "generation",
+      "title": "Lesson 8 — measure unseen text and generate a continuation",
+      "content_path": "lessons/08-evaluate-and-generate.md",
+      "objective_ids": [
+        "generation"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [
+        "sampling"
+      ],
+      "practice_ids": [
+        "evaluation",
+        "temperature",
+        "request-reset"
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "title": "Lesson 9 — save an update you can actually recover",
+      "content_path": "lessons/09-persistent-checkpoints.md",
+      "objective_ids": [
+        "checkpoint"
+      ],
+      "diagram_ids": [
+        "recovery"
+      ],
+      "table_ids": [],
+      "scenario_ids": [
+        "recovery-choice"
+      ],
+      "practice_ids": [
+        "recovery"
+      ]
+    },
+    {
+      "id": "trainer",
+      "title": "Lesson 10 — run one bounded experiment across sessions",
+      "content_path": "lessons/10-train-and-resume.md",
+      "objective_ids": [
+        "trainer"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "state-order",
+        "resume-vs-warm-start"
+      ]
+    },
+    {
+      "id": "colab",
+      "title": "Lesson 11 — continue the same trainer on Colab Free",
+      "content_path": "lessons/11-colab.md",
+      "objective_ids": [
+        "colab"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "hosted-proof"
+      ]
+    },
+    {
+      "id": "handoff",
+      "title": "Lesson 12 — explain the cost and prepare for GPT-2",
+      "content_path": "lessons/12-profile-and-handoff.md",
+      "objective_ids": [
+        "handoff"
+      ],
+      "diagram_ids": [
+        "memory"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "parameter-count",
+        "profile",
+        "cache"
+      ]
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "prefix",
+      "title": "One prefix, several predictions",
+      "description": "Prediction and supervision paths; targets never enter their own forward calculation.",
+      "entity_ids": [
+        "prefix-input",
+        "prefix-model",
+        "prefix-scores",
+        "prefix-labels"
+      ],
+      "relationship_ids": [
+        "prefix-edge-0",
+        "prefix-edge-1",
+        "prefix-edge-2"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "data-flow",
+      "title": "Split before learning tokens",
+      "description": "Partition before fitting. Only training chapters fit the tokenizer. Then encode each of the three retained partitions separately with the frozen tokenizer.",
+      "entity_ids": [
+        "data-flow-raw",
+        "data-flow-split",
+        "data-flow-tokenizer",
+        "data-flow-windows"
+      ],
+      "relationship_ids": [
+        "data-flow-edge-0",
+        "data-flow-edge-1",
+        "data-flow-edge-3"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "attention",
+      "title": "Head geometry",
+      "description": "Edges describe tensor calculations, not prerequisite relationships.",
+      "entity_ids": [
+        "attention-x",
+        "attention-qkv",
+        "attention-score",
+        "attention-mix",
+        "attention-out"
+      ],
+      "relationship_ids": [
+        "attention-edge-0",
+        "attention-edge-1",
+        "attention-edge-2",
+        "attention-edge-3"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "model",
+      "title": "A complete small GPT",
+      "description": "The same token matrix is used for lookup and the final bias-free vocabulary projection.",
+      "entity_ids": [
+        "model-ids",
+        "model-embedding",
+        "model-blocks",
+        "model-norm",
+        "model-logits"
+      ],
+      "relationship_ids": [
+        "model-edge-0",
+        "model-edge-1",
+        "model-edge-2",
+        "model-edge-3"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "prenorm",
+      "title": "One pre-norm residual branch",
+      "description": "Trace the direct residual and normalized sublayer paths separately. The FFN branch repeats this pattern.",
+      "entity_ids": [
+        "prenorm-x",
+        "prenorm-norm",
+        "prenorm-sum",
+        "prenorm-attention"
+      ],
+      "relationship_ids": [
+        "prenorm-edge-0",
+        "prenorm-edge-1",
+        "prenorm-edge-2",
+        "prenorm-edge-3"
+      ],
+      "layout": "grid"
+    },
+    {
+      "id": "recovery",
+      "title": "A checkpoint becomes recoverable",
+      "description": "The completion record follows verified persistent bytes; recovery validates again.",
+      "entity_ids": [
+        "recovery-update",
+        "recovery-local",
+        "recovery-persistent",
+        "recovery-complete"
+      ],
+      "relationship_ids": [
+        "recovery-edge-0",
+        "recovery-edge-1",
+        "recovery-edge-2"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "memory",
+      "title": "Different storage lifetimes",
+      "description": "These are storage categories, not sequential operations.",
+      "entity_ids": [
+        "memory-weight",
+        "memory-adam",
+        "memory-activation",
+        "memory-cache"
+      ],
+      "relationship_ids": [],
+      "layout": "grid"
+    }
+  ],
+  "tables": [],
+  "scenarios": [
+    {
+      "id": "visibility",
+      "title": "Change the visible keys",
+      "description": "Zero scores and values [2,4,8]; inspect query row 1.",
+      "variables": [
+        {
+          "id": "mask",
+          "label": "Mask",
+          "options": [
+            "causal",
+            "unmasked"
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "when": {
+            "mask": "causal"
+          },
+          "outcome": "Output 3",
+          "narrative": "Only keys 0 and 1 are visible: (2+4)/2.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "design"
+          ]
+        },
+        {
+          "when": {
+            "mask": "unmasked"
+          },
+          "outcome": "Output 4.666667",
+          "narrative": "The future key contributes: (2+4+8)/3. This leaks future input during next-token training.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "design"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "denominator",
+      "title": "Which average is being optimized?",
+      "description": "Two labels with summed NLL 2, then one with NLL 4.",
+      "variables": [
+        {
+          "id": "reduction",
+          "label": "Reduction",
+          "options": [
+            "token mean",
+            "batch means"
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "when": {
+            "reduction": "token mean"
+          },
+          "outcome": "NLL 2",
+          "narrative": "(2+4)/(2+1)=2, the required valid-token mean.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "design"
+          ]
+        },
+        {
+          "when": {
+            "reduction": "batch means"
+          },
+          "outcome": "NLL 2.5",
+          "narrative": "(2/2+4/1)/2=2.5, which overweights the shorter microbatch.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "design"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sampling",
+      "title": "Change temperature",
+      "description": "Scores [0,ln(3)], no top-k restriction.",
+      "variables": [
+        {
+          "id": "temperature",
+          "label": "Temperature",
+          "options": [
+            "1",
+            "0.5",
+            "0"
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "when": {
+            "temperature": "1"
+          },
+          "outcome": "Second token probability 0.75",
+          "narrative": "Odds 3:1.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "design"
+          ]
+        },
+        {
+          "when": {
+            "temperature": "0.5"
+          },
+          "outcome": "Second token probability 0.90",
+          "narrative": "Logits double; odds become 9:1.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "design"
+          ]
+        },
+        {
+          "when": {
+            "temperature": "0"
+          },
+          "outcome": "Always choose second token",
+          "narrative": "Explicit greedy case; never divide by zero.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "design"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recovery-choice",
+      "title": "Which generation can resume?",
+      "description": "Older generation 100 verifies; newest candidate is 150.",
+      "variables": [
+        {
+          "id": "newest",
+          "label": "Newest state",
+          "options": [
+            "valid",
+            "partial",
+            "corrupt",
+            "incompatible"
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "when": {
+            "newest": "valid"
+          },
+          "outcome": "Restore 150",
+          "narrative": "Manifest, bytes, loadability and identity agree.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "design"
+          ]
+        },
+        {
+          "when": {
+            "newest": "partial"
+          },
+          "outcome": "Restore 100 with rejection report",
+          "narrative": "No accepted completion record; ignore partial generation.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "design"
+          ]
+        },
+        {
+          "when": {
+            "newest": "corrupt"
+          },
+          "outcome": "Restore 100 with rollback",
+          "narrative": "Persistent state checksum/loadability fails.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "design"
+          ]
+        },
+        {
+          "when": {
+            "newest": "incompatible"
+          },
+          "outcome": "Stop",
+          "narrative": "A valid latest state belongs to a different identity; do not silently mix runs.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "design"
+          ]
+        }
+      ]
+    }
+  ],
+  "practice": [
+    {
+      "id": "shift",
+      "question": "For bytes of ok=[111,107], write x and y including BOS/EOS. Which token does x position zero predict?",
+      "answer": "x=[257,111,107], y=[111,107,258]. Position zero predicts 111, using BOS only. The causal diagonal is allowed because the input at that position precedes its label.",
+      "rubric": "Correct shift, end marker and causal explanation.",
+      "objective_ids": [
+        "next-token"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "perplexity",
+      "question": "Correct-token probabilities are 1/2, 1/4 and 1/8. Compute sequence probability, mean NLL and perplexity.",
+      "answer": "Product=1/64. Negative log product=ln(64); divide by 3 to get ln(4). Perplexity=4. Unequal per-position uncertainty can have this same average.",
+      "rubric": "Use logs and three valid predictions; do not confuse perplexity with vocabulary size.",
+      "objective_ids": [
+        "next-token"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "heads",
+      "question": "If D=96 and H=4, what is head width? Why does D=63,H=4 fail?",
+      "answer": "Head width is 24. D/H must be integral for equal head partitions; 63 cannot be divided into four equal integer feature groups.",
+      "rubric": "Connect configuration validation to reshape dimensions.",
+      "objective_ids": [
+        "workspace"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "tokenizer",
+      "question": "You train BPE on all twelve chapters before splitting. Why is a frozen final artifact still insufficient?",
+      "answer": "The learned merge vocabulary already used validation/test text. Freeze after fitting only on training chapters; preserve a new artifact hash and rerun the experiment. Freezing prevents later drift but does not undo earlier leakage.",
+      "rubric": "Name both split-before-fit and run identity.",
+      "objective_ids": [
+        "text"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "windows",
+      "question": "For BOS,a,b,c,d,EOS with T=3, give both x/y windows and count supervised labels.",
+      "answer": "x0=[BOS,a,b], y0=[a,b,c]; x1=[c,d,PAD], y1=[d,EOS,PAD]. Five supervised labels. c is a label in one window and context in the next; it is not predicted twice.",
+      "rubric": "Keep tail/EOS and exclude PAD from denominator.",
+      "objective_ids": [
+        "windows"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "batch-rng",
+      "question": "Weights and optimizer restore correctly, but the next random window differs. What is missing?",
+      "answer": "Restore the dedicated sampler generator state and draw position/contract. A model/dropout seed does not identify the sampler's next draw after many updates.",
+      "rubric": "Distinguish independent generator state from initial seeds.",
+      "objective_ids": [
+        "windows"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "mask",
+      "question": "With all scores zero and values 2,4,8, what is row 1 under a causal mask? What if forbidden scores are set to zero?",
+      "answer": "Row 1 averages 2 and 4, giving 3. If the forbidden future key gets score zero rather than negative infinity, it receives probability and changes the result toward 14/3.",
+      "rubric": "Read rows as queries, columns as keys and preserve diagonal.",
+      "objective_ids": [
+        "attention"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "gradient-check",
+      "question": "Outputs match SDPA but Q gradients differ. What must you check before widening the tolerance?",
+      "answer": "Match dtype, reduction/objective, mask polarity, score scaling, head permutation and dropout=0. Compare K/V gradients too; use a small float64 finite-difference check to distinguish shared mistakes.",
+      "rubric": "Gradient evidence and controlled settings, not output shape alone.",
+      "objective_ids": [
+        "attention"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "positions",
+      "question": "Does a repeated token at positions 2 and 5 share both embedding rows?",
+      "answer": "It shares the token row E[id] and accumulates both token-gradient contributions there. It uses different learned position rows P[2] and P[5]. Their sum remains width D.",
+      "rubric": "Distinguish token identity from location and addition from concatenation.",
+      "objective_ids": [
+        "model"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "prenorm",
+      "question": "Zero both sublayer outputs. What remains of a pre-norm block, and a post-norm block?",
+      "answer": "Pre-norm residual branches leave X unchanged. Post-norm normalizes the residual result, so the overall block is not generally identity. This does not mean the final model lacks its final norm.",
+      "rubric": "Trace operations rather than relying on names.",
+      "objective_ids": [
+        "model"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "gelu",
+      "question": "Why can GELU(-1) be negative while ReLU(-1)=0?",
+      "answer": "GELU multiplies -1 by the positive probability Phi(-1), approximately 0.158655. Result is about -0.158655. It is a smooth gate, not a hard sign threshold. The tanh approximation is close but not identical.",
+      "rubric": "Connect Gaussian CDF to the activation and declare the variant.",
+      "objective_ids": [
+        "model"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "loss-gradient",
+      "question": "For logits [0,ln(3)] and correct class 1, compute the two logit derivatives.",
+      "answer": "Probabilities are [0.25,0.75]. Subtract the one-hot target [0,1], giving [0.25,-0.25] for summed single-label loss. A mean over N valid labels divides these by N.",
+      "rubric": "State both sign and reduction.",
+      "objective_ids": [
+        "learning"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "accumulation",
+      "question": "Microbatch A has 2 tokens with NLL sum 2; B has 1 with sum 4. How should backward be scaled?",
+      "answer": "Backpropagate 2/3 and 4/3 as the differentiable sums; their gradients add to the mean over 3 labels. The combined NLL is 2. Averaging batch means yields 2.5 and is wrong here.",
+      "rubric": "Use a common total valid-token denominator.",
+      "objective_ids": [
+        "learning"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "schedule",
+      "question": "A 300-update run pauses at 150. What schedule step follows, and can --updates 150 change total to 150?",
+      "answer": "The next schedule input is 151. --updates limits additional work in this session; the fixed experiment total remains 300. Restarting warmup or changing total is a different schedule/run.",
+      "rubric": "Separate global experiment from session budget.",
+      "objective_ids": [
+        "learning"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "evaluation",
+      "question": "Training loss falls but validation rises. Is greedy sample readability enough to call the model improved?",
+      "answer": "No. Preserve the held-out result and investigate overfitting/data shift/selection. Readable samples are qualitative and easy to cherry-pick; likelihood on a fixed split and tokenization measures another property.",
+      "rubric": "Avoid substituting one observation for another.",
+      "objective_ids": [
+        "generation"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "temperature",
+      "question": "For logits [0,ln(3)], compare probability of the second token at temperatures 1 and 0.5.",
+      "answer": "Odds are 3:1 then 9:1, so probabilities are 0.75 and 0.9. Lowering temperature changes decoding, not learned weights or validation NLL.",
+      "rubric": "Show scaling before normalization.",
+      "objective_ids": [
+        "generation"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "request-reset",
+      "question": "A generated prefix is longer than context 64. What does this baseline do, and why is that relevant to a cache?",
+      "answer": "It crops to the most recent 64 IDs and resets position indices within the new window. Cache parity must reproduce that policy or be restricted to an uncropped prefix; stale positions/state change logits.",
+      "rubric": "Name both truncation and position semantics.",
+      "objective_ids": [
+        "generation"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "recovery",
+      "question": "The newest directory has state.pt but no COMPLETE. An older completed generation verifies. What should resume do?",
+      "answer": "Reject the incomplete directory, validate and restore the newest remaining compatible completed state, and report rollback/rejection. Never infer completeness from the filename or latest pointer.",
+      "rubric": "Check bytes, manifest, loadability and compatibility.",
+      "objective_ids": [
+        "checkpoint"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "state-order",
+      "question": "Why restore RNG after constructing and loading the model?",
+      "answer": "Construction consumes random numbers for initialization. Restoring RNG before construction would move the saved stream forward before the next training operation. Load all state first, restore RNG last, then draw the next batch/update.",
+      "rubric": "Explain the effect on dropout and next draws.",
+      "objective_ids": [
+        "trainer"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "resume-vs-warm-start",
+      "question": "You load only weights at update 150 and create a new optimizer. Is that a resumed run?",
+      "answer": "It is a warm start/new optimization trajectory. Adam moments, global schedule/data/RNG and monitoring state differ. Label it explicitly and give it a new run identity instead of claiming strict resume.",
+      "rubric": "Separate inference weights from complete training state.",
+      "objective_ids": [
+        "trainer"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "hosted-proof",
+      "question": "A local /tmp save/reload and a successful Drive mount passed. What remains before Colab recovery is established?",
+      "answer": "Train/save a verified generation on Drive, delete the runtime, reacquire exact source/data/environment, restore the same run in a fresh runtime and advance/save again. Record identities, rollback, resource and persistence evidence.",
+      "rubric": "Actual destroyed-runtime continuation, not notebook syntax or mount success.",
+      "objective_ids": [
+        "colab"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "parameter-count",
+      "question": "What changes in the parameter count if you untie a bias-free vocabulary head?",
+      "answer": "Add V times D parameters: 260*64=16640 for the default model. The tied model has one shared matrix with two uses; count it once.",
+      "rubric": "Distinguish unique storage from operations.",
+      "objective_ids": [
+        "handoff"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "profile",
+      "question": "Doubling context from 32 to 64 does what to explicit attention-score storage? Does step time necessarily quadruple?",
+      "answer": "The B*H*T*T score storage quadruples at fixed B,H,dtype. Total runtime also includes projections, FFN, backward, launch overhead and implementation choices, so measure rather than assuming a 4x whole-step slowdown.",
+      "rubric": "Use scope and measured timing together.",
+      "objective_ids": [
+        "handoff"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    },
+    {
+      "id": "cache",
+      "question": "A one-token query follows five cached keys. Why can a naive triangular 1x6 mask be wrong?",
+      "answer": "A top-left triangular mask allows only key zero. The query actually occupies absolute position 5 and may attend all six keys including itself. Align query positions to past length and compare with full-prefix logits.",
+      "rubric": "Absolute alignment, valid diagonal and numerical parity before optimization.",
+      "objective_ids": [
+        "handoff"
+      ],
+      "claim_ids": [
+        "design"
+      ]
+    }
+  ],
+  "scenes": [],
+  "media": {},
+  "approval": null
+}

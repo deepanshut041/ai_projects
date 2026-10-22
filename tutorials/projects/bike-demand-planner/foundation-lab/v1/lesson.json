@@ -1,0 +1,362 @@
+{
+  "schema_version": 1,
+  "project_id": "bike-demand-planner",
+  "languages": [
+    "cpp",
+    "python"
+  ],
+  "examples": [],
+  "slug": "foundation-lab",
+  "revision": "v1",
+  "title": "Foundation Lab: Bike Demand Planner",
+  "question": "How do we turn a future calendar hour into a reproducible demand estimate, and decide what that estimate can support?",
+  "topic_kind": "repo",
+  "level": "advanced",
+  "prerequisites": [],
+  "created_at": "2026-10-20T03:54:55.535191+00:00",
+  "repository": {
+    "base_sha": "34334e3fd681dcdc98e55efd6c14856830ec7558",
+    "name": "docs"
+  },
+  "objectives": [
+    {
+      "id": "prediction-contract",
+      "text": "Which information can a forecast use, and how does an error move the weights?"
+    },
+    {
+      "id": "hourly-data-and-splits",
+      "text": "How do real records become a leakage-safe matrix?"
+    },
+    {
+      "id": "calendar-baselines",
+      "text": "What can a small prediction rule achieve?"
+    },
+    {
+      "id": "linear-regression",
+      "text": "Can a weighted calendar sum explain the same hours?"
+    },
+    {
+      "id": "batches-and-optimizers",
+      "text": "What changes when each update sees fewer rows?"
+    },
+    {
+      "id": "losses-and-calendar-structure",
+      "text": "Which errors and calendar patterns does the model represent?"
+    },
+    {
+      "id": "trees-and-ensembles",
+      "text": "Can tree partitions and ensembles improve later estimates?"
+    },
+    {
+      "id": "residuals-and-candidate-choice",
+      "text": "Where do the estimates fail and what requests are supported?"
+    },
+    {
+      "id": "saved-predictions-and-recovery",
+      "text": "What must survive a process restart?"
+    },
+    {
+      "id": "final-evaluation-and-application",
+      "text": "What do untouched later outcomes say about the selected function?"
+    }
+  ],
+  "sources": [
+    {
+      "id": "bike-source",
+      "kind": "local",
+      "title": "Bike numerical prediction and update at completed source 0b49c0a",
+      "path": "projects/foundations/bike-demand-planner/src/bike_demand_planner/linear.py",
+      "start": 1,
+      "end": 56,
+      "sha256": "b37e1e639c3681e4bd93befd15d726361b380ee187a25016f6bd148d315fed80",
+      "excerpt_sha256": "b37e1e639c3681e4bd93befd15d726361b380ee187a25016f6bd148d315fed80",
+      "excerpt_path": "evidence/bike-source.txt",
+      "base_sha": "0b49c0aafe154888929d8b22dbe6637ba2e56661",
+      "working_tree": false,
+      "repository_path": "ai_projects"
+    }
+  ],
+  "claims": [
+    {
+      "id": "completed-reference",
+      "text": "The worked course consolidates the implemented and checked local Bike project and its retained historical results.",
+      "source_ids": [
+        "bike-source"
+      ],
+      "status": "verified",
+      "proof_limit": "The source and historical checks describe local software behavior; they do not establish learner mastery, operational acceptance, a new independent test or hosted recovery."
+    }
+  ],
+  "entities": [],
+  "relationships": [],
+  "chapters": [
+    {
+      "id": "prediction-contract",
+      "title": "One hourly prediction and one numerical update",
+      "content_path": "lessons/01-prediction-contract.md",
+      "objective_ids": [
+        "prediction-contract"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "prediction-contract-check"
+      ]
+    },
+    {
+      "id": "hourly-data-and-splits",
+      "title": "Understand the hourly data, calendar features and time split",
+      "content_path": "lessons/02-hourly-data-and-splits.md",
+      "objective_ids": [
+        "hourly-data-and-splits"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "hourly-data-and-splits-check"
+      ]
+    },
+    {
+      "id": "calendar-baselines",
+      "title": "Build and compare simple calendar predictions",
+      "content_path": "lessons/03-calendar-baselines.md",
+      "objective_ids": [
+        "calendar-baselines"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "calendar-baselines-check"
+      ]
+    },
+    {
+      "id": "linear-regression",
+      "title": "Fit linear regression and follow its gradients",
+      "content_path": "lessons/04-linear-regression.md",
+      "objective_ids": [
+        "linear-regression"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "linear-regression-check"
+      ]
+    },
+    {
+      "id": "batches-and-optimizers",
+      "title": "Compare batches, momentum and Adam",
+      "content_path": "lessons/05-batches-and-optimizers.md",
+      "objective_ids": [
+        "batches-and-optimizers"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "batches-and-optimizers-check"
+      ]
+    },
+    {
+      "id": "losses-and-calendar-structure",
+      "title": "Change the loss, regularization and calendar structure",
+      "content_path": "lessons/06-losses-and-calendar-structure.md",
+      "objective_ids": [
+        "losses-and-calendar-structure"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "losses-and-calendar-structure-check"
+      ]
+    },
+    {
+      "id": "trees-and-ensembles",
+      "title": "Follow tree leaves, forests and boosted corrections",
+      "content_path": "lessons/07-trees-and-ensembles.md",
+      "objective_ids": [
+        "trees-and-ensembles"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "trees-and-ensembles-check"
+      ]
+    },
+    {
+      "id": "residuals-and-candidate-choice",
+      "title": "Read hourly errors and freeze a supported candidate",
+      "content_path": "lessons/08-residuals-and-candidate-choice.md",
+      "objective_ids": [
+        "residuals-and-candidate-choice"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "residuals-and-candidate-choice-check"
+      ]
+    },
+    {
+      "id": "saved-predictions-and-recovery",
+      "title": "Reload predictions and recover the next training update",
+      "content_path": "lessons/09-saved-predictions-and-recovery.md",
+      "objective_ids": [
+        "saved-predictions-and-recovery"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "saved-predictions-and-recovery-check"
+      ]
+    },
+    {
+      "id": "final-evaluation-and-application",
+      "title": "Evaluate later hours and inspect the completed application",
+      "content_path": "lessons/10-final-evaluation-and-application.md",
+      "objective_ids": [
+        "final-evaluation-and-application"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "final-evaluation-and-application-check"
+      ]
+    }
+  ],
+  "diagrams": [],
+  "tables": [],
+  "scenarios": [],
+  "practice": [
+    {
+      "id": "prediction-contract-check",
+      "question": "Starting again from prediction 40, what happens if only the target changes from 45 to 35?",
+      "answer": "Residual changes from -5 to +5. With x=[1,2] and rate .01, gradients change from [-5,-10], -5 to [5,10], 5. Parameters become [9.95,4.9], 19.95 and the same input predicts 39.70. Compare both runs from the same initial parameters.",
+      "rubric": "Keep the initial state fixed, name the residual convention, and account for all three updates.",
+      "objective_ids": [
+        "prediction-contract"
+      ],
+      "claim_ids": [
+        "completed-reference"
+      ]
+    },
+    {
+      "id": "hourly-data-and-splits-check",
+      "question": "A source has counts 10, an unrecorded hour and 30. Why is the observed mean 20 rather than 13.33?",
+      "answer": "There are two observed targets, with sum 40. Dividing by two gives 20. Dividing by three after inserting a zero manufactures a target and changes both the fit and evaluation question. The gap remains missing.",
+      "rubric": "Distinguish an absent row from an observed zero and retain the denominator.",
+      "objective_ids": [
+        "hourly-data-and-splits"
+      ],
+      "claim_ids": [
+        "completed-reference"
+      ]
+    },
+    {
+      "id": "calendar-baselines-check",
+      "question": "Why can January Monday at 08:00 and June Monday at 08:00 receive exactly the same group prediction?",
+      "answer": "The group key is only (hour, workingday). Both requests use (8,1), whose 2011 total is 86677 over 248 observations, giving 349.504032258. Month is not part of this fitted function even though the calendar schema contains it.",
+      "rubric": "Explain which fields the estimator actually uses and separate prediction from the later outcome.",
+      "objective_ids": [
+        "calendar-baselines"
+      ],
+      "claim_ids": [
+        "completed-reference"
+      ]
+    },
+    {
+      "id": "linear-regression-check",
+      "question": "The fitted additive model converges but has validation MAE 116.7312, worse than groups. Is another optimizer guaranteed to fix that?",
+      "answer": "No. Reaching the chosen training objective does not make the additive function expressive enough to learn separate working-day hourly shapes, nor does it guarantee the validation objective improves. Inspect representation, loss and temporal shift separately.",
+      "rubric": "Separate optimizer convergence, function structure and later prediction error.",
+      "objective_ids": [
+        "linear-regression"
+      ],
+      "claim_ids": [
+        "completed-reference"
+      ]
+    },
+    {
+      "id": "batches-and-optimizers-check",
+      "question": "Two runs each process 86450 examples, one with batch 32 and one with full batches. Do they take the same number of updates?",
+      "answer": "No. Work in processed examples is held fixed while batch size changes the number and noise of updates. A final partial batch uses its actual size. Optimizer state and schedules must use their declared update/example counters.",
+      "rubric": "Name the fixed budget and explain why update count and training passes are different quantities.",
+      "objective_ids": [
+        "batches-and-optimizers"
+      ],
+      "claim_ids": [
+        "completed-reference"
+      ]
+    },
+    {
+      "id": "losses-and-calendar-structure-check",
+      "question": "If a raw model predicts -10 rentals and the observation is 5, what does clipping change?",
+      "answer": "Raw residual is -15 and absolute error is 15. A predeclared nonnegative policy returns zero, making residual -5 and absolute error 5. This is a different output function; it does not change the fitted weights or justify selecting the policy on final-test outcomes.",
+      "rubric": "Account for the changed prediction and error while preserving fit and selection boundaries.",
+      "objective_ids": [
+        "losses-and-calendar-structure"
+      ],
+      "claim_ids": [
+        "completed-reference"
+      ]
+    },
+    {
+      "id": "trees-and-ensembles-check",
+      "question": "Why does averaging 64 trees not guarantee that the morning demand deficit disappears?",
+      "answer": "Averaging reduces variation when errors differ, but a shared historical underprediction remains in the mean. Training all trees on the same older demand period can preserve that common bias. Compare the actual later forecasts and counts.",
+      "rubric": "Separate diversity across trees from a shared error in their data or function.",
+      "objective_ids": [
+        "trees-and-ensembles"
+      ],
+      "claim_ids": [
+        "completed-reference"
+      ]
+    },
+    {
+      "id": "residuals-and-candidate-choice-check",
+      "question": "Why should a rush-hour slice report both MAE and its number of observations?",
+      "answer": "The subset answers a different question from all-hour error. Its mean must be weighted by the actual count when recombining a partition. A small or empty slice cannot be treated as equally supported or as zero error.",
+      "rubric": "Preserve the denominator, subset definition and undefined empty metrics.",
+      "objective_ids": [
+        "residuals-and-candidate-choice"
+      ],
+      "claim_ids": [
+        "completed-reference"
+      ]
+    },
+    {
+      "id": "saved-predictions-and-recovery-check",
+      "question": "Why can restoring weights alone change the next Adam update?",
+      "answer": "The next step also depends on first/second moments, update index and bias correction, next batch/permutation/cursor, schedule, RNG and transformation/context. Restoring a compatible complete generation reproduces these; zeroing moments is a different continuation.",
+      "rubric": "Trace the next update state, rather than only whether a model file can be loaded.",
+      "objective_ids": [
+        "saved-predictions-and-recovery"
+      ],
+      "claim_ids": [
+        "completed-reference"
+      ]
+    },
+    {
+      "id": "final-evaluation-and-application-check",
+      "question": "The forest has final MAE 103.6474 versus groups 125.4167. What happens to the claim if it is chosen now?",
+      "answer": "The original groups selection remains the validation decision. Choosing the forest now is informed by the final outcomes, so that same period cannot supply a fresh independent performance claim for the newly selected decision. Record the new choice and use new held-out evidence for a new claim.",
+      "rubric": "Retain the observed ranking reversal and distinguish selection evidence from independent assessment.",
+      "objective_ids": [
+        "final-evaluation-and-application"
+      ],
+      "claim_ids": [
+        "completed-reference"
+      ]
+    }
+  ],
+  "scenes": [],
+  "media": {},
+  "approval": null
+}

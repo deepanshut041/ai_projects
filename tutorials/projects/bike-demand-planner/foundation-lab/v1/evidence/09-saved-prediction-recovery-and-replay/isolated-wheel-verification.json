@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "python": "3.12.13",
+  "module_origin": "/mnt/projects/ai/.ai/bike-app-20261019/wheel-environment/lib/python3.12/site-packages/bike_demand_planner/saved_predictor.py",
+  "source_project_access_denied_by_audit_hook": true,
+  "prediction": 349.5040322580645,
+  "packaged_web_assets_and_http_routes_verified": true,
+  "no_dataset_or_training_process_required_for_prediction": true
+}

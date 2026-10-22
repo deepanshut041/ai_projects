@@ -1,0 +1,218 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:03.970
+Start with Monday,
+the ninth of January, twenty twelve.
+
+00:00:04.700 --> 00:00:09.090
+At seven in the morning, we need a
+forecast for the hour beginning at eight.
+
+00:00:09.580 --> 00:00:13.470
+The target hour is eight,
+and the working day flag is one.
+
+00:00:13.820 --> 00:00:16.050
+Those calendar facts are already known.
+
+00:00:16.420 --> 00:00:18.430
+They form the pair eight, one.
+
+00:00:19.120 --> 00:00:22.110
+The recorded outcome was four
+hundred and twenty rentals.
+
+00:00:22.520 --> 00:00:26.010
+We can inspect that answer now
+because the hour is historical.
+
+00:00:26.640 --> 00:00:29.770
+At the original issue time,
+it was still in the future.
+
+00:00:30.260 --> 00:00:33.390
+Our predictor must select its
+answer without that outcome.
+
+00:00:33.740 --> 00:00:37.830
+The outcome becomes useful later,
+when we score the saved forecast.
+
+00:00:40.292 --> 00:00:44.702
+The existing constant predictor learned
+one number from the training year.
+
+00:00:45.312 --> 00:00:49.536
+Eight thousand, six hundred and forty
+five recorded hours contain one million,
+
+00:00:49.536 --> 00:00:53.702
+two hundred and forty three thousand,
+one hundred and three rentals.
+
+00:00:54.332 --> 00:00:58.209
+Dividing the total by the count gives
+about one hundred and forty three point
+
+00:00:58.209 --> 00:01:00.382
+seven nine rentals per hour.
+
+00:01:01.152 --> 00:01:03.662
+Every requested hour
+receives that same value.
+
+00:01:04.172 --> 00:01:05.862
+This makes a useful reference,
+
+00:01:06.052 --> 00:01:09.502
+but it cannot distinguish a quiet
+night from the morning commute.
+
+00:01:10.092 --> 00:01:12.462
+Missing source hours remain missing.
+
+00:01:12.872 --> 00:01:17.372
+We do not insert zero targets or change
+the denominator to a complete calendar
+
+00:01:17.372 --> 00:01:18.062
+grid.
+
+00:01:20.150 --> 00:01:24.060
+Now select the training hours
+whose key is eight, one.
+
+00:01:24.470 --> 00:01:26.370
+There are two hundred
+and forty eight of them.
+
+00:01:26.370 --> 00:01:30.319
+Their observed training targets
+total eighty six thousand,
+
+00:01:30.319 --> 00:01:32.820
+six hundred and seventy seven rentals.
+
+00:01:33.470 --> 00:01:35.320
+Divide that total by two
+hundred and forty eight.
+
+00:01:36.590 --> 00:01:41.150
+The group mean is about three hundred and
+forty nine point five zero rentals per
+
+00:01:41.150 --> 00:01:41.740
+hour.
+
+00:01:42.370 --> 00:01:45.180
+This is the number saved
+for a working day at eight.
+
+00:01:45.650 --> 00:01:50.900
+Calling predict with the pair eight,
+one looks up that saved value.
+
+00:01:51.290 --> 00:01:55.770
+We have changed the fitted function from
+one global level to calendar dependent
+
+00:01:55.770 --> 00:01:56.540
+levels.
+
+00:01:57.050 --> 00:02:00.240
+No validation answer
+participated in either fit.
+
+00:02:02.608 --> 00:02:06.718
+The working day group at two in the
+morning has a different training mean.
+
+00:02:07.108 --> 00:02:08.227
+Its total is one thousand,
+
+00:02:08.227 --> 00:02:12.978
+seven hundred and ninety six across
+two hundred and thirty nine hours.
+
+00:02:13.428 --> 00:02:16.458
+That gives seven point
+five one rentals per hour.
+
+00:02:16.948 --> 00:02:22.078
+The real later outcome is five, so the
+residual is positive two point five one.
+
+00:02:22.708 --> 00:02:23.418
+At eight,
+
+00:02:23.468 --> 00:02:27.291
+subtract four hundred and twenty from
+three hundred and forty nine point five
+
+00:02:27.291 --> 00:02:27.838
+zero.
+
+00:02:28.308 --> 00:02:31.338
+The residual is negative
+seventy point five zero,
+
+00:02:31.708 --> 00:02:35.568
+compared with negative two hundred and
+seventy six point two one for the global
+
+00:02:35.568 --> 00:02:36.278
+reference.
+
+00:02:37.048 --> 00:02:38.718
+Both examples become closer.
+
+00:02:39.348 --> 00:02:43.208
+We still need the complete validation
+comparison before making a broader
+
+00:02:43.208 --> 00:02:44.398
+improvement claim.
+
+00:02:46.567 --> 00:02:49.357
+Consider a different
+valid calendar request,
+
+00:02:49.847 --> 00:02:51.977
+eight in the morning on a nonworking day.
+
+00:02:52.507 --> 00:02:54.457
+The key becomes eight, zero.
+
+00:02:54.867 --> 00:02:58.487
+Its training group has one hundred
+and fifteen hours and eight thousand,
+
+00:02:58.487 --> 00:03:00.537
+seven hundred and ninety rentals.
+
+00:03:01.227 --> 00:03:04.117
+The saved mean is about
+seventy six point four three.
+
+00:03:04.707 --> 00:03:08.297
+The hour stays eight,
+but the selected parameter changes.
+
+00:03:08.747 --> 00:03:13.537
+This pairing can represent different daily
+profiles for working and nonworking days.
+
+00:03:14.027 --> 00:03:16.097
+It does not fit a separate Monday effect.
+
+00:03:16.727 --> 00:03:20.197
+Weekends and source holidays
+share the nonworking flag.
+
+00:03:20.727 --> 00:03:22.317
+That pooling is an assumption,
+
+00:03:22.667 --> 00:03:25.977
+and days sharing a key can still
+have very different outcomes.
+

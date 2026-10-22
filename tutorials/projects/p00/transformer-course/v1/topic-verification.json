@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-13",
+  "status": "complete locally",
+  "topics": 32,
+  "practice_items": 64,
+  "diagrams": 29,
+  "scenarios": 3,
+  "sources": 30,
+  "tests": {
+    "original": 71,
+    "applied": 29,
+    "study_export": 7,
+    "total": 107,
+    "standalone_python_blocks": 39,
+    "study_code_cells_executed": 13
+  },
+  "study": {
+    "topics": 32,
+    "cleared_cells": 46,
+    "outputs_cleared": true,
+    "all_topic_prompts_specific": true,
+    "overwrite_refused": true
+  },
+  "reader": {
+    "tested_fingerprint": "f58f3421af7fd17be2ff4567f8fd31a58f1868f7d82d38dec2c21d70859e6e83",
+    "bases": [
+      "/",
+      "/project_docs/"
+    ],
+    "records_per_base": 112,
+    "all_course_chapters": 69,
+    "viewport_widths": [
+      320,
+      390,
+      768,
+      1440
+    ],
+    "content_tests": 9,
+    "math_page_http_errors": 0,
+    "verified_markdown_downloads": 4,
+    "print_and_no_js": true
+  },
+  "export": {
+    "source_sha256": "78bc63c28cc1c686f1d1151024ffeb63a93f3cd5a65fa9c5c4f8d0c22650da13",
+    "payload_files": 26,
+    "members": 27,
+    "runtime": {
+      "python": [
+        3,
+        12,
+        13
+      ],
+      "torch": "2.14.1+cpu",
+      "numpy": "2.5.4"
+    },
+    "payload_identical_to_independently_executed_export": true
+  },
+  "preservation": {
+    "old_chapter_ids_and_paths": 24,
+    "original_source_changes": [
+      "course_source_export.py packaging/overwrite safeguards"
+    ],
+    "original_model_data_trainer_checkpoint_math": "unchanged",
+    "other_tutorial_changes": "Only separately authorized D053 migration path/ownership documentation/render changes; this task did not write those tutorials."
+  },
+  "scope": {
+    "learner": "P00-M1 setup complete; linear() next in existing relocated lab",
+    "hosted_recovery": "pending, not performed",
+    "commit_publication": "none"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "isolated_from_checkout": true,
+  "request_rejections": 14,
+  "known_residual": -70,
+  "plotting_module_imported": true
+}

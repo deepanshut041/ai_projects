@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "isolated_from_source_checkout": true,
+  "families": [
+    {
+      "family": "tree",
+      "predictions": [
+        1.5,
+        187.0,
+        1.5,
+        187.0
+      ],
+      "library_parity": true
+    },
+    {
+      "family": "forest",
+      "predictions": [
+        1.8333333333333333,
+        181.66666666666666,
+        1.8333333333333333,
+        181.66666666666666
+      ],
+      "library_parity": true
+    },
+    {
+      "family": "boosting",
+      "predictions": [
+        76.6275,
+        111.8725,
+        76.6275,
+        111.8725
+      ],
+      "library_parity": true
+    }
+  ],
+  "dependency_install": "Registry resolution was required after the offline cache lacked metadata; installed versions match uv.lock."
+}

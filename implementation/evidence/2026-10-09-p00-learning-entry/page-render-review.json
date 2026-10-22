@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-09",
+  "status": "passed",
+  "record_routes": 40,
+  "viewport_widths": [
+    1440,
+    768,
+    390,
+    320
+  ],
+  "live_views": 160,
+  "visual_review": "All 12 P00 chapter entries on desktop and mobile; focused snippets, table, workbook, roadmap, source register and historical P01 reader",
+  "snippets_passed": 9,
+  "declared_examples_passed": 4,
+  "native_tests_passed": 8,
+  "browser_prefix": "passed after managed preview restart",
+  "browser_root": "passed in removed disposable copy",
+  "keyboard_scroll": [
+    "code",
+    "tables",
+    "equations"
+  ],
+  "render_fingerprint": "c66873c091cb7a17ebeda62e595d89b3ce8fc35e753788d338a07d083ba46941",
+  "preserved_reference_files": 34,
+  "screenshots": [
+    "implementation/evidence/2026-10-09-p00-learning-entry/p00-attention-example-desktop.png",
+    "implementation/evidence/2026-10-09-p00-learning-entry/p00-chapter-outline-mobile.png",
+    "implementation/evidence/2026-10-09-p00-learning-entry/p00-language-bridge-reviewed-mobile.png",
+    "implementation/evidence/2026-10-09-p00-learning-entry/project-roadmap-reviewed-desktop.png"
+  ],
+  "learner_state": "P00-M1 not-started",
+  "publication": false
+}

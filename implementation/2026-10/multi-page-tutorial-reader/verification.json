@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-09",
+  "site_base": "/project_docs/",
+  "tutorial_pages": {
+    "overviews": 2,
+    "chapters": 15,
+    "supporting_documents": 7,
+    "complete_lessons": 2
+  },
+  "site_records": 40,
+  "source_references": 13,
+  "checks": {
+    "content_tests": {
+      "passed": 8
+    },
+    "build_root": "passed",
+    "build_prefix": "passed",
+    "browser_root": "passed",
+    "browser_prefix": "passed",
+    "desktop_mobile_visual_inspection": "passed",
+    "source_dashboard_untouched": true,
+    "authored_chapter_example_workbook_whiteboard_bytes_preserved": true,
+    "six_snapshots_updated": true,
+    "running_site_http": "passed"
+  },
+  "concurrent_updates_preserved": [
+    "tutorials/projects/p00/transformer-foundations/v1/validation.json",
+    "tutorials/projects/p00/transformer-foundations/v1/render.json",
+    "tutorials/projects/p00/transformer-foundations/v1/lesson.json",
+    "tutorials/projects/p00/transformer-foundations/v1/lesson.md",
+    "tutorials/projects/p00/transformer-foundations/v1/diagrams/dependencies.svg"
+  ],
+  "documentation_updates": [
+    "tutorials/README.md"
+  ],
+  "screenshots": [
+    "verification/2026-10-09-tutorial-reader/p00-reader-chapter-top-desktop.png",
+    "verification/2026-10-09-tutorial-reader/p00-reader-chapter-top-mobile.png",
+    "verification/2026-10-09-tutorial-reader/p00-reader-chapter-mobile-menu.png"
+  ],
+  "model_milestone": "P00-M1 not-started",
+  "external_publication": false,
+  "cleanup_note": "2026-10-09: selected reader screenshots retained in verification; disposable full-suite captures removed."
+}

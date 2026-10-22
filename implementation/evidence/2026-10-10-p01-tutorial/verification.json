@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-10",
+  "native_tests_passed": 9,
+  "site_bases": [
+    "/project_docs/",
+    "/"
+  ],
+  "records_per_build": 57,
+  "sources_per_build": 13,
+  "browser_widths": [
+    1440,
+    768,
+    390,
+    320
+  ],
+  "browser_suites_passed": 2,
+  "visuals_reviewed": [
+    "lesson one desktop",
+    "lesson one mobile collapsed menu",
+    "lesson six equations and residual diagram",
+    "all seven new P01 diagrams"
+  ],
+  "final_fingerprint": "a6713ed678f37ec0ec6221100ad5f86d12b9813f13e296995bf9edc1122b3904",
+  "scope": "Local author preparation. No hosted runtime or learner gate completed."
+}

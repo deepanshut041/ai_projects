@@ -1,0 +1,59 @@
+{
+  "fresh_process_resume": {
+    "full": 8,
+    "split": [
+      4,
+      4
+    ],
+    "all_state_exact": true,
+    "dropout": 0.1
+  },
+  "fixed_batch_overfit": {
+    "updates": 300,
+    "before_nll": 5.596348285675049,
+    "after_nll": 0.08269761502742767,
+    "target": 0.1,
+    "passed": true
+  },
+  "profile": [
+    {
+      "context": 32,
+      "parameters": 118784,
+      "weight_bytes_fp32": 475136,
+      "weights_grad_adam_bytes_estimate": 1900544,
+      "one_attention_score_bytes": 131072,
+      "median_forward_backward_seconds": 0.0031742189967189915,
+      "min_seconds": 0.003095326006587129,
+      "max_seconds": 0.003268410997407045,
+      "torch": "2.14.1+cpu",
+      "python": "3.12.13",
+      "threads": 1,
+      "batch": 8,
+      "repeats": 10,
+      "scope": "CPU synthetic forward/backward; excludes optimizer/data/save; bytes exclude activations/temporaries"
+    },
+    {
+      "context": 64,
+      "parameters": 120832,
+      "weight_bytes_fp32": 483328,
+      "weights_grad_adam_bytes_estimate": 1933312,
+      "one_attention_score_bytes": 524288,
+      "median_forward_backward_seconds": 0.006946785499167163,
+      "min_seconds": 0.006339772000501398,
+      "max_seconds": 0.007152727004722692,
+      "torch": "2.14.1+cpu",
+      "python": "3.12.13",
+      "threads": 1,
+      "batch": 8,
+      "repeats": 10,
+      "scope": "CPU synthetic forward/backward; excludes optimizer/data/save; bytes exclude activations/temporaries"
+    }
+  ],
+  "export": {
+    "files": 15,
+    "notebook": "checked final export in course-verification.json",
+    "scope": "Local source/notebook validation; no hosted run"
+  },
+  "notebook_cells_compile": true,
+  "hosted_run": false
+}

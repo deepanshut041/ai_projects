@@ -1,0 +1,290 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:03.750
+We want to know what
+an update rule changes,
+
+00:00:04.020 --> 00:00:08.530
+so we avoid a large cross product in
+which many settings move together.
+
+00:00:09.280 --> 00:00:12.310
+The optimizer family fixes
+batch size thirty two.
+
+00:00:12.720 --> 00:00:16.810
+The batch family fixes SGD
+and rate zero point zero one.
+
+00:00:17.500 --> 00:00:23.210
+The schedule family fixes SGD, batch
+thirty two and its selected starting rate.
+
+00:00:23.640 --> 00:00:27.470
+They share the same calendar inputs,
+training only scaler,
+
+00:00:27.880 --> 00:00:29.450
+zero weights and mean bias,
+
+00:00:30.060 --> 00:00:32.530
+frozen row identities
+and error definitions.
+
+00:00:33.380 --> 00:00:35.030
+The three seeds are seventeen,
+
+00:00:35.500 --> 00:00:36.910
+twenty nine and forty three.
+
+00:00:37.760 --> 00:00:41.370
+Matching a seed pairs the training
+order across comparable trials.
+
+00:00:41.860 --> 00:00:44.770
+These controls make a measured
+difference interpretable.
+
+00:00:45.060 --> 00:00:48.790
+They do not remove the additive
+model limitations already observed.
+
+00:00:50.900 --> 00:00:52.470
+Before the main trials,
+
+00:00:52.640 --> 00:00:57.290
+each rule receives the same four candidate
+rates and two hundred pilot updates.
+
+00:00:57.840 --> 00:01:00.990
+We reset parameters and
+optimizer buffers each time.
+
+00:01:01.540 --> 00:01:06.490
+Selection uses final full training half
+squared error among completed candidates.
+
+00:01:06.960 --> 00:01:08.390
+Validation has not been loaded.
+
+00:01:09.460 --> 00:01:11.810
+SGD chooses zero point zero one,
+
+00:01:12.320 --> 00:01:16.050
+momentum zero point zero zero one,
+and Adam one.
+
+00:01:16.580 --> 00:01:19.167
+Their selected training losses
+are about three thousand,
+
+00:01:19.167 --> 00:01:20.590
+two hundred and seventy two,
+
+00:01:21.320 --> 00:01:22.850
+three thousand,
+two hundred and fifty five,
+
+00:01:23.580 --> 00:01:24.870
+and three thousand,
+two hundred and fifty six.
+
+00:01:25.900 --> 00:01:29.670
+Rate one makes the SGD and
+momentum pilots diverge.
+
+00:01:29.960 --> 00:01:32.830
+Those failures are retained,
+rather than erased from the allowance.
+
+00:01:33.440 --> 00:01:35.850
+We then write and hash the selected rates,
+
+00:01:36.200 --> 00:01:38.790
+budgets and seeds before
+fitting main trials.
+
+00:01:41.025 --> 00:01:45.215
+This shortened source trace makes
+the information boundary visible.
+
+00:01:45.565 --> 00:01:50.325
+Training pilots determine the rates,
+and a saved protocol fixes those choices.
+
+00:01:50.325 --> 00:01:54.735
+Main fitting finishes
+before validation is loaded.
+
+00:01:55.425 --> 00:01:57.475
+The shared scorer then checks record,
+
+00:01:57.845 --> 00:02:00.055
+target time and issue time alignment.
+
+00:02:01.165 --> 00:02:04.175
+The rate one failures retain
+explicit work counters.
+
+00:02:04.845 --> 00:02:09.185
+A failed attempted batch can consume
+examples without completing another
+
+00:02:09.185 --> 00:02:10.315
+parameter update.
+
+00:02:10.945 --> 00:02:16.015
+The failure record therefore distinguishes
+examples visited from updates applied.
+
+00:02:16.605 --> 00:02:19.365
+A failed pilot is retained
+as evidence about its rate,
+
+00:02:19.365 --> 00:02:21.795
+without receiving a validation score.
+
+00:02:23.918 --> 00:02:29.368
+Identical configurations reuse the
+same fitted trial for a given seed.
+
+00:02:29.978 --> 00:02:34.408
+There are twelve pilot candidates
+and eighteen unique main fits.
+
+00:02:35.138 --> 00:02:40.368
+Reused SGD entries are not
+extra independent repetitions,
+
+00:02:40.458 --> 00:02:43.688
+even when they appear in
+more than one family table.
+
+00:02:44.198 --> 00:02:49.238
+A small integration fixture changes
+validation outcomes and checks that pilot
+
+00:02:49.238 --> 00:02:52.488
+choices and saved model
+bytes remain unchanged.
+
+00:02:53.278 --> 00:02:58.048
+Independent audits also recalculate
+protocol and artifact hashes,
+
+00:02:58.258 --> 00:03:00.708
+training work counts,
+prediction identities
+
+00:03:01.198 --> 00:03:02.208
+and scalar metrics.
+
+00:03:03.318 --> 00:03:06.158
+These checks support the
+declared information boundary,
+
+00:03:06.158 --> 00:03:10.048
+while the later validation
+scores measure forecast behavior.
+
+00:03:12.275 --> 00:03:14.885
+At batch thirty two and ten passes,
+
+00:03:15.435 --> 00:03:20.055
+mean validation absolute error is one
+hundred and sixteen point one seven for
+
+00:03:20.055 --> 00:03:20.925
+SGD,
+
+00:03:21.475 --> 00:03:24.245
+one hundred and sixteen
+point six zero for momentum,
+
+00:03:24.855 --> 00:03:27.925
+and one hundred and fourteen
+point three six for Adam.
+
+00:03:28.395 --> 00:03:33.405
+Adam has the lowest observed mean, but its
+sample deviation is two point three seven,
+
+00:03:33.795 --> 00:03:37.365
+larger than the roughly zero
+point six for the other rules.
+
+00:03:37.955 --> 00:03:42.005
+All remain worse than the group
+baseline at ninety one point five seven.
+
+00:03:42.735 --> 00:03:46.265
+Three orderings provide a small
+reproducibility comparison,
+
+00:03:46.795 --> 00:03:48.925
+not a population confidence interval.
+
+00:03:49.535 --> 00:03:54.365
+Pilot seed seventeen is also one
+main seed, which we declare openly.
+
+00:03:55.015 --> 00:03:59.695
+We retain every seed result and avoid
+presenting the most flattering one as the
+
+00:03:59.695 --> 00:04:00.565
+whole experiment.
+
+00:04:02.793 --> 00:04:05.723
+Return to the later Monday at eight.
+
+00:04:06.213 --> 00:04:08.723
+Its target is four hundred
+and twenty rentals.
+
+00:04:09.673 --> 00:04:10.803
+For seed seventeen,
+
+00:04:11.213 --> 00:04:15.103
+SGD forecasts one hundred and
+sixty eight point nine one,
+
+00:04:15.233 --> 00:04:19.043
+while Adam forecasts one hundred
+and fifty three point two one.
+
+00:04:19.613 --> 00:04:25.063
+Adam is worse on this hour even though
+its overall mean absolute error is lower.
+
+00:04:25.973 --> 00:04:28.743
+Average improvement is not a
+promise for every observation.
+
+00:04:29.713 --> 00:04:33.913
+Both rules still produce negative
+predictions at the quiet two oclock
+
+00:04:33.913 --> 00:04:34.523
+example.
+
+00:04:35.173 --> 00:04:38.763
+We keep raw predictions without
+hidden clipping or rounding.
+
+00:04:39.373 --> 00:04:43.463
+The optimizer changes the route through
+the same additive function family;
+
+00:04:43.573 --> 00:04:46.923
+it cannot invent an hour
+by working day interaction.
+
+00:04:47.893 --> 00:04:50.523
+The measured outcome supports
+a bounded comparison,
+
+00:04:50.993 --> 00:04:55.343
+while the stronger group baseline and
+remaining forecast failures stay visible.
+

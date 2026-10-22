@@ -1,0 +1,241 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:05.190
+Return to Monday, the third of January,
+twenty eleven, at eight.
+
+00:00:05.800 --> 00:00:09.230
+The recorded target is one
+hundred and fifty four rentals.
+
+00:00:09.880 --> 00:00:14.926
+Zero weights and the completed training
+window mean give a prediction of about one
+
+00:00:14.926 --> 00:00:17.130
+hundred and forty three point seven nine.
+
+00:00:17.580 --> 00:00:19.060
+This is a training calculation,
+
+00:00:19.060 --> 00:00:23.240
+rather than a claim that those fitted
+statistics existed on January third.
+
+00:00:23.240 --> 00:00:28.885
+Prediction minus target gives
+residual minus ten point two
+
+00:00:28.885 --> 00:00:29.450
+one.
+
+00:00:30.000 --> 00:00:31.510
+The forecast is too low.
+
+00:00:32.100 --> 00:00:36.170
+We now keep that same miss and
+change how its loss values it.
+
+00:00:38.452 --> 00:00:41.362
+Half squared error has
+slope equal to the residual,
+
+00:00:41.852 --> 00:00:43.902
+about minus ten point two one.
+
+00:00:44.272 --> 00:00:47.462
+Absolute error has slope minus one here.
+
+00:00:48.032 --> 00:00:53.472
+Huber with threshold ten uses a quadratic
+region near zero and a linear region
+
+00:00:53.472 --> 00:00:54.402
+outside it.
+
+00:00:54.732 --> 00:00:57.262
+The threshold is measured
+in rentals per hour.
+
+00:00:57.752 --> 00:00:59.702
+This residual is just outside,
+
+00:01:00.172 --> 00:01:04.522
+so its loss is ten times the
+absolute residual minus five,
+
+00:01:04.732 --> 00:01:06.782
+about fifty two point zero six.
+
+00:01:07.272 --> 00:01:09.842
+Its slope is capped at minus ten.
+
+00:01:10.272 --> 00:01:12.962
+The signs agree because
+the prediction is low;
+
+00:01:13.432 --> 00:01:16.942
+the magnitudes change how strongly
+this row influences fitting.
+
+00:01:19.150 --> 00:01:24.320
+The implementation returns one loss
+and one prediction slope for each row.
+
+00:01:24.850 --> 00:01:26.680
+It averages the loss values.
+
+00:01:27.210 --> 00:01:31.590
+Transposing the feature matrix and
+multiplying by slopes gives the weight
+
+00:01:31.590 --> 00:01:34.120
+contributions, divided by the row count.
+
+00:01:34.510 --> 00:01:36.860
+The intercept uses the slope mean.
+
+00:01:37.390 --> 00:01:38.540
+For our one row,
+
+00:01:38.610 --> 00:01:42.700
+the hour eight standardized value
+is about four point seven eight,
+
+00:01:42.910 --> 00:01:45.420
+so it multiplies each chosen slope.
+
+00:01:45.970 --> 00:01:50.460
+A full batch combines all eight thousand,
+six hundred and forty five rows,
+
+00:01:50.530 --> 00:01:53.080
+and their contributions
+can oppose one another.
+
+00:01:53.490 --> 00:01:58.680
+At an exact match, our MAE branch
+explicitly chooses subgradient zero.
+
+00:02:00.942 --> 00:02:03.312
+As an illustrative changed case,
+
+00:02:03.482 --> 00:02:07.502
+replace the target with four hundred
+and fifty four while keeping the same
+
+00:02:07.502 --> 00:02:08.112
+forecast.
+
+00:02:08.622 --> 00:02:10.912
+This is not a new recorded observation.
+
+00:02:11.962 --> 00:02:15.912
+The residual becomes about minus
+three hundred and ten point two one.
+
+00:02:16.522 --> 00:02:19.112
+Squared error now pulls much harder,
+
+00:02:19.362 --> 00:02:25.112
+while absolute error still uses minus
+one and Huber ten still uses minus ten.
+
+00:02:25.682 --> 00:02:30.112
+That is the mechanism behind lower
+sensitivity to extreme residuals.
+
+00:02:30.242 --> 00:02:33.012
+It does not prove that a busy
+commute should be ignored.
+
+00:02:33.562 --> 00:02:37.632
+A large real rental count may be
+exactly the behavior we need to predict.
+
+00:02:39.898 --> 00:02:44.498
+Each objective receives the same three
+rates and two hundred training only pilot
+
+00:02:44.498 --> 00:02:45.328
+updates.
+
+00:02:45.878 --> 00:02:47.088
+The calendar representation,
+
+00:02:47.838 --> 00:02:49.008
+scaler, initialization
+
+00:02:49.718 --> 00:02:51.688
+and Adam convention stay fixed.
+
+00:02:52.438 --> 00:02:56.228
+We choose a rate by the final
+training objective within that loss.
+
+00:02:56.898 --> 00:02:58.728
+Every objective selects one here.
+
+00:02:59.418 --> 00:03:02.808
+The main fits reset state
+and run two thousand updates.
+
+00:03:03.658 --> 00:03:08.618
+We never compare the numerical value
+of MAE loss directly with Huber loss to
+
+00:03:08.618 --> 00:03:09.408
+choose a winner;
+
+00:03:09.798 --> 00:03:10.768
+their scales differ.
+
+00:03:11.558 --> 00:03:13.978
+Fixed step Adam can oscillate,
+
+00:03:13.978 --> 00:03:19.588
+so the final update budget is explicit
+and no exact nonsmooth optimum is claimed.
+
+00:03:21.957 --> 00:03:27.010
+Squared error gives later mean absolute
+error about one hundred and sixteen point
+
+00:03:27.010 --> 00:03:28.027
+seven three.
+
+00:03:28.517 --> 00:03:31.887
+MAE fitting gives one hundred
+and seventeen point five six;
+
+00:03:32.637 --> 00:03:35.427
+the Huber variants are
+also slightly worse here.
+
+00:03:36.377 --> 00:03:39.307
+MAE did lower training absolute error.
+
+00:03:39.577 --> 00:03:42.367
+That does not guarantee lower
+error on another period.
+
+00:03:42.997 --> 00:03:45.407
+At the busy Monday target
+of four hundred and twenty,
+
+00:03:46.057 --> 00:03:50.467
+MAE and Huber ten forecast around
+two hundred and eighteen or nineteen,
+
+00:03:50.937 --> 00:03:53.007
+closer than squared error near
+one hundred and seventy five.
+
+00:03:54.297 --> 00:03:57.007
+Other observations
+offset that improvement.
+
+00:03:57.717 --> 00:04:02.887
+Keep the common validation metrics and raw
+failures visible before preferring a loss.
+

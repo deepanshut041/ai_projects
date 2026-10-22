@@ -1,0 +1,105 @@
+{
+  "recorded_date": "2026-10-13",
+  "folder": "/mnt/projects/ai/.ai/course-checks/tutorial1-topic-rewrite/study-export/verified-danrwjge",
+  "archive": "/mnt/projects/ai/.ai/course-checks/tutorial1-topic-rewrite/study-export/verified-danrwjge/tutorial1-source.zip",
+  "archive_sha256": "f512e9896f6eb99897dd7dfb25398cce7212481f3e7974f7c3e612e9f9e3a249",
+  "members": 27,
+  "hashed_payload_files": 26,
+  "source_members": [
+    "LICENSE.txt",
+    "course_checkpoint.py",
+    "course_recovery_checks.py",
+    "course_session.py",
+    "course_session_checks.py",
+    "course_source_export.py",
+    "course_study_notebook.py",
+    "first_retrieval.py",
+    "foundation_math.cpp",
+    "foundation_math.py",
+    "model_learning_probes.py",
+    "roberta_checks.py",
+    "roberta_data.py",
+    "roberta_model.py",
+    "roberta_train.py",
+    "study-notes.md",
+    "study.ipynb",
+    "test_course_study.py",
+    "test_foundation_math.py",
+    "test_model_learning_probes.py",
+    "translation_attention.py",
+    "translation_checks.py",
+    "translation_data.py",
+    "translation_metrics.py",
+    "translation_model.py",
+    "translation_train.py"
+  ],
+  "study": "/mnt/projects/ai/.ai/course-checks/tutorial1-topic-rewrite/study-export/verified-danrwjge/extracted/study.ipynb",
+  "study_sha256": "3f346968b8cd12b469c041528b7c737312154b962cecce9380d3b2a8b0788a37",
+  "notes": "/mnt/projects/ai/.ai/course-checks/tutorial1-topic-rewrite/study-export/verified-danrwjge/extracted/study-notes.md",
+  "notes_sha256": "83a27ace0be11c92a693f9a3ae5501fb4d8cc429aaafce56d73ba96bd177f5f0",
+  "colab": "/mnt/projects/ai/.ai/course-checks/tutorial1-topic-rewrite/study-export/verified-danrwjge/tutorial1-source.colab.ipynb",
+  "colab_sha256": "2841b0da7fb74c2fad02501f889b7cefdeb80bcd10a71c4335aa870f08090ae3",
+  "study_cells": 46,
+  "study_code_cells": 13,
+  "colab_code_cells": 5,
+  "topics_covered": 32,
+  "all_cells_cleared_and_compilable": true,
+  "sequential_study_execution": {
+    "code_cells": 13,
+    "cells": [
+      {
+        "id": "setup",
+        "stdout": "Applied probes ready. Write a prediction before executing each calculation.\n"
+      },
+      {
+        "id": "probe-04",
+        "stdout": "{'loss_sum': tensor(0.2877, dtype=torch.float64), 'count': 1, 'loss': tensor(0.2877, dtype=torch.float64), 'gradient': tensor([[ 0.2500, -0.2500],\n        [ 0.0000,  0.0000]], dtype=torch.float64)}\n"
+      },
+      {
+        "id": "probe-07",
+        "stdout": "tensor([[ 0.,  0.],\n        [ 0.,  0.],\n        [ 5.,  3.],\n        [-3.,  6.]], dtype=torch.float64)\n"
+      },
+      {
+        "id": "probe-08",
+        "stdout": "tensor([[ 0.0000,  1.0000,  0.0000,  1.0000],\n        [ 0.8415,  0.5403,  0.0100,  0.9999],\n        [ 0.9093, -0.4161,  0.0200,  0.9998],\n        [ 0.1411, -0.9900,  0.0300,  0.9996]])\n"
+      },
+      {
+        "id": "probe-09",
+        "stdout": "weights tensor([[[[0.1429, 0.4286, 0.4286],\n          [0.4000, 0.2000, 0.4000]]]], dtype=torch.float64)\noutput tensor([[[1.1429, 1.4286],\n         [1.6000, 0.2000]]], dtype=torch.float64)\n"
+      },
+      {
+        "id": "probe-12",
+        "stdout": "src_input_ids [[2, 4, 3, 0], [2, 5, 6, 3]]\nsrc_pad_mask [[True, True, True, False], [True, True, True, True]]\ntgt_input_ids [[2, 4, 3, 1], [2, 5, 6, 7]]\ntgt_pad_mask [[True, True, True, False], [True, True, True, True]]\ntgt_outputs [[4, 3, -100, -100], [5, 6, 7, 3]]\nsupervised targets 6\n"
+      },
+      {
+        "id": "probe-14",
+        "stdout": "normalized tensor([-1.2247,  0.0000,  1.2247], dtype=torch.float64) input gradient tensor([ 0.2041, -0.4082,  0.2041], dtype=torch.float64)\n"
+      },
+      {
+        "id": "probe-20",
+        "stdout": "{'precision': [0.75, 0.6666666666666666], 'brevity_penalty': 0.7788007830714049, 'score': 55.069531490318376}\n"
+      },
+      {
+        "id": "probe-24",
+        "stdout": "{'selected': 6.0, 'mask': 4.800000000000001, 'random': 0.6000000000000001, 'unchanged': 0.6000000000000001, 'zero_selection_probability': 0.001502301249891433}\n{'labels': [[-100, 6, 7, 8, -100, -100, -100]], 'selected': 3, 'mask_branch': 1, 'random_branch': 1, 'unchanged_branch': 1, 'original_ids_unchanged': True, 'random_token_ordinary': True, 'unchanged_selected_label_preserved': True}\n"
+      },
+      {
+        "id": "probe-28",
+        "stdout": "[(0, 1), (1, 2), (2, 3), (3, 4), (3, 4)]\n"
+      },
+      {
+        "id": "probe-29",
+        "stdout": "{'loss': tensor(1.3863, dtype=torch.float64), 'count': 1, 'start_gradient': tensor([[ 0.1250, -0.3750,  0.1250,  0.1250]], dtype=torch.float64), 'end_gradient': tensor([[ 0.1250,  0.1250, -0.3750,  0.1250]], dtype=torch.float64)}\n"
+      },
+      {
+        "id": "probe-30",
+        "stdout": "[{'start': 1, 'end': 1, 'left': 0, 'right': 3, 'score': 9.0}, {'start': 1, 'end': 2, 'left': 0, 'right': 7, 'score': 15.0}, {'start': 2, 'end': 2, 'left': 4, 'right': 7, 'score': 9.0}]\nduplicate-aware F1 0.5\n"
+      },
+      {
+        "id": "probe-31",
+        "stdout": "{'translation_future_prefix_invariant': True, 'translation_source_padding_invariant': True, 'translation_depends_on_real_source': True, 'roberta_can_use_right_context': True, 'roberta_tail_padding_invariant': True, 'scope': 'untrained visibility controls; not held-out task quality'}\n"
+      }
+    ]
+  },
+  "scope": "Fresh local CPU source extraction and all optional study cells. Colab upload/install/Drive/training cells compiled only; no hosted execution."
+}

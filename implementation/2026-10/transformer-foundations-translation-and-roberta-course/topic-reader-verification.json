@@ -1,0 +1,372 @@
+{
+  "schema_version": 1,
+  "status": "pass",
+  "verified_at": "2026-10-13T04:53:12.315403+00:00",
+  "tested_fingerprint": "f58f3421af7fd17be2ff4567f8fd31a58f1868f7d82d38dec2c21d70859e6e83",
+  "final_fingerprint": "62c5b39c47375e0f8244eac76d66b0b68251f914ac2773945ab7b2cc3c4c7ea3",
+  "final_render_delta": {
+    "changed_files": [
+      "topic-verification.json"
+    ],
+    "interpretation": "Only the verification evidence asset changed after passing browser snapshots. All lesson prose, manifest, diagrams, examples and compiled lesson are byte-identical.",
+    "parent_record": "/mnt/projects/ai/ai_projects/docs/implementation/2026-10/transformer-foundations-translation-and-roberta-course/topic-final-verification.json"
+  },
+  "npm_test": {
+    "exit_code": 0,
+    "tests": 9,
+    "passed": 9,
+    "failed": 0,
+    "log": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/npm-test.log"
+  },
+  "isolation": {
+    "source": "/mnt/projects/ai/ai_projects/docs",
+    "evidence_root": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13",
+    "shared_dist_used": false,
+    "dependency_link": "/mnt/projects/ai/ai_projects/docs/website/node_modules",
+    "build_environment": "SITE_BASE explicit for each copy; site.config.mjs reads it. Independent website/dist and random-port static server for each suite.",
+    "exclusions": [
+      ".git",
+      "node_modules",
+      "dist",
+      "test-results",
+      "__pycache__",
+      ".pytest_cache",
+      ".ruff_cache",
+      ".cache",
+      ".agents",
+      ".playwright-cli"
+    ]
+  },
+  "coverage": {
+    "records_per_deployment": 112,
+    "catalog_sources": 13,
+    "tutorials": 3,
+    "chapters_all_courses": 69,
+    "viewport_widths": [
+      320,
+      390,
+      768,
+      1440
+    ],
+    "record_width_checks_per_deployment": 448,
+    "course1": {
+      "chapters": 32,
+      "diagrams": 29,
+      "practice_items": 64,
+      "scenario_controls": 3,
+      "scenario_cases": 11,
+      "original_chapter_ids_retained": 24
+    },
+    "all_courses": {
+      "diagrams": 51,
+      "practice_items": 113,
+      "scenario_controls": 9,
+      "scenario_cases": 28
+    },
+    "tutorial0_legacy_redirects": 19,
+    "course1_retained_routes_checked_per_deployment": 24,
+    "math_parse_errors": 0,
+    "page_errors": 0,
+    "http_error_responses": 0,
+    "article_internal_links": "Every record checked for status200; content tests validate anchors, sources and asset links.",
+    "region_keyboard_focus": "All chapter pre, tables and display equations have tabindex0.",
+    "navigation": "Chapter current state, previous/next, section anchors, 390px menu and JavaScript-disabled fallback pass.",
+    "practice": "Every native practice revealed/hidden separately; Course 1 beforeprint reveals all 64 answers and afterprint hides all 64.",
+    "scenarios": "All declared cases and expected outcomes/narratives pass.",
+    "downloads": "Four actual browser downloads across both deployments are byte-equal built assets.",
+    "print": "Suite print button/CSS/A4 PDF pass; additional Course 1 Lesson 18 print action/CSS and 6-page Letter PDF pass in each deployment.",
+    "search_and_filters": "Record search, tutorial search/order and source catalog filters pass."
+  },
+  "deployments": [
+    {
+      "base": "/",
+      "snapshot": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/root/snapshot.json",
+      "commands": [
+        {
+          "action": "build",
+          "base": "/",
+          "started_at": "2026-10-13T04:48:02.183672+00:00",
+          "finished_at": "2026-10-13T04:48:02.884136+00:00",
+          "exit_code": 0,
+          "log": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/root/logs/build.log"
+        },
+        {
+          "action": "test:browser",
+          "base": "/",
+          "started_at": "2026-10-13T04:48:02.884216+00:00",
+          "finished_at": "2026-10-13T04:48:54.210524+00:00",
+          "exit_code": 0,
+          "log": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/root/logs/browser.log"
+        }
+      ],
+      "downloads": {
+        "base": "/",
+        "browser_events": 2,
+        "downloads": [
+          {
+            "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/root/output/playwright/.playwright-cli/p00-transformer-course-v1.md",
+            "built_path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/root/docs/website/dist/source/tutorials/p00-transformer-course-v1.md",
+            "bytes": 89528,
+            "sha256": "d0bc9140027b68787341134d8ef6963a380e75b20d01cb883bb47d4e1cbeb0a3",
+            "byte_equal": true
+          },
+          {
+            "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/root/output/playwright/.playwright-cli/lesson.md",
+            "built_path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/root/docs/website/dist/tutorial-assets/p00/transformer-course/v1/lesson.md",
+            "bytes": 311082,
+            "sha256": "72d91915eb84cb8f6d075b5a201d362e2235ca39aa9fd2591090456b4344f54e",
+            "byte_equal": true
+          }
+        ]
+      },
+      "print": {
+        "print_action_invoked": true,
+        "css": {
+          "background": "rgb(255, 255, 255)",
+          "sidebar": "none",
+          "nav": "none",
+          "pager": "none",
+          "answerVisibility": [
+            "block",
+            "block"
+          ],
+          "mathErrors": 0
+        },
+        "pdf": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/root/output/playwright/course1-training.pdf",
+        "pdf_generated": true,
+        "pdf_bytes": 128090
+      },
+      "legacy_course1_routes": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/root/logs/course1-legacy-routes.json",
+      "suite_screenshot_count": 93,
+      "suite_pdf": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/root/docs/website/test-results/record.pdf"
+    },
+    {
+      "base": "/project_docs/",
+      "snapshot": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/prefix/snapshot.json",
+      "commands": [
+        {
+          "action": "build",
+          "base": "/project_docs/",
+          "started_at": "2026-10-13T04:48:02.183598+00:00",
+          "finished_at": "2026-10-13T04:48:02.895907+00:00",
+          "exit_code": 0,
+          "log": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/prefix/logs/build.log"
+        },
+        {
+          "action": "test:browser",
+          "base": "/project_docs/",
+          "started_at": "2026-10-13T04:48:02.895992+00:00",
+          "finished_at": "2026-10-13T04:48:54.268593+00:00",
+          "exit_code": 0,
+          "log": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/prefix/logs/browser.log"
+        }
+      ],
+      "downloads": {
+        "base": "/project_docs/",
+        "browser_events": 2,
+        "downloads": [
+          {
+            "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/prefix/output/playwright/.playwright-cli/p00-transformer-course-v1.md",
+            "built_path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/prefix/docs/website/dist/source/tutorials/p00-transformer-course-v1.md",
+            "bytes": 89528,
+            "sha256": "d0bc9140027b68787341134d8ef6963a380e75b20d01cb883bb47d4e1cbeb0a3",
+            "byte_equal": true
+          },
+          {
+            "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/prefix/output/playwright/.playwright-cli/lesson.md",
+            "built_path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/prefix/docs/website/dist/tutorial-assets/p00/transformer-course/v1/lesson.md",
+            "bytes": 311082,
+            "sha256": "72d91915eb84cb8f6d075b5a201d362e2235ca39aa9fd2591090456b4344f54e",
+            "byte_equal": true
+          }
+        ]
+      },
+      "print": {
+        "print_action_invoked": true,
+        "css": {
+          "background": "rgb(255, 255, 255)",
+          "sidebar": "none",
+          "nav": "none",
+          "pager": "none",
+          "answerVisibility": [
+            "block",
+            "block"
+          ],
+          "mathErrors": 0
+        },
+        "pdf": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/prefix/output/playwright/course1-training.pdf",
+        "pdf_generated": true,
+        "pdf_bytes": 128155
+      },
+      "legacy_course1_routes": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/prefix/logs/course1-legacy-routes.json",
+      "suite_screenshot_count": 93,
+      "suite_pdf": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/prefix/docs/website/test-results/record.pdf"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/dynamic-mlm-corruption-1440-full.png",
+      "size": [
+        1440,
+        6457
+      ],
+      "sha256": "75b09e2bb663317340e5502d3f6bacdcbd88704c1823862c6f26290f77642db6"
+    },
+    {
+      "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/dynamic-mlm-corruption-390-diagram.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "eb2c14d8fc589a9fdd6ff80c164b6fd008279efea24d9ace7b18189fbe0c4b8f"
+    },
+    {
+      "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/dynamic-mlm-corruption-390-top.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "d0f9ecbd2d171ecb35d4296eb081f476fd5ed6b53c329fd9f15c24f9d66dbdc5"
+    },
+    {
+      "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/qa-head-and-fine-tuning-1440-full.png",
+      "size": [
+        1440,
+        5212
+      ],
+      "sha256": "b83503d66004e4a156820fc6725c25851090055fd52da403006f46864ff9830a"
+    },
+    {
+      "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/qa-head-and-fine-tuning-390-diagram.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "3419c79ac814dfeaee98050e4e3327d58ecb998d2eae16f2d8462c200e3ed2d3"
+    },
+    {
+      "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/qa-head-and-fine-tuning-390-top.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "ca418d86b2e948b51a2aa2302c4d391818d6f234baca0a08445e9afb0a01a7c6"
+    },
+    {
+      "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/qkv-1440-full.png",
+      "size": [
+        1440,
+        7626
+      ],
+      "sha256": "7c8eca7a35e2f0f187274732865db6aa6cbd69135451c53cb7775f74b6875220"
+    },
+    {
+      "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/qkv-390-diagram.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "d6552bd289308634b18d10b03c9721e14c13e96d4ef44abfc50206a4a4a8b582"
+    },
+    {
+      "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/qkv-390-top.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "b736883dad8c201717790d12910f857c9f6d6cd1a21883c725add9f9a918cd42"
+    },
+    {
+      "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/recovery-320-display-fix.png",
+      "size": [
+        320,
+        844
+      ],
+      "sha256": "033b0e840336c66e4b8dbba3f41c036d0954bdae64a3a274d83033b5b85f45fc"
+    },
+    {
+      "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/translation-embeddings-1440-full.png",
+      "size": [
+        1440,
+        4267
+      ],
+      "sha256": "dbca7196b72239107d4300ae29194725a36943f36d19db70a9af469408f4d4aa"
+    },
+    {
+      "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/translation-embeddings-390-diagram.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "679e07c0151ec04ddf61c0988d5f7008eb7b5daa385c18a4f8d9aeccf0ab8b26"
+    },
+    {
+      "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/translation-embeddings-390-top.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "6c2bba2f500c4a520953f05ed3e47beb244b59bc8e579adf88389fe16751b8a9"
+    },
+    {
+      "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/translation-training-1440-full.png",
+      "size": [
+        1440,
+        5762
+      ],
+      "sha256": "75ec91978ae1a0a912b1ea3cc736e5c17c0370d3dfbbd88c0918009a6890caf6"
+    },
+    {
+      "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/translation-training-390-diagram.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "27a8f24f058072a6f680c6ebdf274586fd7140e2d7599bb20ad7dc7e18a64766"
+    },
+    {
+      "path": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/translation-training-390-top.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "810331430321c09b294a0741d0945337c6b21a6e11fc729a8bc8e8f8a6d13c97"
+    }
+  ],
+  "screenshot_reuse_proof": "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/selected-captures/reuse-proof.json",
+  "parent_visual_review": {
+    "status": "completed",
+    "reviewed": "Five selected mobile views plus embedding and QA desktop pages; parent reported no remaining visual blocker."
+  },
+  "resolved_reader_issues": [
+    {
+      "id": "recovery-inline-equation-overflow",
+      "before": {
+        "viewport_width": 320,
+        "document_scroll_width": 358
+      },
+      "fix": "Parent moved state tuple to keyboard-scrollable display math.",
+      "verification": "All 112 records pass all 4 widths in both deployments."
+    },
+    {
+      "id": "duplicate-visibility-scenario",
+      "before": {
+        "declared": 3,
+        "rendered": 4
+      },
+      "fix": "Parent removed visibility insertion and scenario_ids from the objective preview; detailed masks chapter retains it.",
+      "verification": "All 3 Course 1 controls and 11 cases pass."
+    }
+  ],
+  "superseded_evidence": [
+    "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/superseded-inline-equation",
+    "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/superseded-duplicate-scenario",
+    "/mnt/projects/ai/.ai/tutorial1-topic-reader/2026-10-13/superseded-support-repair"
+  ],
+  "cleanup": "All agent-created CLI browser sessions and supplemental static servers closed; suite browsers/servers close in finally.",
+  "boundaries": [
+    "Reader/source preparation is not learner mastery or model milestone completion.",
+    "No hosted Colab, benchmark performance or deployment claim.",
+    "No website source, frozen lesson prose or learner state changed by this reader task."
+  ]
+}

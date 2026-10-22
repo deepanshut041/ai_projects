@@ -1,0 +1,21 @@
+{
+  "unequal_errors": {
+    "count": 2,
+    "mae": 5.0,
+    "rmse": 5.830951894845301,
+    "mean_signed_error": -3.0,
+    "mean_underprediction": 4.0,
+    "underprediction_count": 1,
+    "mean_underprediction_when_under": 8.0
+  },
+  "cancelling_errors": {
+    "count": 2,
+    "mae": 10.0,
+    "rmse": 10.0,
+    "mean_signed_error": 0.0,
+    "mean_underprediction": 5.0,
+    "underprediction_count": 1,
+    "mean_underprediction_when_under": 10.0
+  },
+  "misaligned_forecasts_rejected": "Forecast identities must match each target row in order."
+}

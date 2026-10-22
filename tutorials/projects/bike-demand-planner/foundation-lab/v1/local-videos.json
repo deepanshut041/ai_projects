@@ -1,0 +1,413 @@
+{
+  "schema_version": 1,
+  "videos": [
+    {
+      "src": "media/bike-first-hourly-contract/video.mp4",
+      "package": "bike-first-hourly-contract",
+      "file": "out/video.mp4",
+      "sha256": "eb62e021675388a3d7a15da79d0a02a5f4c9803d6c563e388076e5771a857760",
+      "title": "What is known before the rental hour?",
+      "duration": 220.5
+    },
+    {
+      "src": "media/bike-first-prediction-and-loss/video.mp4",
+      "package": "bike-first-prediction-and-loss",
+      "file": "out/video.mp4",
+      "sha256": "3336d630d7629898a282ece7aba413f44154aef39b3aabed35862ff5e1725295",
+      "title": "Build the prediction and measure its error",
+      "duration": 236.29166666666666
+    },
+    {
+      "src": "media/bike-first-gradient-update/video.mp4",
+      "package": "bike-first-gradient-update",
+      "file": "out/video.mp4",
+      "sha256": "5e7dd6ea85cdb9c7dd42f0945e761c09e4cd501ed7594bb294490c9b487c7d38",
+      "title": "Follow the chain rule through one update",
+      "duration": 234.41666666666666
+    },
+    {
+      "src": "media/bike-first-opposite-target/video.mp4",
+      "package": "bike-first-opposite-target",
+      "file": "out/video.mp4",
+      "sha256": "6884bd9807f3d77d885887452210b4c8403a04e8be783dab270d8fd72eb8ca29",
+      "title": "Change the target to 35 and compare both updates",
+      "duration": 230.75
+    },
+    {
+      "src": "media/bike-data-hourly-contract-depth/video.mp4",
+      "package": "bike-data-hourly-contract-depth",
+      "file": "out/complete/video.mp4",
+      "sha256": "002f8e7ce70af9cec8ea454868c1e1c6ebd94e7eb0cd6d44f178ddb486b3249a",
+      "title": "The hourly prediction contract",
+      "duration": 281.604667
+    },
+    {
+      "src": "media/bike-data-source-audit-depth/video.mp4",
+      "package": "bike-data-source-audit-depth",
+      "file": "out/complete/video.mp4",
+      "sha256": "57b39997aae444d56cda8218b78d9080577627942c2f9a17b5037c6f7083951a",
+      "title": "Useful inputs, leakage and missing hours",
+      "duration": 289.979329
+    },
+    {
+      "src": "media/bike-data-calendar-vector-depth/video.mp4",
+      "package": "bike-data-calendar-vector-depth",
+      "file": "out/complete/video.mp4",
+      "sha256": "6c89307a1049ca13414a50aaf3caa7f7c26f4fe622d72d5cd184e53849dc709c",
+      "title": "Build the 45 calendar inputs",
+      "duration": 394.145996
+    },
+    {
+      "src": "media/bike-data-representation-depth/video.mp4",
+      "package": "bike-data-representation-depth",
+      "file": "out/complete/video.mp4",
+      "sha256": "331c9e48574ca7ca034103cb85facdea1ab2260d74c082f465a2049f34696ee2",
+      "title": "What the calendar representation assumes",
+      "duration": 345.270996
+    },
+    {
+      "src": "media/bike-data-chronological-split-depth/video.mp4",
+      "package": "bike-data-chronological-split-depth",
+      "file": "out/complete/video.mp4",
+      "sha256": "44473b49351156aebeb8c3fcb4d1b9889f7a9f3250b537ff8874abdde1f858ca",
+      "title": "Time splits and information availability",
+      "duration": 369.395996
+    },
+    {
+      "src": "media/bike-data-saved-artifacts-depth/video.mp4",
+      "package": "bike-data-saved-artifacts-depth",
+      "file": "out/complete/video.mp4",
+      "sha256": "42365072a5e8f8053985092e3ffd67617917baef296344ed8d62a93abd91d125",
+      "title": "Follow the row through files, code and checks",
+      "duration": 363.312663
+    },
+    {
+      "src": "media/bike-group-hourly-example/video.mp4",
+      "package": "bike-group-hourly-example",
+      "file": "out/video.mp4",
+      "sha256": "b1a398f1f034680323720439364ca9ebbff64bd838a96f6c8c0b1daea681b14c",
+      "title": "Choose a training mean for a real hour",
+      "duration": 209.125
+    },
+    {
+      "src": "media/bike-group-fit-predict/video.mp4",
+      "package": "bike-group-fit-predict",
+      "file": "out/video.mp4",
+      "sha256": "0cfc8e58ca9d8f224a9c9bbfc91c304bbe34d2e2faa599e46890686b260e63ee",
+      "title": "Fit once, then predict from calendar keys",
+      "duration": 225.083333
+    },
+    {
+      "src": "media/bike-group-missing-pairs/video.mp4",
+      "package": "bike-group-missing-pairs",
+      "file": "out/video.mp4",
+      "sha256": "e6b43baefc06a06fe7ce11189886149fe91ccd6bd38b492a9cd12d6489824fb1",
+      "title": "A training-only fallback for an absent group",
+      "duration": 227.25
+    },
+    {
+      "src": "media/bike-group-validation-review/video.mp4",
+      "package": "bike-group-validation-review",
+      "file": "out/video.mp4",
+      "sha256": "ae494de79e245d5aaafa8044b1153dddf744329c76e7aeb004f9482dc648d384",
+      "title": "Read the baseline comparison and its failures",
+      "duration": 233.666667
+    },
+    {
+      "src": "media/bike-linear-calendar-scaling/video.mp4",
+      "package": "bike-linear-calendar-scaling",
+      "file": "out/video.mp4",
+      "sha256": "28da889b55c7be265e47a19c9dfcef8798eb5a4cd2a10e69212748f4400b5801",
+      "title": "Follow Monday at eight into the linear model",
+      "duration": 233.666667
+    },
+    {
+      "src": "media/bike-linear-two-updates/video.mp4",
+      "package": "bike-linear-two-updates",
+      "file": "out/video.mp4",
+      "sha256": "407eaf415d0011e03dc0e1598785904070cb8a370989bad106c0983952906e96",
+      "title": "Work two batch updates with numbers we can check",
+      "duration": 283.5
+    },
+    {
+      "src": "media/bike-linear-batch-convergence/video.mp4",
+      "package": "bike-linear-batch-convergence",
+      "file": "out/video.mp4",
+      "sha256": "3daaceead11232039f9a053dbdf19dba7af79d698aa90b1d12b28a88d93b9696",
+      "title": "Watch the real training hour move, then let the batch converge",
+      "duration": 230.25
+    },
+    {
+      "src": "media/bike-linear-dependent-coefficients/video.mp4",
+      "package": "bike-linear-dependent-coefficients",
+      "file": "out/video.mp4",
+      "sha256": "827b8406a5be8bc98b2d9c02f5dd349460937bf163f717d16012b7231372d888",
+      "title": "Check the fitted function when coefficients are not unique",
+      "duration": 247.833333
+    },
+    {
+      "src": "media/bike-linear-validation-failures/video.mp4",
+      "package": "bike-linear-validation-failures",
+      "file": "out/video.mp4",
+      "sha256": "7f919f362b13f1db52c42cc08758a710df2985dfb6848a9756c6c9ce2e7ae55c",
+      "title": "Compare the forecasts and explain the failures",
+      "duration": 241.958333
+    },
+    {
+      "src": "media/bike-optimizer-sgd-momentum/video.mp4",
+      "package": "bike-optimizer-sgd-momentum",
+      "file": "out/video.mp4",
+      "sha256": "c250239ea75c0ec6d2030371bc84c9c8361ab228d199aecb37904686983e3117",
+      "title": "Follow the same hour through SGD and momentum",
+      "duration": 255.708333
+    },
+    {
+      "src": "media/bike-optimizer-adam-moments/video.mp4",
+      "package": "bike-optimizer-adam-moments",
+      "file": "out/video.mp4",
+      "sha256": "852f8a4ff689e8daa2b7ffe57eb5f2724ce16ab0313b90afaae0f409aaf6a176",
+      "title": "Let Adam remember gradient direction and size",
+      "duration": 251.583333
+    },
+    {
+      "src": "media/bike-optimizer-batches-work/video.mp4",
+      "package": "bike-optimizer-batches-work",
+      "file": "out/video.mp4",
+      "sha256": "284b0f8c5d65d8ae60b1035f7ca09c47be4f0ccf410b6c79fc24eab4db8f6268",
+      "title": "Change the batch while keeping the time boundary intact",
+      "duration": 258.125
+    },
+    {
+      "src": "media/bike-optimizer-controlled-comparison/video.mp4",
+      "package": "bike-optimizer-controlled-comparison",
+      "file": "out/video.mp4",
+      "sha256": "baa470b77f5a56649b68a2b26a1953533da5492a8e272b0b9de9b82e334da7be",
+      "title": "Freeze a fair comparison and read what it says",
+      "duration": 298.416667
+    },
+    {
+      "src": "media/bike-optimizer-rate-decay/video.mp4",
+      "package": "bike-optimizer-rate-decay",
+      "file": "out/video.mp4",
+      "sha256": "50706264b467442820c66f880f3afa51d4ef8558dc8aec1e17d96da376d600e7",
+      "title": "Reduce the rate using work already processed",
+      "duration": 250.833333
+    },
+    {
+      "src": "media/bike-optimizer-continuation-state/video.mp4",
+      "package": "bike-optimizer-continuation-state",
+      "file": "out/video.mp4",
+      "sha256": "bffbff7a761197888ead69e52ac8224f20de61902c5c3b5a0d266bef6d179622",
+      "title": "Save what determines the next update",
+      "duration": 275.75
+    },
+    {
+      "src": "media/bike-objectives-loss-influence/video.mp4",
+      "package": "bike-objectives-loss-influence",
+      "file": "out/video.mp4",
+      "sha256": "1ea461771004a993af31dcfc67ed2da6743fccede768af00d4e571198f6fdf12",
+      "title": "Follow the same hourly error through three losses",
+      "duration": 246.0
+    },
+    {
+      "src": "media/bike-objectives-l2-weights/video.mp4",
+      "package": "bike-objectives-l2-weights",
+      "file": "out/video.mp4",
+      "sha256": "80b0e633e4cb9081799ebf741d7278a77e3e1d3ce2cff2ff3e3cfd06c31bd594",
+      "title": "Shrink weights without pulling the intercept toward zero",
+      "duration": 244.291667
+    },
+    {
+      "src": "media/bike-objectives-scaling-coordinates/video.mp4",
+      "package": "bike-objectives-scaling-coordinates",
+      "file": "out/video.mp4",
+      "sha256": "cda7a76881720967f88e29156cefade3aeedf76fe35789bd978e678b3dcd5773",
+      "title": "Change coordinates without adding a new pattern",
+      "duration": 256.75
+    },
+    {
+      "src": "media/bike-objectives-cyclic-calendar/video.mp4",
+      "package": "bike-objectives-cyclic-calendar",
+      "file": "out/video.mp4",
+      "sha256": "2ea13947fc9c777985f89968a3c2b5b9b5cc8dc46e0a6bb6502683d632973a2a",
+      "title": "Give the calendar a circle and inspect what it loses",
+      "duration": 239.041667
+    },
+    {
+      "src": "media/bike-objectives-hour-interactions/video.mp4",
+      "package": "bike-objectives-hour-interactions",
+      "file": "out/video.mp4",
+      "sha256": "5347f62916cfa69907a96229bb63eec97175a0d9b807770b16b403fa754c3a1a",
+      "title": "Give working days their own hourly shape",
+      "duration": 241.416667
+    },
+    {
+      "src": "media/bike-objectives-output-selection/video.mp4",
+      "package": "bike-objectives-output-selection",
+      "file": "out/video.mp4",
+      "sha256": "7a866dcd14ee46787be143a5aafe92d05a07124c9338c745d4b6b236e3325468",
+      "title": "Score nonnegative forecasts and freeze the next reference",
+      "duration": 249.5
+    },
+    {
+      "src": "media/bike-trees-leaf-prediction/video.mp4",
+      "package": "bike-trees-leaf-prediction",
+      "file": "out/video.mp4",
+      "sha256": "840358750f49838fc07e10ecead74c8e0f2d044b171b3ea7c7e02c6d82feb9e7",
+      "title": "Follow one hourly request to a leaf mean",
+      "duration": 224.958333
+    },
+    {
+      "src": "media/bike-trees-depth-and-support/video.mp4",
+      "package": "bike-trees-depth-and-support",
+      "file": "out/video.mp4",
+      "sha256": "2707383f4f0321d0de2454e0f3281fc60300eeedc406e22c0642781a154ea162",
+      "title": "Let the tree grow and inspect what its smaller leaves remember",
+      "duration": 243.958333
+    },
+    {
+      "src": "media/bike-trees-forest-averaging/video.mp4",
+      "package": "bike-trees-forest-averaging",
+      "file": "out/video.mp4",
+      "sha256": "8ffe3685f31c8d649d5fe57aef5aed2aaf85b4b1bda9506a3d780f2be578c61b",
+      "title": "Average varied trees without assuming their shared errors disappear",
+      "duration": 247.958333
+    },
+    {
+      "src": "media/bike-trees-boosting-corrections/video.mp4",
+      "package": "bike-trees-boosting-corrections",
+      "file": "out/video.mp4",
+      "sha256": "8f6422b913f18bdf919f4e53edc59263367d75641a11e450f3881b468c098eed",
+      "title": "Add successive residual corrections instead of averaging forecasts",
+      "duration": 254.375
+    },
+    {
+      "src": "media/bike-trees-comparison-choice/video.mp4",
+      "package": "bike-trees-comparison-choice",
+      "file": "out/video.mp4",
+      "sha256": "61b9c4bb5d2f9adc02de4c3cda7b1e61a283f11a6e007abddd14b1c39cd2f122",
+      "title": "Choose a development reference using quality, cost and honest evidence",
+      "duration": 265.083333
+    },
+    {
+      "src": "media/bike-errors-residuals/video.mp4",
+      "package": "bike-errors-residuals",
+      "file": "out/video.mp4",
+      "sha256": "51417fcfe62683a9ff10aa2ab1fa2eaed9336ff9eb239a71c99cbc7e42c1e838",
+      "title": "Read an hourly miss without losing its sign",
+      "duration": 268.208333
+    },
+    {
+      "src": "media/bike-errors-counted-slices/video.mp4",
+      "package": "bike-errors-counted-slices",
+      "file": "out/video.mp4",
+      "sha256": "7ba07b14f3c77e54c4dc9cad8bbb83a17201df71859ecadf5176dbacfef6ecec",
+      "title": "Keep the denominator when you split the hours",
+      "duration": 258.291667
+    },
+    {
+      "src": "media/bike-errors-time-and-levels/video.mp4",
+      "package": "bike-errors-time-and-levels",
+      "file": "out/video.mp4",
+      "sha256": "606ead5b0dbf5e430734f401b27c97e5834a42da94345830857c07474b152108",
+      "title": "Keep time order when the demand level changes",
+      "duration": 263.416667
+    },
+    {
+      "src": "media/bike-errors-input-boundary/video.mp4",
+      "package": "bike-errors-input-boundary",
+      "file": "out/video.mp4",
+      "sha256": "2ece8c0019f917ff89d0d28e4cf6c4b728e465324d29ade4c7b643ef1e80c402",
+      "title": "Separate a valid calendar change from an unsupported request",
+      "duration": 272.041667
+    },
+    {
+      "src": "media/bike-errors-candidate-handoff/video.mp4",
+      "package": "bike-errors-candidate-handoff",
+      "file": "out/video.mp4",
+      "sha256": "e4c5aa8d390b78bfbfdd1f27cf1a872ab010f34bd96781eebd118216530c6e2b",
+      "title": "Freeze the candidate together with the limits we just found",
+      "duration": 280.583333
+    },
+    {
+      "src": "media/bike-save-prediction-reload/video.mp4",
+      "package": "bike-save-prediction-reload",
+      "file": "out/video.mp4",
+      "sha256": "3ff09c6a8cce92da23a16029de748785141f66c731db1f4a98127583b5b4852f",
+      "title": "Reload the same forecast without carrying the training process",
+      "duration": 264.375
+    },
+    {
+      "src": "media/bike-save-next-update/video.mp4",
+      "package": "bike-save-next-update",
+      "file": "out/video.mp4",
+      "sha256": "4cc3500f550f7b86e6f46ee8e025f23f80d8560b085d0a8f0ec9fa4c1381a80d",
+      "title": "Resume the next update with the same state and next batch",
+      "duration": 280.416667
+    },
+    {
+      "src": "media/bike-save-generation-fallback/video.mp4",
+      "package": "bike-save-generation-fallback",
+      "file": "out/video.mp4",
+      "sha256": "32ccfdfa7a18e6d9b2cd1852e7c6e2c84f77df0433fc43dfe734beae00266ba4",
+      "title": "Recover from a damaged save without hiding the fallback",
+      "duration": 275.166667
+    },
+    {
+      "src": "media/bike-save-replay-application/video.mp4",
+      "package": "bike-save-replay-application",
+      "file": "out/video.mp4",
+      "sha256": "a6aff1d3411b9a591b9fff09bf1075e3e84f8cf1697694f929cece62e513a37c",
+      "title": "Keep the forecast and recorded outcome separate in the application",
+      "duration": 271.333333
+    },
+    {
+      "src": "media/bike-save-benchmark-limits/video.mp4",
+      "package": "bike-save-benchmark-limits",
+      "file": "out/video.mp4",
+      "sha256": "01a5218dd373fd387e4e9479adc3a5ae74edce62ab6852909b93be3b1391c7d2",
+      "title": "Read the benchmark alongside the candidate's limits",
+      "duration": 289.375
+    },
+    {
+      "src": "media/bike-final-freeze-boundary/video.mp4",
+      "package": "bike-final-freeze-boundary",
+      "file": "out/video.mp4",
+      "sha256": "ccb89a0e30544c912d4aac8c742791a1b2ed11a006b147c5ee8cd35eb21fffad",
+      "title": "Freeze the question before looking at later outcomes",
+      "duration": 260.208333
+    },
+    {
+      "src": "media/bike-final-hourly-forward/video.mp4",
+      "package": "bike-final-hourly-forward",
+      "file": "out/video.mp4",
+      "sha256": "2dd13603b29f95a31c7ee459e9426abd96c91f299c35a0ca227c4c6f90c48cae",
+      "title": "Carry one July hour from calendar to counted error",
+      "duration": 266.0
+    },
+    {
+      "src": "media/bike-final-ranking-and-error/video.mp4",
+      "package": "bike-final-ranking-and-error",
+      "file": "out/video.mp4",
+      "sha256": "3ac0f152b0c73eab4579c09a684718c0863dd60e0f5423901d3be4e5eb671c02",
+      "title": "Read the final comparison without moving the goalposts",
+      "duration": 268.75
+    },
+    {
+      "src": "media/bike-final-slices-and-deficits/video.mp4",
+      "package": "bike-final-slices-and-deficits",
+      "file": "out/video.mp4",
+      "sha256": "ad3a54ef197e620d16d3f86129dcbd2137bfb2486e6892377b3872b6ea2a052f",
+      "title": "Find where the later forecasts still fall short",
+      "duration": 276.916667
+    },
+    {
+      "src": "media/bike-final-application-and-handoff/video.mp4",
+      "package": "bike-final-application-and-handoff",
+      "file": "out/video.mp4",
+      "sha256": "27ca957c8d7fab382eb802005cbfac599df8aa9f164547532e75f0562d09d93d",
+      "title": "Connect the saved artifact to the application and an honest handoff",
+      "duration": 285.541667
+    }
+  ]
+}

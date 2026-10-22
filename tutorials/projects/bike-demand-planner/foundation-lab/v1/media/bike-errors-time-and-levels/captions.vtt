@@ -1,0 +1,263 @@
+WEBVTT
+
+00:00:00.520 --> 00:00:04.550
+January and June do not merely
+contain different error magnitudes.
+
+00:00:04.820 --> 00:00:07.910
+They occupy different positions
+in the forecast timeline.
+
+00:00:08.400 --> 00:00:13.580
+The daily plot keeps that order and shows
+mostly larger negative residuals later in
+
+00:00:13.580 --> 00:00:14.670
+the validation period.
+
+00:00:15.260 --> 00:00:18.790
+We summarize each date using
+its actual recorded hours,
+
+00:00:19.260 --> 00:00:21.510
+then form Monday starting weekly groups.
+
+00:00:21.960 --> 00:00:23.570
+There are twenty seven such groups,
+
+00:00:23.720 --> 00:00:27.030
+with counts ranging from twenty
+three to one hundred and sixty eight.
+
+00:00:27.780 --> 00:00:29.970
+Partial boundary weeks remain partial.
+
+00:00:30.320 --> 00:00:34.720
+We have not shuffled observations or
+invented missing targets to make every day
+
+00:00:34.720 --> 00:00:36.570
+and week look equally complete.
+
+00:00:38.692 --> 00:00:43.222
+The validation window contains
+ten unrecorded hourly slots.
+
+00:00:43.932 --> 00:00:49.452
+A row after a gap must not be treated
+as exactly one hour after the row before
+
+00:00:49.452 --> 00:00:50.082
+it.
+
+00:00:50.452 --> 00:00:53.642
+The pair builder therefore
+compares timestamps,
+
+00:00:53.712 --> 00:00:56.102
+retaining only differences of one hour.
+
+00:00:56.572 --> 00:01:01.402
+It finds four thousand, three hundred
+and forty six consecutive hour pairs.
+
+00:01:01.872 --> 00:01:07.062
+For these pairs, the residual correlation
+is about zero point eight six eight.
+
+00:01:07.772 --> 00:01:12.832
+The full function guards against too few
+pairs and zero variation before computing
+
+00:01:12.832 --> 00:01:13.522
+correlation.
+
+00:01:14.312 --> 00:01:16.422
+Missing slots remain missing;
+
+00:01:17.392 --> 00:01:22.432
+inserting zero outcomes would alter both
+the evaluation population and its apparent
+
+00:01:22.432 --> 00:01:23.502
+time structure.
+
+00:01:25.692 --> 00:01:30.132
+A strong positive correlation says
+neighboring residuals tend to move
+
+00:01:30.132 --> 00:01:32.182
+together in these observed pairs.
+
+00:01:32.692 --> 00:01:35.422
+It does not prove a cause
+or guarantee persistence.
+
+00:01:36.292 --> 00:01:41.375
+Weekly mean absolute error ranges from
+thirty two point seven five to one hundred
+
+00:01:41.375 --> 00:01:44.362
+and fifty seven point two
+six on the observed weeks.
+
+00:01:44.892 --> 00:01:48.462
+That range is descriptive,
+not a confidence interval for next week.
+
+00:01:49.032 --> 00:01:54.312
+The earlier forest seed standard deviation
+near zero point zero five five has another
+
+00:01:54.312 --> 00:01:54.982
+meaning.
+
+00:01:55.372 --> 00:01:58.942
+It measures fitting variation
+on the same validation dates.
+
+00:01:59.352 --> 00:02:02.662
+Repeating seeds does not
+produce new future periods.
+
+00:02:03.292 --> 00:02:07.472
+We retain those distinctions instead
+of reporting an unsupported independent
+
+00:02:07.472 --> 00:02:08.982
+observation interval.
+
+00:02:11.192 --> 00:02:15.082
+To inspect the level difference,
+first match month,
+
+00:02:15.252 --> 00:02:18.322
+hour and working day cells
+between the two years.
+
+00:02:18.852 --> 00:02:20.062
+Within each cell,
+
+00:02:20.152 --> 00:02:24.752
+calculate a historical mean from January
+through June twenty eleven training
+
+00:02:24.752 --> 00:02:25.402
+targets.
+
+00:02:26.032 --> 00:02:31.572
+Weight that old cell mean by the number
+of later validation rows belonging to the
+
+00:02:31.572 --> 00:02:32.062
+cell.
+
+00:02:32.432 --> 00:02:37.952
+This asks what the old within cell
+levels look like under the later calendar
+
+00:02:37.952 --> 00:02:38.922
+composition.
+
+00:02:39.692 --> 00:02:40.545
+All four thousand,
+
+00:02:40.545 --> 00:02:45.662
+three hundred and fifty seven validation
+observations find a historical cell,
+
+00:02:45.832 --> 00:02:47.342
+with none dropped as unmatched.
+
+00:02:48.092 --> 00:02:50.982
+The weighting changes
+composition for this diagnostic,
+
+00:02:51.512 --> 00:02:55.202
+while the previously fitted
+candidate itself remains unchanged.
+
+00:02:57.317 --> 00:03:01.968
+The reweighted historical cell means
+average one hundred and twenty one point
+
+00:03:01.968 --> 00:03:04.347
+three one rentals per hour.
+
+00:03:04.957 --> 00:03:08.827
+The later observed mean is two
+hundred and fifteen point two zero.
+
+00:03:09.697 --> 00:03:13.267
+Their difference is about
+ninety three point eight nine.
+
+00:03:13.857 --> 00:03:18.671
+This is distinct from the selected group
+predictions mean of one hundred and forty
+
+00:03:18.671 --> 00:03:19.917
+two point eight six,
+
+00:03:19.917 --> 00:03:25.557
+because the diagnostic conditions on month
+too and uses only matching first half
+
+00:03:25.557 --> 00:03:26.787
+historical cells.
+
+00:03:27.097 --> 00:03:29.787
+It is not a newly ranked
+forecasting candidate.
+
+00:03:30.257 --> 00:03:34.857
+Its role is to make an observed level
+difference easier to inspect after
+
+00:03:34.857 --> 00:03:36.647
+outcomes have become available.
+
+00:03:38.957 --> 00:03:39.837
+Matching month,
+
+00:03:39.837 --> 00:03:45.017
+hour and day type makes a calendar
+composition only explanation less
+
+00:03:45.017 --> 00:03:49.487
+adequate, because a substantial difference
+remains within those shared cells.
+
+00:03:50.117 --> 00:03:53.867
+It does not identify which real
+world cause produced that difference.
+
+00:03:54.497 --> 00:03:58.307
+Demand growth, unmodelled weather
+or other changes could contribute.
+
+00:03:58.917 --> 00:04:02.017
+We have not measured their separate
+effects or carried out a causal
+
+00:04:02.017 --> 00:04:02.767
+intervention.
+
+00:04:03.357 --> 00:04:06.107
+If a different later mix were observed,
+
+00:04:06.437 --> 00:04:10.507
+its weights and diagnostic could change
+even with the same historical means.
+
+00:04:11.037 --> 00:04:14.987
+That is why the weights,
+unmatched count and scope are saved,
+
+00:04:15.157 --> 00:04:19.597
+and why this picture does not silently
+authorize refitting or changing the frozen
+
+00:04:19.597 --> 00:04:20.247
+split.
+

@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-12",
+  "source_tests": {
+    "numerical_tensor_text_and_new_math": 57,
+    "classifier_export_and_recovery": 23,
+    "total": 80,
+    "passed": true
+  },
+  "publisher_examples": 6,
+  "torch_comparisons": [
+    {
+      "maximum_absolute_difference": 2.220446049250313e-16,
+      "matches": true,
+      "dtype": "float64",
+      "device": "cpu"
+    },
+    {
+      "maximum_absolute_difference": 1.6653345369377348e-16,
+      "matches": true,
+      "dtype": "float64",
+      "device": "cpu"
+    }
+  ],
+  "notebook": {
+    "lesson_note_sections": 11,
+    "executed_code_cells": 5,
+    "output_cleared": true,
+    "isolated_export_execution": true,
+    "overwrite_protection": true
+  },
+  "export": {
+    "archive": "/mnt/projects/ai/.ai/course-exports/2026-10-12/written-maths/tutorial0-source.zip",
+    "sha256": "2cf6d457b64eab47d2dc0a23f3b2d0a5bbdff5e8572a40924d57dc7bb951dfd4",
+    "members": [
+      "byte_bpe.py",
+      "colab.ipynb",
+      "deep_learning_math.py",
+      "first_session.py",
+      "manifest.json",
+      "prerequisite_checkpoint.py",
+      "prerequisite_export.py",
+      "prerequisite_math.cpp",
+      "prerequisite_math.py",
+      "prerequisite_mlp.py",
+      "prerequisite_mlp_checks.py",
+      "prerequisite_tensors.py",
+      "prerequisite_text.py",
+      "requirements.txt",
+      "study-notes.md",
+      "study.ipynb",
+      "study_notebook.py",
+      "test_deep_learning_math.py",
+      "test_prerequisite_math.py",
+      "test_prerequisite_tensors.py",
+      "test_prerequisite_text.py"
+    ],
+    "notebook": "/mnt/projects/ai/.ai/course-exports/2026-10-12/written-maths/tutorial0-colab.ipynb",
+    "study_notebook": "/mnt/projects/ai/.ai/course-exports/2026-10-12/written-maths/tutorial0-study.ipynb",
+    "hosted_execution": "unverified"
+  },
+  "source_sha256": {
+    "examples/prerequisite_mlp.py": "30071122b9cb8f7ced4a126d95e40f9cc034252763647279da82cd14c46acc40",
+    "examples/study_notebook.py": "6e52d78a3fe9ca0c82ad872bb461290e75f26aa07bf9b5d0edd5a9fce8370d91",
+    "examples/prerequisite_export.py": "2c3717148ba826992ed47b9aba23afa8a1e084715cde5cc96af1cefe3a99f9a7",
+    "examples/numerical_trace.cpp": "989dce03c34f5b799a83aab2078dd641f04f47d6dd989883542b17ea6891d78f",
+    "examples/fresh_process_resume.py": "4cf54ce15acd6356fc7a04993d2a075d9914ab2ec884594a54ca982a134faaa5",
+    "examples/prerequisite_tensors.py": "10ea67eaedbf0aec7ea8cd6f45924ba658c6e543facea30d3747e70122d94ae3",
+    "examples/test_prerequisite_text.py": "d8441ee65e49b55a34b5f3a2626466ca9b91e266e6727e4050ee9bb60fb62630",
+    "examples/test_deep_learning_math.py": "38b1c8cdf69a967901e5eeae17403d6af5d5503f5949ca34b41dfa28efca02b5",
+    "examples/byte_bpe.py": "5adcd5044d52d541dc729554a3f6d184ff0d53d2704122d0b37f4dd51e6db190",
+    "examples/first_session.py": "7c2fc16ad94edadeeecec4e901c6beeed07d27919687ced003e42dad532d0548",
+    "examples/test_prerequisite_math.py": "a93d345f769ad6ff8ee2a0f5a6b236588d869e7a1567982617872426aca3dae9",
+    "examples/tiny_transformer.py": "0e4073ce2595c1170a5184247a8d2b2467d1b2f7a4059d9dc8019a296be90635",
+    "examples/numerical_trace.py": "bd276de5aafd7e31eff80b89b367ca9859940aa752baff1c1939b70ba4b17d43",
+    "examples/prerequisite_mlp_checks.py": "fb281f713c91f67d2b15c4c741d206a06b541db8e3bd425069a1f0a04ed3bdfb",
+    "examples/make_colab_notebook.py": "dd60c2f59334b49918039d32b46b3e3ecae8bbcb35cabc673092b95df2dc8a61",
+    "examples/deep_learning_math.py": "b6d07e8e5180d477ba13ddef68eb8aed3984eabeb26a16f93f82c86829ea8f8d",
+    "examples/tensor_autograd.py": "27798d9f9fbb1eeeb888367a2e4a5bd199ec2c79b5822e8569309315575e56c3",
+    "examples/prerequisite_math.cpp": "123bf8e2c25d2afc267d097c2f2434cd8f0252793d76723f8a61accd47ac179e",
+    "examples/prerequisite_math.py": "b7d2fb4cef5edfbffb716482a096aafa54d17508a27308ebd0d8ecf69885ee62",
+    "examples/math_checks.py": "a7dd57cc0d62176ee50967900df7a96f1d00b72399ee6529c81f55c59502a9d3",
+    "examples/prerequisite_checkpoint.py": "5affe55623c57b1433dae54594890d5e51cec929faaa97a0525f3197e9733151",
+    "examples/test_prerequisite_tensors.py": "cbfa82433884375e54be3d7961c10553ca8561264245f3a3f1534773b0453da3",
+    "examples/prerequisite_text.py": "7abae1a1c052d20d23380419c86a41a5c89209bec576c54ad016c90a0031f4ab",
+    "project/study-notes.md": "29e2529dec80984d284bc1fb8ec18d9e3dbbef0e0ee4bd12b8b22bc14fd98aa5"
+  },
+  "learner_state": "unchanged: P00-M1/Lesson 2 setup complete",
+  "hosted_execution": "unverified"
+}

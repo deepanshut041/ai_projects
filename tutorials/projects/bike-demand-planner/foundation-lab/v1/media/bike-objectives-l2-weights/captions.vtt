@@ -1,0 +1,247 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:03.230
+A loss defines how misses contribute.
+
+00:00:03.820 --> 00:00:08.370
+L2 adds a preference among parameter
+vectors by charging for large weights.
+
+00:00:08.640 --> 00:00:14.220
+We use mean half squared error plus
+lambda over two times the squared weight
+
+00:00:14.220 --> 00:00:14.850
+norm.
+
+00:00:15.260 --> 00:00:16.790
+The intercept is excluded.
+
+00:00:17.300 --> 00:00:20.830
+There is no extra division of the
+penalty by the number of observations.
+
+00:00:21.600 --> 00:00:25.270
+Duplicating every row therefore
+leaves this objective unchanged.
+
+00:00:25.920 --> 00:00:28.750
+Its data mean and its
+penalty stay the same.
+
+00:00:29.180 --> 00:00:33.840
+These choices matter because a different
+normalization or a penalized intercept
+
+00:00:33.840 --> 00:00:35.770
+would define a different model.
+
+00:00:37.982 --> 00:00:43.112
+Take illustrative weights two and
+minus three with lambda zero point two.
+
+00:00:43.322 --> 00:00:45.232
+Their squared norm is thirteen,
+
+00:00:45.662 --> 00:00:47.712
+so the penalty is one point three.
+
+00:00:48.102 --> 00:00:53.652
+Its gradient is lambda times each weight:
+zero point four and minus zero point six.
+
+00:00:53.922 --> 00:00:55.972
+If the data residuals are zero,
+
+00:00:56.342 --> 00:01:01.022
+a rate zero point one update changes the
+weights to one point nine six and minus
+
+00:01:01.022 --> 00:01:02.552
+two point nine four.
+
+00:01:03.102 --> 00:01:07.342
+An intercept of one hundred stays
+one hundred because it has no penalty
+
+00:01:07.342 --> 00:01:08.312
+contribution.
+
+00:01:08.922 --> 00:01:10.892
+This isolates the shrinkage calculation;
+
+00:01:11.402 --> 00:01:13.532
+it is not another fitted Bike result.
+
+00:01:15.608 --> 00:01:20.178
+The source adds a separate scalar
+penalty to the mean data loss.
+
+00:01:20.668 --> 00:01:23.698
+The weight gradient receives
+lambda times weights.
+
+00:01:24.248 --> 00:01:27.198
+The intercept still receives
+only the mean slope.
+
+00:01:27.568 --> 00:01:30.118
+That is where the convention
+becomes executable.
+
+00:01:31.048 --> 00:01:34.558
+Independent finite differences
+check these gradients,
+
+00:01:34.748 --> 00:01:37.858
+and a duplicated data fixture
+checks the normalization.
+
+00:01:38.228 --> 00:01:41.438
+We define the penalty in
+standardized coordinates.
+
+00:01:42.088 --> 00:01:45.608
+The same numerical lambda on raw
+coefficients would mean a different
+
+00:01:45.608 --> 00:01:46.278
+preference.
+
+00:01:46.908 --> 00:01:51.268
+Scaling and regularization are therefore
+isolated in different study families,
+
+00:01:51.268 --> 00:01:55.878
+instead of treating a changed coordinate
+penalty as the same experiment.
+
+00:01:58.192 --> 00:02:00.062
+To isolate regularization,
+
+00:02:00.272 --> 00:02:04.552
+we solve an augmented training least
+squares problem rather than adding another
+
+00:02:04.552 --> 00:02:06.002
+optimizer rate comparison.
+
+00:02:06.892 --> 00:02:11.032
+The appended weight rows are multiplied
+by the square root of training count times
+
+00:02:11.032 --> 00:02:11.542
+lambda.
+
+00:02:12.252 --> 00:02:13.802
+Their intercept column is zero.
+
+00:02:14.552 --> 00:02:18.812
+Dividing the augmented squared sum by
+twice the training count produces exactly
+
+00:02:18.812 --> 00:02:21.482
+our declared mean loss plus penalty.
+
+00:02:21.912 --> 00:02:24.602
+The displayed theta
+contains the intercept;
+
+00:02:25.112 --> 00:02:27.242
+the penalized weight vector excludes it.
+
+00:02:27.732 --> 00:02:31.952
+A stable numerical solve handles dependent
+columns without inverting a singular
+
+00:02:31.952 --> 00:02:32.882
+normal matrix.
+
+00:02:33.552 --> 00:02:37.752
+Independent stationarity checks verify
+that the resulting objective gradient is
+
+00:02:37.752 --> 00:02:38.222
+tiny.
+
+00:02:40.400 --> 00:02:45.020
+Increasing the declared penalty shrinks
+the standardized weight norm from about
+
+00:02:45.020 --> 00:02:50.290
+one hundred and five point five four to
+nine point nine three across this grid.
+
+00:02:50.980 --> 00:02:55.910
+Lambda zero point one slightly
+improves raw validation absolute error.
+
+00:02:56.480 --> 00:02:57.990
+Stronger values worsen it.
+
+00:02:58.400 --> 00:03:03.260
+After nonnegative clipping, no penalty
+scores better than zero point one:
+
+00:03:03.260 --> 00:03:08.150
+about one hundred and nine point one four
+versus one hundred and ten point four two.
+
+00:03:08.780 --> 00:03:12.630
+The output policy therefore
+belongs beside every result.
+
+00:03:13.180 --> 00:03:18.400
+A numerical loss including a penalty must
+also be separated from its data error when
+
+00:03:18.400 --> 00:03:19.390
+reading a table.
+
+00:03:21.608 --> 00:03:24.298
+When centered weights
+are pushed toward zero,
+
+00:03:24.648 --> 00:03:28.138
+the unpenalized intercept keeps
+the overall training level.
+
+00:03:28.468 --> 00:03:30.578
+The model approaches a constant forecast.
+
+00:03:31.228 --> 00:03:32.458
+At lambda ten,
+
+00:03:32.508 --> 00:03:36.428
+the quiet hour is predicted near one
+hundred and twenty four against target
+
+00:03:36.428 --> 00:03:37.118
+five.
+
+00:03:37.688 --> 00:03:41.021
+The busy hour is near one hundred and
+forty seven against four hundred and
+
+00:03:41.021 --> 00:03:41.438
+twenty.
+
+00:03:42.548 --> 00:03:46.698
+These outputs are positive but
+have lost useful hourly variation.
+
+00:03:47.228 --> 00:03:51.348
+Penalizing the intercept too would
+additionally pull the overall level toward
+
+00:03:51.348 --> 00:03:53.378
+zero, a different preference.
+
+00:03:53.988 --> 00:03:57.058
+Regularization trades fit
+for parameter control;
+
+00:03:57.588 --> 00:04:01.218
+this evidence does not make stronger
+shrinkage universally better.
+

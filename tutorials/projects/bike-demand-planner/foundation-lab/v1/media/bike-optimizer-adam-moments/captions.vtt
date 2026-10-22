@@ -1,0 +1,254 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:03.250
+Adam stores two numbers per parameter.
+
+00:00:03.680 --> 00:00:05.970
+The first follows the
+gradient with its sign.
+
+00:00:06.260 --> 00:00:08.610
+The second follows its squared magnitude,
+
+00:00:09.040 --> 00:00:11.970
+so large recent gradients
+increase the denominator.
+
+00:00:12.600 --> 00:00:16.970
+We use beta one zero point nine and
+beta two zero point nine nine nine.
+
+00:00:17.680 --> 00:00:19.250
+Both buffers start at zero.
+
+00:00:19.760 --> 00:00:23.030
+That initialization pulls
+early averages toward zero,
+
+00:00:23.040 --> 00:00:25.970
+so we correct them using the
+number of completed updates.
+
+00:00:26.520 --> 00:00:28.920
+The first update is t equals one.
+
+00:00:28.920 --> 00:00:33.350
+A batch of thirty two increments t once,
+just like a one row update.
+
+00:00:33.620 --> 00:00:35.830
+It is not the count of examples visited.
+
+00:00:36.220 --> 00:00:39.720
+Our implementation uses no
+weight decay or AMSGrad,
+
+00:00:39.720 --> 00:00:42.530
+and keeps epsilon outside the square root.
+
+00:00:44.608 --> 00:00:49.425
+The real hour still begins with gradient
+negative forty eight point seven four
+
+00:00:49.425 --> 00:00:50.618
+seven three.
+
+00:00:51.228 --> 00:00:53.658
+The first moment stores one tenth of it,
+
+00:00:53.728 --> 00:00:56.618
+about negative four point
+eight seven four seven.
+
+00:00:56.988 --> 00:01:00.078
+The second stores one
+thousandth of its square,
+
+00:01:00.468 --> 00:01:02.938
+about two point three seven six three.
+
+00:01:03.628 --> 00:01:08.628
+Dividing by zero point one and zero point
+zero zero one restores the first gradient
+
+00:01:08.628 --> 00:01:09.758
+and its square.
+
+00:01:10.228 --> 00:01:13.738
+The square root is approximately
+its absolute magnitude.
+
+00:01:14.208 --> 00:01:16.338
+Their ratio is almost negative one.
+
+00:01:16.908 --> 00:01:21.748
+Rate zero point zero one therefore
+increases this coordinate by about zero
+
+00:01:21.748 --> 00:01:22.898
+point zero one,
+
+00:01:23.268 --> 00:01:25.798
+much less than the first SGD movement.
+
+00:01:26.328 --> 00:01:27.818
+Across all coordinates,
+
+00:01:28.028 --> 00:01:31.948
+the resulting forecast is one hundred
+and forty four point zero two four nine
+
+00:01:31.948 --> 00:01:32.838
+rentals.
+
+00:01:35.067 --> 00:01:39.777
+The source advances the update counter,
+then accumulates both buffers.
+
+00:01:40.547 --> 00:01:44.577
+These shortened names correspond
+to explicit configuration fields.
+
+00:01:45.367 --> 00:01:47.277
+At the second real hour update,
+
+00:01:47.547 --> 00:01:50.837
+the gradient is about minus
+forty seven point six five.
+
+00:01:51.487 --> 00:01:55.337
+The stored first moment is
+about minus nine point one five,
+
+00:01:55.787 --> 00:01:58.137
+and the second is about
+four point six four.
+
+00:01:58.527 --> 00:02:00.417
+At update two,
+
+00:02:00.587 --> 00:02:05.777
+each correction denominator is one minus
+its beta squared, as shown in the code.
+
+00:02:06.227 --> 00:02:09.777
+Reusing the first step correction
+would give the wrong calculation.
+
+00:02:10.887 --> 00:02:14.947
+The hour eight coefficient
+becomes just under two hundredths.
+
+00:02:14.947 --> 00:02:18.898
+Recomputing every coordinate gives a
+second forecast of about one hundred and
+
+00:02:18.898 --> 00:02:21.337
+forty four point two six rentals.
+
+00:02:22.007 --> 00:02:23.627
+The notes retain the exact values,
+
+00:02:23.627 --> 00:02:27.157
+and the independent scalar
+trace agrees with the code.
+
+00:02:29.192 --> 00:02:30.802
+Now change the case.
+
+00:02:31.192 --> 00:02:35.372
+A scalar parameter starts at zero
+and receives gradient plus two,
+
+00:02:35.372 --> 00:02:38.042
+then minus one, at rate zero point one.
+
+00:02:38.172 --> 00:02:42.102
+The first step takes it to
+approximately negative zero point one.
+
+00:02:42.152 --> 00:02:47.102
+After the sign reversal, the first moment
+is still positive zero point zero eight.
+
+00:02:47.452 --> 00:02:52.252
+Correcting that positive average and
+dividing by a positive magnitude moves the
+
+00:02:52.252 --> 00:02:57.002
+parameter farther down, to negative
+zero point one two six six three four.
+
+00:02:57.572 --> 00:03:02.182
+Restarting the buffers would instead react
+to the latest negative gradient alone.
+
+00:03:02.752 --> 00:03:04.342
+The retained history matters.
+
+00:03:05.052 --> 00:03:09.332
+This changing gradient check is more
+informative than testing only a repeated
+
+00:03:09.332 --> 00:03:09.712
+gradient,
+
+00:03:09.712 --> 00:03:13.992
+because it exposes whether the
+implementation actually carries state
+
+00:03:13.992 --> 00:03:14.982
+between updates.
+
+00:03:17.512 --> 00:03:20.842
+Epsilon becomes important
+for a tiny gradient.
+
+00:03:21.272 --> 00:03:26.342
+With gradient one times ten to the
+negative ten and rate zero point one,
+
+00:03:26.412 --> 00:03:30.630
+our first corrected update is
+approximately negative zero point zero
+
+00:03:30.630 --> 00:03:34.022
+zero zero nine nine zero zero nine nine.
+
+00:03:34.352 --> 00:03:38.342
+Putting epsilon inside the square
+root would produce a different number.
+
+00:03:38.652 --> 00:03:41.522
+A direct arithmetic check
+protects this convention.
+
+00:03:41.872 --> 00:03:43.282
+At the same rate,
+
+00:03:43.412 --> 00:03:48.092
+Adam moved less than SGD on the opening
+hour because it normalized gradient
+
+00:03:48.092 --> 00:03:49.022
+magnitude.
+
+00:03:49.412 --> 00:03:52.902
+That is not proof that it is
+slower in every useful comparison.
+
+00:03:53.832 --> 00:03:59.242
+Our equal allowance pilot selects Adam
+rate one for the unscaled rental target.
+
+00:03:59.552 --> 00:04:02.572
+Compare measured behavior with
+declared tuning allowances,
+
+00:04:02.572 --> 00:04:04.542
+and keep the moments,
+
+00:04:04.752 --> 00:04:08.382
+counter and numerical convention
+in every continuation record.
+

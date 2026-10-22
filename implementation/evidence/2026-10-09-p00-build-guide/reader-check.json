@@ -1,0 +1,18 @@
+{
+  "base": "/project_docs/",
+  "build_pages": [
+    "/project_docs/records/tutorials/p00-transformer-foundations-v1/documents/build/01-workspace/",
+    "/project_docs/records/tutorials/p00-transformer-foundations-v1/documents/build/02-numbers/",
+    "/project_docs/records/tutorials/p00-transformer-foundations-v1/documents/build/03-autograd/",
+    "/project_docs/records/tutorials/p00-transformer-foundations-v1/documents/build/04-tokenizer/",
+    "/project_docs/records/tutorials/p00-transformer-foundations-v1/documents/build/05-data/",
+    "/project_docs/records/tutorials/p00-transformer-foundations-v1/documents/build/06-attention/",
+    "/project_docs/records/tutorials/p00-transformer-foundations-v1/documents/build/07-model/",
+    "/project_docs/records/tutorials/p00-transformer-foundations-v1/documents/build/08-training/",
+    "/project_docs/records/tutorials/p00-transformer-foundations-v1/documents/build/09-recovery/",
+    "/project_docs/records/tutorials/p00-transformer-foundations-v1/documents/build/10-colab-and-handoff/"
+  ],
+  "next_links": "passed",
+  "notebook_download": "passed",
+  "console_and_http_errors": []
+}

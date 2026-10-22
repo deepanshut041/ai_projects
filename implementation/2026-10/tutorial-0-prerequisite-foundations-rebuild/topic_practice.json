@@ -1,0 +1,177 @@
+[
+  [
+    "route",
+    "linear-transfer",
+    "For X[2,2], W[2,3], b[3], replace the second row [3,4] with [4,4]. What changes? What is the output on a zero input and the parameter count?",
+    "Only the second output row changes, to [4,4,21]; the first stays [1,2,9]. Zero input produces [0,0,1], the bias. There are 2×3+3=9 shared parameters, independent of the number of examples. PyTorch stores the same weight map as [3,2] and transposes it in the operation.",
+    "Calculate the changed cells, identify the shared output-feature bias and separate data size from parameter count."
+  ],
+  [
+    "workspace",
+    "tensor-transfer",
+    "For X[B,T,D] with B=2,T=3,D=4, how do you apply valid[B,T]? Does reshape(2,4,3) perform transpose(1,2)? What enters an embedding?",
+    "Use valid[...,None] to align token validity with all features. Reshape preserves traversal order and is not the axis permutation; transpose maps coordinates and changes strides. IDs enter a lookup as integer indices, normally int64; learned floating vectors enter affine maps. Shape, dtype, device and axis meaning all require checks.",
+    "Explain coordinates and storage independently; show the mask singleton and distinguish IDs from continuous features."
+  ],
+  [
+    "numbers",
+    "calculus-transfer",
+    "Change the scalar target from1 to2, keeping x3,w2,b0. Derive both gradients and compare a weight-only η.01 step with updating both weight and bias.",
+    "Prediction6,error4,loss16. dw=2×4×3=24, db=2×4=8. Weight-only update gives w1.76,b0,prediction5.28,loss10.7584. Updating both gives w1.76,b−.08,prediction5.2,loss10.24. The unchanged forward prediction had a different target-dependent loss signal.",
+    "Derive both partials, state the fixed variables and compute both distinct updates."
+  ],
+  [
+    "probability",
+    "probability-transfer",
+    "Change the lesson to q=[.5,.5] and p=[.25,.75]. Compute entropy, cross-entropy and KL. If successive conditional probabilities are.6,.5,.2, what is sequence NLL, and does the factorization assert independence?",
+    "H(q)=log2≈.693147; H(q,p)=−.5log(.25)−.5log(.75)≈.836988; KL≈.143841. Conditional product is.06 and total NLL≈2.813411; mean over3 tokens≈.937804. Conditional chain-rule factorization does not assert token independence. Swapping q and p changes KL, so it is not symmetric.",
+    "State the distribution order and log units; distinguish conditional factorization from independent records and sum from mean."
+  ],
+  [
+    "model",
+    "feedforward-transfer",
+    "Why can't two affine layers without an activation solve the opposite-sign quadrant task? How many parameters do 2→2→2 and 2→8→2 networks have?",
+    "Composition collapses to x(W1W2)+b1W2+b2, still affine. The averages of the two positive quadrant scores require bias>0, while the two negative quadrant scores require bias<0. A nonlinear hidden layer changes the function family. Counts including both biases are12 and42, respectively.",
+    "Derive the collapse and contradiction; count matrix and bias terms rather than using batch size."
+  ],
+  [
+    "initialization",
+    "initialization-transfer",
+    "With D independent centered unit-variance inputs, what variance does Σwi xi have for weight variance σ²? Why divide attention scores by sqrt(d) rather than d?",
+    "Under the stated independence/centering assumptions, output variance is Dσ². For independent centered unit-variance query/key coordinates, the dot-product variance is d. Dividing by sqrt(d) gives variance1, while dividing by d gives variance1/d. The assumptions describe a scale motivation, not a guarantee about learned coordinates.",
+    "Name every independence/centering assumption and use variance scaling rather than only quoting a formula."
+  ],
+  [
+    "autograd",
+    "backprop-transfer",
+    "In the controlled tanh fixture, why is the first row of grad W2 zero? If only the target changes1→0, what changes in the forward/backward trace?",
+    "The first hidden activation is0, so its outer-product contributions to W2 are0; its local upstream signal and earlier-layer gradients need not be zero. Forward activations/logits/probabilities stay fixed. The logit gradient changes [.25,−.25]→[−.75,.75], multiplying all propagated parameter/input derivatives by−3. Loss changes log(4/3)→log4.",
+    "Distinguish zero activation from zero upstream gradient; derive the target change at the output then propagate it."
+  ],
+  [
+    "losses",
+    "loss-transfer",
+    "Change the stable fixture to logits[1002,1000], target1. Calculate NLL without large exponentials. How should batches with2 and8 valid labels combine? Why not pass softmax probabilities to CrossEntropyLoss?",
+    "Subtract1002: target1 NLL=2+log(1+exp(−2))≈2.126928. Sum both unweighted valid-label losses and divide by10; averaging the two means equally overweights the smaller batch. CrossEntropyLoss expects raw logits and applies log-softmax/NLL; passing probabilities as logits changes the objective.",
+    "Show stable arithmetic, declare the denominator and identify the API's class axis/target contract."
+  ],
+  [
+    "optimizers",
+    "optimizer-transfer",
+    "Reverse the Adam fixture’s first gradient to−30, then give a zero gradient. What moments and parameter movement arise? Why is AdamW different from an adaptive L2 penalty?",
+    "m1=−3,v1=.9; m2=−2.7,v2=.8991. Starting θ2,η.01,β1.9,β2.999,ε1e−8, θ becomes approximately2.01 then2.016700583: history still moves it upward. Coupled L2 enters gradient moments/adaptive scaling, while AdamW applies separate parameter decay. Resetting moments erases this continuation history.",
+    "Calculate stored moments and explain where the penalty enters; include step count in continuation state."
+  ],
+  [
+    "steps",
+    "training-step-transfer",
+    "Micro-batches have2 and6 valid targets. How do their summed losses produce one combined gradient? Compute the paper-style schedule for D4,w4 at s1,4,16 and clip gradient[3,4] to norm2.5.",
+    "Backpropagate each sum divided by8, accumulate and step once. Rates are.0625,.25,.125. The global gradient norm is5 and scaling by.5 gives[1.5,2], preserving direction. Clearing/optimizer/schedule steps occur at the defined update boundary; per-micro-batch means averaged equally would change weighting.",
+    "Work all three calculations and place clear/backward/clip/update/schedule in an explicit order."
+  ],
+  [
+    "data",
+    "data-transfer",
+    "Records have token losses[1,2,3] and[4], plus padded labels. Compare token and record means; explain PAD ID, ignored label and attention mask.",
+    "Token mean is10/4=2.5. Equal-record mean is(2+4)/2=3. PAD is an input vocabulary filler, ignored label −100 excludes a supervised loss, and an attention mask removes permitted-score connections. None automatically performs the others' job; ignored labels must not enter an embedding.",
+    "Compute both objectives and assign each mask/ID to the operation it controls."
+  ],
+  [
+    "tokenizer",
+    "encoding-transfer",
+    "In The café is open., which half-open character and UTF-8 byte intervals extract café? Why must BPE encoding use saved merge ranks and document boundaries?",
+    "Original code-point interval[4,8) and UTF-8 byte interval[4,9) extract the full word. Reusing[4,8) as bytes cuts é in half. Saved ranks define the trained tokenizer; new-input pair frequency does not retrain it. Counting across document boundaries invents pairs. Normalization can change coordinates, so preserve original spans/alignment.",
+    "Name coordinate systems and show the multibyte boundary; separate training and encoding rules."
+  ],
+  [
+    "embeddings",
+    "embedding-transfer",
+    "IDs[2,1,2] receive upstream rows[1,1],[2,2],[3,3]. What is each table-row gradient? Does padding_idx globally freeze a row when its table is tied to output weights?",
+    "Lookup contributions: row2[4,4], row1[2,2], unselected rows0. Repeated selections sum. padding_idx suppresses lookup contributions but does not block an output-projection path or explicit decay acting on the same parameter. With shared vocab V4,D2, three untied tables have24 matrix entries versus8 for one fully shared table.",
+    "Derive gather-backward accumulation and identify both tied gradient paths and vocabulary-identity conditions."
+  ],
+  [
+    "position",
+    "position-transfer",
+    "Change sinusoidal width to D8. What are the four frequencies, the position0 row and the slowest pair at position1? Does content-only self-attention establish order?",
+    "Frequencies are1,.1,.01,.001. Position0 is[0,1,0,1,0,1,0,1]; the last pair at position1 is[sin(.001),cos(.001)]≈[.000999999833,.999999500000]. Unmasked content-only self-attention is permutation equivariant when Q/K/V are permuted together; it has no intrinsic original order without position/mask signals. Fixed encoding does not prove long-context extrapolation.",
+    "Calculate frequencies and derive a permutation/shift relationship with its assumptions."
+  ],
+  [
+    "attention",
+    "attention-transfer",
+    "Keep the lesson’s Q/K scores[0,log2,log3] but change only the third value to[−2,4]. Compute weights/output, then change the third key instead. Which stages and backward paths can change?",
+    "Weights stay[1/6,2/6,3/6]; the value output becomes[0,3]. Changing only V leaves the forward weights fixed, while score-path gradients can change because their upstream derivative depends on V. Changing K can alter all row-normalized weights. Key-position softmax and feature dot products remain separate axes.",
+    "Work the score/normalization/value stages separately and identify which gradients/paths each input influences."
+  ],
+  [
+    "masks",
+    "mask-transfer",
+    "Mask the middle key in the three-key fixture. What weights/output result? Compare all-masked policy and Boolean masks for SDPA versus MultiheadAttention.",
+    "Allowed keys0,2 renormalize to[1/4,0,3/4], output[3,1.5]. The declared empty-row probe policy is zero weights/output, implemented without softmax of all −inf. SDPA Boolean True means allowed; MultiheadAttention Boolean attention-mask True means blocked and key-padding True means ignored. Source padding and target loss masks remain separate.",
+    "Compute renormalization and explain safe empty rows and deliberate API conversion."
+  ],
+  [
+    "multihead",
+    "multihead-transfer",
+    "For B2,T3,S5,D8,H2, give score/head-output/merged shapes and projection parameter count without biases. What changes if H4 but D stays8?",
+    "Scores[2,2,3,5], head output[2,2,3,4], merged[2,3,8]. Q/K/V/O matrices total4×8²=256 entries. At H4, head width2 and scores[2,4,3,5]; projection total stays256, while explicit score storage doubles. Transpose back before merging heads. Splitting alone does not prove specialization.",
+    "Trace all axes and distinguish projection parameters from explicit score storage."
+  ],
+  [
+    "ffn",
+    "ffn-transfer",
+    "Using the lesson's D2,F3 matrices, work outputs for[2,−1] and[−1,2]. Can changing one position change the other's FFN output? Count parameters at F4D.",
+    "Outputs[3,−1] and[3,4]. A shared position-wise FFN changes features independently at each position, so the untouched position's FFN output remains fixed. Including biases, count2DF+F+D; at F4D this is8D²+5D. Earlier attention can mix token information, but the FFN itself does not mix positions.",
+    "Show preactivation/ReLU/output and derive count while distinguishing feature and token mixing."
+  ],
+  [
+    "residual",
+    "residual-transfer",
+    "Derive the residual input gradient. With a zero sublayer, do original post-norm and pre-norm produce the same result? Can an identity path guarantee nonzero gradients?",
+    "For y=x+F(x), upstream g gives g+JFᵀg. Zero F gives LN(x) under post-norm and x under pre-norm, generally different. F=−x cancels both output and derivative, so an identity branch is not a guarantee. Cross-attention adds to the decoder query stream, not encoder memory.",
+    "Derive the two branches and give the cancellation example and shape/stream contract."
+  ],
+  [
+    "normalization",
+    "normalization-transfer",
+    "Shift the lesson’s token[1,3] to[11,13] and use constant[−2,−2]. Compute statistics and outputs for gamma[2,1],beta[0,1],epsilon1e−5. Which B×T×D axes reduce?",
+    "The shifted token has μ12,v1 and the same normalized coordinates as[1,3], approximately[−.999995,.999995]; affine output[−1.999990,1.999995]. The constant has μ−2,v0 and output beta[0,1]. LayerNorm(D) reduces D independently at each batch/position, using population variance in train/eval. A common shift cancels; epsilon makes scale invariance approximate.",
+    "Calculate epsilon placement and named axes; explain constant rows and gradient coupling."
+  ],
+  [
+    "regularization",
+    "regularization-transfer",
+    "With dropout p=.5 on scalar2, list training outputs/expectation/variance. Does eval disable gradients? What target does uniform-mixture smoothing ε.1,V4 produce for class2?",
+    "Inverted-dropout outputs0 or4 with equal chance, expectation2, variance4. eval switches dropout to identity but does not disable autograd; no_grad separately controls recording. Uniform-mixture smoothing gives [.025,.025,.925,.025]. An exclude-gold convention gives a different distribution and must be declared; the original paper reports its smoothing value without defining every implementation convention.",
+    "Derive expectation/variance, distinguish modes and declare the smoothing target convention."
+  ],
+  [
+    "seq2seq",
+    "seq2seq-transfer",
+    "For target[a,b,EOS], create teacher-forced decoder input/labels with BOS. Can all training positions run together? What does inference consume?",
+    "Inputs[BOS,a,b], labels[a,b,EOS]. A causal mask lets each prediction use only its input prefix, so parallel training computes all conditionals without future answers. Inference consumes previously generated tokens, not unknown future ground-truth tokens; append EOS and stop for that sequence. Cross-attention keys/values come from real encoder source positions.",
+    "Draw the shift and mask and distinguish teacher forcing from autoregressive generation and EOS/padding roles."
+  ],
+  [
+    "training",
+    "evaluation-transfer",
+    "Training loss falls but validation does not improve. What checks come before increasing model size? Does small-grid classification establish translation or calibrated confidence?",
+    "Check splits/duplicates, target alignment, mask conventions, token denominators, eval/no_grad mode, gradients, a tiny overfit case and simple baselines. Inspect held-out errors and likelihood separately from accuracy. The structured classifier tests nonlinear learning on its declared grid, not translation/general text or calibrated probabilities. Hard-target perplexity needs fixed tokenizer/data/objective.",
+    "Choose falsifiable probes and separate task evidence from broader claims."
+  ],
+  [
+    "recovery",
+    "recovery-transfer",
+    "Why do weights alone not reproduce the next update? What should happen when the newest checkpoint is corrupt or has incompatible source/tokenizer identity?",
+    "Continuation also needs optimizer moments/step, schedule position, RNG, sampler order/cursor and matching source/config/data/tokenizer/runtime/precision contract. Verify a complete compatible generation before mutating state; fall back to a prior verified generation on corruption and reject incompatibility. Compare the same next batch/update in a new process. Local recovery does not prove deleted Colab runtime/Drive survival.",
+    "List state and update boundary, define fallback/identity checks and distinguish storage durability from verification."
+  ],
+  [
+    "handoff",
+    "handoff-transfer",
+    "Map the paper's attention, FFN, position and schedule equations to their required tensors/state. Which original choices must not be silently replaced when beginning Course1?",
+    "Attention needs Q/K feature widths, allowed key/query connections, head split/merge and value width; FFN needs shared D→F→D maps with ReLU; positions add same-width sine/cosine features; schedule needs positive optimizer-update index/warmup. Original post-norm/Adam/ReLU choices differ from later pre-norm/AdamW/GELU. Readiness requires independent calculations, runnable checks and an honest remaining learner/hosted record, not merely authored source tests.",
+    "Connect equations to concrete contracts and preserve architecture/evidence boundaries."
+  ]
+]

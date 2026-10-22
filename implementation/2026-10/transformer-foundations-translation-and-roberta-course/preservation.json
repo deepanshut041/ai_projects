@@ -1,0 +1,19 @@
+{
+  "checked_at": "2026-10-12",
+  "existing_tutorial_files": 112,
+  "missing": [],
+  "changed": [
+    "ai_projects/docs/tutorials/index.json",
+    "ai_projects/docs/tutorials/README.md",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/validation.json",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/render.json",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/lesson.json",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/example-checks.json",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/lesson.md"
+  ],
+  "old_foundations_files_preserved": 44,
+  "p01_source_and_lessons_preserved": true,
+  "attention_child_head": "475c6347104c1de9a8c158171b9f6f3228d1aba3",
+  "attention_child_working_tree": "clean",
+  "new_commits": false
+}

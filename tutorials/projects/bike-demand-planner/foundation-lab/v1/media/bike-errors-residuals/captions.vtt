@@ -1,0 +1,256 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:03.370
+Start with Monday, January ninth,
+
+00:00:03.940 --> 00:00:04.250
+twenty twelve.
+
+00:00:04.800 --> 00:00:08.890
+At seven in the morning, issue a
+forecast for the hour beginning at eight.
+
+00:00:09.480 --> 00:00:14.803
+The already fitted hour and working day
+mean returns three hundred and forty nine
+
+00:00:14.803 --> 00:00:17.530
+point five zero rentals per hour.
+
+00:00:18.100 --> 00:00:21.050
+The recorded outcome later turns
+out to be four hundred and twenty.
+
+00:00:22.080 --> 00:00:24.710
+That answer was not part
+of the original request.
+
+00:00:25.380 --> 00:00:30.350
+The prediction is too low, but we
+need both its direction and its size.
+
+00:00:30.900 --> 00:00:35.180
+This review keeps the earlier fitted
+model unchanged and studies its saved
+
+00:00:35.180 --> 00:00:35.730
+predictions.
+
+00:00:36.580 --> 00:00:38.570
+No new linear regression is fitted.
+
+00:00:40.733 --> 00:00:44.863
+Our scoring residual is
+prediction minus observed target.
+
+00:00:45.433 --> 00:00:48.779
+Subtract four hundred and twenty from
+three hundred and forty nine point five
+
+00:00:48.779 --> 00:00:49.303
+zero.
+
+00:00:50.113 --> 00:00:53.903
+The result is negative seventy
+point five zero rentals per hour.
+
+00:00:54.813 --> 00:00:58.043
+A negative sign means
+underprediction with this convention.
+
+00:00:58.813 --> 00:01:02.063
+The absolute error is positive
+seventy point five zero.
+
+00:01:02.953 --> 00:01:07.283
+A boosting correction used target
+minus prediction, the opposite sign,
+
+00:01:07.333 --> 00:01:10.643
+because it described a move
+the model still needed to make.
+
+00:01:11.113 --> 00:01:15.963
+Here we are measuring a fixed forecast,
+not taking another optimization step.
+
+00:01:16.413 --> 00:01:20.213
+Naming the convention prevents the same
+number being interpreted in opposite
+
+00:01:20.213 --> 00:01:21.023
+directions.
+
+00:01:23.393 --> 00:01:27.463
+Change the requested hour to two
+in the morning on the same Monday.
+
+00:01:28.013 --> 00:01:33.443
+The corresponding group predicts seven
+point five one against a target of five,
+
+00:01:33.533 --> 00:01:35.843
+giving positive two point five one.
+
+00:01:36.473 --> 00:01:38.003
+This is an overestimate.
+
+00:01:38.673 --> 00:01:43.857
+Adding the two absolute errors and
+dividing by two gives thirty six point
+
+00:01:43.857 --> 00:01:44.803
+five one.
+
+00:01:45.393 --> 00:01:50.469
+Adding the signed errors instead gives a
+mean near negative thirty three point nine
+
+00:01:50.469 --> 00:01:51.143
+nine.
+
+00:01:51.813 --> 00:01:55.503
+Overprediction can cancel
+underprediction in the signed mean,
+
+00:01:55.713 --> 00:01:58.823
+while both contribute
+to mean absolute error.
+
+00:01:59.473 --> 00:02:01.743
+These two hours explain the arithmetic.
+
+00:02:02.313 --> 00:02:05.403
+They do not replace the
+complete validation population.
+
+00:02:07.858 --> 00:02:10.928
+The reader first compares record identity,
+
+00:02:11.558 --> 00:02:12.488
+target time,
+
+00:02:12.938 --> 00:02:17.048
+issue time and row order with
+the frozen prepared rows.
+
+00:02:17.698 --> 00:02:22.638
+It also verifies the saved target and
+checks that each exported error column
+
+00:02:22.638 --> 00:02:25.428
+agrees with prediction minus target.
+
+00:02:25.938 --> 00:02:30.608
+Only after this alignment do we
+reduce residuals into summary numbers.
+
+00:02:31.358 --> 00:02:36.078
+One integration check deliberately
+reorders a prediction file and updates its
+
+00:02:36.078 --> 00:02:36.828
+checksum.
+
+00:02:37.058 --> 00:02:39.768
+The identity check still rejects it.
+
+00:02:40.358 --> 00:02:44.308
+A matching checksum alone cannot
+establish correct target alignment.
+
+00:02:45.378 --> 00:02:48.768
+The shown excerpt combines those
+identity fields with the arithmetic;
+
+00:02:49.438 --> 00:02:53.428
+the complete source retains the
+validation branches and specific errors.
+
+00:02:55.525 --> 00:02:57.825
+Across validation, three thousand,
+
+00:02:57.825 --> 00:03:01.435
+one hundred and forty three
+hours are underpredicted.
+
+00:03:01.845 --> 00:03:06.025
+Their deficits total about three hundred
+and fifty seven thousand and eighty nine
+
+00:03:06.025 --> 00:03:08.475
+rentals across one hour records.
+
+00:03:09.205 --> 00:03:10.838
+Divide by all four thousand,
+
+00:03:10.838 --> 00:03:16.495
+three hundred and fifty seven observations
+to obtain eighty one point nine six.
+
+00:03:17.145 --> 00:03:21.898
+Divide only by underpredicted observations
+to obtain one hundred and thirteen point
+
+00:03:21.898 --> 00:03:22.935
+six one.
+
+00:03:23.725 --> 00:03:28.305
+Those summaries answer different questions
+about average burden and the typical
+
+00:03:28.305 --> 00:03:29.835
+deficit when one occurs.
+
+00:03:30.465 --> 00:03:33.695
+Neither measures unmet
+demand or station shortages.
+
+00:03:34.465 --> 00:03:38.965
+The dataset records observed rentals
+and does not establish an inventory or
+
+00:03:38.965 --> 00:03:40.255
+financial consequence.
+
+00:03:42.442 --> 00:03:47.392
+The complete validation mean absolute
+error is ninety one point five seven,
+
+00:03:47.762 --> 00:03:52.052
+with root mean squared error one hundred
+and thirty seven point three nine.
+
+00:03:52.742 --> 00:03:56.632
+Squaring before averaging gives
+large misses more influence.
+
+00:03:57.122 --> 00:04:00.632
+Taking the square root returns
+the result to rental units.
+
+00:04:01.502 --> 00:04:05.502
+Mean signed error is negative
+seventy two point three four,
+
+00:04:05.502 --> 00:04:07.532
+showing overall underprediction.
+
+00:04:08.602 --> 00:04:13.152
+The largest retained miss occurs on March
+twenty third at five in the afternoon:
+
+00:04:13.602 --> 00:04:17.237
+about three hundred and ninety five
+predicted against nine hundred and fifty
+
+00:04:17.237 --> 00:04:18.412
+seven observed.
+
+00:04:19.362 --> 00:04:21.152
+We retain that difficult hour.
+
+00:04:21.522 --> 00:04:25.132
+Explaining a failure does not
+authorize removing it from the score.
+
