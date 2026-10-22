@@ -1,5 +1,7 @@
 # AI Projects
 
+Research readiness (2026-10-22): the workbench and clean multi-repository baseline are ready. The user will provide the first research topic; no topic or experiment is selected. The old constrained-inference proposal is archived historical intake, and the uncommitted cache-study kickoff was removed. Shared infrastructure is reusable for a different topic; Projects learner state and Bike source/results remain unchanged.
+
 Research baseline preparation (2026-10-22): the user authorized reviewing and committing the accumulated local work across all five active repositories before Research starts. The CLI-owned clean-baseline record preserves workspace-home entry files, verification and commit audit; datasets, weights, media, private study records and runtime runs remain ignored. This records software/source readiness without advancing learner or scientific results.
 
 Research workbench (2026-10-22): local infrastructure is complete: study browsing/search, ordered understanding/source/protocol records, canonical resume/progress, evidence connections, provenance-rich bounded run receipts, compatible comparisons, CLI/TUI resources and existing captioned-video support. Private drafts/raw runs stay local; ordinary exports exclude them. R-001 Constrained inference remains intake with no new experiment or scientific result. Next Research action: select one mechanism, reference baseline and correctness contract, then freeze a bounded protocol. Projects learning gates and Bike source/results are unchanged.
