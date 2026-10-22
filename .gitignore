@@ -16,3 +16,8 @@ checkpoints/
 *.pth
 *.ckpt
 *.safetensors
+build/
+*.egg-info/
+artifacts/
+.sources/
+.ipynb_checkpoints/

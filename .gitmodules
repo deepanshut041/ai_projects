@@ -1,12 +1,3 @@
 [submodule "project_docs"]
 	path = docs
 	url = ../.ai/repositories/project_docs.git
-[submodule "projects/linear-model-lab"]
-	path = projects/linear-model-lab
-	url = ../.ai/repositories/linear-model-lab.git
-[submodule "projects/retrieval-lab"]
-	path = projects/retrieval-lab
-	url = ../.ai/repositories/retrieval-lab.git
-[submodule "projects/attention-lab"]
-	path = projects/attention-lab
-	url = ../.ai/repositories/attention-lab.git
