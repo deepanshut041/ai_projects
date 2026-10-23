@@ -1,6 +1,8 @@
 # AI Projects
 
-Research readiness (2026-10-22): the workbench and clean multi-repository baseline are ready. The user will provide the first research topic; no topic or experiment is selected. The old constrained-inference proposal is archived historical intake, and the uncommitted cache-study kickoff was removed. Shared infrastructure is reusable for a different topic; Projects learner state and Bike source/results remain unchanged.
+Research R-002 baseline (2026-10-22): the user selected Qwen3.8-27B UD-Q5_K_M versus UD-IQ2_S on Intel Arc Pro B50 plus system RAM, using all 1,140 official BigCodeBench-Full Instruct tasks. The independent coding-inference repository now has pinned acquisition, Intel Vulkan, matched measured generation, offline upstream evaluation and reports. Software checks and compatible runtime pilots are recorded; the full serial baseline is running, with final accuracy pending and eight disclosed reference-environment failures. Projects learner state and Bike source/results are unchanged.
+
+Historical Research readiness (2026-10-22, before R-002): the workbench and clean multi-repository baseline are ready. The user will provide the first research topic; no topic or experiment is selected. The old constrained-inference proposal is archived historical intake, and the uncommitted cache-study kickoff was removed. Shared infrastructure is reusable for a different topic; Projects learner state and Bike source/results remain unchanged.
 
 Research baseline preparation (2026-10-22): the user authorized reviewing and committing the accumulated local work across all five active repositories before Research starts. The CLI-owned clean-baseline record preserves workspace-home entry files, verification and commit audit; datasets, weights, media, private study records and runtime runs remain ignored. This records software/source readiness without advancing learner or scientific results.
 
