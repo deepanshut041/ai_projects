@@ -30,8 +30,9 @@ test('project collections discover docs locally, preserve relative links and kee
     await write(path.join(projects, 'foundations/README.md'), '# Foundations\n\n1. [Bike](bike/README.md)\n');
     await write(path.join(project, 'README.md'), '# Bike\n\nHourly predictions. [Docs](docs/README.md)');
     await write(path.join(project, 'docs/README.md'), '# My docs\n\n[Notes](notes/understanding.md#example)');
-    await write(path.join(project, 'docs/notes/understanding.md'), '# Understanding\n\nPRIVATE SENTINEL\n\n## Example\n\n[Home](../README.md) [Code][code] [Secret](../../.env) [Raw data](../../data/hour.csv) [Outside](../../../../../../outside.txt)\n\n[code]: ../../src/example.py\n\n$$x^2$$');
+    await write(path.join(project, 'docs/notes/understanding.md'), '# Understanding\n\nPRIVATE SENTINEL\n\n## Example\n\n[Home](../README.md) [Code][code] [Notebook](../../notebooks/example.ipynb) [Secret](../../.env) [Raw data](../../data/hour.csv) [Outside](../../../../../../outside.txt)\n\n[code]: ../../src/example.py\n\n$$x^2$$');
     await write(path.join(project, 'src/example.py'), 'print(42)\n');
+    await write(path.join(project, 'notebooks/example.ipynb'), JSON.stringify({ cells: [], metadata: {}, nbformat: 4, nbformat_minor: 5 }));
     await write(path.join(project, '.env'), 'SECRET=private');
     await write(path.join(project, 'data/hour.csv'), 'raw data');
     await write(path.join(temporary, 'outside.txt'), 'outside');
@@ -48,7 +49,8 @@ test('project collections discover docs locally, preserve relative links and kee
       assert.ok(notes.html.includes(`href="${base}projects/foundations/bike/docs/"`));
       assert.match(notes.html, /class="katex/);
       assert.ok(local.pages.find(p => p.title === 'My docs').html.includes(`${base}projects/foundations/bike/docs/notes/understanding/#example`));
-      assert.deepEqual(Object.values(local.files), [path.join(project, 'src/example.py')]);
+      assert.deepEqual(Object.values(local.files).sort(), [path.join(project, 'src/example.py'), path.join(project, 'notebooks/example.ipynb')].sort());
+      assert.match(notes.html, /href="[^\"]+example\.ipynb"/, 'Explicit notebook links must survive local rendering');
       assert.ok(!local.watches.some(w => w.folder.includes('data') || w.folder.includes('.venv')));
     }
     const next = path.join(projects, 'foundations/another');

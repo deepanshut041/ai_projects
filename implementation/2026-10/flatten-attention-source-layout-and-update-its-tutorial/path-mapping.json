@@ -1,0 +1,17 @@
+{
+  "attention.py": "src/attention.py",
+  "attention_visuals.py": "src/utils/attention_visuals.py",
+  "attention_mechanism.ipynb": "notebooks/attention_mechanism.ipynb",
+  "tokenizer.py": "src/tokenizer.py",
+  "prepare_data.py": "src/prepare_data.py",
+  "train.py": "src/train.py",
+  "inference.py": "src/inference.py",
+  "compute_bleu.py": "src/compute_bleu.py",
+  "src/attention_is_all_you_need/attention.py": "src/core/attention.py",
+  "src/attention_is_all_you_need/model.py": "src/core/model.py",
+  "src/attention_is_all_you_need/config.py": "src/core/config.py",
+  "src/attention_is_all_you_need/data.py": "src/data/dataset.py",
+  "src/attention_is_all_you_need/tokenizer.py": "src/data/tokenizer.py",
+  "src/attention_is_all_you_need/trainer.py": "src/training/trainer.py",
+  "src/attention_is_all_you_need/checkpoint.py": "src/training/checkpoint.py"
+}

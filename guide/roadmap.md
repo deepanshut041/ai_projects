@@ -1,5 +1,25 @@
 # Projects roadmap
 
+## Attention code understanding and section videos — 2026-10-23
+
+The project understanding notes now contain seven focused code/value walkthroughs (about 2,400 words), replacing the 8,240-word course concatenation. The “What the attention computation means” learning points now explain roles, axes, heads, masks, paths and gradients in connected prose, both locally and in the shared tutorial. Seven captioned code companions with 42 editable scenes total about 24 minutes. Each verified video appears immediately after its matching notes heading, before prose; seven corresponding course chapters reuse the same media. Actual root and prefixed browser checks exercise all seven players at desktop/mobile widths, seeking through beginning/middle/end, caption cues, transcripts/downloads and print behavior. Source, Colab runner and Bike results are preserved. No learner explanation, translation training or hosted recovery is inferred. Next: watch/read the Q/K/V and score/value sections, then explain one full query trace.
+
+## Attention runner and source layout — current, 2026-10-23
+
+Six runnable scripts now live directly under src; core/data/training/utils remain grouped below it. src/cli is removed. The concept notebook is replaced by notebooks/attention_colab.ipynb, which uploads verified source, installs the locked Python environment, runs the demo and all 35 checks, and downloads logs. The Attention Lab tutorial retains explanations, worked maths and original figures. Current docs, source downloads and launcher paths follow this structure. Local operational-cell verification is distinct from an actual Google-hosted run. Later translation implementation, learner review and hosted recovery remain pending. This supersedes the earlier grouped-source notebook/cli layout below.
+
+## Attention — grouped source and separate notebooks, 2026-10-23
+
+The user explicitly requested grouped responsibility folders under src, superseding the initial flat-file suggestion. Attention now uses core (attention/model/config), data (tokenizer/dataset), training (trainer/checkpoint) and utils (graphs/controls), with runnable scripts directly in src. The Colab execution notebook lives outside src in notebooks/. The outer attention_is_all_you_need package directory and old root scripts were removed; setup, imports, launcher resources, packaging, current documentation and [the tutorial](../tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/02-project-setup.md) follow the new layout.
+
+The core numerical module is byte-identical after relocation, and fixed-seed demo outputs/weights match the pre-move baseline. All 35 existing tests pass; the six operational Colab runner cells execute locally with simulated file upload/download, real locked setup, demo and all tests. Runtime data ignores explicitly preserve src/data source files. Source downloads and the documented Colab ZIP are refreshed. Later tokenizer/data/model/training work remains unimplemented; learner review and hosted recovery remain separate. Next study: review the grouped source and the existing attention trace.
+
+## Attention Is All You Need — setup and attention tutorial, 2026-10-23
+
+The requested [twelve-lesson reading route](../tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/01-weighted-information.md) documents existing setup and implemented attention with worked tensors, Q/K/V, softmax, heads, padding/causal/cross-attention, public API and gradients. Separate learning points/comparisons, reference runs, source downloads and readiness records support review. The local grouped project reader now exposes phase overviews and separate setup/attention implementation records, including a continuous view of the same authored explanations.
+
+The user explicitly selected setup plus implemented attention now; data/model/training lessons are added as those phases are implemented. No model code, original notebook, captions, Bike source/results or learner gates are advanced. The current 35 CPU checks and demo pass; later tokenizer/data/model/training/BLEU and actual hosted recovery remain pending. Next for this request: read the weighted retrieval and setup, then review one complete attention trace. Later implementation starts with the Part 2 data/tokenizer/batch contract.
+
 ## Bike project tutorial, 2026-10-20
 
 [Foundation Lab: Bike Demand Planner](../tutorials/projects/bike-demand-planner/foundation-lab/v1/lessons/01-prediction-contract.md) is the consolidated course for the completed Bike project. Its ten lessons retain the complete understanding notes, worked calculations, code/results, diagrams and 51 short captioned videos, including four new opening-lesson companions embedded before their matching prose. Learning points and comparisons are separate review pages beside that route; setup, source downloads, reference results and completion/readiness records share the tutorial reader.

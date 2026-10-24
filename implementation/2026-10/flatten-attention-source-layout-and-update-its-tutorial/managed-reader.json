@@ -1,0 +1,10 @@
+{
+  "projectURL": "http://127.0.0.1:4273/project_docs/projects/transformer-labs/attention-is-all-you-need/",
+  "setupURL": "http://127.0.0.1:4273/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/setup/",
+  "notebookDownload": true,
+  "directEntryScripts": true,
+  "colabRunnerCells": 6,
+  "outputsCleared": true,
+  "desktopMobile": true,
+  "passed": true
+}

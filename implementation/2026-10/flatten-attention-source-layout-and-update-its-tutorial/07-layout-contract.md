@@ -1,0 +1,7 @@
+# Final source layout and execution contract
+
+The user requested four responsibility folders directly below src: core (attention/model/config), data (tokenizer/dataset), training (trainer/checkpoint) and utils (graph helpers). The six runnable modules sit directly in src; there is no src/cli or redundant project-named namespace. The console command targets attention:main. Keep attention mathematics and later placeholders unchanged.
+
+notebooks/attention_colab.ipynb is an operational Google Colab runner. It verifies a locally exported source archive and manifest before extraction, installs pinned uv and locked Python 3.12.13 dependencies, executes src/attention.py and all tests, and downloads runtime/source/test evidence. It contains no conceptual plotting walkthrough; the twelve-lesson tutorial owns that teaching. Save the notebook without output. Local full execution uses a simulated Colab file interface; actual hosted execution and persistent recovery are separate pending checks.
+
+Preserve existing uncommitted work, reference/caption identities and Bike results. Update imports, package source mapping, launchers, source-data ignores, current public/private docs, captured source and export together. Verify source restoration, isolated installed wheel execution, exact notebook cells, corrupt-upload rejection, direct/workspace launches, tutorial examples/render, root/prefixed reader paths, notebook download and desktop/mobile views. No training, publication or commit is in scope.

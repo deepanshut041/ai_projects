@@ -1,0 +1,38 @@
+{
+  "checked_at": "2026-10-23T21:04:21.894592+00:00",
+  "results": [
+    {
+      "id": "arithmetic",
+      "language": "python",
+      "path": "examples/arithmetic.py",
+      "sha256": "544e4d82ad5f57563a754e64dc5f9700b3029574a598befcbab86603e52c6703",
+      "output": {
+        "parameter_count": 360,
+        "passed": true,
+        "post_step_loss": 0.183163,
+        "projected_first_context": [
+          2.104448,
+          1.296664
+        ],
+        "query_gradient": 2.0,
+        "rectangular_product": [
+          [
+            58,
+            64
+          ],
+          [
+            139,
+            154
+          ]
+        ],
+        "weighted_context": [
+          4,
+          6
+        ]
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    }
+  ],
+  "passed": true
+}

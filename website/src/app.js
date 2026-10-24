@@ -1,4 +1,5 @@
 import './styles.css';
+import './syntax.css';
 import 'katex/dist/katex.min.css';
 
 const query = document.querySelector('#record-search');

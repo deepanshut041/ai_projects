@@ -1,0 +1,15 @@
+# Attention source organization review
+
+The project now has src/core, src/data, src/training, src/cli and src/utils, with the concept notebook outside src in notebooks/. The unnecessary outer attention_is_all_you_need package and old root command/graph/notebook files are removed. The final attention API and numerical implementation are preserved. Public docs, the twelve-lesson course, local learning records, file launchers, imports, notebook resources and source downloads all use the new paths.
+
+All 35 existing tests pass in the project, an installed wheel and a restored source bundle. The wheel exports all five groups, the source distribution retains the notebook and excludes private/runtime material, and its installed console command works away from the source tree. Installed testing reuses existing dependency libraries but removes the project src directory from import paths and checks module origins. A pytest cache warning from the isolated /dev/null config does not affect the passed numerical checks. Core module bytes and fixed-seed demo output/weight hashes match the pre-move baseline.
+
+All 37 notebook code cells execute from both root and notebooks directories, producing 28 PNG figures each without cell errors. Generated files remain under project runs/attention-visuals; an explicit output_dir supports installed standalone use. The original raw source/caption provenance remains intact. Parts 2-3 remain honest placeholder modules.
+
+The restorable tutorial source now contains 32 current files. The documented Colab ZIP contains those files plus three public source documents; every member byte/hash is verified. Current tutorial snippets execute and render. The reader explicitly supports nested notebook source links under existing safety checks, with an integration regression assertion. All 17 native tests, native static/project/video browser suites and focused root/prefix checks pass; each focused pass checks 88 page/width cases plus links, downloads, reveals, print and navigation.
+
+Final screenshots were inspected, including the actual grouped-source setup section. The reader is running at port 4273; managed-reader.json verifies the served setup route and relocated notebook download. Recovery archive and all detailed receipts are retained in this package or ignored workspace recovery storage. No commit, remote publication, new training result, learner mastery or hosted recovery is claimed.
+
+## Final user corrections: direct scripts and Colab runner
+
+The final result supersedes src/cli and the concept notebook. All six runnable files are directly under src; four responsibility packages remain. The six-cell Colab runner is locally exercised end to end with real install/demo/35 tests and evidence download. Invalid uploads are rejected, outputs are cleared, source bundles/ZIP/docs are synchronized, and the live reader serves the current notebook. Native reader/browser suites and 88 root plus 88 prefix checks pass. Actual Google-hosted execution remains pending. See 00-resume.md and colab-runner-verification.json for the current checkpoint.

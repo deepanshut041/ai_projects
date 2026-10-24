@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 import MarkdownIt from 'markdown-it';
 import anchor from 'markdown-it-anchor';
 import { katex } from '@mdit/plugin-katex';
+import { highlightCode } from './syntax-highlight.mjs';
 
 export const categories = [
   { id: 'implementations', title: 'Implementations', description: 'Runnable local projects, contracts, tests and scope.' },
@@ -46,7 +47,7 @@ export function validateCatalog(catalog) {
 }
 export function renderer(recordFiles, relativeFile, base, tutorial = null, options = {}) {
   const headings = [];
-  const md = new MarkdownIt({ html: false, linkify: true, typographer: true })
+  const md = new MarkdownIt({ html: false, linkify: true, typographer: true, highlight: highlightCode })
     .use(anchor, { level: [2, 3], callback: (token, info) => headings.push({ level: Number(token.tag.slice(1)), ...info }) })
     .use(katex, { throwOnError: true, trust: false, macros: { '\\ket': '\\left|#1\\right\\rangle', '\\bra': '\\left\\langle#1\\right|' } });
   // The reader supplies the chapter h1 after removing the source's h2 title.

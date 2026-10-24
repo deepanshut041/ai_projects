@@ -1,0 +1,525 @@
+{
+  "schema_version": 1,
+  "project_id": "attention-is-all-you-need",
+  "languages": [
+    "cpp",
+    "python"
+  ],
+  "examples": [
+    {
+      "id": "arithmetic",
+      "language": "python",
+      "path": "examples/arithmetic.py",
+      "purpose": "Independent scalar/list arithmetic and finite differences for the worked examples",
+      "expected_output": {
+        "weighted_context": [
+          4,
+          6
+        ],
+        "rectangular_product": [
+          [
+            58,
+            64
+          ],
+          [
+            139,
+            154
+          ]
+        ],
+        "projected_first_context": [
+          2.104448,
+          1.296664
+        ],
+        "query_gradient": 2.0,
+        "post_step_loss": 0.183163,
+        "parameter_count": 360,
+        "passed": true
+      }
+    }
+  ],
+  "slug": "attention-lab",
+  "revision": "v1",
+  "title": "Attention Is All You Need: from weighted averages to reusable attention",
+  "question": "How do input vectors become masked multi-head attention outputs, and what remains before English-to-French translation?",
+  "topic_kind": "repo",
+  "level": "advanced",
+  "prerequisites": [],
+  "created_at": "2026-10-23T19:53:43.059827+00:00",
+  "repository": {
+    "base_sha": "8421ca052bd8d1f21b765d4efde67e3dc8197bbd",
+    "name": "docs"
+  },
+  "objectives": [
+    {
+      "id": "weighted",
+      "text": "Explain a query-weighted value mixture and its proof boundary."
+    },
+    {
+      "id": "setup",
+      "text": "Reproduce the existing environment and distinguish runnable components from placeholders."
+    },
+    {
+      "id": "shapes",
+      "text": "Trace score and context axes through rectangular batched attention."
+    },
+    {
+      "id": "softmax",
+      "text": "Derive stable softmax and head-width scaling."
+    },
+    {
+      "id": "projections",
+      "text": "Work learned Q/K/V maps, bias orientation and value mixing."
+    },
+    {
+      "id": "heads",
+      "text": "Explain separate/vectorized heads, correct reassembly and parameter counts."
+    },
+    {
+      "id": "padding",
+      "text": "Explain key masks, all-blocked behavior and perturbation isolation."
+    },
+    {
+      "id": "causal",
+      "text": "Intersect causal/padding restrictions and diagnose future leakage."
+    },
+    {
+      "id": "cross",
+      "text": "Trace source keys/values and target queries through rectangular attention."
+    },
+    {
+      "id": "interface",
+      "text": "Explain the final API and explicit/SDPA/dropout execution branches."
+    },
+    {
+      "id": "gradient",
+      "text": "Derive and independently verify a query gradient and update."
+    },
+    {
+      "id": "handoff",
+      "text": "State the evidence boundaries and concrete next data-phase requirements."
+    }
+  ],
+  "sources": [
+    {
+      "id": "attention-source",
+      "kind": "local",
+      "title": "Implemented attention module",
+      "path": "projects/transformer-labs/attention-is-all-you-need/src/core/attention.py",
+      "start": 1,
+      "end": 325,
+      "sha256": "4a05ee4f13a20f8409df63c426b27ce14a38fac46c7641c7a652aaf640e72618",
+      "excerpt_sha256": "4a05ee4f13a20f8409df63c426b27ce14a38fac46c7641c7a652aaf640e72618",
+      "excerpt_path": "evidence/attention-source.txt",
+      "base_sha": "0fdd16c03c650e4f74dcfe32cc030f9254f4b2b9",
+      "working_tree": true,
+      "repository_path": "ai_projects"
+    },
+    {
+      "id": "attention-tests",
+      "kind": "local",
+      "title": "Existing independent attention checks",
+      "path": "projects/transformer-labs/attention-is-all-you-need/tests/test_attention.py",
+      "start": 1,
+      "end": 193,
+      "sha256": "ff43f76756f3eea31019082fd26c80e345633fe835655de18a56dd093c833758",
+      "excerpt_sha256": "ff43f76756f3eea31019082fd26c80e345633fe835655de18a56dd093c833758",
+      "excerpt_path": "evidence/attention-tests.txt",
+      "base_sha": "0fdd16c03c650e4f74dcfe32cc030f9254f4b2b9",
+      "working_tree": true,
+      "repository_path": "ai_projects"
+    },
+    {
+      "id": "visual-source",
+      "kind": "local",
+      "title": "Original matrix fixtures and drawing code",
+      "path": "projects/transformer-labs/attention-is-all-you-need/src/utils/attention_visuals.py",
+      "start": 1,
+      "end": 727,
+      "sha256": "bf17257e3ef4978248f2ac2783b482527643a6c2aa6c17ed2eefaaf7bdb37af9",
+      "excerpt_sha256": "bf17257e3ef4978248f2ac2783b482527643a6c2aa6c17ed2eefaaf7bdb37af9",
+      "excerpt_path": "evidence/visual-source.txt",
+      "base_sha": "0fdd16c03c650e4f74dcfe32cc030f9254f4b2b9",
+      "working_tree": true,
+      "repository_path": "ai_projects"
+    },
+    {
+      "id": "visual-tests",
+      "kind": "local",
+      "title": "Known answers for visual examples",
+      "path": "projects/transformer-labs/attention-is-all-you-need/tests/test_attention_visuals.py",
+      "start": 1,
+      "end": 88,
+      "sha256": "c66b0dabce011a15edea61fac60332315ba9fea952d966adc21e470e87267efb",
+      "excerpt_sha256": "c66b0dabce011a15edea61fac60332315ba9fea952d966adc21e470e87267efb",
+      "excerpt_path": "evidence/visual-tests.txt",
+      "base_sha": "0fdd16c03c650e4f74dcfe32cc030f9254f4b2b9",
+      "working_tree": true,
+      "repository_path": "ai_projects"
+    },
+    {
+      "id": "paper",
+      "kind": "external",
+      "title": "Attention Is All You Need, v7",
+      "url": "https://arxiv.org/html/1706.03762v7",
+      "accessed_at": "2026-10-23",
+      "locator": "Sections 3.2.1-3.2.3; component mathematics and roles",
+      "proof_limit": "Primary reference; actual local behavior is checked separately. No task quality or hardware speed claim."
+    },
+    {
+      "id": "sdpa",
+      "kind": "external",
+      "title": "PyTorch 2.14 SDPA API",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html",
+      "accessed_at": "2026-10-23",
+      "locator": "Mask semantics, dropout argument and backend selection",
+      "proof_limit": "Primary reference; actual local behavior is checked separately. No task quality or hardware speed claim."
+    }
+  ],
+  "claims": [
+    {
+      "id": "component",
+      "text": "The existing attention module implements the taught projection, head, mask and retrieval paths.",
+      "source_ids": [
+        "attention-source",
+        "attention-tests",
+        "visual-source",
+        "visual-tests"
+      ],
+      "status": "verified",
+      "proof_limit": "Local source and exercised CPU checks; not trained translation, learner understanding or GPU performance."
+    },
+    {
+      "id": "scope",
+      "text": "The course covers setup and implemented attention; later translation data/model/training remain pending.",
+      "source_ids": [
+        "attention-source"
+      ],
+      "status": "documented",
+      "proof_limit": "Source audit and explicit user scope; no later placeholder is implemented by this authoring work."
+    }
+  ],
+  "entities": [],
+  "relationships": [],
+  "chapters": [
+    {
+      "id": "weighted",
+      "title": "Begin with the information a query retrieves",
+      "content_path": "lessons/01-weighted-information.md",
+      "objective_ids": [
+        "weighted"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "weighted-check"
+      ]
+    },
+    {
+      "id": "setup",
+      "title": "Reproduce the existing project and read its boundaries",
+      "content_path": "lessons/02-project-setup.md",
+      "objective_ids": [
+        "setup"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "setup-check"
+      ]
+    },
+    {
+      "id": "shapes",
+      "title": "Read attention as rows, columns and batches",
+      "content_path": "lessons/03-tensors-and-products.md",
+      "objective_ids": [
+        "shapes"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "shapes-check"
+      ]
+    },
+    {
+      "id": "softmax",
+      "title": "Turn comparisons into normalized attention weights",
+      "content_path": "lessons/04-scores-and-softmax.md",
+      "objective_ids": [
+        "softmax"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "softmax-check"
+      ]
+    },
+    {
+      "id": "projections",
+      "title": "Learn separate query, key and value representations",
+      "content_path": "lessons/05-learned-projections.md",
+      "objective_ids": [
+        "projections"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "projections-check"
+      ]
+    },
+    {
+      "id": "heads",
+      "title": "Run several heads and reassemble their information",
+      "content_path": "lessons/06-multiple-heads.md",
+      "objective_ids": [
+        "heads"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "heads-check"
+      ]
+    },
+    {
+      "id": "padding",
+      "title": "Keep padding out of the retrieved information",
+      "content_path": "lessons/07-padding-and-empty-rows.md",
+      "objective_ids": [
+        "padding"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "padding-check"
+      ]
+    },
+    {
+      "id": "causal",
+      "title": "Stop a decoder query from reading its future",
+      "content_path": "lessons/08-causal-information.md",
+      "objective_ids": [
+        "causal"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "causal-check"
+      ]
+    },
+    {
+      "id": "cross",
+      "title": "Let target queries retrieve source information",
+      "content_path": "lessons/09-cross-attention.md",
+      "objective_ids": [
+        "cross"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "cross-check"
+      ]
+    },
+    {
+      "id": "interface",
+      "title": "Follow the reusable Attention class from call to output",
+      "content_path": "lessons/10-reusable-attention.md",
+      "objective_ids": [
+        "interface"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "interface-check"
+      ]
+    },
+    {
+      "id": "gradient",
+      "title": "Follow an error backward through attention",
+      "content_path": "lessons/11-gradients-and-learning.md",
+      "objective_ids": [
+        "gradient"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "gradient-check"
+      ]
+    },
+    {
+      "id": "handoff",
+      "title": "Explain what works and prepare the next implementation",
+      "content_path": "lessons/12-evidence-and-next-phase.md",
+      "objective_ids": [
+        "handoff"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "handoff-check"
+      ]
+    }
+  ],
+  "diagrams": [],
+  "tables": [],
+  "scenarios": [],
+  "practice": [
+    {
+      "id": "weighted-check",
+      "question": "If weights change from [0.5,0.5] to [0.75,0.25] for values [2,4] and [6,8], what is retrieved?",
+      "answer": "The context becomes [3,5]: compute each coordinate with the same position weights. This is a toy retrieved vector, not a token prediction.",
+      "rubric": "Keep values fixed and show both coordinate sums.",
+      "objective_ids": [
+        "weighted"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "setup-check",
+      "question": "The train.py placeholder exits successfully. Has the translation model been trained?",
+      "answer": "No. Its source is comment-only. Process success without model work is not a training result; inspect source and recorded outputs.",
+      "rubric": "Separate environment readiness, executed component tests and task results.",
+      "objective_ids": [
+        "setup"
+      ],
+      "claim_ids": [
+        "scope"
+      ]
+    },
+    {
+      "id": "shapes-check",
+      "question": "For B=2, H=3, T=3, S=5 and d=4, what are score and context shapes?",
+      "answer": "Scores are (2,3,3,5). Context is (2,3,3,4), and merged output width is H*d=12. Keys/values share S; output follows T.",
+      "rubric": "Name the contracted axes and output ownership.",
+      "objective_ids": [
+        "shapes"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "softmax-check",
+      "question": "What changes if [0,ln(3)] becomes [1000,1000+ln(3)]? What if it becomes [0,2ln(3)]?",
+      "answer": "The common shift preserves [0.25,0.75]. Doubling score differences produces [0.1,0.9]. Subtract a maximum for stable exponentiation.",
+      "rubric": "Separate additive invariance from multiplicative concentration.",
+      "objective_ids": [
+        "softmax"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "projections-check",
+      "question": "Hold Q/K fixed and add [1,-2] to every value row. What changes in a normalized nonempty row?",
+      "answer": "Weights are unchanged; context shifts by [1,-2] because each weight row sums to one. Output projection may transform that shift.",
+      "rubric": "State the normalized/pre-dropout/nonempty conditions and distinguish context from final output.",
+      "objective_ids": [
+        "projections"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "heads-check",
+      "question": "Can head-major context be flattened directly to recover query-major features?",
+      "answer": "No. Transpose (B,H,T,d) to (B,T,H,d), then flatten H and d. Preserving element count alone does not preserve token ownership.",
+      "rubric": "Trace one query row across all heads.",
+      "objective_ids": [
+        "heads"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "padding-check",
+      "question": "All keys are blocked. Why can the module return a nonzero vector?",
+      "answer": "The context is zero, but a biased output projection returns its bias. Also, a source key mask does not normally zero padded query outputs.",
+      "rubric": "Separate visibility, context, output projection and loss masking.",
+      "objective_ids": [
+        "padding"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "causal-check",
+      "question": "A query is position two and valid keys are [1,1,0,1]. Which keys may it read causally?",
+      "answer": "Keys zero and one only: [1,1,0,0]. The current key is padding and key three is future. Intersect validity and j<=i.",
+      "rubric": "Use AND and identify both reasons for exclusion.",
+      "objective_ids": [
+        "causal"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "cross-check",
+      "question": "Source length is five and target length three. Which length controls output, and which controls the mask?",
+      "answer": "Output has three query positions. The source key mask has length five. Queries come from tgt, keys/values from src.",
+      "rubric": "Distinguish representation role from argument order.",
+      "objective_ids": [
+        "cross"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "interface-check",
+      "question": "Does fused_attn=True prove that GPU FlashAttention was used? What changes with need_weights=True?",
+      "answer": "No. SDPA selects a backend for actual device/inputs; current evidence is CPU. Requesting weights selects the explicit calculation in this wrapper.",
+      "rubric": "Separate code path, backend identity and measured performance.",
+      "objective_ids": [
+        "interface"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "gradient-check",
+      "question": "At q=0 with keys [1,-1], values [2,6] and desired context five, which query direction decreases half squared error?",
+      "answer": "Decrease q: c=4, dL/dq=2, so gradient descent moves q negative and increases weight on value six. A step of 0.1 gives q=-0.2.",
+      "rubric": "Explain all three slopes and separate this probe from real translation training.",
+      "objective_ids": [
+        "gradient"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "handoff-check",
+      "question": "Do passing attention tests establish a trained translator or a completed learner review?",
+      "answer": "No. They establish exercised local component properties. Tokenizer/data, full model/training/evaluation and actual human explanations remain separate evidence.",
+      "rubric": "Name at least one missing implementation artifact and one missing evidence class.",
+      "objective_ids": [
+        "handoff"
+      ],
+      "claim_ids": [
+        "scope"
+      ]
+    }
+  ],
+  "scenes": [],
+  "media": {},
+  "approval": null
+}

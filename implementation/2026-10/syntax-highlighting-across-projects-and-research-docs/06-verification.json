@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "verified_at_utc": "2026-10-23T23:58:34.117445+00:00",
+  "scope": "Common code rendering and theme in Projects and Research Docs; no model or scientific work.",
+  "dependency": {
+    "highlight.js": "11.12.0"
+  },
+  "native_checks": {
+    "projects": {
+      "unit_tests_passed": 21,
+      "ordinary_build": "passed",
+      "browser_suites": [
+        "records",
+        "projects",
+        "videos",
+        "syntax"
+      ],
+      "all_passed": true
+    },
+    "research": {
+      "unit_tests_passed": 30,
+      "ordinary_build": "passed",
+      "browser_suites": [
+        "experiments",
+        "workbench",
+        "implementation",
+        "videos",
+        "syntax"
+      ],
+      "all_passed": true,
+      "artifact_audit": {
+        "source_text_files": 264,
+        "markdown_files": 191,
+        "critical_files": 52,
+        "passed": true
+      }
+    }
+  },
+  "syntax_browser_checks": [
+    {
+      "site": "projects",
+      "base": "/",
+      "passed": true,
+      "viewports": [
+        1440,
+        390
+      ],
+      "highlighted_pages": 129,
+      "screen_minimum_token_contrast": 8.205696233097667,
+      "print_minimum_token_contrast": 5.5680446952269715,
+      "copy_preserves_source": true,
+      "actual_page_checks": 6,
+      "runtime_report": "/mnt/projects/ai/ai_projects/docs/website/test-results/syntax-projects-root.json"
+    },
+    {
+      "site": "projects",
+      "base": "/project_docs/",
+      "passed": true,
+      "viewports": [
+        1440,
+        390
+      ],
+      "highlighted_pages": 129,
+      "screen_minimum_token_contrast": 8.205696233097667,
+      "print_minimum_token_contrast": 5.5680446952269715,
+      "copy_preserves_source": true,
+      "actual_page_checks": 6,
+      "runtime_report": "/mnt/projects/ai/ai_projects/docs/website/test-results/syntax-projects-prefix.json"
+    },
+    {
+      "site": "research",
+      "base": "/",
+      "passed": true,
+      "viewports": [
+        1440,
+        390
+      ],
+      "highlighted_pages": 6,
+      "screen_minimum_token_contrast": 8.205696233097667,
+      "print_minimum_token_contrast": 5.5680446952269715,
+      "copy_preserves_source": true,
+      "actual_page_checks": 6,
+      "runtime_report": "/mnt/projects/ai/ai_research/research_docs/test-results/syntax-research-root.json"
+    },
+    {
+      "site": "research",
+      "base": "/research_docs/",
+      "passed": true,
+      "viewports": [
+        1440,
+        390
+      ],
+      "highlighted_pages": 6,
+      "screen_minimum_token_contrast": 8.205696233097667,
+      "print_minimum_token_contrast": 5.5680446952269715,
+      "copy_preserves_source": true,
+      "actual_page_checks": 6,
+      "runtime_report": "/mnt/projects/ai/ai_research/research_docs/test-results/syntax-research-prefix.json"
+    }
+  ],
+  "managed_reader_checks": [
+    {
+      "site": "projects",
+      "url": "http://127.0.0.1:4273/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/implementation/01_attention-mechanism/02-notes-to-understanding/",
+      "width": 1440,
+      "tokens": 66,
+      "colors": [
+        "rgb(255, 159, 181)",
+        "rgb(242, 196, 141)",
+        "rgb(240, 201, 137)",
+        "rgb(138, 219, 208)"
+      ],
+      "videos": 7,
+      "passed": true
+    },
+    {
+      "site": "research-commands",
+      "url": "http://127.0.0.1:4274/research_docs/experiments/coding-inference/baseline/hands-on/",
+      "width": 1440,
+      "tokens": 19,
+      "colors": [
+        "rgb(210, 181, 255)",
+        "rgb(159, 213, 255)"
+      ],
+      "videos": 0,
+      "passed": true
+    },
+    {
+      "site": "research-json",
+      "url": "http://127.0.0.1:4274/research_docs/experiments/coding-inference/baseline/receipts/",
+      "width": 1440,
+      "tokens": 868,
+      "colors": [
+        "rgb(199, 213, 223)",
+        "rgb(159, 213, 255)",
+        "rgb(242, 196, 141)",
+        "rgb(165, 214, 255)",
+        "rgb(255, 159, 181)"
+      ],
+      "videos": 0,
+      "passed": true
+    },
+    {
+      "site": "projects",
+      "url": "http://127.0.0.1:4273/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/implementation/01_attention-mechanism/02-notes-to-understanding/",
+      "width": 390,
+      "tokens": 66,
+      "colors": [
+        "rgb(255, 159, 181)",
+        "rgb(242, 196, 141)",
+        "rgb(240, 201, 137)",
+        "rgb(138, 219, 208)"
+      ],
+      "videos": 7,
+      "passed": true
+    },
+    {
+      "site": "research-commands",
+      "url": "http://127.0.0.1:4274/research_docs/experiments/coding-inference/baseline/hands-on/",
+      "width": 390,
+      "tokens": 19,
+      "colors": [
+        "rgb(210, 181, 255)",
+        "rgb(159, 213, 255)"
+      ],
+      "videos": 0,
+      "passed": true
+    },
+    {
+      "site": "research-json",
+      "url": "http://127.0.0.1:4274/research_docs/experiments/coding-inference/baseline/receipts/",
+      "width": 390,
+      "tokens": 868,
+      "colors": [
+        "rgb(199, 213, 223)",
+        "rgb(159, 213, 255)",
+        "rgb(242, 196, 141)",
+        "rgb(165, 214, 255)",
+        "rgb(255, 159, 181)"
+      ],
+      "videos": 0,
+      "passed": true
+    }
+  ],
+  "screenshots_visually_reviewed": [
+    "projects actual Bike notes, Python source",
+    "research actual implementation shell commands",
+    "projects mobile language specimen",
+    "research print language specimen"
+  ],
+  "boundaries": [
+    "Unlabelled, unknown and explicit plain-text fences remain literal.",
+    "Mermaid/video and inline-code behavior is preserved.",
+    "Research reader was started; no scientific jobs or paused containers were started.",
+    "No commit or publication requested."
+  ],
+  "later_source_cleanup": {
+    "archive": "/mnt/projects/ai/.ai/source-clean-commit/20261024T010936Z/generated-candidates.tar.gz",
+    "member_paths": [
+      "ai_projects/docs/website/test-results/",
+      "ai_research/research_docs/test-results/"
+    ],
+    "note": "The later user-requested cleanup verified this complete archive before removing disposable local captures/builds. Selected verification in this source receipt remains available."
+  }
+}

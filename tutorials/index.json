@@ -137,6 +137,14 @@
       "lessons": [
         "projects/bike-demand-planner/foundation-lab/v1"
       ]
+    },
+    {
+      "id": "attention-is-all-you-need",
+      "title": "Attention Is All You Need",
+      "status": "setup-and-attention-tutorial-available",
+      "lessons": [
+        "projects/attention-is-all-you-need/attention-lab/v1"
+      ]
     }
   ],
   "course_sequence": [

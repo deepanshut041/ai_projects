@@ -92,7 +92,7 @@ export async function projectLibrary(projectsRoot, base, { local = false, links 
     // manifest stays outside the public build and cannot be fetched itself.
     const project = library.groups.flatMap(g => g.projects).find(p => inside(p.root, absolute));
     const relative = project && path.relative(project.root, absolute);
-    const source = project && (/^(?:src|tests)[/\\]/.test(relative) || !relative.includes(path.sep));
+    const source = project && (/^(?:src|tests|notebooks)[/\\]/.test(relative) || !relative.includes(path.sep));
     const notes = project && inside(path.join(project.root, 'docs'), absolute);
     const video = inside(path.join(workspace, '.ai/videos'), absolute);
     if (!(source || notes || video) || !/\.(?:py|cpp|hpp|h|c|toml|json|txt|md|ipynb|png|jpg|jpeg|webp|svg|mp4|m4a|mp3|wav|srt|vtt)$/i.test(absolute)) return null;

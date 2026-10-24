@@ -1,0 +1,9 @@
+{
+  "snippets": {
+    "01-weighted-information.md": "tensor([[[0.5000, 0.5000]]])\ntensor([[[4., 6.]]])",
+    "10-reusable-attention.md": "torch.Size([2, 5, 12]) torch.Size([2, 5, 12])\ntorch.Size([2, 3, 12])\ntorch.Size([2, 3, 5, 5])",
+    "11-gradients-and-learning.md": "4.0 0.5\n2.0\n[-0.5, -0.5]"
+  },
+  "compiled_blocks": 7,
+  "passed": true
+}
