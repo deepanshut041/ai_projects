@@ -4,6 +4,12 @@ We now retain every source state instead of handing off only the final one. The 
 
 ### A context vector for each output step
 
+![A source-state mixture weighted differently for each available token](images/original-slides/lecture-03-slide-09.png)
+
+*Original diagram: [Vizuara, Lecture 3, slide 9](https://lecture3-attention-mechanisms.vercel.app/#/9). Captured from the linked presentation website. Open the image for full size.*
+
+Each source state contributes its entire feature vector, multiplied by one scalar weight. The colored proportions describe contributions to one returned context, rather than probabilities that the decoder has already emitted those words. These are the source presentation’s four states; the worked calculation later uses our three retained rows.
+
 For output step $t$ and source position $j$, write a scalar compatibility score as $e_{tj}=a(s_{t-1},h_j)$. The previous decoder state is the query in this convention. Another decoder implementation can order its internal updates differently; what matters here is that the query is available before this retrieval is computed.
 
 Convert the source-position scores into weights and a context:
@@ -19,6 +25,12 @@ There is no circular requirement to know the next translated word before computi
 
 ### Why the score is called additive
 
+![Separate query and source projections meet at an addition before a nonlinear scalar scorer](images/original-slides/lecture-03-slide-24.png)
+
+*Original diagram: [Vizuara, Lecture 3, slide 24](https://lecture3-attention-mechanisms.vercel.app/#/24). Captured from the linked presentation website. Open the image for full size.*
+
+The two branches first project the decoder query and one source state to compatible widths. Their addition happens inside the scoring network, before tanh and the final scalar projection. It is separate from the weighted sum of values that happens after normalization.
+
 One possible learned scorer is
 
 $$a(s,h)=u^\top\tanh(W_ss+W_hh+b).$$
@@ -30,6 +42,12 @@ The tanh also matters. If it were removed, $u^\top W_ss$ would be the same scala
 The Bahdanau translation paper uses learned alignment and bidirectional encoder annotations. Our arithmetic isolates its scoring-and-retrieval idea; it does not implement that complete model or reproduce its training results. See the [original paper](https://arxiv.org/abs/1409.0473).
 
 ### A complete small calculation
+
+![One decoding step from stored encoder states through scores, weights, context and vocabulary prediction](images/original-slides/lecture-03-slide-14.png)
+
+*Original diagram: [Vizuara, Lecture 3, slide 14](https://lecture3-attention-mechanisms.vercel.app/#/14). Captured from the linked presentation website. Open the image for full size.*
+
+Read the middle path first: compare the available query with every state, normalize the scores, and combine those states. Only afterward does the output-side computation use the context to score vocabulary entries. The source uses four English positions and rounded displayed values; our calculation below independently checks three states and keeps source-position weights separate from vocabulary probabilities.
 
 We will reuse the hand-set memory
 
@@ -146,6 +164,12 @@ if __name__ == '__main__':
 Run `python3 examples/03_additive.py` from the package directory. The result includes the scores, weights and context above. It also changes the query to $s=1$, keeping the source states and parameters fixed, and obtains weights `[0.541045,0.206330,0.252626]`. The changed context comes from a new retrieval, not a new memory or a training step.
 
 ### Read an alignment matrix correctly
+
+![An alignment matrix whose output-step rows can select reordered source columns](images/original-slides/lecture-03-slide-20.png)
+
+*Original diagram: [Vizuara, Lecture 3, slide 20](https://lecture3-attention-mechanisms.vercel.app/#/20). Captured from the linked presentation website. Open the image for full size.*
+
+Follow a row to see which source positions contribute to that output step; follow successive rows to see the retrieval change. The stronger cells need not form a diagonal when translation changes word order. This is a source illustration of alignment, not a learned result from our project or a requirement that attention always produces one-to-one matches.
 
 Stack the weights for several output steps. Rows are output-step queries; columns are source positions. A bright entry can indicate that one source position contributes strongly to that step's context. It is not necessarily a one-to-one word alignment or a proof of a linguistic relationship. Source and target tokenization can differ, soft mixtures can distribute information, and a trained decoder uses more than this matrix.
 

@@ -1,5 +1,12 @@
 # Projects resume checkpoint
 
+## Attention Labs inline presentation visuals — 2026-10-30
+
+Attention Labs visual revision (2026-10-30): all ten Attention Foundations/Heads lessons now include 27 attributed diagram screenshots captured in Chrome from the presentation websites linked by the original lectures. Each appears beside its matching explanation with a full-size link and exact slide provenance; complete previews avoid cropped blank margins on mobile. The checked numerical examples and authored figures are retained, source-example differences and simplified claims are explained, and Lecture 9 remains excluded. Project implementations and learner/hosted checkpoints are unchanged.
+
+Continue at the [Attention Foundations tutorial](../tutorials/projects/attention-labs/attention-foundations/v1/lessons/01-context-and-map.md) or [Attention Heads](../tutorials/projects/attention-labs/attention-heads/v1/lessons/01-independent-heads.md). The [visual revision record](../implementation/2026-10/attention-labs-playlist-tutorial/08-visual-revision.md) owns source capture, placement and browser verification. This addresses tutorial presentation; attention implementation remains at its prepared boilerplate checkpoint.
+
+
 ## Attention Foundations build/test project — 2026-10-30
 
 Attention Foundations project preparation (2026-10-30): the existing attention-labs/attention-foundations child now has an explicit goal to build and independently test six basic single-head attention mechanisms, a six-phase route, locked Python 3.12.13 source boilerplate, workspace runners and a source-upload Colab notebook. All 18 scaffold checks and the six operational notebook cells pass locally; only the Colab file interface is simulated. Attention implementations, actual Google-hosted execution and learner review remain pending. MHA/GQA stay in attention-heads, shared tutorials stay in Docs, and existing learner/model checkpoints are preserved.

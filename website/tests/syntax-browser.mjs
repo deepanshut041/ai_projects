@@ -96,6 +96,10 @@ try {
   assert.equal(await code.nth(8).locator('span').count(),0);assert.equal(await code.nth(9).locator('span').count(),0);
   assert.equal(await page.locator('article img, article script').count(),0);
   const first=code.first();
+  // The chosen real page may keep its article in a collapsed project overview.
+  // Text selection must exercise a visible specimen, as in the actual-page checks above.
+  await first.evaluate(e=>{for(let p=e.parentElement;p;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;});
+  await first.scrollIntoViewIfNeeded();
   const copied=await first.evaluate(e=>{const range=document.createRange();range.selectNodeContents(e);const selection=getSelection();selection.removeAllRanges();selection.addRange(range);const text=selection.toString();selection.removeAllRanges();return text;});
   // Browser text selection omits the final visual line break; DOM text above
   // checks all source bytes, including that trailing newline.

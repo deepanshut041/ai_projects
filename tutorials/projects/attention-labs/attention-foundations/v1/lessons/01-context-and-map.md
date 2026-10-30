@@ -16,6 +16,12 @@ Multi-head attention has its own `attention-heads` folder. It builds on the sing
 
 ### Attention names answer different questions
 
+![A map separating attention scoring, connectivity, heads and other design choices](images/original-slides/lecture-01-slide-05.png)
+
+*Original diagram: [Vizuara, Lecture 1, slide 5](https://lecture1-attention-mechanisms.vercel.app/#/5). Captured from the linked presentation website. Open the image for full size.*
+
+Read the boxes as different questions about one model. A causal, multi-head layer can still use scaled dot-product scoring: the choices combine. The first two boxes guide this foundations route; the head/KV box leads to the separate Attention Heads route. Our table below spells out these questions without assuming that every research method fits only one box.
+
 Suppose a layer uses scaled dot-product scores, a causal mask, and multiple heads. Those descriptions can all be true simultaneously: they describe different choices inside the same layer. Treat the following as questions to ask about a design, not a rule that every published method belongs to exactly one box.
 
 | Question | An example answer | What that answer changes |
@@ -57,3 +63,5 @@ This lesson corresponds to [Vizuara Lecture 1](https://www.youtube.com/watch?v=Q
 ```
 
 For a first session, stop when you can distinguish source-position weights from vocabulary probabilities and locate attention between representation and prediction. The [implementation record](project/implementation.md), [readiness record](project/readiness.md), [source review](research.md), [lecture coverage](project/source-map.md), and [learning points](project/learning-points.md) are available for returning to the course; they are not a second reading route.
+
+The [inline visual source record](project/visual-provenance.json) identifies the original slide and captured diagram for each presentation image used in this route.

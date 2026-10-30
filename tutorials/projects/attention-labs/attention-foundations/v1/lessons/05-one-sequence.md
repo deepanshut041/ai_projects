@@ -4,6 +4,12 @@ So far, we described a decoder query retrieving source information. Now supply q
 
 ### Compute all three queries
 
+![Cross-sequence retrieval becomes a square matrix when both axes use one sequence](images/original-slides/lecture-05-slide-08.png)
+
+*Original diagram: [Vizuara, Lecture 5, slide 8](https://lecture5-attention-mechanisms.vercel.app/#/8). Captured from the linked presentation website. Open the image for full size.*
+
+The source diagram contrasts output-step queries against input memory with queries and keys drawn from one sequence. The square shape follows from using the same number of query and source positions. It does not mean the normalized matrix must be symmetric, or that its diagonal is the only useful information.
+
 Use the same three hand-set rows,
 
 $$X=\begin{bmatrix}1&0\\0&1\\1&1\end{bmatrix}.$$
@@ -41,11 +47,23 @@ For example, the first output's first coordinate is $0.422319+0.422319$, because
 
 ### Shape and normalization are part of the meaning
 
+![A six-position self-attention weight matrix with one distribution per query row](images/original-slides/lecture-05-slide-21.png)
+
+*Original diagram: [Vizuara, Lecture 5, slide 21](https://lecture5-attention-mechanisms.vercel.app/#/21). Captured from the linked presentation website. Open the image for full size.*
+
+Read a row as one query choosing among the source columns. This source picture uses six tokens and rounded weights; our preceding matrix uses three synthetic rows. In both cases, normalization runs across source positions, and each output feature receives its mixture from that same query row.
+
 $X$ is $3\times2$, $X^\top$ is $2\times3$, scores and weights are $3\times3$, and $Z$ is $3\times2$. Normalizing along the feature axis of $X$ would not produce distributions over source positions. Normalizing the columns of $S$ would answer a different question and would not ensure each query's weights sum to one.
 
 Although $S$ is symmetric, $A$ need not be. The first and third score rows have different denominators, so $A_{13}=0.422319$ while $A_{31}=0.211942$. Softmax preserves a row's score ordering; it does not preserve arbitrary matrix symmetries.
 
 ### What happens when inputs change?
+
+![One self-attention output is a weighted sum of the sequence’s input vectors](images/original-slides/lecture-05-slide-18.png)
+
+*Original diagram: [Vizuara, Lecture 5, slide 18](https://lecture5-attention-mechanisms.vercel.app/#/18). Captured from the linked presentation website. Open the image for full size.*
+
+Each arrow into the returned vector carries a source vector scaled by its attention weight. A changed input can change both the available content and the weights used to retrieve it. The six-word source illustration gives the structural picture; our numerical outputs above use the explicitly declared three-row fixture.
 
 Change one source row and it can affect its own query, its key in every other query's comparisons, and its value in every mixture. That is why contextualization is a collective computation. It is not a rule that only the modified token's output changes.
 

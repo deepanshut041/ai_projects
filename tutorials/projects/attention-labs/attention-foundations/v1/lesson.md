@@ -24,6 +24,12 @@ Multi-head attention has its own `attention-heads` folder. It builds on the sing
 
 ### Attention names answer different questions
 
+![A map separating attention scoring, connectivity, heads and other design choices](images/original-slides/lecture-01-slide-05.png)
+
+*Original diagram: [Vizuara, Lecture 1, slide 5](https://lecture1-attention-mechanisms.vercel.app/#/5). Captured from the linked presentation website. Open the image for full size.*
+
+Read the boxes as different questions about one model. A causal, multi-head layer can still use scaled dot-product scoring: the choices combine. The first two boxes guide this foundations route; the head/KV box leads to the separate Attention Heads route. Our table below spells out these questions without assuming that every research method fits only one box.
+
 Suppose a layer uses scaled dot-product scores, a causal mask, and multiple heads. Those descriptions can all be true simultaneously: they describe different choices inside the same layer. Treat the following as questions to ask about a design, not a rule that every published method belongs to exactly one box.
 
 | Question | An example answer | What that answer changes |
@@ -76,12 +82,20 @@ This lesson corresponds to [Vizuara Lecture 1](https://www.youtube.com/watch?v=Q
 
 For a first session, stop when you can distinguish source-position weights from vocabulary probabilities and locate attention between representation and prediction. The [implementation record](project/implementation.md), [readiness record](project/readiness.md), [source review](research.md), [lecture coverage](project/source-map.md), and [learning points](project/learning-points.md) are available for returning to the course; they are not a second reading route.
 
+The [inline visual source record](project/visual-provenance.json) identifies the original slide and captured diagram for each presentation image used in this route.
+
 
 ## 2. Why one fixed summary can be difficult to use
 
 The previous lesson located attention inside a translation system. To see why it helps, first build a system whose output side can access only one final input summary. This is a useful historical starting point, not a claim that every recurrent model necessarily loses its earliest input.
 
 ### Follow the input into recurrent state
+
+![A recurrent cell combines a previous state and a token embedding](images/original-slides/lecture-02-slide-08.png)
+
+*Original diagram: [Vizuara, Lecture 2, slide 8](https://lecture2-attention-mechanisms.vercel.app/#/8). Captured from the linked presentation website. Open the image for full size.*
+
+Follow the two incoming arrows before the outgoing one: one carries the previous summary and the other carries the current token representation. Reusing this cell creates a chain of computed states. The source picture labels one four-word step; our formula and three-token probe below describe the same dependency with different inputs.
 
 Let the three source tokens have embeddings $x_1,x_2,x_3$. An embedding is a vector selected by token identity. A recurrent encoder updates a state after each token:
 
@@ -98,6 +112,12 @@ The input embedding can be understood as a table lookup. If token ID 4 selects r
 In this baseline, the decoder receives $c=h_3$. A decoder state can be initialized from $c$, or a decoder can also condition on $c$ at each update. Those are implementation choices; our limitation is that the input information reaching the decoder must pass through that same fixed-width representation.
 
 ### Quantify one possible fading effect
+
+![An illustration of earlier information becoming less prominent through repeated recurrent updates](images/original-slides/lecture-02-slide-16.png)
+
+*Original diagram: [Vizuara, Lecture 2, slide 16](https://lecture2-attention-mechanisms.vercel.app/#/16). Captured from the linked presentation website. Open the image for full size.*
+
+The changing color illustrates a possible loss of earlier contributions as the summary is updated. Treat that as motivation for a test, rather than a guarantee that every recurrent model erases its first words. The scalar calculation below specifies one retention factor and measures its exact effect.
 
 Use a scalar recurrence to isolate the effect of repeated state updates:
 
@@ -147,6 +167,12 @@ The output records states `[1.0,0.5,2.25]`, a changed final state `2.5`, and sen
 
 ### Follow the summary into output tokens
 
+![A complete recurrent encoder hands one context vector to a decoder](images/original-slides/lecture-02-slide-12.png)
+
+*Original diagram: [Vizuara, Lecture 2, slide 12](https://lecture2-attention-mechanisms.vercel.app/#/12). Captured from the linked presentation website. Open the image for full size.*
+
+Trace the single middle arrow: all source information available to this decoder crosses the same context-vector handoff. The left and right chains can have different numbers of steps, as the English and French examples show. The next-token vocabulary prediction belongs on the decoder side; the context vector is an input representation, not a distribution over words.
+
 The decoder begins with a start token, usually written `<BOS>`. At step $t$, it combines its previous state with the embedding of the previous output token. A conventional output head computes
 
 $$\ell_t=s_tW_o+b_o,\qquad p(y_t\mid y_{<t},c)=\operatorname{softmax}(\ell_t).$$
@@ -188,6 +214,12 @@ We now retain every source state instead of handing off only the final one. The 
 
 ### A context vector for each output step
 
+![A source-state mixture weighted differently for each available token](images/original-slides/lecture-03-slide-09.png)
+
+*Original diagram: [Vizuara, Lecture 3, slide 9](https://lecture3-attention-mechanisms.vercel.app/#/9). Captured from the linked presentation website. Open the image for full size.*
+
+Each source state contributes its entire feature vector, multiplied by one scalar weight. The colored proportions describe contributions to one returned context, rather than probabilities that the decoder has already emitted those words. These are the source presentation’s four states; the worked calculation later uses our three retained rows.
+
 For output step $t$ and source position $j$, write a scalar compatibility score as $e_{tj}=a(s_{t-1},h_j)$. The previous decoder state is the query in this convention. Another decoder implementation can order its internal updates differently; what matters here is that the query is available before this retrieval is computed.
 
 Convert the source-position scores into weights and a context:
@@ -203,6 +235,12 @@ There is no circular requirement to know the next translated word before computi
 
 ### Why the score is called additive
 
+![Separate query and source projections meet at an addition before a nonlinear scalar scorer](images/original-slides/lecture-03-slide-24.png)
+
+*Original diagram: [Vizuara, Lecture 3, slide 24](https://lecture3-attention-mechanisms.vercel.app/#/24). Captured from the linked presentation website. Open the image for full size.*
+
+The two branches first project the decoder query and one source state to compatible widths. Their addition happens inside the scoring network, before tanh and the final scalar projection. It is separate from the weighted sum of values that happens after normalization.
+
 One possible learned scorer is
 
 $$a(s,h)=u^\top\tanh(W_ss+W_hh+b).$$
@@ -214,6 +252,12 @@ The tanh also matters. If it were removed, $u^\top W_ss$ would be the same scala
 The Bahdanau translation paper uses learned alignment and bidirectional encoder annotations. Our arithmetic isolates its scoring-and-retrieval idea; it does not implement that complete model or reproduce its training results. See the [original paper](https://arxiv.org/abs/1409.0473).
 
 ### A complete small calculation
+
+![One decoding step from stored encoder states through scores, weights, context and vocabulary prediction](images/original-slides/lecture-03-slide-14.png)
+
+*Original diagram: [Vizuara, Lecture 3, slide 14](https://lecture3-attention-mechanisms.vercel.app/#/14). Captured from the linked presentation website. Open the image for full size.*
+
+Read the middle path first: compare the available query with every state, normalize the scores, and combine those states. Only afterward does the output-side computation use the context to score vocabulary entries. The source uses four English positions and rounded displayed values; our calculation below independently checks three states and keeps source-position weights separate from vocabulary probabilities.
 
 We will reuse the hand-set memory
 
@@ -331,6 +375,12 @@ Run `python3 examples/03_additive.py` from the package directory. The result inc
 
 ### Read an alignment matrix correctly
 
+![An alignment matrix whose output-step rows can select reordered source columns](images/original-slides/lecture-03-slide-20.png)
+
+*Original diagram: [Vizuara, Lecture 3, slide 20](https://lecture3-attention-mechanisms.vercel.app/#/20). Captured from the linked presentation website. Open the image for full size.*
+
+Follow a row to see which source positions contribute to that output step; follow successive rows to see the retrieval change. The stronger cells need not form a diagonal when translation changes word order. This is a source illustration of alignment, not a learned result from our project or a requirement that attention always produces one-to-one matches.
+
 Stack the weights for several output steps. Rows are output-step queries; columns are source positions. A bright entry can indicate that one source position contributes strongly to that step's context. It is not necessarily a one-to-one word alignment or a proof of a linguistic relationship. Source and target tokenization can differ, soft mixtures can distribute information, and a trained decoder uses more than this matrix.
 
 The number of rows can differ from the number of columns. Generation still ends according to the decoder's output behavior, not when attention has used every column once. Nothing in row-wise normalization imposes a monotonic alignment or requires each source position to be selected exactly once.
@@ -364,6 +414,12 @@ We can preserve the source-position normalization and value mixture while replac
 
 ### Direction and magnitude both affect a dot product
 
+![Query and key vectors with aligned, perpendicular and opposite directions](images/original-slides/lecture-04-slide-08.png)
+
+*Original diagram: [Vizuara, Lecture 4, slide 8](https://lecture4-attention-mechanisms.vercel.app/#/8). Captured from the linked presentation website. Open the image for full size.*
+
+The three panels isolate the sign contributed by direction: aligned vectors can give a positive score, perpendicular vectors give zero, and opposite vectors can give a negative score. Length also matters through the product of the norms. Use the same-direction, different-length counterexample below to avoid reading this picture as a cosine-only comparison.
+
 For rows $q,k\in\mathbb R^{d_k}$,
 
 $$q\cdot k=\sum_{r=1}^{d_k}q_rk_r=\lVert q\rVert\lVert k\rVert\cos\theta.$$
@@ -375,6 +431,12 @@ Using query `[1,1]` with the three rows retained from Lesson 3 gives scores `[1,
 Luong and colleagues studied several alignment score forms, including dot, general/bilinear, and concat forms. Dot-product scoring is a useful case from that work, not its entire contribution. A bilinear score $qMk^\top$ can also bridge unequal query/key widths. See the [original paper](https://aclanthology.org/D15-1166/).
 
 ### Why divide by a square root?
+
+![An illustration of typical random dot-product size increasing with key width](images/original-slides/lecture-04-slide-10.png)
+
+*Original diagram: [Vizuara, Lecture 4, slide 10](https://lecture4-attention-mechanisms.vercel.app/#/10). Captured from the linked presentation website. Open the image for full size.*
+
+The plotted scale is a typical score magnitude, approximately the square root of the width under the stated random-coordinate assumptions. It is not a plot of variance: the variance calculation below gives d before scaling. Learned or correlated coordinates need not follow this sketch.
 
 Assume, for this calculation, independent query and key coordinates with mean zero and variance one, with the coordinate-product terms mutually independent. For $r_i=q_ik_i$,
 
@@ -396,6 +458,12 @@ For our width-two query, divide scores `[1,1,2]` by $\sqrt2$ before softmax. The
 ![The same ranking with different concentration](images/04-scale.svg)
 
 ### Softmax derivatives explain the concern more precisely
+
+![Multiplying score differences produces a more concentrated softmax distribution](images/original-slides/lecture-04-slide-11.png)
+
+*Original diagram: [Vizuara, Lecture 4, slide 11](https://lecture4-attention-mechanisms.vercel.app/#/11). Captured from the linked presentation website. Open the image for full size.*
+
+The second panel multiplies the scores, enlarging their differences and concentrating the weights. A common offset alone would leave the distribution unchanged. The source caption compresses the gradient consequence: the derivation below concerns the softmax Jacobian, and does not imply that every gradient in a model disappears.
 
 Let $a_i=\operatorname{softmax}(e)_i$. Differentiating gives
 
@@ -465,6 +533,12 @@ So far, we described a decoder query retrieving source information. Now supply q
 
 ### Compute all three queries
 
+![Cross-sequence retrieval becomes a square matrix when both axes use one sequence](images/original-slides/lecture-05-slide-08.png)
+
+*Original diagram: [Vizuara, Lecture 5, slide 8](https://lecture5-attention-mechanisms.vercel.app/#/8). Captured from the linked presentation website. Open the image for full size.*
+
+The source diagram contrasts output-step queries against input memory with queries and keys drawn from one sequence. The square shape follows from using the same number of query and source positions. It does not mean the normalized matrix must be symmetric, or that its diagonal is the only useful information.
+
 Use the same three hand-set rows,
 
 $$X=\begin{bmatrix}1&0\\0&1\\1&1\end{bmatrix}.$$
@@ -502,11 +576,23 @@ For example, the first output's first coordinate is $0.422319+0.422319$, because
 
 ### Shape and normalization are part of the meaning
 
+![A six-position self-attention weight matrix with one distribution per query row](images/original-slides/lecture-05-slide-21.png)
+
+*Original diagram: [Vizuara, Lecture 5, slide 21](https://lecture5-attention-mechanisms.vercel.app/#/21). Captured from the linked presentation website. Open the image for full size.*
+
+Read a row as one query choosing among the source columns. This source picture uses six tokens and rounded weights; our preceding matrix uses three synthetic rows. In both cases, normalization runs across source positions, and each output feature receives its mixture from that same query row.
+
 $X$ is $3\times2$, $X^\top$ is $2\times3$, scores and weights are $3\times3$, and $Z$ is $3\times2$. Normalizing along the feature axis of $X$ would not produce distributions over source positions. Normalizing the columns of $S$ would answer a different question and would not ensure each query's weights sum to one.
 
 Although $S$ is symmetric, $A$ need not be. The first and third score rows have different denominators, so $A_{13}=0.422319$ while $A_{31}=0.211942$. Softmax preserves a row's score ordering; it does not preserve arbitrary matrix symmetries.
 
 ### What happens when inputs change?
+
+![One self-attention output is a weighted sum of the sequence’s input vectors](images/original-slides/lecture-05-slide-18.png)
+
+*Original diagram: [Vizuara, Lecture 5, slide 18](https://lecture5-attention-mechanisms.vercel.app/#/18). Captured from the linked presentation website. Open the image for full size.*
+
+Each arrow into the returned vector carries a source vector scaled by its attention weight. A changed input can change both the available content and the weights used to retrieve it. The six-word source illustration gives the structural picture; our numerical outputs above use the explicitly declared three-row fixture.
 
 Change one source row and it can affect its own query, its key in every other query's comparisons, and its value in every mixture. That is why contextualization is a collective computation. It is not a rule that only the modified token's output changes.
 
@@ -586,6 +672,12 @@ The previous operation used the same row as a query, a key, and a value. That ti
 
 ### Name the roles after their jobs
 
+![Separate learned projections create comparison requests, matching features and returned content](images/original-slides/lecture-06-slide-10.png)
+
+*Original diagram: [Vizuara, Lecture 6, slide 10](https://lecture6-attention-mechanisms.vercel.app/#/10). Captured from the linked presentation website. Open the image for full size.*
+
+Start at one token representation and follow its three branches. The query branch determines how that position asks, the key branch determines how a source can match, and the value branch determines the content delivered after matching. These are learned roles; the labels do not assign fixed linguistic meanings to coordinates.
+
 A query is the feature row used to request information. A key is the feature row it is compared with. A value is the content row included in the weighted mixture. These are learned numerical roles, not literal database records or guaranteed human-readable questions.
 
 For row-vector inputs,
@@ -600,6 +692,12 @@ If $X$ has shape $N\times d_{\mathrm{in}}$, then $W_Q,W_K$ have shape $d_{\mathr
 Changing $W_Q$ or $W_K$ can change routing weights. Changing only $W_V$ changes returned content while leaving the weights fixed. During training a task loss can update all of these parameters, but adding them does not automatically make attention sharp, linguistically correct, or different across repeated token identities.
 
 ### Project the same three rows
+
+![The input matrix is multiplied by three distinct projection matrices](images/original-slides/lecture-06-slide-14.png)
+
+*Original diagram: [Vizuara, Lecture 6, slide 14](https://lecture6-attention-mechanisms.vercel.app/#/14). Captured from the linked presentation website. Open the image for full size.*
+
+The three products create Q, K and V before any query–key score is normalized. The source diagram uses a five-token input with its own parameter values. Below, we apply the same three-branch operation to our three rows and named matrices, so every resulting number can be checked independently.
 
 Take the input from Lesson 5 and the parameter snapshot
 
@@ -616,6 +714,12 @@ V=\begin{bmatrix}2&0\\0&-1\\2&-1\end{bmatrix}.$$
 For source row 3, $[1,1]W_K=[1,2]$: its first output coordinate is $1\times1+1\times0$, and its second is $1\times1+1\times1$. The same row's value becomes `[2,-1]`, which shows explicitly that a negative value coordinate is allowed even though attention weights are nonnegative.
 
 ### Follow the last query all the way through
+
+![A complete learned self-attention flow from input through Q/K/V to output](images/original-slides/lecture-06-slide-21.png)
+
+*Original diagram: [Vizuara, Lecture 6, slide 21](https://lecture6-attention-mechanisms.vercel.app/#/21). Captured from the linked presentation website. Open the image for full size.*
+
+Follow Q and K into the score matrix, then follow V around the comparison branch into the final value mixture. This bypass explains why changing a value projection can change delivered features without changing the attention weights. The matrix axes and widths below give the exact contract for our smaller worked example.
 
 The last query `[1,1]` scores the three keys as `[2,1,3]`. Divide by $\sqrt2$ to get approximately `[1.414214,0.707107,2.121320]`. Stable softmax gives
 
@@ -756,6 +860,12 @@ A model predicting the next token must operate with the prefix available at that
 
 ### Locate the target before drawing the triangle
 
+![A causal attention matrix permits the diagonal and earlier source positions](images/original-slides/lecture-07-slide-09.png)
+
+*Original diagram: [Vizuara, Lecture 7, slide 9](https://lecture7-attention-mechanisms.vercel.app/#/9). Captured from the linked presentation website. Open the image for full size.*
+
+Use a row as the position making a prediction and a column as a possible source. The visible prefix grows one position at a time; entries strictly to the right are forbidden. The diagonal is allowed because that row predicts the following token from the current token and its prefix, as the shifted targets below make explicit.
+
 For tokens `[Quiet,cats,nap,<EOS>]`, one shifted training pair is
 
 | Position | Decoder input token | Prediction target | Allowed input positions |
@@ -767,6 +877,12 @@ For tokens `[Quiet,cats,nap,<EOS>]`, one shifted training pair is
 The diagonal is allowed because the current **input** token is known; its target is the next token. At row 1, allowing input position 2 would reveal “cats”, the answer being predicted. A correct triangular mask does not repair incorrectly aligned inputs and labels, and a mask at only one layer does not prevent leakage through another path that has already mixed future information.
 
 ### Apply visibility before normalization
+
+![Forbidden score entries become negative infinity before exponentiation and normalization](images/original-slides/lecture-07-slide-12.png)
+
+*Original diagram: [Vizuara, Lecture 7, slide 12](https://lecture7-attention-mechanisms.vercel.app/#/12). Captured from the linked presentation website. Open the image for full size.*
+
+The blocked entries contribute zero after exponentiation, so the denominator includes only allowed sources. The order is essential to the direct masked-softmax calculation. A row with no allowed finite score still needs explicit handling; the picture does not define a valid distribution for that case.
 
 With row $i$ as query and column $j$ as source, define
 
@@ -802,6 +918,12 @@ A source key is usable only if both conditions hold: it is in the allowed prefix
 Masking padded keys also does not automatically eliminate padded **query** outputs or their losses. An application normally tracks query validity separately and excludes those rows from the loss, or explicitly zeroes their outputs according to its contract. This tutorial's examples use three real queries and reject an empty attention support.
 
 ### Dropout changes a sample, not the intended mean
+
+![A dropped contribution is either removed or rescaled when it survives](images/original-slides/lecture-07-slide-16.png)
+
+*Original diagram: [Vizuara, Lecture 7, slide 16](https://lecture7-attention-mechanisms.vercel.app/#/16). Captured from the linked presentation website. Open the image for full size.*
+
+The two outcomes illustrate the expectation calculation: a contribution sometimes becomes zero, and the survivors are enlarged by the reciprocal keep probability. Each sampled attention row need not sum to one. Our example below enumerates every keep/drop pattern and checks the immediate weighted mixture rather than claiming equality for a whole nonlinear model.
 
 The training motivation is regularization: randomly removing contributions makes the computation operate with varying subsets of its usual information paths. It can reduce reliance on particular contributions, but whether it improves held-out quality depends on the model, data and dropout probability. No generalization improvement is established by the arithmetic example alone.
 
@@ -857,6 +979,12 @@ if __name__ == '__main__':
 Run `python3 examples/07_causal.py`. It checks exact zero future weights, changes the final input to `[99,-37]` and verifies that the first two outputs do not change. That intervention is stronger than checking only that a printed matrix looks triangular. It also tests the empty-support error and dropout expectation.
 
 ### The same causal calculation in C++
+
+![The full causal path projects inputs, masks scores, normalizes and mixes values](images/original-slides/lecture-07-slide-17.png)
+
+*Original diagram: [Vizuara, Lecture 7, slide 17](https://lecture7-attention-mechanisms.vercel.app/#/17). Captured from the linked presentation website. Open the image for full size.*
+
+Read the stages in order and locate the mask between the scores and softmax. Dropout, when enabled for training, acts on normalized weights before the value mixture. The final arrow abbreviates multiplying the weights by V; the weight matrix itself is not the output Z. The C++ reference below checks the deterministic masked calculation without adding a dropout implementation; the earlier Python reference separately checks the dropout expectation.
 
 The following complete program iterates only through allowed source indices `j <= i`, so it never constructs a forbidden-score array. The reduction and returned context are the same as the Python reference. It deliberately fixes this example's shapes rather than claiming to be a general tensor library.
 

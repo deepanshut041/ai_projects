@@ -4,6 +4,12 @@ A model predicting the next token must operate with the prefix available at that
 
 ### Locate the target before drawing the triangle
 
+![A causal attention matrix permits the diagonal and earlier source positions](images/original-slides/lecture-07-slide-09.png)
+
+*Original diagram: [Vizuara, Lecture 7, slide 9](https://lecture7-attention-mechanisms.vercel.app/#/9). Captured from the linked presentation website. Open the image for full size.*
+
+Use a row as the position making a prediction and a column as a possible source. The visible prefix grows one position at a time; entries strictly to the right are forbidden. The diagonal is allowed because that row predicts the following token from the current token and its prefix, as the shifted targets below make explicit.
+
 For tokens `[Quiet,cats,nap,<EOS>]`, one shifted training pair is
 
 | Position | Decoder input token | Prediction target | Allowed input positions |
@@ -15,6 +21,12 @@ For tokens `[Quiet,cats,nap,<EOS>]`, one shifted training pair is
 The diagonal is allowed because the current **input** token is known; its target is the next token. At row 1, allowing input position 2 would reveal “cats”, the answer being predicted. A correct triangular mask does not repair incorrectly aligned inputs and labels, and a mask at only one layer does not prevent leakage through another path that has already mixed future information.
 
 ### Apply visibility before normalization
+
+![Forbidden score entries become negative infinity before exponentiation and normalization](images/original-slides/lecture-07-slide-12.png)
+
+*Original diagram: [Vizuara, Lecture 7, slide 12](https://lecture7-attention-mechanisms.vercel.app/#/12). Captured from the linked presentation website. Open the image for full size.*
+
+The blocked entries contribute zero after exponentiation, so the denominator includes only allowed sources. The order is essential to the direct masked-softmax calculation. A row with no allowed finite score still needs explicit handling; the picture does not define a valid distribution for that case.
 
 With row $i$ as query and column $j$ as source, define
 
@@ -50,6 +62,12 @@ A source key is usable only if both conditions hold: it is in the allowed prefix
 Masking padded keys also does not automatically eliminate padded **query** outputs or their losses. An application normally tracks query validity separately and excludes those rows from the loss, or explicitly zeroes their outputs according to its contract. This tutorial's examples use three real queries and reject an empty attention support.
 
 ### Dropout changes a sample, not the intended mean
+
+![A dropped contribution is either removed or rescaled when it survives](images/original-slides/lecture-07-slide-16.png)
+
+*Original diagram: [Vizuara, Lecture 7, slide 16](https://lecture7-attention-mechanisms.vercel.app/#/16). Captured from the linked presentation website. Open the image for full size.*
+
+The two outcomes illustrate the expectation calculation: a contribution sometimes becomes zero, and the survivors are enlarged by the reciprocal keep probability. Each sampled attention row need not sum to one. Our example below enumerates every keep/drop pattern and checks the immediate weighted mixture rather than claiming equality for a whole nonlinear model.
 
 The training motivation is regularization: randomly removing contributions makes the computation operate with varying subsets of its usual information paths. It can reduce reliance on particular contributions, but whether it improves held-out quality depends on the model, data and dropout probability. No generalization improvement is established by the arithmetic example alone.
 
@@ -105,6 +123,12 @@ if __name__ == '__main__':
 Run `python3 examples/07_causal.py`. It checks exact zero future weights, changes the final input to `[99,-37]` and verifies that the first two outputs do not change. That intervention is stronger than checking only that a printed matrix looks triangular. It also tests the empty-support error and dropout expectation.
 
 ### The same causal calculation in C++
+
+![The full causal path projects inputs, masks scores, normalizes and mixes values](images/original-slides/lecture-07-slide-17.png)
+
+*Original diagram: [Vizuara, Lecture 7, slide 17](https://lecture7-attention-mechanisms.vercel.app/#/17). Captured from the linked presentation website. Open the image for full size.*
+
+Read the stages in order and locate the mask between the scores and softmax. Dropout, when enabled for training, acts on normalized weights before the value mixture. The final arrow abbreviates multiplying the weights by V; the weight matrix itself is not the output Z. The C++ reference below checks the deterministic masked calculation without adding a dropout implementation; the earlier Python reference separately checks the dropout expectation.
 
 The following complete program iterates only through allowed source indices `j <= i`, so it never constructs a forbidden-score array. The reduction and returned context are the same as the Python reference. It deliberately fixes this example's shapes rather than claiming to be a general tensor library.
 

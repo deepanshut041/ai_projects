@@ -6,6 +6,12 @@ This folder owns head and key/value layouts. Multi-head attention is the impleme
 
 ### What a second head changes
 
+![Independent projected attention heads produce separate outputs before concatenation](images/original-slides/lecture-08-slide-09.png)
+
+*Original diagram: [Vizuara, Lecture 8, slide 9](https://lecture8-attention-mechanisms.vercel.app/#/9). Captured from the linked presentation website. Open the image for full size.*
+
+Follow the input into both projection branches, then keep the two resulting attention patterns distinct until their outputs are joined. Each general projection can use every input feature; this is not a requirement to divide the raw embedding into disjoint slices. Separate parameters allow different retrievals but do not guarantee linguistic specialization.
+
 For one head, every value-feature column is mixed using the same matrix $A$:
 
 $$Z=AV.$$
@@ -43,6 +49,12 @@ $$z_{\mathrm{joined},3}=[1.422319,-0.266956].$$
 At the first position only the first key is allowed. Its two head outputs are `[1]` and `[1]`, so concatenation gives `[1,1]`. The head arrangement changes neither the causal permission rule nor the meaning of the sequence axis.
 
 ### Concatenation preserves the separate channels; projection mixes them
+
+![A learned output projection combines concatenated head features within each position](images/original-slides/lecture-08-slide-10.png)
+
+*Original diagram: [Vizuara, Lecture 8, slide 10](https://lecture8-attention-mechanisms.vercel.app/#/10). Captured from the linked presentation website. Open the image for full size.*
+
+Concatenation preserves the separate head channels; the following matrix can combine those channels into the layer’s output width. The output projection acts within a token row. It does not create a new attention distribution across tokens, and it is not required to mix every feature if the learned parameters preserve some channels.
 
 Use the row-vector output matrix
 
@@ -138,3 +150,5 @@ This route develops [Vizuara Lecture 8](https://www.youtube.com/watch?v=IOmg660S
 ```
 
 The [source map](project/source-map.md), [learning points](project/learning-points.md), [reference runs](project/reference-runs.md), [implementation record](project/implementation.md), [readiness record](project/readiness.md), and [research](research.md) retain the course's scope and return-to-work evidence. You can also download the [complete standalone Python reference](examples/multihead.py).
+
+The [inline visual source record](project/visual-provenance.json) identifies the original slide and captured diagram for each presentation image used in this route.

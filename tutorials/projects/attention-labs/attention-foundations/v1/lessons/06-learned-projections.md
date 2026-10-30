@@ -4,6 +4,12 @@ The previous operation used the same row as a query, a key, and a value. That ti
 
 ### Name the roles after their jobs
 
+![Separate learned projections create comparison requests, matching features and returned content](images/original-slides/lecture-06-slide-10.png)
+
+*Original diagram: [Vizuara, Lecture 6, slide 10](https://lecture6-attention-mechanisms.vercel.app/#/10). Captured from the linked presentation website. Open the image for full size.*
+
+Start at one token representation and follow its three branches. The query branch determines how that position asks, the key branch determines how a source can match, and the value branch determines the content delivered after matching. These are learned roles; the labels do not assign fixed linguistic meanings to coordinates.
+
 A query is the feature row used to request information. A key is the feature row it is compared with. A value is the content row included in the weighted mixture. These are learned numerical roles, not literal database records or guaranteed human-readable questions.
 
 For row-vector inputs,
@@ -18,6 +24,12 @@ If $X$ has shape $N\times d_{\mathrm{in}}$, then $W_Q,W_K$ have shape $d_{\mathr
 Changing $W_Q$ or $W_K$ can change routing weights. Changing only $W_V$ changes returned content while leaving the weights fixed. During training a task loss can update all of these parameters, but adding them does not automatically make attention sharp, linguistically correct, or different across repeated token identities.
 
 ### Project the same three rows
+
+![The input matrix is multiplied by three distinct projection matrices](images/original-slides/lecture-06-slide-14.png)
+
+*Original diagram: [Vizuara, Lecture 6, slide 14](https://lecture6-attention-mechanisms.vercel.app/#/14). Captured from the linked presentation website. Open the image for full size.*
+
+The three products create Q, K and V before any query–key score is normalized. The source diagram uses a five-token input with its own parameter values. Below, we apply the same three-branch operation to our three rows and named matrices, so every resulting number can be checked independently.
 
 Take the input from Lesson 5 and the parameter snapshot
 
@@ -34,6 +46,12 @@ V=\begin{bmatrix}2&0\\0&-1\\2&-1\end{bmatrix}.$$
 For source row 3, $[1,1]W_K=[1,2]$: its first output coordinate is $1\times1+1\times0$, and its second is $1\times1+1\times1$. The same row's value becomes `[2,-1]`, which shows explicitly that a negative value coordinate is allowed even though attention weights are nonnegative.
 
 ### Follow the last query all the way through
+
+![A complete learned self-attention flow from input through Q/K/V to output](images/original-slides/lecture-06-slide-21.png)
+
+*Original diagram: [Vizuara, Lecture 6, slide 21](https://lecture6-attention-mechanisms.vercel.app/#/21). Captured from the linked presentation website. Open the image for full size.*
+
+Follow Q and K into the score matrix, then follow V around the comparison branch into the final value mixture. This bypass explains why changing a value projection can change delivered features without changing the attention weights. The matrix axes and widths below give the exact contract for our smaller worked example.
 
 The last query `[1,1]` scores the three keys as `[2,1,3]`. Divide by $\sqrt2$ to get approximately `[1.414214,0.707107,2.121320]`. Stable softmax gives
 

@@ -1,0 +1,27 @@
+# Inline presentation visuals — revision plan
+
+The learner rejected the visual treatment: the tutorials should use screenshots of the presentation websites linked from each video description. Existing end-of-lesson live viewers alone do not meet this need.
+
+Revise all ten Attention Labs lessons, including the three MHA passes. Capture selected diagram regions from the original Vizuara slide websites in Chrome, retain exact lecture/slide/figure provenance and add each image beside the corresponding explanation. Use original captions to interpret arrows, matrix axes and intermediate operations. Distinguish the source diagrams' sentences and numbers from our synthetic three-row examples. Preserve the useful original numerical diagrams, code, practice and full written route. Lecture 9 remains excluded; original slide viewers remain optional deeper references.
+
+The visual route is: concept map → recurrent cell/handoff/fading → query-dependent mixture/scoring/alignment → dot geometry/scale/saturation → full self-attention matrix → learned Q/K/V flow → causal visibility/dropout → independent heads/output mixing → packed head axes → head-arrangement boundaries. Select images for a distinct teaching purpose rather than one decorative cover per chapter. Inspect the actual captures and rendered desktop/mobile/print output. Keep raw capture logs ignored; selected attributed teaching images and compact provenance are eligible course assets.
+
+No model or learner implementation, training, videos or hosted execution is requested. The existing Attention Is All You Need tutorial is outside this revision. Preparation snapshots and capture logs are in ignored workspace .ai/attention-labs-source/2026-10-30/visual-revision.
+
+## Completed revision
+
+Captured and visually inspected 27 original diagram regions across Lectures 1–8, then placed them in all ten lessons: 21 images in Attention Foundations and six in Attention Heads. Each image has descriptive alternative text, a direct original slide link, a complete local preview, a full-size image link and an original interpretation paragraph. Compact project/visual-provenance.json records the source figure URL, screenshot hash/dimensions and precise lesson/section placement. Selected PNGs total about 5.2 MiB and work without the external slide hosts. The nine original SVG teaching figures and all numerical code are preserved.
+
+Source review checks the actual dependency arrows, query/source axes, separate value branch and head/token transposes. New explanations distinguish four/five/six-token source examples from the tutorial’s checked three-row fixture. Qualifications accompany the source’s fading-memory sketch, dot-product size assumptions, softmax-gradient shorthand and dropout expectation. The causal pipeline caption explicitly states the final multiplication by V, which its compressed drawing leaves implicit.
+
+The first mobile inspection exposed a problem despite passing containment checks: a naturally wide image could initially show blank left padding. The reader now identifies the selected original-slides raster assets and fits a complete preview inside the board while retaining its full-size link. Existing authored SVGs keep their established scroll behavior. No image content was altered to fix this display issue.
+
+## Verification
+
+Both tutorial packages validate and render with frozen image hashes. The 27 screenshot hashes/dimensions and all ten chapter placements are checked in the owning 09-visual-browser-review.mjs. Root and /project_docs/ acceptance checks decode every source image, verify served bytes, test complete previews at 1440/390/320 widths, open each chapter’s actual full-size image popup, check Markdown downloads, reveal practice and verify print containment. The focused browser blocks external HTTPS hosts to prove that inline figures do not depend on the original live presentations. The [final visual receipt](10-visual-verification.json) records both package fingerprints, all placements and the completed checks.
+
+The native browser acceptance previously assumed that the first image in every complete tutorial must overflow horizontally. With complete source previews that expectation is no longer correct. Its updated check still requires the original mathematical boards to scroll, and separately verifies that source previews fit and link to their exact full-resolution image. The dedicated visual check also opens those links in real browser popups.
+
+Final checks: all 24 native website tests pass. Native record acceptance covers 237 records; project navigation covers five collections and 163 local pages; video acceptance passes. The syntax component passes separately across 188 highlighted pages after correcting its hidden QA specimen: the chosen project overview could be collapsed, making real text selection return an empty string. The test now opens the ancestor disclosure and scrolls the specimen into view before retaining the exact text-selection assertion. This is a test setup correction, not a change to tutorial code copying. The records/projects/media checks did not require another run after that isolated harness change.
+
+Both affected courses retain their existing start URLs and optional full original slide viewers. All 20 existing example and authored-figure files are byte-preserved. Exact pre-existing unrelated diffs for 36 files are preserved; shared checkpoint files are committed selectively. Actual learner review remains unassessed.

@@ -233,8 +233,14 @@ try {
     } finally { await diagramPage.close(); }
     await page.setViewportSize({ width: 390, height: 844 });
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), 'Mobile overflow: tutorial');
-    if (await page.locator('.diagram-scroll').count()) {
-      assert.ok(await page.locator('.diagram-scroll').first().evaluate(el => el.scrollWidth > el.clientWidth), 'Large diagrams should remain readable by scrolling');
+    const scrollableBoards = page.locator('.tutorial-board:not([data-source-capture]) .diagram-scroll');
+    if (await scrollableBoards.count()) {
+      assert.ok(await scrollableBoards.first().evaluate(el => el.scrollWidth > el.clientWidth), 'Large mathematical diagrams should remain readable by scrolling');
+    }
+    for (const preview of await page.locator('.tutorial-board[data-source-capture]').all()) {
+      const image = preview.locator('img');
+      assert.ok(await image.evaluate(img => img.complete && img.naturalWidth > 0 && img.getBoundingClientRect().width <= img.parentElement.clientWidth + 1), 'The complete source diagram must fit its mobile preview');
+      assert.equal(await preview.getByRole('link', { name: 'Open diagram at full size ↗', exact: true }).getAttribute('href'), await image.getAttribute('src'), 'Small source labels must remain available at full size');
     }
     await captureLesson(page, `${prefix}-mobile.png`);
     await page.evaluate(() => window.scrollTo(0, 0));

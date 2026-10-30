@@ -4,6 +4,12 @@ We can preserve the source-position normalization and value mixture while replac
 
 ### Direction and magnitude both affect a dot product
 
+![Query and key vectors with aligned, perpendicular and opposite directions](images/original-slides/lecture-04-slide-08.png)
+
+*Original diagram: [Vizuara, Lecture 4, slide 8](https://lecture4-attention-mechanisms.vercel.app/#/8). Captured from the linked presentation website. Open the image for full size.*
+
+The three panels isolate the sign contributed by direction: aligned vectors can give a positive score, perpendicular vectors give zero, and opposite vectors can give a negative score. Length also matters through the product of the norms. Use the same-direction, different-length counterexample below to avoid reading this picture as a cosine-only comparison.
+
 For rows $q,k\in\mathbb R^{d_k}$,
 
 $$q\cdot k=\sum_{r=1}^{d_k}q_rk_r=\lVert q\rVert\lVert k\rVert\cos\theta.$$
@@ -15,6 +21,12 @@ Using query `[1,1]` with the three rows retained from Lesson 3 gives scores `[1,
 Luong and colleagues studied several alignment score forms, including dot, general/bilinear, and concat forms. Dot-product scoring is a useful case from that work, not its entire contribution. A bilinear score $qMk^\top$ can also bridge unequal query/key widths. See the [original paper](https://aclanthology.org/D15-1166/).
 
 ### Why divide by a square root?
+
+![An illustration of typical random dot-product size increasing with key width](images/original-slides/lecture-04-slide-10.png)
+
+*Original diagram: [Vizuara, Lecture 4, slide 10](https://lecture4-attention-mechanisms.vercel.app/#/10). Captured from the linked presentation website. Open the image for full size.*
+
+The plotted scale is a typical score magnitude, approximately the square root of the width under the stated random-coordinate assumptions. It is not a plot of variance: the variance calculation below gives d before scaling. Learned or correlated coordinates need not follow this sketch.
 
 Assume, for this calculation, independent query and key coordinates with mean zero and variance one, with the coordinate-product terms mutually independent. For $r_i=q_ik_i$,
 
@@ -36,6 +48,12 @@ For our width-two query, divide scores `[1,1,2]` by $\sqrt2$ before softmax. The
 ![The same ranking with different concentration](images/04-scale.svg)
 
 ### Softmax derivatives explain the concern more precisely
+
+![Multiplying score differences produces a more concentrated softmax distribution](images/original-slides/lecture-04-slide-11.png)
+
+*Original diagram: [Vizuara, Lecture 4, slide 11](https://lecture4-attention-mechanisms.vercel.app/#/11). Captured from the linked presentation website. Open the image for full size.*
+
+The second panel multiplies the scores, enlarging their differences and concentrating the weights. A common offset alone would leave the distribution unchanged. The source caption compresses the gradient consequence: the derivation below concerns the softmax Jacobian, and does not imply that every gradient in a model disappears.
 
 Let $a_i=\operatorname{softmax}(e)_i$. Differentiating gives
 

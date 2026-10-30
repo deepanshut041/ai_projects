@@ -8,7 +8,7 @@ Start at [Attention Foundations](../../../tutorials/projects/attention-labs/atte
 
 Chrome verified the playlist, each included video page, each presentation URL and all 181 rendered slides. DownSub VTT files are now saved for all eight included lectures. Lecture 6 was also read through Transcript.you; all 1,417 segment texts match the later VTT. All eight automatic caption texts were read from opening through closing alongside the slides, including the live code explanations. The [spoken review](06-spoken-review.md) records the resulting corrections and additions. Raw captures, captions and reading copies stay in ignored workspace .ai/attention-labs-source/2026-10-30; compact hashes are frozen in each tutorial's source provenance.
 
-The original presentations remain externally hosted, attributed and viewable inside each matching lesson, with direct source links. Our prose, synthetic coordinates, figures and code are independently authored. Primary papers and D2L 1.0.3 bound the claims. Automatic captions are fallible; no frame-by-frame audiovisual audit or redistribution of the original slide/caption text is claimed.
+The original presentations remain externally hosted, attributed and viewable inside each matching lesson, with direct source links. Our prose, synthetic coordinates, figures and code are independently authored. Primary papers and D2L 1.0.3 bound the claims. Automatic captions are fallible; no frame-by-frame audiovisual audit is claimed. The [subsequent visual revision](08-visual-revision.md) adds selected attributed screenshots of the original presentation diagrams beside their matching explanations.
 
 ## Verification
 

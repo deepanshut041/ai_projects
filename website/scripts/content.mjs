@@ -161,7 +161,9 @@ export function renderer(recordFiles, relativeFile, base, tutorial = null, optio
     const original=md.renderer.rules.image;
     md.renderer.rules.image=(tokens,index,options,env,self)=>{
       const token=tokens[index];const src=token.attrGet('src');
-      return `<figure class="tutorial-board"><a href="${escape(src)}" target="_blank" rel="noopener">Open diagram at full size ↗</a><p class="diagram-hint">Scroll sideways to follow the complete diagram.</p><div class="diagram-scroll" tabindex="0" role="region" aria-label="${escape(token.content)}">${original(tokens,index,options,env,self)}</div></figure>`;
+      const sourceCapture=src.includes('/images/original-slides/') && /\.(?:png|webp|jpe?g)$/.test(src);
+      const hint=sourceCapture ? 'Full diagram preview. Open full size to inspect small labels.' : 'Scroll sideways to follow the complete diagram.';
+      return `<figure class="tutorial-board"${sourceCapture ? ' data-source-capture="true"' : ''}><a href="${escape(src)}" target="_blank" rel="noopener">Open diagram at full size ↗</a><p class="diagram-hint">${hint}</p><div class="diagram-scroll" tabindex="0" role="region" aria-label="${escape(token.content)}">${original(tokens,index,options,env,self)}</div></figure>`;
     };
   }
   return { md, headings };

@@ -14,6 +14,12 @@ This folder owns head and key/value layouts. Multi-head attention is the impleme
 
 ### What a second head changes
 
+![Independent projected attention heads produce separate outputs before concatenation](images/original-slides/lecture-08-slide-09.png)
+
+*Original diagram: [Vizuara, Lecture 8, slide 9](https://lecture8-attention-mechanisms.vercel.app/#/9). Captured from the linked presentation website. Open the image for full size.*
+
+Follow the input into both projection branches, then keep the two resulting attention patterns distinct until their outputs are joined. Each general projection can use every input feature; this is not a requirement to divide the raw embedding into disjoint slices. Separate parameters allow different retrievals but do not guarantee linguistic specialization.
+
 For one head, every value-feature column is mixed using the same matrix $A$:
 
 $$Z=AV.$$
@@ -51,6 +57,12 @@ $$z_{\mathrm{joined},3}=[1.422319,-0.266956].$$
 At the first position only the first key is allowed. Its two head outputs are `[1]` and `[1]`, so concatenation gives `[1,1]`. The head arrangement changes neither the causal permission rule nor the meaning of the sequence axis.
 
 ### Concatenation preserves the separate channels; projection mixes them
+
+![A learned output projection combines concatenated head features within each position](images/original-slides/lecture-08-slide-10.png)
+
+*Original diagram: [Vizuara, Lecture 8, slide 10](https://lecture8-attention-mechanisms.vercel.app/#/10). Captured from the linked presentation website. Open the image for full size.*
+
+Concatenation preserves the separate head channels; the following matrix can combine those channels into the layer’s output width. The output projection acts within a token row. It does not create a new attention distribution across tokens, and it is not required to mix every feature if the learned parameters preserve some channels.
 
 Use the row-vector output matrix
 
@@ -157,12 +169,20 @@ This route develops [Vizuara Lecture 8](https://www.youtube.com/watch?v=IOmg660S
 
 The [source map](project/source-map.md), [learning points](project/learning-points.md), [reference runs](project/reference-runs.md), [implementation record](project/implementation.md), [readiness record](project/readiness.md), and [research](research.md) retain the course's scope and return-to-work evidence. You can also download the [complete standalone Python reference](examples/multihead.py).
 
+The [inline visual source record](project/visual-provenance.json) identifies the original slide and captured diagram for each presentation image used in this route.
+
 
 ## 2. Pack independent heads without changing the operation
 
 The previous lesson computed each head separately. A tensor implementation can place the head axis beside the batch axis, allowing a numerical backend to evaluate the heads through batched operations. Packing changes representation and execution; it need not change the parameters, outputs or derivatives.
 
 ### Combine the projections first
+
+![One wide projection contains the output slices of multiple attention heads](images/original-slides/lecture-08-slide-16.png)
+
+*Original diagram: [Vizuara, Lecture 8, slide 16](https://lecture8-attention-mechanisms.vercel.app/#/16). Captured from the linked presentation website. Open the image for full size.*
+
+The packed matrix places the independent per-head projection columns together. Splitting its computed output recovers those head features without replacing the parameters with shared weights. This is why the equality below can be checked using one parameter set rather than comparing separately initialized layers.
 
 For two heads with query matrices $W_{Q,1}$ and $W_{Q,2}$, concatenate their columns:
 
@@ -174,6 +194,12 @@ This equality follows directly from matrix multiplication. The same construction
 The packed layer does not share parameters between heads. Each head still selects its own contiguous output slice of the larger matrix. A grouped-query implementation would intentionally share some key/value information; that would be a mathematical change, not just this packing transformation.
 
 ### Track the axes through a real example
+
+![The full multi-head tensor route labels batch, token, head and feature dimensions](images/original-slides/lecture-08-slide-18.png)
+
+*Original diagram: [Vizuara, Lecture 8, slide 18](https://lecture8-attention-mechanisms.vercel.app/#/18). Captured from the linked presentation website. Open the image for full size.*
+
+Read the axis names at each transition before trusting the shape alone. The source diagram uses its own dimensions; the table below instantiates the same route with B=2, T=3, H=2 and one feature per head. The intended score axes are query token and source token separately inside every batch and head.
 
 Use batch size $B=2$, sequence length $T=3$, model width $D=2$, head count $H=2$, and head width $d_h=1$. The first sequence is the numerical example from the previous lesson. A second, different sequence verifies that the batch axis remains independent.
 
@@ -195,6 +221,12 @@ A reshape reinterprets a projected width as two axes. The transpose then determi
 After the head split but **before** that transpose, the last two axes are heads and features. Multiplication there produces a head-by-head matrix for each token, which is the wrong relationship. We need token-by-token comparisons separately for each head, so queries and keys must have shape `[B,H,T,d_h]` first.
 
 ### Transpose the right axes, then merge deliberately
+
+![Moving the head axis before the token axis makes attention operate within each head](images/original-slides/lecture-08-slide-17.png)
+
+*Original diagram: [Vizuara, Lecture 8, slide 17](https://lecture8-attention-mechanisms.vercel.app/#/17). Captured from the linked presentation website. Open the image for full size.*
+
+The transpose positions batch and head as the leading batch-like axes, leaving token and feature in the last two axes. Matrix multiplication can then compare tokens within one head. Reversing that transpose before merging is equally necessary: having the right number of elements does not establish the right token/head ordering.
 
 Use `k.transpose(-2,-1)` to change `[B,H,T,d_h]` into `[B,H,d_h,T]`. A plain `.T` on a tensor with more than two axes does not express this intended operation. The causal mask has shape `[T,T]` and broadcasts over batch and heads; future weights are zero in every head.
 
@@ -327,6 +359,12 @@ This is the implementation pass for [Vizuara Lecture 8](https://www.youtube.com/
 We now have a concrete multi-head implementation and a reference loop that computes the same result. This folder can grow into other arrangements of query heads and key/value heads without scattering the foundational single-head material across new project directories.
 
 ### Describe the current implementation exactly
+
+![The source map highlights head and key/value arrangement as one design concern](images/original-slides/lecture-08-slide-03.png)
+
+*Original diagram: [Vizuara, Lecture 8, slide 3](https://lecture8-attention-mechanisms.vercel.app/#/3). Captured from the linked presentation website. Open the image for full size.*
+
+The highlighted head/KV area is the concern this folder develops. Scoring, visibility, positional information and execution strategy remain separate questions about the same component. The map motivates the later GQA/MQA route; it is not evidence that those variants or a cache have already been implemented here.
 
 Our MHA reference has two independent query projections, two independent key projections and two independent value projections. It uses scaled dot-product scores, causal visibility, no bias terms and an output projection. It has no attention dropout, padding interface, positional method or KV cache. It implements an attention component rather than a complete GPT: residual paths, normalization, feed-forward blocks, tokenization, vocabulary prediction and training are outside this reference.
 

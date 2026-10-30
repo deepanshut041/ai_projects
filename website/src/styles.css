@@ -81,3 +81,6 @@
 
 .video-error[hidden] { display: none; }
 .original-presentation{margin:24px 0;padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--panel);max-width:100%}.original-presentation figcaption{font-weight:600}.original-presentation p{font-size:13px}.original-presentation summary{cursor:pointer;color:var(--accent);padding:8px 0}.original-presentation iframe{display:block;width:100%;aspect-ratio:16/9;border:0;background:#fff;margin-top:12px}.original-presentation iframe:focus-visible{outline:2px solid var(--accent)}@media print{.original-presentation details{display:none}.original-presentation{background:white;break-inside:avoid}.original-presentation a{color:#176449}.original-presentation a::after{content:" (" attr(href) ")";overflow-wrap:anywhere}}
+
+/* Source slide captures show the whole diagram before opening the full-size image. */
+.tutorial-board[data-source-capture] .diagram-scroll img{width:100%;max-width:100%;height:auto}

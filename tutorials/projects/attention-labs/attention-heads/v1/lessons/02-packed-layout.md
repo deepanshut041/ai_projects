@@ -4,6 +4,12 @@ The previous lesson computed each head separately. A tensor implementation can p
 
 ### Combine the projections first
 
+![One wide projection contains the output slices of multiple attention heads](images/original-slides/lecture-08-slide-16.png)
+
+*Original diagram: [Vizuara, Lecture 8, slide 16](https://lecture8-attention-mechanisms.vercel.app/#/16). Captured from the linked presentation website. Open the image for full size.*
+
+The packed matrix places the independent per-head projection columns together. Splitting its computed output recovers those head features without replacing the parameters with shared weights. This is why the equality below can be checked using one parameter set rather than comparing separately initialized layers.
+
 For two heads with query matrices $W_{Q,1}$ and $W_{Q,2}$, concatenate their columns:
 
 $$W_Q=[W_{Q,1}\ W_{Q,2}],\qquad
@@ -14,6 +20,12 @@ This equality follows directly from matrix multiplication. The same construction
 The packed layer does not share parameters between heads. Each head still selects its own contiguous output slice of the larger matrix. A grouped-query implementation would intentionally share some key/value information; that would be a mathematical change, not just this packing transformation.
 
 ### Track the axes through a real example
+
+![The full multi-head tensor route labels batch, token, head and feature dimensions](images/original-slides/lecture-08-slide-18.png)
+
+*Original diagram: [Vizuara, Lecture 8, slide 18](https://lecture8-attention-mechanisms.vercel.app/#/18). Captured from the linked presentation website. Open the image for full size.*
+
+Read the axis names at each transition before trusting the shape alone. The source diagram uses its own dimensions; the table below instantiates the same route with B=2, T=3, H=2 and one feature per head. The intended score axes are query token and source token separately inside every batch and head.
 
 Use batch size $B=2$, sequence length $T=3$, model width $D=2$, head count $H=2$, and head width $d_h=1$. The first sequence is the numerical example from the previous lesson. A second, different sequence verifies that the batch axis remains independent.
 
@@ -35,6 +47,12 @@ A reshape reinterprets a projected width as two axes. The transpose then determi
 After the head split but **before** that transpose, the last two axes are heads and features. Multiplication there produces a head-by-head matrix for each token, which is the wrong relationship. We need token-by-token comparisons separately for each head, so queries and keys must have shape `[B,H,T,d_h]` first.
 
 ### Transpose the right axes, then merge deliberately
+
+![Moving the head axis before the token axis makes attention operate within each head](images/original-slides/lecture-08-slide-17.png)
+
+*Original diagram: [Vizuara, Lecture 8, slide 17](https://lecture8-attention-mechanisms.vercel.app/#/17). Captured from the linked presentation website. Open the image for full size.*
+
+The transpose positions batch and head as the leading batch-like axes, leaving token and feature in the last two axes. Matrix multiplication can then compare tokens within one head. Reversing that transpose before merging is equally necessary: having the right number of elements does not establish the right token/head ordering.
 
 Use `k.transpose(-2,-1)` to change `[B,H,T,d_h]` into `[B,H,d_h,T]`. A plain `.T` on a tensor with more than two axes does not express this intended operation. The causal mask has shape `[T,T]` and broadcasts over batch and heads; future weights are zero in every head.
 

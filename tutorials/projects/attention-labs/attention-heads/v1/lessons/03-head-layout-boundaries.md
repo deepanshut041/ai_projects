@@ -4,6 +4,12 @@ We now have a concrete multi-head implementation and a reference loop that compu
 
 ### Describe the current implementation exactly
 
+![The source map highlights head and key/value arrangement as one design concern](images/original-slides/lecture-08-slide-03.png)
+
+*Original diagram: [Vizuara, Lecture 8, slide 3](https://lecture8-attention-mechanisms.vercel.app/#/3). Captured from the linked presentation website. Open the image for full size.*
+
+The highlighted head/KV area is the concern this folder develops. Scoring, visibility, positional information and execution strategy remain separate questions about the same component. The map motivates the later GQA/MQA route; it is not evidence that those variants or a cache have already been implemented here.
+
 Our MHA reference has two independent query projections, two independent key projections and two independent value projections. It uses scaled dot-product scores, causal visibility, no bias terms and an output projection. It has no attention dropout, padding interface, positional method or KV cache. It implements an attention component rather than a complete GPT: residual paths, normalization, feed-forward blocks, tokenization, vocabulary prediction and training are outside this reference.
 
 Being precise about that boundary makes later changes easier to understand. Adding a key/value cache would change retained state and the inference interface. Adding dropout would change training behavior. Adding positional information would change the inputs to the computation. None of those is implied merely by naming the component MHA.

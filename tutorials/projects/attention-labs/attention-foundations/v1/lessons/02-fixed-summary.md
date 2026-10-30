@@ -4,6 +4,12 @@ The previous lesson located attention inside a translation system. To see why it
 
 ### Follow the input into recurrent state
 
+![A recurrent cell combines a previous state and a token embedding](images/original-slides/lecture-02-slide-08.png)
+
+*Original diagram: [Vizuara, Lecture 2, slide 8](https://lecture2-attention-mechanisms.vercel.app/#/8). Captured from the linked presentation website. Open the image for full size.*
+
+Follow the two incoming arrows before the outgoing one: one carries the previous summary and the other carries the current token representation. Reusing this cell creates a chain of computed states. The source picture labels one four-word step; our formula and three-token probe below describe the same dependency with different inputs.
+
 Let the three source tokens have embeddings $x_1,x_2,x_3$. An embedding is a vector selected by token identity. A recurrent encoder updates a state after each token:
 
 $$h_t=\tanh(x_tW_x+h_{t-1}W_h+b_h),\qquad h_0=0.$$
@@ -19,6 +25,12 @@ The input embedding can be understood as a table lookup. If token ID 4 selects r
 In this baseline, the decoder receives $c=h_3$. A decoder state can be initialized from $c$, or a decoder can also condition on $c$ at each update. Those are implementation choices; our limitation is that the input information reaching the decoder must pass through that same fixed-width representation.
 
 ### Quantify one possible fading effect
+
+![An illustration of earlier information becoming less prominent through repeated recurrent updates](images/original-slides/lecture-02-slide-16.png)
+
+*Original diagram: [Vizuara, Lecture 2, slide 16](https://lecture2-attention-mechanisms.vercel.app/#/16). Captured from the linked presentation website. Open the image for full size.*
+
+The changing color illustrates a possible loss of earlier contributions as the summary is updated. Treat that as motivation for a test, rather than a guarantee that every recurrent model erases its first words. The scalar calculation below specifies one retention factor and measures its exact effect.
 
 Use a scalar recurrence to isolate the effect of repeated state updates:
 
@@ -67,6 +79,12 @@ python3 examples/02_fixed_summary.py
 The output records states `[1.0,0.5,2.25]`, a changed final state `2.5`, and sensitivity `0.25`. These are computed properties of the declared recurrence. If the last two values differ by one rather than a quarter, the program is not applying the retention factor at both intervening updates.
 
 ### Follow the summary into output tokens
+
+![A complete recurrent encoder hands one context vector to a decoder](images/original-slides/lecture-02-slide-12.png)
+
+*Original diagram: [Vizuara, Lecture 2, slide 12](https://lecture2-attention-mechanisms.vercel.app/#/12). Captured from the linked presentation website. Open the image for full size.*
+
+Trace the single middle arrow: all source information available to this decoder crosses the same context-vector handoff. The left and right chains can have different numbers of steps, as the English and French examples show. The next-token vocabulary prediction belongs on the decoder side; the context vector is an input representation, not a distribution over words.
 
 The decoder begins with a start token, usually written `<BOS>`. At step $t$, it combines its previous state with the embedding of the previous output token. A conventional output head computes
 
