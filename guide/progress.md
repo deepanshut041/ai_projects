@@ -1,5 +1,11 @@
 # Projects progress
 
+## Attention Labs shared tutorials — 2026-10-30
+
+Attention Labs preparation (2026-10-30): Attention Labs is an independent collection repository/submodule with one attention-foundations folder for Lectures 1–7 and a separate attention-heads folder for MHA and later GQA. Ten detailed lessons live in the shared Docs tutorials/projects/attention-labs tree. All eight English automatic subtitle/transcript texts and all 181 original slides were reviewed; each included lecture retains its original presentation viewer/link. The explanations, numerical fixtures, diagrams and Python/C++ references are original. Lecture 9 is excluded. Existing model source and learner/hosted checkpoints are unchanged.
+
+Start with [Attention Foundations](../tutorials/projects/attention-labs/attention-foundations/v1/lessons/01-context-and-map.md), then continue to [Attention Heads](../tutorials/projects/attention-labs/attention-heads/v1/lessons/01-independent-heads.md). The [owning record](../implementation/2026-10/attention-labs-playlist-tutorial/00-resume.md) separates source review, author checks and reader delivery. Next: review the worked route and its explanation prompts; no new learner milestone is recorded.
+
 ## Local source handoff and generated-file cleanup — 2026-10-23
 
 The user requested clean local commits across the workspace. The Attention source/Colab organization, source-backed tutorial and both Docs highlighting fixes are reviewed and verified. Generated offline builds, browser-test captures and Python caches are archived with member hashes before removal; authored study records, media, source, dependencies and scientific results are retained. Both Docs readers stay available. The coordinated CLI record is `cli/docs/implementation/2026-10/attention-and-docs-source-cleanup/`, with final owner heads and parent-pointer audit in workspace `.ai/source-clean-commit/20261024T010936Z/final.json`. No push, history rewrite, training or learner milestone follows from this source handoff.

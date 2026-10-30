@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "project_id": "attention-labs",
+  "slug": "attention-heads",
+  "revision": "v1",
+  "files": {
+    "example-checks.json": "af444aabff0a2c8eabe4e1485db50c5a189e4022f129fb9498fbf4763f9964c7",
+    "examples/multihead.py": "c847a2f7e5ae41b9716dac77587bf0767e0cab6e744ca703ab60cd33c345ae32",
+    "examples/multihead_torch.py": "c466996c0782ace85d4542f048ccc3f5a3b44cbbf963c7012f634f4821a6d553",
+    "images/01-heads.svg": "45fc4cb90ca6ec3edc62dc09683ed35c075385a267d1e053589b989b8932bcf5",
+    "images/02-packed-shapes.svg": "e520b890d3630165d883122b9ef60deda30e4cd8d727989c5940385631187430",
+    "lesson.json": "9ab461611aea7bca4f2d86530ff69db1ca5ece0ce13fef3b5ab2ca8407f4dbfa",
+    "lesson.md": "459e13ba2ee933425e1b48edf2683c8b9f35efa478c97d7c725f7f8a9c244527",
+    "lessons/01-independent-heads.md": "702b5689c814ddb2ac2ae405a4155e762853af2336fd113b1e2969485a9432a6",
+    "lessons/02-packed-layout.md": "05e112769493152e288ecc19dafc93753d1c6639b143d17887e2741ceadde8e8",
+    "lessons/03-head-layout-boundaries.md": "fc8a2f7bf204a5cfc77fd543d7c6ef246bd0b5e06b3076ac3f9fca455777a45d",
+    "practice/transfer-review.md": "7b6da44bbc39071c861320b733bf59944b2d1b1e664361f696bae57a56aace46",
+    "project/implementation.md": "cdf114935dd7a454a137b5a80ecfb83165fb9a71da40c0f60fda35dbfc87a8cf",
+    "project/learning-points.md": "287df0323ef28940e0722dd3acabe1e74467004c396cfe222da74a04ae340b07",
+    "project/readiness.md": "4e623060f8df4cb9f9328c7927c053dc3cdc462d0ae482b5c2e66906676bc46d",
+    "project/reference-runs.md": "030f18d9273c7ed989f40d70b2606783bf871efcd0936946e037c7db14022da0",
+    "project/source-map.md": "7463ac800e5a27c394c429d645d4fbb1926eb8af9396a94836f2c7260fe19646",
+    "project/source-provenance.json": "aeac8b13aa935cf443cc1e8183c896e5cad6d0fbb5e9688971cfba5eefd631c7",
+    "research.md": "a3b1a4943604ed390206dddecbe8ffca582fad78934a001f477e2c877e0204b7"
+  },
+  "validated_at": "2026-10-30T17:34:19.083055+00:00",
+  "fingerprint": "00a6dc57ce144e005eeaa9f010dc603702656d73aea3d4905bc7024ead496e4d"
+}

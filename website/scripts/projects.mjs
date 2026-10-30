@@ -10,6 +10,7 @@ export const collections = [
   { id: 'foundations', title: 'Foundations', description: 'Practical machine learning, vision and time series.' },
   { id: 'transformer-labs', title: 'Transformer Labs', description: 'Attention, embeddings and small encoder and decoder systems.' },
   { id: 'language-models', title: 'Language Models', description: 'Complete small language models, training and recovery.' },
+  { id: 'attention-labs', title: 'Attention Labs', description: 'Attention foundations together; head and KV layouts in a separate route.' },
 ];
 const inside = (root, file) => file === root || file.startsWith(root + path.sep);
 const slugTitle = value => value.replace(/^\d+-/, '').replaceAll('-', ' ').replace(/\b\w/g, c => c.toUpperCase());

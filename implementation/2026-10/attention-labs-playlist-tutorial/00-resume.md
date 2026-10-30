@@ -1,0 +1,21 @@
+# Attention Labs: playlist-based original tutorials
+
+The requested local authoring and collection layout are complete. Attention Labs is an independent repository/submodule with one attention-foundations folder for all Lectures 1–7 and one attention-heads folder for MHA and later head/KV arrangements. The ten detailed lessons, runnable numerical references, nine original figures, revealable practice and source/readiness records live in shared tutorials/projects/attention-labs. No basic-type project folders are created. Lecture 9 is excluded by its title label, despite the reversed playlist order.
+
+Start at [Attention Foundations](../../../tutorials/projects/attention-labs/attention-foundations/v1/lessons/01-context-and-map.md), then [Attention Heads](../../../tutorials/projects/attention-labs/attention-heads/v1/lessons/01-independent-heads.md). The repository-owned developer-learning-tutorials skill owns the researched overview-to-depth route; the existing Projects reader and shared CLI provide delivery. The collection repository contains entry-point READMEs, while tutorial examples remain in the shared tutorial packages.
+
+## Sources and teaching review
+
+Chrome verified the playlist, each included video page, each presentation URL and all 181 rendered slides. DownSub VTT files are now saved for all eight included lectures. Lecture 6 was also read through Transcript.you; all 1,417 segment texts match the later VTT. All eight automatic caption texts were read from opening through closing alongside the slides, including the live code explanations. The [spoken review](06-spoken-review.md) records the resulting corrections and additions. Raw captures, captions and reading copies stay in ignored workspace .ai/attention-labs-source/2026-10-30; compact hashes are frozen in each tutorial's source provenance.
+
+The original presentations remain externally hosted, attributed and viewable inside each matching lesson, with direct source links. Our prose, synthetic coordinates, figures and code are independently authored. Primary papers and D2L 1.0.3 bound the claims. Automatic captions are fallible; no frame-by-frame audiovisual audit or redistribution of the original slide/caption text is claimed.
+
+## Verification
+
+All eight declared references pass, including the warning-clean C++20 program. The independent [numerical report](04-numerical-verification.json) verifies 36 random attention cases with differing query/source/key/value widths and padding, the projection derivative through autograd, nine complete displayed programs extracted and run in teaching order, and four loop/packed forward-and-gradient cases. The maximum checked attention output difference is 2.22e-16 on CPU float64.
+
+All 24 website tests and the complete native browser suite pass. Focused root and /project_docs/ checks cover all ten chapters, all eight live original slide viewers and next-slide controls, maths, practice reveals, Markdown downloads, print behavior, readable horizontally scrollable figures and widths 1440/390/320. Full native checks also cover existing tutorial navigation, project collections, media, syntax and private-export separation. The earlier full CLI suite passed 180 tests; the final focused collection test additionally exercises Attention Labs filter/expand/select behavior.
+
+Pre-edit Git/index/diff snapshots are retained in the ignored source archive. All 35 unrelated pre-existing Docs file diffs and four CLI diffs were compared exactly before committing this scope. Existing Attention Is All You Need text, its accepted four-row fixture, model source, media-removal decision, Bike results and learner/hosted checkpoints are preserved. Publication and full-model training are outside this request.
+
+Next: review the first worked route and its explanation prompts. Learner understanding/acceptance is unassessed. GQA/MQA/MLA implementation remains future work inside attention-heads.

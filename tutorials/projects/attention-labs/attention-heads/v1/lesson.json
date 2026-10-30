@@ -1,0 +1,296 @@
+{
+  "schema_version": 1,
+  "project_id": "attention-labs",
+  "languages": [
+    "cpp",
+    "python"
+  ],
+  "examples": [
+    {
+      "id": "example-multihead",
+      "language": "python",
+      "path": "examples/multihead.py",
+      "purpose": "Independent illustrative numerical reference, with exact declared input and output.",
+      "expected_output": {
+        "head1_weights": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.5,
+            0.5,
+            0.0
+          ],
+          [
+            0.422319,
+            0.155362,
+            0.422319
+          ]
+        ],
+        "head2_weights": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.268941,
+            0.731059,
+            0.0
+          ],
+          [
+            0.155362,
+            0.422319,
+            0.422319
+          ]
+        ],
+        "concatenated": [
+          [
+            1.0,
+            1.0
+          ],
+          [
+            1.0,
+            -0.462117
+          ],
+          [
+            1.422319,
+            -0.266956
+          ]
+        ],
+        "output": [
+          [
+            0.5,
+            1.5
+          ],
+          [
+            1.231059,
+            0.037883
+          ],
+          [
+            1.555797,
+            0.444203
+          ]
+        ]
+      }
+    }
+  ],
+  "slug": "attention-heads",
+  "revision": "v1",
+  "title": "Attention heads: multi-head attention and tensor layouts",
+  "question": "How do independent heads combine, and how can a packed tensor compute the same result?",
+  "topic_kind": "concept",
+  "level": "intermediate",
+  "prerequisites": [
+    "Vectors, matrix multiplication, a model parameter, and the role of a loss. No Python syntax course.",
+    "The single-head projections, stable softmax and causal rule from Attention Foundations."
+  ],
+  "created_at": "2026-10-30T17:03:31.947811+00:00",
+  "repository": {
+    "base_sha": "f8938bf2bbfd17f44e29d7e600393433a1eb97de",
+    "name": "docs"
+  },
+  "objectives": [
+    {
+      "id": "heads",
+      "text": "1. Several independent mixtures, then one output"
+    },
+    {
+      "id": "layout",
+      "text": "2. Pack independent heads without changing the operation"
+    },
+    {
+      "id": "boundary",
+      "text": "3. Keep head arrangements separate from other attention choices"
+    }
+  ],
+  "sources": [
+    {
+      "id": "lecture-8-video",
+      "kind": "external",
+      "title": "Vizuara \u00b7 The Attention Family \u00b7 Lecture 8 \u00b7 video",
+      "url": "https://www.youtube.com/watch?v=IOmg660SvmM",
+      "accessed_at": "2026-10-30",
+      "locator": "Video page/description and full English automatic caption text, 00:00:00.880\u201301:11:30.400",
+      "proof_limit": "Full automatic caption/transcript text read alongside all slides. Recognition errors are checked against slides and primary references; this is not a frame-by-frame audiovisual audit."
+    },
+    {
+      "id": "lecture-8-slides",
+      "kind": "external",
+      "title": "Vizuara \u00b7 The Attention Family \u00b7 Lecture 8 \u00b7 slides",
+      "url": "https://lecture8-attention-mechanisms.vercel.app/",
+      "accessed_at": "2026-10-30",
+      "locator": "Complete original Slidev presentation, 22 slides",
+      "proof_limit": "Complete rendered presentation reviewed; original deck remains externally hosted and is not republished."
+    },
+    {
+      "id": "bahdanau",
+      "kind": "external",
+      "title": "Bahdanau et al. \u00b7 Neural Machine Translation by Jointly Learning to Align and Translate",
+      "url": "https://arxiv.org/abs/1409.0473",
+      "accessed_at": "2026-10-30",
+      "locator": "Alignment model and source-memory motivation",
+      "proof_limit": "Primary reference or textbook explanation inspected; not an experiment reproduced here."
+    },
+    {
+      "id": "luong",
+      "kind": "external",
+      "title": "Luong et al. \u00b7 Effective Approaches to Attention-based Neural Machine Translation",
+      "url": "https://aclanthology.org/D15-1166/",
+      "accessed_at": "2026-10-30",
+      "locator": "Global attention and score alternatives",
+      "proof_limit": "Primary reference or textbook explanation inspected; not an experiment reproduced here."
+    },
+    {
+      "id": "transformer",
+      "kind": "external",
+      "title": "Vaswani et al. \u00b7 Attention Is All You Need",
+      "url": "https://arxiv.org/html/1706.03762v7",
+      "accessed_at": "2026-10-30",
+      "locator": "Sections 3.2.1\u20133.2.3 and the scaling assumptions",
+      "proof_limit": "Primary reference or textbook explanation inspected; not an experiment reproduced here."
+    },
+    {
+      "id": "d2l",
+      "kind": "external",
+      "title": "Dive into Deep Learning \u00b7 Attention Scoring Functions",
+      "url": "https://d2l.ai/chapter_attention-mechanisms-and-transformers/attention-scoring-functions.html",
+      "accessed_at": "2026-10-30",
+      "locator": "Sections 11.3.2\u201311.3.4: masked normalization, scaled dot product, additive scoring",
+      "proof_limit": "Primary reference or textbook explanation inspected; not an experiment reproduced here."
+    },
+    {
+      "id": "gqa",
+      "kind": "external",
+      "title": "Ainslie et al. \u00b7 GQA, version 3",
+      "url": "https://arxiv.org/abs/2305.13245v3",
+      "accessed_at": "2026-10-30",
+      "locator": "Abstract: MHA, intermediate grouped KV heads and MQA definitions only; model results not reproduced",
+      "proof_limit": "Primary reference or textbook explanation inspected; not an experiment reproduced here."
+    }
+  ],
+  "claims": [
+    {
+      "id": "heads-claim",
+      "text": "1. Several independent mixtures, then one output",
+      "source_ids": [
+        "transformer",
+        "d2l"
+      ],
+      "status": "illustrative",
+      "proof_limit": "Original small worked example and stated mathematical assumptions. Source review and executed author checks do not establish a trained model or learner mastery."
+    },
+    {
+      "id": "layout-claim",
+      "text": "2. Pack independent heads without changing the operation",
+      "source_ids": [
+        "transformer",
+        "d2l"
+      ],
+      "status": "illustrative",
+      "proof_limit": "Original small worked example and stated mathematical assumptions. Source review and executed author checks do not establish a trained model or learner mastery."
+    },
+    {
+      "id": "boundary-claim",
+      "text": "3. Keep head arrangements separate from other attention choices",
+      "source_ids": [
+        "transformer",
+        "gqa"
+      ],
+      "status": "illustrative",
+      "proof_limit": "Original small worked example and stated mathematical assumptions. Source review and executed author checks do not establish a trained model or learner mastery."
+    }
+  ],
+  "entities": [],
+  "relationships": [],
+  "chapters": [
+    {
+      "id": "heads",
+      "title": "1. Several independent mixtures, then one output",
+      "content_path": "lessons/01-independent-heads.md",
+      "objective_ids": [
+        "heads"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "heads-check"
+      ]
+    },
+    {
+      "id": "layout",
+      "title": "2. Pack independent heads without changing the operation",
+      "content_path": "lessons/02-packed-layout.md",
+      "objective_ids": [
+        "layout"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "layout-check"
+      ]
+    },
+    {
+      "id": "boundary",
+      "title": "3. Keep head arrangements separate from other attention choices",
+      "content_path": "lessons/03-head-layout-boundaries.md",
+      "objective_ids": [
+        "boundary"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "boundary-check"
+      ]
+    }
+  ],
+  "diagrams": [],
+  "tables": [],
+  "scenarios": [],
+  "practice": [
+    {
+      "id": "heads-check",
+      "question": "After concatenating two scalar head outputs, does W_O mix tokens or head features?",
+      "answer": "It mixes head-feature channels separately at each token. Token-to-token mixing already occurred inside each attention head. In our first row, [1,1] multiplied by the declared W_O becomes [0.5,1.5]. Multiple heads allow different distributions but do not guarantee unique linguistic roles.",
+      "rubric": "Identify the feature contraction and reproduce the small output-projection calculation.",
+      "objective_ids": [
+        "heads"
+      ],
+      "claim_ids": [
+        "heads-claim"
+      ]
+    },
+    {
+      "id": "layout-check",
+      "question": "Why is [B,T,H,d_h] the wrong layout for Q @ K.transpose(-2,-1)?",
+      "answer": "Its last two axes are heads and features. That product compares heads for each token, producing [B,T,H,H]. Transposing to [B,H,T,d_h] makes the contraction produce [B,H,T,T], one token-by-token score matrix per head and sequence. Merging outputs also requires restoring token/head order, not merely matching element counts.",
+      "rubric": "Name the query-token and source-token axes before multiplication and the feature order after merging.",
+      "objective_ids": [
+        "layout"
+      ],
+      "claim_ids": [
+        "layout-claim"
+      ]
+    },
+    {
+      "id": "boundary-check",
+      "question": "Does packing query/key/value projections implement GQA or reduce the count of stored KV heads?",
+      "answer": "No. Our packed MHA preserves separate Q/K/V parameters per head and H_q=H_kv. GQA deliberately shares key/value heads among query heads, which needs an explicit grouping rule and corresponding correctness checks. Neither packing nor grouping automatically removes the sequence-length cost of the score calculation.",
+      "rubric": "Separate an equivalent tensor layout from a changed head-sharing relationship.",
+      "objective_ids": [
+        "boundary"
+      ],
+      "claim_ids": [
+        "boundary-claim"
+      ]
+    }
+  ],
+  "scenes": [],
+  "media": {},
+  "approval": null
+}

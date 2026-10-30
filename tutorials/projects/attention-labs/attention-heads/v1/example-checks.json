@@ -1,0 +1,78 @@
+{
+  "checked_at": "2026-10-30T17:34:18.790484+00:00",
+  "results": [
+    {
+      "id": "example-multihead",
+      "language": "python",
+      "path": "examples/multihead.py",
+      "sha256": "c847a2f7e5ae41b9716dac77587bf0767e0cab6e744ca703ab60cd33c345ae32",
+      "output": {
+        "head1_weights": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.5,
+            0.5,
+            0.0
+          ],
+          [
+            0.422319,
+            0.155362,
+            0.422319
+          ]
+        ],
+        "head2_weights": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.268941,
+            0.731059,
+            0.0
+          ],
+          [
+            0.155362,
+            0.422319,
+            0.422319
+          ]
+        ],
+        "concatenated": [
+          [
+            1.0,
+            1.0
+          ],
+          [
+            1.0,
+            -0.462117
+          ],
+          [
+            1.422319,
+            -0.266956
+          ]
+        ],
+        "output": [
+          [
+            0.5,
+            1.5
+          ],
+          [
+            1.231059,
+            0.037883
+          ],
+          [
+            1.555797,
+            0.444203
+          ]
+        ]
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    }
+  ],
+  "passed": true
+}

@@ -145,6 +145,15 @@
       "lessons": [
         "projects/attention-is-all-you-need/attention-lab/v1"
       ]
+    },
+    {
+      "id": "attention-labs",
+      "title": "Attention Labs",
+      "status": "foundations-and-mha-written-tutorial-available",
+      "lessons": [
+        "projects/attention-labs/attention-foundations/v1",
+        "projects/attention-labs/attention-heads/v1"
+      ]
     }
   ],
   "course_sequence": [

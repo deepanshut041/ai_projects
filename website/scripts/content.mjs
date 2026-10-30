@@ -15,6 +15,19 @@ export const categories = [
 ];
 
 export const escape = v => String(v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+export function presentationDefinition(text) {
+  let data;
+  try { data = JSON.parse(text); } catch { throw new Error('Presentation blocks require JSON.'); }
+  if (!data || Array.isArray(data) || typeof data !== 'object' ||
+      typeof data.title !== 'string' || !data.title.trim() || typeof data.url !== 'string' ||
+      Object.keys(data).some(key => !['title', 'url'].includes(key))) throw new Error('Invalid presentation block.');
+  let url;
+  try { url = new URL(data.url); } catch { throw new Error('Invalid presentation URL.'); }
+  if (url.protocol !== 'https:' || url.username || url.password || url.port || url.pathname !== '/' || url.search ||
+      !/^lecture[1-8]-attention-mechanisms\.vercel\.app$/.test(url.hostname) ||
+      (url.hash && !/^#\/(?:[1-9][0-9]*|overview)?$/.test(url.hash))) throw new Error('Presentation origin or route is not allowed.');
+  return { title: data.title, url: url.href };
+}
 export function videoDefinition(text) {
   let data;
   try { data = JSON.parse(text); } catch { throw new Error('Video blocks require a JSON object.'); }
@@ -64,6 +77,10 @@ export function renderer(recordFiles, relativeFile, base, tutorial = null, optio
   const fence = md.renderer.rules.fence;
   md.renderer.rules.fence = (...args) => {
     const token = args[0][args[1]];
+    if (token.info.trim() === 'presentation') {
+      const data = presentationDefinition(token.content);
+      return `<figure class="original-presentation"><figcaption>${escape(data.title)}</figcaption><p><a href="${escape(data.url)}" target="_blank" rel="noopener noreferrer">Open original presentation ↗</a></p><details><summary>Read the original slides here</summary><iframe src="${escape(data.url)}" title="${escape(data.title)}" loading="lazy" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer" allowfullscreen></iframe></details></figure>\n`;
+    }
     if (token.info.trim() === 'video' && (options.resolveLink || tutorial?.links)) {
       const data = videoDefinition(token.content);
       const resolve = options.resolveLink ?? (href => tutorial.links[href] ? base + tutorial.links[href] : null);
