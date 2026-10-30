@@ -1,5 +1,12 @@
 # Projects resume checkpoint
 
+## Attention Foundations build/test project — 2026-10-30
+
+Attention Foundations project preparation (2026-10-30): the existing attention-labs/attention-foundations child now has an explicit goal to build and independently test six basic single-head attention mechanisms, a six-phase route, locked Python 3.12.13 source boilerplate, workspace runners and a source-upload Colab notebook. All 18 scaffold checks and the six operational notebook cells pass locally; only the Colab file interface is simulated. Attention implementations, actual Google-hosted execution and learner review remain pending. MHA/GQA stay in attention-heads, shared tutorials stay in Docs, and existing learner/model checkpoints are preserved.
+
+Start from the [project goal](../../projects/attention-labs/attention-foundations/README.md) and [Colab instructions](../../projects/attention-labs/attention-foundations/COLAB.md). Next implementation action: specify one additive query/key/value retrieval, then implement and independently verify it. The [current setup record](../../projects/attention-labs/attention-foundations/docs/implementation/00_setup-build-goals-and-colab-runner/00-resume.md) separates preparation from learning and hosted evidence.
+
+
 ## Attention Labs shared tutorials — 2026-10-30
 
 Attention Labs preparation (2026-10-30): Attention Labs is an independent collection repository/submodule with one attention-foundations folder for Lectures 1–7 and a separate attention-heads folder for MHA and later GQA. Ten detailed lessons live in the shared Docs tutorials/projects/attention-labs tree. All eight English automatic subtitle/transcript texts and all 181 original slides were reviewed; each included lecture retains its original presentation viewer/link. The explanations, numerical fixtures, diagrams and Python/C++ references are original. Lecture 9 is excluded. Existing model source and learner/hosted checkpoints are unchanged.
