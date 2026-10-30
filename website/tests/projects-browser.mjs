@@ -15,6 +15,31 @@ try {
   page.on('pageerror', error => errors.push(error.message));
   page.on('response', response => { if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`); });
   const ready = () => page.waitForFunction(() => document.documentElement.dataset.ready === 'true');
+  const quantization = library.groups.find(group => group.id === 'quantization-lab');
+  assert.ok(quantization, 'Quantization Lab must be included in project navigation');
+  assert.equal(quantization.projects.length, 2);
+  const assistant = quantization.projects.find(project => project.id === 'document-assistant');
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto(origin + base); await ready();
+    assert.equal(await page.locator('.sidebar-project-docs .collection-nav').filter({ hasText: 'Quantization Lab' }).getAttribute('href'), quantization.url);
+    await page.locator('.project-collections').getByRole('link', { name: /Quantization Lab/ }).click(); await ready();
+    assert.equal(new URL(page.url()).pathname, quantization.url);
+    assert.equal(await page.locator('.project-card').count(), 2);
+    await page.locator(`.project-card[href="${assistant.url}"]`).click(); await ready();
+    assert.equal(new URL(page.url()).pathname, assistant.url);
+    await page.locator('.collection-overview > summary').click();
+    await page.locator('article').getByRole('link', { name: 'complete Document Assistant written tutorial', exact: true }).click(); await ready();
+    assert.equal(new URL(page.url()).pathname, `${base}records/tutorials/document-assistant-quantization-lab-v1/chapters/contract/`);
+    const video = page.locator('.section-video video');
+    assert.equal(await video.count(), 1, 'The existing lesson companion must remain attached');
+    await video.evaluate(video => video.play());
+    await page.waitForFunction(video => video.currentTime > .15, await video.elementHandle());
+    await video.evaluate(video => video.pause());
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await page.screenshot({ path: `test-results/quantization-tutorial-${base === '/' ? 'root' : 'prefixed'}-${width}.png` });
+  }
+  await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(origin + base); await ready();
   await page.locator('.project-collections').getByRole('link', { name: /Foundations/ }).click(); await ready();
   assert.equal(await page.locator('.project-card').count(), 4);

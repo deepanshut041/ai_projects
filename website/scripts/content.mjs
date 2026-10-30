@@ -9,7 +9,7 @@ import { highlightCode } from './syntax-highlight.mjs';
 export const categories = [
   { id: 'implementations', title: 'Implementations', description: 'Runnable local projects, contracts, tests and scope.' },
   { id: 'guides', title: 'Workspace guides', description: 'Use and extend the CLI, repositories and reproducible workflows.' },
-  { id: 'tutorials', title: 'Project tutorials', description: 'Learn each model with diagrams, C++/Python examples, worked cases and whiteboard practice.' },
+  { id: 'tutorials', title: 'Tutorials', description: 'Learn each model with diagrams, C++/Python examples, worked cases and whiteboard practice.' },
   { id: 'experiments', title: 'Learning experiments', description: 'Inspect known-model behavior; hand focused research questions to Research.' },
   { id: 'questions', title: 'Project questions', description: 'Next steps and implementation decisions requiring evidence.' },
 ];

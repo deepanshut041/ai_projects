@@ -10,6 +10,7 @@ export const collections = [
   { id: 'foundations', title: 'Foundations', description: 'Practical machine learning, vision and time series.' },
   { id: 'transformer-labs', title: 'Transformer Labs', description: 'Attention, embeddings and small encoder and decoder systems.' },
   { id: 'language-models', title: 'Language Models', description: 'Complete small language models, training and recovery.' },
+  { id: 'quantization-lab', title: 'Quantization Lab', description: 'Practical document answering and semantic search under memory budgets.' },
   { id: 'attention-labs', title: 'Attention Labs', description: 'Attention foundations together; head and KV layouts in a separate route.' },
 ];
 const inside = (root, file) => file === root || file.startsWith(root + path.sep);
@@ -137,13 +138,13 @@ export function collectionCards(groups) {
   return `<div class="collection-grid">${groups.map(group => `<a class="collection-card" href="${group.url}"><span class="eyebrow">${group.projects.length} ${group.projects.length === 1 ? 'project' : 'projects'}</span><h2>${e(group.title)} <span aria-hidden="true">↗</span></h2><p>${e(group.description)}</p></a>`).join('')}</div>`;
 }
 export function projectsHome(library) {
-  return `${heading('Projects', 'Choose a collection, then open a project and its documentation.')}${collectionCards(library.groups)}`;
+  return `${heading('Project Docs', 'Choose a collection, then open a project’s goals, setup and implementation records.')}${collectionCards(library.groups)}`;
 }
-export function projectsSidebar(library, base) {
-  return `<p class="sidebar-label">COLLECTIONS</p>${library.groups.map(group => `<a class="collection-nav" href="${group.url}"><span>${e(group.title)}</span><small>${group.projects.length}</small></a>`).join('')}`;
+export function projectsSidebar(library, base, active = '') {
+  return library.groups.map(group => `<a class="collection-nav" href="${group.url}"${active === `projects/${group.id}` ? ' aria-current="page"' : ''}><span>${e(group.title)}</span><small>${group.projects.length}</small></a>`).join('');
 }
 function breadcrumbs(page, base) {
-  return `<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${base}projects/">Projects</a><span>/</span><a href="${page.group.url}">${e(page.group.title)}</a>${page.project ? `<span>/</span><a href="${page.project.url}">${e(page.project.title)}</a>` : ''}${page.project && page !== page.project.overview ? `<span>/</span><span>${e(page.title)}</span>` : ''}</nav>`;
+  return `<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${base}projects/">Project Docs</a><span>/</span><a href="${page.group.url}">${e(page.group.title)}</a>${page.project ? `<span>/</span><a href="${page.project.url}">${e(page.project.title)}</a>` : ''}${page.project && page !== page.project.overview ? `<span>/</span><span>${e(page.title)}</span>` : ''}</nav>`;
 }
 function contents(project, active) {
   const root = { children: new Map(), pages: [] };

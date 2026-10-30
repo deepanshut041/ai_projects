@@ -1,0 +1,13 @@
+# Separate Project Docs and Tutorials by collection
+
+The homepage currently shows project collection cards followed by one mixed grid of guides and tutorials. Tutorials has a flat list, while only project documents have collection navigation. The user requested two distinct sections, each broken down by collection.
+
+Use the existing Projects site and owning ai-project-workflow. The homepage will show Project Docs and Tutorials as separate collection browsers. Preserve the five ordered collections: Foundations, Transformer Labs, Language Models, Quantization Lab and Attention Labs. Project Docs keeps the existing /projects/ URLs. Tutorials gains /tutorials/{collection}/ pages linking to the unchanged course/chapter URLs. Keep every tutorial source, frozen asset, media binding, project document and private-export boundary intact.
+
+Resolve tutorial membership from real project IDs and collection IDs. The legacy P00 and P01 IDs map to Transformer Labs and Language Models. A retained map for the existing named courses also keeps frozen tutorials browsable when Docs is built without sibling project repositories; unavailable Project Docs links are omitted in that standalone case. Keep authored course order within each collection; a tutorial appears exactly once. A future unmapped tutorial fails clearly rather than disappearing silently. Tutorial availability is separate from the number of implemented projects.
+
+Show the two section groups in the sidebar too. Mobile navigation keeps direct section links and uses the main collection pages; it should not become a large repeated list. Move the existing mixed record search to a dedicated Search page, preserving chapter-text search without putting the mixed grid back on the homepage. Workspace guides and the roadmap remain available separately.
+
+Inspect existing native/browser tests, add meaningful collection/membership coverage, and verify both root and /project_docs/ builds at desktop/mobile sizes. Exercise homepage → section → collection → project docs / actual tutorial chapter, previous/next navigation, search, source images, print/download and existing media. Stop the managed reader before builds and restart it afterward.
+
+The existing pending Quantization Lab registration is a required dependency for the requested five-collection navigation. Adopt that one registration and its matching navigation acceptance coverage as part of this task. Preserve other unrelated edits and all tutorial bytes. Commit only the website/navigation scope and selected checkpoint additions to the owning Docs repository and local bare origin, then update the parent Docs pointer. No external publication, model changes or learner milestone is requested.

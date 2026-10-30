@@ -30,8 +30,11 @@ try {
   await fs.mkdir('test-results', { recursive: true });
   const ready = () => page.waitForFunction(() => document.documentElement.dataset.ready === 'true');
   await page.goto(origin + base); await ready();
-  assert.ok(await page.locator('.record-card').count() >= 4);
+  assert.equal(await page.locator('.project-collections .collection-card').count(), 5);
+  assert.equal(await page.locator('.tutorial-collections .collection-card').count(), 5);
+  assert.equal(await page.locator('.record-card').count(), 0, 'The homepage must keep docs and tutorials in their own collection sections');
   await page.screenshot({ path: 'test-results/research-desktop.png', fullPage: true });
+  await page.getByRole('link', { name: 'Search', exact: true }).click(); await ready();
   await page.getByRole('searchbox', { name: 'Search records' }).fill('The command workflow, repository boundaries');
   assert.equal(await page.locator('.record-card:visible').count(), 1);
   await page.getByRole('searchbox').fill('unfindable-947');
@@ -67,6 +70,8 @@ try {
   await page.goto(origin + base); await ready();
   const searchableChapter = records.find(record => record.tutorial?.kind === 'chapter');
   assert.ok(searchableChapter, 'An authored chapter must be available for search');
+  await page.keyboard.press('/');
+  await page.waitForURL(origin + base + 'search/'); await ready();
   await page.getByRole('searchbox', { name: 'Search records' }).fill(searchableChapter.title);
   assert.ok(await page.locator('.record-card:visible').count() >= 1, 'Chapter text should find its tutorial');
   const searchableOverview = records.find(record => record.file === searchableChapter.tutorial.overviewFile);
@@ -74,10 +79,16 @@ try {
   assert.ok(chapterSearchResults.includes(searchableOverview.url), 'Chapter search must include its owning tutorial, even when guides also refer to it');
   const tutorialOverviews = records.filter(record => record.tutorial?.kind === 'overview');
   await page.goto(origin + base + 'tutorials/'); await ready();
-  assert.equal(await page.locator('.record-card').count(), authoredLessons.length, 'One card per tutorial, not per chapter');
-  const numberedCourses = tutorialOverviews.filter(record => Number.isInteger(record.tutorial.courseNumber));
-  const visibleTitles = await page.locator('.record-card h2').allTextContents();
-  assert.deepEqual(visibleTitles.slice(0, numberedCourses.length), numberedCourses.map(record => record.title), 'Numbered courses must appear before references in reader order');
+  assert.equal(await page.locator('.collection-card').count(), 5, 'Tutorials must start with collections');
+  assert.equal(await page.locator('.record-card').count(), 0, 'Collections precede the course list');
+  const tutorialCollections = await (await fetch(origin + base + 'tutorials/collections.json')).json();
+  assert.equal(tutorialCollections.flatMap(group => group.courses).length, authoredLessons.length);
+  for (const group of tutorialCollections) {
+    await page.goto(origin + group.url); await ready();
+    assert.equal(await page.locator('.record-card').count(), group.courses.length, 'One card per tutorial within its collection');
+    const visibleTitles = await page.locator('.record-card h2').allTextContents();
+    assert.deepEqual(visibleTitles, group.courses.map(course => course.title), 'Authored order is preserved within the collection');
+  }
   for (const tutorial of tutorialOverviews) {
     const authored = authoredLessons.find(lesson => lesson.title === tutorial.title);
     assert.ok(authored, 'Tutorial must have an authored manifest');

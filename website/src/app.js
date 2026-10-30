@@ -59,6 +59,7 @@ document.addEventListener('keydown', event => {
   if (event.key === '/' && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) {
     const search = query ?? sourceQuery;
     if (search) { event.preventDefault(); search.focus(); }
+    else { event.preventDefault(); window.location.assign(`${document.body.dataset.base}search/`); }
   }
 });
 const projectMenu = document.querySelector('.project-menu');

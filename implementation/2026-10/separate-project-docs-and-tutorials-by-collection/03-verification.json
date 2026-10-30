@@ -1,0 +1,231 @@
+{
+  "native_tests_working_checkout": 27,
+  "native_browser_suite": "passed: records, project navigation, media and syntax",
+  "root_collections": {
+    "base": "/",
+    "widths": [
+      1440,
+      390,
+      320
+    ],
+    "collections": [
+      {
+        "id": "foundations",
+        "tutorials": 1,
+        "project_docs": 4
+      },
+      {
+        "id": "transformer-labs",
+        "tutorials": 3,
+        "project_docs": 5
+      },
+      {
+        "id": "language-models",
+        "tutorials": 1,
+        "project_docs": 0
+      },
+      {
+        "id": "quantization-lab",
+        "tutorials": 1,
+        "project_docs": 2
+      },
+      {
+        "id": "attention-labs",
+        "tutorials": 2,
+        "project_docs": 2
+      }
+    ],
+    "tutorials": [
+      {
+        "url": "/records/tutorials/bike-demand-planner-foundation-lab-v1/",
+        "chapter": "/records/tutorials/bike-demand-planner-foundation-lab-v1/chapters/prediction-contract/",
+        "collection": "foundations"
+      },
+      {
+        "url": "/records/tutorials/p00-transformer-foundations-v1/",
+        "chapter": "/records/tutorials/p00-transformer-foundations-v1/chapters/route/",
+        "collection": "transformer-labs"
+      },
+      {
+        "url": "/records/tutorials/p00-transformer-course-v1/",
+        "chapter": "/records/tutorials/p00-transformer-course-v1/chapters/start/",
+        "collection": "transformer-labs"
+      },
+      {
+        "url": "/records/tutorials/attention-is-all-you-need-attention-lab-v1/",
+        "chapter": "/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/weighted/",
+        "collection": "transformer-labs"
+      },
+      {
+        "url": "/records/tutorials/p01-small-gpt-v1/",
+        "chapter": "/records/tutorials/p01-small-gpt-v1/chapters/next-token/",
+        "collection": "language-models"
+      },
+      {
+        "url": "/records/tutorials/document-assistant-quantization-lab-v1/",
+        "chapter": "/records/tutorials/document-assistant-quantization-lab-v1/chapters/contract/",
+        "collection": "quantization-lab"
+      },
+      {
+        "url": "/records/tutorials/attention-labs-attention-foundations-v1/",
+        "chapter": "/records/tutorials/attention-labs-attention-foundations-v1/chapters/map/",
+        "collection": "attention-labs"
+      },
+      {
+        "url": "/records/tutorials/attention-labs-attention-heads-v1/",
+        "chapter": "/records/tutorials/attention-labs-attention-heads-v1/chapters/heads/",
+        "collection": "attention-labs"
+      }
+    ],
+    "project_documents": [
+      "/projects/foundations/bike-demand-planner/",
+      "/projects/transformer-labs/transformer-foundations-lab/",
+      "/projects/quantization-lab/document-assistant/",
+      "/projects/attention-labs/attention-foundations/"
+    ],
+    "passed": true
+  },
+  "prefixed_collections": {
+    "base": "/project_docs/",
+    "widths": [
+      1440,
+      390,
+      320
+    ],
+    "collections": [
+      {
+        "id": "foundations",
+        "tutorials": 1,
+        "project_docs": 4
+      },
+      {
+        "id": "transformer-labs",
+        "tutorials": 3,
+        "project_docs": 5
+      },
+      {
+        "id": "language-models",
+        "tutorials": 1,
+        "project_docs": 0
+      },
+      {
+        "id": "quantization-lab",
+        "tutorials": 1,
+        "project_docs": 2
+      },
+      {
+        "id": "attention-labs",
+        "tutorials": 2,
+        "project_docs": 2
+      }
+    ],
+    "tutorials": [
+      {
+        "url": "/project_docs/records/tutorials/bike-demand-planner-foundation-lab-v1/",
+        "chapter": "/project_docs/records/tutorials/bike-demand-planner-foundation-lab-v1/chapters/prediction-contract/",
+        "collection": "foundations"
+      },
+      {
+        "url": "/project_docs/records/tutorials/p00-transformer-foundations-v1/",
+        "chapter": "/project_docs/records/tutorials/p00-transformer-foundations-v1/chapters/route/",
+        "collection": "transformer-labs"
+      },
+      {
+        "url": "/project_docs/records/tutorials/p00-transformer-course-v1/",
+        "chapter": "/project_docs/records/tutorials/p00-transformer-course-v1/chapters/start/",
+        "collection": "transformer-labs"
+      },
+      {
+        "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/",
+        "chapter": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/weighted/",
+        "collection": "transformer-labs"
+      },
+      {
+        "url": "/project_docs/records/tutorials/p01-small-gpt-v1/",
+        "chapter": "/project_docs/records/tutorials/p01-small-gpt-v1/chapters/next-token/",
+        "collection": "language-models"
+      },
+      {
+        "url": "/project_docs/records/tutorials/document-assistant-quantization-lab-v1/",
+        "chapter": "/project_docs/records/tutorials/document-assistant-quantization-lab-v1/chapters/contract/",
+        "collection": "quantization-lab"
+      },
+      {
+        "url": "/project_docs/records/tutorials/attention-labs-attention-foundations-v1/",
+        "chapter": "/project_docs/records/tutorials/attention-labs-attention-foundations-v1/chapters/map/",
+        "collection": "attention-labs"
+      },
+      {
+        "url": "/project_docs/records/tutorials/attention-labs-attention-heads-v1/",
+        "chapter": "/project_docs/records/tutorials/attention-labs-attention-heads-v1/chapters/heads/",
+        "collection": "attention-labs"
+      }
+    ],
+    "project_documents": [
+      "/project_docs/projects/foundations/bike-demand-planner/",
+      "/project_docs/projects/transformer-labs/transformer-foundations-lab/",
+      "/project_docs/projects/quantization-lab/document-assistant/",
+      "/project_docs/projects/attention-labs/attention-foundations/"
+    ],
+    "passed": true
+  },
+  "standalone_working_checkout": {
+    "no_sibling_project_repositories": true,
+    "uses_existing_locked_node_dependencies": true,
+    "collections": 5,
+    "tutorials": 8,
+    "all_course_links_preserved": true,
+    "passed": true
+  },
+  "tutorial_preservation": {
+    "files": 808,
+    "byte_preserved": true,
+    "passed": true
+  },
+  "preexisting_unrelated_diffs_preserved": [
+    "guide/roadmap.md",
+    "implementation/2026-10/attention-is-all-you-need-source-backed-tutorial/00-resume.md",
+    "implementation/2026-10/attention-is-all-you-need-source-backed-tutorial/05-tracker.md",
+    "tutorials/index.json",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/code/README.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/code/source-bundle.json",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/code/source-manifest.json",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/example-checks.json",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/examples/arithmetic.py",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/examples/verify_component.py",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lesson.json",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lesson.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/01-weighted-information.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/02-project-setup.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/03-tensors-and-products.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/04-scores-and-softmax.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/05-learned-projections.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/06-multiple-heads.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/07-padding-and-empty-rows.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/08-causal-information.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/09-cross-attention.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/10-reusable-attention.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/11-gradients-and-learning.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/12-evidence-and-next-phase.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/practice/explain-attention.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/project/comparisons/01-attention.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/project/implementation.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/project/learning-points/01-attention.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/project/readiness.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/project/reference-runs.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/render.json",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/research.md",
+    "tutorials/projects/attention-is-all-you-need/attention-lab/v1/validation.json",
+    "website/tests/projects.test.mjs"
+  ],
+  "clean_index": {
+    "native_tests": 26,
+    "standalone_build": true,
+    "collections": 5,
+    "committed_tutorials": 7,
+    "working_checkout_tutorials": 8,
+    "note": "The pre-existing local Document Assistant tutorial/index edits remain uncommitted and preserved. Navigation supports both the seven committed tutorials and all eight available locally. Existing pending Quantization unit-test additions are also preserved outside this commit.",
+    "passed": true
+  },
+  "passed": true
+}

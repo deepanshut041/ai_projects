@@ -1,5 +1,12 @@
 # Projects progress
 
+## Separate Project Docs and Tutorials — 2026-10-30
+
+Projects Docs navigation (2026-10-30): the homepage and sidebar now separate Project Docs from Tutorials, with Foundations, Transformer Labs, Language Models, Quantization Lab and Attention Labs collections in both sections. Tutorial collection pages preserve all existing course/chapter URLs and authored ordering; record search has its own page. All 808 tutorial files are byte-preserved. Project, learner and hosted checkpoints are unchanged.
+
+Project documents continue under /projects/; tutorials now browse through /tutorials/{collection}/ before opening their existing lesson URLs. Search is at /search/. The [delivery record](../implementation/2026-10/separate-project-docs-and-tutorials-by-collection/00-resume.md) owns route, compatibility and browser evidence. This is reader organization; implementation and learner progress are preserved.
+
+
 ## Attention Labs inline presentation visuals — 2026-10-30
 
 Attention Labs visual revision (2026-10-30): all ten Attention Foundations/Heads lessons now include 27 attributed diagram screenshots captured in Chrome from the presentation websites linked by the original lectures. Each appears beside its matching explanation with a full-size link and exact slide provenance; complete previews avoid cropped blank margins on mobile. The checked numerical examples and authored figures are retained, source-example differences and simplified claims are explained, and Lecture 9 remains excluded. Project implementations and learner/hosted checkpoints are unchanged.
