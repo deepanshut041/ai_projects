@@ -101,15 +101,18 @@ test('tutorial exports preserve prefixes and reject changed or escaping artifact
       const defense = pages.find(record => record.tutorial.sourcePath === defensePath);
       if (['transformer-foundations', 'small-gpt'].includes(lesson.slug)) assert.ok(defense);
     }
-    const expectedDiagrams = [];
+    const expectedSvgAssets = [];
     for (const project of tutorial.index.projects) {
       for (const relative of project.lessons) {
         const lesson = JSON.parse(await fs.readFile(path.join(temp, 'tutorials', relative, 'lesson.json'), 'utf8'));
-        expectedDiagrams.push(...lesson.diagrams.map(diagram =>
-          `tutorial-assets/${project.id.toLowerCase()}/${lesson.slug}/${lesson.revision}/diagrams/${diagram.id}.svg`));
+        // Authored passive SVG figures are frozen assets too, alongside
+        // schema-generated relationship diagrams.
+        const rendered = JSON.parse(await fs.readFile(path.join(temp, 'tutorials', relative, 'render.json'), 'utf8'));
+        expectedSvgAssets.push(...Object.keys(rendered.files).filter(file => file.endsWith('.svg')).map(file =>
+          `tutorial-assets/${project.id.toLowerCase()}/${lesson.slug}/${lesson.revision}/${file}`));
       }
     }
-    assert.deepEqual(tutorial.assets.filter(asset => asset.file.endsWith('.svg')).map(asset => asset.file).sort(), expectedDiagrams.sort());
+    assert.deepEqual(tutorial.assets.filter(asset => asset.file.endsWith('.svg')).map(asset => asset.file).sort(), expectedSvgAssets.sort());
     await assert.rejects(artifact(temp, '../README.md'), /Unsafe/);
     const indexFile = path.join(temp, 'tutorials/index.json');
     const originalIndex = await fs.readFile(indexFile, 'utf8');
