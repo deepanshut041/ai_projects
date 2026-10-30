@@ -10,3 +10,6 @@
 [submodule "quantization-lab"]
 	path = projects/quantization-lab
 	url = ../.ai/repositories/quantization-lab.git
+[submodule "attention-labs"]
+	path = projects/attention-labs
+	url = ../.ai/repositories/attention-labs.git
