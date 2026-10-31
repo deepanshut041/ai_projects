@@ -13,3 +13,6 @@
 [submodule "attention-labs"]
 	path = projects/attention-labs
 	url = ../.ai/repositories/attention-labs.git
+[submodule "projects/inference_labs"]
+	path = projects/inference_labs
+	url = ../.ai/repositories/inference_labs.git
