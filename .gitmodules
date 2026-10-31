@@ -1,15 +1,15 @@
 [submodule "foundations"]
 	path = projects/foundations
-	url = ../.ai/repositories/foundations.git
+	url = https://github.com/deepanshut041/foundations.git
 [submodule "transformer-labs"]
 	path = projects/transformer-labs
-	url = ../.ai/repositories/transformer-labs.git
+	url = https://github.com/deepanshut041/transformer-labs.git
 [submodule "quantization-lab"]
 	path = projects/quantization-lab
-	url = ../.ai/repositories/quantization-lab.git
+	url = https://github.com/deepanshut041/quantization-lab.git
 [submodule "attention-labs"]
 	path = projects/attention-labs
-	url = ../.ai/repositories/attention-labs.git
+	url = https://github.com/deepanshut041/attention-labs.git
 [submodule "projects/inference_labs"]
 	path = projects/inference_labs
-	url = ../.ai/repositories/inference_labs.git
+	url = https://github.com/deepanshut041/inference_labs.git
