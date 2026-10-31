@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-31",
+  "initial_parent_commit": "c3f9cbdea3830504e258ec4ad4943fb792e70cca",
+  "initial_pages_workflow": "https://github.com/deepanshut041/ai_projects/actions/runs/41240646452",
+  "initial_pages_result": "success",
+  "site_url": "https://deepanshut041.github.io/ai_projects/",
+  "repositories": [
+    {
+      "repository": "deepanshut041/ai_projects",
+      "url": "https://github.com/deepanshut041/ai_projects",
+      "head": "c3f9cbdea3830504e258ec4ad4943fb792e70cca",
+      "visibility": "public",
+      "default_branch": "main"
+    },
+    {
+      "repository": "deepanshut041/foundations",
+      "url": "https://github.com/deepanshut041/foundations",
+      "head": "656b541c19cee747c5c80cf8e4ba35702d53b025",
+      "visibility": "public",
+      "default_branch": "main"
+    },
+    {
+      "repository": "deepanshut041/transformer-labs",
+      "url": "https://github.com/deepanshut041/transformer-labs",
+      "head": "2420d5fd38541019fe09aed383da2189b7e36e83",
+      "visibility": "public",
+      "default_branch": "main"
+    },
+    {
+      "repository": "deepanshut041/quantization-lab",
+      "url": "https://github.com/deepanshut041/quantization-lab",
+      "head": "7f0d6cd7b953d58230eade6594d6a8e4e2119453",
+      "visibility": "public",
+      "default_branch": "main"
+    },
+    {
+      "repository": "deepanshut041/attention-labs",
+      "url": "https://github.com/deepanshut041/attention-labs",
+      "head": "db3f746221322689b3bbf71d7f73c4748e70eeb5",
+      "visibility": "public",
+      "default_branch": "main"
+    },
+    {
+      "repository": "deepanshut041/inference_labs",
+      "url": "https://github.com/deepanshut041/inference_labs",
+      "head": "08a1aeef0d3f7783efa8882a0826092696116991",
+      "visibility": "public",
+      "default_branch": "main"
+    }
+  ],
+  "docs_is_normal_folder": true,
+  "docs_merged_commit": "21eb3c45ec21879cc0329398036018d40bcd81f5",
+  "docs_integrated_blobs": 1608,
+  "tutorial_files_byte_preserved": 1113,
+  "ignore_probes_passed": 54,
+  "forbidden_current_tracked_files": 0,
+  "real_secrets_found": 0,
+  "source_tests_passed": 27,
+  "root_browser_suite": "passed",
+  "prefix_browser_suite": "passed",
+  "anonymous_recursive_clone": "passed",
+  "anonymous_clean_npm_ci_test_build": "passed",
+  "public_records": 286,
+  "live_https_routes_and_assets": 293,
+  "live_mha_images_loaded": 26,
+  "live_mha_math_errors": 0
+}

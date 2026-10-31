@@ -4,13 +4,14 @@ Updated: 2026-10-31
 
 | Task | State | Evidence |
 | --- | --- | --- |
-| Inspect ownership and preserve source/history | done | Original heads, diffs, verified Git bundles and tutorial inventories in ignored recovery storage |
-| Review publication boundary and strengthen ignores | done | Eligible source/current history scans; Gitleaks findings individually reviewed; private project docs and runtime output excluded |
-| Fold Docs into ai_projects | done | 21eb3c45ec21879cc0329398036018d40bcd81f5; all 1,608 source blobs identical; both histories retained |
-| Prepare parent Pages workflow | done | .github/workflows/pages.yml; recursive collection checkout; docs/website public build; /ai_projects/ prefix |
-| Validate source and browser behavior | in progress | 27 tests pass; full prefix suite passes; root suite running; 26,917 internal links have no missing targets |
-| Create and push six public repositories | in progress | Chrome creates target repositories; first three collections pushed and exact heads verified |
-| Publish parent public submodule URLs | in progress | Five HTTPS GitHub URLs replace local-only collection URLs; Docs no longer a gitlink |
-| Verify Pages and anonymous recursive clone | pending | Await parent push and GitHub Pages configuration |
+| Inspect ownership and preserve source/history | done | Verified Git bundles, original heads/diffs, original Docs metadata and tutorial inventories saved locally |
+| Strengthen ignore rules and review source/history | done | 54 ignore probes pass; no forbidden current tracked files; all Gitleaks findings reviewed as checksums/tutorial wording |
+| Fold Docs into ai_projects | done | Integration merge 21eb3c4 retains both histories and all 1,608 original source blobs |
+| Build Pages from the parent repository | done | .github/workflows/pages.yml recursively checks out collections and builds docs/website at /ai_projects/ |
+| Validate source and browser behavior | done | 27 tests, public root/prefix builds, all four browser suites at both bases, 26,917 internal link checks |
+| Create and push six public repositories | done | Created using signed-in Chrome; GitHub public/default-main metadata and exact remote heads verified |
+| Publish portable submodule URLs | done | Five public HTTPS submodule URLs; anonymous recursive clone initializes all five |
+| Verify GitHub Pages and clean independent build | done | Workflow 41240646452 succeeds; fresh anonymous clone npm ci/test/build passes; 293 HTTPS checks cover all 286 record routes and core assets |
+| Verify live Chrome lesson | done | MHA lesson navigation, zero math errors and all 26 image elements loaded |
 
-One existing authored tutorial source-map has a blank line at EOF; its bytes are preserved. Source checks otherwise pass whitespace validation with blank-at-EOF excluded. Publication does not advance learning/model/hosted-compute checkpoints.
+One existing tutorial source-map has a blank line at EOF; its bytes were preserved. Local-only videos and private study records are deliberately excluded from the public build. Learner/model outcomes are unchanged. Selected receipt: verification.json; review: 06-review.md.

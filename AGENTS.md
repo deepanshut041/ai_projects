@@ -1,6 +1,6 @@
 # AI Projects
 
-GitHub publication (2026-10-31): Docs is an ordinary tracked folder inside ai_projects. Publish the umbrella and its five independent collection repositories under deepanshut041; build GitHub Pages from docs/website at /ai_projects/. Preserve ignored private records and runtime assets. This changes hosting and Docs ownership only; learner and model checkpoints are unchanged.
+GitHub publication (2026-10-31): ai_projects and its five independent collections are public under deepanshut041. Docs is an ordinary tracked folder inside ai_projects, with its history retained. The [tutorial website](https://deepanshut041.github.io/ai_projects/) is deployed through GitHub Pages from docs/website. Anonymous recursive clone/build, 27 source checks, root/prefix browser suites and all 286 live record routes pass. Proper ignore rules exclude private records and runtime assets. Learner and model checkpoints are unchanged.
 
 Standalone project execution (2026-10-31): all eight runnable projects support native commands and the optional workspace CLI/TUI. Clean standalone source checks and all eight workspace launch checks pass. Inference Labs also passes a fresh independent-clone check without its parent umbrella or CLI. Collection guidance and future scaffolds require both routes; Bike uses its native unittest runner through the adapter. Documentation-only projects, learner checkpoints and model results remain unchanged.
 

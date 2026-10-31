@@ -1,5 +1,9 @@
 # Projects progress
 
+## Public GitHub publication — 2026-10-31
+
+AI Projects and the five collection repositories are public under [deepanshut041](https://github.com/deepanshut041/ai_projects). [GitHub Pages](https://deepanshut041.github.io/ai_projects/) serves the public tutorial build from the ordinary docs/ folder. The [publication review](../implementation/2026-10/publish-ai-projects-repositories-and-github-pages/06-review.md) records history preservation, ignore/secret checks, anonymous clone/build, browser acceptance and live HTTP evidence. No separate project_docs GitHub repository was created. This is hosting completion; the existing learning checkpoint and model results remain unchanged.
+
 ## Standalone project execution — 2026-10-31
 
 Standalone project execution (2026-10-31): all eight runnable projects support native commands and the optional workspace CLI/TUI. Clean standalone source checks and all eight workspace launch checks pass. Inference Labs also passes a fresh independent-clone check without its parent umbrella or CLI. Collection guidance and future scaffolds require both routes; Bike uses its native unittest runner through the adapter. Documentation-only projects, learner checkpoints and model results remain unchanged.
