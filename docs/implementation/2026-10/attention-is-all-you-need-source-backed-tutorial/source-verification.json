@@ -1,0 +1,20 @@
+{
+  "restore": {
+    "path": "/tmp/attention-tutorial-source-k15436i4/restored-project",
+    "files": 25,
+    "restored": true
+  },
+  "overwrite_rejected": true,
+  "two_downloads_same_folder_restore": true,
+  "isolated_tests": "...................................                                      [100%]\n35 passed in 0.98s",
+  "snippet_outputs": {
+    "01-weighted-information.md": "tensor([[[0.5000, 0.5000]]])\ntensor([[[4., 6.]]])",
+    "10-reusable-attention.md": "torch.Size([2, 5, 12]) torch.Size([2, 5, 12])\ntorch.Size([2, 3, 12])\ntorch.Size([2, 3, 5, 5])",
+    "11-gradients-and-learning.md": "4.0 0.5\n2.0\n[-0.5, -0.5]"
+  },
+  "syntax_checked_blocks": 7,
+  "imports_from_restored_source": true,
+  "preserved_files": 119,
+  "model_notebook_captions_bike_unchanged": true,
+  "passed": true
+}

@@ -1,0 +1,564 @@
+{
+  "schema_version": 1,
+  "project_id": "attention-is-all-you-need",
+  "languages": [
+    "cpp",
+    "python"
+  ],
+  "examples": [
+    {
+      "id": "arithmetic",
+      "language": "python",
+      "path": "examples/arithmetic.py",
+      "purpose": "Independent standard-library arithmetic for the single four-position teaching fixture and its query-gradient update.",
+      "expected_output": {
+        "supplied_context": [
+          1.4,
+          1.0
+        ],
+        "query_context": [
+          1.339523,
+          1.0
+        ],
+        "query_gradient": [
+          -0.206595,
+          0.353553
+        ],
+        "post_step_loss": 0.701457,
+        "passed": true
+      }
+    }
+  ],
+  "slug": "attention-lab",
+  "revision": "v1",
+  "title": "Attention: from the translation problem to the actual computation",
+  "question": "How does a translation model share information between positions, why does it use queries, keys, values, heads and masks, and how does the actual attention code implement those decisions?",
+  "topic_kind": "repo",
+  "level": "intermediate",
+  "prerequisites": [
+    "Read vectors and matrix products; recognize a model parameter, gradient and loss. Python syntax is not taught here."
+  ],
+  "created_at": "2026-10-23T19:53:43.059827+00:00",
+  "repository": {
+    "base_sha": "8421ca052bd8d1f21b765d4efde67e3dc8197bbd",
+    "name": "docs"
+  },
+  "objectives": [
+    {
+      "id": "weighted",
+      "text": "1. The whole picture, then the first attention calculation"
+    },
+    {
+      "id": "softmax",
+      "text": "2. Derive one attention output from the input rows"
+    },
+    {
+      "id": "shapes",
+      "text": "3. Keep one output per position and expose the matrix axes"
+    },
+    {
+      "id": "projections",
+      "text": "4. What the learned projections can change"
+    },
+    {
+      "id": "heads",
+      "text": "5. Why use several attention heads?"
+    },
+    {
+      "id": "padding",
+      "text": "6. Padding: exclude storage rows from the information flow"
+    },
+    {
+      "id": "causal",
+      "text": "7. Decoder causality: match training to what generation can know"
+    },
+    {
+      "id": "cross",
+      "text": "8. Let the decoder read the encoded source"
+    },
+    {
+      "id": "gradient",
+      "text": "9. How the translation error reaches attention"
+    },
+    {
+      "id": "interface",
+      "text": "10. Trace one call through the actual project implementation"
+    },
+    {
+      "id": "handoff",
+      "text": "11. Put attention back into the Transformer"
+    },
+    {
+      "id": "setup",
+      "text": "Reference — run and inspect the existing attention project"
+    }
+  ],
+  "sources": [
+    {
+      "id": "attention-source",
+      "kind": "local",
+      "title": "Implemented attention module",
+      "path": "projects/transformer-labs/attention-is-all-you-need/src/core/attention.py",
+      "start": 1,
+      "end": 325,
+      "sha256": "4a05ee4f13a20f8409df63c426b27ce14a38fac46c7641c7a652aaf640e72618",
+      "excerpt_sha256": "4a05ee4f13a20f8409df63c426b27ce14a38fac46c7641c7a652aaf640e72618",
+      "excerpt_path": "evidence/attention-source.txt",
+      "base_sha": "0fdd16c03c650e4f74dcfe32cc030f9254f4b2b9",
+      "working_tree": true,
+      "repository_path": "ai_projects"
+    },
+    {
+      "id": "attention-tests",
+      "kind": "local",
+      "title": "Existing independent attention checks",
+      "path": "projects/transformer-labs/attention-is-all-you-need/tests/test_attention.py",
+      "start": 1,
+      "end": 193,
+      "sha256": "ff43f76756f3eea31019082fd26c80e345633fe835655de18a56dd093c833758",
+      "excerpt_sha256": "ff43f76756f3eea31019082fd26c80e345633fe835655de18a56dd093c833758",
+      "excerpt_path": "evidence/attention-tests.txt",
+      "base_sha": "0fdd16c03c650e4f74dcfe32cc030f9254f4b2b9",
+      "working_tree": true,
+      "repository_path": "ai_projects"
+    },
+    {
+      "id": "visual-source",
+      "kind": "local",
+      "title": "Original matrix fixtures and drawing code",
+      "path": "projects/transformer-labs/attention-is-all-you-need/src/utils/attention_visuals.py",
+      "start": 1,
+      "end": 727,
+      "sha256": "bf17257e3ef4978248f2ac2783b482527643a6c2aa6c17ed2eefaaf7bdb37af9",
+      "excerpt_sha256": "bf17257e3ef4978248f2ac2783b482527643a6c2aa6c17ed2eefaaf7bdb37af9",
+      "excerpt_path": "evidence/visual-source.txt",
+      "base_sha": "0fdd16c03c650e4f74dcfe32cc030f9254f4b2b9",
+      "working_tree": true,
+      "repository_path": "ai_projects"
+    },
+    {
+      "id": "visual-tests",
+      "kind": "local",
+      "title": "Known answers for visual examples",
+      "path": "projects/transformer-labs/attention-is-all-you-need/tests/test_attention_visuals.py",
+      "start": 1,
+      "end": 88,
+      "sha256": "c66b0dabce011a15edea61fac60332315ba9fea952d966adc21e470e87267efb",
+      "excerpt_sha256": "c66b0dabce011a15edea61fac60332315ba9fea952d966adc21e470e87267efb",
+      "excerpt_path": "evidence/visual-tests.txt",
+      "base_sha": "0fdd16c03c650e4f74dcfe32cc030f9254f4b2b9",
+      "working_tree": true,
+      "repository_path": "ai_projects"
+    },
+    {
+      "id": "paper",
+      "kind": "external",
+      "title": "Attention Is All You Need, v7",
+      "url": "https://arxiv.org/html/1706.03762v7",
+      "accessed_at": "2026-10-26",
+      "locator": "Sections 1–4: motivation, architecture, attention roles, positions and complexity",
+      "proof_limit": "Primary reference; actual local behavior is checked separately. No task quality or hardware speed claim."
+    },
+    {
+      "id": "sdpa",
+      "kind": "external",
+      "title": "PyTorch 2.14 SDPA API",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html",
+      "accessed_at": "2026-10-23",
+      "locator": "Mask semantics, dropout argument and backend selection",
+      "proof_limit": "Primary reference; actual local behavior is checked separately. No task quality or hardware speed claim."
+    },
+    {
+      "id": "illustrated-transformer",
+      "kind": "external",
+      "title": "The Illustrated Transformer — Jay Alammar",
+      "url": "https://jalammar.github.io/illustrated-transformer/",
+      "accessed_at": "2026-10-26",
+      "locator": "High-level model, tensors, scalar/matrix attention, heads, decoder and training; editorial comparison only",
+      "proof_limit": "Primary authored source for motivation or teaching comparison; no local task result or educational-effectiveness measurement."
+    },
+    {
+      "id": "annotated-transformer",
+      "kind": "external",
+      "title": "The Annotated Transformer — Harvard NLP, inspected 2018 version",
+      "url": "https://nlp.seas.harvard.edu/2018/04/03/attention.html",
+      "accessed_at": "2026-10-26",
+      "locator": "Model Architecture, Attention, Applications of Attention, Training and decoding; historical implementation, not current install instructions",
+      "proof_limit": "Primary authored source for motivation or teaching comparison; no local task result or educational-effectiveness measurement."
+    },
+    {
+      "id": "d2l-attention",
+      "kind": "external",
+      "title": "Dive into Deep Learning — Q/K/V",
+      "url": "https://d2l.ai/chapter_attention-mechanisms-and-transformers/queries-keys-values.html",
+      "accessed_at": "2026-10-26",
+      "locator": "Attention pooling roles and visualization; editorial comparison",
+      "proof_limit": "Primary authored source for motivation or teaching comparison; no local task result or educational-effectiveness measurement."
+    },
+    {
+      "id": "d2l-bahdanau",
+      "kind": "external",
+      "title": "Dive into Deep Learning — Bahdanau attention",
+      "url": "https://d2l.ai/chapter_attention-mechanisms-and-transformers/bahdanau-attention.html",
+      "accessed_at": "2026-10-26",
+      "locator": "Encoder/decoder bottleneck and adaptive source retrieval; editorial comparison",
+      "proof_limit": "Primary authored source for motivation or teaching comparison; no local task result or educational-effectiveness measurement."
+    },
+    {
+      "id": "bahdanau",
+      "kind": "external",
+      "title": "Neural Machine Translation by Jointly Learning to Align and Translate",
+      "url": "https://arxiv.org/abs/1409.0473",
+      "accessed_at": "2026-10-26",
+      "locator": "Abstract and proposed source retrieval versus fixed-length source representation",
+      "proof_limit": "Primary authored source for motivation or teaching comparison; no local task result or educational-effectiveness measurement."
+    }
+  ],
+  "claims": [
+    {
+      "id": "component",
+      "text": "The existing attention module implements the taught projection, head, mask and retrieval paths.",
+      "source_ids": [
+        "attention-source",
+        "attention-tests",
+        "visual-source",
+        "visual-tests"
+      ],
+      "status": "verified",
+      "proof_limit": "Local source and exercised CPU checks; not trained translation, learner understanding or GPU performance."
+    },
+    {
+      "id": "scope",
+      "text": "The course covers setup and implemented attention; later translation data/model/training remain pending.",
+      "source_ids": [
+        "attention-source"
+      ],
+      "status": "documented",
+      "proof_limit": "Source audit and explicit user scope; no later placeholder is implemented by this authoring work."
+    }
+  ],
+  "entities": [],
+  "relationships": [],
+  "chapters": [
+    {
+      "id": "weighted",
+      "title": "1. The whole picture, then the first attention calculation",
+      "content_path": "lessons/01-weighted-information.md",
+      "objective_ids": [
+        "weighted"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "weighted-check"
+      ]
+    },
+    {
+      "id": "softmax",
+      "title": "2. Derive one attention output from the input rows",
+      "content_path": "lessons/04-scores-and-softmax.md",
+      "objective_ids": [
+        "softmax"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "softmax-check"
+      ]
+    },
+    {
+      "id": "shapes",
+      "title": "3. Keep one output per position and expose the matrix axes",
+      "content_path": "lessons/03-tensors-and-products.md",
+      "objective_ids": [
+        "shapes"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "shapes-check"
+      ]
+    },
+    {
+      "id": "projections",
+      "title": "4. What the learned projections can change",
+      "content_path": "lessons/05-learned-projections.md",
+      "objective_ids": [
+        "projections"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "projections-check"
+      ]
+    },
+    {
+      "id": "heads",
+      "title": "5. Why use several attention heads?",
+      "content_path": "lessons/06-multiple-heads.md",
+      "objective_ids": [
+        "heads"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "heads-check"
+      ]
+    },
+    {
+      "id": "padding",
+      "title": "6. Padding: exclude storage rows from the information flow",
+      "content_path": "lessons/07-padding-and-empty-rows.md",
+      "objective_ids": [
+        "padding"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "padding-check"
+      ]
+    },
+    {
+      "id": "causal",
+      "title": "7. Decoder causality: match training to what generation can know",
+      "content_path": "lessons/08-causal-information.md",
+      "objective_ids": [
+        "causal"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "causal-check"
+      ]
+    },
+    {
+      "id": "cross",
+      "title": "8. Let the decoder read the encoded source",
+      "content_path": "lessons/09-cross-attention.md",
+      "objective_ids": [
+        "cross"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "cross-check"
+      ]
+    },
+    {
+      "id": "gradient",
+      "title": "9. How the translation error reaches attention",
+      "content_path": "lessons/11-gradients-and-learning.md",
+      "objective_ids": [
+        "gradient"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "gradient-check"
+      ]
+    },
+    {
+      "id": "interface",
+      "title": "10. Trace one call through the actual project implementation",
+      "content_path": "lessons/10-reusable-attention.md",
+      "objective_ids": [
+        "interface"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "interface-check"
+      ]
+    },
+    {
+      "id": "handoff",
+      "title": "11. Put attention back into the Transformer",
+      "content_path": "lessons/12-evidence-and-next-phase.md",
+      "objective_ids": [
+        "handoff"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "handoff-check"
+      ]
+    },
+    {
+      "id": "setup",
+      "title": "Reference — run and inspect the existing attention project",
+      "content_path": "lessons/02-project-setup.md",
+      "objective_ids": [
+        "setup"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "setup-check"
+      ]
+    }
+  ],
+  "diagrams": [],
+  "tables": [],
+  "scenarios": [],
+  "practice": [
+    {
+      "id": "weighted-check",
+      "question": "Keep input row 1 fixed and change row 0. Can h_1=f(x_1) change? What new path does attention provide?",
+      "answer": "The row-independent h_1 cannot change because its expression does not use x_0. Attention can make output row 1 depend on value 0 and its score against key 0, subject to the allowed mask. This provides a possible dependency, not a guarantee that every input perturbation changes the result.",
+      "rubric": "Identify the actual input-to-output path, rather than saying only that attention adds context.",
+      "objective_ids": [
+        "weighted"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "softmax-check",
+      "question": "Hold K and V fixed but replace q=[1,0] with q=[0,0]. Explain the entire consequence.",
+      "answer": "All four dot products become zero, so softmax assigns 1/4 to each key and the context becomes [1,1]. The available content is unchanged; the receiving comparison now treats every key equally. The zero source row remains valid and takes part in normalization.",
+      "rubric": "Follow query → scores → normalized weights → both value features.",
+      "objective_ids": [
+        "softmax"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "shapes-check",
+      "question": "You reorder K rows but leave V in its old order. Shapes still match. Why is the calculation wrong?",
+      "answer": "A weight calculated against key j now multiplies content from a different source row. Keys and values must move together. With paired K/V permutations the summed result for fixed Q is unchanged; permuting Q as well reorders output receivers. Positional information is a separate input.",
+      "rubric": "Explain source pairing and receiver ownership; shape agreement alone is insufficient.",
+      "objective_ids": [
+        "shapes"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "projections-check",
+      "question": "Halve W_V for every input. Which quantities change, and is this the same kind of state as an attention-weight row?",
+      "answer": "For fixed X and Q/K maps, V and C halve while scores and A stay the same. W_V is a persistent shared parameter; A is recomputed from each input. The parameter change therefore applies to subsequent examples as well.",
+      "rubric": "Separate content from selection, and shared model parameters from input-dependent activations.",
+      "objective_ids": [
+        "projections"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "heads-check",
+      "question": "Would giving head 0 only the first half of a sentence implement the head split shown here?",
+      "answer": "No. The shown split assigns projected feature groups to heads while each head retains every permitted source position. Different heads can normalize different distributions over the same positions. Splitting sentence positions would remove information paths instead.",
+      "rubric": "Name the split axis, retained source axis and independently normalized distributions.",
+      "objective_ids": [
+        "heads"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "padding-check",
+      "question": "If a padded value is [0,0], can it still change real-token outputs when its key is not masked?",
+      "answer": "Yes. Its score still contributes an exponential to the softmax denominator, reducing the weights on real keys. Exclude it before normalization. The key mask does not delete query rows, and target-loss masking remains separate.",
+      "rubric": "Trace denominator contamination instead of looking only for a nonzero padded contribution.",
+      "objective_ids": [
+        "padding"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "causal-check",
+      "question": "At decoder input position 1 containing Nous, which token is the label, and why must input position 2 be blocked?",
+      "answer": "The label is lisons; input position 2 already contains lisons during teacher-forced training. Reading it would reveal the answer unavailable at generation time. Allow input keys 0 and 1, and shift labels separately. Padding is a different restriction.",
+      "rubric": "Identify the exact cheating path and reconcile the current-position allowance with next-token labels.",
+      "objective_ids": [
+        "causal"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "cross-check",
+      "question": "A decoder has five receiving rows and the encoder has four memory rows. What are the weight/output position axes, and may the last source row be read by target row 0?",
+      "answer": "Weights have shape (B,H,5,4); output has shape (B,5,d_model) in this class. All valid source rows may be read even at target row 0, because the source was available before generation. The target query must already obey its own prefix boundary.",
+      "rubric": "Trace Q versus K/V origin and avoid imposing target time on source indices.",
+      "objective_ids": [
+        "cross"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "gradient-check",
+      "question": "Does translation training need a hand-written desired context vector or an attention-map label?",
+      "answer": "Ordinary next-token training uses reference token labels. Cross-entropy gradients flow from vocabulary logits through decoder representations into attention parameters. The course’s [2,0] desired context is an isolated derivative probe. A decrease in that probe loss does not establish useful translation.",
+      "rubric": "Connect actual task supervision to shared projections and distinguish the local probe objective.",
+      "objective_ids": [
+        "gradient"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "interface-check",
+      "question": "The class is configured with fused_attn=True, but the call requests need_weights=True. Which path runs, and what must be matched to compare paths?",
+      "answer": "Requesting weights selects the explicit helper. A valid comparison copies the same parameters and fixes input, masks, dtype and evaluation mode. Evaluation supplies zero dropout to the library path. Two random layer initializations are not the same function.",
+      "rubric": "Follow the actual branch condition and identify controlled comparison inputs.",
+      "objective_ids": [
+        "interface"
+      ],
+      "claim_ids": [
+        "component"
+      ]
+    },
+    {
+      "id": "handoff-check",
+      "question": "Why does the Transformer retain a position-wise feed-forward layer after adding attention, and where does order come from?",
+      "answer": "Attention shares information between permitted positions. The feed-forward layer applies a nonlinear feature transformation within each row, while residual/norm sublayers organize updates. Positional input supplies order information that unrestricted attention alone lacks. These components have distinct responsibilities.",
+      "rubric": "Explain the separate operations in the architecture rather than treating attention as the complete model.",
+      "objective_ids": [
+        "handoff"
+      ],
+      "claim_ids": [
+        "scope"
+      ]
+    },
+    {
+      "id": "setup-check",
+      "question": "The demo and 35 tests pass. What has been checked, and what would still be needed to claim translation quality?",
+      "answer": "Those runs check the implemented component, known arithmetic and exercised interfaces. Translation quality needs actual tokenizer/data, full encoder/decoder, trained parameters, decoding and fixed evaluation. A placeholder script exiting successfully or local Colab simulation supplies none of those results.",
+      "rubric": "Separate component evidence from task execution and held-out evaluation.",
+      "objective_ids": [
+        "setup"
+      ],
+      "claim_ids": [
+        "scope"
+      ]
+    }
+  ],
+  "scenes": [],
+  "media": {},
+  "approval": null
+}

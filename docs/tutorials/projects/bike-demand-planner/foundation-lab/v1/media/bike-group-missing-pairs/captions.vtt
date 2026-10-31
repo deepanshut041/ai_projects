@@ -1,0 +1,210 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:05.960
+A small training sample may have working
+day mornings and no nonworking day at
+
+00:00:05.960 --> 00:00:06.410
+two.
+
+00:00:06.940 --> 00:00:11.230
+The pair two, zero is valid,
+but its group mean is undefined.
+
+00:00:12.020 --> 00:00:15.890
+Our declared fallback is the global
+mean of recorded training targets.
+
+00:00:16.480 --> 00:00:19.650
+We choose this before evaluation
+and save it with the model.
+
+00:00:20.120 --> 00:00:23.070
+Validation answers never
+fill the missing group.
+
+00:00:23.840 --> 00:00:25.570
+An invalid request is different.
+
+00:00:25.960 --> 00:00:30.490
+Hour twenty four or a working day
+value of two must raise an error.
+
+00:00:30.860 --> 00:00:35.060
+Treating malformed input as a missing
+group would conceal a problem in the
+
+00:00:35.060 --> 00:00:36.230
+request or schema.
+
+00:00:36.780 --> 00:00:41.570
+A fallback handles limited training
+coverage, not arbitrary invalid values.
+
+00:00:43.733 --> 00:00:46.183
+Here is the complete training fixture.
+
+00:00:46.833 --> 00:00:50.543
+The pair eight,
+one has targets ten and thirty.
+
+00:00:50.953 --> 00:00:54.303
+Its group mean is twenty
+and its support is two.
+
+00:00:54.973 --> 00:00:58.323
+The pair two, one has one target of two.
+
+00:00:58.893 --> 00:01:02.263
+The pair eight,
+zero has one target of one hundred.
+
+00:01:02.953 --> 00:01:07.743
+Those groups have means two and one
+hundred, each supported by one row.
+
+00:01:08.433 --> 00:01:12.323
+We have four recorded training
+rows across three observed groups.
+
+00:01:12.933 --> 00:01:15.223
+The pair two, zero is absent.
+
+00:01:15.853 --> 00:01:20.633
+Keeping the counts matters because a group
+with two rows represents twice as many
+
+00:01:20.633 --> 00:01:25.063
+recorded hours as a one row group
+when we calculate the global fallback.
+
+00:01:27.553 --> 00:01:29.203
+Add the four training targets.
+
+00:01:29.733 --> 00:01:35.163
+Ten plus thirty plus two plus one
+hundred gives one hundred and forty two.
+
+00:01:36.133 --> 00:01:41.263
+Divide by the four recorded training
+rows to obtain thirty five point five.
+
+00:01:42.173 --> 00:01:47.178
+Averaging the three group means equally
+would instead give about forty point six
+
+00:01:47.178 --> 00:01:47.783
+seven.
+
+00:01:48.533 --> 00:01:51.663
+That assigns equal weight to
+groups with different support.
+
+00:01:52.093 --> 00:01:55.983
+Our fallback estimates the
+level across recorded hours,
+
+00:01:56.393 --> 00:01:59.103
+so the original row
+weights must be preserved.
+
+00:01:59.833 --> 00:02:03.773
+A different fallback hierarchy,
+such as an hour only mean,
+
+00:02:03.853 --> 00:02:07.363
+would be a different modelling
+policy to declare and compare.
+
+00:02:07.973 --> 00:02:11.463
+It is not introduced silently
+when a difficult request appears.
+
+00:02:13.608 --> 00:02:17.178
+The executable example fits
+those four training rows.
+
+00:02:17.888 --> 00:02:21.998
+Requesting eight, one returns the
+observed group's mean of twenty.
+
+00:02:22.708 --> 00:02:27.818
+Requesting two, zero returns the global
+fallback of thirty five point five.
+
+00:02:28.008 --> 00:02:30.948
+Change the first requested key to eight,
+
+00:02:30.948 --> 00:02:35.358
+zero and its answer becomes one hundred,
+because that group exists.
+
+00:02:36.128 --> 00:02:38.938
+The absent key still returns
+thirty five point five.
+
+00:02:39.368 --> 00:02:42.698
+Neither call creates a new
+group or uses an outcome.
+
+00:02:43.488 --> 00:02:46.458
+Repeating the missing lookup
+leaves the model unchanged.
+
+00:02:47.348 --> 00:02:52.008
+The test also changes the original input
+lists after fitting and verifies that the
+
+00:02:52.008 --> 00:02:53.578
+saved model is unaffected.
+
+00:02:54.128 --> 00:02:56.238
+Its state contains the fitted statistics,
+
+00:02:56.768 --> 00:02:59.058
+not references to mutable training lists.
+
+00:03:01.317 --> 00:03:06.687
+The real training year contains all forty
+eight valid hour and working day pairs.
+
+00:03:07.257 --> 00:03:11.577
+The model therefore uses no fallback
+for its actual training or validation
+
+00:03:11.577 --> 00:03:12.467
+predictions.
+
+00:03:13.217 --> 00:03:15.827
+Those zero counts are
+saved in the run receipt.
+
+00:03:16.657 --> 00:03:20.527
+The real score establishes the
+performance of observed group lookup.
+
+00:03:21.097 --> 00:03:25.307
+The small fixture establishes what
+happens for a valid absent group.
+
+00:03:25.517 --> 00:03:30.497
+A branch never used by a successful
+dataset still needs a meaningful known
+
+00:03:30.497 --> 00:03:31.527
+answer check.
+
+00:03:31.917 --> 00:03:34.387
+If we later made the groups more specific,
+
+00:03:34.617 --> 00:03:37.027
+coverage and support would
+need fresh inspection.
+
+00:03:37.897 --> 00:03:39.847
+That would be another model comparison,
+
+00:03:40.277 --> 00:03:43.867
+while this baseline keeps its
+original forty eight pair definition.
+

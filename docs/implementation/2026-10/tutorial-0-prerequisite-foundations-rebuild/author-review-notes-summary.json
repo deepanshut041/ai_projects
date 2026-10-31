@@ -1,0 +1,28 @@
+{
+  "temporary_notes": {
+    "tutorial0-math-notes.md": {
+      "bytes": 5517,
+      "sha256": "765a06a8293b4411fe20e263563f7bd6ac6839838bd9a637257669ea29e8a38a"
+    },
+    "tutorial0-tensor-notes.md": {
+      "bytes": 7895,
+      "sha256": "f8e3ee6451a3432699ccbb971c848ec314aff93571f480ed3e70f774feed80c5"
+    },
+    "tutorial0-training-notes.md": {
+      "bytes": 3944,
+      "sha256": "c203a9877dcf0ff0ac605c37c3bcb59cd5e7efc6fcbb8b6fd2524ce9f3a9e82f"
+    },
+    "tutorial0-semantic-review.md": {
+      "bytes": 2620,
+      "sha256": "7c288c0a31de4ea8961326c631f275bd14512531457eb0bf5fc7eb38bd805049"
+    }
+  },
+  "review_corrections": [
+    "advanced Python assumption; remove programming primers",
+    "shifted-target NLL avoids huge-offset cancellation in Python/C++/Torch",
+    "view/reshape/contiguity coordinate-order trace",
+    "embedding matrix row separators corrected",
+    "one buffer entry contains two fixed scalars"
+  ],
+  "all_corrections_integrated": true
+}

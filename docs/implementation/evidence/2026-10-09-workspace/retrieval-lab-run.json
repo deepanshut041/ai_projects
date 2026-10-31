@@ -1,0 +1,44 @@
+{
+  "corpus": "four original toy documents",
+  "method": "smoothed word TF-IDF cosine",
+  "k": 3,
+  "queries": [
+    {
+      "query": "training derivatives",
+      "ranking": [
+        [
+          "gradient",
+          0.5334185723684125
+        ]
+      ],
+      "recall_at_k": 1.0,
+      "reciprocal_rank_at_k": 1.0,
+      "ndcg_at_k": 1.0
+    },
+    {
+      "query": "query documents",
+      "ranking": [
+        [
+          "retrieval",
+          0.49909611242601504
+        ]
+      ],
+      "recall_at_k": 1.0,
+      "reciprocal_rank_at_k": 1.0,
+      "ndcg_at_k": 1.0
+    },
+    {
+      "query": "transformer attention",
+      "ranking": [
+        [
+          "attention",
+          0.43837285968014356
+        ]
+      ],
+      "recall_at_k": 1.0,
+      "reciprocal_rank_at_k": 1.0,
+      "ndcg_at_k": 1.0
+    }
+  ],
+  "scope": "lexical retrieval; no generated answers or external embeddings"
+}

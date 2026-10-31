@@ -1,0 +1,242 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:04.670
+The overall score combines
+quiet hours and busy commutes.
+
+00:00:05.000 --> 00:00:09.410
+To inspect that mixture, define
+exactly which rows belong to a slice.
+
+00:00:10.140 --> 00:00:13.950
+Rush clock hours here are seven,
+eight and nine in the morning,
+
+00:00:14.380 --> 00:00:17.430
+and sixteen,
+seventeen and eighteen in the afternoon.
+
+00:00:18.140 --> 00:00:20.290
+This window exists on every day.
+
+00:00:20.920 --> 00:00:25.130
+Working day rush adds the requirement
+that the working day flag is one.
+
+00:00:25.760 --> 00:00:29.490
+There are one thousand and ninety
+two rush clock observations,
+
+00:00:29.680 --> 00:00:33.230
+but only seven hundred and fifty
+working day rush observations.
+
+00:00:33.860 --> 00:00:37.790
+Mixing those definitions would attach
+the right number to the wrong population.
+
+00:00:40.192 --> 00:00:45.672
+The seven hundred and fifty working day
+rush observations have mean absolute error
+
+00:00:45.672 --> 00:00:48.342
+one hundred and seventy
+eight point one nine.
+
+00:00:49.112 --> 00:00:50.148
+All other three thousand,
+
+00:00:50.148 --> 00:00:54.622
+six hundred and seven observations
+average seventy three point five six.
+
+00:00:55.312 --> 00:01:00.002
+Multiply each mean by its observation
+count, add those error totals,
+
+00:01:00.292 --> 00:01:02.382
+and divide by four thousand,
+three hundred and fifty seven.
+
+00:01:03.492 --> 00:01:07.682
+This recovers the overall ninety
+one point five seven score.
+
+00:01:08.212 --> 00:01:13.432
+Simply averaging the two means would give
+the small rush population equal weight to
+
+00:01:13.432 --> 00:01:14.982
+the much larger remainder.
+
+00:01:15.752 --> 00:01:19.562
+The count tells us which objective
+the aggregate actually measures.
+
+00:01:21.775 --> 00:01:27.015
+The implementation selects a slice by row
+indices and passes the same indices to
+
+00:01:27.015 --> 00:01:27.585
+predictions.
+
+00:01:28.255 --> 00:01:33.445
+It retains count, absolute error,
+squared error, residual, deficit
+
+00:01:33.955 --> 00:01:37.205
+and excess totals,
+rather than only rounded means.
+
+00:01:37.995 --> 00:01:42.195
+Each dimension must reconstruct the
+original population and those error
+
+00:01:42.195 --> 00:01:42.845
+totals.
+
+00:01:43.695 --> 00:01:48.175
+The independent audit verifies six hundred
+and eighty six slice summaries across
+
+00:01:48.175 --> 00:01:51.405
+seven model policy pairs
+and both partitions.
+
+00:01:52.235 --> 00:01:57.345
+Hour, month and day type each describe
+the same underlying observations.
+
+00:01:58.275 --> 00:02:02.345
+Adding counts across these overlapping
+dimensions would count hours repeatedly.
+
+00:02:03.255 --> 00:02:04.805
+Check each partition on its own.
+
+00:02:06.998 --> 00:02:12.338
+January contains seven hundred and forty
+recorded validation hours and has mean
+
+00:02:12.338 --> 00:02:14.988
+absolute error thirty nine point six one.
+
+00:02:15.738 --> 00:02:19.908
+June contains seven hundred and twenty
+and has error one hundred and forty three.
+
+00:02:21.038 --> 00:02:24.968
+Mean signed error also becomes
+much more negative by June.
+
+00:02:25.658 --> 00:02:28.168
+These differences are hidden
+by the single aggregate.
+
+00:02:28.538 --> 00:02:32.178
+July through December contain
+zero validation observations,
+
+00:02:32.178 --> 00:02:35.928
+because those dates belong
+outside the retained window.
+
+00:02:36.438 --> 00:02:39.848
+We do not borrow reserved test
+outcomes to fill the table.
+
+00:02:40.198 --> 00:02:44.958
+A complete category domain can contain
+empty positions while the actual evidence
+
+00:02:44.958 --> 00:02:47.328
+remains limited to its observed dates.
+
+00:02:49.583 --> 00:02:52.733
+Season names need the
+same coverage discipline.
+
+00:02:53.203 --> 00:02:56.033
+Winter here means January and February.
+
+00:02:56.683 --> 00:03:01.073
+Spring means March through May,
+while summer means only June.
+
+00:03:01.843 --> 00:03:04.033
+Autumn has no observations at all.
+
+00:03:04.503 --> 00:03:07.413
+Its metric is undefined
+and stored as null.
+
+00:03:08.003 --> 00:03:10.053
+If we displayed zero instead,
+
+00:03:10.443 --> 00:03:14.393
+the figure would misleadingly suggest
+perfectly predicted autumn hours.
+
+00:03:14.923 --> 00:03:17.393
+The chart explicitly labels no score.
+
+00:03:18.263 --> 00:03:22.293
+For root mean squared error,
+another denominator issue appears:
+
+00:03:23.023 --> 00:03:26.673
+first combine squared error totals,
+divide by count,
+
+00:03:27.043 --> 00:03:28.433
+then take the square root.
+
+00:03:28.883 --> 00:03:33.503
+Averaging seasonal root mean squared
+errors generally does not reproduce the
+
+00:03:33.503 --> 00:03:34.573
+overall value.
+
+00:03:36.627 --> 00:03:40.117
+We also group errors by the
+eventual observed count.
+
+00:03:40.607 --> 00:03:44.097
+Hours below fifty rentals
+average error near twelve,
+
+00:03:44.387 --> 00:03:47.897
+while hours at least two hundred average
+about one hundred and sixty eight.
+
+00:03:48.627 --> 00:03:53.667
+That is useful retrospective evidence that
+the high count part of the population is
+
+00:03:53.667 --> 00:03:54.217
+difficult.
+
+00:03:54.787 --> 00:03:58.857
+Now consider using that band to choose
+a model when issuing a forecast.
+
+00:03:59.427 --> 00:04:02.257
+We cannot know the band
+without knowing the outcome.
+
+00:04:02.727 --> 00:04:06.807
+Turning this diagnostic into a routing
+input would leak the target into
+
+00:04:06.807 --> 00:04:07.457
+prediction.
+
+00:04:08.047 --> 00:04:11.157
+The slice remains an
+explanation of saved results,
+
+00:04:11.447 --> 00:04:15.137
+alongside its actual count and
+explicit retrospective scope.
+

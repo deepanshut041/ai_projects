@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-09",
+  "scope": "author educational reference verification; not learner or hosted project completion",
+  "runtime": {
+    "python": "3.12.13",
+    "torch": "2.14.1+cpu",
+    "threads": 1,
+    "precision": "fp32",
+    "deterministic": true
+  },
+  "numerical_checks": {
+    "layernorm_gradcheck": true,
+    "attention_forward_backward_parity": true,
+    "causality_padding_gradients_generation": true,
+    "resume_bitwise_cpu": true,
+    "corrupt_incomplete_fallback": true,
+    "identity_rejection": true,
+    "resume_scope": "N8 vs K3+reload+5 in same process; fresh trainer, CPU dropout0.1"
+  },
+  "mlp": {
+    "rows": 4,
+    "updates": 300,
+    "initial_loss": 0.7487483620643616,
+    "final_loss": 0.0007913782028481364,
+    "predictions": [
+      0,
+      1,
+      1,
+      0
+    ],
+    "scope": "XOR truth-table fit; no held-out claim"
+  },
+  "copy_demo": {
+    "argv": [
+      "python",
+      "examples/tiny_transformer.py",
+      "--steps",
+      "600",
+      "--save-every",
+      "300",
+      "--run-dir",
+      "<ignored-run-directory>"
+    ],
+    "updates": 600,
+    "parameters": 54916,
+    "train_records": 256,
+    "heldout_records": 128,
+    "seed": 17,
+    "batch_size": 16,
+    "source_sha256": "0e2af5daacf4cff2a720860ffdb1cec852d1e8222cb76369ddc6bdc9b067e060",
+    "tokenizer_sha256": "f02c710e789f1edcf9fc543eb42a66b6077addac86d7fcaa1f2df332abc6380d",
+    "split_sha256": "a91b3387ffaf571cb41eda7837e1c6711a52231b9804a8021f806698ffc65ac0",
+    "initial_batch_loss": 5.663539409637451,
+    "final_batch_loss": 0.2640805244445801,
+    "held_out": {
+      "target_tokens_including_eos": 666,
+      "loss": 1.607307720470715,
+      "teacher_token_accuracy": 0.56006006006006,
+      "generated_reference_token_accuracy": 0.4758364312267658,
+      "generated_exact_match": 0.109375,
+      "eos_rate": 0.84375
+    },
+    "shuffled_source_control": {
+      "loss": 5.740570709870027,
+      "teacher_token_accuracy": 0.15465465465465467,
+      "generated_exact_match": 0.0
+    },
+    "interpretation": "Does not satisfy proposed 90% task gate; lowering training loss is insufficient. No hosted run or learner mastery."
+  },
+  "pending": [
+    "independent learner child",
+    "learner implementation/explanation",
+    "child dependency lock",
+    "retention/storage failure checks",
+    "interrupted persistent copy",
+    "Colab notebook and deleted-runtime Drive recovery",
+    "held-out task gate",
+    "publication"
+  ],
+  "fresh_process_check": {
+    "fresh_process_resume": true,
+    "updates": 8,
+    "split_at": 3,
+    "dropout": 0.1,
+    "full_state_bitwise_equal": true,
+    "loss_sequence_equal": true,
+    "runtime": "2.14.1+cpu"
+  }
+}

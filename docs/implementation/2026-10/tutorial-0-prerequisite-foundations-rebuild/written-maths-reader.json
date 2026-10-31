@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-12",
+  "content_tests": {
+    "tests": 9,
+    "passed": true
+  },
+  "full_browser_suites": {
+    "root": {
+      "passed": true,
+      "records": 86
+    },
+    "prefix": {
+      "passed": true,
+      "records": 86
+    },
+    "viewport_widths": [
+      320,
+      390,
+      768,
+      1440
+    ],
+    "isolation": "separate source copies and dist outputs",
+    "fingerprint_before_final_label_clarification": "97098e845143f0376a0178506c78e08641a0079ca9011470fb7a1cf26c2af723"
+  },
+  "final_render_fingerprint": "b7193dc7ced613f10fcb09f25bc4218040d60d1a53fb90185b44a8f3df5d217c",
+  "final_label_clarification": {
+    "root": true,
+    "live_prefix": true,
+    "ready": true,
+    "katex_errors": 0,
+    "page_contained": true,
+    "viewport_width": 390
+  },
+  "visual_review": {
+    "whole_network_desktop": true,
+    "whole_network_mobile_after_stacking": true,
+    "binary_cross_entropy_mobile_after_stacking": true,
+    "notes_template_mobile": true,
+    "browser_console_errors_in_isolated_review": 0
+  },
+  "shared_output_attempt": {
+    "passed": false,
+    "reason": "preview rebuilt shared dist to /project_docs/ while root server expected /; asset 404s and pager ready timeout",
+    "resolved_by": "isolated outputs; both complete suites pass"
+  },
+  "live_start_url": "http://127.0.0.1:4273/project_docs/records/tutorials/p00-transformer-foundations-v1/chapters/route/",
+  "study_copy": ".ai/course-exports/2026-10-12/written-maths/study/study.ipynb",
+  "passed": true
+}

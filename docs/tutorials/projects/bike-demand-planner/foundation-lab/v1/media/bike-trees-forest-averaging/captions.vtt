@@ -1,0 +1,240 @@
+WEBVTT
+
+00:00:00.480 --> 00:00:03.810
+Our random forest
+contains sixty four trees.
+
+00:00:04.100 --> 00:00:08.270
+Each is fitted from a bootstrap sample
+of the training rows, with replacement.
+
+00:00:08.860 --> 00:00:14.170
+A draw has the original row count but can
+repeat some observations and omit others.
+
+00:00:14.540 --> 00:00:15.460
+At each split,
+
+00:00:15.460 --> 00:00:18.750
+the forest considers seventy
+percent of the feature columns,
+
+00:00:18.920 --> 00:00:20.730
+adding another source of variation.
+
+00:00:21.520 --> 00:00:26.090
+These mechanisms produce different fitted
+trees whose predictions can be averaged.
+
+00:00:26.880 --> 00:00:29.470
+All views come from twenty
+eleven training data.
+
+00:00:29.660 --> 00:00:33.880
+Validation outcomes do not become
+bootstrap samples or help construct the
+
+00:00:33.880 --> 00:00:34.350
+trees.
+
+00:00:36.483 --> 00:00:40.993
+The library constructor exposes
+tree count, bootstrap policy,
+
+00:00:41.503 --> 00:00:44.053
+feature fraction and one fitting job.
+
+00:00:44.723 --> 00:00:47.793
+Depth and leaf support come
+from the declared candidate.
+
+00:00:48.523 --> 00:00:51.033
+We compare depth eight with support ten,
+
+00:00:51.443 --> 00:00:53.893
+depth sixteen with support five,
+
+00:00:53.983 --> 00:00:57.593
+and the deeper leaf capped
+setting with support one.
+
+00:00:58.083 --> 00:01:00.953
+Tree count stays sixty
+four across these choices.
+
+00:01:01.703 --> 00:01:05.623
+This is an explicit capacity
+sweep within one forest setup,
+
+00:01:05.623 --> 00:01:09.373
+rather than changing every setting
+after looking at its score.
+
+00:01:10.103 --> 00:01:15.243
+Numerical snapshots retain the component
+tests and values so the ensemble result
+
+00:01:15.243 --> 00:01:17.293
+can be independently replayed.
+
+00:01:19.442 --> 00:01:22.932
+At the real later Monday
+eight oclock request,
+
+00:01:23.302 --> 00:01:25.872
+the first three trees return
+one hundred and eighty,
+
+00:01:26.422 --> 00:01:30.652
+one hundred and ninety point three, and
+one hundred and eighty seven point five.
+
+00:01:31.002 --> 00:01:33.092
+Those numbers explain components,
+
+00:01:33.482 --> 00:01:34.772
+not the finished ensemble.
+
+00:01:35.662 --> 00:01:39.564
+All sixty four saved leaf predictions
+sum to about eleven thousand,
+
+00:01:39.564 --> 00:01:42.412
+four hundred and thirty
+six point four eight.
+
+00:01:42.762 --> 00:01:46.892
+Dividing by sixty four gives one
+hundred and seventy eight point seven.
+
+00:01:47.262 --> 00:01:49.672
+That is the actual forest forecast,
+
+00:01:49.862 --> 00:01:52.432
+still well below the target
+of four hundred and twenty.
+
+00:01:53.222 --> 00:01:58.192
+The aggregation rule itself contains
+no new observation of future demand.
+
+00:02:00.317 --> 00:02:05.227
+A component leaf can include several
+copies of the same original observation.
+
+00:02:06.057 --> 00:02:10.427
+Its weighted sample count therefore
+differs from the number of distinct rows.
+
+00:02:11.477 --> 00:02:14.527
+Its fitted mean follows
+the bootstrap weighting,
+
+00:02:14.637 --> 00:02:17.927
+so counting unique rows alone
+can give the wrong arithmetic.
+
+00:02:18.757 --> 00:02:23.807
+This differs from the plain tree example,
+whose eight training rows were unweighted.
+
+00:02:24.317 --> 00:02:27.807
+We preserve both support
+counts in the numerical state.
+
+00:02:28.277 --> 00:02:33.017
+The learner can inspect what supported a
+component without silently interpreting
+
+00:02:33.017 --> 00:02:37.207
+repeated samples as additional
+independent historical hours.
+
+00:02:39.317 --> 00:02:43.357
+Consider a changed case where every
+component predicts one hundred and eighty
+
+00:02:43.357 --> 00:02:45.707
+seven for the busy request.
+
+00:02:46.297 --> 00:02:50.267
+Averaging three copies or sixty four
+copies still gives one hundred and eighty
+
+00:02:50.267 --> 00:02:50.727
+seven.
+
+00:02:51.737 --> 00:02:56.107
+Varied trees can reduce sensitivity
+to particular samples or splits.
+
+00:02:56.637 --> 00:02:59.207
+They cannot guarantee
+removal of errors they share.
+
+00:02:59.997 --> 00:03:01.267
+In the executed sweep,
+
+00:03:01.437 --> 00:03:06.029
+deeper forests improve mean validation
+error from about one hundred and sixteen
+
+00:03:06.029 --> 00:03:08.807
+point six to ninety nine point seven five.
+
+00:03:09.537 --> 00:03:12.247
+That is slightly better
+than one deep tree,
+
+00:03:12.417 --> 00:03:16.447
+while the grouped baseline remains
+better at ninety one point five seven.
+
+00:03:17.097 --> 00:03:19.847
+More machinery has not
+earned selection here.
+
+00:03:22.000 --> 00:03:27.100
+The deepest forests ninety nine point
+seven five score is a mean over seeds
+
+00:03:27.100 --> 00:03:27.970
+seventeen,
+
+00:03:28.880 --> 00:03:30.150
+twenty nine and forty three.
+
+00:03:31.100 --> 00:03:35.450
+The retained seed seventeen artifact
+scores ninety nine point eight three.
+
+00:03:36.000 --> 00:03:39.340
+It was declared as the
+representative before seeing quality,
+
+00:03:39.340 --> 00:03:41.910
+rather than chosen as a lucky seed.
+
+00:03:42.240 --> 00:03:47.140
+The small reported standard deviation
+describes algorithm variation on these
+
+00:03:47.140 --> 00:03:50.570
+same hours, not uncertainty
+over future dates.
+
+00:03:51.360 --> 00:03:55.740
+That representative snapshot contains
+about sixteen point one megabytes of
+
+00:03:55.740 --> 00:03:59.550
+numerical JSON and one hundred
+and thirty one thousand nodes.
+
+00:04:00.180 --> 00:04:04.080
+We compare this cost with the measured
+quality before deciding whether to carry
+
+00:04:04.080 --> 00:04:04.790
+it forward.
+

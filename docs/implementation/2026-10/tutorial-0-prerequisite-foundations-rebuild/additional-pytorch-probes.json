@@ -1,0 +1,33 @@
+{
+  "layout_probe": {
+    "passed": true,
+    "view_rejection_checked": true,
+    "transposed_logical_order": [
+      0,
+      3,
+      1,
+      4,
+      2,
+      5
+    ]
+  },
+  "02-workspace.md": {
+    "executed_blocks": 4,
+    "passed": true
+  },
+  "01-prediction.md": {
+    "executed_blocks": 2,
+    "passed": true
+  },
+  "cleared_notebook_schema_valid": true,
+  "inline_shifted_target_nll": {
+    "stdlib_equal_offset": "1e16",
+    "tensor_equal_offset": "1e20",
+    "positive_ln2_loss": true,
+    "gradient": [
+      0.5,
+      -0.5
+    ],
+    "passed": true
+  }
+}

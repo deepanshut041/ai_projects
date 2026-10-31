@@ -1,0 +1,32 @@
+{
+  "unit_checks": {
+    "command": "uv run --frozen python -m unittest discover -s tests -v",
+    "passed": 33
+  },
+  "run_directory": "/mnt/projects/ai/ai_projects/projects/foundations/bike-demand-planner/runs/training-mean-20261018T052729853988Z",
+  "independent_metrics": {
+    "train": {
+      "count": 8645,
+      "mae": 106.59349137179827,
+      "rmse": 133.7901154614873,
+      "mean_signed_error": 8.669525479233703e-15,
+      "mean_underprediction": 53.29674568589913,
+      "underprediction_count": 3524,
+      "mean_underprediction_when_under": 130.7464149984671
+    },
+    "validation": {
+      "count": 4357,
+      "mae": 154.24520535816333,
+      "rmse": 208.1723211740595,
+      "mean_signed_error": -71.40569005182753,
+      "mean_underprediction": 112.82544770499543,
+      "underprediction_count": 2391,
+      "mean_underprediction_when_under": 205.59618387731706
+    }
+  },
+  "training_target_sum": 1243103,
+  "test_evaluated": false,
+  "artifact_hashes_verified": true,
+  "prediction_identities_verified": true,
+  "source_content_sha256": "4a60eead2e70e31564c2f377e12760ae624411b3635052fa4ad7211648d5f0dc"
+}

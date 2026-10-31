@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "study_directory": "/mnt/projects/ai/ai_projects/projects/foundations/bike-demand-planner/runs/optimization-20261019T234355414391Z",
+  "main_trial_count": 18,
+  "pilot_trial_count": 12,
+  "failed_pilots_retained": 2,
+  "frozen_training_only_protocol_hash_verified": true,
+  "rates_selected_only_from_completed_training_pilots": true,
+  "all_main_trials_have_86450_processed_examples": true,
+  "updates_by_batch": {
+    "32": 2710,
+    "1": 86450,
+    "8645": 10
+  },
+  "epoch_orders_and_rng_match_independent_PCG64_replay": true,
+  "prediction_identities_and_all_artifact_hashes_match": true,
+  "maximum_scalar_metric_difference": 0,
+  "maximum_population_scale_difference": 6.905587213168474e-14,
+  "maximum_real_probe_difference": 1.0408340855860843e-17,
+  "all_four_indexes_unchanged": true,
+  "frozen_non_test_bytes_unchanged": true,
+  "test_targets_opened": false
+}

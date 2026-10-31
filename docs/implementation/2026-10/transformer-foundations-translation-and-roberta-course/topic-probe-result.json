@@ -1,0 +1,178 @@
+{
+  "recorded_date": "2026-10-13",
+  "interpreter": "/mnt/projects/ai/.ai/envs/attention-is-all-you-need/bin/python",
+  "python_version": "3.12.13",
+  "torch_version": "2.14.1+cpu",
+  "dtype": "torch.float64",
+  "device": "cpu",
+  "modules": [
+    "test_foundation_math",
+    "translation_checks",
+    "roberta_checks",
+    "course_session_checks",
+    "test_model_learning_probes"
+  ],
+  "original_tests": 71,
+  "new_tests": 29,
+  "tests_run": 100,
+  "failures": 0,
+  "errors": 0,
+  "successful": true,
+  "test_output": "....................................................................................................\n----------------------------------------------------------------------\nRan 100 tests in 3.538s\n\nOK\n",
+  "changed_original_examples": [],
+  "source_sha256": {
+    "model_learning_probes.py": "f281422d731e20a554ed2ab2fd2e710358b9a40af0ec9b7aa2bdaeaa7aef1f57",
+    "test_model_learning_probes.py": "9293d1f940c966e31afb25579177d2b47873996fae87bc6abff071dee2c55d42"
+  },
+  "expected_stdout": "{\"controlled_mlm\":{\"labels\":[[-100,6,7,8,-100,-100,-100]],\"mask_branch\":1,\"original_ids_unchanged\":true,\"random_branch\":1,\"random_token_ordinary\":true,\"selected\":3,\"unchanged_branch\":1,\"unchanged_selected_label_preserved\":true},\"learned_rectangular_attention\":{\"output\":[1.142857,1.428571,1.6,0.2],\"weights\":[0.142857,0.428571,0.428571,0.4,0.2,0.4]},\"mlm_expected_of_100_at_p15\":{\"mask\":12.0,\"random\":1.5,\"selected\":15.0,\"unchanged\":1.5,\"zero_selection_probability\":8.747673630108589e-08},\"qa_endpoint\":{\"end_gradient\":[0.05,0.1,0.15,-0.3],\"mean_loss\":1.060132,\"start_gradient\":[0.05,0.1,-0.35,0.2]},\"roberta_mlm_counts\":{\"backbone\":920,\"embeddings\":320,\"encoder\":600,\"head\":108,\"total\":1028},\"translation_counts\":{\"decoder\":904,\"embeddings\":128,\"encoder\":600,\"head\":81,\"total\":1713},\"utf8_characters_for_cafe\":[[0,1],[1,2],[2,3],[3,4],[3,4]],\"valid_nll\":{\"count\":2,\"logit_gradient\":[0.125,-0.125,-0.375,0.375,0.0,0.0],\"mean\":0.836988},\"visibility\":{\"roberta_can_use_right_context\":true,\"roberta_tail_padding_invariant\":true,\"scope\":\"untrained visibility controls; not held-out task quality\",\"translation_depends_on_real_source\":true,\"translation_future_prefix_invariant\":true,\"translation_source_padding_invariant\":true}}\n",
+  "report": {
+    "valid_nll": {
+      "count": 2,
+      "mean": 0.836988,
+      "logit_gradient": [
+        0.125,
+        -0.125,
+        -0.375,
+        0.375,
+        0.0,
+        0.0
+      ]
+    },
+    "learned_rectangular_attention": {
+      "weights": [
+        0.142857,
+        0.428571,
+        0.428571,
+        0.4,
+        0.2,
+        0.4
+      ],
+      "output": [
+        1.142857,
+        1.428571,
+        1.6,
+        0.2
+      ]
+    },
+    "controlled_mlm": {
+      "labels": [
+        [
+          -100,
+          6,
+          7,
+          8,
+          -100,
+          -100,
+          -100
+        ]
+      ],
+      "selected": 3,
+      "mask_branch": 1,
+      "random_branch": 1,
+      "unchanged_branch": 1,
+      "original_ids_unchanged": true,
+      "random_token_ordinary": true,
+      "unchanged_selected_label_preserved": true
+    },
+    "mlm_expected_of_100_at_p15": {
+      "selected": 15.0,
+      "mask": 12.0,
+      "random": 1.5,
+      "unchanged": 1.5,
+      "zero_selection_probability": 8.747673630108589e-08
+    },
+    "qa_endpoint": {
+      "mean_loss": 1.060132,
+      "start_gradient": [
+        0.05,
+        0.1,
+        -0.35,
+        0.2
+      ],
+      "end_gradient": [
+        0.05,
+        0.1,
+        0.15,
+        -0.3
+      ]
+    },
+    "utf8_characters_for_cafe": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "translation_counts": {
+      "embeddings": 128,
+      "head": 81,
+      "encoder": 600,
+      "decoder": 904,
+      "total": 1713
+    },
+    "roberta_mlm_counts": {
+      "embeddings": 320,
+      "encoder": 600,
+      "backbone": 920,
+      "head": 108,
+      "total": 1028
+    },
+    "visibility": {
+      "translation_future_prefix_invariant": true,
+      "translation_source_padding_invariant": true,
+      "translation_depends_on_real_source": true,
+      "roberta_can_use_right_context": true,
+      "roberta_tail_padding_invariant": true,
+      "scope": "untrained visibility controls; not held-out task quality"
+    }
+  },
+  "scope": "Author component/source checks. No learner implementation, new complete model/trainer, held-out quality or hosted recovery claim.",
+  "original_example_assets_checked": 20,
+  "standard_library_import_without_torch": true,
+  "fresh_process_recovery": {
+    "command": "python course_recovery_checks.py --project all",
+    "exit_code": 0,
+    "result": {
+      "translation_resume": true,
+      "mlm_resume": true,
+      "qa_resume": true,
+      "corrupt_fallback": true,
+      "partial_ignored": true,
+      "incompatible_rejected": true,
+      "source_identity_rejected": true,
+      "scheduler_identity_rejected": true,
+      "retained_generations": 2
+    },
+    "scope": "Local exact continuation and failure contracts; not hosted recovery."
+  },
+  "study_checks": {
+    "module": "test_course_study",
+    "tests_run": 7,
+    "successful": true,
+    "combined_command": "python -m unittest test_foundation_math translation_checks roberta_checks course_session_checks test_model_learning_probes test_course_study",
+    "combined_tests_run": 107,
+    "combined_seconds": 5.595,
+    "combined_exit_code": 0,
+    "source_sha256": "6509ffb8deb5230f5575becdc97474b476abd49c0c9909e06782b3cc13c351dd",
+    "combined_result_excerpt": "Ran 107 tests in 5.595s\n\nOK\n"
+  },
+  "changed_original_examples_after_study_integration": [
+    "examples/course_source_export.py"
+  ],
+  "study_workflow_evidence": "topic-study-export-verification.json"
+}

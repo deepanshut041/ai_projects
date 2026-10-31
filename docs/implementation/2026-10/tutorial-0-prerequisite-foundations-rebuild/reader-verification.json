@@ -1,0 +1,59 @@
+{
+  "checked_at": "2026-10-12",
+  "content_tests": {
+    "passed": true,
+    "tests": 9
+  },
+  "builds": {
+    "/": {
+      "passed": true,
+      "records": 85,
+      "catalog_sources": 13
+    },
+    "/project_docs/": {
+      "passed": true,
+      "records": 85,
+      "catalog_sources": 13
+    }
+  },
+  "browser_checks": {
+    "root": true,
+    "prefix": true,
+    "records": 85,
+    "viewport_widths": [
+      320,
+      390,
+      768,
+      1440
+    ],
+    "covers": [
+      "search ownership",
+      "course order0/1/2",
+      "chapter navigation",
+      "all local record/source links",
+      "math rendering",
+      "native practice/interactive scenarios",
+      "artifact downloads",
+      "print action",
+      "mobile menus/layouts",
+      "all declared diagram filenames by ID"
+    ]
+  },
+  "visual_review": {
+    "declared_diagrams": 15,
+    "reviewed": 15,
+    "matrix_rows": [
+      6,
+      1,
+      3
+    ],
+    "desktop_and_mobile": true,
+    "layout_trace": true
+  },
+  "course_order": [
+    0,
+    1,
+    2
+  ],
+  "passed": true
+}

@@ -1,0 +1,247 @@
+{
+  "scope": "All 25 topic lessons: standalone Python code blocks with imports, each run in a fresh process with examples as working directory",
+  "interpreter": "/mnt/projects/ai/ai_projects/projects/attention-is-all-you-need/.venv/bin/python",
+  "results": [
+    {
+      "file": "lessons/02-workspace.md",
+      "block": 1,
+      "line": 24,
+      "sha256": "74c802bb55d1edb9ab6431c02d337a54d7993d3116fc76250af669336623c374",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/02-workspace.md",
+      "block": 2,
+      "line": 40,
+      "sha256": "8ad295e4e3bb2bb718fb7c5af589b62f16bd4539fd3f6aa5a8499419f405df19",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/02-workspace.md",
+      "block": 3,
+      "line": 57,
+      "sha256": "8bcb51554450a9a6e667da231d9bdcab9470917ebdcaa1aac25f0f580573827b",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/03-numbers.md",
+      "block": 1,
+      "line": 48,
+      "sha256": "95a26b9564a62fa490de557b3bdee5effe4a8874c37acefeb68030f64269296f",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/04-autograd.md",
+      "block": 1,
+      "line": 51,
+      "sha256": "376a888694637261cd054a0641d09773d801e5904f0f4874463f079be4fa49c2",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/04-probability.md",
+      "block": 1,
+      "line": 44,
+      "sha256": "b5b561d65574f8df5951c30f3d7b79179b080b4da378507753e6972f8ebafd07",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/05-tokenizer.md",
+      "block": 1,
+      "line": 9,
+      "sha256": "74296f7a4a1f31ca6e461d84cecb15c4972ae2a148d1f39d536345d0d293bf4b",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/06-data.md",
+      "block": 1,
+      "line": 44,
+      "sha256": "2405bf7de5e3a26ddf87d514a863c33c0e587ef9732d0ca980c2ce1d3a5dbf74",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/06-initialization.md",
+      "block": 1,
+      "line": 36,
+      "sha256": "13244a32151352859a46ec3c2f1b51166b1af0eb2b6fc579f52845e7806a3792",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/07-attention.md",
+      "block": 1,
+      "line": 54,
+      "sha256": "7b3994506205e235b88ffa28d539edac8dfce16059aa9422b0652fb2bc00634c",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/08-losses.md",
+      "block": 1,
+      "line": 39,
+      "sha256": "200187010e037726bafcea9a4d309ae581760a381b1a4460bfb02bd0bc2d87b6",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/08-model.md",
+      "block": 1,
+      "line": 53,
+      "sha256": "e19485e0d1fe556c4114faef7c8d0ee6be86d93c1b410b8abe271f9fc33da7f6",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/09-optimizers.md",
+      "block": 1,
+      "line": 42,
+      "sha256": "a75abfaa55ed6d09ace212c7224072e1ed3f6dee882edf6cb50b6fca61a48a62",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/10-training-steps.md",
+      "block": 1,
+      "line": 9,
+      "sha256": "2818b1b0e07dd9b8ff3a3a9dd6e5cce6cf6a0f29b3452904c577678a95499ed0",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/13-embeddings.md",
+      "block": 1,
+      "line": 23,
+      "sha256": "660fb466d4c9263b33dd073d04f8e9d2cbb5d257040b91f1ebb4370e1ae1431a",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/14-position.md",
+      "block": 1,
+      "line": 29,
+      "sha256": "3a11ce5c0e69f4a419aa14f3c0823705e748c52e594d4911ee2cab9af3d42731",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/16-masks.md",
+      "block": 1,
+      "line": 31,
+      "sha256": "e4095171494fb95d2a8d88e94bc2cd81fb24736777c71264731f8f810fdb3792",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/17-multihead.md",
+      "block": 1,
+      "line": 31,
+      "sha256": "1d44b5c218cb79f4ca9d3168e6e152d3db5011a37021249adc4395920bfc8f35",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/18-positionwise-ffn.md",
+      "block": 1,
+      "line": 26,
+      "sha256": "a048a92fd7c46a9b9eba1bd9b9ffe763027c30689ffdcc8b734941239d1c0797",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/19-residual.md",
+      "block": 1,
+      "line": 33,
+      "sha256": "a019c4bf8d453a8463adf8d0f32b7eb03f774d3ab6d9eef73097310aecd5476c",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/20-normalization.md",
+      "block": 1,
+      "line": 42,
+      "sha256": "e0bc017182dbacbdfa5828ffa97559809ea3e2f8162b307c744ba359b4cd4282",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/21-regularization.md",
+      "block": 1,
+      "line": 70,
+      "sha256": "e9cfc6d58383ea70b6ecb2da346a0c2dc750d20c4e05731b27fae9d84154ab96",
+      "returncode": 0,
+      "stdout": "smoothed loss: 0.6485614662970294\nevaluation identity and gradient-mode checks passed\n",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/22-encoder-decoder.md",
+      "block": 1,
+      "line": 46,
+      "sha256": "2e469822417e826e62ac284356b72c20429e88ac539142a2263c168cd8173707",
+      "returncode": 0,
+      "stdout": "decoder: [[1, 4, 5, 6], [1, 7, 0, 0]]\nvalid targets: 6 uniform mean NLL: 2.0794413884480796\n",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/09-training.md",
+      "block": 1,
+      "line": 31,
+      "sha256": "7c61ed2abecf9f08553aaabd57f7392349f1e2733c09d1999a9facb77c87678b",
+      "returncode": 0,
+      "stdout": "validation before: {'split': 'validation', 'loss': 0.7687182426452637, 'correct': 18, 'count': 36, 'accuracy': 0.5}\nvalidation after: {'split': 'validation', 'loss': 0.00012999554423408376, 'correct': 36, 'count': 36, 'accuracy': 1.0}\nupdates/examples: 1000 16000\n",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/10-recovery.md",
+      "block": 1,
+      "line": 73,
+      "sha256": "c1d72db690d3b3c5acc410ea251f07699c6c812c2c03c6b42d1e034726cd6345",
+      "returncode": 0,
+      "stdout": "same update: 4 fallback update: 3\n",
+      "stderr": ""
+    },
+    {
+      "file": "lessons/11-colab-and-handoff.md",
+      "block": 1,
+      "line": 68,
+      "sha256": "1904840000e60141e0503da15e75e19cc823f05f768947171130c0326f1f7e9e",
+      "returncode": 0,
+      "stdout": "parameters: 2138 explicit score bytes: 592 schedule: [0.0625, 0.25, 0.125]\n",
+      "stderr": ""
+    }
+  ],
+  "passed": 26,
+  "total": 26,
+  "current_content_digest_check": {
+    "blocks": 26,
+    "unverified": 0,
+    "changed_since_execution": 0
+  }
+}

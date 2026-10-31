@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "languages": [
+    "cpp",
+    "python"
+  ],
+  "projects": [
+    {
+      "id": "P00",
+      "title": "Tokenization and Transformer Foundations",
+      "status": "prerequisite-and-model-courses-available",
+      "lessons": [
+        "projects/p00/transformer-foundations/v1",
+        "projects/p00/transformer-course/v1"
+      ]
+    },
+    {
+      "id": "P01",
+      "title": "Small GPT Language Model",
+      "status": "integrated-tutorial-available",
+      "lessons": [
+        "projects/p01/small-gpt/v1"
+      ]
+    },
+    {
+      "id": "P02",
+      "title": "GPT-2",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P03",
+      "title": "Llama 2 → Llama 3",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P04",
+      "title": "Qwen3 Dense",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P05",
+      "title": "Switch-style routing → Qwen3 MoE",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P06",
+      "title": "Qwen3-Next",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P07",
+      "title": "PaliGemma",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P08",
+      "title": "Qwen3.5",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P09",
+      "title": "Qwen3.8 dense VLM",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P10",
+      "title": "Gemma 4 E2B text model",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P11",
+      "title": "DeepSeek V3 → V3.2",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P12",
+      "title": "DeepSeek V4-Flash-style model",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P13",
+      "title": "Qwen3.8-Flash-Next-style model",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P14",
+      "title": "Kimi Linear → Kimi K3-style model",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P15",
+      "title": "DeepSeek V4.1-Flash-style model",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P16",
+      "title": "Mamba 2 → Mamba 3",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P17",
+      "title": "RWKV-7",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P18",
+      "title": "LLaDA → iLLaDA; optional editing extension",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "P19",
+      "title": "Gemma 4 unified multimodal",
+      "status": "planned",
+      "lessons": []
+    },
+    {
+      "id": "bike-demand-planner",
+      "title": "Foundation Lab",
+      "status": "integrated-tutorial-available",
+      "lessons": [
+        "projects/bike-demand-planner/foundation-lab/v1"
+      ]
+    },
+    {
+      "id": "attention-is-all-you-need",
+      "title": "Attention Is All You Need",
+      "status": "setup-and-attention-tutorial-available",
+      "lessons": [
+        "projects/attention-is-all-you-need/attention-lab/v1"
+      ]
+    },
+    {
+      "id": "document-assistant",
+      "title": "Document Assistant",
+      "status": "full-phase-written-tutorial-available",
+      "lessons": [
+        "projects/document-assistant/quantization-lab/v1"
+      ]
+    },
+    {
+      "id": "attention-labs",
+      "title": "Attention Labs",
+      "status": "tutorials-available",
+      "lessons": [
+        "projects/attention-labs/attention-foundations/v1",
+        "projects/attention-labs/attention-heads/v1",
+        "projects/attention-labs/attention-inference/v1",
+        "projects/attention-labs/attention-position/v1",
+        "projects/attention-labs/attention-kernels/v1",
+        "projects/attention-labs/attention-sparse/v1",
+        "projects/attention-labs/attention-linear/v1",
+        "projects/attention-labs/attention-distributed/v1"
+      ]
+    }
+  ],
+  "course_sequence": [
+    "projects/p00/transformer-foundations/v1",
+    "projects/p00/transformer-course/v1",
+    "projects/p01/small-gpt/v1"
+  ],
+  "reference_lessons": [],
+  "course_number_start": 0
+}

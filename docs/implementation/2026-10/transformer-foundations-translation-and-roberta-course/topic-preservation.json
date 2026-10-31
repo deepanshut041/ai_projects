@@ -1,0 +1,46 @@
+{
+  "protected_tutorial_files": 148,
+  "protected_changes": [
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/validation.json",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/render.json",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lesson.md",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/project/implementation.md",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/01-prediction.md",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/02-workspace.md"
+  ],
+  "original_example_count": 20,
+  "original_changed": [
+    "examples/course_source_export.py"
+  ],
+  "children": {
+    "transformer-foundations-lab": {
+      "path": "/mnt/projects/ai/ai_projects/projects/transformer-labs/transformer-foundations-lab",
+      "baseline_head": "b7ffaa6911c305c07823b474cbfbda1169d8e158",
+      "nested_git_control_present": false,
+      "changed_or_missing_files": [
+        "docs/implementation/2026-10/p00-foundations-implementation-and-learning/01-research.md",
+        "AGENTS.md",
+        "docs/implementation/2026-10/p00-foundations-implementation-and-learning/03-tasks.md",
+        "README.md",
+        "docs/implementation/2026-10/p00-foundations-implementation-and-learning/05-tracker.md",
+        "docs/implementation/2026-10/p00-foundations-implementation-and-learning/02-human-plan.md",
+        "docs/implementation/2026-10/p00-foundations-implementation-and-learning/02-implementation-plan.md",
+        "docs/implementation/2026-10/p00-foundations-implementation-and-learning/00-resume.md"
+      ],
+      "verified_file_count": 19
+    },
+    "attention-is-all-you-need": {
+      "path": "/mnt/projects/ai/ai_projects/projects/transformer-labs/attention-is-all-you-need",
+      "baseline_head": "475c6347104c1de9a8c158171b9f6f3228d1aba3",
+      "nested_git_control_present": false,
+      "changed_or_missing_files": [
+        "docs/COLAB.md"
+      ],
+      "verified_file_count": 30
+    }
+  },
+  "migration": "Externally authorized D053 moved children and retired their nested Git controls; this task preserves current ownership and core source.",
+  "old_chapters_preserved": true,
+  "protected_changes_explanation": "Six Tutorial 0 files changed in the concurrent authorized layout migration: project-path/runtime instructions and generated render/validation assets. This task did not write Tutorial 0 or Small GPT files.",
+  "child_changes_explanation": "Changed child records are migration path/ownership/runtime documentation. Core implementation, first_prediction.py, numerics, attention source and notebooks match the baseline; previous child HEADs are archived history, not active nested repositories."
+}

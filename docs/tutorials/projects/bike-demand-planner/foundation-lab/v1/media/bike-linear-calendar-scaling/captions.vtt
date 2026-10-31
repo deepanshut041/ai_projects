@@ -1,0 +1,237 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:03.610
+What does our linear model
+receive when it predicts an hour?
+
+00:00:04.160 --> 00:00:08.290
+Take Monday, the third of January,
+twenty eleven, at eight in the morning.
+
+00:00:08.700 --> 00:00:10.410
+This is training record fifty four.
+
+00:00:11.240 --> 00:00:14.670
+Under the retained convention,
+the request is issued at seven.
+
+00:00:15.060 --> 00:00:17.950
+It predicts observed rentals
+during eight to nine.
+
+00:00:18.560 --> 00:00:21.510
+The recorded outcome is one
+hundred and fifty four rentals,
+
+00:00:21.660 --> 00:00:23.330
+available after that interval.
+
+00:00:24.060 --> 00:00:26.650
+Calendar information is
+available in advance.
+
+00:00:27.280 --> 00:00:31.260
+The target and observed target hour
+weather are excluded from prediction
+
+00:00:31.260 --> 00:00:32.110
+inputs.
+
+00:00:32.540 --> 00:00:34.580
+We are following a real
+training observation,
+
+00:00:34.580 --> 00:00:38.550
+with the same information boundary
+used by the earlier baselines.
+
+00:00:40.957 --> 00:00:44.767
+The raw vector has forty five
+columns in a fixed order.
+
+00:00:45.277 --> 00:00:46.867
+Hour eight, Monday,
+
+00:00:47.917 --> 00:00:48.217
+January
+
+00:00:48.617 --> 00:00:50.507
+and the working day flag are active.
+
+00:00:51.017 --> 00:00:54.307
+Every other entry is zero,
+including the holiday flag.
+
+00:00:55.297 --> 00:00:57.607
+Record identity is stored separately.
+
+00:00:58.677 --> 00:01:03.457
+A raw coordinate linear forecast adds an
+intercept and the coefficients for these
+
+00:01:03.457 --> 00:01:04.507
+active inputs.
+
+00:01:04.997 --> 00:01:07.607
+Each adjustment is shared
+by many observations.
+
+00:01:08.697 --> 00:01:13.577
+Expanding the hour into separate
+indicators lets eight and two receive
+
+00:01:13.577 --> 00:01:18.467
+different effects, without assuming a
+constant increase for every hour number.
+
+00:01:19.057 --> 00:01:24.517
+Multiplying columns in the wrong order can
+produce a number with valid dimensions and
+
+00:01:24.517 --> 00:01:25.527
+the wrong meaning.
+
+00:01:26.237 --> 00:01:28.727
+The saved feature order
+is part of the predictor.
+
+00:01:30.983 --> 00:01:33.953
+The training loop uses
+standardized coordinates.
+
+00:01:34.823 --> 00:01:35.653
+For each column,
+
+00:01:35.743 --> 00:01:40.713
+subtract its training mean and divide
+by its population standard deviation.
+
+00:01:41.563 --> 00:01:46.563
+The hour eight indicator has a training
+mean near zero point zero four two,
+
+00:01:46.563 --> 00:01:50.153
+and a scale near zero point two zero one.
+
+00:01:50.663 --> 00:01:52.413
+For our active indicator,
+
+00:01:52.803 --> 00:01:55.913
+one minus that mean, divided by the scale,
+
+00:01:56.103 --> 00:01:59.093
+is about four point seven seven six six.
+
+00:01:59.783 --> 00:02:02.673
+Inactive columns become
+negative after centering.
+
+00:02:03.243 --> 00:02:05.993
+We must use the full standardized vector,
+
+00:02:06.123 --> 00:02:09.413
+rather than only its four
+originally active entries.
+
+00:02:10.123 --> 00:02:13.553
+The transformation changes numerical
+coordinates for optimization.
+
+00:02:14.263 --> 00:02:18.373
+It adds no information and leaves
+the target in rentals per hour.
+
+00:02:20.442 --> 00:02:26.192
+The source computes one mean and one
+population deviation per feature column.
+
+00:02:26.682 --> 00:02:29.252
+Axis zero reduces over training rows.
+
+00:02:29.802 --> 00:02:32.232
+The denominator is the
+full training count.
+
+00:02:32.742 --> 00:02:37.632
+A constant column receives scale one,
+protecting against division by zero.
+
+00:02:38.202 --> 00:02:40.492
+It then maps to zero on training.
+
+00:02:41.002 --> 00:02:43.792
+The model saves these
+values beside its weights.
+
+00:02:44.282 --> 00:02:48.452
+Prediction transforms new raw
+inputs with the saved statistics,
+
+00:02:48.942 --> 00:02:51.572
+then applies the dot
+product and intercept.
+
+00:02:52.122 --> 00:02:54.732
+The real training
+columns are not constant,
+
+00:02:55.222 --> 00:02:57.352
+but a small fixture checks that policy.
+
+00:02:57.982 --> 00:03:01.632
+Standardization does not remove
+dependent indicator columns.
+
+00:03:02.042 --> 00:03:05.802
+It makes the gradient coordinates
+more comparable while preserving the
+
+00:03:05.802 --> 00:03:07.452
+representable linear function.
+
+00:03:09.567 --> 00:03:13.977
+Suppose a later request batch
+contains mostly eight oclock hours.
+
+00:03:14.367 --> 00:03:17.277
+Should we recompute the
+feature mean from that batch?
+
+00:03:17.787 --> 00:03:19.897
+We keep the saved training mean.
+
+00:03:20.107 --> 00:03:22.257
+The weights were fitted
+in those coordinates.
+
+00:03:22.807 --> 00:03:27.567
+A new batch mean would change the meaning
+of the same coefficient and could make one
+
+00:03:27.567 --> 00:03:31.157
+forecast depend on the other
+requests submitted beside it.
+
+00:03:31.587 --> 00:03:32.297
+Likewise,
+
+00:03:32.467 --> 00:03:37.527
+assigning scale one to a constant training
+feature does not teach its effect for a
+
+00:03:37.527 --> 00:03:38.797
+value never observed.
+
+00:03:39.307 --> 00:03:40.717
+That remains limited evidence.
+
+00:03:41.467 --> 00:03:43.357
+The raw exports stay unchanged.
+
+00:03:43.967 --> 00:03:45.717
+The scaler is learned state,
+
+00:03:45.967 --> 00:03:50.317
+fitted only on training and reused
+consistently for every later prediction.
+

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="500" viewBox="0 0 1160 500" role="img"><title>Compare retained KV bytes under one contract</title><desc>One token, one layer, Hq = 32, dk = dv = 128, FP16 = 2 bytes per element.</desc>
+<rect x="0" y="0" width="1160" height="500" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">Compare retained KV bytes under one contract</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">One token, one layer, Hq = 32, dk = dv = 128, FP16 = 2 bytes per element.</text>
+<text x="36" y="150" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="start" fill="#2563b9">MHA: 32 KV heads</text>
+<rect x="325" y="125" width="565" height="37" rx="4" fill="#e9edf6"/>
+<rect x="325" y="125" width="565.0" height="37" rx="4" fill="#2563b9"/>
+<text x="910" y="150" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">16,384 B</text>
+<text x="36" y="250" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="start" fill="#16735e">GQA: 8 KV heads</text>
+<rect x="325" y="225" width="565" height="37" rx="4" fill="#e9edf6"/>
+<rect x="325" y="225" width="141.25" height="37" rx="4" fill="#16735e"/>
+<text x="910" y="250" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">4,096 B</text>
+<text x="36" y="350" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="start" fill="#b65a1c">MQA: 1 KV head</text>
+<rect x="325" y="325" width="565" height="37" rx="4" fill="#e9edf6"/>
+<rect x="325" y="325" width="17.65625" height="37" rx="4" fill="#b65a1c"/>
+<text x="910" y="350" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">512 B</text>
+<text x="36" y="442" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">All bars use a common zero and byte scale. Only the retained KV-head count changes.</text>
+</svg>

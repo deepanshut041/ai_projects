@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "wheel_entries": 27,
+  "source_entries": 62,
+  "source_wheel_installed_modules_identical": true,
+  "private_material_excluded": true,
+  "sha256": {
+    "bike_demand_planner-0.1.0-py3-none-any.whl": "98350c9274aa3ebb41b08a015c2bc817394d07a8197eae21ef32cec894ca6b5b",
+    "bike_demand_planner-0.1.0.tar.gz": "5df90359d76f0da520976dac384a4ca5a8b8a8e1bab4e9ae4f175bc6973e8872"
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "schema": 1,
+  "updated": "2026-10-09",
+  "collections": [
+    {
+      "id": "attention",
+      "title": "Attention"
+    },
+    {
+      "id": "modeling",
+      "title": "Modeling and evaluation"
+    },
+    {
+      "id": "retrieval",
+      "title": "Retrieval"
+    },
+    {
+      "id": "tooling",
+      "title": "Workspace tooling"
+    },
+    {
+      "id": "foundations",
+      "title": "Tokenization and Transformer foundations"
+    }
+  ],
+  "archive": {
+    "files": 0,
+    "bytes": 0
+  },
+  "sources": [
+    {
+      "id": "attention-paper",
+      "title": "Attention Is All You Need — arXiv v7, architecture and training",
+      "url": "https://arxiv.org/html/1706.03762v7",
+      "collection": "attention",
+      "kind": "Paper",
+      "access": "link-checked",
+      "review": "Figure 1 and sections 3.1–3.5/5 inspected for P00; published results not reproduced",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "linear-models",
+      "title": "scikit-learn: Linear models",
+      "url": "https://scikit-learn.org/stable/modules/linear_model.html",
+      "collection": "modeling",
+      "kind": "Documentation",
+      "access": "link-checked",
+      "review": "relevant section inspected",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "numpy-lstsq",
+      "title": "NumPy: numpy.linalg.lstsq",
+      "url": "https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html",
+      "collection": "modeling",
+      "kind": "Documentation",
+      "access": "link-checked",
+      "review": "API reference inspected",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "tfidf",
+      "title": "scikit-learn: Text feature extraction",
+      "url": "https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction",
+      "collection": "retrieval",
+      "kind": "Documentation",
+      "access": "link-checked",
+      "review": "relevant section inspected",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "ranking-metrics",
+      "title": "scikit-learn: Model evaluation",
+      "url": "https://scikit-learn.org/stable/modules/model_evaluation.html#ranking-metrics",
+      "collection": "retrieval",
+      "kind": "Documentation",
+      "access": "link-checked",
+      "review": "metric context inspected",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "uv-sync",
+      "title": "uv: Locking and syncing",
+      "url": "https://docs.astral.sh/uv/concepts/projects/sync/",
+      "collection": "tooling",
+      "kind": "Documentation",
+      "access": "link-checked",
+      "review": "workflow inspected",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "textual-table",
+      "title": "Textual: DataTable",
+      "url": "https://textual.textualize.io/widgets/data_table/",
+      "collection": "tooling",
+      "kind": "Documentation",
+      "access": "link-checked",
+      "review": "API reference inspected",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "bpe-subword-paper",
+      "title": "Neural Machine Translation of Rare Words with Subword Units — v5",
+      "url": "https://arxiv.org/html/1508.07909v5",
+      "collection": "foundations",
+      "kind": "Paper",
+      "access": "link-checked",
+      "review": "section 3.2 and Algorithm 1 inspected; byte adaptation explicitly distinguished",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "minbpe-reference",
+      "title": "minbpe: byte-BPE learning reference",
+      "url": "https://github.com/karpathy/minbpe/blob/1acefe89412b20245db5a22d2a02001e547dc602/README.md",
+      "collection": "foundations",
+      "kind": "Code",
+      "access": "link-checked",
+      "review": "pinned README inspected; train/encode/decode/save/load and special-token policies",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "annotated-transformer-reference",
+      "title": "Harvard Annotated Transformer: component/copy-task reference",
+      "url": "https://github.com/harvardnlp/annotated-transformer/blob/debc9fd747bb2123160a98046ad1c2d4da44a567/the_annotated_transformer.py",
+      "collection": "foundations",
+      "kind": "Code",
+      "access": "link-checked",
+      "review": "SublayerConnection/EncoderLayer/DecoderLayer/data_gen/greedy_decode inspected; convenience pre-norm differs from paper",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "pytorch-autograd-foundations",
+      "title": "PyTorch automatic differentiation primer",
+      "url": "https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html",
+      "collection": "foundations",
+      "kind": "Documentation",
+      "access": "link-checked",
+      "review": "graph/backward/gradient accumulation sections inspected for bounded P00 primer",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "small-gpt-reference",
+      "title": "build-nanoGPT: decoder reference",
+      "url": "https://github.com/karpathy/build-nanogpt/blob/6104ab1b53920f6e2159749676073ff7d815c1fa/train_gpt2.py",
+      "collection": "foundations",
+      "kind": "Code",
+      "access": "link-checked",
+      "review": "Block/GPTConfig/GPT inspected; pre-norm/learned-position/GELU reference, not training-budget defaults",
+      "checked": "2026-10-09"
+    },
+    {
+      "id": "cs336-foundations-reference",
+      "title": "Stanford CS336 assignment 1: optional exercise reference",
+      "url": "https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/README.md",
+      "collection": "foundations",
+      "kind": "Code",
+      "access": "link-checked",
+      "review": "README setup/test/data sections inspected; optional reference, full assignment not required",
+      "checked": "2026-10-09"
+    }
+  ]
+}

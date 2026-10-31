@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="650" viewBox="0 0 1160 650" role="img"><title>Distance penalties become a normalized retrieval</title><desc>Query position i = 3; content logits all zero; arithmetic slope m = 0.5.</desc>
+<rect x="0" y="0" width="1160" height="650" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">Distance penalties become a normalized retrieval</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">Query position i = 3; content logits all zero; arithmetic slope m = 0.5.</text>
+<rect x="36" y="120" width="310" height="380" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="152" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">1. Add −m × distance</text>
+<rect x="390" y="120" width="380" height="380" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="408" y="152" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#2563b9">2. Softmax across keys</text>
+<rect x="814" y="120" width="310" height="380" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="832" y="152" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#16735e">3. Multiply by values</text>
+<text x="56" y="205" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">key 0: d=3 → -1.5</text>
+<text x="410" y="205" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">key 0    0.101536</text>
+<rect x="410" y="217" width="338" height="19" rx="4" fill="#e9edf6"/>
+<rect x="410" y="217" width="34.31927754294451" height="19" rx="4" fill="#2563b9"/>
+<text x="834" y="205" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">0.101536 × 1</text>
+<text x="56" y="278" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">key 1: d=2 → -1</text>
+<text x="410" y="278" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">key 1    0.167405</text>
+<rect x="410" y="290" width="338" height="19" rx="4" fill="#e9edf6"/>
+<rect x="410" y="290" width="56.58292288011384" height="19" rx="4" fill="#2563b9"/>
+<text x="834" y="278" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">0.167405 × 2</text>
+<text x="56" y="351" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">key 2: d=1 → -0.5</text>
+<text x="410" y="351" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">key 2    0.276004</text>
+<rect x="410" y="363" width="338" height="19" rx="4" fill="#e9edf6"/>
+<rect x="410" y="363" width="93.28946851082864" height="19" rx="4" fill="#2563b9"/>
+<text x="834" y="351" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">0.276004 × 3</text>
+<text x="56" y="424" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">key 3: d=0 → 0</text>
+<text x="410" y="424" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">key 3    0.455054</text>
+<rect x="410" y="436" width="338" height="19" rx="4" fill="#e9edf6"/>
+<rect x="410" y="436" width="153.808331066113" height="19" rx="4" fill="#2563b9"/>
+<text x="834" y="424" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">0.455054 × 4</text>
+<line x1="350" y1="309" x2="383" y2="309" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="383.00,309.00 372.87,313.28 372.87,304.72" fill="#6846c7"/>
+<line x1="774" y1="309" x2="807" y2="309" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="807.00,309.00 796.87,313.28 796.87,304.72" fill="#6846c7"/>
+<text x="36" y="556" font-family="DejaVu Sans" font-size="24" font-weight="700" text-anchor="start" fill="#6846c7">Σ exp(logit) = 2.197540</text>
+<text x="670" y="556" font-family="DejaVu Sans" font-size="24" font-weight="700" text-anchor="start" fill="#16735e">Σ a[j]V[j] = 3.084576</text>
+<text x="36" y="610" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">Future keys are masked separately. The newest key has no distance penalty.</text>
+</svg>

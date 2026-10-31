@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="710" viewBox="0 0 1160 710" role="img"><title>Forget first, then correct the remaining prediction</title><desc>Initial S = diag(2,4), k = [1,0], v = [5,0], decay α = 0.5, write β = 0.25.</desc>
+<rect x="0" y="0" width="1160" height="710" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">Forget first, then correct the remaining prediction</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">Initial S = diag(2,4), k = [1,0], v = [5,0], decay α = 0.5, write β = 0.25.</text>
+<rect x="36" y="120" width="348" height="442" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="152" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#2563b9">1. Old state</text>
+<text x="59" y="201" font-family="DejaVu Sans" font-size="19" font-weight="400" text-anchor="start" fill="#17253f">key rows × value columns</text>
+<rect x="100" y="231" width="90" height="70" rx="7" fill="#e3ebfa" stroke="#2563b9" stroke-width="1.5"/>
+<text x="145" y="277" font-family="DejaVu Sans" font-size="29" font-weight="700" text-anchor="middle" fill="#2563b9">2</text>
+<rect x="204" y="231" width="90" height="70" rx="7" fill="#f1f3f8"/>
+<text x="249" y="277" font-family="DejaVu Sans" font-size="29" font-weight="700" text-anchor="middle" fill="#53617b">0</text>
+<rect x="100" y="312" width="90" height="70" rx="7" fill="#f1f3f8"/>
+<text x="145" y="358" font-family="DejaVu Sans" font-size="29" font-weight="700" text-anchor="middle" fill="#53617b">0</text>
+<rect x="204" y="312" width="90" height="70" rx="7" fill="#e3ebfa" stroke="#2563b9" stroke-width="1.5"/>
+<text x="249" y="358" font-family="DejaVu Sans" font-size="29" font-weight="700" text-anchor="middle" fill="#2563b9">4</text>
+<text x="59" y="463" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">k S = [2,0]</text>
+<rect x="406" y="120" width="348" height="442" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="424" y="152" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#16735e">2. Decay every entry</text>
+<text x="429" y="201" font-family="DejaVu Sans" font-size="19" font-weight="400" text-anchor="start" fill="#17253f">key rows × value columns</text>
+<rect x="470" y="231" width="90" height="70" rx="7" fill="#e3ebfa" stroke="#16735e" stroke-width="1.5"/>
+<text x="515" y="277" font-family="DejaVu Sans" font-size="29" font-weight="700" text-anchor="middle" fill="#16735e">1</text>
+<rect x="574" y="231" width="90" height="70" rx="7" fill="#f1f3f8"/>
+<text x="619" y="277" font-family="DejaVu Sans" font-size="29" font-weight="700" text-anchor="middle" fill="#53617b">0</text>
+<rect x="470" y="312" width="90" height="70" rx="7" fill="#f1f3f8"/>
+<text x="515" y="358" font-family="DejaVu Sans" font-size="29" font-weight="700" text-anchor="middle" fill="#53617b">0</text>
+<rect x="574" y="312" width="90" height="70" rx="7" fill="#e3ebfa" stroke="#16735e" stroke-width="1.5"/>
+<text x="619" y="358" font-family="DejaVu Sans" font-size="29" font-weight="700" text-anchor="middle" fill="#16735e">2</text>
+<text x="429" y="463" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">k (α S) = [1,0]</text>
+<text x="429" y="494" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">residual = [4,0]</text>
+<rect x="776" y="120" width="348" height="442" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="794" y="152" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#b65a1c">3. Add the correction</text>
+<text x="799" y="201" font-family="DejaVu Sans" font-size="19" font-weight="400" text-anchor="start" fill="#17253f">key rows × value columns</text>
+<rect x="840" y="231" width="90" height="70" rx="7" fill="#e3ebfa" stroke="#b65a1c" stroke-width="1.5"/>
+<text x="885" y="277" font-family="DejaVu Sans" font-size="29" font-weight="700" text-anchor="middle" fill="#b65a1c">2</text>
+<rect x="944" y="231" width="90" height="70" rx="7" fill="#f1f3f8"/>
+<text x="989" y="277" font-family="DejaVu Sans" font-size="29" font-weight="700" text-anchor="middle" fill="#53617b">0</text>
+<rect x="840" y="312" width="90" height="70" rx="7" fill="#f1f3f8"/>
+<text x="885" y="358" font-family="DejaVu Sans" font-size="29" font-weight="700" text-anchor="middle" fill="#53617b">0</text>
+<rect x="944" y="312" width="90" height="70" rx="7" fill="#e3ebfa" stroke="#b65a1c" stroke-width="1.5"/>
+<text x="989" y="358" font-family="DejaVu Sans" font-size="29" font-weight="700" text-anchor="middle" fill="#b65a1c">2</text>
+<text x="799" y="463" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">add β kᵀ [4,0]</text>
+<text x="799" y="494" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">→ first diagonal +1</text>
+<line x1="390" y1="330" x2="399" y2="330" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="399.00,330.00 388.87,334.28 388.87,325.72" fill="#6846c7"/>
+<line x1="760" y1="330" x2="769" y2="330" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="769.00,330.00 758.87,334.28 758.87,325.72" fill="#6846c7"/>
+<rect x="36" y="594" width="1088" height="73" rx="12" fill="#fbe9ed"/>
+<text x="56" y="640" font-family="DejaVu Sans" font-size="23" font-weight="700" text-anchor="start" fill="#b13f56">Wrong order: residual from old read 2 gives 1 + .25(5−2) = 1.75, not 2.</text>
+</svg>

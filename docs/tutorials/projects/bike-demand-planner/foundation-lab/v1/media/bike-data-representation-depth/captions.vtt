@@ -1,0 +1,409 @@
+WEBVTT
+
+1
+00:00:00.720 --> 00:00:02.570
+Year is known in advance,
+
+2
+00:00:03.000 --> 00:00:07.170
+so omitting it is a modelling decision
+rather than a leakage restriction.
+
+3
+00:00:07.840 --> 00:00:10.870
+Every training observation
+belongs to twenty eleven,
+
+4
+00:00:11.000 --> 00:00:13.430
+where the raw year flag is zero.
+
+5
+00:00:14.240 --> 00:00:18.350
+A linear weight gradient equals
+residual times feature value.
+
+6
+00:00:18.860 --> 00:00:23.250
+Multiplying by that zero feature
+gives zero for every training example.
+
+7
+00:00:23.880 --> 00:00:28.690
+The data therefore cannot identify a
+year to year effect through this column.
+
+8
+00:00:29.160 --> 00:00:33.710
+A year flag of one in twenty twelve
+would use an unsupported coefficient.
+
+9
+00:00:34.400 --> 00:00:36.130
+We leave it out of the first schema.
+
+10
+00:00:38.109 --> 00:00:42.749
+We retain month and omit the
+coarser season code from this first
+
+11
+00:00:42.749 --> 00:00:43.819
+representation.
+
+12
+00:00:44.549 --> 00:00:48.239
+The source documents disagree
+about some season names,
+
+13
+00:00:48.409 --> 00:00:52.159
+so we retain the codes without
+assigning uncertain names.
+
+14
+00:00:52.649 --> 00:00:56.799
+We have not tested whether including
+season would improve a predictor.
+
+15
+00:00:57.589 --> 00:01:02.029
+A later feature comparison can ask that
+question using the same frozen validation
+
+16
+00:01:02.029 --> 00:01:02.899
+period.
+
+17
+00:01:03.969 --> 00:01:08.779
+Source documentation also differs on
+some weather normalization details.
+
+18
+00:01:09.329 --> 00:01:13.909
+We validate retained numeric ranges
+without inventing disputed temperature
+
+19
+00:01:13.909 --> 00:01:14.799
+conversions.
+
+20
+00:01:17.025 --> 00:01:21.195
+Exactly one hour indicator
+is active for every row.
+
+21
+00:01:21.745 --> 00:01:26.215
+Add two to every hour coefficient,
+and subtract two from the bias.
+
+22
+00:01:26.825 --> 00:01:32.175
+The prediction stays unchanged, because
+one added two cancels the subtracted two.
+
+23
+00:01:32.785 --> 00:01:36.975
+Full category groups and the intercept
+therefore contain dependencies.
+
+24
+00:01:37.845 --> 00:01:40.635
+Some flags overlap with
+calendar groups as well.
+
+25
+00:01:41.145 --> 00:01:45.965
+A model can have useful predictions while
+individual coefficient values are not
+
+26
+00:01:45.965 --> 00:01:46.655
+unique.
+
+27
+00:01:47.245 --> 00:01:52.065
+We should be careful about treating one
+coefficient as a unique effect or a causal
+
+28
+00:01:52.065 --> 00:01:53.015
+explanation.
+
+29
+00:01:55.067 --> 00:02:00.607
+Dropping one reference indicator from each
+of the three category groups removes three
+
+30
+00:02:00.607 --> 00:02:01.277
+columns.
+
+31
+00:02:02.027 --> 00:02:04.037
+Forty five becomes forty two,
+
+32
+00:02:04.447 --> 00:02:05.997
+with the two flags retained.
+
+33
+00:02:07.127 --> 00:02:11.487
+Coefficients then describe differences
+relative to the omitted categories for
+
+34
+00:02:11.487 --> 00:02:12.257
+those groups.
+
+35
+00:02:13.247 --> 00:02:15.577
+Other flag dependencies can still remain.
+
+36
+00:02:16.607 --> 00:02:19.317
+Regularization is another
+later modelling choice.
+
+37
+00:02:20.027 --> 00:02:22.517
+Neither change has been
+silently added here.
+
+38
+00:02:22.967 --> 00:02:27.297
+Our first schema keeps all categories
+visible, records the dependencies
+
+39
+00:02:27.747 --> 00:02:30.917
+and leaves later comparisons
+to measure their consequences.
+
+40
+00:02:33.067 --> 00:02:37.457
+The hour domain, zero through twenty
+three, comes from the calendar.
+
+41
+00:02:38.187 --> 00:02:40.697
+We do not discover it by
+reading future observations.
+
+42
+00:02:41.567 --> 00:02:44.317
+This fixed encoder has
+no fitted statistics.
+
+43
+00:02:45.107 --> 00:02:49.137
+Its outputs are already zero or one,
+and no scaler is fitted.
+
+44
+00:02:49.687 --> 00:02:53.797
+If we later learn a mean,
+scale or selected feature set,
+
+45
+00:02:54.127 --> 00:02:56.397
+that learning belongs to training only.
+
+46
+00:02:57.167 --> 00:02:59.537
+Validation applies the saved transform.
+
+47
+00:03:00.187 --> 00:03:04.357
+A chronological cross validation
+fold needs its own training fit,
+
+48
+00:03:04.447 --> 00:03:07.337
+following the same
+boundary inside every fold.
+
+49
+00:03:09.295 --> 00:03:13.505
+A valid calendar category can be
+missing from a small training sample.
+
+50
+00:03:13.955 --> 00:03:15.725
+Its schema position still exists,
+
+51
+00:03:15.915 --> 00:03:19.125
+although the model has no
+supporting examples for its effect.
+
+52
+00:03:19.995 --> 00:03:24.545
+An impossible hour, twenty four,
+is different and must fail validation.
+
+53
+00:03:25.515 --> 00:03:31.465
+Missing fields, extra fields such as the
+target, and noninteger codes also fail.
+
+54
+00:03:32.335 --> 00:03:35.685
+The working day flag must
+agree with weekday and holiday.
+
+55
+00:03:36.515 --> 00:03:39.185
+Training only feature
+counts describe coverage.
+
+56
+00:03:40.095 --> 00:03:41.645
+Constant columns keep their positions,
+
+57
+00:03:41.935 --> 00:03:44.785
+and we never divide by a
+zero standard deviation.
+
+58
+00:03:47.165 --> 00:03:50.695
+Circular coordinates make a
+clock relationship numerical.
+
+59
+00:03:51.425 --> 00:03:55.255
+At hour zero,
+sine and cosine are zero and one.
+
+60
+00:03:55.685 --> 00:03:56.755
+At hour twenty three,
+
+61
+00:03:57.325 --> 00:04:02.595
+they are approximately minus zero point
+two five eight eight and zero point nine
+
+62
+00:04:02.595 --> 00:04:03.735
+six five nine.
+
+63
+00:04:04.325 --> 00:04:07.975
+Their Euclidean distance is
+about zero point two six one one,
+
+64
+00:04:08.185 --> 00:04:10.915
+while raw hour numbers
+differ by twenty three.
+
+65
+00:04:11.585 --> 00:04:14.035
+That encodes closeness across midnight.
+
+66
+00:04:14.865 --> 00:04:19.845
+A linear predictor over one sine and
+cosine pair still has a smooth single
+
+67
+00:04:19.845 --> 00:04:21.095
+harmonic shape,
+
+68
+00:04:21.365 --> 00:04:24.995
+which is a modelling assumption rather
+than evidence of better forecasts.
+
+69
+00:04:27.560 --> 00:04:32.370
+Full one hot encoding with an
+intercept has another subtle property.
+
+70
+00:04:32.860 --> 00:04:36.130
+Every row activates
+exactly one hour indicator.
+
+71
+00:04:36.760 --> 00:04:41.180
+Add five to all twenty four hour
+coefficients and subtract five from the
+
+72
+00:04:41.180 --> 00:04:41.730
+intercept.
+
+73
+00:04:42.200 --> 00:04:46.450
+The active hour contributes five
+more and the intercept five less,
+
+74
+00:04:46.800 --> 00:04:48.990
+so every prediction stays the same.
+
+75
+00:04:49.440 --> 00:04:52.470
+Ten plus twenty becomes
+five plus twenty five.
+
+76
+00:04:53.100 --> 00:04:56.350
+Both totals are thirty before
+the other shared terms.
+
+77
+00:04:57.080 --> 00:05:02.200
+A coefficient can therefore lack a unique
+isolated interpretation even while the
+
+78
+00:05:02.200 --> 00:05:03.750
+prediction is well defined.
+
+79
+00:05:05.900 --> 00:05:09.790
+Does that dependence mean the dataset
+cannot be used for prediction?
+
+80
+00:05:10.540 --> 00:05:14.830
+Pause and distinguish predictions
+from parameter interpretation.
+
+81
+00:05:15.600 --> 00:05:19.530
+Equivalent coefficient sets can
+produce the same prediction function.
+
+82
+00:05:20.080 --> 00:05:25.360
+Dropping a reference category or applying
+regularization can select a representation
+
+83
+00:05:25.360 --> 00:05:26.630
+or solution,
+
+84
+00:05:27.060 --> 00:05:29.690
+but those are explicit later choices.
+
+85
+00:05:30.500 --> 00:05:35.190
+Do not call an isolated hourly
+weight a unique causal effect.
+
+86
+00:05:35.680 --> 00:05:40.880
+Keep the schema fixed and evaluate choices
+with the same observations before claiming
+
+87
+00:05:40.880 --> 00:05:42.210
+that one is better.

@@ -1,0 +1,52 @@
+[
+  {
+    "step": 1,
+    "chapter": "weighted",
+    "path": "examples/walkthrough/01_weighted.py"
+  },
+  {
+    "step": 2,
+    "chapter": "softmax",
+    "path": "examples/walkthrough/02_softmax.py"
+  },
+  {
+    "step": 3,
+    "chapter": "shapes",
+    "path": "examples/walkthrough/03_shapes.py"
+  },
+  {
+    "step": 4,
+    "chapter": "projections",
+    "path": "examples/walkthrough/04_projections.py"
+  },
+  {
+    "step": 5,
+    "chapter": "heads",
+    "path": "examples/walkthrough/05_heads.py"
+  },
+  {
+    "step": 6,
+    "chapter": "padding",
+    "path": "examples/walkthrough/06_padding.py"
+  },
+  {
+    "step": 7,
+    "chapter": "causal",
+    "path": "examples/walkthrough/07_causal.py"
+  },
+  {
+    "step": 8,
+    "chapter": "cross",
+    "path": "examples/walkthrough/08_cross.py"
+  },
+  {
+    "step": 9,
+    "chapter": "gradient",
+    "path": "examples/walkthrough/09_gradient.py"
+  },
+  {
+    "step": 10,
+    "chapter": "interface",
+    "path": "examples/walkthrough/10_interface.py"
+  }
+]

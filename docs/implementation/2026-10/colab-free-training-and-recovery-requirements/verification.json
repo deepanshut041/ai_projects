@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-09",
+  "scope": "Shared Projects requirements and local documentation website",
+  "checks": [
+    {
+      "argv": [
+        "npm",
+        "test"
+      ],
+      "cwd": "ai_projects/docs",
+      "exit_code": 0,
+      "result": "7/7 content tests"
+    },
+    {
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "ai_projects/docs",
+      "exit_code": 0,
+      "result": "14 records, 7 references at /project_docs/"
+    },
+    {
+      "argv": [
+        "npm",
+        "run",
+        "test:browser"
+      ],
+      "cwd": "ai_projects/docs",
+      "exit_code": 0,
+      "result": "14 records; search, filters, downloads, links, print and mobile checks passed"
+    }
+  ],
+  "guide_browser": {
+    "id": "guides/colab",
+    "desktop": [
+      1440,
+      1000
+    ],
+    "mobile": [
+      390,
+      844
+    ],
+    "mobile_scroll_width": 390,
+    "tables": 3,
+    "console_errors": 0,
+    "console_warnings": 0,
+    "visual_review": "Desktop/mobile screenshots inspected"
+  },
+  "artifacts": [
+    {
+      "path": "verification/2026-10-09-colab/colab-desktop.png",
+      "sha256": "eb7b8417b20367705d8c3365dc4c5bda104562baa645a01478e3eeabe870d74d"
+    },
+    {
+      "path": "verification/2026-10-09-colab/colab-mobile.png",
+      "sha256": "e95eb384d19cb18e645dce5d6055649acd2e8b71d5f7d0d94b0e79d9d608850a"
+    }
+  ],
+  "pending": [
+    "P01 model implementation",
+    "Child Colab notebooks and checkpoint code",
+    "Actual Free training and fresh-runtime Drive recovery"
+  ],
+  "external_publication": false
+}

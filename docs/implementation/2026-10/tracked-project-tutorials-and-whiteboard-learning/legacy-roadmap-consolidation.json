@@ -1,0 +1,127 @@
+{
+  "source_sha256": "9c13778c3fa3c318f8bdc8bdfdbbd3080d52f4acc28fd9c487193fcf91fbc77a",
+  "copies_identical": true,
+  "section_routes": [
+    {
+      "section": 1,
+      "title": "Objective and working assumptions",
+      "destination": "ai_projects/docs/roadmap.md",
+      "source_body_sha256": "db95bda4ee71384344bd5e57ce3af10038bc8a1ad3765cbd3e78c13ed2a60123",
+      "destination_body_sha256": "db95bda4ee71384344bd5e57ce3af10038bc8a1ad3765cbd3e78c13ed2a60123",
+      "layout_adapted": false
+    },
+    {
+      "section": 2,
+      "title": "How to size the implementations",
+      "destination": "ai_projects/docs/roadmap.md",
+      "source_body_sha256": "80095684705054b56aceea8b9d37724b36fd65260f26efea4895a7dab8fe5c6c",
+      "destination_body_sha256": "80095684705054b56aceea8b9d37724b36fd65260f26efea4895a7dab8fe5c6c",
+      "layout_adapted": false
+    },
+    {
+      "section": 3,
+      "title": "Roadmap at a glance",
+      "destination": "ai_projects/docs/roadmap.md",
+      "source_body_sha256": "3385ac0716914031ab10715ce658646057a412cd8ea766cf835bbc5a93c1298c",
+      "destination_body_sha256": "2f544c7beecb979f2e25bc606c2436574d1423f2281311a6a78d406ed3f088c9",
+      "layout_adapted": false
+    },
+    {
+      "section": 4,
+      "title": "Detailed implementation projects",
+      "destination": "ai_projects/docs/roadmap.md",
+      "source_body_sha256": "3c4f97167965e6ca2fa17e2728de429dee2530ececfc8d9ae6f5663d23573194",
+      "destination_body_sha256": "1c061b74e65365d21e7122d905e8a53533397780dfb0d6ae7724e069505d5ed1",
+      "layout_adapted": false
+    },
+    {
+      "section": 5,
+      "title": "Distinct research branches",
+      "destination": "ai_projects/docs/roadmap.md",
+      "source_body_sha256": "193c90fb17e48c11e6ad17b3779a72ed50f9d4c3a190e125d81f9c6c85ce0efc",
+      "destination_body_sha256": "751109ff627b46d1dc66561ec65b4cacbff01d0439b9d370a82dec2cf7ac3500",
+      "layout_adapted": false
+    },
+    {
+      "section": 6,
+      "title": "Required CPU verification protocol",
+      "destination": "ai_projects/docs/roadmap.md",
+      "source_body_sha256": "fc496b2f363225a6ce46abd066e4638360d9b35e3852a0c0ce26e57a1cdb782c",
+      "destination_body_sha256": "0c873c6327f4c8064dd536077b51862ab92a684605487db534131e5eaae0ef6e",
+      "layout_adapted": false
+    },
+    {
+      "section": 7,
+      "title": "Optimization track",
+      "destination": "ai_projects/docs/roadmap.md",
+      "source_body_sha256": "61ea096d997b7c78e508e4bf533805c61b97fe8b8fcd68dc5ea2d2a31f37d728",
+      "destination_body_sha256": "61ea096d997b7c78e508e4bf533805c61b97fe8b8fcd68dc5ea2d2a31f37d728",
+      "layout_adapted": false
+    },
+    {
+      "section": 8,
+      "title": "Training, adaptation, and reasoning projects",
+      "destination": "ai_projects/docs/roadmap.md",
+      "source_body_sha256": "be384c86f0ca797bf3d1d1fe3f4ecad436a048a3b486380f5673c44a00333ada",
+      "destination_body_sha256": "be384c86f0ca797bf3d1d1fe3f4ecad436a048a3b486380f5673c44a00333ada",
+      "layout_adapted": false
+    },
+    {
+      "section": 9,
+      "title": "Research workflow and reusable deliverables",
+      "destination": "ai_projects/docs/SETUP.md",
+      "source_body_sha256": "0b68ca29923c502dfadb627685a45823cd23b3b46079a87b33ce416c486a6ab5",
+      "destination_body_sha256": "387d0088f806a0f512f0a264f3d92243c83fc92a0082ad0953016c845db96334",
+      "layout_adapted": true
+    },
+    {
+      "section": 10,
+      "title": "Completion gates",
+      "destination": "ai_projects/docs/progress.md",
+      "source_body_sha256": "b88f960090f1548ea272c4ed71f3c635b9ede87dfc905c094c182e47599abd52",
+      "destination_body_sha256": "b88f960090f1548ea272c4ed71f3c635b9ede87dfc905c094c182e47599abd52",
+      "layout_adapted": false
+    },
+    {
+      "section": 11,
+      "title": "Recent releases: implementation priority",
+      "destination": "ai_projects/docs/roadmap.md",
+      "source_body_sha256": "c397c89af6be036bea65ae59b7728a3722979bc02ede2101caca06cd89338dae",
+      "destination_body_sha256": "c397c89af6be036bea65ae59b7728a3722979bc02ede2101caca06cd89338dae",
+      "layout_adapted": false
+    },
+    {
+      "section": 12,
+      "title": "Source-review and verification status",
+      "destination": "ai_projects/docs/roadmap.md",
+      "source_body_sha256": "92b12556f208e03ee76a0a13dd4dc581f46c7fcc7bfcd00ba5b086c9673b1511",
+      "destination_body_sha256": "92b12556f208e03ee76a0a13dd4dc581f46c7fcc7bfcd00ba5b086c9673b1511",
+      "layout_adapted": false
+    }
+  ],
+  "sections_preserved": 12,
+  "model_plans_preserved": 19,
+  "resource_urls_preserved": 60,
+  "removed": [
+    "ai_projects/docs/llm-implementation-research-roadmap.md",
+    "ai_research/llm-implementation-research-roadmap.md",
+    "ai_projects/ai"
+  ],
+  "state": "complete; content consolidated, root cleaned and locally verified",
+  "verification": {
+    "root_visible_regular_files": [
+      "AGENTS.md",
+      "README.md"
+    ],
+    "current_docs": "ai_projects/docs",
+    "broken_active_links": [],
+    "cli_tests": 54,
+    "docs_content_tests": 7,
+    "browser_records": 13,
+    "tui": "passed",
+    "doctor": "passed",
+    "shared_launcher_from_projects_and_unrelated_cwd": "passed",
+    "local_site": "running",
+    "publication": "none"
+  }
+}

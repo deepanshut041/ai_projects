@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="650" viewBox="0 0 1160 650" role="img"><title>A cached step still reads every permitted value</title><desc>Fifth-token query: old K/V survive; only the new Q/K/V rows are projected.</desc>
+<rect x="0" y="0" width="1160" height="650" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">A cached step still reads every permitted value</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">Fifth-token query: old K/V survive; only the new Q/K/V rows are projected.</text>
+<rect x="36" y="110" width="100" height="48" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="46" y="142.16" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#6846c7">key j</text>
+<rect x="136" y="110" width="180" height="48" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="146" y="142.16" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#6846c7">scaled score</text>
+<rect x="316" y="110" width="180" height="48" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="326" y="142.16" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#6846c7">weight a[j]</text>
+<rect x="496" y="110" width="180" height="48" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="506" y="142.16" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#6846c7">V[j,0]</text>
+<rect x="676" y="110" width="180" height="48" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="686" y="142.16" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#6846c7">a[j] × V[j,0]</text>
+<rect x="856" y="110" width="230" height="48" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="866" y="142.16" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#6846c7">origin</text>
+<rect x="36" y="158" width="100" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="46" y="190.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">0</text>
+<rect x="136" y="158" width="180" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="146" y="190.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">.135</text>
+<rect x="316" y="158" width="180" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="326" y="190.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">.193772</text>
+<rect x="496" y="158" width="180" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="506" y="190.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">1</text>
+<rect x="676" y="158" width="180" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="686" y="190.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">.193772</text>
+<rect x="856" y="158" width="230" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="866" y="190.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">retained</text>
+<rect x="36" y="206" width="100" height="48" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="46" y="238.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">1</text>
+<rect x="136" y="206" width="180" height="48" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="146" y="238.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">.180</text>
+<rect x="316" y="206" width="180" height="48" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="326" y="238.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">.202691</text>
+<rect x="496" y="206" width="180" height="48" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="506" y="238.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">0</text>
+<rect x="676" y="206" width="180" height="48" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="686" y="238.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">0</text>
+<rect x="856" y="206" width="230" height="48" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="866" y="238.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">retained</text>
+<rect x="36" y="254" width="100" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="46" y="286.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">2</text>
+<rect x="136" y="254" width="180" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="146" y="286.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">.225</text>
+<rect x="316" y="254" width="180" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="326" y="286.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">.212020</text>
+<rect x="496" y="254" width="180" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="506" y="286.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">0</text>
+<rect x="676" y="254" width="180" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="686" y="286.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">0</text>
+<rect x="856" y="254" width="230" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="866" y="286.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">retained</text>
+<rect x="36" y="302" width="100" height="48" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="46" y="334.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">3</text>
+<rect x="136" y="302" width="180" height="48" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="146" y="334.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">.125</text>
+<rect x="316" y="302" width="180" height="48" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="326" y="334.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">.191844</text>
+<rect x="496" y="302" width="180" height="48" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="506" y="334.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">0</text>
+<rect x="676" y="302" width="180" height="48" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="686" y="334.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">0</text>
+<rect x="856" y="302" width="230" height="48" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="866" y="334.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">retained</text>
+<rect x="36" y="350" width="100" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="46" y="382.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">4</text>
+<rect x="136" y="350" width="180" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="146" y="382.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">.165</text>
+<rect x="316" y="350" width="180" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="326" y="382.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">.199673</text>
+<rect x="496" y="350" width="180" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="506" y="382.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">1</text>
+<rect x="676" y="350" width="180" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="686" y="382.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">.199673</text>
+<rect x="856" y="350" width="230" height="48" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="866" y="382.16" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">newly appended</text>
+<line x1="760" y1="412" x2="760" y2="451" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="760.00,451.00 755.72,440.87 764.28,440.87" fill="#6846c7"/>
+<rect x="36" y="464" width="1088" height="145" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="496" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#16735e">Normalize once, then mix the full five-row V</text>
+<text x="56" y="533" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">sum of weights = 1; first coordinate = .193772 + .199673 = .393445</text>
+<text x="56" y="564" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">complete context ≈ [.393445, .402364, .411693, .391517]</text>
+</svg>

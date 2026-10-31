@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-09",
+  "scope": "P00 tutorial second pass; mathematics and required P01 prerequisites",
+  "fingerprint": "20fd7a47ab6fb52d1b42bd7f23586b239fecc560e8524d391a2f270266fe5ae3",
+  "arithmetic_checks": 20,
+  "torch_comparison_groups": 8,
+  "new_inline_blocks": 5,
+  "worked_project_tests": 23,
+  "site_tests": 8,
+  "site_browser": {
+    "records": 37,
+    "widths": [
+      1440,
+      768,
+      390,
+      320
+    ],
+    "bases": [
+      "/project_docs/",
+      "/"
+    ],
+    "passed": true
+  },
+  "targeted_browser": {
+    "section_views": 10,
+    "readiness_navigation": true,
+    "passed": true
+  },
+  "preservation": {
+    "worked_files_ast_unchanged": 26,
+    "existing_example_diagram_files_unchanged": 19,
+    "lessons": 11,
+    "practice": 31,
+    "sources": 22,
+    "learner_repository_exists": false,
+    "passed": true
+  },
+  "learner_state": "P00-M1 not-started",
+  "hosted_execution": "not run",
+  "model_task_success": "not established; historical author copy 10.94% failed proposed 90% gate",
+  "publication": "none",
+  "evidence": "implementation/evidence/2026-10-09-p00-second-pass/"
+}

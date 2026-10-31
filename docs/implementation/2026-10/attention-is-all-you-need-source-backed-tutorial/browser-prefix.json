@@ -1,0 +1,369 @@
+{
+  "base": "/project_docs/",
+  "chapters": 12,
+  "localProjectPages": 22,
+  "widths": [
+    1440,
+    768,
+    390,
+    320
+  ],
+  "checked": [
+    {
+      "width": 1440,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/weighted/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/setup/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/shapes/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/softmax/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/projections/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/heads/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/padding/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/causal/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/cross/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/interface/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/gradient/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/handoff/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/implementation/00_project-setup/02-notes-to-understanding/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/implementation/01_attention-mechanism/02-notes-to-understanding/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/implementation/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/00-project-setup/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/01-attention/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/02-tokenizer-and-data/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/03-transformer-and-training/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/"
+    },
+    {
+      "width": 1440,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/weighted/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/setup/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/shapes/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/softmax/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/projections/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/heads/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/padding/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/causal/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/cross/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/interface/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/gradient/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/handoff/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/implementation/00_project-setup/02-notes-to-understanding/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/implementation/01_attention-mechanism/02-notes-to-understanding/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/implementation/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/00-project-setup/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/01-attention/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/02-tokenizer-and-data/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/03-transformer-and-training/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/"
+    },
+    {
+      "width": 768,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/weighted/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/setup/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/shapes/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/softmax/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/projections/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/heads/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/padding/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/causal/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/cross/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/interface/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/gradient/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/handoff/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/implementation/00_project-setup/02-notes-to-understanding/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/implementation/01_attention-mechanism/02-notes-to-understanding/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/implementation/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/00-project-setup/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/01-attention/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/02-tokenizer-and-data/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/03-transformer-and-training/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/"
+    },
+    {
+      "width": 390,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/weighted/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/setup/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/shapes/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/softmax/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/projections/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/heads/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/padding/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/causal/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/cross/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/interface/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/gradient/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/handoff/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/implementation/00_project-setup/02-notes-to-understanding/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/implementation/01_attention-mechanism/02-notes-to-understanding/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/implementation/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/00-project-setup/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/01-attention/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/02-tokenizer-and-data/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/03-transformer-and-training/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/phases/"
+    },
+    {
+      "width": 320,
+      "url": "/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/"
+    }
+  ],
+  "passed": true,
+  "downloadSourceFiles": 25,
+  "practicePageChecks": 12,
+  "errors": []
+}

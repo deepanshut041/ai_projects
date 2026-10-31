@@ -1,0 +1,22 @@
+{
+  "model": {
+    "vocab": 260,
+    "context": 64,
+    "width": 64,
+    "heads": 4,
+    "layers": 2,
+    "hidden": 256,
+    "dropout": 0.1
+  },
+  "train": {
+    "total": 300,
+    "warmup": 20,
+    "peak_lr": 0.001,
+    "floor_lr": 0.0001,
+    "batch": 8,
+    "accumulation": 1,
+    "decay": 0.1,
+    "clip": 1.0,
+    "seed": 17
+  }
+}

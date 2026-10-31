@@ -1,0 +1,31 @@
+{
+  "temporary_items_removed": [
+    "author_tutorial0_training.py",
+    "tutorial0-final-measure-se6nx0i7",
+    "tutorial0-final-measure.json",
+    "tutorial0-final-proof.json",
+    "tutorial0-final-source-0381ysyp",
+    "tutorial0-guarded-export-2zuabmlj",
+    "tutorial0-guarded-proof.json",
+    "tutorial0-guarded-staged-i3nphhe8",
+    "tutorial0-last-proof-pn704yo_",
+    "tutorial0-lesson02-scope.json",
+    "tutorial0-math-notes.md",
+    "tutorial0-mlp-first-measure",
+    "tutorial0-prerequisite-math",
+    "tutorial0-prerequisites-colab.ipynb",
+    "tutorial0-prerequisites-source.zip",
+    "tutorial0-semantic-review.md",
+    "tutorial0-source-proof-7p3tache",
+    "tutorial0-source-proof.json",
+    "tutorial0-staged-training-ykfclpk_",
+    "tutorial0-tensor-notes.md",
+    "tutorial0-training-notes.md",
+    "tutorial0_manifest.py",
+    "verify_tutorial0_final.py"
+  ],
+  "durable_export_directory": ".ai/course-exports/2026-10-12",
+  "verified_prior_archive_retained": true,
+  "selected_evidence_retained": true,
+  "passed": true
+}

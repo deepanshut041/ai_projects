@@ -1,0 +1,198 @@
+[
+  {
+    "chapter_id": "start",
+    "id": "start-practice-1",
+    "question": "A model receives an uncorrupted sentence, attends bidirectionally and predicts every original token. Is that the masked-language objective? Explain the leakage path.",
+    "answer": "No. At each supervised position the input contains the same target ID. A self-attention/residual path can copy it. MLM supplies a deliberately corrupted input and supervises original IDs only at selected positions; a bidirectional mask is legal under that corruption contract.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "start",
+    "id": "start-transfer",
+    "question": "Translation and QA both return logits. Give their different class axes, target objects and inference constraints for a seven-token context and a vocabulary of 20.",
+    "answer": "Translation logits classify 20 vocabulary IDs at each decoder slot, conditioned on source and a causal prefix. QA supplies start/end scores over seven packed positions (or the complete packed length if question/special tokens are included); gold objects are endpoint positions and decoding must restrict ordered context spans. Equal use of cross-entropy does not make the target domains interchangeable.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "workspace",
+    "id": "workspace-boundaries",
+    "question": "Two source ZIPs have matching filenames and tensor shapes, but one tokenizer swaps two ordinary IDs. Is a checkpoint compatible? What evidence establishes compatibility?",
+    "answer": "Not from shapes. The embedding/head rows now refer to different symbols. Verify source/config/runtime and the exact serialized tokenizer vocabulary/processing identity against the checkpoint before loading; matching byte hashes or a deliberately validated remapping establishes the required identity.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "workspace",
+    "id": "workspace-transfer",
+    "question": "I want to experiment with another head width. Where should I make that change, and what distinguishes a reference run from learner completion?",
+    "answer": "Use a separate scratch/reference copy with its own recorded config and artifacts, preserving the existing learner child. Passing a reference import or author check verifies source behavior. Learner completion requires the learner implementation, explanation and task/recovery evidence specified by the milestone.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "tensors",
+    "id": "tensors-practice-1",
+    "question": "For B=3,T=5,S=8,D=12,H=3, state Q/K/score/context/output shapes and FP32 score bytes for one cross-attention layer.",
+    "answer": "Head width is 4. Q [3,3,5,4], K/V [3,3,8,4], scores [3,3,5,8], head context [3,3,5,4], final output [3,5,12]. Scores contain 360 entries or 1440 FP32 bytes; this is not total training memory.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "tensors",
+    "id": "tensors-transfer",
+    "question": "At fixed D=16, change H from two to four. Does a four-projection attention layer gain parameters? Does its conceptual score tensor gain entries?",
+    "answer": "Biased projection count remains 4*16^2+4*16=1088. Head width halves from eight to four. BHTS conceptual entries double for the same lengths, while the total dot-product feature work remains proportional to BTSD. Backend memory and wall time require measurement.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "learning",
+    "id": "learning-practice-1",
+    "question": "Two records contain two valid losses summing to 4 and four valid losses summing to 4. Compute token mean versus mean of record means.",
+    "answer": "Token mean is (4+4)/(2+4)=4/3. Record means are 2 and 1, whose mean is 1.5. The first weights every token equally; the second weights each record equally. Padding contributes to neither valid count.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "learning",
+    "id": "learning-transfer",
+    "question": "For probabilities [.2,.5,.3], gold class zero and a batch denominator of five, derive the logit-row gradient. What is the gradient of an ignored row?",
+    "answer": "The hard-target gradient is ([.2,.5,.3]-[1,0,0])/5=[-.16,.10,.06]. It sums to zero. An ignored label row contributes zero loss and zero logit gradient under the reference CE contract; that does not establish its attention visibility.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "tokenization",
+    "id": "tokenization-practice-1",
+    "question": "A saved target vocabulary contains BOS/EOS but an adapter adds them again after tokenizer post-processing. What does this change and how should it be checked?",
+    "answer": "It duplicates boundaries, creates incorrect prefixes/labels and consumes extra position capacity. Establish whether encode already supplies specials, add them exactly once, then assert the first/last IDs and a full shifted batch under the saved tokenizer identity.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "tokenization",
+    "id": "tokenization-transfer",
+    "question": "The strings \u00e9 and e plus a combining accent look alike. Why may character/byte offsets differ even if an NFC-normalized tokenizer gives equal IDs?",
+    "answer": "They use different original code-point sequences and UTF-8 bytes. NFC may make modeled strings equal, but offsets for extractive answers must still address the original text through an explicit mapping. Equal normalized token IDs do not justify copying normalized offsets into the original string.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "objectives",
+    "id": "objectives-practice-1",
+    "question": "A source file contains a blank line while the paired target is nonblank. Why does dropping blanks independently create a wrong dataset?",
+    "answer": "Independent filtering shifts subsequent row alignment. Traverse both columns together, reject unequal file lengths, and apply acceptance/rejection to the pair. A complete traversal is needed to establish that no later mismatch exists.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "objectives",
+    "id": "objectives-transfer",
+    "question": "A validation sentence is absent from training records, but its text was included when fitting the tokenizer. Which boundary was crossed, and what can the tiny two-combination validation fixture prove?",
+    "answer": "The declared training-only tokenizer-fit boundary was crossed: validation text influenced vocabulary/processing. The tiny fixture can diagnose specific composition behavior and pipeline invariants; it cannot establish general translation quality or official WMT performance.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "translation-embeddings",
+    "id": "translation-embeddings-transfer",
+    "question": "With Vsrc=9,Vtgt=11,D=8, count source/target input tables plus a separate biased target head. How many unique parameters would target input/output tying save?",
+    "answer": "Tables have 72 and 88 parameters; the head has 88+11=99, totaling 259. Tying target table and head saves 88, leaving 171, provided the target row meaning and width match. Sharing one Parameter is required; copying values does not tie gradients.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "translation-embeddings",
+    "id": "translation-embeddings-gradient",
+    "question": "IDs [2,2,3] use a table with PAD=0. Their upstream rows are [1,-2], [4,5], [-3,6]. Give the lookup gradient and explain what changes if the same table is an output head.",
+    "answer": "Lookup row 2 receives [5,3], row 3 [-3,6], and unused/PAD rows receive zero lookup gradient. A tied output head adds class-logit gradients across vocabulary rows, potentially including PAD; padding_idx suppresses only the embedding-lookup route.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "translation-positions",
+    "id": "translation-positions-transfer",
+    "question": "For D=6, give the three frequencies and the entire position-zero vector. Are these values learned parameters in this reference?",
+    "answer": "Frequencies are 1, 10000^(-1/3) and 10000^(-2/3). Position zero is [0,1,0,1,0,1]. The table is a registered buffer, saved/moved with the model but excluded from optimizer parameters.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "translation-positions",
+    "id": "translation-positions-offset",
+    "question": "After decoding six prefix tokens, I pass only the next token to the existing position module. Which position does it receive and what cache interface is missing?",
+    "answer": "It receives position zero because the module always slices from the beginning. Correct incremental execution needs the absolute offset six, aligned cached key coordinates/masks, capacity checks and identical parameter state. The existing reference instead recomputes the whole prefix.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "qkv",
+    "id": "qkv-practice-1",
+    "question": "Hold Q/K fixed with weights [.25,.75]. Change values [2,6] to [2,10]. Which weights change, and what is the new scalar context?",
+    "answer": "No weights change because scores depend on Q/K. New context is .25*2+.75*10=8, versus 5 previously. Changing the underlying source state would generally alter K and V together, so the controlled payload-only claim would not apply.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "qkv",
+    "id": "qkv-transfer",
+    "question": "For d=1, q=0, keys [2,-1], values [1,5], and loss equal to context, derive context, query gradient, key gradients and value gradients.",
+    "answer": "Weights are [.5,.5], context 3. Probability upstream [1,5] gives score gradients [-1,1]. Query gradient is -1*2+1*(-1)=-3. Both key gradients are zero since q=0. Value gradients are [.5,.5]. Equal weights do not imply a zero query gradient.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "heads",
+    "id": "heads-practice-1",
+    "question": "With B=2,D=12,H=3,S=7,T=4, give head width, Q/K/scores/context/final output shapes and scaling.",
+    "answer": "d=4 and scale denominator sqrt(4)=2. Q [2,3,4,4], K/V [2,3,7,4], scores [2,3,4,7], context [2,3,4,4], merged/projected output [2,4,12].",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "heads",
+    "id": "heads-transfer",
+    "question": "A loop implementation slices each head\u2019s input-feature columns rather than projection output rows. Is it equivalent to packed projections? What should be compared besides outputs?",
+    "answer": "No. Packed heads each read all D input features through their own output-column map (stored weight rows). Input slicing restricts each head to a subset. Use correct stored-row slices, identical parameters and masks, then compare forward outputs, input gradients and all projection gradients under deterministic mode.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "masks",
+    "id": "masks-practice-1",
+    "question": "Target queries have [2,4,D] and source memory [2,7,D]. What does passing a [2,4] target mask to cross-attention mean, and what should happen?",
+    "answer": "It describes the wrong key domain and must be rejected by shape validation. Supply the source validity mask [2,7], broadcasting over target query rows and heads; output length remains four.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "masks",
+    "id": "masks-transfer",
+    "question": "For a new query at absolute position 5 and cached keys 0\u20265, the last key is padding. Give the legal row and explain why a fresh 1x6 lower triangle is wrong.",
+    "answer": "The legal row is [1,1,1,1,1,0]: compare absolute key/query positions and intersect padding validity. A fresh lower triangle permits only key zero because its local query index is zero, incorrectly discarding past keys.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "bilingual-batches",
+    "id": "bilingual-batches-practice-1",
+    "question": "Batch full targets [2,4,3] and [2,5,6,7,3], with PAD=1. Give shifted inputs, labels and valid count.",
+    "answer": "Padded rows are [2,4,3,1,1] and [2,5,6,7,3]. Inputs are [2,4,3,1] and [2,5,6,7]. Labels are [4,3,-100,-100] and [5,6,7,3]. There are six supervised tokens. The first row\u2019s EOS input is valid but has an ignored next label.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "bilingual-batches",
+    "id": "bilingual-batches-transfer",
+    "question": "Why clone label/input slices before replacing PAD labels with -100? Can label ignore values be used as embedding IDs?",
+    "answer": "Sliced views can alias the full target or one another; an in-place replacement can corrupt input IDs. Clones establish separate ownership. -100 is an objective sentinel and is not a valid vocabulary address; input IDs retain tokenizer PAD and their own key-validity mask.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "translation-ffn",
+    "id": "translation-ffn-transfer",
+    "question": "For D=16 and expansion ratio three, count a biased two-layer FFN. Does perturbing token 2 change token 0 at this module\u2019s output under evaluation?",
+    "answer": "Hidden width is 48. Count is 2*16*48+48+16=1600. Token 0 is unchanged because the same feature map acts independently at each position; attention elsewhere can mix positions. Disable dropout or hold masks fixed to isolate this claim.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "translation-ffn",
+    "id": "translation-ffn-gradient",
+    "question": "Remove GELU from a two-affine-layer FFN. Derive the resulting single map and explain why preserving dimensions does not preserve the nonlinear model.",
+    "answer": "Output becomes x(W1W2)+(b1W2+b2). This is one affine map, possibly rank-constrained by intermediate width. Removing GELU removes input-dependent gating and its derivative, changing the represented function despite matching input/output widths.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "transformer-blocks",
+    "id": "transformer-blocks-practice-1",
+    "question": "Set a post-norm block\u2019s sublayer update to zero for input [2,6], with gamma=1,beta=0,epsilon=1e-5. Is it identity?",
+    "answer": "No. Mean is four and variance four; output is [-2,2]/sqrt(4+1e-5), approximately [-.99999875,.99999875]. The post-norm identity route still passes through normalization. A pre-norm residual with a zero update retains the original input before any final normalization.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  },
+  {
+    "chapter_id": "transformer-blocks",
+    "id": "transformer-blocks-transfer",
+    "question": "Someone normalizes [B,T,D] over T instead of D in a causal decoder. Why can this invalidate future isolation even if attention masks are correct?",
+    "answer": "Statistics for an earlier position can include later token representations, creating another future-information path. LayerNorm(D) normalizes each token\u2019s feature axis independently. Verify the normalized_shape and run whole-model future perturbations rather than trusting only attention-mask shape.",
+    "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it."
+  }
+]

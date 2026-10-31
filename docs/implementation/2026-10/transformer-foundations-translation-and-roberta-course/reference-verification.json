@@ -1,0 +1,195 @@
+{
+  "checked_at": "2026-10-12",
+  "scope": "Local author reference only; learner implementation/mastery and hosted recovery remain pending.",
+  "results": {
+    "foundation": {
+      "exit_code": 0,
+      "seconds": 0.034,
+      "tests": 15,
+      "passed": true
+    },
+    "translation": {
+      "exit_code": 0,
+      "seconds": 2.272,
+      "tests": 22,
+      "passed": true
+    },
+    "roberta": {
+      "exit_code": 0,
+      "seconds": 2.236,
+      "tests": 25,
+      "passed": true
+    },
+    "recovery": {
+      "exit_code": 0,
+      "seconds": 6.271,
+      "output": {
+        "translation_resume": true,
+        "mlm_resume": true,
+        "qa_resume": true,
+        "corrupt_fallback": true,
+        "partial_ignored": true,
+        "incompatible_rejected": true,
+        "source_identity_rejected": true,
+        "scheduler_identity_rejected": true,
+        "retained_generations": 2
+      }
+    },
+    "sessions": {
+      "exit_code": 0,
+      "seconds": 2.486,
+      "tests": 9,
+      "passed": true
+    },
+    "translation_training": {
+      "exit_code": 0,
+      "seconds": 2.187,
+      "output": "updates=400 initial_loss=2.5181 final_loss=0.0001\ntrain_token_accuracy=1.000 heldout_token_accuracy=1.000\ntrain_exact=1.000 heldout_exact=1.000\ni see dogs => je vois les chiens | reference: je vois les chiens\nyou see cats => tu vois les chats | reference: tu vois les chats"
+    },
+    "roberta_training": {
+      "exit_code": 0,
+      "seconds": 2.146,
+      "output": {
+        "mlm": {
+          "before": {
+            "loss": 5.850855350494385,
+            "correct": 0,
+            "target_count": 8
+          },
+          "after": {
+            "loss": 3.8351805210113525,
+            "correct": 2,
+            "target_count": 8
+          },
+          "last_update": {
+            "updated": true,
+            "step": 120,
+            "target_count": 38,
+            "loss": 3.231313605057566,
+            "gradient_norm_before_clip": 2.4657351970672607
+          },
+          "parameters": 39957,
+          "vocabulary_size": 341,
+          "one_token_fill_candidates": [
+            {
+              "token_id": 51,
+              "token_text": ".",
+              "probability": 0.2799142003059387
+            },
+            {
+              "token_id": 106,
+              "token_text": "e",
+              "probability": 0.045038506388664246
+            },
+            {
+              "token_id": 297,
+              "token_text": " A",
+              "probability": 0.038999732583761215
+            },
+            {
+              "token_id": 115,
+              "token_text": "n",
+              "probability": 0.028615590184926987
+            },
+            {
+              "token_id": 282,
+              "token_text": " in",
+              "probability": 0.028205733746290207
+            }
+          ]
+        },
+        "qa": {
+          "training_fixture_loss_before": 4.1868815422058105,
+          "training_fixture_loss_after": 0.014509111642837524,
+          "seen_fixture_predictions": [
+            {
+              "question": "What is the capital of France?",
+              "prediction": "Paris",
+              "gold": "Paris",
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            {
+              "question": "What is the capital of Italy?",
+              "prediction": "Rome",
+              "gold": "Rome",
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            {
+              "question": "What is the capital of Germany?",
+              "prediction": "Berlin",
+              "gold": "Berlin",
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            {
+              "question": "What is the capital of Japan?",
+              "prediction": "Tokyo",
+              "gold": "Tokyo",
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            {
+              "question": "Where is the red apple?",
+              "prediction": "the table",
+              "gold": "the table",
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            {
+              "question": "Which animal can swim?",
+              "prediction": "fish",
+              "gold": "fish",
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            {
+              "question": "When does the library open?",
+              "prediction": "Monday",
+              "gold": "Monday",
+              "exact_match": 1.0,
+              "f1": 1.0
+            },
+            {
+              "question": "What does a café serve?",
+              "prediction": "coffee",
+              "gold": "coffee",
+              "exact_match": 1.0,
+              "f1": 1.0
+            }
+          ]
+        }
+      }
+    }
+  },
+  "source_sha256": {
+    "LICENSE.txt": "755d1bfefe482e7538636b67de67d09803e126ff1a587fcab4fbadfcc16a00ee",
+    "course_checkpoint.py": "6eafcffb35ae81f299b3fb64d780079a91e39002cc9cfc40b019a519d16b0cb5",
+    "course_recovery_checks.py": "443229b0e3c7409007889e6a1afec4493bfd59366e97345e9b64e06b43d5c9b4",
+    "course_session.py": "47f1bedda5fb5f0c7429f897df6233ce140a5914b4330a23e76837ec32788d98",
+    "course_session_checks.py": "12be8de6cc855935a43137e4b2c95a99b7f24fe0d3da6126089076936b942a7a",
+    "course_source_export.py": "7e6cddc63a07bc080d393733dafc7f710ab8139b8ff66f359e312fc203ce29dc",
+    "first_retrieval.py": "c18bba06e120528790bc0943f2de0afd19569acc955f1afeae547ebf893d211e",
+    "foundation_math.cpp": "81c1dd9980c68f50d3c3c031617a851cadad0decc60b7d37f533395f3a5a51ab",
+    "foundation_math.py": "7da4c18b914c6e58ab91f3e2f643cb2810388235a750b8e623a117fa7898f4a1",
+    "roberta_checks.py": "52c8fd70581386e8effdbfc926b0e741a04de2be9b202727afd1ff4113d19441",
+    "roberta_data.py": "23dda37498627373798bb39da3d4fc08ffeb4d3af5d592ea2eb31c5282509302",
+    "roberta_model.py": "b409de1ae70100247fc82b5af5c5076ea06565dc70d6b865fd2415f13c765d5c",
+    "roberta_train.py": "ffcb25c1321ad850acf2c342f49998ba375cec8296033d976e0462d463e5ad5a",
+    "test_foundation_math.py": "625a1a8f546042351d4ae2a72f372c2b64aa924577a596a2400d4588e79f6e09",
+    "translation_attention.py": "ceb54738fba4e3a57ecc8729113e54c38ee08b970be84f7bc62fdb9d56e29eed",
+    "translation_checks.py": "39db9e155e2d1c6c72698e2c7631ec9e7e4ed2e56bd613e8b935dbb1e32b54e8",
+    "translation_data.py": "aa9f631c55c542c10ded2eba8a3594a2b29c174c24a2baba9de9875ff41eb184",
+    "translation_metrics.py": "b1f519262bd3bd681b6d263f5ac52b06694d83b0dfe3141b5eae1b994c7d1f0c",
+    "translation_model.py": "bfd49c11f7350b4d1c759392ff4c097fa57e1ba857999734391f64c798ac9e9f",
+    "translation_train.py": "cd0832eb74454bb4766d4b7a1cb0f6104b79303c47b139ad8b8ee485d560baf3"
+  },
+  "environment": {
+    "python": "3.12.13",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4",
+    "device": "cpu",
+    "training_threads": 1
+  }
+}

@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "project_id": "attention-labs",
+  "languages": [
+    "cpp",
+    "python"
+  ],
+  "examples": [
+    {
+      "id": "cache-arithmetic",
+      "language": "python",
+      "path": "examples/cache_arithmetic.py",
+      "purpose": "Reproduce the sixteen scaled scores, declared fifth-token mixture and cache capacities independently.",
+      "expected_output": {
+        "gqa_cache_bytes": 1342177280,
+        "gqa_cache_gib": 1.25,
+        "mha_cache_gib": 10.0,
+        "new_context": [
+          0.393445,
+          0.402364,
+          0.411693,
+          0.391517
+        ],
+        "new_weights": [
+          0.193772,
+          0.202691,
+          0.21202,
+          0.191844,
+          0.199673
+        ],
+        "scores": [
+          [
+            0.15,
+            0.135,
+            0.135,
+            0.11
+          ],
+          [
+            0.11,
+            0.115,
+            0.185,
+            0.12
+          ],
+          [
+            0.19,
+            0.225,
+            0.295,
+            0.18
+          ],
+          [
+            0.1,
+            0.145,
+            0.18,
+            0.095
+          ]
+        ]
+      }
+    }
+  ],
+  "slug": "attention-inference",
+  "revision": "v1",
+  "title": "Attention inference: KV caching and memory management",
+  "question": "How can generation reuse past computation while keeping each request’s state correct?",
+  "topic_kind": "concept",
+  "level": "intermediate",
+  "prerequisites": [
+    "Causal scaled dot-product attention, Q/K/V projections and independent MHA heads."
+  ],
+  "created_at": "2026-10-30T22:26:59.319443+00:00",
+  "repository": {
+    "base_sha": "6114868d844022fb42d82a1e04d86b1cc51ba90b",
+    "name": "docs"
+  },
+  "objectives": [
+    {
+      "id": "offset",
+      "text": "Explain prefill/decode reuse and construct absolute-position masks."
+    },
+    {
+      "id": "cache-size",
+      "text": "Count stored tensor bytes and distinguish them from runtime speed."
+    },
+    {
+      "id": "paged-address",
+      "text": "Translate token positions and mask an incomplete logical tail."
+    },
+    {
+      "id": "paged-share",
+      "text": "Preserve ownership through prefix forks, copy-on-write, failure and release."
+    }
+  ],
+  "sources": [
+    {
+      "id": "vizuara-cache",
+      "kind": "external",
+      "title": "Vizuara Inference Engineering Chapters 5 and 7",
+      "url": "https://vizuaraai.github.io/convolution-musical-journey/book.html",
+      "accessed_at": "2026-10-30",
+      "locator": "Complete chapters 5 and 7 and all 23 original figures",
+      "proof_limit": "Workshop visual/source review, not a complete spoken-video audit or runtime benchmark."
+    },
+    {
+      "id": "hf-cache",
+      "kind": "external",
+      "title": "Hugging Face How caching works",
+      "url": "https://huggingface.co/docs/transformers/cache_explanation",
+      "accessed_at": "2026-10-30",
+      "locator": "Cache append, attention shapes and causal positions",
+      "proof_limit": "Documented implementation behavior; tiny local example independently checked."
+    },
+    {
+      "id": "paged-workshop",
+      "kind": "external",
+      "title": "Vizuara paged allocation",
+      "url": "https://vizuaraai.github.io/convolution-musical-journey/book.html",
+      "accessed_at": "2026-10-30",
+      "locator": "Chapter11; all ten figures",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    },
+    {
+      "id": "paged-primary",
+      "kind": "external",
+      "title": "PagedAttention",
+      "url": "https://arxiv.org/html/2309.06180v1",
+      "accessed_at": "2026-10-30",
+      "locator": "Sections3.1 and4.1–4.4",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    }
+  ],
+  "claims": [
+    {
+      "id": "cache-claim",
+      "text": "Fixed causal inference can reuse past keys and values while computing the new query rows, with absolute-position visibility and matching model/request state.",
+      "status": "verified",
+      "source_ids": [
+        "hf-cache",
+        "vizuara-cache"
+      ],
+      "proof_limit": "Declared deterministic component and local reference checks; no full-model speed or hosted result."
+    },
+    {
+      "id": "paged-claim",
+      "text": "Logical-to-physical cache translation preserves retrieval; shared partial tails require copy-on-write and blocks are reclaimed only after their final reference is released.",
+      "status": "verified",
+      "source_ids": [
+        "paged-workshop",
+        "paged-primary"
+      ],
+      "proof_limit": "Stated mathematical assumptions and executed tiny reference; no learner, hosted or full-model result."
+    }
+  ],
+  "entities": [],
+  "relationships": [],
+  "chapters": [
+    {
+      "id": "kv-cache",
+      "title": "KV caching: reuse the past without changing the answer",
+      "content_path": "lessons/01-kv-cache.md",
+      "objective_ids": [
+        "offset",
+        "cache-size"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "offset",
+        "cache-size"
+      ]
+    },
+    {
+      "id": "paged",
+      "title": "PagedAttention",
+      "content_path": "lessons/02-paged-attention.md",
+      "objective_ids": [
+        "paged-address",
+        "paged-share"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "paged-address",
+        "paged-share"
+      ]
+    }
+  ],
+  "diagrams": [],
+  "tables": [],
+  "scenarios": [],
+  "practice": [
+    {
+      "id": "offset",
+      "question": "With three cached tokens and a two-token append, which keys may the two new queries see?",
+      "answer": "The absolute query positions are 3 and 4. They may see key indices 0–3 and 0–4 respectively. A top-left 2×5 triangle would incorrectly allow only 1 and 2 keys.",
+      "rubric": "Use absolute positions and state both key sets.",
+      "objective_ids": [
+        "offset"
+      ],
+      "claim_ids": [
+        "cache-claim"
+      ]
+    },
+    {
+      "id": "cache-size",
+      "question": "What payload is retained for B=2,Hkv=2,T=6,dk=3,dv=2 in float64?",
+      "answer": "2×2×6×(3+2)×8 = 960 bytes. Include both K and V widths, but do not count a persistent Q cache. This excludes transient concatenation copies and allocator overhead.",
+      "rubric": "Derive each factor and distinguish payload from peak allocation.",
+      "objective_ids": [
+        "cache-size"
+      ],
+      "claim_ids": [
+        "cache-claim"
+      ]
+    },
+    {
+      "id": "paged-address",
+      "question": "At P=4,table=[7,2,9], where is token10 and how much tail is unused at length11?",
+      "answer": "Logical block2, physical block9, offset2. Twelve slots are allocated, one unused; that slot must be excluded from retrieval.",
+      "rubric": "Calculate quotient, remainder and logical length.",
+      "objective_ids": [
+        "paged-address"
+      ],
+      "claim_ids": [
+        "paged-claim"
+      ]
+    },
+    {
+      "id": "paged-share",
+      "question": "Two requests share a half-full last block; can one append in place?",
+      "answer": "It must copy the shared tail first, update its own mapping and reference counts, then write. Otherwise a future mutation can corrupt the other request.",
+      "rubric": "Distinguish partial-tail copy-on-write from appending after a full block.",
+      "objective_ids": [
+        "paged-share"
+      ],
+      "claim_ids": [
+        "paged-claim"
+      ]
+    }
+  ],
+  "scenes": [],
+  "media": {},
+  "approval": null
+}

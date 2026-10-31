@@ -1,0 +1,247 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:05.130
+Every family answers the same
+hourly calendar only question.
+
+00:00:05.520 --> 00:00:07.027
+Training uses eight thousand,
+
+00:00:07.027 --> 00:00:10.350
+six hundred and forty five
+hours in twenty eleven,
+
+00:00:10.540 --> 00:00:15.310
+followed by the same four thousand, three
+hundred and fifty seven validation hours.
+
+00:00:15.880 --> 00:00:20.050
+No weather, target transform or
+demand history is introduced.
+
+00:00:20.820 --> 00:00:22.590
+The final test remains reserved.
+
+00:00:23.640 --> 00:00:26.330
+Different fitting algorithms
+do different work,
+
+00:00:26.500 --> 00:00:31.780
+so pretending a tree split and an SGD
+update are equal operations would not
+
+00:00:31.780 --> 00:00:33.270
+create a fair control.
+
+00:00:33.780 --> 00:00:38.310
+We instead expose each familys
+structural limits, search allowance,
+
+00:00:38.520 --> 00:00:40.790
+stopping rule and actual costs.
+
+00:00:42.983 --> 00:00:47.843
+Each tree family receives three
+configurations and the same three declared
+
+00:00:47.843 --> 00:00:50.673
+seed values, giving nine main fits.
+
+00:00:51.423 --> 00:00:54.213
+Across families that is twenty seven fits,
+
+00:00:54.443 --> 00:00:58.373
+plus four deterministic references
+with no newly tuned settings.
+
+00:00:59.243 --> 00:01:04.623
+A small training only timing pilot checks
+feasibility for each family before the
+
+00:01:04.623 --> 00:01:05.313
+full sweep.
+
+00:01:05.843 --> 00:01:08.173
+These pilots choose no quality setting.
+
+00:01:08.923 --> 00:01:13.793
+Every fitted main state is saved and
+hashed before validation is opened.
+
+00:01:14.563 --> 00:01:17.773
+The configured timing guards
+run after a fit returns;
+
+00:01:18.363 --> 00:01:20.873
+structural caps bound the actual model.
+
+00:01:21.503 --> 00:01:25.073
+We do not describe those checks
+as interruptible hard timeouts.
+
+00:01:27.358 --> 00:01:30.368
+For one configuration and output policy,
+
+00:01:30.518 --> 00:01:35.088
+take every declared seeds validation
+MAE and average those scores.
+
+00:01:35.578 --> 00:01:37.788
+This is an average of
+quality measurements,
+
+00:01:37.998 --> 00:01:40.348
+not an ensemble of the three seed models.
+
+00:01:41.038 --> 00:01:45.508
+Exact ties prefer raw output and then
+the declared configuration order.
+
+00:01:46.038 --> 00:01:49.928
+The first seed supplies a representative
+artifact by prior declaration.
+
+00:01:50.518 --> 00:01:53.168
+We never pick the seed with
+the most flattering score.
+
+00:01:53.718 --> 00:01:57.378
+The result record keeps both
+the configuration mean and that
+
+00:01:57.378 --> 00:01:58.588
+representatives score
+
+00:01:58.978 --> 00:02:02.928
+so the selected artifact and reported
+evidence can be understood together.
+
+00:02:05.315 --> 00:02:11.165
+The grouped mean remains best at ninety
+one point five seven mean absolute error.
+
+00:02:11.935 --> 00:02:16.695
+The best tree is near one hundred and the
+best forest near ninety nine point seven
+
+00:02:16.695 --> 00:02:17.285
+five.
+
+00:02:18.055 --> 00:02:22.175
+Clipped interaction linear regression
+is near one hundred point five two,
+
+00:02:22.175 --> 00:02:26.425
+and clipped boosting near one
+hundred and two point two two.
+
+00:02:27.295 --> 00:02:32.035
+Beating raw additive linear regression
+is not enough when a stronger simple
+
+00:02:32.035 --> 00:02:33.605
+reference already exists.
+
+00:02:34.455 --> 00:02:37.325
+We therefore retain
+groups with raw policy.
+
+00:02:37.955 --> 00:02:41.385
+Its outputs are already nonnegative,
+so clipping ties.
+
+00:02:42.035 --> 00:02:44.965
+Keeping that model is the result
+of the completed comparison,
+
+00:02:45.435 --> 00:02:48.065
+not evidence that the
+implementation was abandoned.
+
+00:02:50.358 --> 00:02:55.078
+The representative deep forest fits
+locally in about zero point six eight
+
+00:02:55.078 --> 00:02:59.468
+seconds and saves about sixteen
+point one megabytes of JSON.
+
+00:03:00.478 --> 00:03:04.798
+Replaying the validation batch takes
+roughly one tenth of a second through our
+
+00:03:04.798 --> 00:03:07.008
+inspectable numerical traversal.
+
+00:03:07.678 --> 00:03:12.638
+The three hundred stage booster fits in
+about zero point eight two seconds and
+
+00:03:12.638 --> 00:03:15.428
+saves about six hundred
+and sixty four kilobytes.
+
+00:03:15.998 --> 00:03:19.848
+These observations describe this
+machine and this implementation.
+
+00:03:20.618 --> 00:03:23.718
+JSON bytes measure storage
+rather than peak memory,
+
+00:03:23.718 --> 00:03:27.748
+and replay is not optimized
+library serving latency.
+
+00:03:28.438 --> 00:03:33.248
+We compare costs honestly without
+manufacturing a universal speed ranking.
+
+00:03:35.600 --> 00:03:40.330
+Eighty three checks and an independent
+audit verify the saved predictions,
+
+00:03:40.560 --> 00:03:41.530
+scalar metrics,
+
+00:03:42.140 --> 00:03:43.410
+leaf membership, identities
+
+00:03:44.340 --> 00:03:45.690
+and fitted state replay.
+
+00:03:46.280 --> 00:03:50.350
+All written explanations were completed
+before creating these companions.
+
+00:03:51.120 --> 00:03:53.500
+These checks establish
+implemented behavior,
+
+00:03:53.500 --> 00:03:57.570
+while the learners own explanation
+remains a separate conversation.
+
+00:03:58.240 --> 00:04:02.790
+The same validation period has
+informed multiple development choices,
+
+00:04:03.300 --> 00:04:05.770
+so its selected score can be optimistic.
+
+00:04:06.400 --> 00:04:09.110
+The final test and
+application remain pending.
+
+00:04:09.980 --> 00:04:14.600
+The useful next question is why a more
+detailed historical partition predicted
+
+00:04:14.600 --> 00:04:17.730
+the busy Monday worse
+than a broader group.
+
+00:04:18.080 --> 00:04:21.810
+That interpretation is the purpose
+of this practical comparison.
+

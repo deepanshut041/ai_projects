@@ -1,0 +1,163 @@
+{
+  "status": "passed",
+  "url": "http://127.0.0.1:4273/project_docs/records/tutorials/bike-demand-planner-foundation-lab-v1/chapters/prediction-contract/",
+  "opening_lesson_videos": 4,
+  "course_videos": 51,
+  "clips": [
+    {
+      "title": "What is known before the rental hour?",
+      "slug": "bike-first-hourly-contract",
+      "duration": 220.5,
+      "speech_match": 0.998,
+      "true_peak_dbfs": -1.8,
+      "mp4_sha256": "eb62e021675388a3d7a15da79d0a02a5f4c9803d6c563e388076e5771a857760"
+    },
+    {
+      "title": "Build the prediction and measure its error",
+      "slug": "bike-first-prediction-and-loss",
+      "duration": 236.29166666666666,
+      "speech_match": 0.998,
+      "true_peak_dbfs": -1.9,
+      "mp4_sha256": "3336d630d7629898a282ece7aba413f44154aef39b3aabed35862ff5e1725295"
+    },
+    {
+      "title": "Follow the chain rule through one update",
+      "slug": "bike-first-gradient-update",
+      "duration": 234.41666666666666,
+      "speech_match": 0.998,
+      "true_peak_dbfs": -1.8,
+      "mp4_sha256": "5e7dd6ea85cdb9c7dd42f0945e761c09e4cd501ed7594bb294490c9b487c7d38"
+    },
+    {
+      "title": "Change the target to 35 and compare both updates",
+      "slug": "bike-first-opposite-target",
+      "duration": 230.75,
+      "speech_match": 1,
+      "true_peak_dbfs": -1.5,
+      "mp4_sha256": "6884bd9807f3d77d885887452210b4c8403a04e8be783dab270d8fd72eb8ca29"
+    }
+  ],
+  "provider_operations": 26,
+  "active_scenes": 25,
+  "superseded_weighted_sum_recording_retained": true,
+  "narration_request_retries": 0,
+  "fixed_equation_framing_visually_reviewed": true,
+  "caption_and_transcript_downloads": true,
+  "root_and_prefixed_play_pause_and_middle_later_seeking": true,
+  "managed_mobile_presented_frames": 4,
+  "widths": [
+    1440,
+    768,
+    390,
+    320
+  ],
+  "reader_tests": 13,
+  "native_browser_suites": "passed",
+  "explanatory_prose_preserved": true,
+  "source_and_unrelated_staged_state_preserved": {
+    "passed": true,
+    "four_indexes_and_staged_contents_preserved": true,
+    "all_unrelated_tutorial_assets_preserved": true,
+    "bike_source_clean": true,
+    "source_pins_verified": 245,
+    "source_code_changed": false
+  },
+  "critical_finished_audio_values": {
+    "passed": true,
+    "method": "Critical values and signs recovered from speech recognition of the finished MP4, bound to its SHA256; source calculations independently checked. Direct listening unavailable.",
+    "clips": [
+      {
+        "slug": "bike-first-hourly-contract",
+        "finished_mp4_sha256": "eb62e021675388a3d7a15da79d0a02a5f4c9803d6c563e388076e5771a857760",
+        "speech_match": 0.998,
+        "critical_values": [
+          {
+            "quantity": "changed scaled hour",
+            "decoded_excerpt": "8 and the requested clock hour becomes 9. 9 divided by 4 is 2.25 while the working day flag remains 1. the new interval has its own later o"
+          }
+        ]
+      },
+      {
+        "slug": "bike-first-prediction-and-loss",
+        "finished_mp4_sha256": "3336d630d7629898a282ece7aba413f44154aef39b3aabed35862ff5e1725295",
+        "speech_match": 0.998,
+        "critical_values": [
+          {
+            "quantity": "forward estimate",
+            "decoded_excerpt": "is 20 and the bias is another 20. the resulting estimate is 40 rentals. these arithmetic contributions do not establish separate causes o"
+          },
+          {
+            "quantity": "loss",
+            "decoded_excerpt": "calculation. squaring -5 gives 25. multiplying by 1/2 gives 12.5. the half simplifies the derivative we will use next. there is no averagin"
+          },
+          {
+            "quantity": "underprediction",
+            "decoded_excerpt": "ion minus target as the residual convention. 40 minus 45 is -5. the model is 5 rentals too low. keeping this sign matters because the upd"
+          }
+        ]
+      },
+      {
+        "slug": "bike-first-gradient-update",
+        "finished_mp4_sha256": "5e7dd6ea85cdb9c7dd42f0945e761c09e4cd501ed7594bb294490c9b487c7d38",
+        "speech_match": 0.998,
+        "critical_values": [
+          {
+            "quantity": "first updated weight",
+            "decoded_excerpt": " that rate times each derivative. 10 minus 0.01 times -5 is 10.05. 5 minus 0.01 times -10 is 5.10. the bias similarly becomes 20.05. subtrac"
+          },
+          {
+            "quantity": "second updated weight",
+            "decoded_excerpt": " 10 minus 0.01 times -5 is 10.05. 5 minus 0.01 times -10 is 5.10. the bias similarly becomes 20.05. subtracting a negative produces these "
+          },
+          {
+            "quantity": "updated bias",
+            "decoded_excerpt": " 5 minus 0.01 times -10 is 5.10. the bias similarly becomes 20.05. subtracting a negative produces these increases. their direction fits thi"
+          },
+          {
+            "quantity": "updated prediction",
+            "decoded_excerpt": "bias increase of 0.05. the prediction rises by 0.3 reaching 40.30. its remaining residual is -4.70 and half-squared error is 11.045. this i"
+          },
+          {
+            "quantity": "remaining residual",
+            "decoded_excerpt": "tion rises by 0.3 reaching 40.30. its remaining residual is -4.70 and half-squared error is 11.045. this is a same observation arithmetic c"
+          },
+          {
+            "quantity": "updated loss",
+            "decoded_excerpt": ". its remaining residual is -4.70 and half-squared error is 11.045. this is a same observation arithmetic check not an unseen hour performanc"
+          }
+        ]
+      },
+      {
+        "slug": "bike-first-opposite-target",
+        "finished_mp4_sha256": "6884bd9807f3d77d885887452210b4c8403a04e8be783dab270d8fd72eb8ca29",
+        "speech_match": 1,
+        "critical_values": [
+          {
+            "quantity": "first updated weight",
+            "decoded_excerpt": "ed. apply rate 0.01 to the first gradient. 10 minus 0.05 is 9.95. for the second weight 5 minus 0.1 is 4.90. for the bias 20 minus 0.05 is "
+          },
+          {
+            "quantity": "second updated weight",
+            "decoded_excerpt": "10 minus 0.05 is 9.95. for the second weight 5 minus 0.1 is 4.90. for the bias 20 minus 0.05 is 19.95. all three changes are downward in t"
+          },
+          {
+            "quantity": "updated bias",
+            "decoded_excerpt": "d weight 5 minus 0.1 is 4.90. for the bias 20 minus 0.05 is 19.95. all three changes are downward in this case. they have the same magnitude"
+          },
+          {
+            "quantity": "updated prediction",
+            "decoded_excerpt": "sing the new weights and the same two inputs. the result is 39.70. the first weighted contribution falls by 0.05 the second by 0.2 and the "
+          },
+          {
+            "quantity": "updated loss",
+            "decoded_excerpt": "ion by 0.3. the remaining over prediction is 4.70 with loss 11.045. one update reduced the error. it did not have to land on 35. the rate spe"
+          }
+        ]
+      }
+    ]
+  },
+  "direct_listening_available": false,
+  "frozen_fingerprint": "696d8b5da08967102b8de1010b6ec9e418bd4a8fd5f6e3daf4c367e913bb8e7f",
+  "source_or_model_changes": false,
+  "learner_or_hosted_result_inferred": false
+}

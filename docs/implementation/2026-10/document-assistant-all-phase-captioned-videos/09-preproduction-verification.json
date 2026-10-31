@@ -1,0 +1,33 @@
+{
+  "scope": "Preproduction checks only; no finished media",
+  "videos_scripted": 24,
+  "scenes_scripted": 148,
+  "narration_words": 11346,
+  "as_shown_reference_programs": 24,
+  "actual_helper_chain_actions_checked": [
+    "status",
+    "check",
+    "show-config",
+    "answer"
+  ],
+  "actual_helper_chain_exit_codes": [
+    0,
+    0,
+    0,
+    2
+  ],
+  "script_parser": "all148 pass pinned upstream parser",
+  "source_files_preserved": 241,
+  "static_font_width_issues": [],
+  "cloud_requests": 0,
+  "finished_videos": 0,
+  "attachments_created": 0,
+  "pending": [
+    "mounted provider environment access",
+    "configured-model plan review",
+    "narration",
+    "actual frame/sound/timing review",
+    "render and finished media verification",
+    "inline attachment and actual playback checks"
+  ]
+}

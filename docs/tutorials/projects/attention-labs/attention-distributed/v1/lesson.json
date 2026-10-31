@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "project_id": "attention-labs",
+  "languages": [
+    "cpp",
+    "python"
+  ],
+  "examples": [],
+  "slug": "attention-distributed",
+  "revision": "v1",
+  "title": "Attention distribution: Ring Attention",
+  "question": "How can distributed query blocks see every key without gathering all history on each device?",
+  "topic_kind": "concept",
+  "level": "advanced",
+  "prerequisites": [],
+  "created_at": "2026-10-30T23:04:39.041214+00:00",
+  "repository": {
+    "base_sha": "6114868d844022fb42d82a1e04d86b1cc51ba90b",
+    "name": "docs"
+  },
+  "objectives": [
+    {
+      "id": "ring-normalize",
+      "text": "Trace every source-block round and merge global softmax mass correctly."
+    },
+    {
+      "id": "ring-causal",
+      "text": "Preserve original causal coordinates and distinguish balance, bytes and physical execution."
+    }
+  ],
+  "sources": [
+    {
+      "id": "ring-teacher",
+      "kind": "external",
+      "title": "Vizuara context parallelism",
+      "url": "https://vizuaraai.github.io/5d-parallelism-visual-guide/context-parallelism.html",
+      "accessed_at": "2026-10-30",
+      "locator": "Ring mechanism and zigzag sections",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    },
+    {
+      "id": "ring-primary",
+      "kind": "external",
+      "title": "Ring Attention",
+      "url": "https://arxiv.org/html/2310.01889v4",
+      "accessed_at": "2026-10-30",
+      "locator": "Sections2–3; Algorithm1; Figures1–2",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    }
+  ],
+  "claims": [
+    {
+      "id": "ring-claim",
+      "text": "Simulated ring traversal with common-maximum normalization reproduces dense outputs/gradients; absolute-position masks survive contiguous or balanced token ownership.",
+      "status": "verified",
+      "source_ids": [
+        "ring-teacher",
+        "ring-primary"
+      ],
+      "proof_limit": "Stated mathematical assumptions and executed tiny reference; no learner, hosted or full-model result."
+    }
+  ],
+  "entities": [],
+  "relationships": [],
+  "chapters": [
+    {
+      "id": "ring",
+      "title": "Ring Attention",
+      "content_path": "lessons/01-ring-attention.md",
+      "objective_ids": [
+        "ring-normalize",
+        "ring-causal"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "ring-normalize",
+        "ring-causal"
+      ]
+    }
+  ],
+  "diagrams": [],
+  "tables": [],
+  "scenarios": [],
+  "practice": [
+    {
+      "id": "ring-normalize",
+      "question": "Four ranks make three transfers; how many source-block contributions must each query group compute?",
+      "answer": "Four: its initial local block plus three incoming blocks. Merge common-max numerators/denominators, not an equal average of local outputs.",
+      "rubric": "Account for the initial contribution and global normalization.",
+      "objective_ids": [
+        "ring-normalize"
+      ],
+      "claim_ids": [
+        "ring-claim"
+      ]
+    },
+    {
+      "id": "ring-causal",
+      "question": "Does assigning early and late positions to one rank remove the causal mask?",
+      "answer": "No. Visibility still uses original absolute token positions. Zigzag changes ownership; a rank number or local order is not a positional coordinate.",
+      "rubric": "Preserve the global graph while changing distribution.",
+      "objective_ids": [
+        "ring-causal"
+      ],
+      "claim_ids": [
+        "ring-claim"
+      ]
+    }
+  ],
+  "scenes": [],
+  "media": {},
+  "approval": null
+}

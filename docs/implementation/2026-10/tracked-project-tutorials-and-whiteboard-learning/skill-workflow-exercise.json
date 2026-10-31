@@ -1,0 +1,391 @@
+{
+  "state": "passed",
+  "scope": "disposable workspace only; no actual model/study created",
+  "routes": [
+    "project",
+    "paper",
+    "experiment",
+    "reproduction",
+    "combined"
+  ],
+  "research_authoring": [
+    "paper record",
+    "experiment record",
+    "source registration"
+  ],
+  "tutorial_flow": [
+    "init",
+    "duplicate-preservation",
+    "foreign registered snapshot",
+    "author",
+    "validate",
+    "cpp/python examples",
+    "render",
+    "index",
+    "list",
+    "stale-source rejection",
+    "site build",
+    "browser"
+  ],
+  "same_worded_practice_ids": "distinct answers verified",
+  "records": 12,
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main",
+        "<temporary-workspace>/ai_projects/docs"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "<temporary-workspace>/ai_projects/docs",
+        "-c",
+        "user.name=Skill Test",
+        "-c",
+        "user.email=test@example.invalid",
+        "commit",
+        "--allow-empty",
+        "-m",
+        "Disposable baseline"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "git",
+        "init",
+        "-b",
+        "main",
+        "<temporary-workspace>/ai_projects/projects/reference-lab"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "<temporary-workspace>/ai_projects/projects/reference-lab",
+        "-c",
+        "user.name=Skill Test",
+        "-c",
+        "user.email=test@example.invalid",
+        "commit",
+        "--allow-empty",
+        "-m",
+        "Disposable baseline"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "task",
+        "new",
+        "Disposable project",
+        "--owner",
+        "project-docs",
+        "--domains",
+        "project"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "task",
+        "new",
+        "Disposable paper",
+        "--owner",
+        "project-docs",
+        "--domains",
+        "paper"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "task",
+        "new",
+        "Disposable experiment",
+        "--owner",
+        "project-docs",
+        "--domains",
+        "experiment"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "task",
+        "new",
+        "Disposable reproduction",
+        "--owner",
+        "project-docs",
+        "--domains",
+        "reproduction"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "task",
+        "new",
+        "Disposable project paper experiment reproduction",
+        "--owner",
+        "project-docs",
+        "--domains",
+        "project,paper,experiment,reproduction"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "research",
+        "new",
+        "paper",
+        "skill-paper",
+        "--title",
+        "Disposable paper"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "research",
+        "new",
+        "experiment",
+        "skill-experiment",
+        "--title",
+        "Disposable experiment"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "research",
+        "source",
+        "add",
+        "skill-reference",
+        "--title",
+        "Disposable reference",
+        "--url",
+        "https://example.org/reference",
+        "--collection",
+        "skill-tests"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "research",
+        "sources"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "learn",
+        "init",
+        "--project",
+        "P01",
+        "--slug",
+        "gpt-1-foundations",
+        "--title",
+        "Disposable orientation",
+        "--question",
+        "How does this work?",
+        "--goal",
+        "Predict a prefix average",
+        "--level",
+        "introductory"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "learn",
+        "init",
+        "--project",
+        "P01",
+        "--slug",
+        "gpt-1-foundations",
+        "--title",
+        "Duplicate",
+        "--question",
+        "Why?",
+        "--goal",
+        "Predict"
+      ],
+      "returncode": 1
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "learn",
+        "snapshot",
+        "--lesson",
+        "projects/p01/gpt-1-foundations/v1",
+        "--source-project",
+        "reference-lab",
+        "--source-id",
+        "local-reference",
+        "--path",
+        "reference.py",
+        "--start",
+        "1",
+        "--end",
+        "2",
+        "--title",
+        "Local prefix reference"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "learn",
+        "validate",
+        "--lesson",
+        "projects/p01/gpt-1-foundations/v1"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "learn",
+        "examples",
+        "--lesson",
+        "projects/p01/gpt-1-foundations/v1"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "learn",
+        "render",
+        "--lesson",
+        "projects/p01/gpt-1-foundations/v1"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "learn",
+        "list"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/mnt/projects/ai/cli/.venv/bin/python",
+        "-m",
+        "ai_cli",
+        "--root",
+        "<temporary-workspace>",
+        "learn",
+        "validate",
+        "--lesson",
+        "projects/p01/gpt-1-foundations/v1"
+      ],
+      "returncode": 1
+    },
+    {
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "npm",
+        "run",
+        "test:browser"
+      ],
+      "returncode": 0
+    }
+  ]
+}

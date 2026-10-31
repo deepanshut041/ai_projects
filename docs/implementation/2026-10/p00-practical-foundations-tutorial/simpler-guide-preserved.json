@@ -1,0 +1,21 @@
+{
+  "examples/numerical_trace.cpp": "989dce03c34f5b799a83aab2078dd641f04f47d6dd989883542b17ea6891d78f",
+  "examples/fresh_process_resume.py": "4cf54ce15acd6356fc7a04993d2a075d9914ab2ec884594a54ca982a134faaa5",
+  "examples/byte_bpe.py": "5adcd5044d52d541dc729554a3f6d184ff0d53d2704122d0b37f4dd51e6db190",
+  "examples/first_session.py": "7c2fc16ad94edadeeecec4e901c6beeed07d27919687ced003e42dad532d0548",
+  "examples/tiny_transformer.py": "0e4073ce2595c1170a5184247a8d2b2467d1b2f7a4059d9dc8019a296be90635",
+  "examples/numerical_trace.py": "bd276de5aafd7e31eff80b89b367ca9859940aa752baff1c1939b70ba4b17d43",
+  "examples/tensor_autograd.py": "27798d9f9fbb1eeeb888367a2e4a5bd199ec2c79b5822e8569309315575e56c3",
+  "diagrams/gpt-handoff.svg": "15dd95427441b771e9a81b4f41f3166c8b11c45aae882867f8ba7435c8b66890",
+  "diagrams/postnorm.svg": "94c1d1983d4ab1c4acc634bd406ddcaffd049c251528191dfe4d0c9e4cb10e55",
+  "diagrams/dependencies.svg": "a2388d7a2f9741b4530c511881ca1432b2d832e057a8130a0f6f43b8219f1675",
+  "diagrams/target-alignment.svg": "3d85a625118e68f9345c37808ec086d32564bfae06ec5f9f16d56da75866a4e7",
+  "diagrams/model-flow.svg": "03583f9af632b021118523054f54283d2f40359de00092fce21714034590e8bc",
+  "diagrams/recovery-flow.svg": "1587256956f56a7485da704bf62afda14b77fd262137566db43b212dc94d68d7",
+  "diagrams/memory-map.svg": "e031411725edbed54cdd6f54879d19af5d1ed0bbcbd3d02c059fd9e579480e40",
+  "diagrams/attention-flow.svg": "511ba82e58dd49390ec831dde34ae0d5a2b103925f3dba3fd32a79e8b025e9a4",
+  "diagrams/text-pipeline.svg": "391a4852ecf714a2e1f648543ecfecf729e06852e0171ad3564dfeae4b3b23b7",
+  "diagrams/learning-loop.svg": "a55e31925ebc9bb5dcd5ae5c84647df3983b64e63e3b4e787bb8b1e9eb9ac72a",
+  "diagrams/bpe-cycle.svg": "e7b1639bb633750e85ec7eaf46210cab17976b5b72a1fedad562e7986c980152",
+  "evidence/reference-evidence.txt": "d84df3ae6db0ea6c07324a60dcf4fe7a91476188df2c8fdb2ed54b64eb75cda7"
+}

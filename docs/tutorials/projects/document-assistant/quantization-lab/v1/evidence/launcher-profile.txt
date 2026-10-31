@@ -1,0 +1,37 @@
+title = "Document Assistant"
+description = "Compare model quantization through local document question answering."
+focus = "Choose Project status, Check setup or Show configuration, then Run."
+notice = "Runnable boilerplate only. Model loading, quantization, task evaluation and the application remain pending."
+
+[labels]
+run = "Run"
+setup = "Setup env"
+build = "Build pkg"
+test = "Checks"
+
+[[runners]]
+id = "status"
+label = "Project status"
+path = "src/document_assistant.py"
+args = ["status"]
+description = "Show the pinned model and pending workflow stages."
+
+[[runners]]
+id = "check"
+label = "Check setup"
+path = "src/check_setup.py"
+description = "Check the Python environment, configuration and source imports."
+
+[[runners]]
+id = "config"
+label = "Show configuration"
+path = "src/show_config.py"
+description = "Read the pinned model revision and proposed experiment settings."
+
+[[resources]]
+label = "Project README"
+path = "README.md"
+
+[[resources]]
+label = "Model and experiment configuration"
+path = "src/core/project.toml"

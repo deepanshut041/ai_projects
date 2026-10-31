@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-09",
+  "checks": {
+    "doctor": true,
+    "tui": true,
+    "portable_wrapper": true,
+    "diff_check_ai_projects": true,
+    "diff_check_project_docs": true,
+    "diff_check_cli": true,
+    "cli_outside_projects": true,
+    "planning_link": true,
+    "git_identity_available": true,
+    "canonical_links": true,
+    "stable_project_ids": true,
+    "kickoff_checkpoint": true,
+    "umbrella_artifacts_ignored": true,
+    "original_catalogue_preserved": true
+  },
+  "details": {
+    "doctor": {
+      "ok": true,
+      "root": "/mnt/projects/ai",
+      "runtime": "/mnt/projects/ai/.ai",
+      "platform": "linux",
+      "python": "3.12.13",
+      "tools": {
+        "uv": "/home/lucifer/.local/bin/uv",
+        "node": "/home/lucifer/.nvm/versions/node/v24.14.0/bin/node",
+        "npm": "/home/lucifer/.nvm/versions/node/v24.14.0/bin/npm",
+        "git": "/usr/bin/git",
+        "cmake": "/usr/bin/cmake",
+        "ctest": "/usr/bin/ctest",
+        "c++": "/usr/bin/c++",
+        "make": "/usr/bin/make"
+      },
+      "required_tools": [
+        "git",
+        "node",
+        "npm",
+        "uv"
+      ],
+      "missing_required_tools": [],
+      "node_version": "v24.14.0",
+      "node_compatible": true,
+      "missing_repositories": []
+    },
+    "tui": {
+      "ui": "ok",
+      "projects": [
+        "project-docs",
+        "linear-model-lab",
+        "retrieval-lab",
+        "attention-lab",
+        "research-docs",
+        "generalization-lab"
+      ],
+      "markdown_browser": false
+    },
+    "portable_wrapper": {
+      "area": "projects",
+      "section": "resume",
+      "files": {
+        "roadmap": "/mnt/projects/ai/ai_projects/roadmap.md",
+        "progress": "/mnt/projects/ai/ai_projects/progress.md",
+        "resume": "/mnt/projects/ai/ai_projects/resume.md",
+        "decisions": "/mnt/projects/ai/ai_projects/decisions.md"
+      }
+    }
+  },
+  "local_links_checked": 54,
+  "issues": [],
+  "passed": true
+}

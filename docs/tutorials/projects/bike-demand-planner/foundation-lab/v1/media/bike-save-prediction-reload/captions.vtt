@@ -1,0 +1,256 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:03.620
+Return to Monday,
+January ninth, twenty twelve.
+
+00:00:03.620 --> 00:00:04.890
+At seven,
+
+00:00:05.300 --> 00:00:07.950
+we ask for the hour beginning at eight.
+
+00:00:08.500 --> 00:00:13.277
+The saved hour and working day group
+returns three hundred and forty nine point
+
+00:00:13.277 --> 00:00:15.710
+five zero rentals per hour.
+
+00:00:16.500 --> 00:00:18.310
+Now close the fitting process.
+
+00:00:18.680 --> 00:00:23.500
+A new process must produce the same
+forecast without its old local variables
+
+00:00:23.500 --> 00:00:24.910
+or training lists.
+
+00:00:25.600 --> 00:00:30.280
+The recorded outcome of four hundred and
+twenty remains separate and becomes useful
+
+00:00:30.280 --> 00:00:31.730
+afterward for evaluation.
+
+00:00:32.660 --> 00:00:36.020
+Reloading must preserve the
+fitted function and its contract,
+
+00:00:36.020 --> 00:00:40.290
+rather than reconstructing an
+answer from a later observed count.
+
+00:00:42.398 --> 00:00:46.238
+The selected group is supported by
+two hundred and forty eight training
+
+00:00:46.238 --> 00:00:47.918
+observations.
+
+00:00:47.918 --> 00:00:51.788
+Their outcomes sum to eighty six thousand,
+six hundred and seventy seven.
+
+00:00:52.478 --> 00:00:54.568
+Dividing gives the saved mean,
+
+00:00:54.998 --> 00:00:57.228
+three hundred and forty
+nine point five zero.
+
+00:00:58.298 --> 00:01:01.808
+This arithmetic explains where
+the fitted value came from,
+
+00:01:01.998 --> 00:01:05.568
+but prediction does not repeat
+the fit or read these targets.
+
+00:01:06.118 --> 00:01:07.848
+It looks up the stored value.
+
+00:01:08.338 --> 00:01:10.378
+The saved global training mean,
+
+00:01:10.378 --> 00:01:12.958
+about one hundred and forty
+three point seven nine,
+
+00:01:12.958 --> 00:01:17.508
+is the simple baseline and
+valid absent key fallback.
+
+00:01:17.958 --> 00:01:22.488
+Both levels retain rental units and
+remain unrounded in the prediction API.
+
+00:01:24.980 --> 00:01:29.990
+The bundle gives the fitted values and
+their surrounding meaning separate files.
+
+00:01:30.400 --> 00:01:32.640
+Model JSON keeps the original group bytes.
+
+00:01:32.640 --> 00:01:35.950
+Candidate JSON retains schema,
+
+00:01:36.560 --> 00:01:39.330
+feature order,
+raw output and fallback rules,
+
+00:01:39.940 --> 00:01:41.690
+supported dates and known limitations.
+
+00:01:42.600 --> 00:01:47.450
+Calendar JSON supplies recorded
+holiday flags without rental outcomes;
+
+00:01:48.560 --> 00:01:52.050
+the manifest hashes all three
+members and records their producer.
+
+00:01:52.680 --> 00:01:55.010
+The original review record is preserved,
+
+00:01:55.120 --> 00:01:58.970
+while the later application receipt
+records current execution evidence.
+
+00:01:59.900 --> 00:02:04.110
+Hashes establish identity rather
+than trust in an unknown producer.
+
+00:02:04.680 --> 00:02:06.970
+A caller can pin a trusted manifest hash,
+
+00:02:07.380 --> 00:02:10.550
+and semantic checks still
+reject an incompatible schema.
+
+00:02:12.668 --> 00:02:17.178
+The constructor checks the bundle members
+before making a predictor available.
+
+00:02:17.948 --> 00:02:22.258
+The target time is resolved
+into a consistent hour, weekday,
+
+00:02:22.768 --> 00:02:28.758
+month, holiday and working day request,
+with the issue exactly one hour earlier.
+
+00:02:29.528 --> 00:02:32.938
+Prediction checks that request
+and looks up the saved key.
+
+00:02:33.588 --> 00:02:37.058
+It neither fits a transform
+nor reads an outcome file.
+
+00:02:37.588 --> 00:02:40.638
+The selected group model
+has no learned scaler,
+
+00:02:40.868 --> 00:02:45.068
+but its forty five ordered calendar
+positions still identify the input
+
+00:02:45.068 --> 00:02:45.698
+meanings.
+
+00:02:46.388 --> 00:02:50.688
+A request carrying an outcome or
+an unsupported schema is rejected,
+
+00:02:50.688 --> 00:02:54.418
+rather than repaired by a
+successful looking fallback.
+
+00:02:56.648 --> 00:03:00.913
+Change the requested hour to two in the
+morning and the forecast becomes seven
+
+00:03:00.913 --> 00:03:02.138
+point five one.
+
+00:03:02.728 --> 00:03:06.978
+Change to a Sunday at eight and it
+becomes seventy six point four three.
+
+00:03:08.048 --> 00:03:12.154
+A June Monday at eight still receives
+three hundred and forty nine point five
+
+00:03:12.154 --> 00:03:16.638
+zero, because the function uses
+only hour and working day status.
+
+00:03:17.248 --> 00:03:20.638
+Perfect reloading preserves
+this lack of month sensitivity.
+
+00:03:21.268 --> 00:03:22.898
+It does not improve quality.
+
+00:03:23.808 --> 00:03:26.038
+All forty eight real groups are present;
+
+00:03:26.548 --> 00:03:30.078
+a separate small fixture
+establishes the absent key fallback.
+
+00:03:30.708 --> 00:03:33.518
+Invalid inputs instead fail before lookup.
+
+00:03:34.188 --> 00:03:36.198
+Those behaviors belong to different cases.
+
+00:03:38.483 --> 00:03:41.090
+The preparation command
+sends all four thousand,
+
+00:03:41.090 --> 00:03:46.223
+three hundred and fifty seven validation
+requests to a separate Python process
+
+00:03:46.223 --> 00:03:48.233
+launched from the run directory.
+
+00:03:49.043 --> 00:03:51.653
+Every result matches the
+in process predictor,
+
+00:03:52.063 --> 00:03:52.993
+including support,
+
+00:03:53.503 --> 00:03:54.913
+fallback and identities.
+
+00:03:55.923 --> 00:04:00.403
+The independent audit also checks each
+forecast against its original stored group
+
+00:04:00.403 --> 00:04:00.913
+value.
+
+00:04:01.663 --> 00:04:06.253
+An installed wheel predicts while all
+access to the source checkout is denied.
+
+00:04:07.003 --> 00:04:12.263
+These checks establish a portable saved
+prediction path rather than reliance on an
+
+00:04:12.263 --> 00:04:13.633
+old training process.
+
+00:04:14.323 --> 00:04:16.933
+They preserve the earlier
+scores and failures.
+
+00:04:17.463 --> 00:04:21.273
+Whether those forecasts are useful is
+still a separate empirical question.
+

@@ -1,0 +1,22 @@
+[
+  {
+    "check": "setup-all",
+    "exit": 0,
+    "elapsed_seconds": 3.59
+  },
+  {
+    "check": "test-all",
+    "exit": 0,
+    "elapsed_seconds": 1.89
+  },
+  {
+    "check": "build-all",
+    "exit": 0,
+    "elapsed_seconds": 2.68
+  },
+  {
+    "check": "run-all",
+    "exit": 0,
+    "elapsed_seconds": 1.17
+  }
+]

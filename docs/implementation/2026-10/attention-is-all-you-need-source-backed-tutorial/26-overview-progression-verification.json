@@ -1,0 +1,18 @@
+{
+  "overview_before_component_names_and_input_layout": true,
+  "changed_chapters": 3,
+  "other_chapters_preserved": 9,
+  "complete_programs_preserved_and_executed": 10,
+  "model_source_preserved_files": 86,
+  "desktop_mobile_chapter_checks": 24,
+  "diagram_label_bounds": "passed",
+  "lesson_validation_and_export": "passed",
+  "website_tests": {
+    "passed": 21,
+    "total": 21
+  },
+  "ordinary_build": "passed",
+  "videos": 0,
+  "learner_feedback": "detailed explanation positively reviewed; progressive overview requested",
+  "new_progression_acceptance": "pending"
+}

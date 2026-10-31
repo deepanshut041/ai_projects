@@ -1,0 +1,7 @@
+# Implementation contracts
+
+1. Verify every frozen artifact before generating records; read each declared chapter content_path from that verified set. Expand diagram/table/scenario/practice placeholders and append manifest associations exactly once, as the existing compiler does. Reject missing/duplicate page IDs and unvalidated chapters.
+2. Keep tutorial overview IDs stable. Generate nested records under that ID for chapters, supporting Markdown and a complete lesson. Metadata carries ordered page identity/title/source and links; non-overview tutorial pages are excluded from record cards but retained in search data.
+3. Resolve package-relative Markdown links to reader pages, other assets to validated downloads, and source references to their declared source URL/excerpt. Retain heading fragments and deployment prefixes. Nested records remain validated and cannot contain traversal.
+4. Render a shared contents menu, current-page state, chapter position and previous/next links. Mobile gets a collapsible contents menu; ordinary links support direct loads, browser history and JavaScript-disabled reading. Print hides navigation and reveals existing worked answers.
+5. Extend meaningful tests for routing, safety, multi-file ownership, prefix/fragment correctness and unchanged authored content. Run npm test/build/browser at the normal prefix and root; inspect screenshots. Update package and canonical checkpoints, keeping learning gates unchanged.

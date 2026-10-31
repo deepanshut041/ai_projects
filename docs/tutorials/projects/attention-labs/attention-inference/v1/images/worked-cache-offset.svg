@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="530" viewBox="0 0 1160 530" role="img"><title>A chunk begins at its absolute position</title><desc>Three retained tokens + a two-token chunk → query positions 3 and 4.</desc>
+<rect x="0" y="0" width="1160" height="530" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">A chunk begins at its absolute position</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">Three retained tokens + a two-token chunk → query positions 3 and 4.</text>
+<rect x="36" y="126" width="205" height="62" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="46" y="167.54" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#6846c7">query</text>
+<rect x="241" y="126" width="124" height="62" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="251" y="167.54" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#6846c7">key 0</text>
+<rect x="365" y="126" width="124" height="62" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="375" y="167.54" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#6846c7">key 1</text>
+<rect x="489" y="126" width="124" height="62" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="499" y="167.54" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#6846c7">key 2</text>
+<rect x="613" y="126" width="124" height="62" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="623" y="167.54" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#6846c7">key 3</text>
+<rect x="737" y="126" width="124" height="62" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="747" y="167.54" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#6846c7">key 4</text>
+<rect x="861" y="126" width="260" height="62" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="871" y="167.54" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#6846c7">visible count</text>
+<rect x="36" y="188" width="205" height="62" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="46" y="229.54" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">position 3</text>
+<rect x="241" y="188" width="124" height="62" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="251" y="229.54" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">yes</text>
+<rect x="365" y="188" width="124" height="62" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="375" y="229.54" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">yes</text>
+<rect x="489" y="188" width="124" height="62" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="499" y="229.54" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">yes</text>
+<rect x="613" y="188" width="124" height="62" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="623" y="229.54" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">yes</text>
+<rect x="737" y="188" width="124" height="62" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="747" y="229.54" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">masked</text>
+<rect x="861" y="188" width="260" height="62" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="871" y="229.54" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">4</text>
+<rect x="36" y="250" width="205" height="62" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="46" y="291.54" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">position 4</text>
+<rect x="241" y="250" width="124" height="62" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="251" y="291.54" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">yes</text>
+<rect x="365" y="250" width="124" height="62" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="375" y="291.54" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">yes</text>
+<rect x="489" y="250" width="124" height="62" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="499" y="291.54" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">yes</text>
+<rect x="613" y="250" width="124" height="62" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="623" y="291.54" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">yes</text>
+<rect x="737" y="250" width="124" height="62" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="747" y="291.54" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">yes</text>
+<rect x="861" y="250" width="260" height="62" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="871" y="291.54" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">5</text>
+<rect x="36" y="343" width="526" height="139" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="375" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#16735e">Correct: j ≤ past + local row</text>
+<text x="56" y="415" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">row 0 → j ≤ 3; row 1 → j ≤ 4</text>
+<rect x="582" y="343" width="542" height="139" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="600" y="375" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#b13f56">Wrong: j ≤ local row</text>
+<text x="602" y="415" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">row 0 sees 1 key; row 1 sees 2</text>
+</svg>

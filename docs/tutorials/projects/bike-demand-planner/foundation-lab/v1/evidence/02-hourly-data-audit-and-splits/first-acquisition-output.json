@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "rows": 17379,
+  "first_target_time": "2011-01-01T00:00:00",
+  "last_target_time": "2012-12-31T23:00:00",
+  "source_timestamp_policy": "Naive source date/hour labels; timezone and DST semantics are unspecified.",
+  "expected_naive_hour_slots": 17544,
+  "unrecorded_naive_hour_slots": 165,
+  "gap_count": 75,
+  "first_gaps": [
+    {
+      "after": "2011-01-02T04:00:00",
+      "before": "2011-01-02T06:00:00",
+      "unrecorded_hours": 1
+    },
+    {
+      "after": "2011-01-03T01:00:00",
+      "before": "2011-01-03T04:00:00",
+      "unrecorded_hours": 2
+    },
+    {
+      "after": "2011-01-04T02:00:00",
+      "before": "2011-01-04T04:00:00",
+      "unrecorded_hours": 1
+    },
+    {
+      "after": "2011-01-05T02:00:00",
+      "before": "2011-01-05T04:00:00",
+      "unrecorded_hours": 1
+    },
+    {
+      "after": "2011-01-06T02:00:00",
+      "before": "2011-01-06T04:00:00",
+      "unrecorded_hours": 1
+    }
+  ],
+  "rows_by_month": {
+    "2011-01": 688,
+    "2011-02": 649,
+    "2011-03": 730,
+    "2011-04": 719,
+    "2011-05": 744,
+    "2011-06": 720,
+    "2011-07": 744,
+    "2011-08": 731,
+    "2011-09": 717,
+    "2011-10": 743,
+    "2011-11": 719,
+    "2011-12": 741,
+    "2012-01": 741,
+    "2012-02": 692,
+    "2012-03": 743,
+    "2012-04": 718,
+    "2012-05": 744,
+    "2012-06": 720,
+    "2012-07": 744,
+    "2012-08": 744,
+    "2012-09": 720,
+    "2012-10": 708,
+    "2012-11": 718,
+    "2012-12": 742
+  },
+  "empty_cells": 0,
+  "duplicate_ids": 0,
+  "duplicate_date_hours": 0,
+  "target_component_mismatches": 0,
+  "calendar_fields": [
+    "season",
+    "yr",
+    "mnth",
+    "hr",
+    "holiday",
+    "weekday",
+    "workingday"
+  ],
+  "excluded_predictors": {
+    "instant": "Record identity, not a predictor.",
+    "dteday": "Source date retained as identity; calendar fields are selected explicitly.",
+    "casual": "Part of the target-hour outcome; casual + registered equals cnt.",
+    "registered": "Part of the target-hour outcome; casual + registered equals cnt.",
+    "cnt": "Target, kept separate from prediction inputs.",
+    "weathersit": "Observed target-hour weather is not an advance forecast.",
+    "temp": "Observed target-hour weather is not an advance forecast.",
+    "atemp": "Observed target-hour weather is not an advance forecast.",
+    "hum": "Observed target-hour weather is not an advance forecast.",
+    "windspeed": "Observed target-hour weather is not an advance forecast."
+  },
+  "first_row": {
+    "identity": {
+      "record_id": 1,
+      "target_time": "2011-01-01T00:00:00"
+    },
+    "calendar_inputs": {
+      "season": 1,
+      "yr": 0,
+      "mnth": 1,
+      "hr": 0,
+      "holiday": 0,
+      "weekday": 6,
+      "workingday": 0
+    },
+    "target": 16
+  },
+  "split_manifest": "not created",
+  "learned_transforms": "not fitted",
+  "source": {
+    "source_page": "https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset",
+    "archive_url": "https://archive.ics.uci.edu/static/public/275/bike%2Bsharing%2Bdataset.zip",
+    "acquired_at_utc": "2026-10-16T07:20:16.714389+00:00",
+    "attribution": "Fanaee-T, H. (2013). Bike Sharing. UCI Machine Learning Repository.",
+    "doi": "https://doi.org/10.24432/C5W894",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "archive_sha256": "b70182d0d0508e9abbb79306ce5c0cec34869000f8220175ac83d11dbe845401",
+    "member_sha256": {
+      "hour.csv": "e03de4ee4ef4dc376ac6e04bf829673c6269e8eba5c60fa121640fa2f829504f",
+      "Readme.txt": "b92c8628622948bf0828c43a1b315d1517c3d7fd63654730d0dea379b8e88175"
+    }
+  }
+}

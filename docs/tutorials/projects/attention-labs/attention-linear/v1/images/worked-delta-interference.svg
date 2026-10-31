@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="620" viewBox="0 0 1160 620" role="img"><title>A write changes other reads according to key overlap</title><desc>Unit incoming key k = [1,0], β = 1, residual = 3. This is a change in the read, not its total.</desc>
+<rect x="0" y="0" width="1160" height="620" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">A write changes other reads according to key overlap</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">Unit incoming key k = [1,0], β = 1, residual = 3. This is a change in the read, not its total.</text>
+<path d="M 80 422 H 510 M 230 475 V 150" fill="none" stroke="#c6cfdf" stroke-width="2"/>
+<line x1="230" y1="422" x2="450.0" y2="422.0" stroke="#2563b9" stroke-width="2.5"/>
+<polygon points="450.00,422.00 439.87,426.28 439.87,417.72" fill="#2563b9"/>
+<line x1="230" y1="422" x2="385.56349186104046" y2="266.43650813895954" stroke="#16735e" stroke-width="2.5"/>
+<polygon points="385.56,266.44 381.43,276.63 375.37,270.57" fill="#16735e"/>
+<line x1="230" y1="422" x2="230.0" y2="202.0" stroke="#b65a1c" stroke-width="2.5"/>
+<polygon points="230.00,202.00 234.28,212.13 225.72,212.13" fill="#b65a1c"/>
+<text x="420" y="460" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="start" fill="#2563b9">k</text>
+<text x="400" y="253" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="start" fill="#16735e">u</text>
+<text x="188" y="180" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="start" fill="#b65a1c">u⊥</text>
+<rect x="580" y="132" width="544" height="112" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="598" y="164" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#2563b9">u = [1,0]</text>
+<text x="600" y="212" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">overlap 1 → change +3</text>
+<rect x="580" y="270" width="544" height="112" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="598" y="302" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#16735e">u = [1,1] / √2</text>
+<text x="600" y="350" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">overlap 1/√2 → +2.121320</text>
+<rect x="580" y="408" width="544" height="112" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="598" y="440" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#b65a1c">u = [0,1]</text>
+<text x="600" y="488" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">overlap 0 → unchanged</text>
+<text x="36" y="576" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">Δ read at u = β (u · k) (v − prediction). Orthogonal keys isolate this write; similar keys share it.</text>
+</svg>

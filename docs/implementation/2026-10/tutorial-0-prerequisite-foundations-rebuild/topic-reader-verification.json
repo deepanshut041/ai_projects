@@ -1,0 +1,74 @@
+{
+  "final_render_fingerprint": "d2eba3f0f5323b6b60284ac37f9ef8e1ef8c1e15d8c65de9e6bdf2ae35771bb8",
+  "lesson_count": 25,
+  "practice_count": 25,
+  "diagram_count": 15,
+  "sources": 48,
+  "content_tests": {
+    "tests": 9,
+    "passed": true
+  },
+  "browser_profiles": [
+    {
+      "base": "/",
+      "records": 102,
+      "widths": [
+        320,
+        390,
+        768,
+        1440
+      ],
+      "passed": true,
+      "artifact_directory": "/mnt/projects/ai/.ai/tutorial0-topic-reader/2026-10-12/root/docs/website/test-results"
+    },
+    {
+      "base": "/project_docs/",
+      "records": 102,
+      "widths": [
+        320,
+        390,
+        768,
+        1440
+      ],
+      "passed": true,
+      "artifact_directory": "/mnt/projects/ai/.ai/tutorial0-topic-reader/2026-10-12/prefix/docs/website/test-results"
+    }
+  ],
+  "visual_review": [
+    "390px embedding lookup matrix and topic prose",
+    "390px rectangular attention matrices/weighted outputs",
+    "desktop LayerNorm input and parameter gradients; repaired display delimiters and checked final KaTeX/rendered equations"
+  ],
+  "console_errors": 0,
+  "source_tests": 114,
+  "standalone_lesson_code_blocks": 26,
+  "study_code_cells_executed": 9,
+  "scope": "local preparation; no learner or hosted completion",
+  "managed_reader": {
+    "start": {
+      "status": 200,
+      "url": "http://127.0.0.1:4273/project_docs/records/tutorials/p00-transformer-foundations-v1/chapters/route/",
+      "title": "Lesson 1 \u2014 Linear algebra and neural maps \u00b7 AI Projects"
+    },
+    "outline": {
+      "status": 200,
+      "url": "http://127.0.0.1:4273/project_docs/records/tutorials/p00-transformer-foundations-v1/documents/project/course-outline/",
+      "title": "Tutorial 0 \u2014 foundations for Attention Is All You Need \u00b7 AI Projects"
+    },
+    "embeddings": {
+      "status": 200,
+      "url": "http://127.0.0.1:4273/project_docs/records/tutorials/p00-transformer-foundations-v1/chapters/embeddings/",
+      "title": "Lesson 13 \u2014 Embeddings, lookup gradients and weight tying \u00b7 AI Projects"
+    },
+    "normalization": {
+      "status": 200,
+      "url": "http://127.0.0.1:4273/project_docs/records/tutorials/p00-transformer-foundations-v1/chapters/normalization/",
+      "title": "Lesson 20 \u2014 Layer normalization and its gradients \u00b7 AI Projects"
+    },
+    "overview": {
+      "status": 200,
+      "url": "http://127.0.0.1:4273/project_docs/records/tutorials/p00-transformer-foundations-v1/",
+      "title": "Tutorial 0 \u2014 Deep learning foundations for Attention Is All You Need \u00b7 AI Projects"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="680" viewBox="0 0 1160 680" role="img"><title>A new maximum changes the units of every old contribution</title><desc>Unmasked first query from the eight-token fixture; tiles contain four keys each.</desc>
+<rect x="0" y="0" width="1160" height="680" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">A new maximum changes the units of every old contribution</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">Unmasked first query from the eight-token fixture; tiles contain four keys each.</text>
+<rect x="36" y="119" width="335" height="370" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="151" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#2563b9">1. First four keys</text>
+<text x="56" y="200" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">m = .515</text>
+<text x="56" y="231" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">l = 3.671094</text>
+<text x="56" y="262" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">u[0] = 2.067350</text>
+<text x="56" y="351" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">u is unnormalized.</text>
+<text x="56" y="382" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">Do not divide yet.</text>
+<rect x="413" y="119" width="335" height="370" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="431" y="151" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">2. Next maximum .560</text>
+<text x="433" y="200" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">α = exp(.515 − .560)</text>
+<text x="433" y="231" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">α = 0.955997</text>
+<text x="433" y="262" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">old l → 3.509557</text>
+<text x="433" y="293" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">old u[0] → 1.976382</text>
+<rect x="790" y="119" width="335" height="370" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="808" y="151" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#16735e">3. Add the new tile</text>
+<text x="810" y="200" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">m = .560</text>
+<text x="810" y="231" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">l = 6.894195</text>
+<text x="810" y="262" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">u[0] = 3.939684</text>
+<text x="810" y="293" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">y[0] = 0.571449</text>
+<line x1="378" y1="310" x2="406" y2="310" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="406.00,310.00 395.87,314.28 395.87,305.72" fill="#6846c7"/>
+<line x1="754" y1="310" x2="783" y2="310" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="783.00,310.00 772.87,314.28 772.87,305.72" fill="#6846c7"/>
+<rect x="36" y="527" width="1088" height="105" rx="12" fill="#ede8fb"/>
+<text x="56" y="568" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">Final normalized context:</text>
+<text x="56" y="599" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">[0.571449, 0.360734, 0.474255, 0.485480]</text>
+</svg>

@@ -1,0 +1,278 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:05.720
+The benchmark view reads seven compatible
+representative artifacts from the earlier
+
+00:00:05.720 --> 00:00:06.870
+reviewed study.
+
+00:00:07.440 --> 00:00:09.793
+Every row describes
+the same four thousand,
+
+00:00:09.793 --> 00:00:13.670
+three hundred and fifty seven
+observed validation hours.
+
+00:00:14.340 --> 00:00:18.410
+Opening the view or changing its
+sort order fits no new model.
+
+00:00:18.880 --> 00:00:24.020
+The active saved predictor remains the
+hour and working day mean chosen by the
+
+00:00:24.020 --> 00:00:26.750
+overall mean absolute error objective.
+
+00:00:27.440 --> 00:00:31.940
+This distinction is useful because a
+comparison table can change its visual
+
+00:00:31.940 --> 00:00:33.870
+winner when the question changes.
+
+00:00:34.380 --> 00:00:35.890
+We keep the source scope,
+
+00:00:35.980 --> 00:00:40.680
+output policy and selected candidate
+visible rather than treating the first
+
+00:00:40.680 --> 00:00:43.210
+displayed row as an
+implicit new deployment.
+
+00:00:45.643 --> 00:00:50.453
+Groups has overall mean absolute
+error ninety one point five seven,
+
+00:00:50.843 --> 00:00:54.633
+compared with ninety nine point
+eight three for the retained forest.
+
+00:00:55.683 --> 00:00:57.293
+June reverses that comparison:
+
+00:00:58.263 --> 00:00:59.533
+groups is near one
+hundred and forty three,
+
+00:01:00.483 --> 00:01:03.093
+while the forest is near
+ninety point eight eight.
+
+00:01:03.663 --> 00:01:08.953
+Groups also has lower working day rush
+error, although that error remains large.
+
+00:01:09.463 --> 00:01:12.123
+June contains seven hundred
+and twenty observations,
+
+00:01:12.123 --> 00:01:15.133
+and the defined rush slice
+seven hundred and fifty.
+
+00:01:16.183 --> 00:01:20.013
+The forest number belongs to
+one seed seventeen artifact,
+
+00:01:20.423 --> 00:01:23.053
+not the earlier mean
+across three fitting seeds.
+
+00:01:23.543 --> 00:01:28.023
+These values describe a real tradeoff
+rather than one uniformly strongest
+
+00:01:28.023 --> 00:01:28.953
+function.
+
+00:01:31.067 --> 00:01:36.167
+The shown interface code copies the
+retained rows and sorts them by either
+
+00:01:36.167 --> 00:01:38.517
+June error or overall error.
+
+00:01:39.067 --> 00:01:43.417
+It changes rendering order, with no
+call to fitting or candidate selection.
+
+00:01:44.327 --> 00:01:48.317
+Sorting by June puts the deep tree first,
+followed by the forest.
+
+00:01:48.927 --> 00:01:51.997
+The group row still carries
+its saved candidate badge.
+
+00:01:52.767 --> 00:01:57.547
+Adopting a June only objective or a
+different operational cost would require
+
+00:01:57.547 --> 00:02:00.357
+an explicit new comparison and decision.
+
+00:02:01.007 --> 00:02:05.967
+A user exploring the existing evidence
+should not silently alter the function
+
+00:02:05.967 --> 00:02:08.037
+answering the next hourly request.
+
+00:02:08.807 --> 00:02:12.517
+That is why display state and
+prediction state stay separate.
+
+00:02:14.567 --> 00:02:19.607
+The representative forest fitted locally
+in about zero point six seven six seconds
+
+00:02:19.607 --> 00:02:24.637
+and saved sixteen million, eighty
+seven thousand, six hundred JSON bytes.
+
+00:02:25.307 --> 00:02:29.157
+The group fit took about zero
+point zero one three six seconds.
+
+00:02:29.927 --> 00:02:33.537
+These are retained observations from
+that machine and implementation.
+
+00:02:34.607 --> 00:02:36.577
+JSON size measures storage,
+
+00:02:37.007 --> 00:02:38.017
+not peak memory.
+
+00:02:38.447 --> 00:02:42.277
+Batch replay timing measures
+transparent saved state traversal,
+
+00:02:42.427 --> 00:02:45.037
+not optimized per request
+production latency.
+
+00:02:46.007 --> 00:02:49.217
+A direct linear solve has
+zero iterative updates,
+
+00:02:49.547 --> 00:02:51.477
+which does not mean it was never fitted.
+
+00:02:52.367 --> 00:02:56.227
+A null convergence field means that
+particular iterative criterion was not
+
+00:02:56.227 --> 00:02:56.797
+applicable.
+
+00:02:57.807 --> 00:03:01.297
+The fitting details retain those
+distinctions beside the quality numbers.
+
+00:03:03.567 --> 00:03:07.757
+The practical source study
+reports zero failed main trials.
+
+00:03:08.247 --> 00:03:12.817
+Earlier excessive rate optimizer
+failures remain in their own run records.
+
+00:03:13.487 --> 00:03:17.887
+We do not merge unrelated studies to
+manufacture a different failure count,
+
+00:03:17.887 --> 00:03:20.037
+or hide those earlier results.
+
+00:03:20.747 --> 00:03:25.567
+The separate three pass Adam recovery
+demonstration is not another ranked
+
+00:03:25.567 --> 00:03:26.857
+validation candidate.
+
+00:03:27.367 --> 00:03:31.637
+It verifies continuation rather
+than improving the model choice.
+
+00:03:32.627 --> 00:03:37.727
+A working application and exact restart
+make the project more usable and
+
+00:03:37.727 --> 00:03:38.697
+reproducible.
+
+00:03:39.287 --> 00:03:41.977
+They preserve the candidate’s
+lack of month response,
+
+00:03:42.447 --> 00:03:43.737
+large commute deficits,
+
+00:03:44.367 --> 00:03:46.097
+unmeasured inventory consequences
+
+00:03:46.627 --> 00:03:48.457
+and absent calibrated uncertainty.
+
+00:03:49.187 --> 00:03:52.477
+None of those limits disappears
+because the interface runs.
+
+00:03:56.013 --> 00:03:57.103
+One hundred and nine source checks,
+
+00:03:57.173 --> 00:04:00.063
+independent arithmetic
+and artifact audits,
+
+00:04:00.293 --> 00:04:04.003
+installed package checks and
+actual browser checks pass.
+
+00:04:04.533 --> 00:04:07.783
+The complete written records
+preceded these section companions.
+
+00:04:08.653 --> 00:04:13.353
+That evidence establishes implemented
+local behavior rather than the learner’s
+
+00:04:13.353 --> 00:04:16.683
+own explanation or an
+operator’s improved decisions.
+
+00:04:17.453 --> 00:04:20.203
+The application rejects
+reserved test dates,
+
+00:04:20.373 --> 00:04:22.443
+preserving the later held out assessment.
+
+00:04:23.193 --> 00:04:25.443
+Hosted recovery remains unverified.
+
+00:04:26.093 --> 00:04:27.363
+Before advancing,
+
+00:04:27.593 --> 00:04:33.103
+explain how a short linear run can
+recover perfectly yet still fit poorly,
+
+00:04:33.513 --> 00:04:38.103
+and how the saved group model can
+win overall while missing June badly.
+
+00:04:38.773 --> 00:04:41.103
+Those questions connect reproducibility,
+
+00:04:41.213 --> 00:04:46.103
+model quality and the objective instead
+of treating them as one success condition.
+

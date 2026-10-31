@@ -1,0 +1,175 @@
+{
+  "date": "2026-10-09",
+  "status": "local-tutorial-delivered",
+  "chapter_words": 9267,
+  "workbook_words": 1340,
+  "native_content_tests_passed": 8,
+  "reader_owner_verification": "../multi-page-tutorial-reader/verification.json",
+  "reader_owner_checks": {
+    "build_root": "passed",
+    "build_prefix": "passed",
+    "browser_root": "passed",
+    "browser_prefix": "passed"
+  },
+  "author_http_checks": {
+    "overview": 200,
+    "chapters/route/": 200,
+    "documents/workbook/": 200,
+    "complete/": 200
+  },
+  "site_base": "http://127.0.0.1:4273/project_docs/records/tutorials/p00-transformer-foundations-v1/",
+  "author_visual_review": [
+    "verification/2026-10-09-tutorial-reader/p00-reader-overview.png",
+    "verification/2026-10-09-tutorial-reader/p00-reader-chapter-top-mobile.png",
+    "all eleven standalone P00 boards and earlier desktop/mobile full lesson controls"
+  ],
+  "validation_fingerprint": "9fce0b96b47214f1ca84862b9db88077ecd25b9e393ee24c297feb6199d4a328",
+  "git_diff_check_docs": "passed",
+  "git_diff_check_projects": "passed",
+  "learning_milestone": "P00-M1 not-started",
+  "hosted_colab_recovery": "pending",
+  "external_publication": false,
+  "cleanup_note": "2026-10-09: selected reader screenshots retained in verification; disposable full-suite captures removed.",
+  "learner_readiness_revision": {
+    "date": "2026-10-09",
+    "status": "delivered locally",
+    "chapter_words": 13720,
+    "workbook_words": 1984,
+    "chapters": 12,
+    "practice_checks": 25,
+    "downloadable_programs": 7,
+    "declared_examples_passed": 4,
+    "tensor_mlp_and_head_ownership": "passed",
+    "standalone_chapter_snippets_passed": 5,
+    "broadcasting_merge_ffn_mask_cases": "passed",
+    "author_smoke": {
+      "initial_target": 20,
+      "restored_step": 20,
+      "resumed_target": 40,
+      "exact_generation": 0.0,
+      "scope": "command/recovery smoke; not quality or learner completion"
+    },
+    "native_tests_passed": 8,
+    "build_prefix": "passed",
+    "build_root": "passed",
+    "browser_prefix": "passed",
+    "browser_root": "passed",
+    "visual_review": "desktop first exercise; mobile entry and language bridge",
+    "fingerprint": "2691912191ca9bf88f1e48143c5f8edd9b8781418c08d7740fc35410bca1f59e",
+    "svg_boards_unchanged": 11,
+    "model_tokenizer_recovery_and_old_run_evidence_preserved": true,
+    "screenshots": [
+      "implementation/evidence/2026-10-09-p00-learning-entry/p00-first-session-exercise-desktop.png",
+      "implementation/evidence/2026-10-09-p00-learning-entry/p00-first-session-plan-mobile.png",
+      "implementation/evidence/2026-10-09-p00-learning-entry/p00-language-bridge-mobile.png"
+    ],
+    "learning_state": "P00-M1 not-started",
+    "next_action": "chapter 1 first session, then chapters 2\u20133"
+  },
+  "reading_rendering_review": {
+    "date": "2026-10-09",
+    "status": "passed",
+    "record_routes": 40,
+    "viewport_widths": [
+      1440,
+      768,
+      390,
+      320
+    ],
+    "live_views": 160,
+    "visual_review": "All 12 P00 chapter entries on desktop and mobile; focused snippets, table, workbook, roadmap, source register and historical P01 reader",
+    "snippets_passed": 9,
+    "declared_examples_passed": 4,
+    "native_tests_passed": 8,
+    "browser_prefix": "passed after managed preview restart",
+    "browser_root": "passed in removed disposable copy",
+    "keyboard_scroll": [
+      "code",
+      "tables",
+      "equations"
+    ],
+    "render_fingerprint": "c66873c091cb7a17ebeda62e595d89b3ce8fc35e753788d338a07d083ba46941",
+    "preserved_reference_files": 34,
+    "screenshots": [
+      "implementation/evidence/2026-10-09-p00-learning-entry/p00-attention-example-desktop.png",
+      "implementation/evidence/2026-10-09-p00-learning-entry/p00-chapter-outline-mobile.png",
+      "implementation/evidence/2026-10-09-p00-learning-entry/p00-language-bridge-reviewed-mobile.png",
+      "implementation/evidence/2026-10-09-p00-learning-entry/project-roadmap-reviewed-desktop.png"
+    ],
+    "learner_state": "P00-M1 not-started",
+    "publication": false
+  },
+  "file_by_file_build_guide": {
+    "date": "2026-10-09",
+    "status": "delivered locally",
+    "build_pages": 10,
+    "complete_worked_files": 25,
+    "tests_passed": 23,
+    "actual_scaffold_and_locked_install": "passed in disposable workspace",
+    "bounded_smoke": {
+      "new_step": 20,
+      "restored_step": 20,
+      "resumed_step": 40
+    },
+    "notebook": {
+      "cells": 8,
+      "output_cleared": true,
+      "syntax": "passed",
+      "source_export_files": 33,
+      "extraction_hashes": "passed locally",
+      "hosted_execution": "not run"
+    },
+    "native_tests_passed": 8,
+    "record_routes": 46,
+    "viewport_widths": [
+      1440,
+      768,
+      390,
+      320
+    ],
+    "browser_prefix": "passed",
+    "browser_root": "passed in disposable copy",
+    "live_build_next_links": "passed",
+    "notebook_builder_download": "passed",
+    "render_fingerprint": "7b056c6b2b757e7bb95647bee340a8b8faa642c2ed144dca0bceaad98dab2344",
+    "preserved_reference_files": 19,
+    "worked_code_hashes": "25 match final authored blocks",
+    "evidence": "implementation/evidence/2026-10-09-p00-build-guide/",
+    "learning_state": "P00-M1 not-started",
+    "next_action": "Build 1 project/import, then Build 2 numerics/tests/demo",
+    "external_publication": false
+  },
+  "simpler_connected_teaching": {
+    "date": "2026-10-09",
+    "status": "delivered locally",
+    "build_pages": 10,
+    "concept_chapters": 12,
+    "main_route": "Build 1 then Build 2 Learn A and linear() only",
+    "preserved_reference_assets": 19,
+    "worked_files_unchanged": 24,
+    "worked_files_changed": [
+      "numerics.py: explicit matrix loops"
+    ],
+    "tests": 23,
+    "new_mini_examples": 4,
+    "partial_function_checks": 4,
+    "native_tests": 8,
+    "record_routes": 46,
+    "widths": [
+      1440,
+      768,
+      390,
+      320
+    ],
+    "prefix_browser": "passed",
+    "root_browser": "passed in disposable copy",
+    "build_navigation_and_sections": "passed",
+    "live_check": "implementation/evidence/2026-10-09-p00-simpler-guide/live-check.json",
+    "fingerprint": "b7b1c362dcf9d09e45c8c88ba79ee6835b23f54f3e73c3e4c9eb8018a0da4b7f",
+    "learner_state": "P00-M1 not-started",
+    "hosted_execution": false,
+    "learning_speed": "not measured"
+  },
+  "integrated_course": "integrated-course-checks.json",
+  "latest_second_pass": "second-pass-checks.json"
+}

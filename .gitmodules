@@ -1,6 +1,3 @@
-[submodule "project_docs"]
-	path = docs
-	url = ../.ai/repositories/project_docs.git
 [submodule "foundations"]
 	path = projects/foundations
 	url = ../.ai/repositories/foundations.git

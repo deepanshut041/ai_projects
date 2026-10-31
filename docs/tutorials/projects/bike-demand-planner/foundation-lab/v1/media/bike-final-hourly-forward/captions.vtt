@@ -1,0 +1,274 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:05.190
+Follow the real request for July
+second at eight, issued at seven,
+
+00:00:05.240 --> 00:00:08.290
+with record identity thirteen
+thousand and thirty six.
+
+00:00:09.260 --> 00:00:13.990
+Its forty five column calendar vector
+activates positions eight, twenty five,
+
+00:00:14.520 --> 00:00:14.990
+thirty seven
+
+00:00:15.480 --> 00:00:15.990
+and forty four:
+
+00:00:16.940 --> 00:00:19.010
+hour eight, Monday, July
+
+00:00:19.400 --> 00:00:20.430
+and working day.
+
+00:00:21.000 --> 00:00:22.250
+Holiday is zero.
+
+00:00:23.240 --> 00:00:27.200
+These category definitions were fixed
+before the final period rather than
+
+00:00:27.200 --> 00:00:28.730
+learned from later outcomes.
+
+00:00:29.240 --> 00:00:30.630
+Target hour weather,
+
+00:00:30.780 --> 00:00:34.830
+rental components and observed rental
+count remain outside the input.
+
+00:00:35.480 --> 00:00:38.910
+The selected function uses
+only hour and working day,
+
+00:00:39.080 --> 00:00:42.850
+although the shared representation
+contains additional calendar fields.
+
+00:00:45.148 --> 00:00:49.508
+The working day hour eight group contains
+two hundred and forty eight training
+
+00:00:49.508 --> 00:00:52.017
+observations,
+totalling eighty six thousand,
+
+00:00:52.017 --> 00:00:54.838
+six hundred and seventy seven rentals.
+
+00:00:55.328 --> 00:00:59.488
+Dividing gives three hundred and forty
+nine point five zero four rentals per
+
+00:00:59.488 --> 00:01:00.038
+hour.
+
+00:01:00.688 --> 00:01:02.338
+This explains the saved parameter,
+
+00:01:02.808 --> 00:01:06.658
+but prediction simply looks it up;
+it does not reread training outcomes.
+
+00:01:07.708 --> 00:01:10.518
+All forty eight possible
+groups happen to exist here.
+
+00:01:10.708 --> 00:01:15.188
+A synthetic absent group check separately
+verifies the training global mean
+
+00:01:15.188 --> 00:01:15.938
+fallback.
+
+00:01:16.388 --> 00:01:20.498
+A missing valid key and an invalid
+request are different cases,
+
+00:01:20.888 --> 00:01:24.798
+so malformed inputs are rejected
+rather than sent through that fallback.
+
+00:01:26.900 --> 00:01:29.770
+After all final forecasts are persisted,
+
+00:01:30.280 --> 00:01:34.640
+the source join reveals five hundred and
+sixty eight observed rentals for this
+
+00:01:34.640 --> 00:01:35.170
+hour.
+
+00:01:35.760 --> 00:01:40.080
+Subtracting target from prediction gives
+negative two hundred and eighteen point
+
+00:01:40.080 --> 00:01:41.470
+four nine six.
+
+00:01:42.380 --> 00:01:46.966
+The absolute error and underprediction
+contribution are both two hundred and
+
+00:01:46.966 --> 00:01:50.090
+eighteen point four nine
+six rentals per hour.
+
+00:01:50.680 --> 00:01:53.900
+The sign tells us that the
+saved level is too low,
+
+00:01:53.900 --> 00:01:57.890
+and the squared error also contributes
+to root mean squared error.
+
+00:01:58.020 --> 00:02:00.430
+No gradient update follows.
+
+00:02:00.800 --> 00:02:02.850
+We are evaluating a fixed function;
+
+00:02:03.320 --> 00:02:07.210
+using this target in an update would make
+the final outcome training information.
+
+00:02:09.650 --> 00:02:15.170
+The additive linear reference uses the
+same vector but its saved training only
+
+00:02:15.170 --> 00:02:16.080
+scaler.
+
+00:02:16.670 --> 00:02:18.040
+For coordinate eight,
+
+00:02:18.450 --> 00:02:22.640
+the active standardized value is
+about four point seven seven six five.
+
+00:02:23.610 --> 00:02:28.548
+The full standardized dot product is one
+hundred and seventy one point two four
+
+00:02:28.548 --> 00:02:29.540
+zero four.
+
+00:02:30.350 --> 00:02:31.520
+Adding the intercept,
+
+00:02:32.010 --> 00:02:34.430
+one hundred and forty three
+point seven nine four four,
+
+00:02:34.430 --> 00:02:38.820
+gives three hundred and fifteen
+point zero three four nine.
+
+00:02:39.750 --> 00:02:43.060
+The preselected nonnegative
+policy leaves it unchanged.
+
+00:02:44.330 --> 00:02:46.820
+Centered inactive
+coordinates also contribute,
+
+00:02:47.210 --> 00:02:49.880
+so summing only active
+entries would be wrong.
+
+00:02:51.010 --> 00:02:55.000
+Against five hundred and sixty eight, this
+row misses more than the group forecast.
+
+00:02:57.442 --> 00:03:01.852
+The second predeclared example
+changes to July fourth at eight.
+
+00:03:02.262 --> 00:03:06.222
+Its recorded holiday flag is
+one and working day is zero,
+
+00:03:06.222 --> 00:03:07.412
+despite being a Wednesday.
+
+00:03:08.142 --> 00:03:13.052
+The key changes from hour eight,
+working, to hour eight, nonworking.
+
+00:03:13.642 --> 00:03:17.592
+The saved mean is now seventy
+six point four three four eight;
+
+00:03:17.962 --> 00:03:20.172
+the observed count is one
+hundred and fifty three,
+
+00:03:20.702 --> 00:03:24.632
+giving residual negative seventy
+six point five six five two.
+
+00:03:25.582 --> 00:03:30.202
+This response follows the original group
+structure rather than a new holiday fit on
+
+00:03:30.202 --> 00:03:31.132
+final data.
+
+00:03:31.602 --> 00:03:32.912
+Calendar consistency
+
+00:03:33.302 --> 00:03:37.442
+and recorded holiday authority are
+necessary to interpret that changed input
+
+00:03:37.442 --> 00:03:38.132
+correctly.
+
+00:03:40.400 --> 00:03:44.410
+On December third at eight,
+the ordinary working day key returns.
+
+00:03:45.200 --> 00:03:48.850
+The forecast is again three hundred
+and forty nine point five zero four.
+
+00:03:49.540 --> 00:03:51.890
+The observed count is seven
+hundred and thirty one,
+
+00:03:52.860 --> 00:03:54.400
+producing a larger underprediction,
+
+00:03:54.400 --> 00:03:57.840
+negative three hundred and
+eighty one point four nine six.
+
+00:03:57.840 --> 00:04:02.330
+July and December activate
+different month coordinates,
+
+00:04:02.720 --> 00:04:04.930
+but the selected model ignores month.
+
+00:04:05.240 --> 00:04:09.790
+This is an implemented property,
+not evidence about why demand changed.
+
+00:04:10.620 --> 00:04:14.940
+The additive model can lose on this one
+request while scoring better in the final
+
+00:04:14.940 --> 00:04:15.550
+aggregate.
+
+00:04:16.400 --> 00:04:18.130
+One row explains a mechanism;
+
+00:04:18.860 --> 00:04:22.710
+thousands of aligned rows answer
+the declared average error question.
+

@@ -1,0 +1,17 @@
+[
+  {
+    "url": "http://127.0.0.1:4273/project_docs/",
+    "status": 200,
+    "bytes": 12007
+  },
+  {
+    "url": "http://127.0.0.1:4274/research_docs/",
+    "status": 200,
+    "bytes": 11222
+  },
+  {
+    "url": "http://127.0.0.1:4274/research_docs/artifacts/synthetic-ols-v1.json",
+    "status": 200,
+    "bytes": 4724
+  }
+]

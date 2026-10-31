@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "run_directory": "/mnt/projects/ai/ai_projects/projects/foundations/bike-demand-planner/runs/trees-20261020T010936542440Z",
+  "fitted_main_tree_trials": 27,
+  "deterministic_references": 4,
+  "timing_pilots": 3,
+  "configuration_policy_comparisons": 26,
+  "maximum_independent_prediction_difference": 9.094947017729282e-13,
+  "maximum_scalar_metric_difference": 0.0,
+  "held_out_library_refit_parity": {
+    "tree-c2-seed17": 0.0,
+    "forest-c2-seed17": 0.0,
+    "boosting-c2-seed17": 7.389644451905042e-13
+  },
+  "busy_hour_leaf_arithmetic": {
+    "validation_hour": "2012-01-09T08:00:00",
+    "leaf": 1375,
+    "training_count": 8,
+    "target_sum": 1446.0,
+    "leaf_mean": 180.75,
+    "training_targets": [
+      154.0,
+      210.0,
+      188.0,
+      158.0,
+      217.0,
+      177.0,
+      157.0,
+      185.0
+    ],
+    "training_record_ids": [
+      "54",
+      "146",
+      "218",
+      "309",
+      "464",
+      "533",
+      "603",
+      "673"
+    ]
+  },
+  "frozen_selection": "groups/raw",
+  "all_four_indexes_preserved": true,
+  "frozen_non_test_bytes_preserved": true,
+  "reserved_test_targets_opened": false,
+  "all_artifact_source_dependency_hashes_match": true
+}

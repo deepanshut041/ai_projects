@@ -1,0 +1,477 @@
+{
+  "schema_version": 1,
+  "scope": "Authored tutorial references and existing read-only scaffold; no model weights/inference",
+  "checks": [
+    {
+      "name": "exact-layer-values",
+      "passed": true,
+      "scope": "Independent rational matrix products"
+    },
+    {
+      "name": "rational-affine-endpoints",
+      "passed": true,
+      "scope": "Endpoint and zero-point arithmetic"
+    },
+    {
+      "name": "exact-packing",
+      "passed": true,
+      "scope": "Independent Python nibble reconstruction vs C++ output"
+    },
+    {
+      "name": "exact-scale-loss",
+      "passed": true,
+      "scope": "Exact squares for ternary scale example"
+    },
+    {
+      "name": "changed-layer-input",
+      "passed": true,
+      "scope": "Transfer answer independently computed"
+    },
+    {
+      "name": "compensation-cost",
+      "passed": true,
+      "scope": "Exact constrained quadratic loss"
+    },
+    {
+      "name": "residual-cache-ratio",
+      "passed": true,
+      "scope": "Two-bit old region plus BF16 residual, excludes metadata"
+    },
+    {
+      "name": "cache-logical-sizes",
+      "passed": true,
+      "scope": "Independent two-owner allocation"
+    },
+    {
+      "name": "softmax-jacobian-0-0",
+      "passed": true,
+      "scope": "Independent numerical differentiation"
+    },
+    {
+      "name": "softmax-jacobian-0-1",
+      "passed": true,
+      "scope": "Independent numerical differentiation"
+    },
+    {
+      "name": "softmax-jacobian-1-0",
+      "passed": true,
+      "scope": "Independent numerical differentiation"
+    },
+    {
+      "name": "softmax-jacobian-1-1",
+      "passed": true,
+      "scope": "Independent numerical differentiation"
+    },
+    {
+      "name": "calibration-input-validation",
+      "passed": true,
+      "scope": "Empty/ragged failures exercised"
+    },
+    {
+      "name": "duplicated-mean-invariance",
+      "passed": true,
+      "scope": "Denominator transfer case"
+    },
+    {
+      "name": "quantizer-range-validation",
+      "passed": true,
+      "scope": "Degenerate/range-not-containing-zero rejected"
+    },
+    {
+      "name": "all-infeasible-empty",
+      "passed": true,
+      "scope": "No invented candidate when the set is empty"
+    },
+    {
+      "name": "listing-contract",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-contract",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-scaffold",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-scaffold",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-compatibility",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-compatibility",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-memory",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-memory",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-documents",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-documents",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-splits",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-splits",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-reference",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-reference",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-quantization",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-quantization",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-storage",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-storage",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-layer",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-layer",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-artifacts",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-artifacts",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-calibration",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-calibration",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-scaling",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-scaling",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-compensation",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-compensation",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-precision",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-precision",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-quality",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-quality",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-timing",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-timing",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-cache",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-cache",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-cache-quant",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-cache-quant",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-recovery",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-recovery",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-boundary",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-boundary",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-application",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-application",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-selection",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-selection",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "listing-handoff",
+      "passed": true,
+      "scope": "Displayed complete file exactly matches download"
+    },
+    {
+      "name": "isolated-handoff",
+      "passed": true,
+      "scope": "Teaching-order extraction, no sibling imports or checkout dependency"
+    },
+    {
+      "name": "fresh-process-toy-reload",
+      "passed": true,
+      "scope": "Toy byte integrity only; not model recovery"
+    },
+    {
+      "name": "live-scaffold-actions",
+      "passed": true,
+      "scope": "Actual project status/check/config and pending-answer boundary"
+    }
+  ],
+  "extracted": [
+    {
+      "chapter": "contract",
+      "sha256": "1268ce02e3f20a1525d2bb904b8d692a6f3cefb765c26f740c80bb87f351607c",
+      "passed": true
+    },
+    {
+      "chapter": "scaffold",
+      "sha256": "0eda26a179d998b84fd71137bbc9c4102239656d799640c5e73ddbc87e3e6acc",
+      "passed": true
+    },
+    {
+      "chapter": "compatibility",
+      "sha256": "3c657e0768f3121956b2a74dc501a22388519b0e82b6b7cc02264ca82d20427e",
+      "passed": true
+    },
+    {
+      "chapter": "memory",
+      "sha256": "d884396d2a96e4ed3bea711250052f55cf0252e55ab5bace4ef65a382b99a3b1",
+      "passed": true
+    },
+    {
+      "chapter": "documents",
+      "sha256": "6db55a9684964d4cebf7499f41a5402b944e2f65798a9a7f0f9a39b6b7ac27d5",
+      "passed": true
+    },
+    {
+      "chapter": "splits",
+      "sha256": "7b794d66880f9aed1908281cdc2acb1ed7a439fde3e1870cc8f2c0d2accff602",
+      "passed": true
+    },
+    {
+      "chapter": "reference",
+      "sha256": "1b015d8865b947ec8962b849937e9aa51d93ad9454fff05d2948a86d46d865b7",
+      "passed": true
+    },
+    {
+      "chapter": "quantization",
+      "sha256": "d0b127956106e97baa09571016bb0b0609adaf8b1d4f2696d2d5fdd66ff88982",
+      "passed": true
+    },
+    {
+      "chapter": "storage",
+      "sha256": "a16aa7de2c8d8989ccf0cb4990a1733cb033525874bbde939f46cb62fbe8388b",
+      "passed": true
+    },
+    {
+      "chapter": "layer",
+      "sha256": "2a8098b123230965365eab80470465aba5a6051fbc551994915f38a9e9fcaf92",
+      "passed": true
+    },
+    {
+      "chapter": "artifacts",
+      "sha256": "8c8a521b98537a3efe3b95b0f774f8ae53728aca23dbd85bbd3b886f38e89b4a",
+      "passed": true
+    },
+    {
+      "chapter": "calibration",
+      "sha256": "a400ddd5dfe08d974773f8d615d0a54992df6c4703fe71753a4e83407e68cf3e",
+      "passed": true
+    },
+    {
+      "chapter": "scaling",
+      "sha256": "b7334562f06e83f395c596bc85216de2ed45425e78c200c2ced7a3459aa29e30",
+      "passed": true
+    },
+    {
+      "chapter": "compensation",
+      "sha256": "180c815c2a3741cfa65b1ecb9009d21e0d2e0a0693208a513089f3b10eeeda02",
+      "passed": true
+    },
+    {
+      "chapter": "precision",
+      "sha256": "4a17a6e09b336c7c9c16ca1e39bbc66d8243558c00fe22d436c5ee4e725f2236",
+      "passed": true
+    },
+    {
+      "chapter": "quality",
+      "sha256": "27742d410c5d91459a62eea6b3062a418696f1569076d818bad425c8cae33287",
+      "passed": true
+    },
+    {
+      "chapter": "timing",
+      "sha256": "aa2801202eba4ff084ef971089336ca399a2622c822e5d1195a1c27d7ab3fe43",
+      "passed": true
+    },
+    {
+      "chapter": "cache",
+      "sha256": "fa30f03754b79f11c43dfc14528dff64304bb3fe0946c4c6e7df671064d40845",
+      "passed": true
+    },
+    {
+      "chapter": "cache-quant",
+      "sha256": "c88f666eca21d65de32d22973ddaa8f93b64f9e44b9bab290aee5b4eb437a286",
+      "passed": true
+    },
+    {
+      "chapter": "recovery",
+      "sha256": "444188d3124d742d7a1e839f3611a70697f5feb9fd1e2f907719cbec6c86cfa4",
+      "passed": true
+    },
+    {
+      "chapter": "boundary",
+      "sha256": "5ef186b4ed360b7616643edeab486f4a03623ff786f0dc5fa635754a65356fc7",
+      "passed": true
+    },
+    {
+      "chapter": "application",
+      "sha256": "19c6b2f46425b14bb65075f5565fa67cadf19091731a63aa16e61a4616753e29",
+      "passed": true
+    },
+    {
+      "chapter": "selection",
+      "sha256": "71a4bab21307a4c4b30d6f7fcf4246086f4ffc785590154f771922fe3c7a23d1",
+      "passed": true
+    },
+    {
+      "chapter": "handoff",
+      "sha256": "37723abe5eb9f922066c539c269f1bd49263eb7d1fb254504881c0b170bf32e5",
+      "passed": true
+    }
+  ],
+  "live_scaffold": {
+    "status": {
+      "exit": 0,
+      "project": "document-assistant"
+    },
+    "check": {
+      "exit": 0,
+      "project": "document-assistant"
+    },
+    "show-config": {
+      "exit": 0,
+      "project": "document-assistant"
+    },
+    "answer": {
+      "exit": 2,
+      "project": "document-assistant"
+    }
+  },
+  "passed": true
+}

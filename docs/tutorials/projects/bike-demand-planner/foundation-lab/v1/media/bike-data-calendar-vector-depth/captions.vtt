@@ -1,0 +1,490 @@
+WEBVTT
+
+1
+00:00:00.520 --> 00:00:04.550
+Suppose a linear model receives
+the raw hour number eight.
+
+2
+00:00:04.920 --> 00:00:08.630
+Its hourly contribution
+is one weight times eight.
+
+3
+00:00:09.040 --> 00:00:12.610
+Moving from eight to nine
+always adds that same weight.
+
+4
+00:00:13.180 --> 00:00:16.710
+One straight slope cannot
+express a morning rise,
+
+5
+00:00:16.960 --> 00:00:19.370
+a midday dip and an evening rise.
+
+6
+00:00:19.780 --> 00:00:21.690
+There is also a clock boundary:
+
+7
+00:00:22.120 --> 00:00:26.910
+twenty three and zero are adjacent
+in time, yet far apart numerically.
+
+8
+00:00:27.220 --> 00:00:31.680
+We need to choose a representation based
+on what relationships the model should be
+
+9
+00:00:31.680 --> 00:00:32.770
+able to learn.
+
+10
+00:00:34.692 --> 00:00:40.222
+The first representation allocates twenty
+four hour indicators, in hour order.
+
+11
+00:00:40.652 --> 00:00:44.062
+At eight o'clock,
+the hour eight indicator is one.
+
+12
+00:00:44.352 --> 00:00:46.222
+The other twenty three are zero.
+
+13
+00:00:46.952 --> 00:00:51.102
+A future linear model can assign a
+separate coefficient to each hour.
+
+14
+00:00:51.532 --> 00:00:55.932
+This adds flexibility without inventing
+an ordinal distance between the category
+
+15
+00:00:55.932 --> 00:00:56.622
+codes.
+
+16
+00:00:57.712 --> 00:00:59.342
+Encoding creates a representation.
+
+17
+00:00:59.812 --> 00:01:04.092
+It does not fit any of those coefficients
+or guarantee that the resulting predictor
+
+18
+00:01:04.092 --> 00:01:05.262
+will be accurate.
+
+19
+00:01:07.358 --> 00:01:12.788
+We repeat that idea for seven weekday
+categories and twelve month categories.
+
+20
+00:01:13.438 --> 00:01:18.608
+Then we append the holiday and working
+day flags, already zero or one.
+
+21
+00:01:19.058 --> 00:01:24.188
+The total is twenty four plus
+seven plus twelve plus two,
+
+22
+00:01:24.458 --> 00:01:25.968
+which is forty five columns.
+
+23
+00:01:26.538 --> 00:01:29.048
+The order is hour, weekday,
+
+24
+00:01:29.598 --> 00:01:29.928
+month,
+
+25
+00:01:30.298 --> 00:01:30.848
+holiday,
+
+26
+00:01:31.278 --> 00:01:31.908
+working day.
+
+27
+00:01:32.578 --> 00:01:35.528
+There is one shared
+schema for all partitions.
+
+28
+00:01:36.318 --> 00:01:41.528
+We save its column names so a later weight
+vector always refers to the same meanings.
+
+29
+00:01:43.950 --> 00:01:47.700
+The hour columns occupy positions
+zero through twenty three.
+
+30
+00:01:48.110 --> 00:01:50.400
+Hour eight activates position eight.
+
+31
+00:01:50.850 --> 00:01:52.540
+Weekdays begin at twenty four,
+
+32
+00:01:53.130 --> 00:01:56.480
+so Monday, code one,
+activates position twenty five.
+
+33
+00:01:57.190 --> 00:01:58.500
+Months begin at thirty one,
+
+34
+00:01:59.170 --> 00:02:01.280
+so January activates position thirty one.
+
+35
+00:02:02.070 --> 00:02:04.940
+Holiday at position
+forty three stays zero.
+
+36
+00:02:05.730 --> 00:02:08.080
+Working day at position forty four is one.
+
+37
+00:02:08.510 --> 00:02:11.820
+The result has four ones
+and forty one zeros.
+
+38
+00:02:12.150 --> 00:02:16.170
+The recorded target of one hundred fifty
+four stays outside these forty five
+
+39
+00:02:16.170 --> 00:02:17.040
+values.
+
+40
+00:02:19.025 --> 00:02:22.795
+Read the encoder's inner expression
+as a membership question.
+
+41
+00:02:23.345 --> 00:02:26.135
+Does this row's field equal this category?
+
+42
+00:02:26.645 --> 00:02:31.735
+A match becomes floating point one,
+and any other category becomes zero.
+
+43
+00:02:32.605 --> 00:02:36.355
+The nested loop walks the category
+groups in the declared order.
+
+44
+00:02:36.765 --> 00:02:40.735
+Afterward, the two flags are
+appended in their declared order.
+
+45
+00:02:41.365 --> 00:02:45.735
+The code is short because the important
+decisions are explicit in the schema:
+
+46
+00:02:46.645 --> 00:02:50.035
+permitted fields,
+category domains and column order.
+
+47
+00:02:51.900 --> 00:02:56.710
+In a later additive linear model,
+the bias contributes to every prediction.
+
+48
+00:02:57.420 --> 00:03:00.710
+For this row,
+the active hour eight, Monday
+
+49
+00:03:01.140 --> 00:03:03.570
+and January coefficients also contribute.
+
+50
+00:03:04.320 --> 00:03:08.090
+The working day coefficient
+contributes because that flag is one.
+
+51
+00:03:08.660 --> 00:03:11.330
+The holiday coefficient
+is multiplied by zero.
+
+52
+00:03:11.960 --> 00:03:15.570
+These terms describe the calculation
+that a fitted model would make.
+
+53
+00:03:15.860 --> 00:03:19.390
+There are no fitted feature weights
+in this data preparation step.
+
+54
+00:03:20.080 --> 00:03:23.150
+One hot encoding permits
+separate category effects;
+
+55
+00:03:23.760 --> 00:03:27.870
+this first additive form does not
+create hour by weekday interactions.
+
+56
+00:03:29.942 --> 00:03:34.592
+Now change only the encoder's
+hour input from eight to nine.
+
+57
+00:03:35.162 --> 00:03:38.512
+Hour eight switches off
+and hour nine switches on.
+
+58
+00:03:39.002 --> 00:03:40.552
+Monday, January
+
+59
+00:03:40.922 --> 00:03:42.612
+and both flags stay unchanged.
+
+60
+00:03:43.462 --> 00:03:45.072
+The feature count remains forty five.
+
+61
+00:03:46.062 --> 00:03:47.272
+With fitted coefficients,
+
+62
+00:03:47.762 --> 00:03:52.082
+the prediction difference would be the
+hour nine weight minus the hour eight
+
+63
+00:03:52.082 --> 00:03:52.632
+weight.
+
+64
+00:03:52.902 --> 00:03:55.572
+This is a controlled encoding probe.
+
+65
+00:03:55.862 --> 00:03:59.602
+It does not claim that the next real
+observation has the same target,
+
+66
+00:03:59.602 --> 00:04:03.112
+or that demand must rise
+when the clock advances.
+
+67
+00:04:05.227 --> 00:04:08.377
+One hot encoding treats
+hour categories separately.
+
+68
+00:04:09.007 --> 00:04:12.917
+It gives no built in preference for
+neighbouring hours to behave alike.
+
+69
+00:04:13.447 --> 00:04:18.507
+A sine and cosine pair can represent
+position around the daily clock with two
+
+70
+00:04:18.507 --> 00:04:19.117
+columns.
+
+71
+00:04:19.707 --> 00:04:23.537
+Twenty three and zero then sit
+close together on a circle.
+
+72
+00:04:24.087 --> 00:04:25.227
+For a linear model,
+
+73
+00:04:25.227 --> 00:04:30.607
+a single pair also constrains the daily
+contribution to one smooth sinusoidal
+
+74
+00:04:30.607 --> 00:04:31.257
+shape.
+
+75
+00:04:31.907 --> 00:04:35.337
+We keep one hot encoding as
+an inspectable first choice.
+
+76
+00:04:35.827 --> 00:04:40.537
+A different encoding needs a controlled
+comparison on the same validation hours.
+
+77
+00:04:42.483 --> 00:04:46.353
+Let us follow the changed hour
+through exact coordinates.
+
+78
+00:04:47.363 --> 00:04:51.213
+The Monday eight o’clock input
+activates positions eight,
+
+79
+00:04:51.723 --> 00:04:52.043
+twenty five,
+
+80
+00:04:52.603 --> 00:04:53.073
+thirty one
+
+81
+00:04:53.543 --> 00:04:54.073
+and forty four.
+
+82
+00:04:54.883 --> 00:05:00.033
+At nine o’clock, position eight
+turns off and position nine turns on.
+
+83
+00:05:00.623 --> 00:05:03.093
+The other active positions
+remain unchanged.
+
+84
+00:05:04.123 --> 00:05:07.933
+Both vectors still have forty
+five values and four ones.
+
+85
+00:05:09.083 --> 00:05:13.193
+Two coordinates changed,
+even though only one source field changed.
+
+86
+00:05:13.623 --> 00:05:17.633
+This is the concrete effect of
+replacing one categorical choice.
+
+87
+00:05:19.775 --> 00:05:23.225
+To connect this representation
+to a linear prediction,
+
+88
+00:05:24.055 --> 00:05:25.305
+choose illustrative coefficients.
+
+89
+00:05:26.355 --> 00:05:27.745
+The intercept is ten,
+
+90
+00:05:28.295 --> 00:05:31.925
+the hour eight coefficient twenty,
+and the shared Monday,
+
+91
+00:05:32.275 --> 00:05:36.825
+January and working day contributions
+are three, two and five.
+
+92
+00:05:37.515 --> 00:05:38.485
+That sums to forty.
+
+93
+00:05:39.355 --> 00:05:44.165
+Give hour nine coefficient twelve and
+the changed request sums to thirty two.
+
+94
+00:05:44.975 --> 00:05:48.955
+The eight rental difference comes
+entirely from selecting a different hour
+
+95
+00:05:48.955 --> 00:05:49.585
+coefficient.
+
+96
+00:05:50.435 --> 00:05:53.025
+These are hand chosen explanatory weights.
+
+97
+00:05:53.295 --> 00:05:57.645
+They do not claim a trained prediction
+or accuracy for source record fifty four.
+
+98
+00:05:59.900 --> 00:06:04.760
+Now suppose somebody exchanges the
+meanings of columns eight and nine but
+
+99
+00:06:04.760 --> 00:06:06.290
+keeps the array length.
+
+100
+00:06:06.680 --> 00:06:10.630
+Would checking forty five columns
+and four ones detect the problem?
+
+101
+00:06:11.260 --> 00:06:12.550
+Pause before answering.
+
+102
+00:06:13.580 --> 00:06:15.890
+Both checks can still pass.
+
+103
+00:06:16.420 --> 00:06:20.530
+A weight vector would now refer to
+different hours, changing the calculation.
+
+104
+00:06:21.340 --> 00:06:25.800
+The fixed feature names and saved schema
+order are therefore part of the model
+
+105
+00:06:25.800 --> 00:06:26.570
+contract.
+
+106
+00:06:26.880 --> 00:06:30.970
+Shape is necessary, but it is not
+the complete meaning of an input.

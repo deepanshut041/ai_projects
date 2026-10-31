@@ -1,0 +1,42 @@
+{
+  "interface": "simulated google.colab.files; local execution, not hosted",
+  "cells": 6,
+  "receipt": {
+    "created_utc": "2026-10-23T21:04:26.475929+00:00",
+    "source_revision": "0fdd16c03c650e4f74dcfe32cc030f9254f4b2b9",
+    "working_tree": true,
+    "archive_sha256": "ef2aa1463e935e72f93f30ef994d7321e9f00753c9ae99eaa0545a2c557c1066",
+    "environment": {
+      "python": "3.12.13 (main, Mar 10 2026, 18:17:25) [Clang 21.1.4 ]",
+      "platform": "Linux-7.1.5-76070105-generic-x86_64-with-glibc2.39",
+      "torch": "2.14.1+cpu",
+      "numpy": "2.5.4",
+      "matplotlib": "3.11.2",
+      "demo_device": "cpu",
+      "cuda_available": false
+    },
+    "demo_passed": true,
+    "tests_passed": 35,
+    "tests_skipped": 0,
+    "scope": "attention component; no translation training or recovery"
+  },
+  "download_members": [
+    "attention-demo.txt",
+    "environment.json",
+    "run-receipt.json",
+    "source-manifest.json",
+    "tests.txt",
+    "tests.xml"
+  ],
+  "repeat_upload_uses_fresh_directory": true,
+  "rejections": [
+    "missing upload pair",
+    "archive hash mismatch",
+    "path traversal",
+    "file hash mismatch"
+  ],
+  "all_cells_executed": true,
+  "source_member_hashes_preserved": true,
+  "notebook_outputs_cleared": true,
+  "passed": true
+}

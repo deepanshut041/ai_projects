@@ -1,0 +1,17 @@
+schema_version = 1
+project_id = "document-assistant"
+
+[model]
+repo_id = "google/gemma-4-E4B-it"
+revision = "ee0ef6023621cff504d758262d4e04895a5af4a2"
+compute_dtype = "bfloat16"
+
+[fallback_model]
+repo_id = "google/gemma-4-E2B-it"
+revision = "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+
+[experiment]
+seed = 17
+max_input_tokens = 2048
+max_output_tokens = 256
+weight_formats = ["BF16", "Q8_0", "Q4_K_M"]

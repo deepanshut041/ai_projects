@@ -1,0 +1,454 @@
+{
+  "checked_at": "2026-10-26T09:22:57.999103+00:00",
+  "results": [
+    {
+      "id": "reference-contract",
+      "language": "python",
+      "path": "examples/01_contract.py",
+      "sha256": "1268ce02e3f20a1525d2bb904b8d692a6f3cefb765c26f740c80bb87f351607c",
+      "output": {
+        "good": {
+          "correct": true,
+          "valid_ids": true,
+          "supported": true
+        },
+        "wrong_source": {
+          "correct": true,
+          "valid_ids": true,
+          "supported": false
+        }
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-scaffold",
+      "language": "python",
+      "path": "examples/02_scaffold_trace.py",
+      "sha256": "0eda26a179d998b84fd71137bbc9c4102239656d799640c5e73ddbc87e3e6acc",
+      "output": {
+        "scope": "invoke with project root for live scaffold check",
+        "expected_exit_codes": [
+          0,
+          0,
+          0,
+          2
+        ]
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-compatibility",
+      "language": "python",
+      "path": "examples/03_compatibility.py",
+      "sha256": "3c657e0768f3121956b2a74dc501a22388519b0e82b6b7cc02264ca82d20427e",
+      "output": {
+        "fixture_only": true,
+        "rejected": "Unproven capabilities: template_matches"
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-memory",
+      "language": "python",
+      "path": "examples/04_memory_budget.py",
+      "sha256": "d884396d2a96e4ed3bea711250052f55cf0252e55ab5bace4ef65a382b99a3b1",
+      "output": {
+        "bf16_gib": 14.901,
+        "q4_gib": 4.191,
+        "total_gib": 9.191,
+        "fits": true,
+        "longer_cache_fits": false
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-documents",
+      "language": "python",
+      "path": "examples/05_passages.py",
+      "sha256": "6db55a9684964d4cebf7499f41a5402b944e2f65798a9a7f0f9a39b6b7ac27d5",
+      "output": {
+        "count": 2,
+        "offsets": [
+          [
+            0,
+            28
+          ],
+          [
+            30,
+            46
+          ]
+        ],
+        "stable": true,
+        "changed_document_changes_ids": true
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-splits",
+      "language": "python",
+      "path": "examples/06_splits.py",
+      "sha256": "7b794d66880f9aed1908281cdc2acb1ed7a439fde3e1870cc8f2c0d2accff602",
+      "output": {
+        "disjoint": true,
+        "packed": [
+          "charge takes three hours"
+        ],
+        "seed": 17
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-reference",
+      "language": "python",
+      "path": "examples/07_reference_decode.py",
+      "sha256": "1b015d8865b947ec8962b849937e9aa51d93ad9454fff05d2948a86d46d865b7",
+      "output": {
+        "probabilities": [
+          0.25,
+          0.75
+        ],
+        "ids": [
+          0,
+          1
+        ],
+        "finish_reason": "eos"
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-quantization",
+      "language": "python",
+      "path": "examples/08_scalar_quant.py",
+      "sha256": "d0b127956106e97baa09571016bb0b0609adaf8b1d4f2696d2d5fdd66ff88982",
+      "output": {
+        "scale": 0.857143,
+        "zero": 2,
+        "codes": [
+          0,
+          1,
+          2,
+          3,
+          7,
+          7
+        ],
+        "restored": [
+          -1.714286,
+          -0.857143,
+          0.0,
+          0.857143,
+          4.285714,
+          4.285714
+        ]
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-storage",
+      "language": "cpp",
+      "path": "examples/09_pack_int4.cpp",
+      "sha256": "a16aa7de2c8d8989ccf0cb4990a1733cb033525874bbde939f46cb62fbe8388b",
+      "output": {
+        "bytes": [
+          248,
+          112,
+          3
+        ],
+        "count": 5,
+        "round_trip": true
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-layer",
+      "language": "python",
+      "path": "examples/10_layer_error.py",
+      "sha256": "2a8098b123230965365eab80470465aba5a6051fbc551994915f38a9e9fcaf92",
+      "output": {
+        "float_output": [
+          1.98,
+          -2.55
+        ],
+        "quantized_output": [
+          1.0,
+          -3.5
+        ],
+        "delta": [
+          -0.98,
+          -0.95
+        ]
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-artifacts",
+      "language": "python",
+      "path": "examples/11_artifact_plan.py",
+      "sha256": "8c8a521b98537a3efe3b95b0f774f8ae53728aca23dbd85bbd3b886f38e89b4a",
+      "output": {
+        "confounds": [
+          "tokenizer_sha",
+          "placement"
+        ],
+        "classification": "deployment_comparison"
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-calibration",
+      "language": "python",
+      "path": "examples/12_calibration.py",
+      "sha256": "a400ddd5dfe08d974773f8d615d0a54992df6c4703fe71753a4e83407e68cf3e",
+      "output": {
+        "gram": [
+          [
+            16.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0
+          ]
+        ],
+        "same_weight_mse": true,
+        "output_mse": [
+          1.0,
+          0.0625
+        ]
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-scaling",
+      "language": "python",
+      "path": "examples/13_activation_scaling.py",
+      "sha256": "b7334562f06e83f395c596bc85216de2ed45425e78c200c2ced7a3459aa29e30",
+      "output": {
+        "scale_loss": {
+          "1": 0.9216,
+          "2": 0.9216,
+          "4": 0.0036,
+          "8": 0.81
+        },
+        "best_first_channel_scale": 4,
+        "scope": "ternary teaching grid"
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-compensation",
+      "language": "python",
+      "path": "examples/14_compensation.py",
+      "sha256": "180c815c2a3741cfa65b1ecb9009d21e0d2e0a0693208a513089f3b10eeeda02",
+      "output": {
+        "fixed_error": 0.25,
+        "compensation": -0.25,
+        "before": 0.25,
+        "after": 0.125
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-precision",
+      "language": "python",
+      "path": "examples/15_precision_budget.py",
+      "sha256": "4a17a6e09b336c7c9c16ca1e39bbc66d8243558c00fe22d436c5ee4e725f2236",
+      "output": {
+        "recipe": [
+          [
+            4,
+            32
+          ],
+          [
+            8,
+            32
+          ]
+        ],
+        "bytes": 848,
+        "loss": 0.1,
+        "budget": 900
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-quality",
+      "language": "python",
+      "path": "examples/16_quality.py",
+      "sha256": "27742d410c5d91459a62eea6b3062a418696f1569076d818bad425c8cae33287",
+      "output": {
+        "total": 3,
+        "answerable": 2,
+        "unanswerable": 1,
+        "correct": 1,
+        "supported": 1,
+        "unsupported_answer": 1,
+        "false_refusal": 1,
+        "correct_refusal": 0,
+        "truncated": 1
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-timing",
+      "language": "python",
+      "path": "examples/17_timing.py",
+      "sha256": "aa2801202eba4ff084ef971089336ca399a2622c822e5d1195a1c27d7ab3fe43",
+      "output": {
+        "end_to_end_s": 2.7,
+        "runtime_ttft_s": 0.5,
+        "user_ttft_s": 0.7,
+        "decode_tokens_s": 2.0,
+        "prefill_tokens_s": 250.0,
+        "p95_fixture_s": 9,
+        "measured": false
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-cache",
+      "language": "python",
+      "path": "examples/18_cache_budget.py",
+      "sha256": "fa30f03754b79f11c43dfc14528dff64304bb3fe0946c4c6e7df671064d40845",
+      "output": {
+        "lengths": [
+          512,
+          2048,
+          4096
+        ],
+        "bytes": [
+          786432,
+          2359296,
+          4456448
+        ],
+        "scope": "deduplicated logical cache fixture"
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-cache-quant",
+      "language": "python",
+      "path": "examples/19_cache_error.py",
+      "sha256": "c88f666eca21d65de32d22973ddaa8f93b64f9e44b9bab290aee5b4eb437a286",
+      "output": {
+        "base": 3.0,
+        "key_error_output": 3.6,
+        "value_error_output": 3.75,
+        "probabilities": [
+          0.25,
+          0.75
+        ]
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-recovery",
+      "language": "python",
+      "path": "examples/20_recovery.py",
+      "sha256": "444188d3124d742d7a1e839f3611a70697f5feb9fd1e2f907719cbec6c86cfa4",
+      "output": {
+        "loaded": "gen-0001",
+        "rejected": [
+          "gen-0002"
+        ],
+        "partial_ignored": true,
+        "scope": "integrity demo; not durable model storage"
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-boundary",
+      "language": "python",
+      "path": "examples/21_answer_boundary.py",
+      "sha256": "5ef186b4ed360b7616643edeab486f4a03623ff786f0dc5fa635754a65356fc7",
+      "output": {
+        "backend": "fixture",
+        "reset_count": 3,
+        "invalid_citation_rejected": true
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-application",
+      "language": "python",
+      "path": "examples/22_local_app.py",
+      "sha256": "19c6b2f46425b14bb65075f5565fa67cadf19091731a63aa16e61a4616753e29",
+      "output": {
+        "http_status": 200,
+        "bad_request_status": 400,
+        "result": {
+          "backend": "fixture",
+          "model_executed": false,
+          "answer": "3 hours",
+          "citations": [
+            "lumen-1"
+          ]
+        }
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-selection",
+      "language": "python",
+      "path": "examples/23_selection.py",
+      "sha256": "71a4bab21307a4c4b30d6f7fcf4246086f4ffc785590154f771922fe3c7a23d1",
+      "output": {
+        "selected": null,
+        "paired_mean": 0.0,
+        "bootstrap_range": [
+          -1.0,
+          1.0
+        ],
+        "resamples": 256
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "reference-handoff",
+      "language": "python",
+      "path": "examples/24_handoff.py",
+      "sha256": "37723abe5eb9f922066c539c269f1bd49263eb7d1fb254504881c0b170bf32e5",
+      "output": {
+        "complete": false,
+        "missing": [
+          "compatibility",
+          "frozen_data",
+          "float_reference",
+          "q8_comparison",
+          "q4_comparison",
+          "calibration_study",
+          "context_study",
+          "saved_application",
+          "fresh_process_recovery",
+          "final_evaluation"
+        ],
+        "next_phase": "00 — compatibility and budget",
+        "learner_review": "pending"
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    }
+  ],
+  "passed": true
+}

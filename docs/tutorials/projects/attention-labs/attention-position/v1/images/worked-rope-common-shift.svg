@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="650" viewBox="0 0 1160 650" role="img"><title>The whole pair turns; its relative angle stays fixed</title><desc>Fixed unrotated q = k = [1, 0], first coordinate pair, θ = 1 radian per position.</desc>
+<rect x="0" y="0" width="1160" height="650" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">The whole pair turns; its relative angle stays fixed</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">Fixed unrotated q = k = [1, 0], first coordinate pair, θ = 1 radian per position.</text>
+<rect x="36" y="112" width="348" height="441" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="144" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">query 3, key 1</text>
+<circle cx="210" cy="300" r="105" stroke="#d4dbea" stroke-width="2" fill="#fafbff"/>
+<path d="M 91 300 H 329 M 210 181 V 419" stroke="#c8d0e0" fill="none"/>
+<line x1="210" y1="300" x2="106.05078785695324" y2="285.18239915371396" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="106.05,285.18 116.69,282.37 115.48,290.85" fill="#6846c7"/>
+<line x1="210" y1="300" x2="266.7317421161547" y2="211.64554659517086" stroke="#2563b9" stroke-width="2.5"/>
+<polygon points="266.73,211.65 264.86,222.49 257.65,217.86" fill="#2563b9"/>
+<path d="M 240.80 252.04 L 238.36 250.56 L 235.85 249.20 L 233.28 247.97 L 230.65 246.87 L 227.97 245.91 L 225.25 245.08 L 222.48 244.38 L 219.69 243.83 L 216.87 243.42 L 214.03 243.14 L 211.19 243.01 L 208.34 243.02 L 205.49 243.18 L 202.66 243.48 L 199.84 243.91 L 197.05 244.49 L 194.29 245.21 L 191.57 246.06 L 188.90 247.05 L 186.28 248.17 L 183.72 249.42 L 181.22 250.80 L 178.80 252.30 L 176.46 253.92 L 174.19 255.65 L 172.02 257.49 L 169.95 259.45 L 167.97 261.50 L 166.10 263.65 L 164.33 265.89 L 162.69 268.21 L 161.16 270.62 L 159.75 273.09 L 158.47 275.64 L 157.31 278.25 L 156.29 280.91 L 155.41 283.61 L 154.66 286.36 L 154.04 289.15 L 153.57 291.96" stroke="#b65a1c" stroke-width="3" fill="none"/>
+<text x="210" y="462" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="#b65a1c">relative angle = 2 rad</text>
+<text x="210" y="505" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="middle" fill="#17253f">raw dot = −0.416147</text>
+<rect x="406" y="112" width="348" height="441" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="424" y="144" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">query 5, key 3</text>
+<circle cx="580" cy="300" r="105" stroke="#d4dbea" stroke-width="2" fill="#fafbff"/>
+<path d="M 461 300 H 699 M 580 181 V 419" stroke="#c8d0e0" fill="none"/>
+<line x1="580" y1="300" x2="609.7845294736387" y2="400.68704883962954" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="609.78,400.69 602.80,392.19 611.02,389.76" fill="#6846c7"/>
+<line x1="580" y1="300" x2="476.0507878569532" y2="285.18239915371396" stroke="#2563b9" stroke-width="2.5"/>
+<polygon points="476.05,285.18 486.69,282.37 485.48,290.85" fill="#2563b9"/>
+<path d="M 523.57 291.96 L 523.24 294.79 L 523.05 297.63 L 523.00 300.48 L 523.10 303.33 L 523.33 306.17 L 523.71 308.99 L 524.23 311.79 L 524.89 314.57 L 525.69 317.30 L 526.62 319.99 L 527.69 322.64 L 528.88 325.22 L 530.21 327.75 L 531.66 330.20 L 533.23 332.58 L 534.91 334.88 L 536.71 337.09 L 538.62 339.20 L 540.63 341.22 L 542.74 343.14 L 544.94 344.95 L 547.24 346.64 L 549.61 348.22 L 552.06 349.68 L 554.57 351.01 L 557.15 352.22 L 559.79 353.30 L 562.48 354.24 L 565.21 355.05 L 567.98 355.72 L 570.78 356.25 L 573.61 356.64 L 576.45 356.89 L 579.29 357.00 L 582.14 356.96 L 584.99 356.78 L 587.82 356.46 L 590.63 356.00 L 593.42 355.40 L 596.17 354.66" stroke="#b65a1c" stroke-width="3" fill="none"/>
+<text x="580" y="462" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="#b65a1c">relative angle = 2 rad</text>
+<text x="580" y="505" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="middle" fill="#17253f">raw dot = −0.416147</text>
+<rect x="776" y="112" width="348" height="441" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="794" y="144" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">query 100, key 98</text>
+<circle cx="950" cy="300" r="105" stroke="#d4dbea" stroke-width="2" fill="#fafbff"/>
+<path d="M 831 300 H 1069 M 950 181 V 419" stroke="#c8d0e0" fill="none"/>
+<line x1="950" y1="300" x2="1040.5434815902067" y2="353.16839231652466" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="1040.54,353.17 1029.64,351.73 1033.98,344.34" fill="#6846c7"/>
+<line x1="950" y1="300" x2="863.9747342443968" y2="360.2050965589944" stroke="#2563b9" stroke-width="2.5"/>
+<polygon points="863.97,360.21 869.82,350.89 874.73,357.91" fill="#2563b9"/>
+<path d="M 903.30 332.68 L 904.99 334.98 L 906.80 337.18 L 908.71 339.29 L 910.72 341.31 L 912.84 343.22 L 915.04 345.02 L 917.34 346.71 L 919.71 348.29 L 922.17 349.74 L 924.69 351.07 L 927.27 352.27 L 929.91 353.34 L 932.60 354.28 L 935.34 355.08 L 938.11 355.75 L 940.91 356.27 L 943.73 356.65 L 946.57 356.90 L 949.42 357.00 L 952.27 356.95 L 955.11 356.77 L 957.94 356.44 L 960.76 355.98 L 963.54 355.37 L 966.29 354.62 L 969.00 353.74 L 971.66 352.72 L 974.27 351.57 L 976.82 350.30 L 979.30 348.89 L 981.70 347.37 L 984.03 345.73 L 986.28 343.97 L 988.43 342.10 L 990.48 340.13 L 992.44 338.05 L 994.29 335.88 L 996.03 333.63 L 997.65 331.28 L 999.15 328.86" stroke="#b65a1c" stroke-width="3" fill="none"/>
+<text x="950" y="462" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="#b65a1c">relative angle = 2 rad</text>
+<text x="950" y="505" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="middle" fill="#17253f">raw dot = −0.416147</text>
+<text x="36" y="601" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">Purple = rotated query; blue = rotated key. Axes and unit-circle scale match in all panels.</text>
+</svg>

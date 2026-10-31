@@ -1,0 +1,306 @@
+{
+  "checked_at": "2026-10-13T00:21:33.993411+00:00",
+  "results": [
+    {
+      "id": "first-session",
+      "language": "python",
+      "path": "examples/first_session.py",
+      "sha256": "7c2fc16ad94edadeeecec4e901c6beeed07d27919687ced003e42dad532d0548",
+      "output": {
+        "linear": [
+          [
+            1,
+            2,
+            9
+          ],
+          [
+            3,
+            4,
+            19
+          ]
+        ],
+        "prediction": 6.0,
+        "loss_before": 25.0,
+        "gradient": 30.0,
+        "new_weight": 1.7,
+        "loss_after": 16.81,
+        "changed_loss_after": 0.16,
+        "overshoot_loss": 169.0,
+        "shape_rejection": true
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "byte-bpe",
+      "language": "python",
+      "path": "examples/byte_bpe.py",
+      "sha256": "5adcd5044d52d541dc729554a3f6d184ff0d53d2704122d0b37f4dd51e6db190",
+      "output": {
+        "merges": [
+          [
+            97,
+            98
+          ],
+          [
+            260,
+            260
+          ]
+        ],
+        "encoded": [
+          261
+        ],
+        "unicode_roundtrip": true,
+        "boundary_safe": true,
+        "rank_safe": true,
+        "size": 262
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "prerequisite-math-python",
+      "language": "python",
+      "path": "examples/prerequisite_math.py",
+      "sha256": "b7d2fb4cef5edfbffb716482a096aafa54d17508a27308ebd0d8ecf69885ee62",
+      "output": {
+        "adam_moments_after_two": [
+          2.7,
+          0.8991
+        ],
+        "adam_parameters": [
+          1.99,
+          1.983299417
+        ],
+        "affine_gradient_bias": [
+          2.0,
+          3.0
+        ],
+        "affine_gradient_weights": [
+          [
+            5.0,
+            7.0
+          ],
+          [
+            7.0,
+            10.0
+          ]
+        ],
+        "finite_difference_matches": true,
+        "linear": [
+          [
+            1,
+            2,
+            9
+          ],
+          [
+            3,
+            4,
+            19
+          ]
+        ],
+        "mean": 2.0,
+        "nll": 0.287682072,
+        "norm": 5.0,
+        "probabilities": [
+          0.25,
+          0.75
+        ],
+        "rectangular": [
+          [
+            58,
+            64
+          ],
+          [
+            139,
+            154
+          ]
+        ],
+        "scalar_gradient": [
+          30.0,
+          10.0
+        ],
+        "sgd_loss": 16.0,
+        "sgd_parameters": [
+          1.7,
+          -0.1
+        ],
+        "variance": 1.0
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "prerequisite-math-cpp",
+      "language": "cpp",
+      "path": "examples/prerequisite_math.cpp",
+      "sha256": "123bf8e2c25d2afc267d097c2f2434cd8f0252793d76723f8a61accd47ac179e",
+      "output": {
+        "linear": [
+          [
+            1.0,
+            2.0,
+            9.0
+          ],
+          [
+            3.0,
+            4.0,
+            19.0
+          ]
+        ],
+        "rectangular": [
+          [
+            58.0,
+            64.0
+          ],
+          [
+            139.0,
+            154.0
+          ]
+        ],
+        "mean": 2.0,
+        "variance": 1.0,
+        "norm": 5.0,
+        "probabilities": [
+          0.25,
+          0.75
+        ],
+        "nll": 0.287682072,
+        "scalar_gradient": [
+          30.0,
+          10.0
+        ],
+        "sgd_parameters": [
+          1.7,
+          -0.1
+        ],
+        "sgd_loss": 16.0,
+        "affine_gradient_weights": [
+          [
+            5.0,
+            7.0
+          ],
+          [
+            7.0,
+            10.0
+          ]
+        ],
+        "affine_gradient_bias": [
+          2.0,
+          3.0
+        ],
+        "adam_parameters": [
+          1.99,
+          1.983299417
+        ],
+        "adam_moments_after_two": [
+          2.7,
+          0.8991
+        ],
+        "finite_difference_matches": true
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "prerequisite-text",
+      "language": "python",
+      "path": "examples/prerequisite_text.py",
+      "sha256": "7abae1a1c052d20d23380419c86a41a5c89209bec576c54ad016c90a0031f4ab",
+      "output": {
+        "utf8": [
+          99,
+          97,
+          102,
+          195,
+          169
+        ],
+        "characters": 4,
+        "bytes": 5,
+        "byte_character_offsets": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "cat_ids": [
+          3,
+          2,
+          5
+        ],
+        "unseen_ids": [
+          3,
+          2,
+          1
+        ],
+        "unseen_decode": "ca<UNK>",
+        "original_span": "café",
+        "merged_abab": [
+          261
+        ]
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    },
+    {
+      "id": "deep-learning-math",
+      "language": "python",
+      "path": "examples/deep_learning_math.py",
+      "sha256": "b6d07e8e5180d477ba13ddef68eb8aed3984eabeb26a16f93f82c86829ea8f8d",
+      "output": {
+        "shared_gradient": 16.0,
+        "binary_probability": 0.01,
+        "binary_cross_entropy_gradient": -0.99,
+        "binary_half_squared_gradient": -0.009801,
+        "hidden": [
+          0.0,
+          0.5
+        ],
+        "probabilities": [
+          0.25,
+          0.75
+        ],
+        "loss": 0.287682072,
+        "grad_hidden_weights": [
+          [
+            0.5,
+            -0.411979608
+          ],
+          [
+            1.0,
+            -0.823959217
+          ]
+        ],
+        "grad_output_weights": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.125,
+            -0.125
+          ]
+        ]
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    }
+  ],
+  "passed": true
+}

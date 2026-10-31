@@ -1,0 +1,30 @@
+{
+  "checked_at": "2026-10-27T05:58:20.523280+00:00",
+  "results": [
+    {
+      "id": "arithmetic",
+      "language": "python",
+      "path": "examples/arithmetic.py",
+      "sha256": "d1ca80619bf0e91be85ced41fc910186bc0477eb70f364650b64d9b70a7b1b29",
+      "output": {
+        "supplied_context": [
+          1.4,
+          1.0
+        ],
+        "query_context": [
+          1.339523,
+          1.0
+        ],
+        "query_gradient": [
+          -0.206595,
+          0.353553
+        ],
+        "post_step_loss": 0.701457,
+        "passed": true
+      },
+      "passed": true,
+      "scope": "illustrative component, not a full model"
+    }
+  ],
+  "passed": true
+}

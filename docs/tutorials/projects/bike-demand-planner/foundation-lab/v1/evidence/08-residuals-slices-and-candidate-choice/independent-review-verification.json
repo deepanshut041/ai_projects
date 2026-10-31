@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "review_directory": "/mnt/projects/ai/ai_projects/projects/foundations/bike-demand-planner/runs/errors-20261020T014809822762Z",
+  "prediction_files": 14,
+  "model_policy_pairs": 7,
+  "slice_summaries_verified": 686,
+  "maximum_independent_numeric_difference": 3.3306690738754696e-16,
+  "all_summaries_temporal_groups_largest_misses_and_level_comparisons_verified": true,
+  "candidate_bytes_equal_original_selected_model": true,
+  "fit_analysis_dependency_artifact_identities_verified": true,
+  "all_four_indexes_preserved": true,
+  "frozen_non_test_bytes_preserved": true,
+  "reserved_test_targets_opened": false
+}

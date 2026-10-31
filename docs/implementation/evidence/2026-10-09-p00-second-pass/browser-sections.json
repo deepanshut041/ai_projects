@@ -1,0 +1,77 @@
+{
+  "results": [
+    {
+      "route": "chapters/numbers/",
+      "width": 1440,
+      "heading": "Where a derivative comes from",
+      "math": 17,
+      "passed": true
+    },
+    {
+      "route": "chapters/numbers/",
+      "width": 390,
+      "heading": "Where a derivative comes from",
+      "math": 17,
+      "passed": true
+    },
+    {
+      "route": "chapters/autograd/",
+      "width": 1440,
+      "heading": "Adam remembers how gradients have behaved",
+      "math": 12,
+      "passed": true
+    },
+    {
+      "route": "chapters/autograd/",
+      "width": 390,
+      "heading": "Adam remembers how gradients have behaved",
+      "math": 12,
+      "passed": true
+    },
+    {
+      "route": "chapters/attention/",
+      "width": 1440,
+      "heading": "Mean and variance describe the spread of numbers",
+      "math": 7,
+      "passed": true
+    },
+    {
+      "route": "chapters/attention/",
+      "width": 390,
+      "heading": "Mean and variance describe the spread of numbers",
+      "math": 7,
+      "passed": true
+    },
+    {
+      "route": "chapters/handoff/",
+      "width": 1440,
+      "heading": "Compare the block order on the same input",
+      "math": 4,
+      "passed": true
+    },
+    {
+      "route": "chapters/handoff/",
+      "width": 390,
+      "heading": "Compare the block order on the same input",
+      "math": 4,
+      "passed": true
+    },
+    {
+      "route": "documents/project/p01-readiness/",
+      "width": 1440,
+      "heading": "Check the maths by doing something with it",
+      "math": 0,
+      "passed": true
+    },
+    {
+      "route": "documents/project/p01-readiness/",
+      "width": 390,
+      "heading": "Check the maths by doing something with it",
+      "math": 0,
+      "passed": true
+    }
+  ],
+  "readinessNavigation": true,
+  "errors": [],
+  "passed": true
+}

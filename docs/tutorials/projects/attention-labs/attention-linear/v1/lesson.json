@@ -1,0 +1,323 @@
+{
+  "schema_version": 1,
+  "project_id": "attention-labs",
+  "languages": [
+    "cpp",
+    "python"
+  ],
+  "examples": [],
+  "slug": "attention-linear",
+  "revision": "v1",
+  "title": "Attention memory: linear attention and selective updates",
+  "question": "How can a fixed-size state summarize and revise past associations?",
+  "topic_kind": "concept",
+  "level": "advanced",
+  "prerequisites": [],
+  "created_at": "2026-10-30T22:51:16.430020+00:00",
+  "repository": {
+    "base_sha": "6114868d844022fb42d82a1e04d86b1cc51ba90b",
+    "name": "docs"
+  },
+  "objectives": [
+    {
+      "id": "linear-normalize",
+      "text": "Reassociate a chosen positive kernel while preserving its denominator."
+    },
+    {
+      "id": "linear-collision",
+      "text": "Explain prefix state, ownership and information collisions."
+    },
+    {
+      "id": "performer-scale",
+      "text": "Derive positive features with the correct dot-product scaling."
+    },
+    {
+      "id": "performer-state",
+      "text": "Separate same-feature equality, statistical error and projection-state compatibility."
+    },
+    {
+      "id": "delta-overwrite",
+      "text": "Derive residual writes and the unit-key overwrite condition."
+    },
+    {
+      "id": "delta-interference",
+      "text": "Trace online regression, key interference and chunk continuation."
+    },
+    {
+      "id": "gated-order",
+      "text": "Derive decay before prediction and compare affine/residual forms."
+    },
+    {
+      "id": "gated-forget",
+      "text": "Distinguish write strength, forgetting, reset and complete-model state."
+    }
+  ],
+  "sources": [
+    {
+      "id": "linear-workshop",
+      "kind": "external",
+      "title": "Vizuara kernel state",
+      "url": "https://vizuaraai.github.io/convolution-musical-journey/book.html",
+      "accessed_at": "2026-10-30",
+      "locator": "Sections9.3 and9.6",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    },
+    {
+      "id": "linear-primary",
+      "kind": "external",
+      "title": "Transformers are RNNs",
+      "url": "https://arxiv.org/html/2006.16236v3",
+      "accessed_at": "2026-10-30",
+      "locator": "Sections3.2–3.4",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    },
+    {
+      "id": "performer-primary",
+      "kind": "external",
+      "title": "Performer and FAVOR+",
+      "url": "https://arxiv.org/html/2009.14794v4",
+      "accessed_at": "2026-10-30",
+      "locator": "Sections2.2–2.4; Lemma1; Figures1–2",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    },
+    {
+      "id": "delta-teacher",
+      "kind": "external",
+      "title": "Vizuara delta-memory teaching",
+      "url": "https://vizuaraai.github.io/vizuara-ai-daily/kimi-delta-attention-explained/",
+      "accessed_at": "2026-10-30",
+      "locator": "Sections1–3; Figures1–3",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    },
+    {
+      "id": "delta-primary",
+      "kind": "external",
+      "title": "Parallel DeltaNet",
+      "url": "https://arxiv.org/html/2406.06484v6",
+      "accessed_at": "2026-10-30",
+      "locator": "Section2.2",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    },
+    {
+      "id": "gated-primary",
+      "kind": "external",
+      "title": "Gated Delta Networks",
+      "url": "https://arxiv.org/html/2412.06464v3",
+      "accessed_at": "2026-10-30",
+      "locator": "Sections3.1–3.4; Equation10",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    }
+  ],
+  "claims": [
+    {
+      "id": "linear-claim",
+      "text": "Normalized positive-kernel retrieval has equivalent pairwise and prefix-state evaluations; constant inference state can merge distinct histories.",
+      "status": "verified",
+      "source_ids": [
+        "linear-workshop",
+        "linear-primary"
+      ],
+      "proof_limit": "Stated mathematical assumptions and executed tiny reference; no learner, hosted or full-model result."
+    },
+    {
+      "id": "performer-claim",
+      "text": "Finite positive random features approximate the exponential kernel; fixed-feature pairwise and recurrent outputs/gradients agree while finite-seed softmax error remains measurable.",
+      "status": "verified",
+      "source_ids": [
+        "performer-primary"
+      ],
+      "proof_limit": "Stated mathematical assumptions and executed tiny reference; no learner, hosted or full-model result."
+    },
+    {
+      "id": "delta-claim",
+      "text": "The delta write is one online squared-error gradient step; unit-key full writes replace the same-key prediction while nonorthogonal queries can interfere.",
+      "status": "verified",
+      "source_ids": [
+        "delta-teacher",
+        "delta-primary"
+      ],
+      "proof_limit": "Stated mathematical assumptions and executed tiny reference; no learner, hosted or full-model result."
+    },
+    {
+      "id": "gated-delta-claim",
+      "text": "Scalar decay followed by correction of the decayed prediction equals the affine gated delta recurrence; forgetting persists even with a zero write gate.",
+      "status": "verified",
+      "source_ids": [
+        "gated-primary"
+      ],
+      "proof_limit": "Stated mathematical assumptions and executed tiny reference; no learner, hosted or full-model result."
+    }
+  ],
+  "entities": [],
+  "relationships": [],
+  "chapters": [
+    {
+      "id": "linear",
+      "title": "Linear attention",
+      "content_path": "lessons/01-linear-attention.md",
+      "objective_ids": [
+        "linear-normalize",
+        "linear-collision"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "linear-normalize",
+        "linear-collision"
+      ]
+    },
+    {
+      "id": "performer",
+      "title": "Performer",
+      "content_path": "lessons/02-performer.md",
+      "objective_ids": [
+        "performer-scale",
+        "performer-state"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "performer-scale",
+        "performer-state"
+      ]
+    },
+    {
+      "id": "delta",
+      "title": "DeltaNet",
+      "content_path": "lessons/03-deltanet.md",
+      "objective_ids": [
+        "delta-overwrite",
+        "delta-interference"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "delta-overwrite",
+        "delta-interference"
+      ]
+    },
+    {
+      "id": "gated-delta",
+      "title": "Gated DeltaNet",
+      "content_path": "lessons/04-gated-deltanet.md",
+      "objective_ids": [
+        "gated-order",
+        "gated-forget"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "gated-order",
+        "gated-forget"
+      ]
+    }
+  ],
+  "diagrams": [],
+  "tables": [],
+  "scenarios": [],
+  "practice": [
+    {
+      "id": "linear-normalize",
+      "question": "If all values are3, what should normalized retrieval return as history grows?",
+      "answer": "3 whenever the denominator is positive. Without the normalizer, the numerator grows with accumulated similarity mass.",
+      "rubric": "Explain numerator/denominator cancellation.",
+      "objective_ids": [
+        "linear-normalize"
+      ],
+      "claim_ids": [
+        "linear-claim"
+      ]
+    },
+    {
+      "id": "linear-collision",
+      "question": "Does parallel/recurrent equality prove equality to softmax attention?",
+      "answer": "No. It proves two evaluations of the same selected kernel. ELU+1 similarities differ from exponentiated dot products.",
+      "rubric": "Separate exact reassociation from changing the kernel.",
+      "objective_ids": [
+        "linear-collision"
+      ],
+      "claim_ids": [
+        "linear-claim"
+      ]
+    },
+    {
+      "id": "performer-scale",
+      "question": "Why divide both raw Q and K by d to the one-quarter power?",
+      "answer": "Their dot product then divides by sqrt(d), matching scaled dot-product attention. Dividing both by sqrt(d) would divide the dot product by d.",
+      "rubric": "Account for both factors.",
+      "objective_ids": [
+        "performer-scale"
+      ],
+      "claim_ids": [
+        "performer-claim"
+      ]
+    },
+    {
+      "id": "performer-state",
+      "question": "Can you redraw random projections and keep the old recurrent state?",
+      "answer": "Not directly. S,z encode the old feature coordinates; rebuild them or derive a compatible transformation. Same-feature equality does not prove exact softmax output.",
+      "rubric": "Name the representation dependency and approximation boundary.",
+      "objective_ids": [
+        "performer-state"
+      ],
+      "claim_ids": [
+        "performer-claim"
+      ]
+    },
+    {
+      "id": "delta-overwrite",
+      "question": "Does beta1 always overwrite a prediction for an unnormalized key?",
+      "answer": "No. The effective correction is beta*||k||². Full overwrite at beta1 follows for a unit-norm key.",
+      "rubric": "Derive the same-key read after the update.",
+      "objective_ids": [
+        "delta-overwrite"
+      ],
+      "claim_ids": [
+        "delta-claim"
+      ]
+    },
+    {
+      "id": "delta-interference",
+      "question": "What happens to an orthogonal query when one association is corrected?",
+      "answer": "Its direct read change is zero because u dot k=0. Similar queries can change, so this is not unlimited independent memory.",
+      "rubric": "Use the dot-product interference term.",
+      "objective_ids": [
+        "delta-interference"
+      ],
+      "claim_ids": [
+        "delta-claim"
+      ]
+    },
+    {
+      "id": "gated-order",
+      "question": "Why is predicting from the old state before decay wrong here?",
+      "answer": "The correction must target the remaining decayed prediction. In the worked example the correct first diagonal is2; using the old prediction gives1.75.",
+      "rubric": "Trace all three operations in order.",
+      "objective_ids": [
+        "gated-order"
+      ],
+      "claim_ids": [
+        "gated-delta-claim"
+      ]
+    },
+    {
+      "id": "gated-forget",
+      "question": "At beta0 and alpha.8, is the state unchanged?",
+      "answer": "No. It becomes .8 times the old state. Beta controls the correction; alpha independently controls retention.",
+      "rubric": "Separate the two gates and name alpha1 as the no-decay case.",
+      "objective_ids": [
+        "gated-forget"
+      ],
+      "claim_ids": [
+        "gated-delta-claim"
+      ]
+    }
+  ],
+  "scenes": [],
+  "media": {},
+  "approval": null
+}

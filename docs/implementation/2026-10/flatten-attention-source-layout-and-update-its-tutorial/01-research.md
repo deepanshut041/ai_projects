@@ -1,0 +1,9 @@
+# Source, packaging and documentation findings
+
+The project previously split root commands/visual helpers/notebook from src/attention_is_all_you_need implementation modules. The user clarified that src should contain meaningful responsibility folders, not a flat pile of modules. The chosen source groups are core, data, training, cli and utils. Hatch source mapping installs these groups directly; the source distribution additionally retains notebooks and public project guidance.
+
+Inspected current source/tests, notebook code/metadata, dependency/build config, workspace runner planning, source export generator, tutorial manifest/text/probes, local project-file allowlist and existing reader tests. The official Hatch wheel documentation was checked for source selection/mapping. No model API or dependency upgrade is required. The old data/ ignore matched src/data and the parent umbrella also ignored any data directory; scoped runtime rules plus explicit src/data negations are required for versioning and packaging.
+
+Graph helpers previously based output on their own file directory. Their new location requires a project-aware output directory, preserving runs/attention-visuals from root/notebooks launches and allowing an explicit destination for installed use. Notebook imports rely on the project environment, removing old root-file/path assumptions. Full notebook execution confirms the actual new import path.
+
+The docs reader's local source allowlist supported src/tests and root files, so a moved notebooks/ link would otherwise disappear. Explicitly allow the notebooks group under the same realpath/suffix checks and extend the existing integration test; public exports still omit private project study material. Current tutorial code capture and source ZIP must be refreshed and obsolete generated copies removed. Historical receipts and upstream source JSON paths retain their original provenance.

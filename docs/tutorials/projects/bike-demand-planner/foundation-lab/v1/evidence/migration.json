@@ -1,0 +1,999 @@
+{
+  "source_commit": "0b49c0aafe154888929d8b22dbe6637ba2e56661",
+  "records": [
+    {
+      "original": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/01_prediction-contract-and-one-update/02-notes-to-understanding.md",
+      "sha256": "dc5823bdde69adb9e5271ac5f5ae15cf62ff5eb5811da6cee1a0987fa5b7bb39",
+      "lesson": "lessons/01-prediction-contract.md",
+      "words": 2862,
+      "videos": 0
+    },
+    {
+      "original": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/02_hourly-data-audit-and-splits/02-notes-to-understanding.md",
+      "sha256": "b07264749edfedf98d6536c0d324c187e69f4412b69eef4cb8304400ddd3e74f",
+      "lesson": "lessons/02-hourly-data-and-splits.md",
+      "words": 5750,
+      "videos": 6
+    },
+    {
+      "original": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/03_simple-predictions-and-hourly-error-metrics/02-notes-to-understanding.md",
+      "sha256": "e2f9b661b972b0e4be23be1daf6b2185b8fc343fda19f4a0a0acd21304af28a0",
+      "lesson": "lessons/03-calendar-baselines.md",
+      "words": 4697,
+      "videos": 4
+    },
+    {
+      "original": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/04_linear-regression-and-full-batch-learning/02-notes-to-understanding.md",
+      "sha256": "58bc8fafe32dac2b9c7dc79a7a491fbb89b2ea3aff18b8435635d7e307fb95c9",
+      "lesson": "lessons/04-linear-regression.md",
+      "words": 3636,
+      "videos": 5
+    },
+    {
+      "original": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/05_batches-momentum-and-adam/02-notes-to-understanding.md",
+      "sha256": "daf72c839512a0e4716b4b04b15b7817d1f7739acd8f8a02d8e28151c18ab5b8",
+      "lesson": "lessons/05-batches-and-optimizers.md",
+      "words": 3853,
+      "videos": 6
+    },
+    {
+      "original": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/06_losses-regularization-and-calendar-structure/02-notes-to-understanding.md",
+      "sha256": "3d5cf1d3079514181e4c35d7c312bab749220cf7a81e0863b072c03adfe72c51",
+      "lesson": "lessons/06-losses-and-calendar-structure.md",
+      "words": 3307,
+      "videos": 6
+    },
+    {
+      "original": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/07_tree-forest-and-boosting-comparisons/02-notes-to-understanding.md",
+      "sha256": "e1b0faa6e072ac986a054853e3064451d40ec174ee9d2e4294613ec99c185e7a",
+      "lesson": "lessons/07-trees-and-ensembles.md",
+      "words": 3162,
+      "videos": 5
+    },
+    {
+      "original": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/08_residuals-slices-and-candidate-choice/02-notes-to-understanding.md",
+      "sha256": "b7b5121b7f3604fac8e611bfe866f3a39e011a4249d7ebceb9f58eeb4546a236",
+      "lesson": "lessons/08-residuals-and-candidate-choice.md",
+      "words": 3245,
+      "videos": 5
+    },
+    {
+      "original": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/09_saved-prediction-recovery-and-replay/02-notes-to-understanding.md",
+      "sha256": "4afff5463cd7c12609faeebfaa72446406589d12a5cfc312731781a44a1d3148",
+      "lesson": "lessons/09-saved-predictions-and-recovery.md",
+      "words": 3405,
+      "videos": 5
+    },
+    {
+      "original": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/10_frozen-held-out-evaluation/02-notes-to-understanding.md",
+      "sha256": "a0690d5bb1f7ee2b3ba67837f34f8f5c526c58ec7a34364e801ab47d8012fbae",
+      "lesson": "lessons/10-final-evaluation-and-application.md",
+      "words": 3274,
+      "videos": 5
+    }
+  ],
+  "copied_assets": {
+    "code/src/bike_demand_planner/linear.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/linear.py",
+      "sha256": "b37e1e639c3681e4bd93befd15d726361b380ee187a25016f6bd148d315fed80"
+    },
+    "code/linear_example.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/linear_example.py",
+      "sha256": "78ca5c4720518433194b72c78ed39969fdcf41e14318d1a6aea6fbcf0cd7361f"
+    },
+    "evidence/01-prediction-contract-and-one-update/changed-target-output.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/01_prediction-contract-and-one-update/changed-target-output.json",
+      "sha256": "d374e0f8bcd05977049ca40ad5d0546fa6f8bd24973370078aa1a2157458cd20"
+    },
+    "evidence/01-prediction-contract-and-one-update/numerical-output.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/01_prediction-contract-and-one-update/numerical-output.json",
+      "sha256": "fb34a3c9ca094a38fb2d0640c4d1cb1d3dfcc47d0bf8368e831fa3ae8c7e8c57"
+    },
+    "code/src/bike_demand_planner/data.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/data.py",
+      "sha256": "dd3e974e0136566ba10d9b94689ea361af0317678914e417897efcd91e9ca0b7"
+    },
+    "code/src/bike_demand_planner/features.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/features.py",
+      "sha256": "57d65c19a134c06ef1c2fde5671b384a0a97d9c7254f4079345c9ad5f9bd9dd9"
+    },
+    "code/src/bike_demand_planner/splits.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/splits.py",
+      "sha256": "6cc5a94f854c074a52b89b09f056c5239966170d92b5204508e088013e6fd653"
+    },
+    "evidence/02-hourly-data-audit-and-splits/calendar-example-output.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/02_hourly-data-audit-and-splits/calendar-example-output.json",
+      "sha256": "a5f898441e3c4c18b39cf608ebf9a0f97802a8b5d5278fad55b77d408bb26abd"
+    },
+    "code/calendar_example.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/calendar_example.py",
+      "sha256": "1976d546ba054b30ef203b12ea6f88c3ff6d28570f9396681221395fe41f7945"
+    },
+    "evidence/02-hourly-data-audit-and-splits/encoding-changed-case-and-failures.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/02_hourly-data-audit-and-splits/encoding-changed-case-and-failures.json",
+      "sha256": "602e8436438eb4cb87ee0f6752c9fed0a30fc308b5163805683a460c8ea7c30b"
+    },
+    "evidence/02-hourly-data-audit-and-splits/first-acquisition-output.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/02_hourly-data-audit-and-splits/first-acquisition-output.json",
+      "sha256": "dbce1d94b822268445ea2ac018b787ad766f61f6e053997fe624798d464c47dd"
+    },
+    "evidence/02-hourly-data-audit-and-splits/encoding-splits-preparation.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/02_hourly-data-audit-and-splits/encoding-splits-preparation.json",
+      "sha256": "9e5e763235f159ec071cf485e255bbab6d97c8558a020545bfc797a1cb37996f"
+    },
+    "evidence/02-hourly-data-audit-and-splits/encoding-splits-verification.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/02_hourly-data-audit-and-splits/encoding-splits-verification.json",
+      "sha256": "6448b94608f37bc63ca5ca93605e817af0d19e089e838091ec77623f735cd021"
+    },
+    "media/bike-data-hourly-contract-depth/poster.jpg": {
+      "source": ".ai/videos/projects/bike-data-hourly-contract-depth/out/complete/poster.jpg",
+      "sha256": "96edc098cd3576ce0f34ad63833ae1ac80eb60b0815f5483127b8a15fde42251"
+    },
+    "media/bike-data-hourly-contract-depth/captions.vtt": {
+      "source": ".ai/videos/projects/bike-data-hourly-contract-depth/out/complete/captions.vtt",
+      "sha256": "aebb0315c0a6d960c23432d3d9a1a06c1da82979de49152d332aba441d020399"
+    },
+    "media/bike-data-hourly-contract-depth/transcript.md": {
+      "source": ".ai/videos/projects/bike-data-hourly-contract-depth/out/complete/transcript.md",
+      "sha256": "f407b2b90171699f0cfce3c0b9cec0be42f31cc167eb0a849ca6a6d650218c81"
+    },
+    "media/bike-data-source-audit-depth/poster.jpg": {
+      "source": ".ai/videos/projects/bike-data-source-audit-depth/out/complete/poster.jpg",
+      "sha256": "236b566dae7cba5287e4af46431be41bf82caad19b5aa0a87788ee1777d4d0cc"
+    },
+    "media/bike-data-source-audit-depth/captions.vtt": {
+      "source": ".ai/videos/projects/bike-data-source-audit-depth/out/complete/captions.vtt",
+      "sha256": "68d7102ce8cc3612b80c47e49fa37c31055b2e2f0f3a80bf4dd5e31defe4aff1"
+    },
+    "media/bike-data-source-audit-depth/transcript.md": {
+      "source": ".ai/videos/projects/bike-data-source-audit-depth/out/complete/transcript.md",
+      "sha256": "8cde442bd8fa4b881b84a9f67317a30965a2b81a3699977867080f1e5d0928ce"
+    },
+    "media/bike-data-calendar-vector-depth/poster.jpg": {
+      "source": ".ai/videos/projects/bike-data-calendar-vector-depth/out/complete/poster.jpg",
+      "sha256": "451dc0aa53b602d965a3329add3a02bc5e67bb08b239dba0866e01054b996e3a"
+    },
+    "media/bike-data-calendar-vector-depth/captions.vtt": {
+      "source": ".ai/videos/projects/bike-data-calendar-vector-depth/out/complete/captions.vtt",
+      "sha256": "0b8a41b192fcb5cdd9256e774ba97e7491959d5a40fd9f7628d32a49d6afba8e"
+    },
+    "media/bike-data-calendar-vector-depth/transcript.md": {
+      "source": ".ai/videos/projects/bike-data-calendar-vector-depth/out/complete/transcript.md",
+      "sha256": "dfdf820de9509f7535bf16886cf5ef9dfed86ed83054c4474e6f342d4b53fe64"
+    },
+    "media/bike-data-representation-depth/poster.jpg": {
+      "source": ".ai/videos/projects/bike-data-representation-depth/out/complete/poster.jpg",
+      "sha256": "c891fe7115153803a31e6e90bbf4872cddc7f549c7424d219352bab096b5eefb"
+    },
+    "media/bike-data-representation-depth/captions.vtt": {
+      "source": ".ai/videos/projects/bike-data-representation-depth/out/complete/captions.vtt",
+      "sha256": "0d34250bc04bfe41cd7b188df2b7b02b74807800ef6f5932dcaaed14daffe181"
+    },
+    "media/bike-data-representation-depth/transcript.md": {
+      "source": ".ai/videos/projects/bike-data-representation-depth/out/complete/transcript.md",
+      "sha256": "4f8429cc9cfbea656edbcab27c31ee4a2fdd5d0d9108fef4f11a1d4ee130cc80"
+    },
+    "media/bike-data-chronological-split-depth/poster.jpg": {
+      "source": ".ai/videos/projects/bike-data-chronological-split-depth/out/complete/poster.jpg",
+      "sha256": "09efaec52e3e8c384a8dae0ea7abd911b721f18d6cf23e3be97d419991038d9a"
+    },
+    "media/bike-data-chronological-split-depth/captions.vtt": {
+      "source": ".ai/videos/projects/bike-data-chronological-split-depth/out/complete/captions.vtt",
+      "sha256": "e4e1310c891d7df9415d374b87a5dce63de3995aea5e01e70f79f604485098c1"
+    },
+    "media/bike-data-chronological-split-depth/transcript.md": {
+      "source": ".ai/videos/projects/bike-data-chronological-split-depth/out/complete/transcript.md",
+      "sha256": "7fac0ae3b92ad1a5bb4c823cb4778e0eac19f386bbeb092785bf9f842591d033"
+    },
+    "media/bike-data-saved-artifacts-depth/poster.jpg": {
+      "source": ".ai/videos/projects/bike-data-saved-artifacts-depth/out/complete/poster.jpg",
+      "sha256": "ecc3073ab2a05b598f1645e1fdfa589191e392b64f4ee57403d796d836fc3df5"
+    },
+    "media/bike-data-saved-artifacts-depth/captions.vtt": {
+      "source": ".ai/videos/projects/bike-data-saved-artifacts-depth/out/complete/captions.vtt",
+      "sha256": "596b13b074a54255097f2e23a2a6df395f089c22d5927f8ea79e12e7b71eb806"
+    },
+    "media/bike-data-saved-artifacts-depth/transcript.md": {
+      "source": ".ai/videos/projects/bike-data-saved-artifacts-depth/out/complete/transcript.md",
+      "sha256": "6a69327287b7416585807c71723ec0e415d07ef41cb35d97aedf86ba3314ef9c"
+    },
+    "code/src/bike_demand_planner/baselines.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/baselines.py",
+      "sha256": "920017376d83756014f9811ff00bb3650f4b0bfb9b0b813922406af720cd25af"
+    },
+    "code/src/bike_demand_planner/evaluation.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/evaluation.py",
+      "sha256": "717f55b0e7d075f0457c582d60a5c18d6f1eb738390a57af7fde6f61e56ea531"
+    },
+    "code/src/bike_demand_planner/metrics.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/metrics.py",
+      "sha256": "97fba7de8f81b2158a1e70e49649a1cc5c5c922249182629f86abd2ac255ace3"
+    },
+    "evidence/03-simple-predictions-and-hourly-error-metrics/metric-and-alignment-probes.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/03_simple-predictions-and-hourly-error-metrics/metric-and-alignment-probes.json",
+      "sha256": "3fa0022646fd457d2157d51a6acedeb19395313b0c33a449d7703e2dfdda4793"
+    },
+    "evidence/03-simple-predictions-and-hourly-error-metrics/first-baseline-output.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/03_simple-predictions-and-hourly-error-metrics/first-baseline-output.json",
+      "sha256": "91373a30d52d5f70e37cfbdd292489c7fab6c00111e4d035f7dc52436038c9fd"
+    },
+    "evidence/03-simple-predictions-and-hourly-error-metrics/baseline-verification.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/03_simple-predictions-and-hourly-error-metrics/baseline-verification.json",
+      "sha256": "5127bb22dcd0c3d7cc492c8f9ee8517dac20c6f9674ef4fd39abfddb3e3859a3"
+    },
+    "code/group_baseline_example.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/group_baseline_example.py",
+      "sha256": "cac1119e7172a590a37a0b60d1e8f3a477c2b00d9f0d0189e5280a9f836239e4"
+    },
+    "evidence/03-simple-predictions-and-hourly-error-metrics/group-baseline-output.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/03_simple-predictions-and-hourly-error-metrics/group-baseline-output.json",
+      "sha256": "dc56974301b44472ebd9ad417a2f2f4b36b3b480ed34966786fb050befc3d3d2"
+    },
+    "evidence/03-simple-predictions-and-hourly-error-metrics/group-baseline-verification.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/03_simple-predictions-and-hourly-error-metrics/group-baseline-verification.json",
+      "sha256": "d77338cc8647d287eb1d396263e42363302d72ae50710f03192bba5b0d6293f6"
+    },
+    "media/bike-group-hourly-example/poster.jpg": {
+      "source": ".ai/videos/projects/bike-group-hourly-example/out/poster.jpg",
+      "sha256": "1da9d23918dee2828b67afe7507a42c8b2ea14c8f9248159ad4246b1ccb3af79"
+    },
+    "media/bike-group-hourly-example/captions.vtt": {
+      "source": ".ai/videos/projects/bike-group-hourly-example/out/video.vtt",
+      "sha256": "47daa4ed221742f69bb1f7b51ff50665a255dec308b6e971eabf81993677098e"
+    },
+    "media/bike-group-hourly-example/transcript.md": {
+      "source": ".ai/videos/projects/bike-group-hourly-example/out/transcript.md",
+      "sha256": "590a05d692741fb58617ca0b5ae8601bad2333fddf1abd3adb5ffb0c44e0c29f"
+    },
+    "media/bike-group-fit-predict/poster.jpg": {
+      "source": ".ai/videos/projects/bike-group-fit-predict/out/poster.jpg",
+      "sha256": "f7cc164ff4b29b0907cffe4758a6d719df0d14d30411dfbad85e7021960b2786"
+    },
+    "media/bike-group-fit-predict/captions.vtt": {
+      "source": ".ai/videos/projects/bike-group-fit-predict/out/video.vtt",
+      "sha256": "39ed6a8818f721dd1257a40a021c65154a4ef6e0cd62bfdae90837a55e47876a"
+    },
+    "media/bike-group-fit-predict/transcript.md": {
+      "source": ".ai/videos/projects/bike-group-fit-predict/out/transcript.md",
+      "sha256": "bad505a16b9fe54906b620c541d2becc5be887e864fd6d32aa53bfcfd4c5b94c"
+    },
+    "media/bike-group-missing-pairs/poster.jpg": {
+      "source": ".ai/videos/projects/bike-group-missing-pairs/out/poster.jpg",
+      "sha256": "affa42a613ce81719ae043bb271c7de355fe277495091b640d7c952e011d3192"
+    },
+    "media/bike-group-missing-pairs/captions.vtt": {
+      "source": ".ai/videos/projects/bike-group-missing-pairs/out/video.vtt",
+      "sha256": "8cd2f7e5d33adc20e1fb8e51b3d5e8e580b431c5aeda571ffe42c7812c669bb0"
+    },
+    "media/bike-group-missing-pairs/transcript.md": {
+      "source": ".ai/videos/projects/bike-group-missing-pairs/out/transcript.md",
+      "sha256": "54b7cf77a7c49c5c348044b8b2e5cff4fc750b68d3808c330dcebb471a5aa491"
+    },
+    "media/bike-group-validation-review/poster.jpg": {
+      "source": ".ai/videos/projects/bike-group-validation-review/out/poster.jpg",
+      "sha256": "562b3336b6fceb621d1cc620c7bad5a2b536fe849d31564496438ac9a5ba0044"
+    },
+    "media/bike-group-validation-review/captions.vtt": {
+      "source": ".ai/videos/projects/bike-group-validation-review/out/video.vtt",
+      "sha256": "246e05cab6a28ab092f4ae88f617cee42ba6f2b8c9f5bff48bbbcca4e8b4dc69"
+    },
+    "media/bike-group-validation-review/transcript.md": {
+      "source": ".ai/videos/projects/bike-group-validation-review/out/transcript.md",
+      "sha256": "d2e56f55a896997ccdf49555554b500e4cc52f9a770c47742d724449cf21ef41"
+    },
+    "code/src/bike_demand_planner/regression.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/regression.py",
+      "sha256": "9efb03560d83ab3f66a9ac5c39151ad9c10a229a3b3e3cb2ff0d1b7c079b1b20"
+    },
+    "code/src/bike_demand_planner/linear_evaluation.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/linear_evaluation.py",
+      "sha256": "4b019040f38908f6e2838a157fda66dcc63c813ae68b61d51e56609a10ecef80"
+    },
+    "evidence/04-linear-regression-and-full-batch-learning/comparison.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/runs/linear-comparison-20261019T230603269342Z/comparison.json",
+      "sha256": "10db44ab38aed132d05f9e4771dc8034c1b8e266e28d75daeeb4be6d9bc8064f"
+    },
+    "evidence/04-linear-regression-and-full-batch-learning/independent-linear-verification.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/04_linear-regression-and-full-batch-learning/independent-linear-verification.json",
+      "sha256": "52026699e9865956fe9d73388168075a038272f94ed785b5fb7972f7b26a7938"
+    },
+    "media/bike-linear-calendar-scaling/poster.jpg": {
+      "source": ".ai/videos/projects/bike-linear-calendar-scaling/out/poster.jpg",
+      "sha256": "c1a4564542f67865fe4dc8db3fdac9657bf0ad4c7b02d313c96df2ae9fae459b"
+    },
+    "media/bike-linear-calendar-scaling/captions.vtt": {
+      "source": ".ai/videos/projects/bike-linear-calendar-scaling/out/video.vtt",
+      "sha256": "bb27d63a91702d91ea704de1a8c8adf0d797399bbf35aee6dbf6189cb2ad1851"
+    },
+    "media/bike-linear-calendar-scaling/transcript.md": {
+      "source": ".ai/videos/projects/bike-linear-calendar-scaling/out/transcript.md",
+      "sha256": "d01733431def8ebac037a1abed7238a729991a0fb28d80d2fbe6531026f3891c"
+    },
+    "media/bike-linear-two-updates/poster.jpg": {
+      "source": ".ai/videos/projects/bike-linear-two-updates/out/poster.jpg",
+      "sha256": "cf6e3ff0b348a3dd9bfbb1e6a35bcecd1e5dd3527d9708b9a3c2983b0f53749a"
+    },
+    "media/bike-linear-two-updates/captions.vtt": {
+      "source": ".ai/videos/projects/bike-linear-two-updates/out/video.vtt",
+      "sha256": "38eeb9d12bdbdff682d90730fa8859abbda26b4e28a8236018c35ce4e9a7dd65"
+    },
+    "media/bike-linear-two-updates/transcript.md": {
+      "source": ".ai/videos/projects/bike-linear-two-updates/out/transcript.md",
+      "sha256": "3a12c3338f2cb2e322ebf47b04cd16bc9a5297bd14093d9884b3524ef7b3aa94"
+    },
+    "media/bike-linear-batch-convergence/poster.jpg": {
+      "source": ".ai/videos/projects/bike-linear-batch-convergence/out/poster.jpg",
+      "sha256": "158cf3049a98716c2e8cbf4225fc2653aedb8247ce184e408816cdda3119ae8a"
+    },
+    "media/bike-linear-batch-convergence/captions.vtt": {
+      "source": ".ai/videos/projects/bike-linear-batch-convergence/out/video.vtt",
+      "sha256": "c7783e15a52999bd53f656cfd627172966a0c82eade6829142a9e46f91ead9c7"
+    },
+    "media/bike-linear-batch-convergence/transcript.md": {
+      "source": ".ai/videos/projects/bike-linear-batch-convergence/out/transcript.md",
+      "sha256": "59935e0129578bc1587de73cf15eec6496cafcf72df61671e4f35c970d06dd63"
+    },
+    "media/bike-linear-dependent-coefficients/poster.jpg": {
+      "source": ".ai/videos/projects/bike-linear-dependent-coefficients/out/poster.jpg",
+      "sha256": "5c301f2fd4ca5769c2d8d95a487d6a4893cf5657bb50d2a18193887cb201a24e"
+    },
+    "media/bike-linear-dependent-coefficients/captions.vtt": {
+      "source": ".ai/videos/projects/bike-linear-dependent-coefficients/out/video.vtt",
+      "sha256": "03022faeb5be79fd7d78dc3312fa631071ca617d8e9ba66b1bd2dc74d6a77f0e"
+    },
+    "media/bike-linear-dependent-coefficients/transcript.md": {
+      "source": ".ai/videos/projects/bike-linear-dependent-coefficients/out/transcript.md",
+      "sha256": "4e931e5b59e0aff93c206f8070ef7542ca950073c4ad3276e33c47be7b87706e"
+    },
+    "media/bike-linear-validation-failures/poster.jpg": {
+      "source": ".ai/videos/projects/bike-linear-validation-failures/out/poster.jpg",
+      "sha256": "85d5f14bb6e0bff2df6e305589548eee3db013b6827aae4ef226df55a3e64e0b"
+    },
+    "media/bike-linear-validation-failures/captions.vtt": {
+      "source": ".ai/videos/projects/bike-linear-validation-failures/out/video.vtt",
+      "sha256": "225d35304c6925dc7c0016316ae7f722843636ec3338ee0896687f25d9aef877"
+    },
+    "media/bike-linear-validation-failures/transcript.md": {
+      "source": ".ai/videos/projects/bike-linear-validation-failures/out/transcript.md",
+      "sha256": "12c4a6c643127be032c2e2515bebcf8b5000291f34aa3c709157fe867bc0c520"
+    },
+    "code/src/bike_demand_planner/optimizers.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/optimizers.py",
+      "sha256": "c88a432a4171126c50affbe3adf3c4f9d7bfcaff4b7eb8c650437b8944bd63cf"
+    },
+    "code/optimization_example.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/optimization_example.py",
+      "sha256": "3bc1d0607f65ab362f4ccc9693759760cd407d6e7d92c19cb8fdc4d08bdc0b6c"
+    },
+    "code/src/bike_demand_planner/optimization.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/optimization.py",
+      "sha256": "58dac34b9637d89629da3482143f1873f3cb5c3b21fbc458ce0abacba1d18655"
+    },
+    "code/src/bike_demand_planner/optimizer_evaluation.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/optimizer_evaluation.py",
+      "sha256": "f6c827ff8d0b305bd79d7980bf3be1f734f96a111b53262eee0005d95395cf1c"
+    },
+    "evidence/05-batches-momentum-and-adam/state.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/runs/optimization-20261019T234355414391Z/trials/8d49727af4ebf5bc/state.json",
+      "sha256": "62ef360ebc8243b1edcb34206a36ae0c429eb751e0c9158863173d1cc93f0089"
+    },
+    "evidence/05-batches-momentum-and-adam/study.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/runs/optimization-20261019T234355414391Z/study.json",
+      "sha256": "9f858ae7b36f3c5da72be213f77ffd16e92fe5fc71254f6c3b51962040bc9b3d"
+    },
+    "evidence/05-batches-momentum-and-adam/independent-study-verification.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/05_batches-momentum-and-adam/independent-study-verification.json",
+      "sha256": "2d744a708186259e710d4831a6d3d37a6d6e61cda81df0d4a6abe2c13b8f62aa"
+    },
+    "media/bike-optimizer-sgd-momentum/poster.jpg": {
+      "source": ".ai/videos/projects/bike-optimizer-sgd-momentum/out/poster.jpg",
+      "sha256": "ac78da93063b50f25773583a52e9f407db2398933573750bcbeb238645b2ea06"
+    },
+    "media/bike-optimizer-sgd-momentum/captions.vtt": {
+      "source": ".ai/videos/projects/bike-optimizer-sgd-momentum/out/video.vtt",
+      "sha256": "c316cf63e9b9c64c698257f4dd47692544580f474564c9a8221c6eca139f930b"
+    },
+    "media/bike-optimizer-sgd-momentum/transcript.md": {
+      "source": ".ai/videos/projects/bike-optimizer-sgd-momentum/out/transcript.md",
+      "sha256": "48c5337c427816ca23e299a4d1f0f869b3d46a80260a15e06a7eab9df6358b24"
+    },
+    "media/bike-optimizer-adam-moments/poster.jpg": {
+      "source": ".ai/videos/projects/bike-optimizer-adam-moments/out/poster.jpg",
+      "sha256": "9e9fa0fd594b2ef7f3ce634a5de0a52724d0c8c1bdfbfb17be06c2e03ffdc502"
+    },
+    "media/bike-optimizer-adam-moments/captions.vtt": {
+      "source": ".ai/videos/projects/bike-optimizer-adam-moments/out/video.vtt",
+      "sha256": "6a48fe1088feae00128d6b719ab4f68e224d6fa602e0585c106bf589fff0556a"
+    },
+    "media/bike-optimizer-adam-moments/transcript.md": {
+      "source": ".ai/videos/projects/bike-optimizer-adam-moments/out/transcript.md",
+      "sha256": "13d0d7794436e6bb1be0ab674c29e9dd4731d42a5cf4d4e10bf02e79cdb79993"
+    },
+    "media/bike-optimizer-batches-work/poster.jpg": {
+      "source": ".ai/videos/projects/bike-optimizer-batches-work/out/poster.jpg",
+      "sha256": "19acfc6f62ab8f09faf046811007338fed3fc4a725d471b3c29aca60255954ab"
+    },
+    "media/bike-optimizer-batches-work/captions.vtt": {
+      "source": ".ai/videos/projects/bike-optimizer-batches-work/out/video.vtt",
+      "sha256": "cbe521460f245e95c29178a6a4e5a68308b838974f69768e9d2e60167eed05b8"
+    },
+    "media/bike-optimizer-batches-work/transcript.md": {
+      "source": ".ai/videos/projects/bike-optimizer-batches-work/out/transcript.md",
+      "sha256": "45b6c9438e1b7519924ca87c69bb37b12e3e9741938529e1d16a1da230c93bdd"
+    },
+    "media/bike-optimizer-controlled-comparison/poster.jpg": {
+      "source": ".ai/videos/projects/bike-optimizer-controlled-comparison/out/poster.jpg",
+      "sha256": "e901f0f7313d07513eb54da8233bb07c6f581c72a8083af84e360ea51ec6a28f"
+    },
+    "media/bike-optimizer-controlled-comparison/captions.vtt": {
+      "source": ".ai/videos/projects/bike-optimizer-controlled-comparison/out/video.vtt",
+      "sha256": "bde6537514da12853b11f39fd7a118979fdab2d24d243dac2f1d59bcb2a89dec"
+    },
+    "media/bike-optimizer-controlled-comparison/transcript.md": {
+      "source": ".ai/videos/projects/bike-optimizer-controlled-comparison/out/transcript.md",
+      "sha256": "54322e7cf3e449428ac10c52f5f17918dd173188d15853a4a6ce8b084db24ef9"
+    },
+    "media/bike-optimizer-rate-decay/poster.jpg": {
+      "source": ".ai/videos/projects/bike-optimizer-rate-decay/out/poster.jpg",
+      "sha256": "b7f158d768b4f23baf33db465a10e4c13ac472d1dd49d812bf2aa48f3a69f817"
+    },
+    "media/bike-optimizer-rate-decay/captions.vtt": {
+      "source": ".ai/videos/projects/bike-optimizer-rate-decay/out/video.vtt",
+      "sha256": "83363693b326cda21336401c3c423d0e4323f2d622419d5960d75b1012c09814"
+    },
+    "media/bike-optimizer-rate-decay/transcript.md": {
+      "source": ".ai/videos/projects/bike-optimizer-rate-decay/out/transcript.md",
+      "sha256": "700661795831f414434e7e14702ee03d591f1fb7299cc9c328d6ef224fea7ede"
+    },
+    "media/bike-optimizer-continuation-state/poster.jpg": {
+      "source": ".ai/videos/projects/bike-optimizer-continuation-state/out/poster.jpg",
+      "sha256": "00b536bc86c3fc1f8ca218f5cf9a712d9b4fa243a2d3889a1df9ce88a80afb50"
+    },
+    "media/bike-optimizer-continuation-state/captions.vtt": {
+      "source": ".ai/videos/projects/bike-optimizer-continuation-state/out/video.vtt",
+      "sha256": "59f9aea12524bbe4f884a7677d3d087ac6c0be3aa98b0ec4f4261d5a1233723c"
+    },
+    "media/bike-optimizer-continuation-state/transcript.md": {
+      "source": ".ai/videos/projects/bike-optimizer-continuation-state/out/transcript.md",
+      "sha256": "c8b5cbb209a306e5c52adc249ec9be025088f6ed75ab1600a42c58f157ad7bc7"
+    },
+    "code/src/bike_demand_planner/objectives.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/objectives.py",
+      "sha256": "252504bf987e02d059ba2c653d7c4fb259399a87f67762f369d1742300ea0ec3"
+    },
+    "evidence/06-losses-regularization-and-calendar-structure/selection.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/runs/objectives-20261020T002938229644Z/selection.json",
+      "sha256": "28ebbc432e690bebcbd1aa9f26eee9fe7b2552480caa3ed4d54538bb9bf6818d"
+    },
+    "code/src/bike_demand_planner/objective_evaluation.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/objective_evaluation.py",
+      "sha256": "bc68b24c27be767a589877cc7e0b0e2d47b95a394753ad90f6e12c626a823053"
+    },
+    "code/objective_example.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/objective_example.py",
+      "sha256": "b4681020a1b147f3ca531963d8221ca6cf4176da337dff486b7dc1bb7eece8a4"
+    },
+    "evidence/06-losses-regularization-and-calendar-structure/independent-study-verification.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/06_losses-regularization-and-calendar-structure/independent-study-verification.json",
+      "sha256": "e78e661e057107988229a2453cb204a9c6cd9138147d28d7b4a684a241561aad"
+    },
+    "media/bike-objectives-loss-influence/poster.jpg": {
+      "source": ".ai/videos/projects/bike-objectives-loss-influence/out/poster.jpg",
+      "sha256": "ba959620cb8ba6b0bab01f9b721a87cd8f9791b8941ea41b10f2fcae190773a9"
+    },
+    "media/bike-objectives-loss-influence/captions.vtt": {
+      "source": ".ai/videos/projects/bike-objectives-loss-influence/out/video.vtt",
+      "sha256": "d1deec0b556ba4ac9ca043677526e30385c11d05ec7aa06d2752681428696542"
+    },
+    "media/bike-objectives-loss-influence/transcript.md": {
+      "source": ".ai/videos/projects/bike-objectives-loss-influence/out/transcript.md",
+      "sha256": "549a647fb085584514ef4ca6d948b181d4f81fc770cf2291f438d4aebace18d5"
+    },
+    "media/bike-objectives-l2-weights/poster.jpg": {
+      "source": ".ai/videos/projects/bike-objectives-l2-weights/out/poster.jpg",
+      "sha256": "6ebb471c79c10d70ea3bcb83ce66de4196101e735a4744cfc8feb928296ae768"
+    },
+    "media/bike-objectives-l2-weights/captions.vtt": {
+      "source": ".ai/videos/projects/bike-objectives-l2-weights/out/video.vtt",
+      "sha256": "ee095974c1391282dad306ea377ddac3d45cd9ec3a0c1c750b32ace3bfd1e741"
+    },
+    "media/bike-objectives-l2-weights/transcript.md": {
+      "source": ".ai/videos/projects/bike-objectives-l2-weights/out/transcript.md",
+      "sha256": "ef99ffafa4809a885f0caaffe1472c8f15bff5d6f996227e92d6baed73be250c"
+    },
+    "media/bike-objectives-scaling-coordinates/poster.jpg": {
+      "source": ".ai/videos/projects/bike-objectives-scaling-coordinates/out/poster.jpg",
+      "sha256": "162ae7ff9a2923723bf1c509aad2787c5b709f8667906d6ac4ad6c35c2687f88"
+    },
+    "media/bike-objectives-scaling-coordinates/captions.vtt": {
+      "source": ".ai/videos/projects/bike-objectives-scaling-coordinates/out/video.vtt",
+      "sha256": "83d4eb73e625a838d025a0ff4b2e43428e3e6941673399e95b70e1d5402c4d00"
+    },
+    "media/bike-objectives-scaling-coordinates/transcript.md": {
+      "source": ".ai/videos/projects/bike-objectives-scaling-coordinates/out/transcript.md",
+      "sha256": "a88044ccd2d78a09fb11ede9e86d8aa34c16a38bc373643009f28b7bae816dff"
+    },
+    "media/bike-objectives-cyclic-calendar/poster.jpg": {
+      "source": ".ai/videos/projects/bike-objectives-cyclic-calendar/out/poster.jpg",
+      "sha256": "b17ffd6c052c6491451effd048dbb8ae181df71cc765862e058ee94b89ece653"
+    },
+    "media/bike-objectives-cyclic-calendar/captions.vtt": {
+      "source": ".ai/videos/projects/bike-objectives-cyclic-calendar/out/video.vtt",
+      "sha256": "3cad9f77453f417f2632d0dd885961adac2c8b0540b3bdd3c33d8d24646a3cc0"
+    },
+    "media/bike-objectives-cyclic-calendar/transcript.md": {
+      "source": ".ai/videos/projects/bike-objectives-cyclic-calendar/out/transcript.md",
+      "sha256": "c39517a734bc84bb84397a33adc619166eaffbe5ce721876424285f947df0877"
+    },
+    "media/bike-objectives-hour-interactions/poster.jpg": {
+      "source": ".ai/videos/projects/bike-objectives-hour-interactions/out/poster.jpg",
+      "sha256": "f10d78f60f708de269164898dfe366d589091bc8e3bad16e72aa8f7a043b06ce"
+    },
+    "media/bike-objectives-hour-interactions/captions.vtt": {
+      "source": ".ai/videos/projects/bike-objectives-hour-interactions/out/video.vtt",
+      "sha256": "c9e01ca74f3b2610fea1e4353e741de344c64fa5e3e84fbb27bd66011ecc8d4f"
+    },
+    "media/bike-objectives-hour-interactions/transcript.md": {
+      "source": ".ai/videos/projects/bike-objectives-hour-interactions/out/transcript.md",
+      "sha256": "eebb3101d9c323f227dc9620bc46c656a249e27e3068a142326400500da23c41"
+    },
+    "media/bike-objectives-output-selection/poster.jpg": {
+      "source": ".ai/videos/projects/bike-objectives-output-selection/out/poster.jpg",
+      "sha256": "b943d575f5e1b08278648a0b5cb5513237df7b57cacf305bacd051c3a7aa2beb"
+    },
+    "media/bike-objectives-output-selection/captions.vtt": {
+      "source": ".ai/videos/projects/bike-objectives-output-selection/out/video.vtt",
+      "sha256": "52c174338a22acde13794594d3afcd90153931331d3534561a63347edc7257cc"
+    },
+    "media/bike-objectives-output-selection/transcript.md": {
+      "source": ".ai/videos/projects/bike-objectives-output-selection/out/transcript.md",
+      "sha256": "9d1f89cbf5e3d4dc941c0bb373a7066241e5fd22fd1acf1337a4936f82dc476f"
+    },
+    "code/src/bike_demand_planner/trees.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/trees.py",
+      "sha256": "799df6c8ec7205926f2acbebda0332cbb036f9eca512966ec98f0b45c3510413"
+    },
+    "code/src/bike_demand_planner/tree_evaluation.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/tree_evaluation.py",
+      "sha256": "3e15f857cfa734ee8f46794b9031e3392c77b5540cc43a6f823ce57077e2582b"
+    },
+    "code/src/bike_demand_planner/comparison.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/comparison.py",
+      "sha256": "51fe0a15ec1299bdc9658f19e21f28b7113f53d638f55d16aeddbf57d4b27024"
+    },
+    "code/tree_example.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/tree_example.py",
+      "sha256": "94c76b525592c858aa94ad888c6698867013260375a780d5c4bb21e613858b30"
+    },
+    "evidence/07-tree-forest-and-boosting-comparisons/independent-study-verification.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/07_tree-forest-and-boosting-comparisons/independent-study-verification.json",
+      "sha256": "ad507e26f19268498a36f33545df58c3138cfebdc8a2e020558e84ebe22f5a3b"
+    },
+    "evidence/07-tree-forest-and-boosting-comparisons/distribution-verification.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/07_tree-forest-and-boosting-comparisons/distribution-verification.json",
+      "sha256": "52d9eba908ce0e365f8a1dd034654d629130400dd0de3ffb79b144b8896655d2"
+    },
+    "evidence/07-tree-forest-and-boosting-comparisons/isolated-wheel-verification.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/07_tree-forest-and-boosting-comparisons/isolated-wheel-verification.json",
+      "sha256": "581efe091fb66d78258f9a645c30087e67a7c466c415f82ed02a18fb5a4bcb2c"
+    },
+    "media/bike-trees-leaf-prediction/poster.jpg": {
+      "source": ".ai/videos/projects/bike-trees-leaf-prediction/out/poster.jpg",
+      "sha256": "17e5511f979a143818efdfc2d2a5d28b431576078fe49cd59843a7bf47161cef"
+    },
+    "media/bike-trees-leaf-prediction/captions.vtt": {
+      "source": ".ai/videos/projects/bike-trees-leaf-prediction/out/video.vtt",
+      "sha256": "46ef28ee6b5784140dcd51173d2f0f1435d58c03cb14df42b91db8c110717c3a"
+    },
+    "media/bike-trees-leaf-prediction/transcript.md": {
+      "source": ".ai/videos/projects/bike-trees-leaf-prediction/out/transcript.md",
+      "sha256": "e7dd2d15865358be2ca35cbcf3cab3400a8ddcc4fe5ffe440c2d9235043839e4"
+    },
+    "media/bike-trees-depth-and-support/poster.jpg": {
+      "source": ".ai/videos/projects/bike-trees-depth-and-support/out/poster.jpg",
+      "sha256": "70b104835f7b0bb3015cc299a9ea20333d3e49a62e2b1fd4b8b8e9613f577dd6"
+    },
+    "media/bike-trees-depth-and-support/captions.vtt": {
+      "source": ".ai/videos/projects/bike-trees-depth-and-support/out/video.vtt",
+      "sha256": "2cdf54e386703da111952008317a942fd68b2f0a54e2b7114c009e889dbc6ff6"
+    },
+    "media/bike-trees-depth-and-support/transcript.md": {
+      "source": ".ai/videos/projects/bike-trees-depth-and-support/out/transcript.md",
+      "sha256": "e0a140d66469cfd8212d30fd4232bee9ab314b057ee0ba80e1d67ac97b01de04"
+    },
+    "media/bike-trees-forest-averaging/poster.jpg": {
+      "source": ".ai/videos/projects/bike-trees-forest-averaging/out/poster.jpg",
+      "sha256": "bb82bd846b5084607c6c321e57d49654e65803199e1eea378173348a08fa5dca"
+    },
+    "media/bike-trees-forest-averaging/captions.vtt": {
+      "source": ".ai/videos/projects/bike-trees-forest-averaging/out/video.vtt",
+      "sha256": "0a80e60a1855d3a9be6d82ff42d3cde8d920917617c4694691c2ca794748c7da"
+    },
+    "media/bike-trees-forest-averaging/transcript.md": {
+      "source": ".ai/videos/projects/bike-trees-forest-averaging/out/transcript.md",
+      "sha256": "27ce0cf7ec809a48107d2456d152a5f2233fbec0285e2df63fba7ccc2a4e1fb4"
+    },
+    "media/bike-trees-boosting-corrections/poster.jpg": {
+      "source": ".ai/videos/projects/bike-trees-boosting-corrections/out/poster.jpg",
+      "sha256": "d4d91a3a6fd78c0cb99280464813eee6d52650f5d348560c315d8b09a2153aaf"
+    },
+    "media/bike-trees-boosting-corrections/captions.vtt": {
+      "source": ".ai/videos/projects/bike-trees-boosting-corrections/out/video.vtt",
+      "sha256": "bc62579a137eaa5ef7b4a26844e92cfa56a4dd85456eabbb11c59c077493bfcc"
+    },
+    "media/bike-trees-boosting-corrections/transcript.md": {
+      "source": ".ai/videos/projects/bike-trees-boosting-corrections/out/transcript.md",
+      "sha256": "bd900c21054605f593f570a4ccc3be4f4bee0d799a51c50af2a8e4079ae11b0c"
+    },
+    "media/bike-trees-comparison-choice/poster.jpg": {
+      "source": ".ai/videos/projects/bike-trees-comparison-choice/out/poster.jpg",
+      "sha256": "8ccb0470d6cf13fb189a534c7a7109a08504d58971754bc369f7ac367dc4c1e2"
+    },
+    "media/bike-trees-comparison-choice/captions.vtt": {
+      "source": ".ai/videos/projects/bike-trees-comparison-choice/out/video.vtt",
+      "sha256": "e9f3152e86d978acf457813dd1003ab7547cc24e7a569178bf2f484b594a1be9"
+    },
+    "media/bike-trees-comparison-choice/transcript.md": {
+      "source": ".ai/videos/projects/bike-trees-comparison-choice/out/transcript.md",
+      "sha256": "8606288b66d85d40bddeb65905f175509329d76655fd4aea535d56cfb059e4d2"
+    },
+    "code/src/bike_demand_planner/error_analysis.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/error_analysis.py",
+      "sha256": "4f623506d5ffa3adfd4ceb6f1d9d296845c562a267010b1c2512710e7b96dcf4"
+    },
+    "images/08-residuals-slices-and-candidate-choice-actual-versus-predicted.png": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/08_residuals-slices-and-candidate-choice/figures/actual-versus-predicted.png",
+      "sha256": "c0aedbafec2e744a531ffa0775f8e77a713203fd55416e472025491e18837c85"
+    },
+    "images/08-residuals-slices-and-candidate-choice-calendar-slices.png": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/08_residuals-slices-and-candidate-choice/figures/calendar-slices.png",
+      "sha256": "2e26879fefcd213f5f512e12aed97067eaa91f50459130102b574bfad8e7172d"
+    },
+    "images/08-residuals-slices-and-candidate-choice-daily-errors.png": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/08_residuals-slices-and-candidate-choice/figures/daily-errors.png",
+      "sha256": "562dd26a098129ddac99f8ceafe38853a9a180b68b711fd3affde0aa0b4e4c74"
+    },
+    "images/08-residuals-slices-and-candidate-choice-calendar-levels.png": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/08_residuals-slices-and-candidate-choice/figures/calendar-levels.png",
+      "sha256": "85f65fb78579072dc91fa313d6cd0572cc5a4878935ae31e9d41d9ab9a9553f8"
+    },
+    "code/src/bike_demand_planner/review_contract.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/review_contract.py",
+      "sha256": "8f5ed72ffea0e4c9282d2cb130941baca2b234bc91b264c6e4ae4ebae4012222"
+    },
+    "code/src/bike_demand_planner/error_review.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/error_review.py",
+      "sha256": "062aaee2c1168caeea8c06e55f772f0059c3af97f909f6725677db871f5808e8"
+    },
+    "code/src/bike_demand_planner/error_plots.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/error_plots.py",
+      "sha256": "924974306cf0a411c33d89dbf32a859725d447bfb1735828b50da1b4455c06fc"
+    },
+    "code/error_review_example.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/error_review_example.py",
+      "sha256": "bfde96bb775e5610ee4f7c4f15561ece246a64b00107a138d21b584054289568"
+    },
+    "evidence/08-residuals-slices-and-candidate-choice/independent-review-verification.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/08_residuals-slices-and-candidate-choice/independent-review-verification.json",
+      "sha256": "a71f85d77b69d3b941c719cbd4668f394eb60d19393442d415bcdefbbe6371d7"
+    },
+    "evidence/08-residuals-slices-and-candidate-choice/distribution-verification.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/08_residuals-slices-and-candidate-choice/distribution-verification.json",
+      "sha256": "f92b7e7955675b0c04498a3d84daca7194fcc4c041590f603c3ca366b06dff59"
+    },
+    "evidence/08-residuals-slices-and-candidate-choice/isolated-wheel-verification.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/08_residuals-slices-and-candidate-choice/isolated-wheel-verification.json",
+      "sha256": "bfde5a22c2e28a5f1fc9aeaf9f17e323d2b2c96df873dc32f375fabcec1ace7e"
+    },
+    "media/bike-errors-residuals/poster.jpg": {
+      "source": ".ai/videos/projects/bike-errors-residuals/out/poster.jpg",
+      "sha256": "4885e05cb481cf1dd6d5df3f2212ef25ca692539b23e559cf3928e5346402657"
+    },
+    "media/bike-errors-residuals/captions.vtt": {
+      "source": ".ai/videos/projects/bike-errors-residuals/out/video.vtt",
+      "sha256": "42407d4421c26c89c4269b6d709304ee4796bf3db46d1e1ac75bd705af7ab710"
+    },
+    "media/bike-errors-residuals/transcript.md": {
+      "source": ".ai/videos/projects/bike-errors-residuals/out/transcript.md",
+      "sha256": "f4fef1bab5fd44d0977b8de5418f14aa34c269ad2d521f06cec92cb0593a723e"
+    },
+    "media/bike-errors-counted-slices/poster.jpg": {
+      "source": ".ai/videos/projects/bike-errors-counted-slices/out/poster.jpg",
+      "sha256": "ec0c1160a39127062a39a6123aeff19e2977d0d7202bf20039a73868f8f747d3"
+    },
+    "media/bike-errors-counted-slices/captions.vtt": {
+      "source": ".ai/videos/projects/bike-errors-counted-slices/out/video.vtt",
+      "sha256": "3018396d3c040d093114049e18af75b77105c9bbb1bf08b3bff70934ac95cd22"
+    },
+    "media/bike-errors-counted-slices/transcript.md": {
+      "source": ".ai/videos/projects/bike-errors-counted-slices/out/transcript.md",
+      "sha256": "0f63a9c59e4df9cfd2b5f4ca5fae7833b7196b2278864aaf40b0969c2b6d11b0"
+    },
+    "media/bike-errors-time-and-levels/poster.jpg": {
+      "source": ".ai/videos/projects/bike-errors-time-and-levels/out/poster.jpg",
+      "sha256": "110b45eb5c59342d648458a6ca139d866e5717b9f5b536d6867d6ffb6ccf693a"
+    },
+    "media/bike-errors-time-and-levels/captions.vtt": {
+      "source": ".ai/videos/projects/bike-errors-time-and-levels/out/video.vtt",
+      "sha256": "766a0f7be9e03cd63256d2f9c64a778902acfcd49018bbfdadcd56286b2fe55c"
+    },
+    "media/bike-errors-time-and-levels/transcript.md": {
+      "source": ".ai/videos/projects/bike-errors-time-and-levels/out/transcript.md",
+      "sha256": "0825fc8ba2c0672ed73b5c9b591a1d7cd97460b48897d73a348da972ee67e772"
+    },
+    "media/bike-errors-input-boundary/poster.jpg": {
+      "source": ".ai/videos/projects/bike-errors-input-boundary/out/poster.jpg",
+      "sha256": "a944fb9b10222b1eab8c3a26468fb11dbb4e34fb8e9d87bd8f378676f34e39d5"
+    },
+    "media/bike-errors-input-boundary/captions.vtt": {
+      "source": ".ai/videos/projects/bike-errors-input-boundary/out/video.vtt",
+      "sha256": "f02abfcf266976d0b0927a34222f283abbc3a2a08e652d5af675a7c47b52f1d1"
+    },
+    "media/bike-errors-input-boundary/transcript.md": {
+      "source": ".ai/videos/projects/bike-errors-input-boundary/out/transcript.md",
+      "sha256": "1b3656fa86acea3eca95b218b3859e76305976a245a669a8a66a5323b824f36f"
+    },
+    "media/bike-errors-candidate-handoff/poster.jpg": {
+      "source": ".ai/videos/projects/bike-errors-candidate-handoff/out/poster.jpg",
+      "sha256": "abc1f4c89a4705ab184c778d252f6ec8bfc34fa7cc7025b86bbf5b92e2665f55"
+    },
+    "media/bike-errors-candidate-handoff/captions.vtt": {
+      "source": ".ai/videos/projects/bike-errors-candidate-handoff/out/video.vtt",
+      "sha256": "e6d79fa2d46e6e579c3ef075fb2c73ef94f164816e1cb700d198190e6b7bc453"
+    },
+    "media/bike-errors-candidate-handoff/transcript.md": {
+      "source": ".ai/videos/projects/bike-errors-candidate-handoff/out/transcript.md",
+      "sha256": "e180b7d8be26df05b7736cea979f18c6319b1f92793c2d71f41d126ce32aec09"
+    },
+    "code/src/bike_demand_planner/saved_predictor.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/saved_predictor.py",
+      "sha256": "b1d65991146d16666ad763efb7917e36ee298f4abe126d1b4f4506fcec5c50fb"
+    },
+    "code/src/bike_demand_planner/recovery.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/recovery.py",
+      "sha256": "6fa37c2c491c2a7569be51eba08e90844e5e9dc710b8ffe1bc8a32f779902182"
+    },
+    "code/src/bike_demand_planner/artifacts.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/artifacts.py",
+      "sha256": "d4a8a0211aa86b5d7aa763f8ce2584677709d57aba0624594b4ed466942bb665"
+    },
+    "images/09-saved-prediction-recovery-and-replay-replay.png": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/09_saved-prediction-recovery-and-replay/images/replay.png",
+      "sha256": "b334ec3ac06197068d668cee9098082d4777ab875e7aabbfdfae59ffe332dc4b"
+    },
+    "code/src/bike_demand_planner/application.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/application.py",
+      "sha256": "126d1814d1b2ac553454c6c3e1cc39047eba1d49e1c9501d01d666017d5b597e"
+    },
+    "images/09-saved-prediction-recovery-and-replay-benchmarks.png": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/09_saved-prediction-recovery-and-replay/images/benchmarks.png",
+      "sha256": "0a39386b4d4cf9bee8c567b1d74d67a7356ff435bd7bd384ef19db94832a526a"
+    },
+    "code/src/bike_demand_planner/application_data.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/application_data.py",
+      "sha256": "b1285b0632cf8329193022b5298d8800374a000ed96e4d2473143be77a857c35"
+    },
+    "code/src/bike_demand_planner/checkpoints.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/checkpoints.py",
+      "sha256": "35929e9814841b82db8986d54bd0fe6255446e0587639a0f31c0ae59b5f79f8b"
+    },
+    "code/src/bike_demand_planner/application_run.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/application_run.py",
+      "sha256": "eae42e9c3ac9afd168f645e12bdb4b536c0390422b96e1c3751a6a7c55df3224"
+    },
+    "evidence/09-saved-prediction-recovery-and-replay/independent-application-verification.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/09_saved-prediction-recovery-and-replay/independent-application-verification.json",
+      "sha256": "d6c2d45ee5d520529a3e882c039b70bf8e2252cd18a441c7aaae124a22b8299e"
+    },
+    "evidence/09-saved-prediction-recovery-and-replay/isolated-wheel-verification.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/09_saved-prediction-recovery-and-replay/isolated-wheel-verification.json",
+      "sha256": "90aa1a8b3af2628298ac713e64c430de81732b2b0b1203f80401a46564f91214"
+    },
+    "evidence/09-saved-prediction-recovery-and-replay/application-browser-verification.json": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/09_saved-prediction-recovery-and-replay/application-browser-verification.json",
+      "sha256": "79471a4916d6c2d1123fcb46bd31d4e1646c1ff66960688603d6f46dbf4bf663"
+    },
+    "media/bike-save-prediction-reload/poster.jpg": {
+      "source": ".ai/videos/projects/bike-save-prediction-reload/out/poster.jpg",
+      "sha256": "f7c66cf7aab2bd9ec512fd3b07157fb662f0a44509b3968ba827903cae96f7e4"
+    },
+    "media/bike-save-prediction-reload/captions.vtt": {
+      "source": ".ai/videos/projects/bike-save-prediction-reload/out/video.vtt",
+      "sha256": "284d4ff7cf466995d1105e3ab6afff0036f1dad02e7c57334b1e75de7e8814de"
+    },
+    "media/bike-save-prediction-reload/transcript.md": {
+      "source": ".ai/videos/projects/bike-save-prediction-reload/out/transcript.md",
+      "sha256": "c06fab614c654517ee42014146bff7915e188977f8d819925ee8c88bcc164a02"
+    },
+    "media/bike-save-next-update/poster.jpg": {
+      "source": ".ai/videos/projects/bike-save-next-update/out/poster.jpg",
+      "sha256": "101916e15e68a976cc1a9dc0b699cf65ed6e78c90b12165f6301703415020065"
+    },
+    "media/bike-save-next-update/captions.vtt": {
+      "source": ".ai/videos/projects/bike-save-next-update/out/video.vtt",
+      "sha256": "cff27e760cc36fc172226ffaaa9a59b17371e185f24fabf4c6ae3a2712ce6626"
+    },
+    "media/bike-save-next-update/transcript.md": {
+      "source": ".ai/videos/projects/bike-save-next-update/out/transcript.md",
+      "sha256": "55d4efe258efe22949ad8f57f98f3e99589b166eae4cd295288a2c2e9d9a20fa"
+    },
+    "media/bike-save-generation-fallback/poster.jpg": {
+      "source": ".ai/videos/projects/bike-save-generation-fallback/out/poster.jpg",
+      "sha256": "dc997be9542359f7e4289574a895cc6b7dcf75df132e2ba76929f542f67c8cff"
+    },
+    "media/bike-save-generation-fallback/captions.vtt": {
+      "source": ".ai/videos/projects/bike-save-generation-fallback/out/video.vtt",
+      "sha256": "6c411543549cff7d6e580747bff0445d52c80a5a2cbee51203d4d791e1d09bb1"
+    },
+    "media/bike-save-generation-fallback/transcript.md": {
+      "source": ".ai/videos/projects/bike-save-generation-fallback/out/transcript.md",
+      "sha256": "b8e4c0817b56dbfbb0749a17d4ba814bd43bf8e691a4de89b0faee2a371d2521"
+    },
+    "media/bike-save-replay-application/poster.jpg": {
+      "source": ".ai/videos/projects/bike-save-replay-application/out/poster.jpg",
+      "sha256": "a177752eee488855c88bd718d0943b22b32206a37e64d27247c5a44b08588714"
+    },
+    "media/bike-save-replay-application/captions.vtt": {
+      "source": ".ai/videos/projects/bike-save-replay-application/out/video.vtt",
+      "sha256": "1a280e190769ebcdca3ec1e3bc0cbe870d46538844bdfd502bd01288ac2eca28"
+    },
+    "media/bike-save-replay-application/transcript.md": {
+      "source": ".ai/videos/projects/bike-save-replay-application/out/transcript.md",
+      "sha256": "362db223becb51e902f085f0766e5527d32137ba45e6ab42d09d88381ba7b414"
+    },
+    "media/bike-save-benchmark-limits/poster.jpg": {
+      "source": ".ai/videos/projects/bike-save-benchmark-limits/out/poster.jpg",
+      "sha256": "ecd03711a4b86d70a8f67b346d0d733ee5b45fbcfee394123f9784bbd291fdec"
+    },
+    "media/bike-save-benchmark-limits/captions.vtt": {
+      "source": ".ai/videos/projects/bike-save-benchmark-limits/out/video.vtt",
+      "sha256": "6a8cf58fbfde1f5c6bc3b3fdf583b533f8fc5972db052305c8e113a5089ce6f8"
+    },
+    "media/bike-save-benchmark-limits/transcript.md": {
+      "source": ".ai/videos/projects/bike-save-benchmark-limits/out/transcript.md",
+      "sha256": "c79dd032900b0577f8537764365e08576c57f3e9054d6e1326827187926b42ec"
+    },
+    "code/src/bike_demand_planner/final_evaluation.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/final_evaluation.py",
+      "sha256": "07c0114957fae9331f1e50c5d55b260bcee08ba0324b2f2b2aa30c81128c6b4a"
+    },
+    "images/10-frozen-held-out-evaluation-assessment.png": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/docs/implementation/10_frozen-held-out-evaluation/images/assessment.png",
+      "sha256": "30a9567af7d94336822251d9abdce5f466d299954802df66b8b7e4ab538ffb94"
+    },
+    "code/src/bike_demand_planner/final_application.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/final_application.py",
+      "sha256": "cf2c0b2c46ca708260492333d25f387050eec925315c755e71737798d9fce075"
+    },
+    "media/bike-final-freeze-boundary/poster.jpg": {
+      "source": ".ai/videos/projects/bike-final-freeze-boundary/out/poster.jpg",
+      "sha256": "601aa757c229a429a1f6d47e1fee45e3325cb6cb25f367977cee68050adf7570"
+    },
+    "media/bike-final-freeze-boundary/captions.vtt": {
+      "source": ".ai/videos/projects/bike-final-freeze-boundary/out/video.vtt",
+      "sha256": "64a560f2910cd2be9488ddf5c3d6587b4b2585d2dd3bca6510e74f4c655df2ac"
+    },
+    "media/bike-final-freeze-boundary/transcript.md": {
+      "source": ".ai/videos/projects/bike-final-freeze-boundary/out/transcript.md",
+      "sha256": "04943eb99532872b907e362d0780054c033ed52aa15e861d55312fea1685a29f"
+    },
+    "media/bike-final-hourly-forward/poster.jpg": {
+      "source": ".ai/videos/projects/bike-final-hourly-forward/out/poster.jpg",
+      "sha256": "2d9893b9dd49892f6359e4f754bf22447fb3fbb7c15175ffa613c74152b7cc39"
+    },
+    "media/bike-final-hourly-forward/captions.vtt": {
+      "source": ".ai/videos/projects/bike-final-hourly-forward/out/video.vtt",
+      "sha256": "2c207b23ba3733be47700ebbe35e12f7a866acaebfcb7a9c4901003740663684"
+    },
+    "media/bike-final-hourly-forward/transcript.md": {
+      "source": ".ai/videos/projects/bike-final-hourly-forward/out/transcript.md",
+      "sha256": "d3ee94ecabfc7a2960b7e247316336265808b7c82390339c7125a57108c2f994"
+    },
+    "media/bike-final-ranking-and-error/poster.jpg": {
+      "source": ".ai/videos/projects/bike-final-ranking-and-error/out/poster.jpg",
+      "sha256": "f7014af48ebcee136e738b9937ef2204da9db6fdd1602fdaff394150ba4f2927"
+    },
+    "media/bike-final-ranking-and-error/captions.vtt": {
+      "source": ".ai/videos/projects/bike-final-ranking-and-error/out/video.vtt",
+      "sha256": "43069fa65b9bbe2621a98d924bdeadd6a053c3d5bae090a644df14f0667d49fb"
+    },
+    "media/bike-final-ranking-and-error/transcript.md": {
+      "source": ".ai/videos/projects/bike-final-ranking-and-error/out/transcript.md",
+      "sha256": "238d98c347d60485dca2b6a3d627b71fc097d8d1369688b7082966cc21dc83b5"
+    },
+    "media/bike-final-slices-and-deficits/poster.jpg": {
+      "source": ".ai/videos/projects/bike-final-slices-and-deficits/out/poster.jpg",
+      "sha256": "915bea348488038a1285b158a7c302a81eb6bb4f2caeffbebbf90a13c6924ac0"
+    },
+    "media/bike-final-slices-and-deficits/captions.vtt": {
+      "source": ".ai/videos/projects/bike-final-slices-and-deficits/out/video.vtt",
+      "sha256": "7ddb95a79975b7c642a0232cdebfa305698228ef0d9046be899e862fb3a2b614"
+    },
+    "media/bike-final-slices-and-deficits/transcript.md": {
+      "source": ".ai/videos/projects/bike-final-slices-and-deficits/out/transcript.md",
+      "sha256": "f32bf6732a5a3e5132bebb3ecf7734e5afdccc7b100647757c5f1c9859ffa021"
+    },
+    "media/bike-final-application-and-handoff/poster.jpg": {
+      "source": ".ai/videos/projects/bike-final-application-and-handoff/out/poster.jpg",
+      "sha256": "4666bdf825725ef6c6c6c015317900eb6658e22f4537c69390cc91cc7cb9e405"
+    },
+    "media/bike-final-application-and-handoff/captions.vtt": {
+      "source": ".ai/videos/projects/bike-final-application-and-handoff/out/video.vtt",
+      "sha256": "8436e4b1b592b20a02df3e7e6f953a41e4e3094bede294bdd5e74c1fc0cffc42"
+    },
+    "media/bike-final-application-and-handoff/transcript.md": {
+      "source": ".ai/videos/projects/bike-final-application-and-handoff/out/transcript.md",
+      "sha256": "75facbbb32cc8bdeaf1135768a61f9df5523ef02dc0303c70d8d34e9fd1076c3"
+    },
+    "code/application_example.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/application_example.py",
+      "sha256": "d924d0006e1fe516d65f467f17a14abbfa56ad63a3c2920995fd76b861ae603c"
+    },
+    "code/baseline_example.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/baseline_example.py",
+      "sha256": "ab85e3be43c7aa24bec2eb5831e0c1867ca4a28132b08f0af0ece094cda0a7fd"
+    },
+    "code/check_setup.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/check_setup.py",
+      "sha256": "cd05cd1cf15fd34bce371e407669687e78d182fbea5c98826f107d6aa056a9d8"
+    },
+    "code/compare.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/compare.py",
+      "sha256": "2c2ceee6b4464da13fd3fea54647a94243225f77131c1c4c5d1f74ace3b400c1"
+    },
+    "code/demo.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/demo.py",
+      "sha256": "84e50632d18ba9364a1d9e263da63f8d68a2bca78ac697cae8d380d69bb2914c"
+    },
+    "code/final_evaluation_example.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/final_evaluation_example.py",
+      "sha256": "414f8c9983f79a57a3091770633cd7e73c02a073d7d466bd8d330da2f9ce1326"
+    },
+    "code/inference.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/inference.py",
+      "sha256": "ee11500526e87698d20d6b6f3c687fb1d843581b6861b46a5fe8d55153396f3b"
+    },
+    "code/prepare_data.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/prepare_data.py",
+      "sha256": "8aee1341329ba03b555ac1906a005f252f3fac88cdeda64940a2426596460b47"
+    },
+    "code/regression_example.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/regression_example.py",
+      "sha256": "a90f3a924ab91df6651d34ff6e8140bba708921611258ff3d8bbb7c980c8d83d"
+    },
+    "code/serve_app.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/serve_app.py",
+      "sha256": "f8cc23a6147e9665b849724118ff5d32ec3676a35251b4fbc7eb102621e00987"
+    },
+    "code/serve_final.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/serve_final.py",
+      "sha256": "debdf3781f647b23e6cab530cb3a19961ac3e9e74db1dc0461898961a009d989"
+    },
+    "code/train.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/train.py",
+      "sha256": "565acd3384a084ba1e794cca8f2a68ee457f9b01534e040490a3a41a3c273cbe"
+    },
+    "code/src/bike_demand_planner/__init__.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/__init__.py",
+      "sha256": "1ff3b4de508285134410ca4fbad7d2a21dde4d9d6f1af5fa71ab6c79d0454859"
+    },
+    "code/src/bike_demand_planner/__main__.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/__main__.py",
+      "sha256": "bbfff787cd098c5fd251b09f85778eb08407374d6ac0c9c4010633b8b01064d1"
+    },
+    "code/src/bike_demand_planner/prediction_worker.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/prediction_worker.py",
+      "sha256": "41c133d52f173e6b4ff023e37d33d9b4eb08d2ad9cb16031321e547f27669a6a"
+    },
+    "code/src/bike_demand_planner/project.py": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/src/bike_demand_planner/project.py",
+      "sha256": "13eb56ed716ef7f6c9b7851a9931b9ed070e5d5edf35a7fa57060c411f703ff7"
+    },
+    "evidence/project-readme.txt": {
+      "source": "ai_projects/projects/foundations/bike-demand-planner/README.md",
+      "sha256": "077d8274d6c5ccba52177b7753564b05f54b1ee29a5708a9e3b9db49f27d3e52"
+    }
+  },
+  "short_video_count": 47,
+  "original_records_retained": true
+}

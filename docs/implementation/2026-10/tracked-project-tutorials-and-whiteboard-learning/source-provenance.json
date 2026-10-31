@@ -1,0 +1,13 @@
+{
+  "repository": "/home/lucifer/Desktop/work/api_dashboard/dashboard.cyberlegends.com",
+  "revision": "7e105b5473dece4c2adcb075dd4305b012f500cb",
+  "files": {
+    ".agents/skills/developer-learning-tutorials/SKILL.md": "26e7334e49e2664c799348ee205bee654e173e671663fd8ad24417bc19e080df",
+    ".agents/skills/developer-learning-tutorials/scripts/learning_core.py": "d2f69b65a1054b48c8ae171a50e9039912e4d164c93d546629034f6cbc5d4b57",
+    ".agents/skills/developer-learning-tutorials/scripts/visuals.py": "9755a192ffcd85925bbe660469844efbf918cd993dc4bc1cb52b1684b170f84d",
+    ".agents/skills/developer-learning-tutorials/schemas/lesson-v1.json": "cfa3c2bd1d0c392072721d6907d251cebbd5c1945ed4eb05415ae01f86f6e76d",
+    ".agents/skills/feature-whiteboard-defense/SKILL.md": "bc6cd3690f64ad6c8a38aaa4987c2ef1340c5204cc34c2bc477725088279b3dd",
+    ".agents/skills/developer-learning-tutorials/references/visual-system-design.md": "00889bb09b1acdaeaf12cc5a5c8b0917b6eeca60221dc41f80a524d6b8cd3653"
+  },
+  "adaptation": "Retain visual/evidence/practice workflow; tutorial source is Git-eligible in Projects Docs; C++ and Python learning examples; no Dashboard runtime/content port or paid media."
+}

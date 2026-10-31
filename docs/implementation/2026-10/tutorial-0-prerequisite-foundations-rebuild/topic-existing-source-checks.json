@@ -1,0 +1,31 @@
+{
+  "runtime": "2.14.1+cpu",
+  "device": "cpu",
+  "tests": 80,
+  "passed": true,
+  "source_sha256": {
+    "prerequisite_mlp.py": "30071122b9cb8f7ced4a126d95e40f9cc034252763647279da82cd14c46acc40",
+    "study_notebook.py": "bb9ba137a8c97cc770365df427725515f85bcc5319fd36ed59132c7cfc84aa8e",
+    "prerequisite_export.py": "8882c69ca581ce0754cbe8169a124032f4af3de6359d336837318b7243808183",
+    "fresh_process_resume.py": "4cf54ce15acd6356fc7a04993d2a075d9914ab2ec884594a54ca982a134faaa5",
+    "prerequisite_tensors.py": "10ea67eaedbf0aec7ea8cd6f45924ba658c6e543facea30d3747e70122d94ae3",
+    "test_prerequisite_text.py": "d8441ee65e49b55a34b5f3a2626466ca9b91e266e6727e4050ee9bb60fb62630",
+    "test_deep_learning_math.py": "38b1c8cdf69a967901e5eeae17403d6af5d5503f5949ca34b41dfa28efca02b5",
+    "byte_bpe.py": "5adcd5044d52d541dc729554a3f6d184ff0d53d2704122d0b37f4dd51e6db190",
+    "first_session.py": "7c2fc16ad94edadeeecec4e901c6beeed07d27919687ced003e42dad532d0548",
+    "test_prerequisite_math.py": "a93d345f769ad6ff8ee2a0f5a6b236588d869e7a1567982617872426aca3dae9",
+    "tiny_transformer.py": "0e4073ce2595c1170a5184247a8d2b2467d1b2f7a4059d9dc8019a296be90635",
+    "numerical_trace.py": "bd276de5aafd7e31eff80b89b367ca9859940aa752baff1c1939b70ba4b17d43",
+    "prerequisite_mlp_checks.py": "fb281f713c91f67d2b15c4c741d206a06b541db8e3bd425069a1f0a04ed3bdfb",
+    "make_colab_notebook.py": "dd60c2f59334b49918039d32b46b3e3ecae8bbcb35cabc673092b95df2dc8a61",
+    "deep_learning_math.py": "b6d07e8e5180d477ba13ddef68eb8aed3984eabeb26a16f93f82c86829ea8f8d",
+    "tensor_autograd.py": "27798d9f9fbb1eeeb888367a2e4a5bd199ec2c79b5822e8569309315575e56c3",
+    "prerequisite_math.py": "b7d2fb4cef5edfbffb716482a096aafa54d17508a27308ebd0d8ecf69885ee62",
+    "math_checks.py": "a7dd57cc0d62176ee50967900df7a96f1d00b72399ee6529c81f55c59502a9d3",
+    "prerequisite_checkpoint.py": "5affe55623c57b1433dae54594890d5e51cec929faaa97a0525f3197e9733151",
+    "test_prerequisite_tensors.py": "cbfa82433884375e54be3d7961c10553ca8561264245f3a3f1534773b0453da3",
+    "prerequisite_text.py": "7abae1a1c052d20d23380419c86a41a5c89209bec576c54ad016c90a0031f4ab"
+  },
+  "learner": "unchanged",
+  "hosted_recovery": "pending"
+}

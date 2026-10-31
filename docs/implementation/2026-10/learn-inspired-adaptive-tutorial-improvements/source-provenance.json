@@ -1,0 +1,31 @@
+{
+  "accessed_at": "2026-10-09",
+  "source_url": "https://github.com/amosblomqvist/learn",
+  "revision": "7cfd8942f82ab9476e63572387e1fe9bcea5082c",
+  "upstream_files": {
+    "README.md": "259105a848716bb60d4c176f937e3fcac86a4f382132cbc607c54299dfdb1e50",
+    "skills/teach/SKILL.md": "180d78f5bd65e2f251dab60c716ac5874727595a28377e58590c1aac526ada80",
+    "skills/visualize/SKILL.md": "56cd3eabc9d4a2ff44d9251a11d1b18a4179f28bc13a0ca8cd5d484785241855",
+    "agents/researcher.md": "37b59661e5ef7df20632576da0f105c66ab91f107bbca4cfb7676a36886a32cb",
+    "agents/mermaid-maker.md": "75581c2d49ff8177c1bf891bf2dcfde0d8b359ead38171b356cf87a42c3e4e9b",
+    "agents/svg-maker.md": "78fb459098866bb11c68081fbdc3ac8902b47abe97923a491f4191098d50f021",
+    "extensions/quiz.ts": "a0f6f26da530f266024254b11b02cd38a7dedbd9892189d84f033a0a0bc1b1da",
+    "extensions/md-log.ts": "48e778ce827124cae020f2c1abd7a85337c528d9ded577505871df21d836d040",
+    "extensions/ask-user-question.ts": "62bc3eddf919b40b60b9a55d2b262eeb9d77b61558ac69a589dbc4debf768645",
+    "extensions/visual-tools/index.ts": "ae35173b1cc261f3ee6541cf52eef80fc2f918d71a8fd698efa0ae02cfe1c3f8",
+    "extensions/visual-tools/tools/_common.ts": "d04850539bb800135c6e590b827851765e87ed6e398465c3c6c54bf5319cd08f"
+  },
+  "license_file_in_pinned_tree": false,
+  "source_use": "Inspected only; original adaptation, no installation or code copying.",
+  "local_baseline": {
+    "ai_research/research_docs/.agents/skills/developer-learning-tutorials/SKILL.md": "1327ca99145608fca5ea6a8ae2725422f4eec2f580b5edb2bcc09d59faff7bc7",
+    "ai_research/research_docs/.agents/skills/feature-whiteboard-defense/SKILL.md": "51e2433c8e069539c0ab33f96cf5e47a6e67462079ac1a91bd34c99acddc4c96",
+    "ai_projects/docs/tutorials/projects/p01/gpt-1-foundations/v1/lesson.json": "dc18ba8231064cbacf9fee641f3323a59c99aa968780504133a3c3b86b9dba8d",
+    "ai_projects/docs/tests/browser.mjs": "24d5c9efaef2c903c42c51bbf3d8bb9aabed24d14d2b4bc191d2b709a3cac04e"
+  },
+  "owner_heads": {
+    "ai_projects": "c8f82e42bec777f626de44b2d66fb83aafd023e6",
+    "ai_projects/docs": "ec2096438d5db14262ea2b929d10161df4498d65",
+    "ai_research/research_docs": "3e51ad9059825e8ecb07c349a0c7cfcd6bda702c"
+  }
+}

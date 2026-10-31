@@ -1,0 +1,242 @@
+WEBVTT
+
+00:00:00.440 --> 00:00:05.960
+The comparison entry point creates a
+fresh global run and an hour working day
+
+00:00:05.960 --> 00:00:06.490
+run.
+
+00:00:06.860 --> 00:00:09.070
+Both fit on the same training year.
+
+00:00:09.560 --> 00:00:14.670
+Both score the same four thousand, three
+hundred and fifty seven validation hours.
+
+00:00:15.380 --> 00:00:16.310
+Record identity,
+
+00:00:16.680 --> 00:00:20.930
+target time and issue time are
+checked before any error reduction.
+
+00:00:21.540 --> 00:00:25.930
+Metric definitions and the unrounded
+prediction policy also stay fixed.
+
+00:00:26.320 --> 00:00:29.410
+Each run saves the model,
+aligned predictions,
+
+00:00:30.100 --> 00:00:31.670
+source and dependency identities,
+
+00:00:32.280 --> 00:00:33.530
+frozen data identities
+
+00:00:33.940 --> 00:00:35.190
+and completion status.
+
+00:00:35.800 --> 00:00:37.370
+The parent saves their comparison.
+
+00:00:38.220 --> 00:00:39.770
+Only the predictor changes.
+
+00:00:40.240 --> 00:00:42.730
+We do not refit with validation answers,
+
+00:00:43.080 --> 00:00:45.890
+and we do not evaluate
+the reserved final test.
+
+00:00:48.025 --> 00:00:52.745
+The global mean has validation mean
+absolute error of about one hundred and
+
+00:00:52.745 --> 00:00:55.735
+fifty four point two
+five rentals per hour.
+
+00:00:56.305 --> 00:00:59.055
+The group model has about
+ninety one point five seven.
+
+00:00:59.865 --> 00:01:02.285
+Root mean squared error also falls,
+
+00:01:02.285 --> 00:01:06.776
+from about two hundred and eight point
+one seven to one hundred and thirty seven
+
+00:01:06.776 --> 00:01:07.875
+point three nine.
+
+00:01:08.085 --> 00:01:12.095
+The group model captures useful
+daily structure on this window.
+
+00:01:12.605 --> 00:01:14.475
+Its training errors are lower too,
+
+00:01:14.665 --> 00:01:18.505
+which is expected when separate group
+constants can reproduce the global
+
+00:01:18.505 --> 00:01:20.815
+constant as one possible setting.
+
+00:01:21.505 --> 00:01:26.135
+That training squared error argument does
+not guarantee a validation improvement.
+
+00:01:26.725 --> 00:01:30.395
+The later result needs measurement,
+which these saved runs provide.
+
+00:01:32.728 --> 00:01:37.878
+Subtract the group model's mean absolute
+error from the global model's value.
+
+00:01:38.168 --> 00:01:42.518
+The reduction is about sixty two
+point six seven rentals per hour.
+
+00:01:42.888 --> 00:01:46.038
+Divide that reduction by
+the original global error,
+
+00:01:46.328 --> 00:01:47.718
+then multiply by one hundred.
+
+00:01:48.288 --> 00:01:50.598
+This gives about forty
+point six three percent.
+
+00:01:51.168 --> 00:01:53.178
+The denominator matters.
+
+00:01:53.508 --> 00:01:57.358
+We are reporting a relative reduction
+against this reference score.
+
+00:01:57.588 --> 00:02:00.808
+It does not mean forty percent
+of forecasts became exact,
+
+00:02:00.808 --> 00:02:03.258
+or that every hour improved.
+
+00:02:03.568 --> 00:02:08.038
+It is also a development comparison
+for these frozen chronological periods.
+
+00:02:08.608 --> 00:02:13.248
+The reserved test and an application's
+quality requirements still need their own
+
+00:02:13.248 --> 00:02:14.218
+later evidence.
+
+00:02:16.442 --> 00:02:20.332
+Consider the eleventh of January
+at five in the afternoon,
+
+00:02:20.702 --> 00:02:21.712
+issued at four.
+
+00:02:22.142 --> 00:02:24.052
+The recorded target is one
+hundred and thirty four.
+
+00:02:25.462 --> 00:02:29.642
+The working day group predicts three
+hundred and ninety four point nine two,
+
+00:02:29.642 --> 00:02:33.752
+producing an absolute error of about
+two hundred and sixty point nine two.
+
+00:02:34.462 --> 00:02:36.972
+The global constant
+happens to be much closer,
+
+00:02:37.302 --> 00:02:39.352
+missing by about nine point seven nine.
+
+00:02:40.042 --> 00:02:41.312
+This hour gets worse.
+
+00:02:42.022 --> 00:02:42.752
+Across validation,
+
+00:02:43.222 --> 00:02:43.669
+three thousand,
+
+00:02:43.669 --> 00:02:48.472
+three hundred and twenty three hourly
+absolute errors improve and one thousand
+
+00:02:48.472 --> 00:02:49.932
+and thirty four worsen.
+
+00:02:50.562 --> 00:02:52.992
+The model knows a typical level for a key,
+
+00:02:53.222 --> 00:02:55.812
+but cannot distinguish
+all days sharing that key.
+
+00:02:56.222 --> 00:02:59.412
+We have not established why
+this particular hour was quiet.
+
+00:03:01.483 --> 00:03:04.393
+There is one more result
+to interpret carefully.
+
+00:03:05.043 --> 00:03:08.316
+The number of underpredicted
+hours rises from two thousand,
+
+00:03:08.316 --> 00:03:12.653
+three hundred and ninety one to three
+thousand, one hundred and forty three.
+
+00:03:13.503 --> 00:03:18.696
+Their mean deficit falls from about two
+hundred and five point six zero to one
+
+00:03:18.696 --> 00:03:20.613
+hundred and thirteen point six one.
+
+00:03:21.483 --> 00:03:25.293
+Mean signed error remains negative
+seventy two point three four,
+
+00:03:25.723 --> 00:03:27.633
+slightly more negative than before.
+
+00:03:28.643 --> 00:03:34.323
+Removing large quiet hour overpredictions
+can improve absolute error without fixing
+
+00:03:34.323 --> 00:03:36.693
+the later period's overall level.
+
+00:03:37.163 --> 00:03:41.253
+Error size, frequency and direction
+answer different questions.
+
+00:03:42.143 --> 00:03:44.033
+The implementation is ready for review.
+
+00:03:44.603 --> 00:03:47.113
+These results motivate the
+next modelling discussion,
+
+00:03:47.383 --> 00:03:50.393
+without starting a later phase
+or claiming learner mastery.
+

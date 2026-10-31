@@ -1,0 +1,233 @@
+WEBVTT
+
+00:00:00.620 --> 00:00:04.430
+Hour zero and hour twenty
+three are neighbors on a clock.
+
+00:00:05.020 --> 00:00:07.650
+A numeric hour column
+has a jump at midnight,
+
+00:00:08.140 --> 00:00:12.510
+while one hot indicators give no
+built in notion of neighboring hours.
+
+00:00:13.220 --> 00:00:17.990
+A sine and cosine pair places those
+hours close together on a circle.
+
+00:00:18.720 --> 00:00:22.630
+Hour eight occupies its own
+position farther around the clock.
+
+00:00:23.360 --> 00:00:28.100
+The highlighted short connection shows why
+twenty three and zero are nearby in this
+
+00:00:28.100 --> 00:00:28.830
+representation.
+
+00:00:29.600 --> 00:00:31.650
+That is a useful input geometry,
+
+00:00:32.240 --> 00:00:35.920
+but the prediction function still depends
+on what the learner can do with those
+
+00:00:35.920 --> 00:00:36.530
+coordinates.
+
+00:00:39.067 --> 00:00:41.587
+Divide the hour by its period,
+twenty four,
+
+00:00:41.587 --> 00:00:45.097
+and multiply by two pi to get an angle.
+
+00:00:45.587 --> 00:00:47.997
+Apply both sine and cosine.
+
+00:00:48.187 --> 00:00:49.417
+At hour eight,
+
+00:00:49.467 --> 00:00:54.717
+the values are about zero point eight
+six six and minus zero point five.
+
+00:00:54.967 --> 00:00:57.677
+At zero the pair is zero and one.
+
+00:00:58.187 --> 00:01:03.471
+At twenty three it is about minus zero
+point two five nine and zero point nine
+
+00:01:03.471 --> 00:01:04.297
+six six,
+
+00:01:04.727 --> 00:01:06.317
+close to the midnight point.
+
+00:01:06.927 --> 00:01:09.097
+Weekday and month use their own periods.
+
+00:01:09.727 --> 00:01:13.297
+January is indexed at zero in
+our declared transformation.
+
+00:01:15.650 --> 00:01:21.130
+The source recovers calendar indices from
+the frozen one hot vector and computes
+
+00:01:21.130 --> 00:01:21.860
+each pair.
+
+00:01:22.570 --> 00:01:23.960
+It reads no outcomes.
+
+00:01:24.670 --> 00:01:26.440
+Three pairs make six columns;
+
+00:01:27.250 --> 00:01:29.200
+holiday and working day add two,
+
+00:01:29.610 --> 00:01:30.820
+giving eight inputs.
+
+00:01:31.530 --> 00:01:36.420
+We retain their exact order and fit
+any standardization on training only.
+
+00:01:37.330 --> 00:01:40.580
+The pair still distinguishes
+the discrete hour positions.
+
+00:01:41.090 --> 00:01:44.680
+What changes is how a linear
+function can combine them.
+
+00:01:45.110 --> 00:01:50.170
+This representation is compared with the
+original one hot model using the same
+
+00:01:50.170 --> 00:01:54.140
+training solve,
+no penalty and the same later rows.
+
+00:01:56.317 --> 00:02:01.957
+A linear model can multiply the sine and
+cosine by one coefficient each and add
+
+00:02:01.957 --> 00:02:02.687
+an intercept.
+
+00:02:03.377 --> 00:02:08.567
+That combination produces one sinusoidal
+wave for the hourly contribution.
+
+00:02:09.217 --> 00:02:13.737
+It cannot freely assign twenty four
+independent hour effects as one hot
+
+00:02:13.737 --> 00:02:14.667
+columns can.
+
+00:02:15.157 --> 00:02:20.107
+Two sharp commuting peaks are therefore
+difficult to express with this one pair.
+
+00:02:20.817 --> 00:02:25.527
+The calendar position remains encoded,
+but linear expressive freedom has changed.
+
+00:02:26.497 --> 00:02:30.597
+Adding harmonics or using another
+nonlinear learner could change that
+
+00:02:30.597 --> 00:02:31.167
+limitation;
+
+00:02:31.657 --> 00:02:33.967
+either would be a new declared comparison,
+
+00:02:34.397 --> 00:02:36.607
+not something already implemented here.
+
+00:02:39.110 --> 00:02:42.290
+The cyclic training half squared
+error is about four thousand,
+
+00:02:42.290 --> 00:02:46.783
+eight hundred and ten, higher than the
+one hot reference near three thousand,
+
+00:02:46.783 --> 00:02:48.100
+one hundred and sixty eight.
+
+00:02:48.830 --> 00:02:53.540
+Raw validation absolute error is
+slightly lower for cyclic features,
+
+00:02:53.890 --> 00:02:56.420
+but after consistent clipping it is worse.
+
+00:02:57.330 --> 00:02:59.480
+Root mean squared error is also worse.
+
+00:03:00.110 --> 00:03:01.800
+These are stable training solves,
+
+00:03:01.910 --> 00:03:06.480
+so unfinished gradient optimization does
+not explain the structural difference.
+
+00:03:07.090 --> 00:03:11.540
+A smaller representation has not supplied
+a universally stronger predictor.
+
+00:03:12.250 --> 00:03:13.240
+Keep the representation,
+
+00:03:13.790 --> 00:03:17.000
+output policy and metric
+beside each result.
+
+00:03:19.108 --> 00:03:22.098
+At the later Monday eight oclock hour,
+
+00:03:22.368 --> 00:03:26.715
+the cyclic model predicts only about
+fifty two rentals against four hundred and
+
+00:03:26.715 --> 00:03:27.158
+twenty.
+
+00:03:28.208 --> 00:03:31.018
+The one hot reference predicts
+about one hundred and seventy five.
+
+00:03:32.608 --> 00:03:34.418
+The clock picture is sensible,
+
+00:03:34.748 --> 00:03:38.418
+but the resulting linear function
+is too restrictive for this example.
+
+00:03:39.128 --> 00:03:43.298
+That does not make circular encoding
+useless for every learner or problem.
+
+00:03:43.728 --> 00:03:47.808
+It tells us what this particular linear
+pair can express under the frozen
+
+00:03:47.808 --> 00:03:48.478
+contract.
+
+00:03:49.008 --> 00:03:53.178
+We next add an explicit hour
+by working day interaction,
+
+00:03:53.568 --> 00:03:55.878
+which answers a different
+structural question.
+

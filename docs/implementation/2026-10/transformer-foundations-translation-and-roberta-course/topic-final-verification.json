@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-13",
+  "final_fingerprint": "62c5b39c47375e0f8244eac76d66b0b68251f914ac2773945ab7b2cc3c4c7ea3",
+  "browser_tested_fingerprint": "f58f3421af7fd17be2ff4567f8fd31a58f1868f7d82d38dec2c21d70859e6e83",
+  "post_browser_changes": [
+    "topic-verification.json"
+  ],
+  "post_browser_change_scope": "Only finalized verification JSON data and generated validation/render bookkeeping; chapter prose, diagrams, code, metadata and compiled lesson are identical to passing isolated suites.",
+  "final_content_tests": 9,
+  "final_build_records": 112,
+  "live_preview": {
+    "url": "http://127.0.0.1:4273/project_docs/records/tutorials/p00-transformer-course-v1/chapters/start/",
+    "status": 200,
+    "chapters": 32
+  },
+  "no_commit_publication": true
+}

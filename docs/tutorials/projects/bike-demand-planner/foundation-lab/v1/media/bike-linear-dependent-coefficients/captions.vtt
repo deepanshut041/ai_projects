@@ -1,0 +1,237 @@
+WEBVTT
+
+00:00:00.540 --> 00:00:04.570
+Our fitted design has forty six
+columns including the intercept,
+
+00:00:04.940 --> 00:00:07.270
+but its measured rank is forty two.
+
+00:00:07.940 --> 00:00:11.930
+Several columns repeat relationships
+already expressible by others.
+
+00:00:12.620 --> 00:00:17.210
+In raw coordinates,
+every row activates exactly one hour,
+
+00:00:17.360 --> 00:00:18.790
+weekday and month.
+
+00:00:19.440 --> 00:00:23.470
+Each complete indicator group
+therefore sums to the intercept column.
+
+00:00:24.040 --> 00:00:25.690
+In these training records,
+
+00:00:25.920 --> 00:00:31.010
+working day also equals the Monday
+through Friday indicators minus holiday.
+
+00:00:31.680 --> 00:00:35.850
+The independent audit checks that
+extra relation on this export.
+
+00:00:36.540 --> 00:00:40.630
+Standardization changes coordinates
+without removing those dependencies.
+
+00:00:41.440 --> 00:00:45.780
+The training data can determine a fitted
+function on supported inputs without
+
+00:00:45.780 --> 00:00:48.570
+assigning a unique value
+to every coefficient.
+
+00:00:50.942 --> 00:00:53.852
+Consider a simple
+equivalent parameterization.
+
+00:00:54.302 --> 00:00:59.092
+Add ten to every raw hour coefficient
+and subtract ten from the intercept.
+
+00:00:59.722 --> 00:01:04.192
+Every valid hour vector has
+exactly one active hour indicator.
+
+00:01:04.742 --> 00:01:07.372
+The added ten and subtracted ten cancel.
+
+00:01:07.802 --> 00:01:09.332
+The forecast stays unchanged.
+
+00:01:10.322 --> 00:01:13.752
+That gives two different coefficient
+arrays for the same predictions.
+
+00:01:14.802 --> 00:01:18.582
+Requiring two solvers to print identical
+arrays would reject an equivalent
+
+00:01:18.582 --> 00:01:19.592
+representation.
+
+00:01:20.322 --> 00:01:23.392
+We compare their predictions
+and objective values instead.
+
+00:01:23.962 --> 00:01:28.362
+This argument also cautions against
+interpreting a single coefficient as a
+
+00:01:28.362 --> 00:01:29.832
+unique causal effect.
+
+00:01:30.242 --> 00:01:34.812
+Its numerical value depends on the chosen
+representation and the other columns.
+
+00:01:37.025 --> 00:01:41.155
+The reference first uses the
+same saved training scaler.
+
+00:01:41.405 --> 00:01:45.805
+It appends ones and solves the training
+least squares problem with a stable
+
+00:01:45.805 --> 00:01:47.095
+numerical routine.
+
+00:01:47.625 --> 00:01:51.195
+We do not invert a normal
+matrix that may be singular.
+
+00:01:51.805 --> 00:01:53.575
+The routine returns parameters,
+
+00:01:54.005 --> 00:01:55.875
+rank and singular values.
+
+00:01:56.625 --> 00:02:00.195
+Its residual summary can be
+empty for a dependent design,
+
+00:02:00.525 --> 00:02:05.185
+so we explicitly calculate prediction
+errors instead of calling that empty array
+
+00:02:05.185 --> 00:02:06.415
+zero loss.
+
+00:02:07.225 --> 00:02:11.825
+The iterative and reference predictions
+differ by less than one millionth of a
+
+00:02:11.825 --> 00:02:14.915
+rental on observed training
+and validation inputs.
+
+00:02:15.445 --> 00:02:18.655
+Their training objectives agree
+to the displayed precision.
+
+00:02:19.225 --> 00:02:21.195
+That supports numerical correctness,
+
+00:02:21.765 --> 00:02:24.695
+while forecast usefulness
+remains a separate measurement.
+
+00:02:27.067 --> 00:02:28.997
+To inspect one hour,
+
+00:02:29.027 --> 00:02:32.217
+convert the standardized
+model back to raw coordinates.
+
+00:02:32.687 --> 00:02:35.477
+Divide each weight by
+its saved feature scale.
+
+00:02:36.027 --> 00:02:39.687
+Then subtract the mean weighted
+contribution from the standardized
+
+00:02:39.687 --> 00:02:42.417
+intercept to obtain the raw intercept.
+
+00:02:42.807 --> 00:02:45.657
+This conversion preserves
+the same function.
+
+00:02:46.327 --> 00:02:49.637
+In raw coordinates,
+inactive indicators are zero again,
+
+00:02:49.927 --> 00:02:53.697
+so Monday at eight can be read as
+an intercept plus four adjustments.
+
+00:02:54.547 --> 00:02:58.297
+The implementation checks equality
+between both coordinate systems.
+
+00:02:59.067 --> 00:03:01.817
+A constant training column uses scale one,
+
+00:03:01.887 --> 00:03:06.517
+which protects arithmetic but supplies
+no learned evidence for unseen variation.
+
+00:03:07.187 --> 00:03:10.437
+This is a readable decomposition
+of the saved representation,
+
+00:03:10.887 --> 00:03:13.517
+not a unique account
+of what causes demand.
+
+00:03:15.870 --> 00:03:20.500
+The saved raw intercept is about one
+hundred and forty three point five seven.
+
+00:03:21.190 --> 00:03:25.960
+The hour eight coefficient adds about
+one hundred and nineteen point five six.
+
+00:03:26.950 --> 00:03:29.240
+Monday adds three point seven three,
+
+00:03:29.890 --> 00:03:33.130
+January subtracts ninety
+two point seven nine,
+
+00:03:33.130 --> 00:03:37.080
+and working day adds about
+zero point seven one.
+
+00:03:37.830 --> 00:03:42.660
+Their sum is one hundred and seventy
+four point seven eight rentals per hour.
+
+00:03:43.590 --> 00:03:46.660
+This equals the standardized
+full vector calculation.
+
+00:03:47.570 --> 00:03:51.660
+If we shift every hour coefficient
+and compensate in the intercept,
+
+00:03:52.090 --> 00:03:53.700
+that total stays unchanged
+
+00:03:54.230 --> 00:03:57.040
+even though this displayed
+decomposition changes.
+
+00:03:57.670 --> 00:04:01.390
+Check the fitted function and its
+supported inputs before drawing
+
+00:04:01.390 --> 00:04:04.240
+conclusions from individual
+dependent coefficients.
+

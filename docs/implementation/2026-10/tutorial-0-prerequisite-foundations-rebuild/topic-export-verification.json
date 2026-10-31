@@ -1,0 +1,24 @@
+{
+  "members_verified": 22,
+  "notebooks": {
+    "study.ipynb": {
+      "cells": 35,
+      "code_cells": 9,
+      "cleared": true,
+      "syntax": true
+    },
+    "colab.ipynb": {
+      "cells": 8,
+      "code_cells": 5,
+      "cleared": true,
+      "syntax": true
+    }
+  },
+  "study_notes_topics": 25,
+  "study_code_cells_executed": 9,
+  "study_stdout_sha256": "0fc41a5b50cd4468aefa0dec7a356e2fd8614ce3d7b1ab2374cd3d3341c9e18b",
+  "personal_notebook_overwrite_rejected": true,
+  "hosted_execution": "pending",
+  "archive": "/mnt/projects/ai/.ai/course-exports/2026-10-12/topic-foundations-final/tutorial0-source.zip",
+  "archive_sha256": "b3f5ac884815e25f79d567a70d23c0140e4c4b994e497058de3f5ec1e65cf0ef"
+}

@@ -1,0 +1,79 @@
+{
+  "recorded_date": "2026-10-13",
+  "lessons": [
+    {
+      "file": "lessons/15-encoder-stack.md",
+      "sha256": "73da5c484d2f821a3c18547816f43bc7515642b4ad3e456271876488bd0e79bf",
+      "standalone_python_blocks": 1,
+      "practice_ids": [
+        "encoder-stack-transfer",
+        "encoder-stack-sharing-transfer"
+      ],
+      "word_count": 834
+    },
+    {
+      "file": "lessons/16-decoder-stack.md",
+      "sha256": "f51650dc740f5be843d4426e8bd9952a81767ace3ef78eb6e9767f8cf46471ab",
+      "standalone_python_blocks": 1,
+      "practice_ids": [
+        "decoder-stack-transfer",
+        "decoder-stack-gradient-transfer"
+      ],
+      "word_count": 822
+    },
+    {
+      "file": "lessons/12-translation-model.md",
+      "sha256": "e399bcb8730f3318f6d2af47711b151ab5a30391194c162e7afdde9b460be84c",
+      "standalone_python_blocks": 1,
+      "practice_ids": [
+        "translation-model-practice-1",
+        "translation-model-state-transfer"
+      ],
+      "word_count": 1005
+    },
+    {
+      "file": "lessons/13-translation-training.md",
+      "sha256": "1c650f12e4fb3e5a279299f1134316933d4eb3621d8882afef2681efc2161608",
+      "standalone_python_blocks": 1,
+      "practice_ids": [
+        "translation-training-practice-1",
+        "translation-training-schedule-transfer"
+      ],
+      "word_count": 1018
+    },
+    {
+      "file": "lessons/14-translation-generation.md",
+      "sha256": "cf3813768f44e5f3bd82c8898e01a3b1d1c5f228445db90af18f6a99d7104d1b",
+      "standalone_python_blocks": 1,
+      "practice_ids": [
+        "translation-generation-practice-1",
+        "translation-generation-search-transfer"
+      ],
+      "word_count": 1078
+    },
+    {
+      "file": "lessons/20-translation-evaluation.md",
+      "sha256": "27d76ffbb0fbed4482ce02c0a4267a9aba52b3513637fa2ceef75dd63bf089d3",
+      "standalone_python_blocks": 2,
+      "practice_ids": [
+        "translation-evaluation-transfer",
+        "translation-evaluation-source-transfer"
+      ],
+      "word_count": 1124
+    },
+    {
+      "file": "lessons/15-checkpoints-and-colab.md",
+      "sha256": "0af79903f3ad42a8ec6881bce3cc78cd5a91ed346a696a71e4cb57048fb6b93a",
+      "standalone_python_blocks": 1,
+      "practice_ids": [
+        "checkpoints-and-colab-practice-1",
+        "full-state-resume"
+      ],
+      "word_count": 1316
+    }
+  ],
+  "practice_bank": "translation-topic-practice.json",
+  "practice_items": 14,
+  "reference_source_edited": false,
+  "learner_state_advanced": false
+}

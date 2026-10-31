@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "later_course_files": 133,
+  "child_heads_status_and_files_unchanged": true,
+  "stable_lesson_paths": 11,
+  "original_source_files_retained": 20,
+  "intentionally_modified_original_sources": [
+    "prerequisite_export.py"
+  ]
+}

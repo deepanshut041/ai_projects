@@ -1,0 +1,443 @@
+WEBVTT
+
+1
+00:00:00.580 --> 00:00:03.390
+The nominal training
+window is twenty eleven.
+
+2
+00:00:04.000 --> 00:00:08.990
+January through June, twenty twelve,
+supplies validation for comparing choices.
+
+3
+00:00:09.480 --> 00:00:13.310
+July through December remains
+the reserved final test.
+
+4
+00:00:13.740 --> 00:00:18.500
+A random mixture of early and later
+observations would change the historical
+
+5
+00:00:18.500 --> 00:00:20.050
+forecasting question.
+
+6
+00:00:20.520 --> 00:00:23.230
+These windows stay fixed
+across later comparisons.
+
+7
+00:00:24.200 --> 00:00:27.750
+Final test outcomes do not guide
+the current feature choices,
+
+8
+00:00:28.080 --> 00:00:31.210
+model settings or
+exploratory error analysis.
+
+9
+00:00:31.640 --> 00:00:36.550
+We still need to check when each preceding
+stage was ready to support a forecast.
+
+10
+00:00:38.734 --> 00:00:42.664
+The final training hour runs from
+eleven at night until midnight.
+
+11
+00:00:43.074 --> 00:00:48.284
+Under our convention, its outcome becomes
+available at midnight, as January begins.
+
+12
+00:00:49.034 --> 00:00:52.804
+Now consider a validation target
+starting at that same midnight.
+
+13
+00:00:53.214 --> 00:00:56.654
+A one hour lead requires its
+forecast at twenty three hundred,
+
+14
+00:00:56.654 --> 00:00:59.584
+when the last training
+interval has only begun.
+
+15
+00:01:00.154 --> 00:01:04.034
+A model built using that interval's
+completed outcome could not have existed
+
+16
+00:01:04.034 --> 00:01:05.304
+for this issue time.
+
+17
+00:01:05.754 --> 00:01:09.464
+Sorting target starts alone
+misses this availability problem.
+
+18
+00:01:11.442 --> 00:01:15.292
+We keep the midnight
+observation in the raw source,
+
+19
+00:01:15.362 --> 00:01:17.552
+but exclude it from the model partitions.
+
+20
+00:01:18.482 --> 00:01:22.452
+The first validation target now
+starts at one in the morning.
+
+21
+00:01:22.942 --> 00:01:26.112
+Its one hour ahead forecast
+is issued at midnight.
+
+22
+00:01:26.822 --> 00:01:30.862
+That is when the final training outcome
+becomes available under the current
+
+23
+00:01:30.862 --> 00:01:32.272
+offline convention.
+
+24
+00:01:32.902 --> 00:01:37.922
+The rule is that preceding outcomes
+must be ready no later than the first
+
+25
+00:01:37.922 --> 00:01:39.752
+evaluation issue time.
+
+26
+00:01:40.202 --> 00:01:45.592
+The target starts and forecast issue times
+play different roles in this inequality.
+
+27
+00:01:47.650 --> 00:01:51.960
+This exercise treats the source
+hour label as an interval start.
+
+28
+00:01:52.390 --> 00:01:57.520
+It treats its outcome as available at
+interval end, with zero reporting delay.
+
+29
+00:01:58.110 --> 00:02:02.140
+It also assumes zero model building
+delay at the stage boundary.
+
+30
+00:02:02.490 --> 00:02:06.620
+A practical system with either
+delay needs a later readiness time.
+
+31
+00:02:07.170 --> 00:02:11.740
+The source does not specify timezone
+or daylight saving disambiguation,
+
+32
+00:02:12.030 --> 00:02:14.840
+so we retain naive date and hour labels.
+
+33
+00:02:15.510 --> 00:02:17.900
+The calculation is internally explicit.
+
+34
+00:02:18.350 --> 00:02:21.960
+It is not documentary proof
+of physical elapsed hours,
+
+35
+00:02:22.230 --> 00:02:25.160
+real reporting latency
+or production readiness.
+
+36
+00:02:27.495 --> 00:02:31.385
+Validation is used to compare
+and select modelling choices.
+
+37
+00:02:32.035 --> 00:02:36.205
+Its final hourly interval finishes at
+midnight, at the beginning of July.
+
+38
+00:02:36.915 --> 00:02:41.075
+A test target starting at that midnight
+would require an issue time an hour
+
+39
+00:02:41.075 --> 00:02:41.745
+earlier.
+
+40
+00:02:42.275 --> 00:02:44.095
+We exclude that existing midnight row too.
+
+41
+00:02:44.095 --> 00:02:49.245
+The first test target starts at one,
+with its issue at midnight.
+
+42
+00:02:49.775 --> 00:02:54.635
+The two excluded source identifiers are
+eight thousand six hundred forty six and
+
+43
+00:02:54.635 --> 00:02:56.045
+thirteen thousand four.
+
+44
+00:02:56.315 --> 00:03:00.795
+We retain their identities and exclusion
+reasons without using reserved test
+
+45
+00:03:00.795 --> 00:03:02.725
+outcomes to select models.
+
+46
+00:03:04.817 --> 00:03:09.247
+The split function first assigns targets
+before January first to training.
+
+47
+00:03:09.757 --> 00:03:10.867
+For later targets,
+
+48
+00:03:11.237 --> 00:03:14.107
+it checks issue time by
+subtracting the forecast lead.
+
+49
+00:03:14.657 --> 00:03:17.647
+An issue before validation
+readiness is excluded.
+
+50
+00:03:18.317 --> 00:03:22.567
+It repeats the same logic at July
+first before assigning the final test.
+
+51
+00:03:23.237 --> 00:03:26.907
+The supported windows include their
+starts and exclude their ends.
+
+52
+00:03:27.537 --> 00:03:30.687
+Dates outside twenty eleven
+and twenty twelve are rejected.
+
+53
+00:03:31.317 --> 00:03:32.297
+After partitioning,
+
+54
+00:03:32.297 --> 00:03:36.417
+a separate guard compares the last
+preceding interval end with the first
+
+55
+00:03:36.417 --> 00:03:39.967
+evaluation issue time,
+checking the same contract again.
+
+56
+00:03:41.937 --> 00:03:45.737
+The frozen training partition contains
+eight thousand six hundred forty five
+
+57
+00:03:45.737 --> 00:03:46.687
+rows.
+
+58
+00:03:47.117 --> 00:03:49.357
+Validation contains four thousand
+three hundred fifty seven,
+
+59
+00:03:49.357 --> 00:03:54.427
+and reserved test contains four
+thousand three hundred seventy five.
+
+60
+00:03:55.537 --> 00:03:59.487
+Two existing observations are
+recorded as boundary exclusions.
+
+61
+00:03:59.837 --> 00:04:03.894
+Together those counts recover all
+seventeen thousand three hundred seventy
+
+62
+00:04:03.894 --> 00:04:05.767
+nine acquired observations.
+
+63
+00:04:06.577 --> 00:04:10.407
+The three model partitions contain
+seventeen thousand three hundred seventy
+
+64
+00:04:10.407 --> 00:04:11.667
+seven rows.
+
+65
+00:04:12.337 --> 00:04:16.797
+None of the one hundred sixty five
+unrecorded slots becomes a new row or an
+
+66
+00:04:16.797 --> 00:04:17.947
+exclusion identifier.
+
+67
+00:04:20.250 --> 00:04:25.880
+Keep the saved split unchanged and try
+a hypothetical availability calculation.
+
+68
+00:04:26.710 --> 00:04:29.000
+The final training
+interval ends at midnight.
+
+69
+00:04:29.730 --> 00:04:33.100
+Reporting takes twenty minutes and
+building takes another fifteen.
+
+70
+00:04:33.710 --> 00:04:35.740
+Readiness is now twelve thirty five.
+
+71
+00:04:36.550 --> 00:04:40.700
+A one o’clock target needs an issue
+at midnight, which is too early.
+
+72
+00:04:41.250 --> 00:04:45.240
+A two o’clock target needs an issue
+at one, after the model is ready.
+
+73
+00:04:45.890 --> 00:04:50.220
+The first feasible hourly request
+moves because availability changed,
+
+74
+00:04:50.450 --> 00:04:54.640
+not because random splitting or a
+convenient gap size became preferable.
+
+75
+00:04:57.040 --> 00:04:59.970
+The comparison is small
+enough to write directly.
+
+76
+00:05:00.500 --> 00:05:03.770
+Subtract the lead from the target
+start to get the issue time.
+
+77
+00:05:04.240 --> 00:05:06.810
+Add reporting delay to
+the training interval end,
+
+78
+00:05:07.320 --> 00:05:08.570
+then add the build delay.
+
+79
+00:05:09.080 --> 00:05:11.930
+The issue must be at or
+after that readiness time.
+
+80
+00:05:12.880 --> 00:05:15.270
+Under the saved zero delay convention,
+
+81
+00:05:15.480 --> 00:05:17.990
+midnight readiness permits
+the one o’clock target.
+
+82
+00:05:18.460 --> 00:05:21.870
+Under the hypothetical thirty
+five minute delay, it does not.
+
+83
+00:05:22.340 --> 00:05:24.090
+This is a sensitivity example.
+
+84
+00:05:24.600 --> 00:05:28.070
+No frozen membership file is
+regenerated by explaining it.
+
+85
+00:05:30.192 --> 00:05:34.932
+Suppose the actual service later confirms
+that reporting always takes twenty
+
+86
+00:05:34.932 --> 00:05:35.562
+minutes.
+
+87
+00:05:36.232 --> 00:05:40.962
+Can we keep the old availability claim
+simply because the split is chronological?
+
+88
+00:05:41.872 --> 00:05:44.442
+Pause and use the issue time comparison.
+
+89
+00:05:45.132 --> 00:05:48.982
+A real contract change requires
+an explicit preparation revision.
+
+90
+00:05:49.612 --> 00:05:52.562
+It may exclude additional
+recorded boundary observations,
+
+91
+00:05:53.132 --> 00:05:55.862
+which is different from
+filling missing source hours.
+
+92
+00:05:56.372 --> 00:06:01.422
+Keep the existing saved assumptions and
+membership intact for current comparisons.
+
+93
+00:06:01.932 --> 00:06:06.062
+A revised experiment needs its own
+declared contract and evidence.

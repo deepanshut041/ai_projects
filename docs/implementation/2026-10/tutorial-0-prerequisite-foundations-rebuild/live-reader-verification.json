@@ -1,0 +1,18 @@
+{
+  "project_docs_running": true,
+  "course_routes": [
+    {
+      "url": "http://127.0.0.1:4273/project_docs/records/tutorials/p00-transformer-foundations-v1/chapters/route/",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4273/project_docs/records/tutorials/p00-transformer-course-v1/chapters/start/",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4273/project_docs/records/tutorials/p01-small-gpt-v1/chapters/next-token/",
+      "status": 200
+    }
+  ],
+  "passed": true
+}

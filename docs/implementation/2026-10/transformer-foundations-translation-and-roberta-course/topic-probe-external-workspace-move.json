@@ -1,0 +1,28 @@
+{
+  "transformer-foundations-lab": {
+    "current_path": "/mnt/projects/ai/ai_projects/projects/transformer-labs/transformer-foundations-lab",
+    "baseline_head": "b7ffaa6911c305c07823b474cbfbda1169d8e158",
+    "head_unchanged": null,
+    "changed_files": [],
+    "missing_files": [],
+    "git_root_returned": "/mnt/projects/ai/ai_projects",
+    "child_git_control_present": false,
+    "enclosing_repository_head": "96885ccb830515c97572e0a65b79987accd42ecf",
+    "head": null,
+    "head_verification": "Unavailable: no child .git control; Git resolves to enclosing repository. Do not equate its HEAD/status with child HEAD/status.",
+    "enclosing_repository_status": "MM ../../../.gitmodules\n M ../../../AGENTS.md\n M ../../../README.md\n m ../../../docs\nD  ../../attention-lab\nD  ../../linear-model-lab\nD  ../../retrieval-lab\n?? ../../\n"
+  },
+  "attention-is-all-you-need": {
+    "current_path": "/mnt/projects/ai/ai_projects/projects/transformer-labs/attention-is-all-you-need",
+    "baseline_head": "475c6347104c1de9a8c158171b9f6f3228d1aba3",
+    "head_unchanged": null,
+    "changed_files": [],
+    "missing_files": [],
+    "git_root_returned": "/mnt/projects/ai/ai_projects",
+    "child_git_control_present": false,
+    "enclosing_repository_head": "96885ccb830515c97572e0a65b79987accd42ecf",
+    "head": null,
+    "head_verification": "Unavailable: no child .git control; Git resolves to enclosing repository. Do not equate its HEAD/status with child HEAD/status.",
+    "enclosing_repository_status": "MM ../../../.gitmodules\n M ../../../AGENTS.md\n M ../../../README.md\n m ../../../docs\nD  ../../attention-lab\nD  ../../linear-model-lab\nD  ../../retrieval-lab\n?? ../../\n"
+  }
+}

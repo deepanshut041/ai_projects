@@ -1,0 +1,242 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:01.850
+With a fixed rate,
+
+00:00:01.900 --> 00:00:06.690
+later noisy batches can keep moving
+parameters around the training optimum.
+
+00:00:07.400 --> 00:00:09.610
+A decreasing rate may settle the fit.
+
+00:00:10.180 --> 00:00:14.090
+We test that question while holding SGD,
+batch thirty two,
+
+00:00:14.520 --> 00:00:16.490
+initial rate zero point zero one,
+
+00:00:17.220 --> 00:00:19.550
+paired orders and ten passes fixed.
+
+00:00:20.160 --> 00:00:22.620
+There is one declared
+inverse time schedule,
+
+00:00:22.620 --> 00:00:26.630
+rather than a search across many
+shapes after looking at validation.
+
+00:00:27.440 --> 00:00:32.750
+Its progress measure is examples already
+processed before the next batch update.
+
+00:00:33.040 --> 00:00:34.910
+That timing is part of the rule.
+
+00:00:35.480 --> 00:00:40.130
+We will compare both training squared
+error and later absolute error.
+
+00:00:40.480 --> 00:00:44.840
+Better optimization of the first quantity
+does not mathematically guarantee an
+
+00:00:44.840 --> 00:00:46.150
+improvement in the second.
+
+00:00:48.275 --> 00:00:53.558
+The base rate is divided by one plus
+examples seen over forty three thousand,
+
+00:00:53.558 --> 00:00:54.825
+two hundred and twenty five.
+
+00:00:56.155 --> 00:00:59.485
+That denominator equals five
+complete training passes.
+
+00:01:00.355 --> 00:01:03.705
+At zero examples,
+the rate is zero point zero one.
+
+00:01:04.195 --> 00:01:09.285
+At five passes, the denominator is two,
+giving zero point zero zero five.
+
+00:01:10.335 --> 00:01:12.565
+At ten passes it is three,
+
+00:01:12.735 --> 00:01:17.925
+so the next rate would be about zero
+point zero zero three three three three.
+
+00:01:18.435 --> 00:01:21.425
+The run has already reached
+its work budget then.
+
+00:01:22.095 --> 00:01:25.745
+A saved next rate describes
+what a future update would use;
+
+00:01:25.935 --> 00:01:28.445
+it does not imply an
+extra update happened.
+
+00:01:28.935 --> 00:01:33.055
+Writing the progress unit explicitly
+prevents confusion between parameter
+
+00:01:33.055 --> 00:01:35.165
+updates and examples processed.
+
+00:01:37.317 --> 00:01:40.447
+First calculate the rate
+from completed exposure.
+
+00:01:41.297 --> 00:01:44.927
+Then obtain the next batch and
+compute its actual mean gradient.
+
+00:01:45.517 --> 00:01:48.587
+Finally apply the optimizer
+step with that rate.
+
+00:01:48.997 --> 00:01:53.047
+If we advanced the example counter
+before evaluating the schedule,
+
+00:01:53.377 --> 00:01:56.747
+even the first batch would start
+below the declared base rate.
+
+00:01:57.237 --> 00:02:00.787
+At the tail,
+count the five examples actually visited,
+
+00:02:01.077 --> 00:02:03.087
+not thirty two imaginary ones.
+
+00:02:03.637 --> 00:02:08.152
+One hundred updates means one
+hundred examples for single rows,
+
+00:02:08.152 --> 00:02:10.347
+thirty two hundred for
+ordinary mini batches,
+
+00:02:10.857 --> 00:02:14.887
+or eight hundred and sixty four thousand,
+five hundred for full batches.
+
+00:02:15.857 --> 00:02:20.167
+Choosing examples as the clock makes
+the intended exposure meaning explicit.
+
+00:02:20.737 --> 00:02:23.107
+Choosing updates could
+also define a study,
+
+00:02:23.257 --> 00:02:25.347
+but it would be a different
+schedule contract.
+
+00:02:27.525 --> 00:02:31.015
+The decayed rule gets closer
+to the training optimum.
+
+00:02:31.745 --> 00:02:34.832
+Mean half squared error falls
+from about three thousand,
+
+00:02:34.832 --> 00:02:38.645
+one hundred and seventy seven
+point nine zero to three thousand,
+
+00:02:38.645 --> 00:02:40.995
+one hundred and sixty
+eight point three five.
+
+00:02:41.725 --> 00:02:45.052
+The earlier converged reference
+is about three thousand,
+
+00:02:45.052 --> 00:02:47.635
+one hundred and sixty
+seven point five three.
+
+00:02:48.605 --> 00:02:53.445
+Yet mean validation absolute error
+increases from one hundred and sixteen
+
+00:02:53.445 --> 00:02:57.575
+point one seven to one hundred
+and sixteen point five six.
+
+00:02:58.125 --> 00:03:00.875
+That is about zero point three nine worse.
+
+00:03:01.905 --> 00:03:03.655
+Seed spread is smaller with decay,
+
+00:03:03.945 --> 00:03:06.595
+but that alone does not
+make the forecast better.
+
+00:03:07.125 --> 00:03:07.955
+The two objectives,
+
+00:03:08.365 --> 00:03:13.015
+their data windows and their units must
+stay distinct when reading the result.
+
+00:03:15.377 --> 00:03:19.877
+Pairing shows that decay worsens
+validation absolute error for seeds
+
+00:03:19.877 --> 00:03:24.327
+seventeen and forty three,
+and slightly improves it for twenty nine.
+
+00:03:25.037 --> 00:03:27.227
+We keep that detail beside the mean.
+
+00:03:27.817 --> 00:03:31.957
+A quieter final trajectory therefore
+supports a claim about optimization
+
+00:03:31.957 --> 00:03:36.987
+stability in this run, rather than
+universal forecast superiority.
+
+00:03:38.097 --> 00:03:41.087
+All trials stop after
+their example allowance.
+
+00:03:41.637 --> 00:03:45.947
+We did not configure a convergence test
+or stop because a curve looked flat.
+
+00:03:46.417 --> 00:03:47.907
+Time, update,
+
+00:03:48.497 --> 00:03:52.147
+divergence and nonfinite stops
+have separate recorded reasons.
+
+00:03:52.997 --> 00:03:57.567
+Changing the decay interval after reading
+validation would be a new comparison.
+
+00:03:58.357 --> 00:03:59.367
+For continuation,
+
+00:03:59.877 --> 00:04:04.577
+save the example count and schedule
+configuration so the next rate follows the
+
+00:04:04.577 --> 00:04:07.687
+same clock instead of
+restarting at the base value.
+

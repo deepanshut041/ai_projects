@@ -1,0 +1,16 @@
+{
+  "runtime": "2.14.1+cpu",
+  "scope": "Independent analytical attention and LayerNorm backward; SDPA mask equivalence; safe empty-row backward; tied padding output-gradient caveat",
+  "results": {
+    "attention_Q_max_error": 2.220446049250313e-16,
+    "attention_K_max_error": 2.7755575615628914e-17,
+    "attention_V_max_error": 0.0,
+    "layernorm_backward_max_error": 1.7763568394002505e-15,
+    "sdpa_allowed_mask_max_error": 4.440892098500626e-16,
+    "all_masked_score_gradient_max_abs": 0.0,
+    "tied_padding_output_gradient": [
+      1.0,
+      2.0
+    ]
+  }
+}

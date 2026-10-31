@@ -1,0 +1,61 @@
+{
+  "canonical_documentation": "ai_projects/docs",
+  "documentation_entry": "ai_projects/docs/README.md",
+  "tutorial_directory": "ai_projects/docs/tutorials",
+  "root_entries": [
+    ".agents",
+    ".git",
+    ".gitignore",
+    ".gitmodules",
+    "AGENTS.md",
+    "README.md",
+    "ai",
+    "docs",
+    "projects"
+  ],
+  "canonical_files_consolidated": [
+    "roadmap.md",
+    "progress.md",
+    "resume.md",
+    "decisions.md",
+    "START_HERE.md",
+    "SETUP.md",
+    "PROJECT_OVERVIEW.md",
+    "llm-implementation-research-roadmap.md"
+  ],
+  "old_directory_absent": true,
+  "nested_docs_absent": true,
+  "docs_head_preserved": "ec2096438d5db14262ea2b929d10161df4498d65",
+  "projects_head_preserved": "c8f82e42bec777f626de44b2d66fb83aafd023e6",
+  "original_source_hashes_preserved_before_link_edits": 139,
+  "tutorial_source_files_not_ignored": 21,
+  "navigation_links_checked": 15,
+  "broken_navigation_links": [],
+  "cli_tests": 54,
+  "docs_content_tests": 7,
+  "browser_records": 14,
+  "diagram_assets": 6,
+  "cpp_python_examples_passed": 2,
+  "source_dashboard_skill_hashes_match": {
+    ".agents/skills/developer-learning-tutorials/SKILL.md": true,
+    ".agents/skills/developer-learning-tutorials/scripts/learning_core.py": true,
+    ".agents/skills/developer-learning-tutorials/scripts/visuals.py": true,
+    ".agents/skills/developer-learning-tutorials/schemas/lesson-v1.json": true,
+    ".agents/skills/feature-whiteboard-defense/SKILL.md": true,
+    ".agents/skills/developer-learning-tutorials/references/visual-system-design.md": true
+  },
+  "state": "implemented and locally tested; no model/training/mastery/publication",
+  "managed_site": {
+    "status": "running",
+    "path": "ai_projects/docs",
+    "http_checks": {
+      "": 200,
+      "records/guides/start-here/": 200,
+      "records/guides/roadmap/": 200,
+      "records/tutorials/p01-gpt-1-foundations-v1/": 200,
+      "tutorial-assets/p01/gpt-1-foundations/v1/examples/causal_trace.cpp": 200
+    },
+    "url": "http://127.0.0.1:4273/project_docs/"
+  },
+  "visual_inspection": "desktop/mobile lesson screenshots inspected; diagrams readable via scroll/full-size link"
+}

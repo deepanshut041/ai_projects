@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="590" viewBox="0 0 1160 590" role="img"><title>The group axis is a wiring decision</title><desc>Eight query heads, two KV groups: four adjacent query heads share each memory.</desc>
+<rect x="0" y="0" width="1160" height="590" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">The group axis is a wiring decision</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">Eight query heads, two KV groups: four adjacent query heads share each memory.</text>
+<rect x="36" y="130" width="122" height="64" rx="12" fill="#eaf0fb" stroke="#2563b9" stroke-width="1.5"/>
+<text x="97" y="169" font-family="DejaVu Sans" font-size="19" font-weight="700" text-anchor="middle" fill="#2563b9">Q head 0</text>
+<line x1="97" y1="199" x2="300" y2="300" stroke="#2563b9" stroke-width="2.5"/>
+<polygon points="300.00,300.00 289.02,299.32 292.84,291.65" fill="#2563b9"/>
+<rect x="174" y="130" width="122" height="64" rx="12" fill="#eaf0fb" stroke="#2563b9" stroke-width="1.5"/>
+<text x="235" y="169" font-family="DejaVu Sans" font-size="19" font-weight="700" text-anchor="middle" fill="#2563b9">Q head 1</text>
+<line x1="235" y1="199" x2="300" y2="300" stroke="#2563b9" stroke-width="2.5"/>
+<polygon points="300.00,300.00 290.91,293.80 298.12,289.16" fill="#2563b9"/>
+<rect x="312" y="130" width="122" height="64" rx="12" fill="#eaf0fb" stroke="#2563b9" stroke-width="1.5"/>
+<text x="373" y="169" font-family="DejaVu Sans" font-size="19" font-weight="700" text-anchor="middle" fill="#2563b9">Q head 2</text>
+<line x1="373" y1="199" x2="300" y2="300" stroke="#2563b9" stroke-width="2.5"/>
+<polygon points="300.00,300.00 302.46,289.28 309.41,294.30" fill="#2563b9"/>
+<rect x="450" y="130" width="122" height="64" rx="12" fill="#eaf0fb" stroke="#2563b9" stroke-width="1.5"/>
+<text x="511" y="169" font-family="DejaVu Sans" font-size="19" font-weight="700" text-anchor="middle" fill="#2563b9">Q head 3</text>
+<line x1="511" y1="199" x2="300" y2="300" stroke="#2563b9" stroke-width="2.5"/>
+<polygon points="300.00,300.00 307.29,291.76 310.99,299.49" fill="#2563b9"/>
+<rect x="588" y="130" width="122" height="64" rx="12" fill="#e4f3ed" stroke="#16735e" stroke-width="1.5"/>
+<text x="649" y="169" font-family="DejaVu Sans" font-size="19" font-weight="700" text-anchor="middle" fill="#16735e">Q head 4</text>
+<line x1="649" y1="199" x2="850" y2="300" stroke="#16735e" stroke-width="2.5"/>
+<polygon points="850.00,300.00 839.02,299.28 842.87,291.62" fill="#16735e"/>
+<rect x="726" y="130" width="122" height="64" rx="12" fill="#e4f3ed" stroke="#16735e" stroke-width="1.5"/>
+<text x="787" y="169" font-family="DejaVu Sans" font-size="19" font-weight="700" text-anchor="middle" fill="#16735e">Q head 5</text>
+<line x1="787" y1="199" x2="850" y2="300" stroke="#16735e" stroke-width="2.5"/>
+<polygon points="850.00,300.00 841.00,293.67 848.27,289.14" fill="#16735e"/>
+<rect x="864" y="130" width="122" height="64" rx="12" fill="#e4f3ed" stroke="#16735e" stroke-width="1.5"/>
+<text x="925" y="169" font-family="DejaVu Sans" font-size="19" font-weight="700" text-anchor="middle" fill="#16735e">Q head 6</text>
+<line x1="925" y1="199" x2="850" y2="300" stroke="#16735e" stroke-width="2.5"/>
+<polygon points="850.00,300.00 852.60,289.31 859.48,294.42" fill="#16735e"/>
+<rect x="1002" y="130" width="122" height="64" rx="12" fill="#e4f3ed" stroke="#16735e" stroke-width="1.5"/>
+<text x="1063" y="169" font-family="DejaVu Sans" font-size="19" font-weight="700" text-anchor="middle" fill="#16735e">Q head 7</text>
+<line x1="1063" y1="199" x2="850" y2="300" stroke="#16735e" stroke-width="2.5"/>
+<polygon points="850.00,300.00 857.32,291.79 860.99,299.53" fill="#16735e"/>
+<rect x="102" y="307" width="396" height="118" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="120" y="339" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#2563b9">KV group 0</text>
+<text x="122" y="384" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">K₀ and V₀: all retained tokens</text>
+<rect x="652" y="307" width="396" height="118" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="670" y="339" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#16735e">KV group 1</text>
+<text x="672" y="384" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">K₁ and V₁: all retained tokens</text>
+<text x="36" y="475" font-family="DejaVu Sans" font-size="23" font-weight="700" text-anchor="start" fill="#16735e">Correct contiguous expansion:  [0, 0, 0, 0, 1, 1, 1, 1]</text>
+<text x="36" y="520" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#b13f56">Alternating [0, 1, 0, 1, 0, 1, 0, 1] has the same shape but different connections.</text>
+<text x="36" y="557" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">g(h) = floor(h / 4); outputs are still joined in query-head order 0 through 7.</text>
+</svg>

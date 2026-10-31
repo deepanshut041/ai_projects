@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="640" viewBox="0 0 1160 640" role="img"><title>A positive feature product is still a finite approximation</title><desc>Arithmetic probe: d = 1, x = 1, y = 0; selected directions +1 and −1; r = 2.</desc>
+<rect x="0" y="0" width="1160" height="640" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">A positive feature product is still a finite approximation</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">Arithmetic probe: d = 1, x = 1, y = 0; selected directions +1 and −1; r = 2.</text>
+<rect x="36" y="125" width="180" height="76" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="46" y="175.92000000000002" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">direction ω</text>
+<rect x="216" y="125" width="245" height="76" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="226" y="175.92000000000002" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">φ(x)</text>
+<rect x="461" y="125" width="245" height="76" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="471" y="175.92000000000002" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">φ(y)</text>
+<rect x="706" y="125" width="418" height="76" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="716" y="175.92000000000002" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">φ(x) × φ(y)</text>
+<rect x="36" y="201" width="180" height="76" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="46" y="251.92000000000002" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">+1</text>
+<rect x="216" y="201" width="245" height="76" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="226" y="251.92000000000002" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">exp(.5) / √2</text>
+<rect x="461" y="201" width="245" height="76" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="471" y="251.92000000000002" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">1 / √2</text>
+<rect x="706" y="201" width="418" height="76" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="716" y="251.92000000000002" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">exp(.5) / 2 ≈ .824361</text>
+<rect x="36" y="277" width="180" height="76" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="46" y="327.92" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">−1</text>
+<rect x="216" y="277" width="245" height="76" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="226" y="327.92" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">exp(−1.5) / √2</text>
+<rect x="461" y="277" width="245" height="76" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="471" y="327.92" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">1 / √2</text>
+<rect x="706" y="277" width="418" height="76" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="716" y="327.92" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">exp(−1.5) / 2 ≈ .111565</text>
+<rect x="36" y="401" width="515" height="158" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="433" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#2563b9">Estimated kernel</text>
+<text x="56" y="475" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">.824361 + .111565 ≈ .935925</text>
+<rect x="609" y="401" width="515" height="158" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="627" y="433" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#16735e">Exact exponential kernel</text>
+<text x="629" y="475" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">exp(x × y) = exp(0) = 1</text>
+<text x="36" y="609" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">These chosen directions illustrate arithmetic; the Gaussian expectation identity is a separate result.</text>
+</svg>

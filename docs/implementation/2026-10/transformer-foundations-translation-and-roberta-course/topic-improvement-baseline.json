@@ -1,0 +1,632 @@
+{
+  "archive": "/mnt/projects/ai/.ai/retired-tutorials/2026-10-13/course1-before-topic-improvement/course1.zip",
+  "archive_sha256": "5d4e20d3ca1ed33b4949fdd0cc32a62dd04605f57d31f555d6727cb8eb495dd1",
+  "protected": {
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/research.md": "a661243876f55e831e77bd97c96ab95931ef82a40e4cc089da8c941aa11541af",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/reference-verification.json": "4c2ec1b907fe6e1b375005845371edc6e6cb49f203481d789985e3141eaeca36",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/validation.json": "5aee0e4acb6462de9247c530929d3c936995bc5d02d664a9886b559d8bc4991d",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/render.json": "e036dc8fd64e181adb08d272c65381f40e460d43683434e6f37c7c56e898b4c1",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lesson.json": "80a5e514061b5ddd4066dea404f738c32d065a846247c8e521b0d821cd4405ab",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/example-checks.json": "862a24bf3d994598cdf8240bf9da7d10d7625e88e71ea04b9ed85a551d148400",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lesson.md": "8fdb6260cf4e6a1d6bea0cf2ab3cf2f657af6b16ec717ff98e5e0ecccd8a0d12",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/prerequisite_mlp.py": "30071122b9cb8f7ced4a126d95e40f9cc034252763647279da82cd14c46acc40",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/study_notebook.py": "bb9ba137a8c97cc770365df427725515f85bcc5319fd36ed59132c7cfc84aa8e",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/prerequisite_export.py": "8882c69ca581ce0754cbe8169a124032f4af3de6359d336837318b7243808183",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/numerical_trace.cpp": "989dce03c34f5b799a83aab2078dd641f04f47d6dd989883542b17ea6891d78f",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/fresh_process_resume.py": "4cf54ce15acd6356fc7a04993d2a075d9914ab2ec884594a54ca982a134faaa5",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/prerequisite_tensors.py": "10ea67eaedbf0aec7ea8cd6f45924ba658c6e543facea30d3747e70122d94ae3",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/test_prerequisite_text.py": "d8441ee65e49b55a34b5f3a2626466ca9b91e266e6727e4050ee9bb60fb62630",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/test_deep_learning_math.py": "38b1c8cdf69a967901e5eeae17403d6af5d5503f5949ca34b41dfa28efca02b5",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/byte_bpe.py": "5adcd5044d52d541dc729554a3f6d184ff0d53d2704122d0b37f4dd51e6db190",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/first_session.py": "7c2fc16ad94edadeeecec4e901c6beeed07d27919687ced003e42dad532d0548",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/test_prerequisite_math.py": "a93d345f769ad6ff8ee2a0f5a6b236588d869e7a1567982617872426aca3dae9",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/tiny_transformer.py": "0e4073ce2595c1170a5184247a8d2b2467d1b2f7a4059d9dc8019a296be90635",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/numerical_trace.py": "bd276de5aafd7e31eff80b89b367ca9859940aa752baff1c1939b70ba4b17d43",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/prerequisite_mlp_checks.py": "fb281f713c91f67d2b15c4c741d206a06b541db8e3bd425069a1f0a04ed3bdfb",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/transformer_foundation_probes.py": "80151cc7f474497a67fe7d99113b064bef1a9993c4e879060abc13c468ee8e50",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/make_colab_notebook.py": "dd60c2f59334b49918039d32b46b3e3ecae8bbcb35cabc673092b95df2dc8a61",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/deep_learning_math.py": "b6d07e8e5180d477ba13ddef68eb8aed3984eabeb26a16f93f82c86829ea8f8d",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/tensor_autograd.py": "27798d9f9fbb1eeeb888367a2e4a5bd199ec2c79b5822e8569309315575e56c3",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/prerequisite_math.cpp": "123bf8e2c25d2afc267d097c2f2434cd8f0252793d76723f8a61accd47ac179e",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/prerequisite_math.py": "b7d2fb4cef5edfbffb716482a096aafa54d17508a27308ebd0d8ecf69885ee62",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/math_checks.py": "a7dd57cc0d62176ee50967900df7a96f1d00b72399ee6529c81f55c59502a9d3",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/prerequisite_checkpoint.py": "5affe55623c57b1433dae54594890d5e51cec929faaa97a0525f3197e9733151",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/test_prerequisite_tensors.py": "cbfa82433884375e54be3d7961c10553ca8561264245f3a3f1534773b0453da3",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/prerequisite_text.py": "7abae1a1c052d20d23380419c86a41a5c89209bec576c54ad016c90a0031f4ab",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/examples/test_transformer_foundation_probes.py": "01861d222cd344871a1de5cbd02302e0b3a7709f8f5810a2450c105c6acd11f5",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/residual-path.svg": "12a3ba83846658a4971763d3e5c71c6d99ee17eda96634718c64504234631cee",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/prereq-text.svg": "e6663d97f45b24eae8400304e4396167596ae05d6f7a589e46017c17eab0d155",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/prereq-adam.svg": "7efdbe2ad70e49a57e1eb81ffcbe2937fc5ed7e45a1813045a74415d9c1f729d",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/gpt-handoff.svg": "15dd95427441b771e9a81b4f41f3166c8b11c45aae882867f8ba7435c8b66890",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/postnorm.svg": "94c1d1983d4ab1c4acc634bd406ddcaffd049c251528191dfe4d0c9e4cb10e55",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/prereq-recovery.svg": "fa9edd5e10fc0161f00d7d140d4e438b40bf072f9ab553e90060b96427fcc058",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/dependencies.svg": "a2388d7a2f9741b4530c511881ca1432b2d832e057a8130a0f6f43b8219f1675",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/prereq-prediction.svg": "bb1e5f0d98202c0a175ff868e91805f66d086211e99a75b056c359b32e65cf04",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/mlp-shapes.svg": "b0a8f5863b6e4cec884caf41680e4aa0c0acb8d721f09acc1330f5dc538bda93",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/target-alignment.svg": "3d85a625118e68f9345c37808ec086d32564bfae06ec5f9f16d56da75866a4e7",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/data-roles.svg": "ece67791d1a3a5575bfdd79ccf7cb234b80e8e70dba7c7b77d0abc7667fb304d",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/prereq-gradient.svg": "f22d1bbad2b84ee807b8109d49dd3d8b4dc57fb1ee0e1bff33cb6a5e1619a1c8",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/model-flow.svg": "03583f9af632b021118523054f54283d2f40359de00092fce21714034590e8bc",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/recovery-flow.svg": "1587256956f56a7485da704bf62afda14b77fd262137566db43b212dc94d68d7",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/prereq-handoff.svg": "49cf50bf7279a137a61cbdfbe8d12d62a52696e9569813dc5684baff983a25c8",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/memory-map.svg": "e031411725edbed54cdd6f54879d19af5d1ed0bbcbd3d02c059fd9e579480e40",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/prereq-training.svg": "06aaa4f591f5ad81830b46478b10d5c1eb00f1974a92769a212e0fd8fb635f23",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/attention-flow.svg": "3fedcaab87aae7648167df7ea26d31050a640fc5830fa8ba04e11fcc84f44afd",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/probability-matrices.svg": "2c8dc426f62726ccc1ddb4edd5664912f773c335ebc6d58e8bd83aa2b8389080",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/prereq-lookup.svg": "e3324e98296b152ff9e4864a1cb295410c4bcec891eb59c3fc886f46d3c0c6ad",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/prereq-probabilities.svg": "f6cd4091062e7bce72ad01509c43f1adcd77679dd6c11d3f324a914edee1c7f9",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/text-pipeline.svg": "391a4852ecf714a2e1f648543ecfecf729e06852e0171ad3564dfeae4b3b23b7",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/prereq-linear.svg": "4bf6ce56c34f1dbb90f2ce03676357252a28fa88e409ce71573e464d771a00fd",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/learning-loop.svg": "a55e31925ebc9bb5dcd5ae5c84647df3983b64e63e3b4e787bb8b1e9eb9ac72a",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/head-shapes.svg": "7b526dbc5979e0d6cb48c8b53321631d6a9b3aa2705145f19dead71ceec8d9cf",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/feature-normalization.svg": "887150b11745d45ce70a13f4ae06d0f6f280ecc3c48cfd02452378a3668e49d3",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/module-state.svg": "31eb391b70e6bec16c284991252f44a5a435ba22d27fc72baeda1c83dfcfaa80",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/seq2seq-contract.svg": "e7c2d1d0f4b1e83b7113368a936e24ed49293af17fb584f2284d6ccb0199a6c8",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/mask-contracts.svg": "00d6689e18a19686d00ff8f610599a3d7504b7ce714637439996a11156cb8a4c",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/diagrams/bpe-cycle.svg": "e7b1639bb633750e85ec7eaf46210cab17976b5b72a1fedad562e7986c980152",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/practice/questions.md": "ec562902bb966db69210e46768931889492578d08d61abb64f489db8dfaa70ae",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/practice/explain-your-model.md": "b44a4d8518403594c4ea3e83f5795cece91e1ad8cbceff8ef8ccff12189e7d9d",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/evidence/reference-evidence.txt": "d84df3ae6db0ea6c07324a60dcf4fe7a91476188df2c8fdb2ed54b64eb75cda7",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/project/study-notes.md": "fe05cb781b274d3052f28e66b945444e5a072125a5c305e67344a6f38b1dbe78",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/project/course-outline.md": "1b377accbd5cc28ee47219ab10f112ac1b6766f45929fe6f707977a454581e3d",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/project/prerequisite-map.md": "04cba7d6d3c9ff236cb69c2a3e2d608e41eaa23eb99ef1592b40110f3123ee74",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/project/p01-readiness.md": "c8f1132c307b010ef965a5a2ef51779c93d958fb37895075df0d929fc726373e",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/project/source-notes.md": "83596b55a0c496e6c8f21d99e345367d2fd717a0e2534078cda3ccef1c41dcc0",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/project/implementation.md": "a1f6e9d205e9b4d44e9d2709fcd5609daff4514a8ddc2c26264c8d518e2a0062",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/project/reference-runs.md": "35185a8dfee25c956e0013d22aaf1178788287850cde7998cc1b999a396d6e09",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/06-initialization.md": "65052f935523106a12e321893777440cb8e665ccc67926c0cb19a1379b995a31",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/20-normalization.md": "74092d1c5bd8a1e842822321463cf178112d86a028cb153aaea4269412196b9b",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/03-numbers.md": "3b3690825fea6c24b89baa1f58b3b4081543afcd3e36fe321fee13aa96f78213",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/13-embeddings.md": "3bf372eccddaf5747af29b7f37521aed5585c501d2eb9216f59264a36b225963",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/21-regularization.md": "344c649f57601852f769de0a67bb0d53cf2a8b405f4629bce1ac7903cc0fc06b",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/17-multihead.md": "cf1a51a79e91cb97627c388195219c3e420e911ca4a8f3f925410fd4ff672286",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/10-recovery.md": "18f5cb0c368a0d2545b22401b5e8b30a675b8325fc334dcda85d9620f4fe1b1f",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/11-colab-and-handoff.md": "4b9844c7dfcc163939e44598f45368c3a8ed2167002ed97860dcd77af6aabc84",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/01-prediction.md": "9662e73d430d9e94d5ff09060f163e5dff597d09d8d76d808b42aa5ca4e98f6b",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/10-training-steps.md": "3087b19bbeedc25005d222d0b2129d7869f81675091891bfe5899930ce0fd159",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/07-attention.md": "93db61ef4324a0c5a0cba06b60791e7d36033c8d2c8e365f2056e93ecebb6fc7",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/19-residual.md": "13e4475ed37cdd3092a3568b1169f22426b16f68697d0f987c4dd021831fb49e",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/09-optimizers.md": "c971aa55d8cee0871eed9136b81147515e092de7fcbad7970cc22a555752bbb8",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/06-data.md": "fd0b557d0eb41a600028b43499c78da2c16ee20e4a220dfaa6589463b90d72b6",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/09-training.md": "1b1bdde6bdcdba8ce036ae875d743f8487911d70523a19c52c28fb7bea5a71d5",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/08-losses.md": "c5f3255b411309303d8f6c61bd817743cf4116981cdab0e564f4748af824e74c",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/08-model.md": "807652e86c34f3971e869fed2b2e013a79e61403513a9c174416b1af8b945bb0",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/18-positionwise-ffn.md": "466ccb2d61dafdaf6cc37d8185f943b0e777237b57251a9ef78f8624d55cea51",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/05-tokenizer.md": "5ae0436b481204f0bdaf190f8639dc1ec2cb82c6e05cd6b6cc0b20432377183a",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/04-autograd.md": "487d8d4db49a8e56669740cd8b7ad21b2132b786389bf6af26c875453018e9f7",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/14-position.md": "97844048cc329c191fc55f6e82ebe9d35aa1d731393c17ae97554e563d08e3f0",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/16-masks.md": "3b7fd399ea017a85e24c137566c508ed88f3c9d1aa91805a6bfa6e843b255a92",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/04-probability.md": "85db96004522d92499521c985e422923e61024408d9ee19db9532bc5335838c6",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/02-workspace.md": "d5033bec5b6aa078bcf782449f3b65c34b91c777b77f4b047942e59c5fa3754c",
+    "ai_projects/docs/tutorials/projects/p00/transformer-foundations/v1/lessons/22-encoder-decoder.md": "969c57d70c16ebc9140cc381868f1ffecf9fce54e946f2fae033a98b77e1e720",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/research.md": "9cc4daa3c1e432d601e4e944fdb77b57e0ecaae95dca32b2357399a920a5561e",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/validation.json": "902860018ab04aaf9676047ea1eaf1be9c090c96589dc7ed919ac9aebc7f9aeb",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/render.json": "e0fedee71278638be5a5afb4468870dc30d82f401c25c4b8755fcaa31554c121",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/lesson.json": "fc171ca4282be8fb77da70fbbc36aca99be72166f836b3c9ce1867de2ef36bb5",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/example-checks.json": "67ae780ebc2add586b8e0112eec6ca3a507284d6ed862648f4b39205800e1db2",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/lesson.md": "85d7d0f260d7e382eaa8a6bc4a258f9cae5665053553e8da98933e6785643b49",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/gpt_checkpoint.py": "702427c35aff18267af1f99c100204e18ec7d195b0ba4a80e894d19fb2e04c7e",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/export_source.py": "5247c064d4532d649102b193a25dc3ebb10cb96bd34fbe7dda63b2c3259f43c4",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/gpt_trainer.py": "18204270f90b9b34fd094cb91678abc0070cce6ce5df9c5fed1a29da494f1f2b",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/math_trace.py": "e96a8410b4c8081e2a73a9be366556577c5548ef2ce5563dcf2f49a07f3c5f46",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/colab-free.json": "c7e0491d4640073af2155955b6144c2d41bd554408d583889948e6f2071dfe36",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/gpt_sample.py": "033ca94076401284f27c1b9f94f9b52ea7694f62971f3e03a6863b9fd81ccc45",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/gpt_config.py": "9637f09e533deaaa55283687545f54db5e5ceca33579898e4cd69122903ee82c",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/test_gpt_data.py": "61ff8ad1a6c3e7e3b7e71a4e7ddd6bc557946ae2a47346193b6acd8c2102b4d8",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/test_gpt_model.py": "5d797d8679ca2a40296c9cea3bc67df052b51cc00f8859c6b6c833c07c77f155",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/fit_tiny.py": "86cdfe980cb89f8de0d73b6e2987fca0f249ca8cfecfb8e3639794451cd01b95",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/gpt_train.py": "f2bf6ba70d5dac6a4faa328dbd704094b88885a4abf34ebd836ca73b831bf242",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/gpt_data.py": "24c42a603949370d4b12c7dce4681bca09d299268aa5a1c28c5d526af796a3e8",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/gpt_objective.py": "568fa565f6c326312b4e44fd8808364f77a20fa0cdd8d0f85619a7e56e3d2d96",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/gpt_attention.py": "d5ccdc630d1840ba6f9e0d4bbfb823e05e8a5fb552f789568faeeb9c297877ea",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/cpu.json": "c7e0491d4640073af2155955b6144c2d41bd554408d583889948e6f2071dfe36",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/gpt_tokenizer.py": "5adcd5044d52d541dc729554a3f6d184ff0d53d2704122d0b37f4dd51e6db190",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/gpt_profile.py": "c6141921ee9d9ca1c6af35b12dd2f948283c3a0fa31b00250a7f8c2da9e63080",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/test_gpt_training.py": "44a6ad3f09a2053ba6b311c91c0844a2d8623361bb7c0abcf6f498207e62044e",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/gpt_model.py": "a0b531606053c85385beb18667f3e9f8aabe11fe43b09e48e34376c0d7cb3519",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/examples/math_trace.cpp": "b27fcf045ce995db744edc63c573a97597485b5e07c3daf1c5b31b6646b17daa",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/diagrams/memory.svg": "880fcb06e9787b3bd100c4eb1f0f58dc3042139f0f5d60428199074844a82b7e",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/diagrams/data-flow.svg": "e68a4d444b8c53feb2f3df70a0f73649ed92c568eaab50d15c6f01e773d5e14f",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/diagrams/prenorm.svg": "4a750ebe7a8c8d6c31f848de5aa97c55f45370e6926c7df64ac3e57a9a7a51cc",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/diagrams/model.svg": "cfe83ae5bf73f556f91ce8b72a6a34f757c6d7767a0b6bef1afca32a2211b6bf",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/diagrams/attention.svg": "a8f8a248254ca35cb0ff723ec686aa8dcddfed004463cc5aca689e435206aaa3",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/diagrams/recovery.svg": "1b509c1e10d4f6aebf185dfd47d11bb0fd0b357de620869a4632ee473f7af15c",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/diagrams/prefix.svg": "aaf26ed47b49d628ad204d819b38572b7ed7cd54bf8dc2b0d03ec6e2278cf28a",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/practice/questions.md": "294fa5ce3e6d8c19e9558fb4cf9dcdf4016ed79c3bda765cabf918bf4cab74f5",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/practice/explain-your-model.md": "9767aa99cf097225b7bad8b6e2c3f04a42e2029c5da50a279b4250745fc3217f",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/project/reference-results.json": "cfff93f395bf784e17c60b48aa27200255b2a356d49e40f90370618d8d6aeb2b",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/project/implementation.md": "c73c7c8220db25ffb64bd48587c40eb97b4cdc70d596b69cbf933a1ee09a9389",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/project/readiness.md": "52f235c4f22c3d87dfc27dc2f2b2bb5b55ab5c9c5264dab5c71910780bf37a1d",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/project/reference-runs.md": "1624dc7441d622aec28a1a73ff24e85d9e88ca54cf8ca526a0cb1f33a679f32f",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/lessons/07-loss-and-learning.md": "b721882b42d6fea6dbde19f64d7d798d8a4d5997b109400a8762aae4b893d90b",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/lessons/04-windows.md": "f3658176f88027da50e81ad3bec0a037935470411c0d4cdfe2404be0e17feaee",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/lessons/06-complete-gpt.md": "ca1b457b9cfb3216983ffad78bd0a30d79112f0acb3021b50e9ccc3444534410",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/lessons/09-persistent-checkpoints.md": "3db49711aa0bd2c84d6510ccc2cff0b410944e9c3cc6ca59676218a85396cd2f",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/lessons/10-train-and-resume.md": "d492e320501a447b4c3c1b61682bea4799913d8f80f88b51e4e776c7d70a798f",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/lessons/03-text-and-tokenizer.md": "e186098d0b27f76ad481a932e254d7920ad3d4232a3b0f33ee8ce1c840e8ef67",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/lessons/11-colab.md": "9303ce17e286957a478e8fa6d279898629e5cfc0c83a29786acd57af39e8c353",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/lessons/05-causal-attention.md": "d7ebecaf882bf5a856059f7e01e6cbe6f22e00cb53e279992a004a6021cb3302",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/lessons/08-evaluate-and-generate.md": "2e86c36a5bea037db95450b0c15b36cb537f1606c410abf48cc6e93c37fead34",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/lessons/01-next-token.md": "3142fef8086b9bc817148d43dc974d34f6bb2d2455fe615853af670f3e8bbbe0",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/lessons/12-profile-and-handoff.md": "ff3a35a06f13cd13fdabdf3740c11a6fcfd4ceb436f5d7cc5cd07a4187337314",
+    "ai_projects/docs/tutorials/projects/p01/small-gpt/v1/lessons/02-workspace.md": "4d4488bf61f57c4c511c0087de9443bd7230855120cc282d332b22f488f949bd"
+  },
+  "children": {
+    "transformer-foundations-lab": {
+      "head": "b7ffaa6911c305c07823b474cbfbda1169d8e158",
+      "status": " M AGENTS.md\n M README.md\n?? .ai-project.toml\n?? docs/\n?? first_prediction.py\n?? src/transformer_foundations_lab/numerics.py\n",
+      "files": {
+        "docs/implementation/2026-10/p00-foundations-implementation-and-learning/06-review.md": "ce0f4fb1f9515c9b276719a2098ecacac70625fdb981241d9c47b75870a6c9d8",
+        "docs/implementation/2026-10/p00-foundations-implementation-and-learning/01-research.md": "3ecdea3599a6a56e4e5761078e47fbe31d2b7cff3596688b6be29aa8a537cc9a",
+        "pyproject.toml": "16c9949aa048b9b83dc4ecfb41b31cf60906b51c6c373a6334ababefd71126ab",
+        "uv.lock": "7453def7a27c2aa0bee85f964fc26219d7d760c039b85df4fb19b25451707bea",
+        "src/transformer_foundations_lab/numerics.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "AGENTS.md": "8add0579d2ec0bbf8316b5b03eb96042aa55a6c259c6205aee187b0c23c76156",
+        "docs/implementation/2026-10/p00-foundations-implementation-and-learning/03-tasks.md": "24f1ffff65162620ccb481e5461bc83c7427b71f24a300be7cb486a7eaf09a9e",
+        "tests/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        ".ai-project.toml": "f4aa2fc5bc01bd2572cd90326b3306b6bc57b4d4502492c7d168481175705ffa",
+        "demo.py": "1d8c1a68242797c9c2b5605ef79362f458807f121c00acf8c6e9869f3bdce8e9",
+        "README.md": "c207ac2af76fc79a0aa09b446c6468527eebef94d967f9281e46c5dc3b396a3a",
+        "docs/implementation/2026-10/p00-foundations-implementation-and-learning/05-tracker.md": "6e90824d48298d6491c2f5419f1ae1ea6979b01ab5f59d475a9c7bec2104d43f",
+        "first_prediction.py": "7d4a867a77b4a0ec8594e739cb8e5ce869ec5c262d7152e74cb733b721f5b0b5",
+        ".gitignore": "3c39cce4ea0f41b19aaf41c068142ba384ed26b8d8cef2297acd8f7502076e7d",
+        "src/transformer_foundations_lab/__init__.py": "f9363700a6ce075d0f0531f63c52c9a6af3b9891cac5668dc35491284c76be44",
+        "docs/implementation/2026-10/p00-foundations-implementation-and-learning/02-human-plan.md": "a43f82414881a9f13c291da29c54db9eebed1b2e278b1a3f30a371b10bf350fd",
+        "docs/implementation/2026-10/p00-foundations-implementation-and-learning/02-implementation-plan.md": "0cdf6b49060be2fd2ad4e6bc07c5cde645ae73d6bdd0a7bdd18d814daad2fffb",
+        "docs/implementation/2026-10/p00-foundations-implementation-and-learning/04-diagrams.md": "dc25b00f233483f966540da3feed1a02bb52fa1baf72f9341d04a4d9e44a5dfb",
+        "docs/implementation/2026-10/p00-foundations-implementation-and-learning/00-resume.md": "53c23169c4c069c2c63c6f6bdf95e38ae5e329cce15fefb04494c84c06b36990"
+      }
+    },
+    "attention-is-all-you-need": {
+      "head": "475c6347104c1de9a8c158171b9f6f3228d1aba3",
+      "status": "",
+      "files": {
+        "LICENSE": "755d1bfefe482e7538636b67de67d09803e126ff1a587fcab4fbadfcc16a00ee",
+        "docs/COLAB.md": "ad6b652f44258cca1d3f73079a65053ba344bb29a1fd46c9db72b1183f5c9582",
+        "tests/test_attention_visuals.py": "cb828ccb4069a97b84959a6be9b0f8a5dc2419c3d73b93d71fc8ea8dbde223ea",
+        "src/attention_is_all_you_need/model.py": "45c5664e172481d2c1c266caabf0338a1a37bd2ae921e0720aa61484b4f32871",
+        "attention.py": "f7ee8a399120fa1846ee4e2297695c20cc21cb3673afa171d8ffcc90ea4a0270",
+        ".python-version": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d",
+        "pyproject.toml": "eb67e380e25ce678d6ab3c051508ed5ab78e247a4550bd2a811d5f3d9146660b",
+        "prepare_data.py": "48e512b4aa65e3e946bb7868478c0e2f139407db8edc94e2bfe9a335c24aa9c0",
+        "src/attention_is_all_you_need/attention.py": "4a05ee4f13a20f8409df63c426b27ce14a38fac46c7641c7a652aaf640e72618",
+        "src/attention_is_all_you_need/config.py": "439c8b3012db7c0d7af15e36bb1ea299d3e54d876531f3d82a56eb153590fd6a",
+        "tests/test_attention.py": "ae425facaae32f1098cad9978ee31806b4b410dccf7da4dc1f52baa9482e3d4c",
+        "train.py": "9c049c69e4c0ee34228341be8d158cf08b3a081d4616eeeabfbdb242241dca88",
+        "uv.lock": "b4d0f9e174d05ef3601e272e61c966a1bf3e3b32720e902d74df3623d88741ca",
+        ".ai-project.toml": "fdc0d0b86c195a69bcd2e045f3fbb93c36ef9b0fd801baa6fd6bc5919d57e2fa",
+        "configs/colab-free.json": "e7e5f4ff03a90e9b2f048798ab63eab81feadd24cf16f13a3362c65584b3147e",
+        "compute_bleu.py": "97dc3ff5a7a99e2a560da77d405ec22b436a7202d1d6ecd684de87e0c2490ebf",
+        "src/attention_is_all_you_need/tokenizer.py": "5d7c9038fafb4cf4726995f1969b9e28e0a7022d7030b2c6d8f0df9ba4681970",
+        "src/attention_is_all_you_need/trainer.py": "bdb6b002ad8ceda0e3e5ae061d179a77948612cf07e14d3f36e81772a43f2e90",
+        "README.md": "77aa295c61614578db1e584e93b18cb428326372cdbb9af49f5eb4129b57a87e",
+        "src/attention_is_all_you_need/data.py": "e07798b515926ccd691904f8060aa2da0f1d6cf8f83f0917be61a749708550ee",
+        "configs/local.json": "d13b44442d8c023e66dc955bd51a6f347d7d630f0f66c9e410ca1a23ca2a21c3",
+        "docs/SOURCES.md": "ed165c9b6ab891864b1bf25c32a921e0ec540355fa2576d5072cba390785bf72",
+        ".gitignore": "e2fbfff2ec87638dfdd744560001bc20569e682918fbf5f55401aee7c7b2f0a4",
+        "attention_mechanism.ipynb": "06952ca12ff2409ae140a8552da435a920ec980090a2280e18f0c3747dbe72e8",
+        "tokenizer.py": "fffec07915c11409468f276f0a793cc7df06112ec3b7f7b50142e2e404daa0c3",
+        "src/attention_is_all_you_need/__init__.py": "535dd468b4c70d840bb63134734cb54030bae68184fd1f88a23da79a3f105949",
+        "inference.py": "f8905b1d88edc1cc3bf8bd2daafe66f285190d262963fb8945804b49a9407d5a",
+        "attention_visuals.py": "0ac95bb65bc9a9807b80d8948ef8e01ad975186bdd941aad5418fcb9c03d7de2",
+        "docs/sources.json": "986f1efc15577ab166999a37fbd80c7a1f60b6a2e370ba3590c65c0fae35d61e",
+        "src/attention_is_all_you_need/checkpoint.py": "2334b286b56834b74cde3fd756ccd0e603ad3c916cab80cb3df0bbffb3f02818"
+      }
+    }
+  },
+  "original_examples": {
+    "examples/translation_train.py": "cd0832eb74454bb4766d4b7a1cb0f6104b79303c47b139ad8b8ee485d560baf3",
+    "examples/course_checkpoint.py": "6eafcffb35ae81f299b3fb64d780079a91e39002cc9cfc40b019a519d16b0cb5",
+    "examples/foundation_math.py": "7da4c18b914c6e58ab91f3e2f643cb2810388235a750b8e623a117fa7898f4a1",
+    "examples/course_source_export.py": "7e6cddc63a07bc080d393733dafc7f710ab8139b8ff66f359e312fc203ce29dc",
+    "examples/translation_attention.py": "ceb54738fba4e3a57ecc8729113e54c38ee08b970be84f7bc62fdb9d56e29eed",
+    "examples/course_session.py": "47f1bedda5fb5f0c7429f897df6233ce140a5914b4330a23e76837ec32788d98",
+    "examples/first_retrieval.py": "c18bba06e120528790bc0943f2de0afd19569acc955f1afeae547ebf893d211e",
+    "examples/roberta_train.py": "ffcb25c1321ad850acf2c342f49998ba375cec8296033d976e0462d463e5ad5a",
+    "examples/course_session_checks.py": "12be8de6cc855935a43137e4b2c95a99b7f24fe0d3da6126089076936b942a7a",
+    "examples/test_foundation_math.py": "625a1a8f546042351d4ae2a72f372c2b64aa924577a596a2400d4588e79f6e09",
+    "examples/translation_data.py": "aa9f631c55c542c10ded2eba8a3594a2b29c174c24a2baba9de9875ff41eb184",
+    "examples/translation_metrics.py": "b1f519262bd3bd681b6d263f5ac52b06694d83b0dfe3141b5eae1b994c7d1f0c",
+    "examples/LICENSE.txt": "755d1bfefe482e7538636b67de67d09803e126ff1a587fcab4fbadfcc16a00ee",
+    "examples/roberta_model.py": "b409de1ae70100247fc82b5af5c5076ea06565dc70d6b865fd2415f13c765d5c",
+    "examples/roberta_checks.py": "52c8fd70581386e8effdbfc926b0e741a04de2be9b202727afd1ff4113d19441",
+    "examples/translation_checks.py": "39db9e155e2d1c6c72698e2c7631ec9e7e4ed2e56bd613e8b935dbb1e32b54e8",
+    "examples/roberta_data.py": "23dda37498627373798bb39da3d4fc08ffeb4d3af5d592ea2eb31c5282509302",
+    "examples/foundation_math.cpp": "81c1dd9980c68f50d3c3c031617a851cadad0decc60b7d37f533395f3a5a51ab",
+    "examples/course_recovery_checks.py": "443229b0e3c7409007889e6a1afec4493bfd59366e97345e9b64e06b43d5c9b4",
+    "examples/translation_model.py": "bfd49c11f7350b4d1c759392ff4c097fa57e1ba857999734391f64c798ac9e9f"
+  },
+  "old_chapters": [
+    {
+      "id": "start",
+      "title": "Lesson 1 \u2014 retrieve information with a weighted mixture",
+      "content_path": "lessons/01-start.md",
+      "objective_ids": [
+        "start"
+      ],
+      "diagram_ids": [
+        "retrieval"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "start-practice-1",
+        "first-mixture"
+      ]
+    },
+    {
+      "id": "workspace",
+      "title": "Lesson 2 \u2014 prepare one workspace for two builds",
+      "content_path": "lessons/02-workspace.md",
+      "objective_ids": [
+        "workspace"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "workspace-boundaries"
+      ]
+    },
+    {
+      "id": "tensors",
+      "title": "Lesson 3 \u2014 Tensors, matrix products and learned linear maps",
+      "content_path": "lessons/03-tensors.md",
+      "objective_ids": [
+        "tensors"
+      ],
+      "diagram_ids": [
+        "matrix-product"
+      ],
+      "table_ids": [
+        "tensor-contracts"
+      ],
+      "scenario_ids": [],
+      "practice_ids": [
+        "tensors-practice-1"
+      ]
+    },
+    {
+      "id": "learning",
+      "title": "Lesson 4 \u2014 Probabilities, losses, gradients and optimizer updates",
+      "content_path": "lessons/04-learning.md",
+      "objective_ids": [
+        "learning"
+      ],
+      "diagram_ids": [
+        "learning-update"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "learning-practice-1"
+      ]
+    },
+    {
+      "id": "tokenization",
+      "title": "Lesson 5 \u2014 Text, bytes, subwords and special tokens",
+      "content_path": "lessons/05-tokenization.md",
+      "objective_ids": [
+        "tokenization"
+      ],
+      "diagram_ids": [
+        "token-pipeline"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "tokenization-practice-1"
+      ]
+    },
+    {
+      "id": "objectives",
+      "title": "Lesson 6 \u2014 Tasks, model visibility and corpus boundaries",
+      "content_path": "lessons/06-objectives.md",
+      "objective_ids": [
+        "objectives"
+      ],
+      "diagram_ids": [
+        "objective-masks"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "objectives-practice-1"
+      ]
+    },
+    {
+      "id": "qkv",
+      "title": "Lesson 7 \u2014 Let each token ask a learned question",
+      "content_path": "lessons/07-qkv.md",
+      "objective_ids": [
+        "qkv"
+      ],
+      "diagram_ids": [
+        "qkv-matrices"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "qkv-practice-1"
+      ]
+    },
+    {
+      "id": "heads",
+      "title": "Lesson 8 \u2014 Pack several attention heads into one tensor",
+      "content_path": "lessons/08-heads.md",
+      "objective_ids": [
+        "heads"
+      ],
+      "diagram_ids": [
+        "head-geometry"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "heads-practice-1"
+      ]
+    },
+    {
+      "id": "masks",
+      "title": "Lesson 9 \u2014 Specify who may read which token",
+      "content_path": "lessons/09-masks.md",
+      "objective_ids": [
+        "masks"
+      ],
+      "diagram_ids": [
+        "translation-masks"
+      ],
+      "table_ids": [],
+      "scenario_ids": [
+        "visibility"
+      ],
+      "practice_ids": [
+        "masks-practice-1"
+      ]
+    },
+    {
+      "id": "bilingual-batches",
+      "title": "Lesson 10 \u2014 Turn parallel sentences into a prediction batch",
+      "content_path": "lessons/10-bilingual-batches.md",
+      "objective_ids": [
+        "bilingual-batches"
+      ],
+      "diagram_ids": [
+        "target-shift"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "bilingual-batches-practice-1"
+      ]
+    },
+    {
+      "id": "transformer-blocks",
+      "title": "Lesson 11 \u2014 Add position, feature transforms and stable residual blocks",
+      "content_path": "lessons/11-transformer-blocks.md",
+      "objective_ids": [
+        "transformer-blocks"
+      ],
+      "diagram_ids": [
+        "sinusoidal-positions"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "transformer-blocks-practice-1"
+      ]
+    },
+    {
+      "id": "translation-model",
+      "title": "Lesson 12 \u2014 Connect the complete encoder\u2013decoder",
+      "content_path": "lessons/12-translation-model.md",
+      "objective_ids": [
+        "translation-model"
+      ],
+      "diagram_ids": [
+        "encoder-decoder"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "translation-model-practice-1"
+      ]
+    },
+    {
+      "id": "translation-training",
+      "title": "Lesson 13 \u2014 Train with a correct denominator and a bounded objective",
+      "content_path": "lessons/13-translation-training.md",
+      "objective_ids": [
+        "translation-training"
+      ],
+      "diagram_ids": [
+        "token-weighted-update"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "translation-training-practice-1"
+      ]
+    },
+    {
+      "id": "translation-generation",
+      "title": "Lesson 14 \u2014 Generate a translation and inspect its mistakes",
+      "content_path": "lessons/14-translation-generation.md",
+      "objective_ids": [
+        "translation-generation"
+      ],
+      "diagram_ids": [
+        "translation-generation"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "translation-generation-practice-1"
+      ]
+    },
+    {
+      "id": "checkpoints-and-colab",
+      "title": "Lesson 15 \u2014 resume learning after the process disappears",
+      "content_path": "lessons/15-checkpoints-and-colab.md",
+      "objective_ids": [
+        "checkpoints-and-colab"
+      ],
+      "diagram_ids": [
+        "recovery-generations"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "checkpoints-and-colab-practice-1",
+        "full-state-resume"
+      ]
+    },
+    {
+      "id": "bert-to-roberta",
+      "title": "Lesson 16 \u2014 Read both directions: from BERT to RoBERTa",
+      "content_path": "lessons/16-bert-to-roberta.md",
+      "objective_ids": [
+        "bert-to-roberta"
+      ],
+      "diagram_ids": [
+        "roberta-objectives"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "bert-to-roberta-practice-1"
+      ]
+    },
+    {
+      "id": "roberta-tokens-and-positions",
+      "title": "Lesson 17 \u2014 Bytes, packed sequences and learned positions",
+      "content_path": "lessons/17-roberta-tokens-and-positions.md",
+      "objective_ids": [
+        "roberta-tokens-and-positions"
+      ],
+      "diagram_ids": [
+        "roberta-positions"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "roberta-tokens-and-positions-practice-1"
+      ]
+    },
+    {
+      "id": "dynamic-mlm-corruption",
+      "title": "Lesson 18 \u2014 Hide inputs without losing their labels",
+      "content_path": "lessons/18-dynamic-mlm-corruption.md",
+      "objective_ids": [
+        "dynamic-mlm-corruption"
+      ],
+      "diagram_ids": [
+        "mlm-corruption"
+      ],
+      "table_ids": [],
+      "scenario_ids": [
+        "corruption-branch"
+      ],
+      "practice_ids": [
+        "dynamic-mlm-corruption-practice-1"
+      ]
+    },
+    {
+      "id": "roberta-encoder-and-mlm-head",
+      "title": "Lesson 19 \u2014 Build the encoder and its tied vocabulary head",
+      "content_path": "lessons/19-roberta-encoder-and-mlm-head.md",
+      "objective_ids": [
+        "roberta-encoder-and-mlm-head"
+      ],
+      "diagram_ids": [
+        "roberta-block"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "roberta-encoder-and-mlm-head-practice-1"
+      ]
+    },
+    {
+      "id": "mlm-training-and-counting",
+      "title": "Lesson 20 \u2014 Pretrain with honest counts and repeatable measurements",
+      "content_path": "lessons/20-mlm-training-and-counting.md",
+      "objective_ids": [
+        "mlm-training-and-counting"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "mlm-training-and-counting-practice-1"
+      ]
+    },
+    {
+      "id": "qa-offsets-and-windows",
+      "title": "Lesson 21 \u2014 Turn answer characters into token windows",
+      "content_path": "lessons/21-qa-offsets-and-windows.md",
+      "objective_ids": [
+        "qa-offsets-and-windows"
+      ],
+      "diagram_ids": [
+        "qa-windows"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "qa-offsets-and-windows-practice-1"
+      ]
+    },
+    {
+      "id": "qa-head-and-fine-tuning",
+      "title": "Lesson 22 \u2014 Reuse the backbone and learn two endpoints",
+      "content_path": "lessons/22-qa-head-and-fine-tuning.md",
+      "objective_ids": [
+        "qa-head-and-fine-tuning"
+      ],
+      "diagram_ids": [
+        "qa-head"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "qa-head-and-fine-tuning-practice-1"
+      ]
+    },
+    {
+      "id": "span-decoding-and-metrics",
+      "title": "Lesson 23 \u2014 Decode a valid answer and inspect its errors",
+      "content_path": "lessons/23-span-decoding-and-metrics.md",
+      "objective_ids": [
+        "span-decoding-and-metrics"
+      ],
+      "diagram_ids": [
+        "qa-joint-span"
+      ],
+      "table_ids": [],
+      "scenario_ids": [
+        "span-validity"
+      ],
+      "practice_ids": [
+        "span-decoding-and-metrics-practice-1"
+      ]
+    },
+    {
+      "id": "ready-for-gpt",
+      "title": "Lesson 24 \u2014 explain both builds and carry the foundations into GPT",
+      "content_path": "lessons/24-ready-for-gpt.md",
+      "objective_ids": [
+        "ready-for-gpt"
+      ],
+      "diagram_ids": [
+        "two-builds-to-gpt"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "ready-for-gpt-practice-1",
+        "gpt-handoff"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="850" viewBox="0 0 1160 850" role="img"><title>Copy a shared partial tail before appending to it</title><desc>P = 4. Cells show absolute token positions; a dot is unused and must stay masked.</desc>
+<rect x="0" y="0" width="1160" height="850" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">Copy a shared partial tail before appending to it</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">P = 4. Cells show absolute token positions; a dot is unused and must stay masked.</text>
+<rect x="36" y="120" width="348" height="577" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="152" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#2563b9">1. Fork six-token prefix</text>
+<text x="56" y="195" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">A: [4,1]</text>
+<text x="56" y="226" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">B: [4,1]</text>
+<text x="56" y="280" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#16735e">block 4 · refs 2</text>
+<rect x="56" y="293" width="67" height="46" rx="5" fill="#edf0f9" stroke="#16735e" stroke-width="1.5"/>
+<text x="89" y="325" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#16735e">0</text>
+<rect x="134" y="293" width="67" height="46" rx="5" fill="#edf0f9" stroke="#16735e" stroke-width="1.5"/>
+<text x="167" y="325" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#16735e">1</text>
+<rect x="212" y="293" width="67" height="46" rx="5" fill="#edf0f9" stroke="#16735e" stroke-width="1.5"/>
+<text x="245" y="325" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#16735e">2</text>
+<rect x="290" y="293" width="67" height="46" rx="5" fill="#edf0f9" stroke="#16735e" stroke-width="1.5"/>
+<text x="323" y="325" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#16735e">3</text>
+<text x="56" y="378" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#2563b9">block 1 · refs 2</text>
+<rect x="56" y="391" width="67" height="46" rx="5" fill="#edf0f9" stroke="#2563b9" stroke-width="1.5"/>
+<text x="89" y="423" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#2563b9">4</text>
+<rect x="134" y="391" width="67" height="46" rx="5" fill="#edf0f9" stroke="#2563b9" stroke-width="1.5"/>
+<text x="167" y="423" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#2563b9">5</text>
+<rect x="212" y="391" width="67" height="46" rx="5" fill="#ffffff" stroke="#2563b9" stroke-width="1.5"/>
+<text x="245" y="423" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#53617b">·</text>
+<rect x="290" y="391" width="67" height="46" rx="5" fill="#ffffff" stroke="#2563b9" stroke-width="1.5"/>
+<text x="323" y="423" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#53617b">·</text>
+<rect x="406" y="120" width="348" height="577" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="424" y="152" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#16735e">2. B appends token 6</text>
+<text x="426" y="195" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">A: [4,1]</text>
+<text x="426" y="226" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">B: [4,3]</text>
+<text x="426" y="280" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#16735e">block 4 · refs 2</text>
+<rect x="426" y="293" width="67" height="46" rx="5" fill="#edf0f9" stroke="#16735e" stroke-width="1.5"/>
+<text x="459" y="325" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#16735e">0</text>
+<rect x="504" y="293" width="67" height="46" rx="5" fill="#edf0f9" stroke="#16735e" stroke-width="1.5"/>
+<text x="537" y="325" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#16735e">1</text>
+<rect x="582" y="293" width="67" height="46" rx="5" fill="#edf0f9" stroke="#16735e" stroke-width="1.5"/>
+<text x="615" y="325" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#16735e">2</text>
+<rect x="660" y="293" width="67" height="46" rx="5" fill="#edf0f9" stroke="#16735e" stroke-width="1.5"/>
+<text x="693" y="325" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#16735e">3</text>
+<text x="426" y="378" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#2563b9">block 1 · refs 1</text>
+<rect x="426" y="391" width="67" height="46" rx="5" fill="#edf0f9" stroke="#2563b9" stroke-width="1.5"/>
+<text x="459" y="423" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#2563b9">4</text>
+<rect x="504" y="391" width="67" height="46" rx="5" fill="#edf0f9" stroke="#2563b9" stroke-width="1.5"/>
+<text x="537" y="423" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#2563b9">5</text>
+<rect x="582" y="391" width="67" height="46" rx="5" fill="#ffffff" stroke="#2563b9" stroke-width="1.5"/>
+<text x="615" y="423" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#53617b">·</text>
+<rect x="660" y="391" width="67" height="46" rx="5" fill="#ffffff" stroke="#2563b9" stroke-width="1.5"/>
+<text x="693" y="423" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#53617b">·</text>
+<text x="426" y="476" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#b65a1c">block 3 · refs 1</text>
+<rect x="426" y="489" width="67" height="46" rx="5" fill="#edf0f9" stroke="#b65a1c" stroke-width="1.5"/>
+<text x="459" y="521" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#b65a1c">4</text>
+<rect x="504" y="489" width="67" height="46" rx="5" fill="#edf0f9" stroke="#b65a1c" stroke-width="1.5"/>
+<text x="537" y="521" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#b65a1c">5</text>
+<rect x="582" y="489" width="67" height="46" rx="5" fill="#edf0f9" stroke="#b65a1c" stroke-width="1.5"/>
+<text x="615" y="521" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#b65a1c">6</text>
+<rect x="660" y="489" width="67" height="46" rx="5" fill="#ffffff" stroke="#b65a1c" stroke-width="1.5"/>
+<text x="693" y="521" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#53617b">·</text>
+<rect x="776" y="120" width="348" height="577" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="794" y="152" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#b65a1c">3. B reaches nine tokens</text>
+<text x="796" y="195" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">A: [4,1]</text>
+<text x="796" y="226" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">B: [4,3,0]</text>
+<text x="796" y="280" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#16735e">block 4 · refs 2</text>
+<rect x="796" y="293" width="67" height="46" rx="5" fill="#edf0f9" stroke="#16735e" stroke-width="1.5"/>
+<text x="829" y="325" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#16735e">0</text>
+<rect x="874" y="293" width="67" height="46" rx="5" fill="#edf0f9" stroke="#16735e" stroke-width="1.5"/>
+<text x="907" y="325" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#16735e">1</text>
+<rect x="952" y="293" width="67" height="46" rx="5" fill="#edf0f9" stroke="#16735e" stroke-width="1.5"/>
+<text x="985" y="325" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#16735e">2</text>
+<rect x="1030" y="293" width="67" height="46" rx="5" fill="#edf0f9" stroke="#16735e" stroke-width="1.5"/>
+<text x="1063" y="325" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#16735e">3</text>
+<text x="796" y="378" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#2563b9">block 1 · refs 1</text>
+<rect x="796" y="391" width="67" height="46" rx="5" fill="#edf0f9" stroke="#2563b9" stroke-width="1.5"/>
+<text x="829" y="423" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#2563b9">4</text>
+<rect x="874" y="391" width="67" height="46" rx="5" fill="#edf0f9" stroke="#2563b9" stroke-width="1.5"/>
+<text x="907" y="423" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#2563b9">5</text>
+<rect x="952" y="391" width="67" height="46" rx="5" fill="#ffffff" stroke="#2563b9" stroke-width="1.5"/>
+<text x="985" y="423" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#53617b">·</text>
+<rect x="1030" y="391" width="67" height="46" rx="5" fill="#ffffff" stroke="#2563b9" stroke-width="1.5"/>
+<text x="1063" y="423" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#53617b">·</text>
+<text x="796" y="476" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#b65a1c">block 3 · refs 1</text>
+<rect x="796" y="489" width="67" height="46" rx="5" fill="#edf0f9" stroke="#b65a1c" stroke-width="1.5"/>
+<text x="829" y="521" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#b65a1c">4</text>
+<rect x="874" y="489" width="67" height="46" rx="5" fill="#edf0f9" stroke="#b65a1c" stroke-width="1.5"/>
+<text x="907" y="521" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#b65a1c">5</text>
+<rect x="952" y="489" width="67" height="46" rx="5" fill="#edf0f9" stroke="#b65a1c" stroke-width="1.5"/>
+<text x="985" y="521" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#b65a1c">6</text>
+<rect x="1030" y="489" width="67" height="46" rx="5" fill="#edf0f9" stroke="#b65a1c" stroke-width="1.5"/>
+<text x="1063" y="521" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#b65a1c">7</text>
+<text x="796" y="574" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#2563b9">block 0 · refs 1</text>
+<rect x="796" y="587" width="67" height="46" rx="5" fill="#edf0f9" stroke="#2563b9" stroke-width="1.5"/>
+<text x="829" y="619" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#2563b9">8</text>
+<rect x="874" y="587" width="67" height="46" rx="5" fill="#ffffff" stroke="#2563b9" stroke-width="1.5"/>
+<text x="907" y="619" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#53617b">·</text>
+<rect x="952" y="587" width="67" height="46" rx="5" fill="#ffffff" stroke="#2563b9" stroke-width="1.5"/>
+<text x="985" y="619" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#53617b">·</text>
+<rect x="1030" y="587" width="67" height="46" rx="5" fill="#ffffff" stroke="#2563b9" stroke-width="1.5"/>
+<text x="1063" y="619" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="middle" fill="#53617b">·</text>
+<line x1="390" y1="420" x2="399" y2="420" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="399.00,420.00 388.87,424.28 388.87,415.72" fill="#6846c7"/>
+<line x1="760" y1="420" x2="769" y2="420" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="769.00,420.00 758.87,424.28 758.87,415.72" fill="#6846c7"/>
+<text x="36" y="752" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">B’s first append copies old tail 1 into private block 3; A’s two tail tokens remain unchanged.</text>
+<text x="36" y="783" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">Release A → free block 1. Release B → free blocks 4,3,0. Block 2 was never allocated here.</text>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="710" viewBox="0 0 1160 710" role="img"><title>Write both the numerator state and its normalizer</title><desc>Start from zero state; key features have already been mapped by φ(x) = ELU(x) + 1.</desc>
+<rect x="0" y="0" width="1160" height="710" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">Write both the numerator state and its normalizer</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">Start from zero state; key features have already been mapped by φ(x) = ELU(x) + 1.</text>
+<rect x="36" y="120" width="348" height="500" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="152" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#2563b9">1. Write key [1,2], v=2</text>
+<text x="58" y="211" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#2563b9">S: feature × value</text>
+<rect x="66" y="234" width="100" height="52" rx="12" fill="#e2edfc"/>
+<text x="116" y="269" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="middle" fill="#2563b9">2</text>
+<rect x="66" y="296" width="100" height="52" rx="12" fill="#e2edfc"/>
+<text x="116" y="331" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="middle" fill="#2563b9">4</text>
+<text x="58" y="410" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">z: feature totals</text>
+<rect x="66" y="433" width="100" height="52" rx="12" fill="#ede8fb"/>
+<text x="116" y="468" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="middle" fill="#6846c7">1</text>
+<rect x="181" y="433" width="100" height="52" rx="12" fill="#ede8fb"/>
+<text x="231" y="468" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="middle" fill="#6846c7">2</text>
+<text x="58" y="565" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">outer product = [2,4]ᵀ</text>
+<rect x="406" y="120" width="348" height="500" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="424" y="152" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#16735e">2. Write key [2,1], v=4</text>
+<text x="428" y="211" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#2563b9">S: feature × value</text>
+<rect x="436" y="234" width="100" height="52" rx="12" fill="#e2edfc"/>
+<text x="486" y="269" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="middle" fill="#2563b9">10</text>
+<rect x="436" y="296" width="100" height="52" rx="12" fill="#e2edfc"/>
+<text x="486" y="331" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="middle" fill="#2563b9">8</text>
+<text x="428" y="410" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">z: feature totals</text>
+<rect x="436" y="433" width="100" height="52" rx="12" fill="#ede8fb"/>
+<text x="486" y="468" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="middle" fill="#6846c7">3</text>
+<rect x="551" y="433" width="100" height="52" rx="12" fill="#ede8fb"/>
+<text x="601" y="468" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="middle" fill="#6846c7">3</text>
+<text x="428" y="565" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">add [8,4]ᵀ to S</text>
+<rect x="776" y="120" width="348" height="500" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="794" y="152" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#b65a1c">3. Read query [1,3]</text>
+<text x="798" y="211" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#2563b9">numerator:</text>
+<text x="798" y="242" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#2563b9">1×10 + 3×8 = 34</text>
+<text x="798" y="335" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#6846c7">denominator:</text>
+<text x="798" y="366" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#6846c7">1×3 + 3×3 = 12</text>
+<text x="798" y="488" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="start" fill="#16735e">34 / 12 = 17 / 6</text>
+<text x="798" y="519" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="start" fill="#16735e">≈ 2.833333</text>
+<line x1="390" y1="363" x2="399" y2="363" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="399.00,363.00 388.87,367.28 388.87,358.72" fill="#6846c7"/>
+<line x1="760" y1="363" x2="769" y2="363" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="769.00,363.00 758.87,367.28 758.87,358.72" fill="#6846c7"/>
+<text x="36" y="673" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">Explicit kernel weights are 7/12 and 5/12: (7×2 + 5×4)/12 gives the same answer.</text>
+</svg>

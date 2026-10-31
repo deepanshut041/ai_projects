@@ -1,0 +1,462 @@
+{
+  "status": "passed",
+  "comparison_run": "/mnt/projects/ai/ai_projects/projects/foundations/bike-demand-planner/runs/calendar-comparison-20261019T222526166388Z",
+  "unit_checks": 38,
+  "independent_metrics": {
+    "global/train": {
+      "count": 8645,
+      "mae": 106.59349137179827,
+      "rmse": 133.79011546148726,
+      "mean_signed_error": 8.669525479233703e-15,
+      "mean_underprediction": 53.296745685899126,
+      "underprediction_count": 3524,
+      "mean_underprediction_when_under": 130.7464149984671
+    },
+    "global/validation": {
+      "count": 4357,
+      "mae": 154.24520535816333,
+      "rmse": 208.1723211740595,
+      "mean_signed_error": -71.40569005182753,
+      "mean_underprediction": 112.82544770499543,
+      "underprediction_count": 2391,
+      "mean_underprediction_when_under": 205.59618387731706
+    },
+    "hour-workingday/train": {
+      "count": 8645,
+      "mae": 55.42804007456469,
+      "rmse": 78.83940946119479,
+      "mean_signed_error": 5.120510403453353e-16,
+      "mean_underprediction": 27.714020037282346,
+      "underprediction_count": 4478,
+      "mean_underprediction_when_under": 53.503283435083944
+    },
+    "hour-workingday/validation": {
+      "count": 4357,
+      "mae": 91.57293961909762,
+      "rmse": 137.39003528616394,
+      "mean_signed_error": -72.34218040584457,
+      "mean_underprediction": 81.95756001247109,
+      "underprediction_count": 3143,
+      "mean_underprediction_when_under": 113.61409130586591
+    }
+  },
+  "global_mean": 143.79444765760556,
+  "groups": [
+    {
+      "hour": 0,
+      "workingday": 0,
+      "count": 114,
+      "total": 8297,
+      "value": 72.78070175438596
+    },
+    {
+      "hour": 0,
+      "workingday": 1,
+      "count": 247,
+      "total": 7243,
+      "value": 29.323886639676115
+    },
+    {
+      "hour": 1,
+      "workingday": 0,
+      "count": 114,
+      "total": 6182,
+      "value": 54.228070175438596
+    },
+    {
+      "hour": 1,
+      "workingday": 1,
+      "count": 246,
+      "total": 3376,
+      "value": 13.723577235772357
+    },
+    {
+      "hour": 2,
+      "workingday": 0,
+      "count": 113,
+      "total": 4865,
+      "value": 43.05309734513274
+    },
+    {
+      "hour": 2,
+      "workingday": 1,
+      "count": 239,
+      "total": 1796,
+      "value": 7.514644351464435
+    },
+    {
+      "hour": 3,
+      "workingday": 0,
+      "count": 113,
+      "total": 2441,
+      "value": 21.601769911504423
+    },
+    {
+      "hour": 3,
+      "workingday": 1,
+      "count": 229,
+      "total": 1000,
+      "value": 4.366812227074236
+    },
+    {
+      "hour": 4,
+      "workingday": 0,
+      "count": 112,
+      "total": 743,
+      "value": 6.633928571428571
+    },
+    {
+      "hour": 4,
+      "workingday": 1,
+      "count": 225,
+      "total": 1074,
+      "value": 4.773333333333333
+    },
+    {
+      "hour": 5,
+      "workingday": 0,
+      "count": 106,
+      "total": 761,
+      "value": 7.179245283018868
+    },
+    {
+      "hour": 5,
+      "workingday": 1,
+      "count": 247,
+      "total": 4396,
+      "value": 17.79757085020243
+    },
+    {
+      "hour": 6,
+      "workingday": 0,
+      "count": 113,
+      "total": 1583,
+      "value": 14.008849557522124
+    },
+    {
+      "hour": 6,
+      "workingday": 1,
+      "count": 248,
+      "total": 19218,
+      "value": 77.49193548387096
+    },
+    {
+      "hour": 7,
+      "workingday": 0,
+      "count": 115,
+      "total": 3690,
+      "value": 32.08695652173913
+    },
+    {
+      "hour": 7,
+      "workingday": 1,
+      "count": 248,
+      "total": 53240,
+      "value": 214.67741935483872
+    },
+    {
+      "hour": 8,
+      "workingday": 0,
+      "count": 115,
+      "total": 8790,
+      "value": 76.43478260869566
+    },
+    {
+      "hour": 8,
+      "workingday": 1,
+      "count": 248,
+      "total": 86677,
+      "value": 349.5040322580645
+    },
+    {
+      "hour": 9,
+      "workingday": 0,
+      "count": 115,
+      "total": 14686,
+      "value": 127.70434782608696
+    },
+    {
+      "hour": 9,
+      "workingday": 1,
+      "count": 248,
+      "total": 44800,
+      "value": 180.6451612903226
+    },
+    {
+      "hour": 10,
+      "workingday": 0,
+      "count": 115,
+      "total": 22358,
+      "value": 194.41739130434783
+    },
+    {
+      "hour": 10,
+      "workingday": 1,
+      "count": 248,
+      "total": 25153,
+      "value": 101.42338709677419
+    },
+    {
+      "hour": 11,
+      "workingday": 0,
+      "count": 115,
+      "total": 27400,
+      "value": 238.2608695652174
+    },
+    {
+      "hour": 11,
+      "workingday": 1,
+      "count": 248,
+      "total": 29198,
+      "value": 117.73387096774194
+    },
+    {
+      "hour": 12,
+      "workingday": 0,
+      "count": 115,
+      "total": 32286,
+      "value": 280.74782608695654
+    },
+    {
+      "hour": 12,
+      "workingday": 1,
+      "count": 249,
+      "total": 36912,
+      "value": 148.24096385542168
+    },
+    {
+      "hour": 13,
+      "workingday": 0,
+      "count": 115,
+      "total": 32867,
+      "value": 285.8
+    },
+    {
+      "hour": 13,
+      "workingday": 1,
+      "count": 249,
+      "total": 36472,
+      "value": 146.4738955823293
+    },
+    {
+      "hour": 14,
+      "workingday": 0,
+      "count": 115,
+      "total": 32277,
+      "value": 280.6695652173913
+    },
+    {
+      "hour": 14,
+      "workingday": 1,
+      "count": 249,
+      "total": 34205,
+      "value": 137.36947791164658
+    },
+    {
+      "hour": 15,
+      "workingday": 0,
+      "count": 115,
+      "total": 32069,
+      "value": 278.8608695652174
+    },
+    {
+      "hour": 15,
+      "workingday": 1,
+      "count": 249,
+      "total": 36521,
+      "value": 146.6706827309237
+    },
+    {
+      "hour": 16,
+      "workingday": 0,
+      "count": 115,
+      "total": 31868,
+      "value": 277.11304347826086
+    },
+    {
+      "hour": 16,
+      "workingday": 1,
+      "count": 250,
+      "total": 53754,
+      "value": 215.016
+    },
+    {
+      "hour": 17,
+      "workingday": 0,
+      "count": 115,
+      "total": 28903,
+      "value": 251.3304347826087
+    },
+    {
+      "hour": 17,
+      "workingday": 1,
+      "count": 250,
+      "total": 98729,
+      "value": 394.916
+    },
+    {
+      "hour": 18,
+      "workingday": 0,
+      "count": 114,
+      "total": 25489,
+      "value": 223.58771929824562
+    },
+    {
+      "hour": 18,
+      "workingday": 1,
+      "count": 249,
+      "total": 91496,
+      "value": 367.45381526104416
+    },
+    {
+      "hour": 19,
+      "workingday": 0,
+      "count": 114,
+      "total": 21301,
+      "value": 186.85087719298247
+    },
+    {
+      "hour": 19,
+      "workingday": 1,
+      "count": 249,
+      "total": 64501,
+      "value": 259.0401606425703
+    },
+    {
+      "hour": 20,
+      "workingday": 0,
+      "count": 114,
+      "total": 16039,
+      "value": 140.69298245614036
+    },
+    {
+      "hour": 20,
+      "workingday": 1,
+      "count": 249,
+      "total": 46779,
+      "value": 187.86746987951807
+    },
+    {
+      "hour": 21,
+      "workingday": 0,
+      "count": 114,
+      "total": 13113,
+      "value": 115.02631578947368
+    },
+    {
+      "hour": 21,
+      "workingday": 1,
+      "count": 249,
+      "total": 35762,
+      "value": 143.62248995983936
+    },
+    {
+      "hour": 22,
+      "workingday": 0,
+      "count": 114,
+      "total": 10790,
+      "value": 94.64912280701755
+    },
+    {
+      "hour": 22,
+      "workingday": 1,
+      "count": 249,
+      "total": 26887,
+      "value": 107.97991967871486
+    },
+    {
+      "hour": 23,
+      "workingday": 0,
+      "count": 114,
+      "total": 8041,
+      "value": 70.53508771929825
+    },
+    {
+      "hour": 23,
+      "workingday": 1,
+      "count": 249,
+      "total": 17075,
+      "value": 68.57429718875503
+    }
+  ],
+  "improved_hours": 3323,
+  "worse_hours": 1034,
+  "equal_hours": 0,
+  "worst_group_errors": [
+    {
+      "record_id": "10623",
+      "target_time": "2012-03-23T17:00:00",
+      "target": 957.0,
+      "prediction": 394.916,
+      "residual": -562.0840000000001,
+      "absolute_error": 562.0840000000001,
+      "global_absolute_error": 813.2055523423944
+    },
+    {
+      "record_id": "11188",
+      "target_time": "2012-04-16T08:00:00",
+      "target": 597.0,
+      "prediction": 76.43478260869566,
+      "residual": -520.5652173913044,
+      "absolute_error": 520.5652173913044,
+      "global_absolute_error": 453.2055523423944
+    },
+    {
+      "record_id": "12901",
+      "target_time": "2012-06-26T17:00:00",
+      "target": 900.0,
+      "prediction": 394.916,
+      "residual": -505.084,
+      "absolute_error": 505.084,
+      "global_absolute_error": 756.2055523423944
+    },
+    {
+      "record_id": "11942",
+      "target_time": "2012-05-17T18:00:00",
+      "target": 868.0,
+      "prediction": 367.45381526104416,
+      "residual": -500.54618473895584,
+      "absolute_error": 500.54618473895584,
+      "global_absolute_error": 724.2055523423944
+    },
+    {
+      "record_id": "11918",
+      "target_time": "2012-05-16T18:00:00",
+      "target": 846.0,
+      "prediction": 367.45381526104416,
+      "residual": -478.54618473895584,
+      "absolute_error": 478.54618473895584,
+      "global_absolute_error": 702.2055523423944
+    }
+  ],
+  "largest_regressions": [
+    {
+      "record_id": "8901",
+      "target_time": "2012-01-11T17:00:00",
+      "target": 134.0,
+      "prediction": 394.916,
+      "residual": 260.916,
+      "absolute_error": 260.916,
+      "global_absolute_error": 9.79444765760556
+    },
+    {
+      "record_id": "10120",
+      "target_time": "2012-03-02T17:00:00",
+      "target": 128.0,
+      "prediction": 394.916,
+      "residual": 266.916,
+      "absolute_error": 266.916,
+      "global_absolute_error": 15.79444765760556
+    },
+    {
+      "record_id": "8854",
+      "target_time": "2012-01-09T17:00:00",
+      "target": 152.0,
+      "prediction": 394.916,
+      "residual": 242.916,
+      "absolute_error": 242.916,
+      "global_absolute_error": 8.20555234239444
+    }
+  ],
+  "test_targets_read": false
+}

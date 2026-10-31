@@ -1,0 +1,42 @@
+{
+  "numerical_module_byte_identical": true,
+  "demo_bitwise_identical": true,
+  "groups": [
+    "core",
+    "data",
+    "training",
+    "utils"
+  ],
+  "wheel_files": [
+    "attention.py",
+    "compute_bleu.py",
+    "inference.py",
+    "prepare_data.py",
+    "tokenizer.py",
+    "train.py",
+    "core/__init__.py",
+    "core/attention.py",
+    "core/config.py",
+    "core/model.py",
+    "data/__init__.py",
+    "data/dataset.py",
+    "data/tokenizer.py",
+    "training/__init__.py",
+    "training/checkpoint.py",
+    "training/trainer.py",
+    "utils/__init__.py",
+    "utils/attention_visuals.py",
+    "attention_is_all_you_need-0.1.0.dist-info/METADATA",
+    "attention_is_all_you_need-0.1.0.dist-info/WHEEL",
+    "attention_is_all_you_need-0.1.0.dist-info/entry_points.txt",
+    "attention_is_all_you_need-0.1.0.dist-info/licenses/LICENSE",
+    "attention_is_all_you_need-0.1.0.dist-info/RECORD"
+  ],
+  "sdist_keeps_notebook_excludes_private_material": true,
+  "installed_wheel_tests": "...................................                                      [100%]\n35 passed in 0.05s",
+  "installed_console_entrypoint": true,
+  "installed_dependency_libraries": "/mnt/projects/ai/ai_projects/projects/transformer-labs/attention-is-all-you-need/.venv/lib/python3.12/site-packages",
+  "restored_source_tests": "...................................                                      [100%]\n35 passed in 0.65s",
+  "restored_source_files": 31,
+  "passed": true
+}

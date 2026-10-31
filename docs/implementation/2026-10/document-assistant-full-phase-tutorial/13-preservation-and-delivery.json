@@ -1,0 +1,37 @@
+{
+  "scope": "Document Assistant full-phase written tutorial",
+  "preserved_preexisting_working_files": 101,
+  "unexpected_changes": [],
+  "authorized_snapshot_changes": [
+    "README.md",
+    "AGENTS.md",
+    "ai_projects/README.md",
+    "ai_projects/AGENTS.md",
+    "ai_projects/docs/README.md",
+    "ai_projects/docs/AGENTS.md",
+    "ai_projects/docs/guide/resume.md",
+    "ai_projects/docs/guide/progress.md",
+    "ai_projects/docs/guide/decisions.md",
+    "ai_projects/projects/quantization-lab/README.md",
+    "ai_projects/projects/quantization-lab/document-assistant/README.md",
+    "ai_projects/projects/quantization-lab/document-assistant/.ai-project.toml",
+    "ai_projects/docs/tutorials/index.json"
+  ],
+  "source_unchanged": {
+    "core_config": "f25837210737f4c44f41198ce7928161a375abd4742ad96074d27e1c81048d4d",
+    "workflow": "174639b698a2fc4ea3e3eb9c35f431325989f453811a8ece307c95a7372d2709",
+    "launcher_profile_unchanged": false
+  },
+  "additional_authorized_test_change": "docs/website/tests/content.test.mjs accepts the complete frozen SVG inventory",
+  "tutorial": {
+    "lessons": 24,
+    "references": 24,
+    "practice": 24,
+    "figures": 10,
+    "sources": 20,
+    "frozen_files": 78,
+    "lesson_words_including_code": 21214
+  },
+  "committed": false,
+  "model_execution": false
+}

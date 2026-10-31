@@ -1,0 +1,21 @@
+{
+  "checked_at": "2026-10-12",
+  "native_tests": 9,
+  "browser_records": 84,
+  "widths": [
+    1440,
+    768,
+    390,
+    320
+  ],
+  "root_base": "passed",
+  "prefix_base": "passed",
+  "managed_base": "http://127.0.0.1:4273/project_docs/",
+  "managed_reader_pages": "200",
+  "course_sequence": [
+    "Course 1 — Transformer Foundations: Translation and RoBERTa",
+    "Course 2 — build a small GPT language model"
+  ],
+  "additional_reference": "older foundations exercises",
+  "scope": "Local reader verification; no remote publication or hosted model execution."
+}

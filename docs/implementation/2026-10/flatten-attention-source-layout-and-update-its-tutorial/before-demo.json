@@ -1,0 +1,9 @@
+{
+  "errors": {
+    "encoder": 1.1920928955078125e-07,
+    "decoder": 1.1920928955078125e-07,
+    "cross": 8.940696716308594e-08
+  },
+  "output_sha256": "4f6e769db2acbc8484999f60036fee3e33d1eeca49fdbdd122e2d86d9ce73ef3",
+  "weights_sha256": "5cacbd3989f3be7c5d5ea2796dd1894258feb533ea237c6da7fd3f541f7d5b1c"
+}

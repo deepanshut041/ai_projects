@@ -1,0 +1,329 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-30T19:24:17.453523+00:00",
+  "scope": "Ten existing Attention Labs lessons; selected diagram screenshots from original presentation sites for Lectures 1\u20138",
+  "packages": {
+    "attention-foundations": {
+      "fingerprint": "8f87d4f9401c7f71d29788d1e3840b996dd2a59e86f8f334434c5b04b2f96e61",
+      "images": 21,
+      "bytes": 3903812,
+      "source_record": "project/visual-provenance.json"
+    },
+    "attention-heads": {
+      "fingerprint": "9dc7c3e8408b58ee2e9ce10cec740cc84b663c0f59ae12766f96f2251ff70a73",
+      "images": 6,
+      "bytes": 1528396,
+      "source_record": "project/visual-provenance.json"
+    }
+  },
+  "browser_checks": {
+    "root": {
+      "base": "/",
+      "widths": [
+        1440,
+        390,
+        320
+      ],
+      "chapters": [
+        {
+          "slug": "attention-foundations",
+          "chapter": "map",
+          "images": 1,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-foundations",
+          "chapter": "summary",
+          "images": 3,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-foundations",
+          "chapter": "additive",
+          "images": 4,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-foundations",
+          "chapter": "scale",
+          "images": 3,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-foundations",
+          "chapter": "self",
+          "images": 3,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-foundations",
+          "chapter": "projection",
+          "images": 3,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-foundations",
+          "chapter": "causal",
+          "images": 4,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-heads",
+          "chapter": "heads",
+          "images": 2,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-heads",
+          "chapter": "layout",
+          "images": 3,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-heads",
+          "chapter": "boundary",
+          "images": 1,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        }
+      ],
+      "images": 27,
+      "external_presentation_hosts_blocked": true,
+      "passed": true
+    },
+    "prefix": {
+      "base": "/project_docs/",
+      "widths": [
+        1440,
+        390,
+        320
+      ],
+      "chapters": [
+        {
+          "slug": "attention-foundations",
+          "chapter": "map",
+          "images": 1,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-foundations",
+          "chapter": "summary",
+          "images": 3,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-foundations",
+          "chapter": "additive",
+          "images": 4,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-foundations",
+          "chapter": "scale",
+          "images": 3,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-foundations",
+          "chapter": "self",
+          "images": 3,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-foundations",
+          "chapter": "projection",
+          "images": 3,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-foundations",
+          "chapter": "causal",
+          "images": 4,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-heads",
+          "chapter": "heads",
+          "images": 2,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-heads",
+          "chapter": "layout",
+          "images": 3,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        },
+        {
+          "slug": "attention-heads",
+          "chapter": "boundary",
+          "images": 1,
+          "hashes": true,
+          "whole_diagram_preview": true,
+          "full_size_popup": true,
+          "markdown": true,
+          "print": true
+        }
+      ],
+      "images": 27,
+      "external_presentation_hosts_blocked": true,
+      "passed": true
+    }
+  },
+  "native_unit_checks": 24,
+  "native_browser_components": {
+    "records": 237,
+    "local_project_pages": 163,
+    "video_acceptance": "passed",
+    "syntax_highlighted_pages": 188,
+    "passed": true,
+    "execution_note": "The native command passed records/projects/video checks. The syntax component was rerun separately after its QA specimen was made visible before real browser text selection."
+  },
+  "visual_inspection": "All 27 captured diagrams inspected in contact sheets/full image views; representative rendered desktop/mobile/print captures reviewed after correcting blank mobile crops.",
+  "preservation": {
+    "preserved_examples_and_authored_figures": [
+      "tutorials/projects/attention-labs/attention-foundations/v1/examples/02_fixed_summary.py",
+      "tutorials/projects/attention-labs/attention-foundations/v1/examples/03_additive.py",
+      "tutorials/projects/attention-labs/attention-foundations/v1/examples/04_scoring.py",
+      "tutorials/projects/attention-labs/attention-foundations/v1/examples/05_self_attention.py",
+      "tutorials/projects/attention-labs/attention-foundations/v1/examples/06_projections.py",
+      "tutorials/projects/attention-labs/attention-foundations/v1/examples/07_causal.py",
+      "tutorials/projects/attention-labs/attention-foundations/v1/examples/attention.cpp",
+      "tutorials/projects/attention-labs/attention-foundations/v1/examples/attention_math.py",
+      "tutorials/projects/attention-labs/attention-foundations/v1/examples/row_math.py",
+      "tutorials/projects/attention-labs/attention-heads/v1/examples/multihead.py",
+      "tutorials/projects/attention-labs/attention-heads/v1/examples/multihead_torch.py",
+      "tutorials/projects/attention-labs/attention-foundations/v1/images/01-context-map.svg",
+      "tutorials/projects/attention-labs/attention-foundations/v1/images/02-fixed-summary.svg",
+      "tutorials/projects/attention-labs/attention-foundations/v1/images/03-additive-flow.svg",
+      "tutorials/projects/attention-labs/attention-foundations/v1/images/04-scale.svg",
+      "tutorials/projects/attention-labs/attention-foundations/v1/images/05-self-matrix.svg",
+      "tutorials/projects/attention-labs/attention-foundations/v1/images/06-projections.svg",
+      "tutorials/projects/attention-labs/attention-foundations/v1/images/07-causal-mask.svg",
+      "tutorials/projects/attention-labs/attention-heads/v1/images/01-heads.svg",
+      "tutorials/projects/attention-labs/attention-heads/v1/images/02-packed-shapes.svg"
+    ],
+    "count": 20,
+    "passed": true
+  },
+  "unrelated_preservation": {
+    "preexisting_unrelated_diffs_unchanged": [
+      "guide/roadmap.md",
+      "implementation/2026-10/attention-is-all-you-need-source-backed-tutorial/00-resume.md",
+      "implementation/2026-10/attention-is-all-you-need-source-backed-tutorial/05-tracker.md",
+      "tutorials/index.json",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/code/README.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/code/source-bundle.json",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/code/source-manifest.json",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/example-checks.json",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/examples/arithmetic.py",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/examples/verify_component.py",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lesson.json",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lesson.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/01-weighted-information.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/02-project-setup.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/03-tensors-and-products.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/04-scores-and-softmax.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/05-learned-projections.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/06-multiple-heads.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/07-padding-and-empty-rows.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/08-causal-information.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/09-cross-attention.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/10-reusable-attention.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/11-gradients-and-learning.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/12-evidence-and-next-phase.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/practice/explain-attention.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/project/comparisons/01-attention.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/project/implementation.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/project/learning-points/01-attention.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/project/readiness.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/project/reference-runs.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/render.json",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/research.md",
+      "tutorials/projects/attention-is-all-you-need/attention-lab/v1/validation.json",
+      "website/scripts/projects.mjs",
+      "website/tests/projects-browser.mjs",
+      "website/tests/projects.test.mjs"
+    ],
+    "count": 36,
+    "shared_snapshot_files_selectively_staged": true,
+    "passed": true
+  },
+  "lecture_9_included": false,
+  "model_or_learner_state_changed": false,
+  "passed": true
+}

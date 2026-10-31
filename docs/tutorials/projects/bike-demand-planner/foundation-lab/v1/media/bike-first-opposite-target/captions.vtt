@@ -1,0 +1,229 @@
+WEBVTT
+
+00:00:00.540 --> 00:00:05.380
+Treat forty five and thirty five as
+alternative outcomes for one illustrative
+
+00:00:05.380 --> 00:00:05.990
+request.
+
+00:00:06.500 --> 00:00:10.470
+Each case starts from weights ten,
+five and bias twenty,
+
+00:00:11.020 --> 00:00:12.950
+so both initial predictions are forty.
+
+00:00:13.680 --> 00:00:15.970
+The loop stores returned
+updates separately.
+
+00:00:16.520 --> 00:00:18.850
+It does not assign them back
+to the starting parameters.
+
+00:00:19.500 --> 00:00:23.940
+Starting the second case from the previous
+update would instead ask about successive
+
+00:00:23.940 --> 00:00:25.230
+training steps.
+
+00:00:25.640 --> 00:00:28.690
+That would mix an outcome
+change with a parameter change.
+
+00:00:29.380 --> 00:00:33.820
+Holding the initial state fixed makes
+the effect of the changed target easy to
+
+00:00:33.820 --> 00:00:34.270
+isolate.
+
+00:00:36.482 --> 00:00:39.672
+Forty minus thirty five is positive five.
+
+00:00:40.062 --> 00:00:42.712
+The model now predicts
+five rentals too many.
+
+00:00:43.602 --> 00:00:45.962
+Half squared error is
+still twelve point five,
+
+00:00:45.962 --> 00:00:48.732
+since the squared residual
+magnitude is unchanged.
+
+00:00:49.562 --> 00:00:54.392
+Multiply the positive residual by the
+two positive inputs to obtain gradients
+
+00:00:54.722 --> 00:00:56.392
+positive five and positive ten.
+
+00:00:57.342 --> 00:00:59.612
+The bias derivative is positive five.
+
+00:01:00.102 --> 00:01:04.362
+Each positive derivative says that
+increasing that parameter slightly would
+
+00:01:04.362 --> 00:01:05.712
+raise the current loss.
+
+00:01:06.402 --> 00:01:09.312
+Gradient descent therefore
+takes the opposite direction,
+
+00:01:09.442 --> 00:01:12.612
+while keeping its subtraction
+rule and learning rate unchanged.
+
+00:01:14.983 --> 00:01:18.753
+Apply rate zero point zero
+one to the first gradient.
+
+00:01:19.243 --> 00:01:24.013
+Ten minus zero point zero
+five is nine point nine five.
+
+00:01:24.623 --> 00:01:30.093
+For the second weight, five minus zero
+point one is four point nine zero.
+
+00:01:30.983 --> 00:01:31.853
+For the bias,
+
+00:01:32.123 --> 00:01:37.133
+twenty minus zero point zero
+five is nineteen point nine five.
+
+00:01:37.863 --> 00:01:40.773
+All three changes are
+downward in this case.
+
+00:01:41.203 --> 00:01:45.133
+They have the same magnitudes as the
+upward changes for target forty five.
+
+00:01:46.003 --> 00:01:50.763
+The equality comes from changing only
+the sign of the starting residual while
+
+00:01:50.763 --> 00:01:54.533
+keeping its magnitude and
+both positive inputs fixed.
+
+00:01:56.937 --> 00:02:00.367
+Recompute using the new weights
+and the same two inputs.
+
+00:02:00.857 --> 00:02:02.947
+The result is thirty
+nine point seven zero.
+
+00:02:03.657 --> 00:02:07.007
+The first weighted contribution
+falls by zero point zero five,
+
+00:02:07.457 --> 00:02:12.107
+the second by zero point two, and the
+bias by another zero point zero five.
+
+00:02:12.697 --> 00:02:15.667
+Together they lower the
+prediction by zero point three.
+
+00:02:16.257 --> 00:02:19.007
+The remaining overprediction
+is four point seven zero,
+
+00:02:19.417 --> 00:02:21.507
+with loss eleven point zero four five.
+
+00:02:22.417 --> 00:02:26.147
+One update reduced the error;
+it did not have to land on thirty five.
+
+00:02:26.877 --> 00:02:29.567
+The rate specifies a local parameter step,
+
+00:02:29.577 --> 00:02:32.147
+not a promise to solve
+the example immediately.
+
+00:02:34.498 --> 00:02:37.808
+Put the original and
+changed cases side by side.
+
+00:02:38.278 --> 00:02:39.548
+For target forty five,
+
+00:02:39.958 --> 00:02:44.788
+the prediction moves from forty to forty
+point three, reducing a negative residual.
+
+00:02:45.278 --> 00:02:49.968
+For target thirty five, it moves from
+forty to thirty nine point seven,
+
+00:02:50.058 --> 00:02:51.588
+reducing a positive residual.
+
+00:02:52.318 --> 00:02:56.688
+Both losses fall from twelve point
+five to eleven point zero four five.
+
+00:02:57.538 --> 00:03:02.648
+Their gradients and changes have opposite
+signs because their initial residuals do.
+
+00:03:03.118 --> 00:03:06.388
+This comparison is a
+controlled numerical example.
+
+00:03:06.838 --> 00:03:10.628
+It does not measure how well a model
+predicts a future bike dataset.
+
+00:03:12.692 --> 00:03:17.582
+The statement that both weights go down
+depends on these inputs being positive.
+
+00:03:18.112 --> 00:03:19.182
+In a different example,
+
+00:03:19.332 --> 00:03:23.552
+a negative input would reverse its
+matching weight derivative relative to the
+
+00:03:23.552 --> 00:03:24.622
+residual sign.
+
+00:03:24.872 --> 00:03:27.412
+The bias derivative still
+equals the residual,
+
+00:03:27.412 --> 00:03:30.122
+because its forward derivative is one.
+
+00:03:31.012 --> 00:03:35.062
+Always trace the residual,
+the matching input and the subtraction.
+
+00:03:35.432 --> 00:03:39.142
+That explanation survives
+changed feature signs and scales.
+
+00:03:39.732 --> 00:03:42.762
+Run the linked example to
+inspect both saved cases,
+
+00:03:43.172 --> 00:03:46.952
+then continue to the real hourly data
+when you can account for their different
+
+00:03:46.952 --> 00:03:47.582
+directions.
+

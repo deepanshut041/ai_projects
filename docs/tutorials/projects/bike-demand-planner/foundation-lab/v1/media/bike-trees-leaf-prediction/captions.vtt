@@ -1,0 +1,218 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:05.550
+Begin with four real observations from
+January fourth and fifth, twenty eleven.
+
+00:00:06.380 --> 00:00:09.970
+At two in the morning,
+the rental counts were one and two.
+
+00:00:10.280 --> 00:00:11.250
+At eight,
+
+00:00:11.400 --> 00:00:14.555
+they were one hundred and seventy
+nine and one hundred and ninety five.
+
+00:00:15.900 --> 00:00:18.140
+Calendar inputs can be known in advance,
+
+00:00:18.140 --> 00:00:21.890
+while these outcomes become
+available after their hours.
+
+00:00:22.460 --> 00:00:26.690
+For this small teaching probe,
+keep only the hour eight indicator.
+
+00:00:27.400 --> 00:00:30.710
+The later benchmark retains all
+forty five calendar columns.
+
+00:00:32.000 --> 00:00:36.570
+Our question is how a tree turns this
+declared input into a prediction.
+
+00:00:38.817 --> 00:00:42.267
+First ignore the hour and fit a constant.
+
+00:00:42.757 --> 00:00:44.967
+The four counts sum to three
+hundred and seventy seven.
+
+00:00:46.457 --> 00:00:51.267
+Dividing by four gives ninety four
+point two five rentals per hour.
+
+00:00:51.717 --> 00:00:56.507
+This is the squared error minimizing
+constant for the whole tiny sample.
+
+00:00:56.957 --> 00:01:01.657
+It is much too high for the two quiet
+observations and much too low for the busy
+
+00:01:01.657 --> 00:01:02.187
+ones.
+
+00:01:02.657 --> 00:01:05.367
+The issue is not a poor learning rate.
+
+00:01:05.597 --> 00:01:10.807
+This constant family has no way to make
+the requested hour change its answer.
+
+00:01:12.817 --> 00:01:18.057
+A one split tree can ask whether the hour
+eight indicator is at most zero point
+
+00:01:18.057 --> 00:01:18.707
+five.
+
+00:01:19.097 --> 00:01:20.987
+A zero takes the left branch.
+
+00:01:21.417 --> 00:01:26.327
+Its two supporting counts are one and two,
+so its mean is one point five.
+
+00:01:26.777 --> 00:01:28.527
+A one takes the right branch,
+
+00:01:28.657 --> 00:01:31.787
+whose counts are one hundred and seventy
+nine and one hundred and ninety five.
+
+00:01:33.077 --> 00:01:34.127
+Their mean is one
+hundred and eighty seven.
+
+00:01:35.617 --> 00:01:38.907
+Asking for eight now returns
+that right leaf value.
+
+00:01:39.157 --> 00:01:42.407
+The tree stores the question and
+the two values during fitting,
+
+00:01:42.717 --> 00:01:44.567
+then reuses them during prediction.
+
+00:01:46.858 --> 00:01:52.178
+The source selects the hour eight position
+from the four real encoded rows and keeps
+
+00:01:52.178 --> 00:01:53.348
+targets separate.
+
+00:01:53.878 --> 00:01:57.968
+It asks the library for a depth one
+regression tree with a fixed seed.
+
+00:01:58.518 --> 00:02:01.108
+Fitting constructs the
+test and mean leaves;
+
+00:02:01.558 --> 00:02:03.828
+prediction receives only zero or one.
+
+00:02:04.418 --> 00:02:08.878
+The library searches useful threshold
+splits rather than taking gradient steps
+
+00:02:08.878 --> 00:02:11.168
+on an existing linear weight vector.
+
+00:02:11.798 --> 00:02:15.838
+We use its implementation so the learning
+focuses on the model contract and
+
+00:02:15.838 --> 00:02:16.328
+arithmetic.
+
+00:02:17.258 --> 00:02:19.888
+The project also saves inspectable tests,
+
+00:02:20.278 --> 00:02:22.928
+support counts and values
+for the full models.
+
+00:02:25.150 --> 00:02:28.836
+The constant has total squared
+error thirty four thousand,
+
+00:02:28.836 --> 00:02:32.720
+five hundred and thirty eight point
+seven five on these four rows.
+
+00:02:33.290 --> 00:02:34.800
+Inside the busy leaf,
+
+00:02:34.910 --> 00:02:38.400
+each outcome is eight rentals
+away from its fitted mean,
+
+00:02:38.590 --> 00:02:40.420
+contributing sixty four each.
+
+00:02:41.130 --> 00:02:45.840
+The two quiet errors have magnitude one
+half, contributing one quarter each.
+
+00:02:46.350 --> 00:02:49.400
+The new total is one hundred
+and twenty eight point five.
+
+00:02:49.450 --> 00:02:53.000
+A mean leaf does not make
+its observations identical;
+
+00:02:53.410 --> 00:02:55.280
+it minimizes their squared deviations.
+
+00:02:56.250 --> 00:02:59.600
+This training improvement says
+nothing yet about another date.
+
+00:03:01.733 --> 00:03:05.223
+Change the requested
+hour from eight to nine.
+
+00:03:05.733 --> 00:03:09.503
+In this probe,
+the only supplied indicator becomes zero.
+
+00:03:10.113 --> 00:03:14.613
+The tree therefore follows the same branch
+as the two oclock observations and returns
+
+00:03:14.613 --> 00:03:15.983
+one point five.
+
+00:03:16.133 --> 00:03:20.103
+That is not a claim about
+real nine oclock demand.
+
+00:03:20.633 --> 00:03:24.063
+It is what this deliberately limited
+fitted function can distinguish.
+
+00:03:24.633 --> 00:03:29.193
+The full benchmark uses all forty
+five calendar inputs and many more
+
+00:03:29.193 --> 00:03:29.903
+observations.
+
+00:03:30.673 --> 00:03:34.903
+It still cannot distinguish requests
+whose available inputs are identical.
+
+00:03:35.533 --> 00:03:39.873
+Keep this limitation in mind before
+interpreting deeper trees as automatic
+
+00:03:39.873 --> 00:03:41.803
+understanding of the future.
+

@@ -1,0 +1,254 @@
+WEBVTT
+
+00:00:00.580 --> 00:00:04.890
+A chronological split fixes which
+observations may train the model.
+
+00:00:05.300 --> 00:00:10.180
+It does not require this independent row
+calendar model to visit training rows
+
+00:00:10.180 --> 00:00:11.170
+chronologically.
+
+00:00:11.700 --> 00:00:13.407
+We shuffle only the eight thousand,
+
+00:00:13.407 --> 00:00:17.190
+six hundred and forty five training
+positions from twenty eleven.
+
+00:00:17.980 --> 00:00:21.050
+Validation remains in
+its later frozen window.
+
+00:00:21.520 --> 00:00:26.220
+There is no recurrent state or lag window
+here whose internal sequence would be
+
+00:00:26.220 --> 00:00:26.730
+broken.
+
+00:00:27.360 --> 00:00:32.870
+An explicit PCG64 seed generates
+one permutation per epoch,
+
+00:00:33.220 --> 00:00:36.410
+and consecutive batches take
+slices without replacement.
+
+00:00:37.100 --> 00:00:40.410
+Each recorded row appears
+once in a completed pass.
+
+00:00:40.800 --> 00:00:45.930
+A different seed changes optimization
+order, while the same seed reproduces it.
+
+00:00:46.160 --> 00:00:49.990
+Neither operation moves a later
+validation outcome into fitting.
+
+00:00:52.150 --> 00:00:56.940
+The stream creates a new permutation
+only when the current one is exhausted.
+
+00:00:57.550 --> 00:01:02.240
+It then takes the next slice, bounded by
+remaining rows and the example budget.
+
+00:01:02.550 --> 00:01:06.540
+This means the final batch may be
+smaller than the requested size.
+
+00:01:06.830 --> 00:01:08.020
+At size thirty two,
+
+00:01:08.390 --> 00:01:08.970
+eight thousand,
+
+00:01:08.970 --> 00:01:14.050
+six hundred and forty five equals two
+hundred and seventy full batches plus five
+
+00:01:14.050 --> 00:01:14.520
+rows.
+
+00:01:15.150 --> 00:01:18.080
+Those five observations are
+retained as a final batch,
+
+00:01:18.130 --> 00:01:20.880
+making two hundred and
+seventy one updates per pass.
+
+00:01:21.350 --> 00:01:23.480
+The cursor moves by the actual count.
+
+00:01:24.030 --> 00:01:28.150
+Saving the cursor without the current
+permutation would lose the identity of the
+
+00:01:28.150 --> 00:01:28.900
+next rows.
+
+00:01:29.570 --> 00:01:32.320
+The generator state determines
+the following permutation,
+
+00:01:32.690 --> 00:01:36.640
+so both current order and future
+random state belong in a continuation.
+
+00:01:39.067 --> 00:01:42.297
+The objective is a mean
+over the actual batch.
+
+00:01:42.907 --> 00:01:47.467
+For weight gradients we multiply the
+transposed batch by its residuals and
+
+00:01:47.467 --> 00:01:48.897
+divide by its row count.
+
+00:01:49.467 --> 00:01:51.557
+The bias uses the residual mean.
+
+00:01:52.127 --> 00:01:55.997
+The tail has five rows,
+so its denominator is five.
+
+00:01:56.867 --> 00:01:57.917
+Dividing by thirty two
+
+00:01:58.347 --> 00:02:02.977
+would shrink that intended mean gradient
+to five thirty seconds of its value.
+
+00:02:03.567 --> 00:02:07.877
+Dropping the tail would discard five
+recorded hours each epoch instead.
+
+00:02:08.687 --> 00:02:09.437
+We do neither.
+
+00:02:10.067 --> 00:02:14.527
+A small constant feature fixture checks
+the expected update with independent
+
+00:02:14.527 --> 00:02:15.937
+scalar arithmetic,
+
+00:02:16.607 --> 00:02:18.337
+including the one row tail case.
+
+00:02:19.047 --> 00:02:22.437
+This detail matters most when
+comparing different batch sizes:
+
+00:02:23.107 --> 00:02:27.117
+a hidden tail scaling change would
+introduce a second update policy.
+
+00:02:29.317 --> 00:02:33.927
+We choose ten complete training
+passes as the main work allowance.
+
+00:02:34.457 --> 00:02:38.747
+Every trial visits eighty six thousand,
+four hundred and fifty examples.
+
+00:02:39.697 --> 00:02:43.847
+A one row method therefore performs
+the same number of parameter updates.
+
+00:02:44.457 --> 00:02:47.727
+Batch thirty two performs two thousand,
+seven hundred and ten,
+
+00:02:48.477 --> 00:02:49.467
+including tails.
+
+00:02:50.277 --> 00:02:52.307
+Full batch performs only ten.
+
+00:02:53.037 --> 00:02:58.047
+The earlier proposed ten thousand update
+cap would truncate the one row trial.
+
+00:02:58.477 --> 00:02:59.807
+Before the main study,
+
+00:02:59.957 --> 00:03:04.237
+we raise that safety cap to one hundred
+thousand while retaining the five minute
+
+00:03:04.237 --> 00:03:04.787
+limit.
+
+00:03:05.277 --> 00:03:08.367
+All main trials finish
+at their example budget.
+
+00:03:08.897 --> 00:03:12.327
+Equal update counts would give
+very different data exposure.
+
+00:03:13.117 --> 00:03:17.007
+Equal wall time would mix algorithm
+behavior with hardware costs.
+
+00:03:17.477 --> 00:03:21.427
+State which comparison you intend
+before interpreting its winner.
+
+00:03:23.665 --> 00:03:27.575
+Keeping SGD and rate zero
+point zero one fixed,
+
+00:03:28.065 --> 00:03:32.605
+mean validation absolute error is one
+hundred and eighteen point zero nine for
+
+00:03:32.605 --> 00:03:33.415
+single rows,
+
+00:03:33.825 --> 00:03:37.255
+one hundred and sixteen point one
+seven for batches of thirty two,
+
+00:03:37.965 --> 00:03:41.315
+and one hundred and forty six
+point nine four for full batch.
+
+00:03:41.765 --> 00:03:44.395
+These are averages across
+three paired seeds.
+
+00:03:45.065 --> 00:03:47.225
+Single row updates also vary more,
+
+00:03:47.225 --> 00:03:51.755
+with sample deviation six point zero
+four versus zero point five six.
+
+00:03:52.525 --> 00:03:57.475
+Full batch has only ten small steps and
+remains far from the training optimum.
+
+00:03:58.105 --> 00:04:02.115
+Our earlier two hundred step,
+higher rate reference did reach it.
+
+00:04:02.525 --> 00:04:06.735
+Local fitting times describe this machine
+and loop, not a general benchmark.
+
+00:04:07.205 --> 00:04:11.415
+The batch comparison exposes noise,
+work and progress together;
+
+00:04:11.625 --> 00:04:15.015
+it does not make full batch
+incapable of fitting the model.
+

@@ -1,0 +1,9 @@
+{
+  "parent_head": "c8f82e42bec777f626de44b2d66fb83aafd023e6",
+  "docs_head": "ec2096438d5db14262ea2b929d10161df4498d65",
+  "verified_files": 139,
+  "all_hashes_preserved": true,
+  "destination": "ai_projects/docs",
+  "old_directory_exists": false,
+  "state": "local relocation; no commit or publication"
+}

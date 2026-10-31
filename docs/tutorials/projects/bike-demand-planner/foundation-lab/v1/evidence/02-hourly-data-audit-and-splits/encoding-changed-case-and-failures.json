@@ -1,0 +1,18 @@
+{
+  "changed_hour_active_features": {
+    "hr_09": 1.0,
+    "weekday_01": 1.0,
+    "mnth_01": 1.0,
+    "workingday": 1.0
+  },
+  "rejected_cases": [
+    {
+      "case": "target_in_inputs",
+      "error": "Expected exactly these calendar inputs: ('hr', 'weekday', 'mnth', 'holiday', 'workingday')."
+    },
+    {
+      "case": "unsupported_date",
+      "error": "Supported target dates are in 2011\u20132012."
+    }
+  ]
+}

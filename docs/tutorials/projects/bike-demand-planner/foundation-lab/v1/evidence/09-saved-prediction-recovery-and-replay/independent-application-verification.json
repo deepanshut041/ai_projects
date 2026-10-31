@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "reviewed_run": "/mnt/projects/ai/ai_projects/projects/foundations/bike-demand-planner/runs/application-20261020T023243004826Z",
+  "fresh_predictions_independently_verified": 4357,
+  "benchmark_artifacts_verified": 7,
+  "model_and_candidate_bytes_unchanged": true,
+  "inference_has_no_outcomes": true,
+  "next_batch_exact": true,
+  "next_adam_update_independently_verified": true,
+  "full_resumed_numeric_state_equal": true,
+  "generation_fallback_verified": true,
+  "all_four_indexes_unchanged": true,
+  "frozen_non_test_bytes_unchanged": true,
+  "source_and_runtime_context_verified": true,
+  "wheel_and_sdist_modules_and_web_assets_match_source": true,
+  "private_material_excluded": true,
+  "wheel_sha256": "12645e9bc4f83cc5c26e0dd1850cf3d6e26fdb7082d08f75b6883463ada9bd97",
+  "sdist_sha256": "49672d91109827ab29d9dd27f7f4d2307368c1184b6a4908b201d2b0e6607a71",
+  "reserved_test_targets_opened": false
+}

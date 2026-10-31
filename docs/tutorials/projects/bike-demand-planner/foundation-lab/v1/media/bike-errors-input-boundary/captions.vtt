@@ -1,0 +1,250 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:03.750
+Begin with our January
+Monday request at eight,
+
+00:00:04.340 --> 00:00:07.910
+supported by two hundred and forty
+eight training hours for its key.
+
+00:00:08.520 --> 00:00:13.070
+Change to Monday, June fourth,
+still at eight and still a working day.
+
+00:00:13.620 --> 00:00:17.190
+The forecast remains three hundred
+and forty nine point five zero.
+
+00:00:18.120 --> 00:00:19.610
+Both requests are valid.
+
+00:00:20.140 --> 00:00:22.850
+The selected predictor
+simply has no month term,
+
+00:00:23.140 --> 00:00:25.010
+so they share the same stored parameter.
+
+00:00:25.660 --> 00:00:30.460
+An unchanged prediction does not establish
+that January and June should have equal
+
+00:00:30.460 --> 00:00:31.170
+demand.
+
+00:00:31.480 --> 00:00:34.430
+It tells us what this fitted
+function can distinguish,
+
+00:00:34.840 --> 00:00:38.230
+which is a separate question from
+whether the input is well formed.
+
+00:00:40.400 --> 00:00:45.696
+A valid Sunday request at eight selects
+the nonworking pair and returns seventy
+
+00:00:45.696 --> 00:00:50.550
+six point four three, supported by one
+hundred and fifteen training observations.
+
+00:00:51.620 --> 00:00:52.790
+The date, weekday
+
+00:00:53.180 --> 00:00:55.790
+and working day flag change
+together consistently.
+
+00:00:56.700 --> 00:01:00.990
+The Monday quiet hour uses another
+key and returns seven point five one.
+
+00:01:01.520 --> 00:01:06.300
+These comparisons expose the actual lookup
+behavior without fitting or reading an
+
+00:01:06.300 --> 00:01:06.830
+outcome.
+
+00:01:07.240 --> 00:01:11.320
+They are not causal estimates of changing
+one flag while holding an impossible
+
+00:01:11.320 --> 00:01:12.490
+calendar fixed.
+
+00:01:13.080 --> 00:01:17.980
+We retain four accepted cases with their
+support and fallback status so the model
+
+00:01:17.980 --> 00:01:20.070
+response can be traced concretely.
+
+00:01:22.208 --> 00:01:26.858
+A large miss found afterward makes
+the pooling assumption tangible.
+
+00:01:27.748 --> 00:01:30.098
+On Monday, April sixteenth at eight,
+
+00:01:30.308 --> 00:01:33.838
+the source records a holiday
+and a nonworking flag.
+
+00:01:34.368 --> 00:01:39.278
+The model therefore uses the nonworking
+mean of seventy six point four three,
+
+00:01:39.588 --> 00:01:42.318
+while the observed count is
+five hundred and ninety seven.
+
+00:01:43.328 --> 00:01:48.798
+A holiday can be structurally consistent
+without behaving like a typical Sunday.
+
+00:01:49.548 --> 00:01:53.858
+We do not change the recorded flag
+afterward to obtain a better answer.
+
+00:01:54.348 --> 00:01:59.718
+This was a posthoc error example,
+not a predeclared extra request probe.
+
+00:02:00.388 --> 00:02:03.018
+The validator checks
+structure and consistency,
+
+00:02:03.508 --> 00:02:06.698
+while calendar authority must
+come from the trusted source.
+
+00:02:08.858 --> 00:02:13.648
+The validator accepts exactly the
+schema version, target timestamp,
+
+00:02:14.198 --> 00:02:15.108
+issue timestamp
+
+00:02:15.538 --> 00:02:17.168
+and named calendar inputs.
+
+00:02:17.918 --> 00:02:23.258
+It checks exact hourly naive timestamps
+and requires the issue to be one hour
+
+00:02:23.258 --> 00:02:24.808
+before the target interval.
+
+00:02:25.418 --> 00:02:31.068
+It also checks that encoded hour, month
+and weekday agree with that timestamp.
+
+00:02:32.058 --> 00:02:36.888
+Named dictionary order is harmless because
+encoding follows the declared schema.
+
+00:02:37.738 --> 00:02:40.768
+Reordering the saved model
+feature names is rejected.
+
+00:02:41.618 --> 00:02:45.228
+Equal vector lengths cannot
+identify misplaced feature meanings.
+
+00:02:46.298 --> 00:02:50.608
+The fourteen rejected probes include
+missing and nonfinite fields,
+
+00:02:51.078 --> 00:02:52.808
+unknown categories and schema,
+
+00:02:53.278 --> 00:02:54.508
+extra outcomes,
+
+00:02:54.938 --> 00:02:56.148
+inconsistent flags,
+
+00:02:56.518 --> 00:02:59.708
+wrong lead and unsupported
+timestamp forms.
+
+00:03:01.858 --> 00:03:06.858
+The candidate currently supports
+historical validation replay from January
+
+00:03:06.858 --> 00:03:10.508
+first at one in the morning through
+June thirtieth at twenty three.
+
+00:03:11.358 --> 00:03:14.948
+The lower boundary follows the
+frozen one hour lead convention.
+
+00:03:15.958 --> 00:03:20.008
+Reserved test dates and a future
+twenty thirteen request are rejected
+
+00:03:20.538 --> 00:03:22.608
+even if their calendar
+values could be encoded.
+
+00:03:23.398 --> 00:03:27.888
+The dataset leaves timezone and daylight
+saving interpretation unspecified,
+
+00:03:28.498 --> 00:03:32.708
+so this review preserves naive timestamps
+rather than inventing an offset.
+
+00:03:33.398 --> 00:03:36.788
+This narrow domain records
+the evidence we actually have.
+
+00:03:37.278 --> 00:03:41.008
+A later application needs its own
+explicit serving and date policy;
+
+00:03:41.618 --> 00:03:44.768
+that adapter is not implemented
+by these sensitivity probes.
+
+00:03:47.018 --> 00:03:49.228
+Three cases need different behavior.
+
+00:03:49.978 --> 00:03:53.948
+A valid hour with no source
+observation may receive an estimate,
+
+00:03:54.198 --> 00:03:56.968
+but no zero target is created for scoring.
+
+00:03:57.678 --> 00:04:03.238
+A valid hour and working day pair absent
+from training uses the saved training only
+
+00:04:03.238 --> 00:04:06.688
+global mean, one hundred and
+forty three point seven nine.
+
+00:04:07.078 --> 00:04:11.688
+All forty eight real pairs are present,
+so a small fixture checks this branch.
+
+00:04:12.398 --> 00:04:17.388
+A missing field or unknown schema
+instead causes rejection before lookup.
+
+00:04:17.838 --> 00:04:21.008
+Fallback is not permission
+to repair malformed input.
+
+00:04:21.458 --> 00:04:25.098
+Keeping those distinctions prevents
+coverage gaps and unsupported requests
+
+00:04:25.098 --> 00:04:28.868
+from being hidden behind an
+apparently successful numeric answer.
+

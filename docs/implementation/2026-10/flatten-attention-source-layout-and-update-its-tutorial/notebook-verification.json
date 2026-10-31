@@ -1,0 +1,21 @@
+{
+  "python": "/mnt/projects/ai/ai_projects/projects/transformer-labs/attention-is-all-you-need/.venv/bin/python3",
+  "runs": [
+    {
+      "cwd": "/mnt/projects/ai/ai_projects/projects/transformer-labs/attention-is-all-you-need",
+      "code_cells": 37,
+      "png_outputs": 28,
+      "errors": 0,
+      "passed": true
+    },
+    {
+      "cwd": "/mnt/projects/ai/ai_projects/projects/transformer-labs/attention-is-all-you-need/notebooks",
+      "code_cells": 37,
+      "png_outputs": 28,
+      "errors": 0,
+      "passed": true
+    }
+  ],
+  "figure_directory": "/mnt/projects/ai/ai_projects/projects/transformer-labs/attention-is-all-you-need/runs/attention-visuals",
+  "passed": true
+}

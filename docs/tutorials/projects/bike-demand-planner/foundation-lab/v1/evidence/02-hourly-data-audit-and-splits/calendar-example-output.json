@@ -1,0 +1,21 @@
+{
+  "record_id": 54,
+  "target_time": "2011-01-03T08:00:00",
+  "forecast_issue_time": "2011-01-03T07:00:00",
+  "calendar_inputs": {
+    "hr": 8,
+    "weekday": 1,
+    "mnth": 1,
+    "holiday": 0,
+    "workingday": 1
+  },
+  "feature_count": 45,
+  "active_features": {
+    "hr_08": 1.0,
+    "weekday_01": 1.0,
+    "mnth_01": 1.0,
+    "workingday": 1.0
+  },
+  "split": "train",
+  "target_separate_from_inputs": 154
+}

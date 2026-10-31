@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="700" viewBox="0 0 1160 700" role="img"><title>Show every seed, not only the best approximation</title><desc>Mean absolute output error versus exact causal softmax; six-token CPU float64 fixture.</desc>
+<rect x="0" y="0" width="1160" height="700" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">Show every seed, not only the best approximation</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">Mean absolute output error versus exact causal softmax; six-token CPU float64 fixture.</text>
+<line x1="107" y1="515.0" x2="807" y2="515.0" stroke="#dce2ee"/>
+<text x="88" y="521.0" font-family="DejaVu Sans" font-size="19" font-weight="400" text-anchor="end" fill="#17253f">0.00</text>
+<line x1="107" y1="434.2307692307692" x2="807" y2="434.2307692307692" stroke="#dce2ee"/>
+<text x="88" y="440.2307692307692" font-family="DejaVu Sans" font-size="19" font-weight="400" text-anchor="end" fill="#17253f">0.03</text>
+<line x1="107" y1="353.46153846153845" x2="807" y2="353.46153846153845" stroke="#dce2ee"/>
+<text x="88" y="359.46153846153845" font-family="DejaVu Sans" font-size="19" font-weight="400" text-anchor="end" fill="#17253f">0.06</text>
+<line x1="107" y1="272.69230769230774" x2="807" y2="272.69230769230774" stroke="#dce2ee"/>
+<text x="88" y="278.69230769230774" font-family="DejaVu Sans" font-size="19" font-weight="400" text-anchor="end" fill="#17253f">0.09</text>
+<line x1="107" y1="191.92307692307696" x2="807" y2="191.92307692307696" stroke="#dce2ee"/>
+<text x="88" y="197.92307692307696" font-family="DejaVu Sans" font-size="19" font-weight="400" text-anchor="end" fill="#17253f">0.12</text>
+<rect x="155" y="466.50615384615384" width="29" height="48.49384615384615" rx="2" fill="#2563b9"/>
+<rect x="193" y="190.87576923076927" width="29" height="324.12423076923073" rx="2" fill="#16735e"/>
+<rect x="231" y="414.5230769230769" width="29" height="100.47692307692307" rx="2" fill="#b65a1c"/>
+<rect x="269" y="478.31461538461537" width="29" height="36.68538461538461" rx="2" fill="#6846c7"/>
+<text x="226" y="554" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="middle" fill="#17253f">r = 16</text>
+<rect x="389" y="492.1907692307692" width="29" height="22.80923076923077" rx="2" fill="#2563b9"/>
+<rect x="427" y="408.54076923076923" width="29" height="106.45923076923077" rx="2" fill="#16735e"/>
+<rect x="465" y="490.56192307692305" width="29" height="24.438076923076924" rx="2" fill="#b65a1c"/>
+<rect x="503" y="477.48269230769233" width="29" height="37.51730769230769" rx="2" fill="#6846c7"/>
+<text x="460" y="554" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="middle" fill="#17253f">r = 64</text>
+<rect x="623" y="502.0338461538461" width="29" height="12.966153846153846" rx="2" fill="#2563b9"/>
+<rect x="661" y="486.545" width="29" height="28.455" rx="2" fill="#16735e"/>
+<rect x="699" y="500.4965384615385" width="29" height="14.503461538461538" rx="2" fill="#b65a1c"/>
+<rect x="737" y="508.0457692307692" width="29" height="6.954230769230768" rx="2" fill="#6846c7"/>
+<text x="694" y="554" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="middle" fill="#17253f">r = 256</text>
+<text x="36" y="128" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">output MAE</text>
+<rect x="866" y="192" width="24" height="24" rx="3" fill="#2563b9"/>
+<text x="907" y="213" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">seed 0</text>
+<rect x="866" y="253" width="24" height="24" rx="3" fill="#16735e"/>
+<text x="907" y="274" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">seed 1</text>
+<rect x="866" y="314" width="24" height="24" rx="3" fill="#b65a1c"/>
+<text x="907" y="335" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">seed 2</text>
+<rect x="866" y="375" width="24" height="24" rx="3" fill="#6846c7"/>
+<text x="907" y="396" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">seed 3</text>
+<text x="36" y="614" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">All twelve results use the same inputs and target. More features do not guarantee a lower error</text>
+<text x="36" y="648" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">for every one seed: seed 3 rises from .013626 at r=16 to .013935 at r=64.</text>
+</svg>

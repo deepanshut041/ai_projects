@@ -1,0 +1,752 @@
+{
+  "version": "linear-optimizer-study-v1",
+  "status": "completed",
+  "started_utc": "2026-10-19T23:43:55.530876+00:00",
+  "test_evaluated": false,
+  "protocol_sha256": "d752f10a3e57bf7953ea62b3831826ee5bf904aaf9c0086cd7b6e7cdd9c6a5d5",
+  "selected_rates": {
+    "sgd": 0.01,
+    "momentum": 0.001,
+    "adam": 1.0
+  },
+  "pilot_trials": [
+    {
+      "optimizer": "sgd",
+      "rate": 0.001,
+      "status": "completed",
+      "stop_reason": "examples_budget",
+      "updates": 200,
+      "examples_processed": 6400,
+      "training_half_mse": 6982.513119469502,
+      "fit_seconds": 0.0033961640001507476,
+      "directory": "pilot/sgd-00"
+    },
+    {
+      "optimizer": "sgd",
+      "rate": 0.01,
+      "status": "completed",
+      "stop_reason": "examples_budget",
+      "updates": 200,
+      "examples_processed": 6400,
+      "training_half_mse": 3271.5710534150735,
+      "fit_seconds": 0.003334257999085821,
+      "directory": "pilot/sgd-01"
+    },
+    {
+      "optimizer": "sgd",
+      "rate": 0.1,
+      "status": "completed",
+      "stop_reason": "examples_budget",
+      "updates": 200,
+      "examples_processed": 6400,
+      "training_half_mse": 3391.765875278562,
+      "fit_seconds": 0.0032587069981673267,
+      "directory": "pilot/sgd-02"
+    },
+    {
+      "optimizer": "sgd",
+      "rate": 1.0,
+      "status": "failed",
+      "stop_reason": "diverged",
+      "updates": 11,
+      "examples_processed": 384,
+      "training_half_mse": 764369.636818745,
+      "fit_seconds": 0.0008890060016710777,
+      "directory": "pilot/sgd-03"
+    },
+    {
+      "optimizer": "momentum",
+      "rate": 0.001,
+      "status": "completed",
+      "stop_reason": "examples_budget",
+      "updates": 200,
+      "examples_processed": 6400,
+      "training_half_mse": 3254.5499801558813,
+      "fit_seconds": 0.0031320390007749666,
+      "directory": "pilot/momentum-00"
+    },
+    {
+      "optimizer": "momentum",
+      "rate": 0.01,
+      "status": "completed",
+      "stop_reason": "examples_budget",
+      "updates": 200,
+      "examples_processed": 6400,
+      "training_half_mse": 3354.2416661388975,
+      "fit_seconds": 0.0031914209976093844,
+      "directory": "pilot/momentum-01"
+    },
+    {
+      "optimizer": "momentum",
+      "rate": 0.1,
+      "status": "completed",
+      "stop_reason": "examples_budget",
+      "updates": 200,
+      "examples_processed": 6400,
+      "training_half_mse": 10935.75074760776,
+      "fit_seconds": 0.003250681998906657,
+      "directory": "pilot/momentum-02"
+    },
+    {
+      "optimizer": "momentum",
+      "rate": 1.0,
+      "status": "failed",
+      "stop_reason": "diverged",
+      "updates": 8,
+      "examples_processed": 288,
+      "training_half_mse": 2128268.213840338,
+      "fit_seconds": 0.0007277740005520172,
+      "directory": "pilot/momentum-03"
+    },
+    {
+      "optimizer": "adam",
+      "rate": 0.001,
+      "status": "completed",
+      "stop_reason": "examples_budget",
+      "updates": 200,
+      "examples_processed": 6400,
+      "training_half_mse": 8881.749844967242,
+      "fit_seconds": 0.003941797000152292,
+      "directory": "pilot/adam-00"
+    },
+    {
+      "optimizer": "adam",
+      "rate": 0.01,
+      "status": "completed",
+      "stop_reason": "examples_budget",
+      "updates": 200,
+      "examples_processed": 6400,
+      "training_half_mse": 8297.919902189537,
+      "fit_seconds": 0.003944312000385253,
+      "directory": "pilot/adam-01"
+    },
+    {
+      "optimizer": "adam",
+      "rate": 0.1,
+      "status": "completed",
+      "stop_reason": "examples_budget",
+      "updates": 200,
+      "examples_processed": 6400,
+      "training_half_mse": 4761.756050852613,
+      "fit_seconds": 0.004024673002277268,
+      "directory": "pilot/adam-02"
+    },
+    {
+      "optimizer": "adam",
+      "rate": 1.0,
+      "status": "completed",
+      "stop_reason": "examples_budget",
+      "updates": 200,
+      "examples_processed": 6400,
+      "training_half_mse": 3256.3659382668616,
+      "fit_seconds": 0.004044940000312636,
+      "directory": "pilot/adam-03"
+    }
+  ],
+  "unique_main_trials": 18,
+  "families": {
+    "optimizer": [
+      {
+        "label": "sgd",
+        "seed": 17,
+        "trial": "8d49727af4ebf5bc"
+      },
+      {
+        "label": "momentum",
+        "seed": 17,
+        "trial": "9971316268872760"
+      },
+      {
+        "label": "adam",
+        "seed": 17,
+        "trial": "0ff1080e74e76137"
+      },
+      {
+        "label": "sgd",
+        "seed": 29,
+        "trial": "aec1cf94b6e4a361"
+      },
+      {
+        "label": "momentum",
+        "seed": 29,
+        "trial": "71ffc0fd3680725d"
+      },
+      {
+        "label": "adam",
+        "seed": 29,
+        "trial": "0350cf23a39d1539"
+      },
+      {
+        "label": "sgd",
+        "seed": 43,
+        "trial": "0112656bec48c074"
+      },
+      {
+        "label": "momentum",
+        "seed": 43,
+        "trial": "76382a6144a7e069"
+      },
+      {
+        "label": "adam",
+        "seed": 43,
+        "trial": "3805f133e22f2d70"
+      }
+    ],
+    "batch": [
+      {
+        "label": "1",
+        "seed": 17,
+        "trial": "a518049314842bbf"
+      },
+      {
+        "label": "32",
+        "seed": 17,
+        "trial": "8d49727af4ebf5bc"
+      },
+      {
+        "label": "full",
+        "seed": 17,
+        "trial": "5e41071e6fbc391b"
+      },
+      {
+        "label": "1",
+        "seed": 29,
+        "trial": "3e01ef990dc68d6d"
+      },
+      {
+        "label": "32",
+        "seed": 29,
+        "trial": "aec1cf94b6e4a361"
+      },
+      {
+        "label": "full",
+        "seed": 29,
+        "trial": "045a94c06017b889"
+      },
+      {
+        "label": "1",
+        "seed": 43,
+        "trial": "9278085e2072665d"
+      },
+      {
+        "label": "32",
+        "seed": 43,
+        "trial": "0112656bec48c074"
+      },
+      {
+        "label": "full",
+        "seed": 43,
+        "trial": "2ef5d2ad7e3feaa3"
+      }
+    ],
+    "schedule": [
+      {
+        "label": "constant",
+        "seed": 17,
+        "trial": "8d49727af4ebf5bc"
+      },
+      {
+        "label": "inverse_time",
+        "seed": 17,
+        "trial": "9c3cd0a1ba8385e2"
+      },
+      {
+        "label": "constant",
+        "seed": 29,
+        "trial": "aec1cf94b6e4a361"
+      },
+      {
+        "label": "inverse_time",
+        "seed": 29,
+        "trial": "b53d97c3dee5a5a8"
+      },
+      {
+        "label": "constant",
+        "seed": 43,
+        "trial": "0112656bec48c074"
+      },
+      {
+        "label": "inverse_time",
+        "seed": 43,
+        "trial": "3cc8365d7ea758ce"
+      }
+    ]
+  },
+  "trial_directories": {
+    "8d49727af4ebf5bc": "trials/8d49727af4ebf5bc",
+    "9971316268872760": "trials/9971316268872760",
+    "0ff1080e74e76137": "trials/0ff1080e74e76137",
+    "a518049314842bbf": "trials/a518049314842bbf",
+    "5e41071e6fbc391b": "trials/5e41071e6fbc391b",
+    "9c3cd0a1ba8385e2": "trials/9c3cd0a1ba8385e2",
+    "aec1cf94b6e4a361": "trials/aec1cf94b6e4a361",
+    "71ffc0fd3680725d": "trials/71ffc0fd3680725d",
+    "0350cf23a39d1539": "trials/0350cf23a39d1539",
+    "3e01ef990dc68d6d": "trials/3e01ef990dc68d6d",
+    "045a94c06017b889": "trials/045a94c06017b889",
+    "b53d97c3dee5a5a8": "trials/b53d97c3dee5a5a8",
+    "0112656bec48c074": "trials/0112656bec48c074",
+    "76382a6144a7e069": "trials/76382a6144a7e069",
+    "3805f133e22f2d70": "trials/3805f133e22f2d70",
+    "9278085e2072665d": "trials/9278085e2072665d",
+    "2ef5d2ad7e3feaa3": "trials/2ef5d2ad7e3feaa3",
+    "3cc8365d7ea758ce": "trials/3cc8365d7ea758ce"
+  },
+  "summaries": {
+    "optimizer": {
+      "sgd": {
+        "trials": 3,
+        "scored_trials": 3,
+        "seeds": [
+          17,
+          29,
+          43
+        ],
+        "stop_reasons": [
+          "examples_budget",
+          "examples_budget",
+          "examples_budget"
+        ],
+        "mae": {
+          "mean": 116.16606476930306,
+          "sample_std": 0.5593588340940719,
+          "minimum": 115.58395899809155,
+          "maximum": 116.69949537381211
+        },
+        "rmse": {
+          "mean": 157.65435680267998,
+          "sample_std": 0.3982855149662159,
+          "minimum": 157.26278899706543,
+          "maximum": 158.05903623353072
+        },
+        "mean_signed_error": {
+          "mean": -94.3393300956228,
+          "sample_std": 0.8345409384501061,
+          "minimum": -95.28496561312386,
+          "maximum": -93.70592379749428
+        },
+        "updates": {
+          "mean": 2710,
+          "sample_std": 0.0,
+          "minimum": 2710,
+          "maximum": 2710
+        },
+        "examples_processed": {
+          "mean": 86450,
+          "sample_std": 0.0,
+          "minimum": 86450,
+          "maximum": 86450
+        },
+        "fit_seconds": {
+          "mean": 0.03524945500006046,
+          "sample_std": 0.00023309378495786436,
+          "minimum": 0.035022323001612676,
+          "maximum": 0.03548808499908773
+        },
+        "training_half_mse": {
+          "mean": 3177.8965824359084,
+          "sample_std": 5.097944360804568,
+          "minimum": 3173.8043409835263,
+          "maximum": 3183.6072913555277
+        }
+      },
+      "momentum": {
+        "trials": 3,
+        "scored_trials": 3,
+        "seeds": [
+          17,
+          29,
+          43
+        ],
+        "stop_reasons": [
+          "examples_budget",
+          "examples_budget",
+          "examples_budget"
+        ],
+        "mae": {
+          "mean": 116.60266111194241,
+          "sample_std": 0.6582357531760025,
+          "minimum": 115.94786491199304,
+          "maximum": 117.26428332708247
+        },
+        "rmse": {
+          "mean": 157.94992231005517,
+          "sample_std": 0.7186319279263603,
+          "minimum": 157.38002009056075,
+          "maximum": 158.7572147287151
+        },
+        "mean_signed_error": {
+          "mean": -95.0609229345566,
+          "sample_std": 1.0413541886950348,
+          "minimum": -96.25662453685476,
+          "maximum": -94.35288227448704
+        },
+        "updates": {
+          "mean": 2710,
+          "sample_std": 0.0,
+          "minimum": 2710,
+          "maximum": 2710
+        },
+        "examples_processed": {
+          "mean": 86450,
+          "sample_std": 0.0,
+          "minimum": 86450,
+          "maximum": 86450
+        },
+        "fit_seconds": {
+          "mean": 0.03702618833510011,
+          "sample_std": 8.407590206609646e-05,
+          "minimum": 0.03694468500179937,
+          "maximum": 0.03711262000069837
+        },
+        "training_half_mse": {
+          "mean": 3174.306640154729,
+          "sample_std": 0.4845438049702756,
+          "minimum": 3173.887854649917,
+          "maximum": 3174.8373531907378
+        }
+      },
+      "adam": {
+        "trials": 3,
+        "scored_trials": 3,
+        "seeds": [
+          17,
+          29,
+          43
+        ],
+        "stop_reasons": [
+          "examples_budget",
+          "examples_budget",
+          "examples_budget"
+        ],
+        "mae": {
+          "mean": 114.36077189577843,
+          "sample_std": 2.3676253349857355,
+          "minimum": 111.62692365021086,
+          "maximum": 115.74201574347751
+        },
+        "rmse": {
+          "mean": 156.43427467882677,
+          "sample_std": 2.709657997229363,
+          "minimum": 153.31090075835033,
+          "maximum": 158.1561114958079
+        },
+        "mean_signed_error": {
+          "mean": -90.82314961654322,
+          "sample_std": 3.61375929430028,
+          "minimum": -93.97117567210364,
+          "maximum": -86.87706888267277
+        },
+        "updates": {
+          "mean": 2710,
+          "sample_std": 0.0,
+          "minimum": 2710,
+          "maximum": 2710
+        },
+        "examples_processed": {
+          "mean": 86450,
+          "sample_std": 0.0,
+          "minimum": 86450,
+          "maximum": 86450
+        },
+        "fit_seconds": {
+          "mean": 0.047852447000574706,
+          "sample_std": 0.00027793621773479694,
+          "minimum": 0.04761656499977107,
+          "maximum": 0.04815885100106243
+        },
+        "training_half_mse": {
+          "mean": 3297.8449802475006,
+          "sample_std": 36.99820937167632,
+          "minimum": 3271.1451614495436,
+          "maximum": 3340.0775358865244
+        }
+      }
+    },
+    "batch": {
+      "1": {
+        "trials": 3,
+        "scored_trials": 3,
+        "seeds": [
+          17,
+          29,
+          43
+        ],
+        "stop_reasons": [
+          "examples_budget",
+          "examples_budget",
+          "examples_budget"
+        ],
+        "mae": {
+          "mean": 118.09235400831973,
+          "sample_std": 6.039042668227279,
+          "minimum": 111.54292659645876,
+          "maximum": 123.44041929592726
+        },
+        "rmse": {
+          "mean": 162.32207380918828,
+          "sample_std": 11.667423321868966,
+          "minimum": 148.85017957407956,
+          "maximum": 169.15709796861003
+        },
+        "mean_signed_error": {
+          "mean": -89.12682416649818,
+          "sample_std": 6.756787834704623,
+          "minimum": -94.68147395014758,
+          "maximum": -81.60465141842296
+        },
+        "updates": {
+          "mean": 86450,
+          "sample_std": 0.0,
+          "minimum": 86450,
+          "maximum": 86450
+        },
+        "examples_processed": {
+          "mean": 86450,
+          "sample_std": 0.0,
+          "minimum": 86450,
+          "maximum": 86450
+        },
+        "fit_seconds": {
+          "mean": 0.9791643179996754,
+          "sample_std": 0.005019304638131121,
+          "minimum": 0.9733694179994927,
+          "maximum": 0.9821499130011944
+        },
+        "training_half_mse": {
+          "mean": 4417.450333216885,
+          "sample_std": 241.59996343547073,
+          "minimum": 4173.071488744172,
+          "maximum": 4656.1720583252645
+        }
+      },
+      "32": {
+        "trials": 3,
+        "scored_trials": 3,
+        "seeds": [
+          17,
+          29,
+          43
+        ],
+        "stop_reasons": [
+          "examples_budget",
+          "examples_budget",
+          "examples_budget"
+        ],
+        "mae": {
+          "mean": 116.16606476930306,
+          "sample_std": 0.5593588340940719,
+          "minimum": 115.58395899809155,
+          "maximum": 116.69949537381211
+        },
+        "rmse": {
+          "mean": 157.65435680267998,
+          "sample_std": 0.3982855149662159,
+          "minimum": 157.26278899706543,
+          "maximum": 158.05903623353072
+        },
+        "mean_signed_error": {
+          "mean": -94.3393300956228,
+          "sample_std": 0.8345409384501061,
+          "minimum": -95.28496561312386,
+          "maximum": -93.70592379749428
+        },
+        "updates": {
+          "mean": 2710,
+          "sample_std": 0.0,
+          "minimum": 2710,
+          "maximum": 2710
+        },
+        "examples_processed": {
+          "mean": 86450,
+          "sample_std": 0.0,
+          "minimum": 86450,
+          "maximum": 86450
+        },
+        "fit_seconds": {
+          "mean": 0.03524945500006046,
+          "sample_std": 0.00023309378495786436,
+          "minimum": 0.035022323001612676,
+          "maximum": 0.03548808499908773
+        },
+        "training_half_mse": {
+          "mean": 3177.8965824359084,
+          "sample_std": 5.097944360804568,
+          "minimum": 3173.8043409835263,
+          "maximum": 3183.6072913555277
+        }
+      },
+      "full": {
+        "trials": 3,
+        "scored_trials": 3,
+        "seeds": [
+          17,
+          29,
+          43
+        ],
+        "stop_reasons": [
+          "examples_budget",
+          "examples_budget",
+          "examples_budget"
+        ],
+        "mae": {
+          "mean": 146.94482593373377,
+          "sample_std": 0.0,
+          "minimum": 146.94482593373377,
+          "maximum": 146.94482593373377
+        },
+        "rmse": {
+          "mean": 200.8621644953834,
+          "sample_std": 0.0,
+          "minimum": 200.8621644953834,
+          "maximum": 200.8621644953834
+        },
+        "mean_signed_error": {
+          "mean": -73.74905774474738,
+          "sample_std": 8.204640795236539e-15,
+          "minimum": -73.74905774474738,
+          "maximum": -73.74905774474736
+        },
+        "updates": {
+          "mean": 10,
+          "sample_std": 0.0,
+          "minimum": 10,
+          "maximum": 10
+        },
+        "examples_processed": {
+          "mean": 86450,
+          "sample_std": 0.0,
+          "minimum": 86450,
+          "maximum": 86450
+        },
+        "fit_seconds": {
+          "mean": 0.004649830333316156,
+          "sample_std": 0.00012604758644195403,
+          "minimum": 0.0045764759997837245,
+          "maximum": 0.00479537600040203
+        },
+        "training_half_mse": {
+          "mean": 7859.961283653422,
+          "sample_std": 0.0,
+          "minimum": 7859.961283653422,
+          "maximum": 7859.961283653422
+        }
+      }
+    },
+    "schedule": {
+      "constant": {
+        "trials": 3,
+        "scored_trials": 3,
+        "seeds": [
+          17,
+          29,
+          43
+        ],
+        "stop_reasons": [
+          "examples_budget",
+          "examples_budget",
+          "examples_budget"
+        ],
+        "mae": {
+          "mean": 116.16606476930306,
+          "sample_std": 0.5593588340940719,
+          "minimum": 115.58395899809155,
+          "maximum": 116.69949537381211
+        },
+        "rmse": {
+          "mean": 157.65435680267998,
+          "sample_std": 0.3982855149662159,
+          "minimum": 157.26278899706543,
+          "maximum": 158.05903623353072
+        },
+        "mean_signed_error": {
+          "mean": -94.3393300956228,
+          "sample_std": 0.8345409384501061,
+          "minimum": -95.28496561312386,
+          "maximum": -93.70592379749428
+        },
+        "updates": {
+          "mean": 2710,
+          "sample_std": 0.0,
+          "minimum": 2710,
+          "maximum": 2710
+        },
+        "examples_processed": {
+          "mean": 86450,
+          "sample_std": 0.0,
+          "minimum": 86450,
+          "maximum": 86450
+        },
+        "fit_seconds": {
+          "mean": 0.03524945500006046,
+          "sample_std": 0.00023309378495786436,
+          "minimum": 0.035022323001612676,
+          "maximum": 0.03548808499908773
+        },
+        "training_half_mse": {
+          "mean": 3177.8965824359084,
+          "sample_std": 5.097944360804568,
+          "minimum": 3173.8043409835263,
+          "maximum": 3183.6072913555277
+        }
+      },
+      "inverse_time": {
+        "trials": 3,
+        "scored_trials": 3,
+        "seeds": [
+          17,
+          29,
+          43
+        ],
+        "stop_reasons": [
+          "examples_budget",
+          "examples_budget",
+          "examples_budget"
+        ],
+        "mae": {
+          "mean": 116.55792317582888,
+          "sample_std": 0.1221048890751165,
+          "minimum": 116.41980952186665,
+          "maximum": 116.6515374431886
+        },
+        "rmse": {
+          "mean": 157.85113081567224,
+          "sample_std": 0.11200012871774484,
+          "minimum": 157.72777884514582,
+          "maximum": 157.9464556843973
+        },
+        "mean_signed_error": {
+          "mean": -94.87006314156417,
+          "sample_std": 0.17305946433639338,
+          "minimum": -94.99157084194316,
+          "maximum": -94.67191756215543
+        },
+        "updates": {
+          "mean": 2710,
+          "sample_std": 0.0,
+          "minimum": 2710,
+          "maximum": 2710
+        },
+        "examples_processed": {
+          "mean": 86450,
+          "sample_std": 0.0,
+          "minimum": 86450,
+          "maximum": 86450
+        },
+        "fit_seconds": {
+          "mean": 0.0352695966673006,
+          "sample_std": 4.197741753292054e-05,
+          "minimum": 0.035221366000769194,
+          "maximum": 0.03529789000094752
+        },
+        "training_half_mse": {
+          "mean": 3168.3496713633613,
+          "sample_std": 0.4044353802708904,
+          "minimum": 3168.087952531697,
+          "maximum": 3168.815486622073
+        }
+      }
+    }
+  },
+  "finished_utc": "2026-10-19T23:44:00.412656+00:00"
+}

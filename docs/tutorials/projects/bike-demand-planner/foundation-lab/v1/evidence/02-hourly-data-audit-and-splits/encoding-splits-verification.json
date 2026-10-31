@@ -1,0 +1,112 @@
+{
+  "date": "2026-10-16",
+  "scope": "Phase 01 fixed calendar encoding and chronological membership; no baseline/model fitting",
+  "checks": {
+    "command": [
+      "uv",
+      "run",
+      "--frozen",
+      "python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "returncode": 0,
+    "passed": 22,
+    "numerical": 7,
+    "raw_data": 6,
+    "encoding": 3,
+    "membership_exports": 6
+  },
+  "real_example": {
+    "record_id": 54,
+    "target_time": "2011-01-03T08:00:00",
+    "forecast_issue_time": "2011-01-03T07:00:00",
+    "calendar_inputs": {
+      "hr": 8,
+      "weekday": 1,
+      "mnth": 1,
+      "holiday": 0,
+      "workingday": 1
+    },
+    "feature_count": 45,
+    "active_features": {
+      "hr_08": 1.0,
+      "weekday_01": 1.0,
+      "mnth_01": 1.0,
+      "workingday": 1.0
+    },
+    "split": "train",
+    "target_separate_from_inputs": 154
+  },
+  "changed_case_and_failures": {
+    "changed_hour_active_features": {
+      "hr_09": 1.0,
+      "weekday_01": 1.0,
+      "mnth_01": 1.0,
+      "workingday": 1.0
+    },
+    "rejected_cases": [
+      {
+        "case": "target_in_inputs",
+        "error": "Expected exactly these calendar inputs: ('hr', 'weekday', 'mnth', 'holiday', 'workingday')."
+      },
+      {
+        "case": "unsupported_date",
+        "error": "Supported target dates are in 2011\u20132012."
+      }
+    ]
+  },
+  "replay_exports_and_identities": {
+    "offline_replay_identical": true,
+    "source_schema_membership_export_hashes_verified": true,
+    "membership_unique_complete": true,
+    "partition_counts": {
+      "train": 8645,
+      "validation": 4357,
+      "test": 4375,
+      "embargo": 2
+    },
+    "test_targets_exported": false,
+    "setup_and_metadata": "passed",
+    "exports": {
+      "bike_demand_planner-0.1.0-py3-none-any.whl": {
+        "private_and_data_files_excluded": true,
+        "new_modules_included": true
+      },
+      "bike_demand_planner-0.1.0.tar.gz": {
+        "private_and_data_files_excluded": true,
+        "new_modules_included": true
+      }
+    },
+    "manifest_sha256": "e551edfad465ede2ba76042564bf184d38408e85a0ef61cb6e7534cf544af733",
+    "schema_sha256": "9e84223da4af4942296245357837e6ac5910a869f38071f7ab6995d6bfdfb521"
+  },
+  "privacy_and_preservation": {
+    "head": "4794ad4b4cfe81f832686fa955f9294505a10750",
+    "index_preserved": true,
+    "raw_hour_bytes_preserved": true,
+    "previous_linear_functions_preserved": true,
+    "private_links_checked": 81,
+    "overview_only_phase_folders": 10,
+    "private_data_and_docs_ignored": true,
+    "remote": "",
+    "worktrees": "/mnt/projects/ai/ai_projects  4794ad4 [main]",
+    "new_commit": false
+  },
+  "mermaid": {
+    "rendered": 3,
+    "new_diagrams_visually_inspected": 2,
+    "screenshots": [
+      "output/playwright/calendar-encoding.png",
+      "output/playwright/issue-time-boundary.png"
+    ]
+  },
+  "working_time_policy": "Naive interval-start labels; one-hour lead and interval duration; interval-end outcomes; zero reporting/model-build delay.",
+  "learner_observation": "No learner answer to the current encoding/boundary question; earlier positive-feature changed-target direction remains observed.",
+  "phase_status": "01 implementation checked, collaborative review current; 02 not started",
+  "commit_or_publication": "none this continuation"
+}

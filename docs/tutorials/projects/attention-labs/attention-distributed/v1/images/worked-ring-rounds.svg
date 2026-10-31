@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="840" viewBox="0 0 1160 840" role="img"><title>Four source contributions require three transfers</title><desc>Queries stay on their ranks. KV colors identify their original source owner as they circulate.</desc>
+<rect x="0" y="0" width="1160" height="840" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">Four source contributions require three transfers</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">Queries stay on their ranks. KV colors identify their original source owner as they circulate.</text>
+<rect x="36" y="120" width="532" height="307" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="152" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">Compute round 0 · local</text>
+<rect x="58" y="178" width="127" height="73" rx="7" fill="#f2f4fa" stroke="#d1d9e8" stroke-width="1.5"/>
+<text x="121" y="203" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#17253f">Q0 stays</text>
+<rect x="58" y="213" width="127" height="38" rx="5" fill="#2563b9"/>
+<text x="121" y="239" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="white">KV0</text>
+<rect x="419" y="178" width="127" height="73" rx="7" fill="#f2f4fa" stroke="#d1d9e8" stroke-width="1.5"/>
+<text x="482" y="203" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#17253f">Q1 stays</text>
+<rect x="419" y="213" width="127" height="38" rx="5" fill="#16735e"/>
+<text x="482" y="239" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="white">KV1</text>
+<rect x="419" y="325" width="127" height="73" rx="7" fill="#f2f4fa" stroke="#d1d9e8" stroke-width="1.5"/>
+<text x="482" y="350" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#17253f">Q2 stays</text>
+<rect x="419" y="360" width="127" height="38" rx="5" fill="#b65a1c"/>
+<text x="482" y="386" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="white">KV2</text>
+<rect x="58" y="325" width="127" height="73" rx="7" fill="#f2f4fa" stroke="#d1d9e8" stroke-width="1.5"/>
+<text x="121" y="350" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#17253f">Q3 stays</text>
+<rect x="58" y="360" width="127" height="38" rx="5" fill="#6846c7"/>
+<text x="121" y="386" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="white">KV3</text>
+<line x1="191" y1="214" x2="412" y2="214" stroke="#53617b" stroke-width="2.5"/>
+<polygon points="412.00,214.00 401.87,218.28 401.87,209.72" fill="#53617b"/>
+<line x1="482" y1="257" x2="482" y2="318" stroke="#53617b" stroke-width="2.5"/>
+<polygon points="482.00,318.00 477.72,307.87 486.28,307.87" fill="#53617b"/>
+<line x1="412" y1="361" x2="191" y2="361" stroke="#53617b" stroke-width="2.5"/>
+<polygon points="191.00,361.00 201.13,356.72 201.13,365.28" fill="#53617b"/>
+<line x1="121" y1="318" x2="121" y2="257" stroke="#53617b" stroke-width="2.5"/>
+<polygon points="121.00,257.00 125.28,267.13 116.72,267.13" fill="#53617b"/>
+<text x="302" y="294" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="middle" fill="#53617b">send KV after compute</text>
+<rect x="592" y="120" width="532" height="307" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="610" y="152" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">Compute round 1</text>
+<rect x="614" y="178" width="127" height="73" rx="7" fill="#f2f4fa" stroke="#d1d9e8" stroke-width="1.5"/>
+<text x="677" y="203" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#17253f">Q0 stays</text>
+<rect x="614" y="213" width="127" height="38" rx="5" fill="#6846c7"/>
+<text x="677" y="239" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="white">KV3</text>
+<rect x="975" y="178" width="127" height="73" rx="7" fill="#f2f4fa" stroke="#d1d9e8" stroke-width="1.5"/>
+<text x="1038" y="203" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#17253f">Q1 stays</text>
+<rect x="975" y="213" width="127" height="38" rx="5" fill="#2563b9"/>
+<text x="1038" y="239" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="white">KV0</text>
+<rect x="975" y="325" width="127" height="73" rx="7" fill="#f2f4fa" stroke="#d1d9e8" stroke-width="1.5"/>
+<text x="1038" y="350" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#17253f">Q2 stays</text>
+<rect x="975" y="360" width="127" height="38" rx="5" fill="#16735e"/>
+<text x="1038" y="386" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="white">KV1</text>
+<rect x="614" y="325" width="127" height="73" rx="7" fill="#f2f4fa" stroke="#d1d9e8" stroke-width="1.5"/>
+<text x="677" y="350" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#17253f">Q3 stays</text>
+<rect x="614" y="360" width="127" height="38" rx="5" fill="#b65a1c"/>
+<text x="677" y="386" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="white">KV2</text>
+<line x1="747" y1="214" x2="968" y2="214" stroke="#53617b" stroke-width="2.5"/>
+<polygon points="968.00,214.00 957.87,218.28 957.87,209.72" fill="#53617b"/>
+<line x1="1038" y1="257" x2="1038" y2="318" stroke="#53617b" stroke-width="2.5"/>
+<polygon points="1038.00,318.00 1033.72,307.87 1042.28,307.87" fill="#53617b"/>
+<line x1="968" y1="361" x2="747" y2="361" stroke="#53617b" stroke-width="2.5"/>
+<polygon points="747.00,361.00 757.13,356.72 757.13,365.28" fill="#53617b"/>
+<line x1="677" y1="318" x2="677" y2="257" stroke="#53617b" stroke-width="2.5"/>
+<polygon points="677.00,257.00 681.28,267.13 672.72,267.13" fill="#53617b"/>
+<text x="858" y="294" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="middle" fill="#53617b">send KV after compute</text>
+<rect x="36" y="452" width="532" height="307" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="484" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">Compute round 2</text>
+<rect x="58" y="510" width="127" height="73" rx="7" fill="#f2f4fa" stroke="#d1d9e8" stroke-width="1.5"/>
+<text x="121" y="535" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#17253f">Q0 stays</text>
+<rect x="58" y="545" width="127" height="38" rx="5" fill="#b65a1c"/>
+<text x="121" y="571" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="white">KV2</text>
+<rect x="419" y="510" width="127" height="73" rx="7" fill="#f2f4fa" stroke="#d1d9e8" stroke-width="1.5"/>
+<text x="482" y="535" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#17253f">Q1 stays</text>
+<rect x="419" y="545" width="127" height="38" rx="5" fill="#6846c7"/>
+<text x="482" y="571" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="white">KV3</text>
+<rect x="419" y="657" width="127" height="73" rx="7" fill="#f2f4fa" stroke="#d1d9e8" stroke-width="1.5"/>
+<text x="482" y="682" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#17253f">Q2 stays</text>
+<rect x="419" y="692" width="127" height="38" rx="5" fill="#2563b9"/>
+<text x="482" y="718" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="white">KV0</text>
+<rect x="58" y="657" width="127" height="73" rx="7" fill="#f2f4fa" stroke="#d1d9e8" stroke-width="1.5"/>
+<text x="121" y="682" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#17253f">Q3 stays</text>
+<rect x="58" y="692" width="127" height="38" rx="5" fill="#16735e"/>
+<text x="121" y="718" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="white">KV1</text>
+<line x1="191" y1="546" x2="412" y2="546" stroke="#53617b" stroke-width="2.5"/>
+<polygon points="412.00,546.00 401.87,550.28 401.87,541.72" fill="#53617b"/>
+<line x1="482" y1="589" x2="482" y2="650" stroke="#53617b" stroke-width="2.5"/>
+<polygon points="482.00,650.00 477.72,639.87 486.28,639.87" fill="#53617b"/>
+<line x1="412" y1="693" x2="191" y2="693" stroke="#53617b" stroke-width="2.5"/>
+<polygon points="191.00,693.00 201.13,688.72 201.13,697.28" fill="#53617b"/>
+<line x1="121" y1="650" x2="121" y2="589" stroke="#53617b" stroke-width="2.5"/>
+<polygon points="121.00,589.00 125.28,599.13 116.72,599.13" fill="#53617b"/>
+<text x="302" y="626" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="middle" fill="#53617b">send KV after compute</text>
+<rect x="592" y="452" width="532" height="307" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="610" y="484" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">Compute round 3 · final</text>
+<rect x="614" y="510" width="127" height="73" rx="7" fill="#f2f4fa" stroke="#d1d9e8" stroke-width="1.5"/>
+<text x="677" y="535" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#17253f">Q0 stays</text>
+<rect x="614" y="545" width="127" height="38" rx="5" fill="#16735e"/>
+<text x="677" y="571" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="white">KV1</text>
+<rect x="975" y="510" width="127" height="73" rx="7" fill="#f2f4fa" stroke="#d1d9e8" stroke-width="1.5"/>
+<text x="1038" y="535" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#17253f">Q1 stays</text>
+<rect x="975" y="545" width="127" height="38" rx="5" fill="#b65a1c"/>
+<text x="1038" y="571" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="white">KV2</text>
+<rect x="975" y="657" width="127" height="73" rx="7" fill="#f2f4fa" stroke="#d1d9e8" stroke-width="1.5"/>
+<text x="1038" y="682" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#17253f">Q2 stays</text>
+<rect x="975" y="692" width="127" height="38" rx="5" fill="#6846c7"/>
+<text x="1038" y="718" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="white">KV3</text>
+<rect x="614" y="657" width="127" height="73" rx="7" fill="#f2f4fa" stroke="#d1d9e8" stroke-width="1.5"/>
+<text x="677" y="682" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#17253f">Q3 stays</text>
+<rect x="614" y="692" width="127" height="38" rx="5" fill="#2563b9"/>
+<text x="677" y="718" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="middle" fill="white">KV0</text>
+<text x="858" y="626" font-family="DejaVu Sans" font-size="18" font-weight="700" text-anchor="middle" fill="#16735e">all sources visited</text>
+<text x="36" y="808" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">Rank 0 visits [0,3,2,1]. Every rank visits each source once; absolute token positions travel with KV.</text>
+</svg>

@@ -1,0 +1,93 @@
+/* Build-time token markup; this stylesheet is also used by static exports. */
+.markdown pre {
+  --syntax-fg: #edf2f4;
+  --syntax-comment: #a4b3be;
+  --syntax-keyword: #ff9fb5;
+  --syntax-string: #a5d6ff;
+  --syntax-number: #f2c48d;
+  --syntax-title: #d2b5ff;
+  --syntax-builtin: #8adbd0;
+  --syntax-variable: #f0c989;
+  --syntax-attr: #9fd5ff;
+  --syntax-meta: #c6b6ff;
+  --syntax-punctuation: #c7d5df;
+  --syntax-addition: #b9e8bd;
+  --syntax-deletion: #ffb4bc;
+  background: #101a20;
+  color: var(--syntax-fg);
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.65;
+  tab-size: 4;
+}
+.markdown pre code {
+  color: var(--syntax-fg);
+  background: transparent;
+  padding: 0;
+  font: 14px/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+.markdown pre:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.markdown pre code .hljs-comment,
+.markdown pre code .hljs-quote { color: var(--syntax-comment); font-style: italic; }
+.markdown pre code .hljs-keyword,
+.markdown pre code .hljs-selector-tag,
+.markdown pre code .hljs-doctag { color: var(--syntax-keyword); }
+.markdown pre code .hljs-string,
+.markdown pre code .hljs-regexp,
+.markdown pre code .hljs-selector-attr { color: var(--syntax-string); }
+.markdown pre code .hljs-number,
+.markdown pre code .hljs-literal { color: var(--syntax-number); }
+.markdown pre code .hljs-title,
+.markdown pre code .hljs-section,
+.markdown pre code .hljs-selector-class,
+.markdown pre code .hljs-selector-id { color: var(--syntax-title); }
+.markdown pre code .hljs-built_in,
+.markdown pre code .hljs-type { color: var(--syntax-builtin); }
+.markdown pre code .hljs-variable,
+.markdown pre code .hljs-template-variable,
+.markdown pre code .hljs-symbol,
+.markdown pre code .hljs-bullet { color: var(--syntax-variable); }
+.markdown pre code .hljs-attr,
+.markdown pre code .hljs-attribute,
+.markdown pre code .hljs-property,
+.markdown pre code .hljs-name { color: var(--syntax-attr); }
+.markdown pre code .hljs-meta { color: var(--syntax-meta); }
+.markdown pre code .hljs-punctuation,
+.markdown pre code .hljs-operator { color: var(--syntax-punctuation); }
+.markdown pre code .hljs-subst { color: var(--syntax-fg); }
+.markdown pre code .hljs-addition { color: var(--syntax-addition); }
+.markdown pre code .hljs-deletion { color: var(--syntax-deletion); }
+.markdown pre code .hljs-emphasis { font-style: italic; }
+.markdown pre code .hljs-strong { font-weight: 700; }
+
+@media print {
+  .markdown pre {
+    --syntax-fg: #1f2933;
+    --syntax-comment: #52616d;
+    --syntax-keyword: #8f1b4a;
+    --syntax-string: #0a4f7a;
+    --syntax-number: #a24b00;
+    --syntax-title: #633ca0;
+    --syntax-builtin: #00645e;
+    --syntax-variable: #805200;
+    --syntax-attr: #1b548c;
+    --syntax-meta: #5f3b85;
+    --syntax-punctuation: #334c5e;
+    --syntax-addition: #24652d;
+    --syntax-deletion: #9d2533;
+    color: var(--syntax-fg);
+    background: #f6f8fa;
+    border: 1px solid #c9d2da;
+    white-space: pre-wrap;
+  }
+  .markdown pre code {
+    font-size: 9pt;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+}

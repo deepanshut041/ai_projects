@@ -1,0 +1,241 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:04.530
+The full tree sees the original
+forty five binary calendar columns.
+
+00:00:04.940 --> 00:00:09.690
+A path can test an hour and then ask
+about working day status or month.
+
+00:00:10.180 --> 00:00:13.090
+Its reached leaf is the
+intersection of those conditions.
+
+00:00:13.820 --> 00:00:18.160
+This lets the tree express conditional
+relationships without us adding every
+
+00:00:18.160 --> 00:00:19.650
+product feature explicitly.
+
+00:00:20.440 --> 00:00:24.720
+Each extra partition also divides the
+available training examples into smaller
+
+00:00:24.720 --> 00:00:25.910
+supporting groups.
+
+00:00:26.380 --> 00:00:31.160
+The practical question is whether that
+extra historical detail improves the later
+
+00:00:31.160 --> 00:00:33.170
+forecasts enough to justify it,
+
+00:00:33.220 --> 00:00:36.470
+rather than whether a larger
+model can lower training error.
+
+00:00:38.650 --> 00:00:40.780
+The source declares depth,
+
+00:00:40.950 --> 00:00:45.640
+minimum leaf support and a maximum of
+one thousand and twenty four leaves.
+
+00:00:46.290 --> 00:00:49.320
+The library fits only
+training rows and targets.
+
+00:00:50.050 --> 00:00:53.420
+Our first setting uses depth
+three and support twenty.
+
+00:00:54.090 --> 00:00:57.180
+The second uses depth
+eight and support ten.
+
+00:00:57.810 --> 00:01:01.230
+The third removes the depth
+limit and uses support one,
+
+00:01:01.230 --> 00:01:03.660
+while retaining the leaf count cap.
+
+00:01:04.110 --> 00:01:07.560
+A sequence of one hot
+questions can become long,
+
+00:01:07.650 --> 00:01:11.080
+so depth does not simply count
+the number of calendar variables.
+
+00:01:11.570 --> 00:01:14.920
+These structural controls are
+the actual fitting limits,
+
+00:01:15.050 --> 00:01:17.100
+with no validation early stopping.
+
+00:01:19.275 --> 00:01:24.975
+Making the bounded tree more flexible
+lowers training mean absolute error from
+
+00:01:24.975 --> 00:01:27.185
+about ninety four to twenty six.
+
+00:01:27.795 --> 00:01:30.775
+It also improves this
+depth sweeps later error,
+
+00:01:30.775 --> 00:01:33.825
+from about one hundred and
+forty one to one hundred.
+
+00:01:34.955 --> 00:01:38.985
+Calling that sweep alone proof of
+overfitting would be inaccurate.
+
+00:01:39.715 --> 00:01:41.265
+Both measured errors improved.
+
+00:01:42.435 --> 00:01:44.665
+Compare the grouped baseline instead:
+
+00:01:45.215 --> 00:01:47.455
+it fits the training sample less closely,
+
+00:01:47.455 --> 00:01:51.405
+but scores better on later hours
+at ninety one point five seven.
+
+00:01:52.195 --> 00:01:56.095
+Lower training error is therefore
+insufficient to choose the function we
+
+00:01:56.095 --> 00:01:57.065
+carry forward.
+
+00:01:59.358 --> 00:02:03.768
+Now follow Monday, January ninth,
+twenty twelve, at eight,
+
+00:02:03.938 --> 00:02:06.088
+whose observed target is
+four hundred and twenty.
+
+00:02:07.238 --> 00:02:11.748
+The actual deep tree first excludes
+hour seventeen and eighteen,
+
+00:02:12.058 --> 00:02:13.968
+then takes its hour eight branch.
+
+00:02:14.798 --> 00:02:17.668
+Further tests include working day status,
+
+00:02:18.038 --> 00:02:18.468
+January
+
+00:02:18.998 --> 00:02:19.728
+and weekdays.
+
+00:02:20.598 --> 00:02:23.328
+The reached leaf contains
+eight training observations.
+
+00:02:24.418 --> 00:02:26.768
+These are real saved
+conditions and support,
+
+00:02:27.058 --> 00:02:30.308
+not an illustrative tree
+drawn after seeing the target.
+
+00:02:30.898 --> 00:02:33.348
+The request supplies
+only the calendar vector.
+
+00:02:34.018 --> 00:02:38.358
+The later count is absent from its route
+and becomes relevant when we score the
+
+00:02:38.358 --> 00:02:39.388
+returned value.
+
+00:02:41.587 --> 00:02:44.297
+The eight supporting
+counts are shown here.
+
+00:02:44.747 --> 00:02:47.337
+They sum to one thousand,
+four hundred and forty six.
+
+00:02:48.487 --> 00:02:51.257
+Dividing by eight gives the stored mean,
+
+00:02:51.647 --> 00:02:55.137
+one hundred and eighty point
+seven five rentals per hour.
+
+00:02:55.587 --> 00:02:57.837
+Against the later target
+of four hundred and twenty,
+
+00:02:58.627 --> 00:03:02.537
+the absolute error is two hundred
+and thirty nine point two five.
+
+00:03:03.267 --> 00:03:08.147
+The broader hour and working day baseline
+predicts about three hundred and forty
+
+00:03:08.147 --> 00:03:10.617
+nine point five, much closer.
+
+00:03:11.327 --> 00:03:16.167
+Finer conditioning has captured historical
+detail that does not help this particular
+
+00:03:16.167 --> 00:03:17.277
+later commute.
+
+00:03:17.927 --> 00:03:21.797
+The result does not identify a
+single cause of changed demand.
+
+00:03:23.858 --> 00:03:28.228
+Change only the requested hour to
+two in the morning on that Monday.
+
+00:03:28.718 --> 00:03:34.128
+The actual saved tree follows another path
+and returns about six point five five.
+
+00:03:34.578 --> 00:03:39.208
+The observed target is five,
+so this is a useful quiet hour forecast.
+
+00:03:39.898 --> 00:03:45.498
+That success coexists with the busy hour
+failure and a worse overall score than the
+
+00:03:45.498 --> 00:03:46.128
+group model.
+
+00:03:46.578 --> 00:03:50.208
+We keep both examples and the
+full validation population,
+
+00:03:50.578 --> 00:03:54.168
+rather than selecting whichever makes
+the newest model look strongest.
+
+00:03:54.718 --> 00:03:56.828
+This is why support, path,
+
+00:03:57.178 --> 00:04:00.588
+training error and later error
+all belong in the explanation.
+

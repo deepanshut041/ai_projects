@@ -1,0 +1,23 @@
+{
+  "scope": "Independent final manifest/workbook/export audit; browser/visual QA belongs to main agent",
+  "chapters": 25,
+  "objectives": 25,
+  "practice_items": 25,
+  "sources": 48,
+  "diagrams": 15,
+  "scenarios": 2,
+  "legacy_id_file_mappings_retained": 11,
+  "current_practice_matches_reviewed_bank": true,
+  "workbook_notebook_titles_align": true,
+  "source_ids_and_local_links_resolve": true,
+  "archive": "/mnt/projects/ai/.ai/course-exports/2026-10-12/topic-foundations-final/tutorial0-source.zip",
+  "archive_sha256": "b3f5ac884815e25f79d567a70d23c0140e4c4b994e497058de3f5ec1e65cf0ef",
+  "verified_payload_files": 22,
+  "zip_entries": 23,
+  "clear_syntax_valid_notebooks": [
+    "study.ipynb",
+    "colab.ipynb"
+  ],
+  "notes_have_complete_opening_sentences": true,
+  "hosted_recovery": "not demonstrated by this audit"
+}

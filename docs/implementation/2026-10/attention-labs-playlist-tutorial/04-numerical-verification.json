@@ -1,0 +1,11 @@
+{
+  "torch_version": "2.14.1+cpu",
+  "dtype": "float64",
+  "device": "cpu",
+  "independent_attention_cases": 36,
+  "maximum_output_error": 2.220446049250313e-16,
+  "autograd_projection_gradient": -0.047694266122954104,
+  "displayed_programs_extracted_and_run": 9,
+  "packed_forward_and_gradient_cases": 4,
+  "passed": true
+}

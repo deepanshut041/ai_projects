@@ -1,0 +1,259 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:04.030
+The overall average hides
+a much harder slice.
+
+00:00:04.620 --> 00:00:09.090
+We defined working day rush
+as hours seven, eight, nine,
+
+00:00:09.440 --> 00:00:14.070
+sixteen, seventeen and eighteen
+before opening the final outcomes.
+
+00:00:14.760 --> 00:00:18.030
+It contains seven hundred
+and forty one recorded hours,
+
+00:00:18.220 --> 00:00:22.510
+with group mean absolute error two
+hundred and sixty five point four three.
+
+00:00:23.140 --> 00:00:27.030
+Signed error there is negative two
+hundred and forty three point eight one.
+
+00:00:27.700 --> 00:00:31.310
+The forest is lower at two hundred
+and twenty six point seven four,
+
+00:00:31.680 --> 00:00:33.690
+but still misses substantially.
+
+00:00:34.440 --> 00:00:37.530
+These counts and definitions
+matter to interpretation.
+
+00:00:38.360 --> 00:00:43.300
+Finding a busy hour failure does not
+establish a new causal model or an
+
+00:00:43.300 --> 00:00:45.250
+operational inventory policy.
+
+00:00:47.602 --> 00:00:50.332
+Month slices show
+different later behavior.
+
+00:00:51.022 --> 00:00:55.739
+July has seven hundred and forty three
+observations and mean absolute error one
+
+00:00:55.739 --> 00:00:57.772
+hundred and thirty two point one four.
+
+00:00:58.422 --> 00:01:02.991
+September has seven hundred and twenty
+and error one hundred and sixty four point
+
+00:01:02.991 --> 00:01:03.892
+three four.
+
+00:01:04.682 --> 00:01:07.772
+October has seven hundred
+and eight recorded hours;
+
+00:01:08.422 --> 00:01:12.372
+December has seven hundred and
+forty two and lower average error.
+
+00:01:13.062 --> 00:01:17.012
+All six observed month counts
+reconstruct the final population.
+
+00:01:17.922 --> 00:01:20.572
+January through June
+final slices are empty,
+
+00:01:20.922 --> 00:01:24.592
+with undefined metrics rather
+than invented zero error.
+
+00:01:25.282 --> 00:01:27.372
+Month and rush dimensions overlap,
+
+00:01:27.722 --> 00:01:30.832
+so adding their separate counts
+would double count observations.
+
+00:01:33.233 --> 00:01:37.793
+The total underprediction deficit is
+five hundred and seventeen thousand,
+
+00:01:37.793 --> 00:01:42.403
+nine hundred and forty one point
+zero zero eight five rentals.
+
+00:01:42.493 --> 00:01:47.443
+Divide by all four thousand, three
+hundred and seventy five observed hours
+
+00:01:47.933 --> 00:01:51.443
+and the average deficit is one
+hundred and eighteen point three nine.
+
+00:01:52.053 --> 00:01:54.466
+Divide by only the three thousand,
+
+00:01:54.466 --> 00:01:58.867
+seven hundred and thirty five
+underpredicted hours and it becomes one
+
+00:01:58.867 --> 00:02:01.003
+hundred and thirty eight point six seven.
+
+00:02:01.753 --> 00:02:05.803
+Both values are correct,
+with different questions and denominators.
+
+00:02:06.333 --> 00:02:09.003
+They measure misses
+against observed rentals,
+
+00:02:09.273 --> 00:02:11.503
+not every person who wanted a bicycle;
+
+00:02:12.193 --> 00:02:14.883
+unmet demand is not
+directly recorded here.
+
+00:02:16.983 --> 00:02:19.693
+Between the first and
+last final observations,
+
+00:02:20.183 --> 00:02:24.093
+forty expected naive hourly
+slots are unrecorded.
+
+00:02:24.663 --> 00:02:27.273
+Their absence does not
+establish zero rentals,
+
+00:02:27.543 --> 00:02:30.953
+nor does it establish a model
+error of any known size.
+
+00:02:31.563 --> 00:02:35.273
+We retain the missingness and
+score only recorded outcomes.
+
+00:02:35.783 --> 00:02:40.423
+October therefore has seven hundred
+and eight observed hours rather than a
+
+00:02:40.423 --> 00:02:42.653
+complete calendar month of hourly labels.
+
+00:02:43.283 --> 00:02:47.323
+Substituting zeros would change
+both numerator and denominator,
+
+00:02:47.323 --> 00:02:50.493
+answering a different question
+without supporting observations.
+
+00:02:51.463 --> 00:02:53.953
+The replay application
+follows the same principle:
+
+00:02:54.463 --> 00:02:59.303
+an estimate may exist for a valid request
+while its actual count and residual remain
+
+00:02:59.303 --> 00:02:59.993
+unavailable.
+
+00:03:02.233 --> 00:03:07.063
+The largest retained group miss occurs
+on September twelfth at eighteen.
+
+00:03:07.753 --> 00:03:11.263
+The model predicts three hundred
+and sixty seven point four five,
+
+00:03:11.813 --> 00:03:14.283
+while the observed count is
+nine hundred and seventy seven.
+
+00:03:15.653 --> 00:03:19.723
+Its residual is negative six
+hundred and nine point five five.
+
+00:03:20.733 --> 00:03:22.663
+Across the final period,
+
+00:03:22.873 --> 00:03:26.543
+mean target is two hundred
+and fifty four point one one,
+
+00:03:26.893 --> 00:03:31.023
+while mean forecast is one hundred
+and forty two point seven six.
+
+00:03:31.773 --> 00:03:34.443
+Their difference agrees with signed error.
+
+00:03:34.913 --> 00:03:39.123
+This describes a level gap consistent
+with old fitted group means.
+
+00:03:39.373 --> 00:03:44.643
+It does not identify why demand changed
+or establish a causal intervention.
+
+00:03:47.040 --> 00:03:49.990
+Nearby hours also tend to miss together.
+
+00:03:50.720 --> 00:03:51.333
+Over four thousand,
+
+00:03:51.333 --> 00:03:55.010
+three hundred and sixty nine
+consecutive observed hour pairs,
+
+00:03:55.300 --> 00:03:58.830
+residual correlation is about
+zero point eight three four nine.
+
+00:03:59.540 --> 00:04:04.150
+Pairs spanning missing hours are
+excluded from that adjacency calculation.
+
+00:04:04.940 --> 00:04:09.050
+Daily and Monday start weekly
+summaries retain their actual counts.
+
+00:04:09.760 --> 00:04:14.480
+The report does not pretend that thousands
+of adjacent hours are independent future
+
+00:04:14.480 --> 00:04:15.390
+experiments.
+
+00:04:15.980 --> 00:04:20.260
+Its time and slice comparisons are
+descriptive evidence about this one later
+
+00:04:20.260 --> 00:04:24.770
+period, without an unsupported
+independent hour confidence interval.
+
+00:04:25.300 --> 00:04:29.720
+A different future operating environment
+remains an unanswered generalization
+
+00:04:29.720 --> 00:04:33.770
+question rather than something
+a large row count guarantees.
+

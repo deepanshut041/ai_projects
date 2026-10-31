@@ -1,0 +1,240 @@
+{
+  "status": "ok",
+  "rows": 17379,
+  "first_target_time": "2011-01-01T00:00:00",
+  "last_target_time": "2012-12-31T23:00:00",
+  "source_timestamp_policy": "Naive source date/hour labels; timezone and DST semantics are unspecified.",
+  "expected_naive_hour_slots": 17544,
+  "unrecorded_naive_hour_slots": 165,
+  "gap_count": 75,
+  "first_gaps": [
+    {
+      "after": "2011-01-02T04:00:00",
+      "before": "2011-01-02T06:00:00",
+      "unrecorded_hours": 1
+    },
+    {
+      "after": "2011-01-03T01:00:00",
+      "before": "2011-01-03T04:00:00",
+      "unrecorded_hours": 2
+    },
+    {
+      "after": "2011-01-04T02:00:00",
+      "before": "2011-01-04T04:00:00",
+      "unrecorded_hours": 1
+    },
+    {
+      "after": "2011-01-05T02:00:00",
+      "before": "2011-01-05T04:00:00",
+      "unrecorded_hours": 1
+    },
+    {
+      "after": "2011-01-06T02:00:00",
+      "before": "2011-01-06T04:00:00",
+      "unrecorded_hours": 1
+    }
+  ],
+  "rows_by_month": {
+    "2011-01": 688,
+    "2011-02": 649,
+    "2011-03": 730,
+    "2011-04": 719,
+    "2011-05": 744,
+    "2011-06": 720,
+    "2011-07": 744,
+    "2011-08": 731,
+    "2011-09": 717,
+    "2011-10": 743,
+    "2011-11": 719,
+    "2011-12": 741,
+    "2012-01": 741,
+    "2012-02": 692,
+    "2012-03": 743,
+    "2012-04": 718,
+    "2012-05": 744,
+    "2012-06": 720,
+    "2012-07": 744,
+    "2012-08": 744,
+    "2012-09": 720,
+    "2012-10": 708,
+    "2012-11": 718,
+    "2012-12": 742
+  },
+  "empty_cells": 0,
+  "duplicate_ids": 0,
+  "duplicate_date_hours": 0,
+  "target_component_mismatches": 0,
+  "calendar_fields": [
+    "season",
+    "yr",
+    "mnth",
+    "hr",
+    "holiday",
+    "weekday",
+    "workingday"
+  ],
+  "excluded_predictors": {
+    "instant": "Record identity, not a predictor.",
+    "dteday": "Source date retained as identity; calendar fields are selected explicitly.",
+    "casual": "Part of the target-hour outcome; casual + registered equals cnt.",
+    "registered": "Part of the target-hour outcome; casual + registered equals cnt.",
+    "cnt": "Target, kept separate from prediction inputs.",
+    "weathersit": "Observed target-hour weather is not an advance forecast.",
+    "temp": "Observed target-hour weather is not an advance forecast.",
+    "atemp": "Observed target-hour weather is not an advance forecast.",
+    "hum": "Observed target-hour weather is not an advance forecast.",
+    "windspeed": "Observed target-hour weather is not an advance forecast."
+  },
+  "first_row": {
+    "identity": {
+      "record_id": 1,
+      "target_time": "2011-01-01T00:00:00"
+    },
+    "calendar_inputs": {
+      "season": 1,
+      "yr": 0,
+      "mnth": 1,
+      "hr": 0,
+      "holiday": 0,
+      "weekday": 6,
+      "workingday": 0
+    },
+    "target": 16
+  },
+  "scope": "raw_structural_audit",
+  "source": {
+    "source_page": "https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset",
+    "archive_url": "https://archive.ics.uci.edu/static/public/275/bike%2Bsharing%2Bdataset.zip",
+    "acquired_at_utc": "2026-10-16T07:20:16.714389+00:00",
+    "attribution": "Fanaee-T, H. (2013). Bike Sharing. UCI Machine Learning Repository.",
+    "doi": "https://doi.org/10.24432/C5W894",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "archive_sha256": "b70182d0d0508e9abbb79306ce5c0cec34869000f8220175ac83d11dbe845401",
+    "member_sha256": {
+      "hour.csv": "e03de4ee4ef4dc376ac6e04bf829673c6269e8eba5c60fa121640fa2f829504f",
+      "Readme.txt": "b92c8628622948bf0828c43a1b315d1517c3d7fd63654730d0dea379b8e88175"
+    }
+  },
+  "prepared_dataset": {
+    "version": "chronological-calendar-v1",
+    "frozen": true,
+    "source_hour_sha256": "e03de4ee4ef4dc376ac6e04bf829673c6269e8eba5c60fa121640fa2f829504f",
+    "feature_schema_sha256": "9e84223da4af4942296245357837e6ac5910a869f38071f7ab6995d6bfdfb521",
+    "membership_sha256": "d5d353a176be326bf24c07ce12f33330ca180af814b0b4eff61bbc0b7e2d782e",
+    "feature_count": 45,
+    "forecast_lead_hours": 1,
+    "target_duration_hours": 1,
+    "availability_policy": "Target hour is an interval start; its label is available at interval end, with zero reporting delay.",
+    "readiness_assumption": "The preceding stage is treated as ready at its boundary; model-build delay is zero in this offline protocol.",
+    "timestamp_policy": "Working protocol on naive source date/hour labels; source timezone/DST semantics are unspecified.",
+    "windows": {
+      "train": {
+        "start_inclusive": "2011-01-01T00:00:00",
+        "end_exclusive": "2012-01-01T00:00:00"
+      },
+      "validation": {
+        "start_inclusive": "2012-01-01T01:00:00",
+        "end_exclusive": "2012-07-01T00:00:00"
+      },
+      "test": {
+        "start_inclusive": "2012-07-01T01:00:00",
+        "end_exclusive": "2013-01-01T00:00:00"
+      }
+    },
+    "counts": {
+      "train": 8645,
+      "validation": 4357,
+      "test": 4375,
+      "embargo": 2
+    },
+    "observed_bounds": {
+      "train": {
+        "first": "2011-01-01T00:00:00",
+        "last": "2011-12-31T23:00:00"
+      },
+      "validation": {
+        "first": "2012-01-01T01:00:00",
+        "last": "2012-06-30T23:00:00"
+      },
+      "test": {
+        "first": "2012-07-01T01:00:00",
+        "last": "2012-12-31T23:00:00"
+      }
+    },
+    "excluded_boundary_rows": [
+      {
+        "record_id": 8646,
+        "target_time": "2012-01-01T00:00:00",
+        "reason": "Forecast issue precedes the preceding stage's label-availability boundary."
+      },
+      {
+        "record_id": 13004,
+        "target_time": "2012-07-01T00:00:00",
+        "reason": "Forecast issue precedes the preceding stage's label-availability boundary."
+      }
+    ],
+    "training_feature_summary": {
+      "rows": 8645,
+      "ones_by_feature": {
+        "hr_00": 361,
+        "hr_01": 360,
+        "hr_02": 352,
+        "hr_03": 342,
+        "hr_04": 337,
+        "hr_05": 353,
+        "hr_06": 361,
+        "hr_07": 363,
+        "hr_08": 363,
+        "hr_09": 363,
+        "hr_10": 363,
+        "hr_11": 363,
+        "hr_12": 364,
+        "hr_13": 364,
+        "hr_14": 364,
+        "hr_15": 364,
+        "hr_16": 365,
+        "hr_17": 365,
+        "hr_18": 363,
+        "hr_19": 363,
+        "hr_20": 363,
+        "hr_21": 363,
+        "hr_22": 363,
+        "hr_23": 363,
+        "weekday_00": 1231,
+        "weekday_01": 1235,
+        "weekday_02": 1222,
+        "weekday_03": 1229,
+        "weekday_04": 1225,
+        "weekday_05": 1239,
+        "weekday_06": 1264,
+        "mnth_01": 688,
+        "mnth_02": 649,
+        "mnth_03": 730,
+        "mnth_04": 719,
+        "mnth_05": 744,
+        "mnth_06": 720,
+        "mnth_07": 744,
+        "mnth_08": 731,
+        "mnth_09": 717,
+        "mnth_10": 743,
+        "mnth_11": 719,
+        "mnth_12": 741,
+        "holiday": 239,
+        "workingday": 5911
+      },
+      "constant_features": []
+    },
+    "transform_fit": "none; fixed category definitions and binary flags",
+    "test_targets_exported": false,
+    "test_policy": "Reserved for final evaluation; no target summaries or model selection.",
+    "artifacts_sha256": {
+      "calendar-schema.json": "210e17c1c7642ee913b7488a4854daea826fa8ad8057c127335bf709c7051bc6",
+      "membership.csv": "d5d353a176be326bf24c07ce12f33330ca180af814b0b4eff61bbc0b7e2d782e",
+      "train.csv": "52ffa6b40c2cc01458e968a9abefdd50461e43b99bc3e2bac3091d6deb1362fb",
+      "validation.csv": "dad3ffda5f1cf41bddcd60abd1f0f934004f7c466744761093edd3d12229f319",
+      "test.csv": "5431ce8b7bbbe9c9886c9e605e562b159e89b5454249cd19b64089b19f5ce4db"
+    },
+    "manifest_sha256": "e551edfad465ede2ba76042564bf184d38408e85a0ef61cb6e7534cf544af733"
+  }
+}

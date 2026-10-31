@@ -1,0 +1,4189 @@
+{
+  "schema_version": 1,
+  "project_id": "P00",
+  "languages": [
+    "cpp",
+    "python"
+  ],
+  "examples": [
+    {
+      "id": "first-retrieval",
+      "language": "python",
+      "path": "examples/first_retrieval.py",
+      "purpose": "Retrieve a checked context vector before introducing model machinery.",
+      "expected_output": {
+        "context": [
+          2.5,
+          3.25
+        ],
+        "single": [
+          2.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "id": "matrix-cpp",
+      "language": "cpp",
+      "path": "examples/foundation_math.cpp",
+      "purpose": "Explicit matrix arithmetic, stable probabilities, central differences and two Adam steps.",
+      "expected_output": {
+        "matrix_product": [
+          [
+            58,
+            64
+          ],
+          [
+            139,
+            154
+          ]
+        ],
+        "probabilities": [
+          0.25,
+          0.75
+        ],
+        "central_differences": true,
+        "adam_steps": 2
+      }
+    }
+  ],
+  "slug": "transformer-course",
+  "revision": "v1",
+  "title": "Course 1 \u2014 Transformer Foundations: Translation and RoBERTa",
+  "question": "How do we derive, implement, train, inspect and recover a complete translation Transformer and a RoBERTa encoder for MLM and extractive QA?",
+  "topic_kind": "concept",
+  "level": "intermediate",
+  "prerequisites": [
+    "Advanced Python programming; ordinary syntax and software setup are assumed.",
+    "Tutorial 0 mathematical/model foundations: tensor axes, differentiation, autograd, probability, losses and optimization.",
+    "Reading and author reference checks do not complete learner implementation, held-out quality or hosted recovery gates."
+  ],
+  "created_at": "2026-10-12T06:40:12.520742+00:00",
+  "repository": {
+    "base_sha": "34334e3fd681dcdc98e55efd6c14856830ec7558",
+    "name": "docs"
+  },
+  "objectives": [
+    {
+      "id": "start",
+      "text": "Model specifications and task contracts"
+    },
+    {
+      "id": "workspace",
+      "text": "Reproducible source and implementation workspace"
+    },
+    {
+      "id": "tensors",
+      "text": "Model tensor interfaces and resource budgets"
+    },
+    {
+      "id": "learning",
+      "text": "Translation likelihood and supervised losses"
+    },
+    {
+      "id": "tokenization",
+      "text": "Source and target tokenizers"
+    },
+    {
+      "id": "objectives",
+      "text": "Corpus splits and task visibility"
+    },
+    {
+      "id": "translation-embeddings",
+      "text": "Translation embeddings and vocabulary projection"
+    },
+    {
+      "id": "translation-positions",
+      "text": "Sinusoidal position implementation"
+    },
+    {
+      "id": "qkv",
+      "text": "Learned Q/K/V and scaled attention"
+    },
+    {
+      "id": "heads",
+      "text": "Multi-head attention implementation"
+    },
+    {
+      "id": "masks",
+      "text": "Padding, causal and cross-attention masks"
+    },
+    {
+      "id": "bilingual-batches",
+      "text": "Bilingual batches and teacher-forced alignment"
+    },
+    {
+      "id": "translation-ffn",
+      "text": "Position-wise FFN and activation choice"
+    },
+    {
+      "id": "transformer-blocks",
+      "text": "Residual and normalization blocks"
+    },
+    {
+      "id": "encoder-stack",
+      "text": "Encoder stack and contextual source memory"
+    },
+    {
+      "id": "decoder-stack",
+      "text": "Decoder stack, source retrieval and information flow"
+    },
+    {
+      "id": "translation-model",
+      "text": "Assemble the complete translation model"
+    },
+    {
+      "id": "translation-training",
+      "text": "Translation optimization and complete training updates"
+    },
+    {
+      "id": "translation-generation",
+      "text": "Autoregressive generation, completion and decoding scores"
+    },
+    {
+      "id": "translation-evaluation",
+      "text": "Translation evaluation, source controls and error analysis"
+    },
+    {
+      "id": "checkpoints-and-colab",
+      "text": "Full-state continuation, verified generations and Colab"
+    },
+    {
+      "id": "bert-to-roberta",
+      "text": "BERT-to-RoBERTa design and bidirectional objectives"
+    },
+    {
+      "id": "roberta-tokens-and-positions",
+      "text": "RoBERTa byte tokens, pair layout and learned positions"
+    },
+    {
+      "id": "dynamic-mlm-corruption",
+      "text": "dynamic MLM corruption and selected-target supervision"
+    },
+    {
+      "id": "roberta-encoder-and-mlm-head",
+      "text": "bidirectional encoder and tied MLM head"
+    },
+    {
+      "id": "mlm-training-and-counting",
+      "text": "MLM pretraining, counted updates and measurement"
+    },
+    {
+      "id": "backbone-transfer",
+      "text": "backbone transfer and stage identity"
+    },
+    {
+      "id": "qa-offsets-and-windows",
+      "text": "QA character offsets and overlapping context windows"
+    },
+    {
+      "id": "qa-head-and-fine-tuning",
+      "text": "QA endpoint head, loss and fine-tuning"
+    },
+    {
+      "id": "span-decoding-and-metrics",
+      "text": "constrained span decoding and QA metrics"
+    },
+    {
+      "id": "diagnosis",
+      "text": "integrated debugging and profiling"
+    },
+    {
+      "id": "ready-for-gpt",
+      "text": "explain the complete models and prepare the Small GPT handoff"
+    }
+  ],
+  "sources": [
+    {
+      "id": "video-attention",
+      "kind": "external",
+      "title": "Attention mechanisms",
+      "url": "https://www.youtube.com/watch?v=JXY5CmiK3LI",
+      "accessed_at": "2026-10-12",
+      "locator": "Attention stages: projections, scores, masks, heads and efficient path",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "video-translation-data",
+      "kind": "external",
+      "title": "Prepare translation data",
+      "url": "https://www.youtube.com/watch?v=UkBggwQsbF8",
+      "accessed_at": "2026-10-12",
+      "locator": "Parallel corpora, separate tokenizers, target shifting and collation",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "video-translation-model",
+      "kind": "external",
+      "title": "Build and train the translation Transformer",
+      "url": "https://www.youtube.com/watch?v=DOqg_QxInd8",
+      "accessed_at": "2026-10-12",
+      "locator": "Positions, encoder/decoder, training, generation and evaluation",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "video-roberta",
+      "kind": "external",
+      "title": "Lets Reproduce RoBERTa from Scratch!",
+      "url": "https://www.youtube.com/watch?v=Fzv2lSt0Ing",
+      "accessed_at": "2026-10-12",
+      "locator": "Data 1:45\u201325:00; masking 44:15\u20131:10:30; model 1:12:25\u20132:08:14; training 2:08:14\u20132:58:45",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "video-qa",
+      "kind": "external",
+      "title": "Extractive Question Answering: Getting RoBERTa To Answer Questions",
+      "url": "https://www.youtube.com/watch?v=_FVwYFICYuE",
+      "accessed_at": "2026-10-12",
+      "locator": "Spans 9:30\u201344:40; head 44:40\u201346:20; backbone/forward 46:20\u20131:13:30; training/inference 1:13:30\u20131:28:10",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "attention-code",
+      "kind": "external",
+      "title": "Pinned attention source",
+      "url": "https://github.com/priyammaz/PyTorch-Adventures/tree/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20Transformers/Attention%20Mechanisms/Attention",
+      "accessed_at": "2026-10-12",
+      "locator": "Attention.ipynb; MIT source; preserved class/projection interfaces",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "translation-code",
+      "kind": "external",
+      "title": "Pinned translation source",
+      "url": "https://github.com/priyammaz/PyTorch-Adventures/tree/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/Seq2Seq%20for%20Neural%20Machine%20Translation",
+      "accessed_at": "2026-10-12",
+      "locator": "model.py, data.py, tokenizer.py, prepare_data.py, train.py, compute_bleu.py",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "roberta-code",
+      "kind": "external",
+      "title": "Pinned RoBERTa and QA source",
+      "url": "https://github.com/priyammaz/PyTorch-Adventures/tree/2f18a5470c4ef0a3d413dd7b18d07941f45779e9/PyTorch%20for%20NLP/RoBERTa%20for%20Masked%20Language%20Models",
+      "accessed_at": "2026-10-12",
+      "locator": "model.py, utils.py, prepare_data.py, pretrain_roberta.py, finetune_roberta_qa.py, inference.py",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "attention-paper",
+      "kind": "external",
+      "title": "Attention Is All You Need",
+      "url": "https://arxiv.org/abs/1706.03762",
+      "accessed_at": "2026-10-12",
+      "locator": "Sections 3 and 5; v7",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "bert-paper",
+      "kind": "external",
+      "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+      "url": "https://arxiv.org/abs/1810.04805",
+      "accessed_at": "2026-10-12",
+      "locator": "Sections 3\u20134; v2",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "roberta-paper",
+      "kind": "external",
+      "title": "RoBERTa: A Robustly Optimized BERT Pretraining Approach",
+      "url": "https://arxiv.org/abs/1907.11692",
+      "accessed_at": "2026-10-12",
+      "locator": "Sections 3\u20135; v1; masking, objective, data and training ablations",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "torch-sdpa",
+      "kind": "external",
+      "title": "PyTorch scaled dot product attention",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Allowed Boolean masks, dropout_p, reference equation and backend dispatch",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "torch-linear",
+      "kind": "external",
+      "title": "PyTorch Linear",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.Linear.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Stored weight shape [out_features,in_features]",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "torch-adam",
+      "kind": "external",
+      "title": "PyTorch Adam",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.optim.Adam.html",
+      "accessed_at": "2026-10-12",
+      "locator": "First/second moments, bias correction and optimizer state",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "torch-gelu",
+      "kind": "external",
+      "title": "PyTorch GELU",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.GELU.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Gaussian CDF and approximation argument",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "tokenizers",
+      "kind": "external",
+      "title": "Hugging Face Tokenizers",
+      "url": "https://huggingface.co/docs/tokenizers/index",
+      "accessed_at": "2026-10-12",
+      "locator": "Pipeline components, training and offsets; exact pipeline identity matters",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "hf-roberta",
+      "kind": "external",
+      "title": "Hugging Face RoBERTa model documentation",
+      "url": "https://huggingface.co/docs/transformers/model_doc/roberta",
+      "accessed_at": "2026-10-12",
+      "locator": "Model/tokenizer interfaces; padding and checkpoint compatibility",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "hf-qa",
+      "kind": "external",
+      "title": "Hugging Face extractive question answering",
+      "url": "https://huggingface.co/docs/transformers/tasks/question_answering",
+      "accessed_at": "2026-10-12",
+      "locator": "Question/context offsets, truncation, span labels and inference",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "wmt14",
+      "kind": "external",
+      "title": "WMT14 translation task",
+      "url": "https://www.statmt.org/wmt14/translation-task.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Official task, training corpora and evaluation set",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "sacrebleu",
+      "kind": "external",
+      "title": "SacreBLEU",
+      "url": "https://github.com/mjpost/sacrebleu",
+      "accessed_at": "2026-10-12",
+      "locator": "Corpus BLEU signatures, tokenization and reproducibility",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "squad-metric",
+      "kind": "external",
+      "title": "Official SQuAD 1.1 evaluator",
+      "url": "https://github.com/rajpurkar/SQuAD-explorer/blob/master/evaluate-v1.1.py",
+      "accessed_at": "2026-10-12",
+      "locator": "Answer normalization, exact match, token overlap F1 and multiple references",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "torch-recovery",
+      "kind": "external",
+      "title": "PyTorch saving and loading models",
+      "url": "https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html",
+      "accessed_at": "2026-10-12",
+      "locator": "General training checkpoint",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "torch-randomness",
+      "kind": "external",
+      "title": "PyTorch reproducibility",
+      "url": "https://docs.pytorch.org/docs/2.14/notes/randomness.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Platform/release/device reproducibility boundaries",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "colab-faq",
+      "kind": "external",
+      "title": "Google Colab FAQ",
+      "url": "https://research.google.com/colaboratory/faq.html",
+      "accessed_at": "2026-10-12",
+      "locator": "Runtime lifetime, hardware availability and changing Free resources",
+      "proof_limit": "Inspected teaching/API reference. Local fixtures, learner completion and hosted capability require separate evidence."
+    },
+    {
+      "id": "torch-ce",
+      "kind": "external",
+      "title": "PyTorch 2.14 CrossEntropyLoss",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.CrossEntropyLoss.html",
+      "accessed_at": "2026-10-13",
+      "locator": "Definition and actual API/metric implementation used by the worked topic.",
+      "proof_limit": "Primary reference; exact local source parity and learner/hosted outcomes require their own checks."
+    },
+    {
+      "id": "torch-embedding",
+      "kind": "external",
+      "title": "PyTorch 2.14 Embedding",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.Embedding.html",
+      "accessed_at": "2026-10-13",
+      "locator": "Definition and actual API/metric implementation used by the worked topic.",
+      "proof_limit": "Primary reference; exact local source parity and learner/hosted outcomes require their own checks."
+    },
+    {
+      "id": "torch-layernorm",
+      "kind": "external",
+      "title": "PyTorch 2.14 LayerNorm",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.LayerNorm.html",
+      "accessed_at": "2026-10-13",
+      "locator": "Definition and actual API/metric implementation used by the worked topic.",
+      "proof_limit": "Primary reference; exact local source parity and learner/hosted outcomes require their own checks."
+    },
+    {
+      "id": "torch-adamw",
+      "kind": "external",
+      "title": "PyTorch 2.14 AdamW",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.optim.AdamW.html",
+      "accessed_at": "2026-10-13",
+      "locator": "Definition and actual API/metric implementation used by the worked topic.",
+      "proof_limit": "Primary reference; exact local source parity and learner/hosted outcomes require their own checks."
+    },
+    {
+      "id": "bleu-paper",
+      "kind": "external",
+      "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+      "url": "https://aclanthology.org/P02-1040/",
+      "accessed_at": "2026-10-13",
+      "locator": "Definition and actual API/metric implementation used by the worked topic.",
+      "proof_limit": "Primary reference; exact local source parity and learner/hosted outcomes require their own checks."
+    },
+    {
+      "id": "hf-squad-metric",
+      "kind": "external",
+      "title": "Hugging Face SQuAD normalization, exact match and F1 source",
+      "url": "https://github.com/huggingface/transformers/blob/main/src/transformers/data/metrics/squad_metrics.py",
+      "accessed_at": "2026-10-13",
+      "locator": "Definition and actual API/metric implementation used by the worked topic.",
+      "proof_limit": "Primary reference; exact local source parity and learner/hosted outcomes require their own checks."
+    }
+  ],
+  "claims": [
+    {
+      "id": "arithmetic",
+      "text": "Worked matrices, derivatives and optimizer examples are original numerical fixtures.",
+      "status": "illustrative",
+      "source_ids": [],
+      "proof_limit": "Known answers and finite differences establish these fixtures only."
+    },
+    {
+      "id": "translation-architecture",
+      "text": "The translation build combines a bidirectional source encoder, causal target decoder and source cross-attention.",
+      "status": "documented",
+      "source_ids": [
+        "translation-code",
+        "attention-paper"
+      ],
+      "proof_limit": "The source GELU/plain embedding/AdamW recipe differs from parts of the paper; choices are explicit."
+    },
+    {
+      "id": "attention-contract",
+      "text": "Scaled query\u2013key comparison, allowed-key softmax and value mixing are shared by explicit and efficient attention.",
+      "status": "documented",
+      "source_ids": [
+        "attention-code",
+        "torch-sdpa"
+      ],
+      "proof_limit": "No guaranteed FlashAttention backend or speedup; check masks, dropout and rectangular shapes."
+    },
+    {
+      "id": "roberta-architecture",
+      "text": "RoBERTa learns bidirectional representations with selected-token reconstruction; extractive QA predicts context endpoints.",
+      "status": "documented",
+      "source_ids": [
+        "roberta-paper",
+        "bert-paper",
+        "roberta-code",
+        "video-qa"
+      ],
+      "proof_limit": "Miniature tokenizer, sizes and parameter names do not provide official checkpoint compatibility."
+    },
+    {
+      "id": "source-corrections",
+      "text": "Padding, random replacement, position conventions, half-open spans and constrained QA decoding are made explicit and corrected.",
+      "status": "documented",
+      "source_ids": [
+        "roberta-code",
+        "hf-roberta",
+        "hf-qa"
+      ],
+      "proof_limit": "Inspected pinned source is teaching material, not a claim about every release or implementation."
+    },
+    {
+      "id": "recovery-contract",
+      "text": "Exact continuation requires optimizer, schedule, RNG, data state and compatible model/tokenizer/runtime identity in addition to weights.",
+      "status": "documented",
+      "source_ids": [
+        "torch-recovery",
+        "torch-randomness"
+      ],
+      "proof_limit": "Fresh-process CPU continuation is checked locally; hosted, CUDA and cross-runtime parity remain open."
+    },
+    {
+      "id": "quality-limit",
+      "text": "Tiny fixture metrics and author verification do not establish learner understanding, WMT/SQuAD quality or Colab recovery.",
+      "status": "inference",
+      "source_ids": [
+        "wmt14",
+        "squad-metric",
+        "colab-faq"
+      ],
+      "proof_limit": "No learner or hosted gate is advanced by authoring this course."
+    }
+  ],
+  "entities": [
+    {
+      "id": "retrieval-1",
+      "label": "A = [.25,.25,.5]",
+      "description": "Weights sum to one and act on both feature columns.",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "retrieval-2",
+      "label": "V rows: [2,0] [0,3] [4,5]",
+      "description": "Three positions store two features each.",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "retrieval-3",
+      "label": "A @ V = [2.5,3.25]",
+      "description": "Feature 0: .5+0+2; feature 1: 0+.75+2.5.",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "matrix-product-1",
+      "label": "A: two rows, width 3",
+      "description": "A=[[1,2,3],[4,5,6]].",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "matrix-product-2",
+      "label": "B: three rows, width 2",
+      "description": "B=[[7,8],[9,10],[11,12]].",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "matrix-product-3",
+      "label": "C: [58,64] [139,154]",
+      "description": "Four outputs, each a row\u2013column dot product.",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "learning-update-1",
+      "label": "x,w,b \u2192 prediction",
+      "description": "Affine map shares parameters over input rows.",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "learning-update-2",
+      "label": "target \u2192 scalar loss",
+      "description": "Reduction specifies the statistical unit.",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "learning-update-3",
+      "label": "backward \u2192 gradients",
+      "description": "Loss sensitivity for each parameter.",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "learning-update-4",
+      "label": "m,v,t \u2192 update",
+      "description": "Optimizer state changes alongside weights.",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "token-pipeline-1",
+      "label": "text: caf\u00e9",
+      "description": "Four Unicode characters, five UTF-8 bytes.",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "token-pipeline-2",
+      "label": "bytes: 99 97 102 195 169",
+      "description": "The final character occupies two bytes.",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "token-pipeline-3",
+      "label": "pieces \u2192 vocabulary IDs",
+      "description": "Saved merge ranks and special IDs define identity.",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "objective-masks-1",
+      "label": "source encoder: all real keys",
+      "description": "Square [S,S] key visibility.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "objective-masks-2",
+      "label": "target decoder: causal keys",
+      "description": "Square [T,T] lower triangle intersected with padding.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "objective-masks-3",
+      "label": "cross-attention: source keys",
+      "description": "Rectangular [T,S], queries remain target positions.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "qkv-matrices-1",
+      "label": "X @ Wq \u2192 Q [T,d]",
+      "description": "A query row asks for information.",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "qkv-matrices-2",
+      "label": "Y @ Wk \u2192 K [S,d]",
+      "description": "A key row provides an address to compare.",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "qkv-matrices-3",
+      "label": "softmax(QK\u1d40/\u221ad)",
+      "description": "One allowed-key distribution per query.",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "qkv-matrices-4",
+      "label": "Y @ Wv \u2192 V [S,d]",
+      "description": "Values provide information rather than scores.",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "qkv-matrices-5",
+      "label": "A @ V \u2192 C [T,d]",
+      "description": "The S axis is reduced; target queries remain.",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "head-geometry-1",
+      "label": "Q [1,2,8]",
+      "description": "Projected total feature width.",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "head-geometry-2",
+      "label": "reshape B,T,H,d [1,2,2,4]",
+      "description": "Axes B,T,H,d.",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "head-geometry-3",
+      "label": "transpose B,H,T,d [1,2,2,4]",
+      "description": "Axes B,H,T,d; same sizes here, different meaning.",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "head-geometry-4",
+      "label": "head contexts [1,2,2,4]",
+      "description": "Independent key normalization per head/query.",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "head-geometry-5",
+      "label": "merge [1,2,8] \u2192 Wo",
+      "description": "Transpose back before flattening H,d.",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "translation-masks-1",
+      "label": "query row t=1",
+      "description": "Which target position requests information?",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "translation-masks-2",
+      "label": "keys j \u2264 1 and real",
+      "description": "Causal visibility intersects source-key padding.",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "translation-masks-3",
+      "label": "masked score \u2192 softmax",
+      "description": "Disallowed columns receive no probability.",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "target-shift-1",
+      "label": "full: BOS je vois EOS",
+      "description": "One target sequence before slicing.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "target-shift-2",
+      "label": "drop last: BOS je vois",
+      "description": "Every query sees only the prefix.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "target-shift-3",
+      "label": "drop first: je vois EOS",
+      "description": "Correct next target at each query position.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "sinusoidal-positions-1",
+      "label": "token embedding [T,D]",
+      "description": "Learned lookup; same token reuses its row.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "sinusoidal-positions-2",
+      "label": "position features [T,D]",
+      "description": "Fixed sin/cos frequencies; a model buffer.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "sinusoidal-positions-3",
+      "label": "sum \u2192 block input",
+      "description": "A representation contains content and order.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "encoder-decoder-1",
+      "label": "source IDs + positions",
+      "description": "Separate source embedding table.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "encoder-decoder-2",
+      "label": "encoder \u2192 memory [B,S,D]",
+      "description": "All real source tokens interact.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "encoder-decoder-3",
+      "label": "target IDs + positions",
+      "description": "Shifted prefix uses its own embedding table.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "encoder-decoder-4",
+      "label": "causal decoder state",
+      "description": "Target self-attention sees no future token.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "encoder-decoder-5",
+      "label": "cross: target Q, memory K/V",
+      "description": "Retrieval connects target and source axes.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "encoder-decoder-6",
+      "label": "FFN \u2192 logits [B,T,Vt]",
+      "description": "Predict one next French ID per target position.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "token-weighted-update-1",
+      "label": "microbatch A: sum / 8",
+      "description": "Two valid labels contribute to one total.",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "token-weighted-update-2",
+      "label": "microbatch B: sum / 8",
+      "description": "Six valid labels contribute to the same total.",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "token-weighted-update-3",
+      "label": "accumulate gradients",
+      "description": "No optimizer step between microbatches.",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "token-weighted-update-4",
+      "label": "clip once \u2192 AdamW once",
+      "description": "One completed update owns schedule/step count.",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "translation-generation-1",
+      "label": "source \u2192 encoder memory",
+      "description": "Gold target labels are absent.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-generation-2",
+      "label": "BOS + generated prefix",
+      "description": "Causal target context only.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-generation-3",
+      "label": "last logits \u2192 next ID",
+      "description": "Greedy choice is local, not sequence optimum.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-generation-4",
+      "label": "EOS or length bound",
+      "description": "Finished rows remain finished.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "recovery-generations-1",
+      "label": "update K completed",
+      "description": "Model, optimizer, schedule, RNG and data state agree.",
+      "claim_ids": [
+        "recovery-contract"
+      ]
+    },
+    {
+      "id": "recovery-generations-2",
+      "label": "state.pt + manifest.json",
+      "description": "Immutable unique folder; hashes verified.",
+      "claim_ids": [
+        "recovery-contract"
+      ]
+    },
+    {
+      "id": "recovery-generations-3",
+      "label": "complete.json last",
+      "description": "An interrupted earlier write is not restorable.",
+      "claim_ids": [
+        "recovery-contract"
+      ]
+    },
+    {
+      "id": "recovery-generations-4",
+      "label": "load newest compatible",
+      "description": "A corrupt newest generation is skipped.",
+      "claim_ids": [
+        "recovery-contract"
+      ]
+    },
+    {
+      "id": "recovery-generations-5",
+      "label": "retain two good saves",
+      "description": "Older verified state remains a fallback.",
+      "claim_ids": [
+        "recovery-contract"
+      ]
+    },
+    {
+      "id": "roberta-objectives-1",
+      "label": "bidirectional encoder",
+      "description": "Every query may read all real keys.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-objectives-2",
+      "label": "MLM pretraining: vocabulary logits",
+      "description": "Selected original token labels.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-objectives-3",
+      "label": "QA fine-tuning: endpoint logits",
+      "description": "Context start and end token labels.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-positions-1",
+      "label": "IDs [0,7,2,1,1]",
+      "description": "BOS, ordinary token, EOS, PAD, PAD.",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "roberta-positions-2",
+      "label": "real [1,1,1,0,0]",
+      "description": "Count only non-PAD positions.",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "roberta-positions-3",
+      "label": "positions [2,3,4,1,1]",
+      "description": "Real cumulative count plus padding index.",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "mlm-corruption-1",
+      "label": "clean IDs \u2192 eligibility",
+      "description": "Exclude all special/padded positions.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "mlm-corruption-2",
+      "label": "select \u2192 original labels",
+      "description": "Unselected targets are \u2212100.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "mlm-corruption-3",
+      "label": "80% MASK input",
+      "description": "Predict the hidden original ID.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "mlm-corruption-4",
+      "label": "10% random input",
+      "description": "Replacement may equal original; label is unchanged.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "mlm-corruption-5",
+      "label": "10% unchanged input",
+      "description": "Still a selected supervised target.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-block-1",
+      "label": "token + learned position",
+      "description": "Embedding normalization and dropout.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-block-2",
+      "label": "attention + residual + LN",
+      "description": "All real keys visible.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-block-3",
+      "label": "GELU FFN + residual + LN",
+      "description": "Shared nonlinear map at each position.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-block-4",
+      "label": "MLM dense \u2192 GELU \u2192 LN",
+      "description": "Task transform keeps feature width D.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-block-5",
+      "label": "tied E\u1d40 \u2192 [B,T,V]",
+      "description": "One parameter table serves lookup and decoder.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "qa-windows-1",
+      "label": "original answer [a,b)",
+      "description": "Offsets refer to original context characters.",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "qa-windows-2",
+      "label": "question + window 1",
+      "description": "May contain only part of the answer.",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "qa-windows-3",
+      "label": "question + window 2",
+      "description": "Contains the full answer span.",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "qa-windows-4",
+      "label": "full span \u2192 token labels",
+      "description": "Context token offsets contain the boundaries.",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "qa-head-1",
+      "label": "encoder H [B,T,D]",
+      "description": "Question/context representations.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "qa-head-2",
+      "label": "linear W [2,D]",
+      "description": "Stored torch weight; bias width 2.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "qa-head-3",
+      "label": "Z [B,T,2]",
+      "description": "Two endpoint channels per token.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "qa-head-4",
+      "label": "start [B,T], end [B,T]",
+      "description": "Two cross-entropies, mean over valid windows.",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "qa-joint-span-1",
+      "label": "start/end logits",
+      "description": "Independent endpoint distributions are inputs.",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "qa-joint-span-2",
+      "label": "context-only valid pairs",
+      "description": "No question, special or padded endpoints.",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "qa-joint-span-3",
+      "label": "argmax valid joint score",
+      "description": "Ordered, bounded span; group windows by example.",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "qa-joint-span-4",
+      "label": "offsets \u2192 original substring",
+      "description": "Return characters, preserving case/punctuation.",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "two-builds-to-gpt-1",
+      "label": "translation: source + prefix",
+      "description": "Causal decoder and source cross-attention.",
+      "claim_ids": [
+        "quality-limit"
+      ]
+    },
+    {
+      "id": "two-builds-to-gpt-2",
+      "label": "RoBERTa: bidirectional input",
+      "description": "MLM and extractive endpoint heads.",
+      "claim_ids": [
+        "quality-limit"
+      ]
+    },
+    {
+      "id": "two-builds-to-gpt-3",
+      "label": "shared tested contracts",
+      "description": "Axes, gradients, tokens, counts and recovery.",
+      "claim_ids": [
+        "quality-limit"
+      ]
+    },
+    {
+      "id": "two-builds-to-gpt-4",
+      "label": "GPT: prefix \u2192 next token",
+      "description": "One tokenizer; learned positions; pre-norm.",
+      "claim_ids": [
+        "quality-limit"
+      ]
+    },
+    {
+      "id": "task-contracts-1",
+      "label": "Source + prefix",
+      "description": "Causal target likelihood over vocabulary IDs",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "task-contracts-2",
+      "label": "Corrupted sentence",
+      "description": "Bidirectional MLM over selected original IDs",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "task-contracts-3",
+      "label": "Question + context",
+      "description": "Packed endpoint loss and constrained context span",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-ffn-1",
+      "label": "Token features D",
+      "description": "Same map independently at each token",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-ffn-2",
+      "label": "Dense \u2192 GELU \u2192 drop",
+      "description": "Expansion to ratio times model width",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-ffn-3",
+      "label": "Dense \u2192 output drop",
+      "description": "Contraction restores residual width",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "residual-normalization-1",
+      "label": "State x",
+      "description": "Identity route and sublayer input",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "residual-normalization-2",
+      "label": "x + Dropout f(x)",
+      "description": "Both routes receive upstream gradients",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "residual-normalization-3",
+      "label": "Feature LayerNorm",
+      "description": "Mean/variance within each token, learned gamma/beta",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "encoder-memory-1",
+      "label": "Source + positions",
+      "description": "Separate source embedding and fixed position buffer",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "encoder-memory-2",
+      "label": "Independent layers",
+      "description": "Full-source self-attention, FFN, two post-norm residuals per layer",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "encoder-memory-3",
+      "label": "Memory [B,S,D]",
+      "description": "Persistent source-valid mask accompanies contextual memory",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "decoder-retrieval-1",
+      "label": "Target prefix",
+      "description": "Causal self-attention updates target states",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "decoder-retrieval-2",
+      "label": "Source retrieval",
+      "description": "Target Q reads memory K/V under source key mask",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "decoder-retrieval-3",
+      "label": "FFN \u2192 target state",
+      "description": "Each residual remains in target coordinates",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "backbone-transfer-1",
+      "label": "MLM backbone artifact",
+      "description": "Checked config/tokenizer identity and contextual tensors",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "backbone-transfer-2",
+      "label": "New QA head + state",
+      "description": "New optimizer, schedule and counters after weight-only transfer",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "backbone-transfer-3",
+      "label": "QA full-state resume",
+      "description": "Existing QA optimizer, schedule and RNG restored together",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "model-diagnosis-1",
+      "label": "Task invariants",
+      "description": "Shift/visibility; corruption counts; character/span ownership",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "model-diagnosis-2",
+      "label": "Controlled probes",
+      "description": "Hold positions/mode/state fixed and perturb one condition",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "model-diagnosis-3",
+      "label": "Gradients + budgets",
+      "description": "Inspect actual paths and measure time/memory",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "translation-embeddings-1",
+      "label": "Source IDs \u2192 Esrc",
+      "description": "Source tokenizer owns rows; encoding produces source memory.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-embeddings-2",
+      "label": "Target IDs \u2192 Etgt",
+      "description": "Target tokenizer owns rows; the shifted target supplies decoder input.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-embeddings-3",
+      "label": "Decoder hidden state",
+      "description": "Causal target processing retrieves source memory.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-embeddings-4",
+      "label": "Target vocabulary head",
+      "description": "Independent biased projection scores all target symbols.",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "retrieval-edge-1",
+      "from": "retrieval-1",
+      "to": "retrieval-2",
+      "label": "concern",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "retrieval-edge-2",
+      "from": "retrieval-2",
+      "to": "retrieval-3",
+      "label": "concern",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "matrix-product-edge-1",
+      "from": "matrix-product-1",
+      "to": "matrix-product-2",
+      "label": "concern",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "matrix-product-edge-2",
+      "from": "matrix-product-2",
+      "to": "matrix-product-3",
+      "label": "concern",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "token-pipeline-edge-1",
+      "from": "token-pipeline-1",
+      "to": "token-pipeline-2",
+      "label": "concern",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "token-pipeline-edge-2",
+      "from": "token-pipeline-2",
+      "to": "token-pipeline-3",
+      "label": "concern",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "qkv-matrices-edge-1",
+      "from": "qkv-matrices-1",
+      "to": "qkv-matrices-3",
+      "label": "concern",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "qkv-matrices-edge-2",
+      "from": "qkv-matrices-2",
+      "to": "qkv-matrices-3",
+      "label": "concern",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "qkv-matrices-edge-3",
+      "from": "qkv-matrices-3",
+      "to": "qkv-matrices-5",
+      "label": "concern",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "qkv-matrices-edge-4",
+      "from": "qkv-matrices-4",
+      "to": "qkv-matrices-5",
+      "label": "concern",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "translation-masks-edge-1",
+      "from": "translation-masks-1",
+      "to": "translation-masks-2",
+      "label": "concern",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "translation-masks-edge-2",
+      "from": "translation-masks-2",
+      "to": "translation-masks-3",
+      "label": "concern",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "target-shift-edge-1",
+      "from": "target-shift-1",
+      "to": "target-shift-2",
+      "label": "concern",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "target-shift-edge-2",
+      "from": "target-shift-1",
+      "to": "target-shift-3",
+      "label": "concern",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "token-weighted-update-edge-1",
+      "from": "token-weighted-update-1",
+      "to": "token-weighted-update-3",
+      "label": "concern",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "token-weighted-update-edge-2",
+      "from": "token-weighted-update-2",
+      "to": "token-weighted-update-3",
+      "label": "concern",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "token-weighted-update-edge-3",
+      "from": "token-weighted-update-3",
+      "to": "token-weighted-update-4",
+      "label": "concern",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "roberta-objectives-edge-1",
+      "from": "roberta-objectives-1",
+      "to": "roberta-objectives-2",
+      "label": "concern",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-objectives-edge-2",
+      "from": "roberta-objectives-1",
+      "to": "roberta-objectives-3",
+      "label": "concern",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-positions-edge-1",
+      "from": "roberta-positions-1",
+      "to": "roberta-positions-2",
+      "label": "concern",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "roberta-positions-edge-2",
+      "from": "roberta-positions-2",
+      "to": "roberta-positions-3",
+      "label": "concern",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "qa-windows-edge-1",
+      "from": "qa-windows-1",
+      "to": "qa-windows-2",
+      "label": "partial",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "qa-windows-edge-2",
+      "from": "qa-windows-1",
+      "to": "qa-windows-3",
+      "label": "complete",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "qa-windows-edge-3",
+      "from": "qa-windows-3",
+      "to": "qa-windows-4",
+      "label": "concern",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "two-builds-to-gpt-edge-1",
+      "from": "two-builds-to-gpt-1",
+      "to": "two-builds-to-gpt-3",
+      "label": "concern",
+      "claim_ids": [
+        "quality-limit"
+      ]
+    },
+    {
+      "id": "two-builds-to-gpt-edge-2",
+      "from": "two-builds-to-gpt-2",
+      "to": "two-builds-to-gpt-3",
+      "label": "concern",
+      "claim_ids": [
+        "quality-limit"
+      ]
+    },
+    {
+      "id": "two-builds-to-gpt-edge-3",
+      "from": "two-builds-to-gpt-3",
+      "to": "two-builds-to-gpt-4",
+      "label": "concern",
+      "claim_ids": [
+        "quality-limit"
+      ]
+    },
+    {
+      "id": "learning-update-edge-1",
+      "from": "learning-update-1",
+      "to": "learning-update-2",
+      "label": "concern",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "learning-update-edge-2",
+      "from": "learning-update-2",
+      "to": "learning-update-3",
+      "label": "concern",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "learning-update-edge-3",
+      "from": "learning-update-3",
+      "to": "learning-update-4",
+      "label": "concern",
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "head-geometry-edge-1",
+      "from": "head-geometry-1",
+      "to": "head-geometry-2",
+      "label": "concern",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "head-geometry-edge-2",
+      "from": "head-geometry-2",
+      "to": "head-geometry-3",
+      "label": "concern",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "head-geometry-edge-3",
+      "from": "head-geometry-3",
+      "to": "head-geometry-4",
+      "label": "concern",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "head-geometry-edge-4",
+      "from": "head-geometry-4",
+      "to": "head-geometry-5",
+      "label": "concern",
+      "claim_ids": [
+        "attention-contract"
+      ]
+    },
+    {
+      "id": "recovery-generations-edge-1",
+      "from": "recovery-generations-1",
+      "to": "recovery-generations-2",
+      "label": "concern",
+      "claim_ids": [
+        "recovery-contract"
+      ]
+    },
+    {
+      "id": "recovery-generations-edge-2",
+      "from": "recovery-generations-2",
+      "to": "recovery-generations-3",
+      "label": "concern",
+      "claim_ids": [
+        "recovery-contract"
+      ]
+    },
+    {
+      "id": "recovery-generations-edge-3",
+      "from": "recovery-generations-3",
+      "to": "recovery-generations-4",
+      "label": "concern",
+      "claim_ids": [
+        "recovery-contract"
+      ]
+    },
+    {
+      "id": "recovery-generations-edge-4",
+      "from": "recovery-generations-4",
+      "to": "recovery-generations-5",
+      "label": "concern",
+      "claim_ids": [
+        "recovery-contract"
+      ]
+    },
+    {
+      "id": "roberta-block-edge-1",
+      "from": "roberta-block-1",
+      "to": "roberta-block-2",
+      "label": "concern",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-block-edge-2",
+      "from": "roberta-block-2",
+      "to": "roberta-block-3",
+      "label": "concern",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-block-edge-3",
+      "from": "roberta-block-3",
+      "to": "roberta-block-4",
+      "label": "concern",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-block-edge-4",
+      "from": "roberta-block-4",
+      "to": "roberta-block-5",
+      "label": "concern",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "qa-head-edge-1",
+      "from": "qa-head-1",
+      "to": "qa-head-2",
+      "label": "concern",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "qa-head-edge-2",
+      "from": "qa-head-2",
+      "to": "qa-head-3",
+      "label": "concern",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "qa-head-edge-3",
+      "from": "qa-head-3",
+      "to": "qa-head-4",
+      "label": "concern",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "qa-joint-span-edge-1",
+      "from": "qa-joint-span-1",
+      "to": "qa-joint-span-2",
+      "label": "concern",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "qa-joint-span-edge-2",
+      "from": "qa-joint-span-2",
+      "to": "qa-joint-span-3",
+      "label": "concern",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "qa-joint-span-edge-3",
+      "from": "qa-joint-span-3",
+      "to": "qa-joint-span-4",
+      "label": "concern",
+      "claim_ids": [
+        "source-corrections"
+      ]
+    },
+    {
+      "id": "encoder-decoder-edge-1",
+      "from": "encoder-decoder-1",
+      "to": "encoder-decoder-2",
+      "label": "concern",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "encoder-decoder-edge-2",
+      "from": "encoder-decoder-3",
+      "to": "encoder-decoder-4",
+      "label": "concern",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "encoder-decoder-edge-3",
+      "from": "encoder-decoder-2",
+      "to": "encoder-decoder-5",
+      "label": "concern",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "encoder-decoder-edge-4",
+      "from": "encoder-decoder-4",
+      "to": "encoder-decoder-5",
+      "label": "concern",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "encoder-decoder-edge-5",
+      "from": "encoder-decoder-5",
+      "to": "encoder-decoder-6",
+      "label": "concern",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "mlm-corruption-edge-1",
+      "from": "mlm-corruption-2",
+      "to": "mlm-corruption-3",
+      "label": "concern",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "mlm-corruption-edge-2",
+      "from": "mlm-corruption-2",
+      "to": "mlm-corruption-4",
+      "label": "concern",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "mlm-corruption-edge-3",
+      "from": "mlm-corruption-2",
+      "to": "mlm-corruption-5",
+      "label": "concern",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "sinusoidal-positions-edge-1",
+      "from": "sinusoidal-positions-1",
+      "to": "sinusoidal-positions-3",
+      "label": "concern",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "sinusoidal-positions-edge-2",
+      "from": "sinusoidal-positions-2",
+      "to": "sinusoidal-positions-3",
+      "label": "concern",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-generation-edge-1",
+      "from": "translation-generation-1",
+      "to": "translation-generation-3",
+      "label": "concern",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-generation-edge-2",
+      "from": "translation-generation-2",
+      "to": "translation-generation-3",
+      "label": "concern",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-generation-edge-3",
+      "from": "translation-generation-3",
+      "to": "translation-generation-4",
+      "label": "concern",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-generation-edge-4",
+      "from": "translation-generation-4",
+      "to": "translation-generation-2",
+      "label": "unfinished",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "task-contracts-edge-1",
+      "from": "task-contracts-1",
+      "to": "task-contracts-2",
+      "label": "contract",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "task-contracts-edge-2",
+      "from": "task-contracts-2",
+      "to": "task-contracts-3",
+      "label": "contract",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-ffn-edge-1",
+      "from": "translation-ffn-1",
+      "to": "translation-ffn-2",
+      "label": "contract",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-ffn-edge-2",
+      "from": "translation-ffn-2",
+      "to": "translation-ffn-3",
+      "label": "contract",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "residual-normalization-edge-1",
+      "from": "residual-normalization-1",
+      "to": "residual-normalization-2",
+      "label": "contract",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "residual-normalization-edge-2",
+      "from": "residual-normalization-2",
+      "to": "residual-normalization-3",
+      "label": "contract",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "encoder-memory-edge-1",
+      "from": "encoder-memory-1",
+      "to": "encoder-memory-2",
+      "label": "contract",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "encoder-memory-edge-2",
+      "from": "encoder-memory-2",
+      "to": "encoder-memory-3",
+      "label": "contract",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "decoder-retrieval-edge-1",
+      "from": "decoder-retrieval-1",
+      "to": "decoder-retrieval-2",
+      "label": "contract",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "decoder-retrieval-edge-2",
+      "from": "decoder-retrieval-2",
+      "to": "decoder-retrieval-3",
+      "label": "contract",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "backbone-transfer-edge-1",
+      "from": "backbone-transfer-1",
+      "to": "backbone-transfer-2",
+      "label": "contract",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "backbone-transfer-edge-2",
+      "from": "backbone-transfer-2",
+      "to": "backbone-transfer-3",
+      "label": "contract",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "model-diagnosis-edge-1",
+      "from": "model-diagnosis-1",
+      "to": "model-diagnosis-2",
+      "label": "contract",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "model-diagnosis-edge-2",
+      "from": "model-diagnosis-2",
+      "to": "model-diagnosis-3",
+      "label": "contract",
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "translation-embeddings-edge-1",
+      "from": "translation-embeddings-1",
+      "to": "translation-embeddings-3",
+      "label": "encoder memory",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-embeddings-edge-2",
+      "from": "translation-embeddings-2",
+      "to": "translation-embeddings-3",
+      "label": "target prefix",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-embeddings-edge-3",
+      "from": "translation-embeddings-3",
+      "to": "translation-embeddings-4",
+      "label": "project logits",
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "id": "start",
+      "title": "Lesson 1 \u2014 Model specifications and task contracts",
+      "content_path": "lessons/01-start.md",
+      "objective_ids": [
+        "start"
+      ],
+      "diagram_ids": [
+        "task-contracts"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "start-practice-1",
+        "start-transfer"
+      ]
+    },
+    {
+      "id": "workspace",
+      "title": "Lesson 2 \u2014 Reproducible source and implementation workspace",
+      "content_path": "lessons/02-workspace.md",
+      "objective_ids": [
+        "workspace"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "workspace-boundaries",
+        "workspace-transfer"
+      ]
+    },
+    {
+      "id": "tensors",
+      "title": "Lesson 3 \u2014 Model tensor interfaces and resource budgets",
+      "content_path": "lessons/03-tensors.md",
+      "objective_ids": [
+        "tensors"
+      ],
+      "diagram_ids": [
+        "matrix-product"
+      ],
+      "table_ids": [
+        "tensor-contracts"
+      ],
+      "scenario_ids": [],
+      "practice_ids": [
+        "tensors-practice-1",
+        "tensors-transfer"
+      ]
+    },
+    {
+      "id": "learning",
+      "title": "Lesson 4 \u2014 Translation likelihood and supervised losses",
+      "content_path": "lessons/04-learning.md",
+      "objective_ids": [
+        "learning"
+      ],
+      "diagram_ids": [
+        "learning-update"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "learning-practice-1",
+        "learning-transfer"
+      ]
+    },
+    {
+      "id": "tokenization",
+      "title": "Lesson 5 \u2014 Source and target tokenizers",
+      "content_path": "lessons/05-tokenization.md",
+      "objective_ids": [
+        "tokenization"
+      ],
+      "diagram_ids": [
+        "token-pipeline"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "tokenization-practice-1",
+        "tokenization-transfer"
+      ]
+    },
+    {
+      "id": "objectives",
+      "title": "Lesson 6 \u2014 Corpus splits and task visibility",
+      "content_path": "lessons/06-objectives.md",
+      "objective_ids": [
+        "objectives"
+      ],
+      "diagram_ids": [
+        "objective-masks"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "objectives-practice-1",
+        "objectives-transfer"
+      ]
+    },
+    {
+      "id": "translation-embeddings",
+      "title": "Lesson 7 \u2014 Translation embeddings and vocabulary projection",
+      "content_path": "lessons/07-translation-embeddings.md",
+      "objective_ids": [
+        "translation-embeddings"
+      ],
+      "diagram_ids": [
+        "translation-embeddings"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "translation-embeddings-transfer",
+        "translation-embeddings-gradient"
+      ]
+    },
+    {
+      "id": "translation-positions",
+      "title": "Lesson 8 \u2014 Sinusoidal position implementation",
+      "content_path": "lessons/08-translation-positions.md",
+      "objective_ids": [
+        "translation-positions"
+      ],
+      "diagram_ids": [
+        "sinusoidal-positions"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "translation-positions-transfer",
+        "translation-positions-offset"
+      ]
+    },
+    {
+      "id": "qkv",
+      "title": "Lesson 9 \u2014 Learned Q/K/V and scaled attention",
+      "content_path": "lessons/07-qkv.md",
+      "objective_ids": [
+        "qkv"
+      ],
+      "diagram_ids": [
+        "qkv-matrices"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "qkv-practice-1",
+        "qkv-transfer"
+      ]
+    },
+    {
+      "id": "heads",
+      "title": "Lesson 10 \u2014 Multi-head attention implementation",
+      "content_path": "lessons/08-heads.md",
+      "objective_ids": [
+        "heads"
+      ],
+      "diagram_ids": [
+        "head-geometry"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "heads-practice-1",
+        "heads-transfer"
+      ]
+    },
+    {
+      "id": "masks",
+      "title": "Lesson 11 \u2014 Padding, causal and cross-attention masks",
+      "content_path": "lessons/09-masks.md",
+      "objective_ids": [
+        "masks"
+      ],
+      "diagram_ids": [
+        "translation-masks"
+      ],
+      "table_ids": [],
+      "scenario_ids": [
+        "visibility"
+      ],
+      "practice_ids": [
+        "masks-practice-1",
+        "masks-transfer"
+      ]
+    },
+    {
+      "id": "bilingual-batches",
+      "title": "Lesson 12 \u2014 Bilingual batches and teacher-forced alignment",
+      "content_path": "lessons/10-bilingual-batches.md",
+      "objective_ids": [
+        "bilingual-batches"
+      ],
+      "diagram_ids": [
+        "target-shift"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "bilingual-batches-practice-1",
+        "bilingual-batches-transfer"
+      ]
+    },
+    {
+      "id": "translation-ffn",
+      "title": "Lesson 13 \u2014 Position-wise FFN and activation choice",
+      "content_path": "lessons/13-translation-ffn.md",
+      "objective_ids": [
+        "translation-ffn"
+      ],
+      "diagram_ids": [
+        "translation-ffn"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "translation-ffn-transfer",
+        "translation-ffn-gradient"
+      ]
+    },
+    {
+      "id": "transformer-blocks",
+      "title": "Lesson 14 \u2014 Residual and normalization blocks",
+      "content_path": "lessons/11-transformer-blocks.md",
+      "objective_ids": [
+        "transformer-blocks"
+      ],
+      "diagram_ids": [
+        "residual-normalization"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "transformer-blocks-practice-1",
+        "transformer-blocks-transfer"
+      ]
+    },
+    {
+      "id": "encoder-stack",
+      "title": "Lesson 15 \u2014 Encoder stack and contextual source memory",
+      "content_path": "lessons/15-encoder-stack.md",
+      "objective_ids": [
+        "encoder-stack"
+      ],
+      "diagram_ids": [
+        "encoder-memory"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "encoder-stack-transfer",
+        "encoder-stack-sharing-transfer"
+      ]
+    },
+    {
+      "id": "decoder-stack",
+      "title": "Lesson 16 \u2014 Decoder stack, source retrieval and information flow",
+      "content_path": "lessons/16-decoder-stack.md",
+      "objective_ids": [
+        "decoder-stack"
+      ],
+      "diagram_ids": [
+        "decoder-retrieval"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "decoder-stack-transfer",
+        "decoder-stack-gradient-transfer"
+      ]
+    },
+    {
+      "id": "translation-model",
+      "title": "Lesson 17 \u2014 Assemble the complete translation model",
+      "content_path": "lessons/12-translation-model.md",
+      "objective_ids": [
+        "translation-model"
+      ],
+      "diagram_ids": [
+        "encoder-decoder"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "translation-model-practice-1",
+        "translation-model-state-transfer"
+      ]
+    },
+    {
+      "id": "translation-training",
+      "title": "Lesson 18 \u2014 Translation optimization and complete training updates",
+      "content_path": "lessons/13-translation-training.md",
+      "objective_ids": [
+        "translation-training"
+      ],
+      "diagram_ids": [
+        "token-weighted-update"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "translation-training-practice-1",
+        "translation-training-schedule-transfer"
+      ]
+    },
+    {
+      "id": "translation-generation",
+      "title": "Lesson 19 \u2014 Autoregressive generation, completion and decoding scores",
+      "content_path": "lessons/14-translation-generation.md",
+      "objective_ids": [
+        "translation-generation"
+      ],
+      "diagram_ids": [
+        "translation-generation"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "translation-generation-practice-1",
+        "translation-generation-search-transfer"
+      ]
+    },
+    {
+      "id": "translation-evaluation",
+      "title": "Lesson 20 \u2014 Translation evaluation, source controls and error analysis",
+      "content_path": "lessons/20-translation-evaluation.md",
+      "objective_ids": [
+        "translation-evaluation"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "translation-evaluation-transfer",
+        "translation-evaluation-source-transfer"
+      ]
+    },
+    {
+      "id": "checkpoints-and-colab",
+      "title": "Lesson 21 \u2014 Full-state continuation, verified generations and Colab",
+      "content_path": "lessons/15-checkpoints-and-colab.md",
+      "objective_ids": [
+        "checkpoints-and-colab"
+      ],
+      "diagram_ids": [
+        "recovery-generations"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "checkpoints-and-colab-practice-1",
+        "full-state-resume"
+      ]
+    },
+    {
+      "id": "bert-to-roberta",
+      "title": "Lesson 22 \u2014 BERT-to-RoBERTa design and bidirectional objectives",
+      "content_path": "lessons/16-bert-to-roberta.md",
+      "objective_ids": [
+        "bert-to-roberta"
+      ],
+      "diagram_ids": [
+        "roberta-objectives"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "bert-to-roberta-practice-1",
+        "bert-to-roberta-transfer"
+      ]
+    },
+    {
+      "id": "roberta-tokens-and-positions",
+      "title": "Lesson 23 \u2014 RoBERTa byte tokens, pair layout and learned positions",
+      "content_path": "lessons/17-roberta-tokens-and-positions.md",
+      "objective_ids": [
+        "roberta-tokens-and-positions"
+      ],
+      "diagram_ids": [
+        "roberta-positions"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "roberta-tokens-and-positions-practice-1",
+        "roberta-tokens-and-positions-transfer"
+      ]
+    },
+    {
+      "id": "dynamic-mlm-corruption",
+      "title": "Lesson 24 \u2014 dynamic MLM corruption and selected-target supervision",
+      "content_path": "lessons/18-dynamic-mlm-corruption.md",
+      "objective_ids": [
+        "dynamic-mlm-corruption"
+      ],
+      "diagram_ids": [
+        "mlm-corruption"
+      ],
+      "table_ids": [],
+      "scenario_ids": [
+        "corruption-branch"
+      ],
+      "practice_ids": [
+        "dynamic-mlm-corruption-practice-1",
+        "dynamic-mlm-corruption-transfer"
+      ]
+    },
+    {
+      "id": "roberta-encoder-and-mlm-head",
+      "title": "Lesson 25 \u2014 bidirectional encoder and tied MLM head",
+      "content_path": "lessons/19-roberta-encoder-and-mlm-head.md",
+      "objective_ids": [
+        "roberta-encoder-and-mlm-head"
+      ],
+      "diagram_ids": [
+        "roberta-block"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "roberta-encoder-and-mlm-head-practice-1",
+        "roberta-encoder-and-mlm-head-transfer"
+      ]
+    },
+    {
+      "id": "mlm-training-and-counting",
+      "title": "Lesson 26 \u2014 MLM pretraining, counted updates and measurement",
+      "content_path": "lessons/20-mlm-training-and-counting.md",
+      "objective_ids": [
+        "mlm-training-and-counting"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "mlm-training-and-counting-practice-1",
+        "mlm-training-and-counting-transfer"
+      ]
+    },
+    {
+      "id": "backbone-transfer",
+      "title": "Lesson 27 \u2014 backbone transfer and stage identity",
+      "content_path": "lessons/27-backbone-transfer.md",
+      "objective_ids": [
+        "backbone-transfer"
+      ],
+      "diagram_ids": [
+        "backbone-transfer"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "backbone-transfer-transfer",
+        "backbone-transfer-resume-case"
+      ]
+    },
+    {
+      "id": "qa-offsets-and-windows",
+      "title": "Lesson 28 \u2014 QA character offsets and overlapping context windows",
+      "content_path": "lessons/21-qa-offsets-and-windows.md",
+      "objective_ids": [
+        "qa-offsets-and-windows"
+      ],
+      "diagram_ids": [
+        "qa-windows"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "qa-offsets-and-windows-practice-1",
+        "qa-offsets-and-windows-transfer"
+      ]
+    },
+    {
+      "id": "qa-head-and-fine-tuning",
+      "title": "Lesson 29 \u2014 QA endpoint head, loss and fine-tuning",
+      "content_path": "lessons/22-qa-head-and-fine-tuning.md",
+      "objective_ids": [
+        "qa-head-and-fine-tuning"
+      ],
+      "diagram_ids": [
+        "qa-head"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "qa-head-and-fine-tuning-practice-1",
+        "qa-head-and-fine-tuning-transfer"
+      ]
+    },
+    {
+      "id": "span-decoding-and-metrics",
+      "title": "Lesson 30 \u2014 constrained span decoding and QA metrics",
+      "content_path": "lessons/23-span-decoding-and-metrics.md",
+      "objective_ids": [
+        "span-decoding-and-metrics"
+      ],
+      "diagram_ids": [
+        "qa-joint-span"
+      ],
+      "table_ids": [],
+      "scenario_ids": [
+        "span-validity"
+      ],
+      "practice_ids": [
+        "span-decoding-and-metrics-practice-1",
+        "span-decoding-and-metrics-transfer"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Lesson 31 \u2014 integrated debugging and profiling",
+      "content_path": "lessons/31-debugging-and-profiling.md",
+      "objective_ids": [
+        "diagnosis"
+      ],
+      "diagram_ids": [
+        "model-diagnosis"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "diagnosis-transfer",
+        "diagnosis-contract-case"
+      ]
+    },
+    {
+      "id": "ready-for-gpt",
+      "title": "Lesson 32 \u2014 explain the complete models and prepare the Small GPT handoff",
+      "content_path": "lessons/24-ready-for-gpt.md",
+      "objective_ids": [
+        "ready-for-gpt"
+      ],
+      "diagram_ids": [
+        "two-builds-to-gpt"
+      ],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "ready-for-gpt-practice-1",
+        "ready-for-gpt-transfer"
+      ]
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "matrix-product",
+      "title": "A row meets every column",
+      "description": "A [2,3] times B [3,2] produces C [2,2]. C[0,0]=1\u00d77+2\u00d79+3\u00d711=58. The contracted dimension is 3.",
+      "entity_ids": [
+        "matrix-product-1",
+        "matrix-product-2",
+        "matrix-product-3"
+      ],
+      "relationship_ids": [
+        "matrix-product-edge-1",
+        "matrix-product-edge-2"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "learning-update",
+      "title": "One parameter update has state",
+      "description": "Prediction enters a loss; the chain rule sends a gradient to each parameter. Adam carries moments forward between completed updates.",
+      "entity_ids": [
+        "learning-update-1",
+        "learning-update-2",
+        "learning-update-3",
+        "learning-update-4"
+      ],
+      "relationship_ids": [
+        "learning-update-edge-1",
+        "learning-update-edge-2",
+        "learning-update-edge-3"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "token-pipeline",
+      "title": "Text changes coordinate systems",
+      "description": "The original character coordinate system must remain available for QA. IDs are vocabulary references, not character meanings.",
+      "entity_ids": [
+        "token-pipeline-1",
+        "token-pipeline-2",
+        "token-pipeline-3"
+      ],
+      "relationship_ids": [
+        "token-pipeline-edge-1",
+        "token-pipeline-edge-2"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "objective-masks",
+      "title": "The objective chooses visibility",
+      "description": "Translation has three visibility patterns. MLM reads both directions at real positions; GPT permits only a prefix. Loss masks select supervision separately.",
+      "entity_ids": [
+        "objective-masks-1",
+        "objective-masks-2",
+        "objective-masks-3"
+      ],
+      "relationship_ids": [],
+      "layout": "flow"
+    },
+    {
+      "id": "qkv-matrices",
+      "title": "Q and K choose; V supplies the payload",
+      "description": "Three learned affine maps retain the token axis. Q [T,d] times K\u1d40 [d,S] creates comparisons; row-softmax weights mix V [S,d].",
+      "entity_ids": [
+        "qkv-matrices-1",
+        "qkv-matrices-2",
+        "qkv-matrices-3",
+        "qkv-matrices-4",
+        "qkv-matrices-5"
+      ],
+      "relationship_ids": [
+        "qkv-matrices-edge-1",
+        "qkv-matrices-edge-2",
+        "qkv-matrices-edge-3",
+        "qkv-matrices-edge-4"
+      ],
+      "layout": "grid"
+    },
+    {
+      "id": "head-geometry",
+      "title": "Split features, preserve positions",
+      "description": "Example B=1,T=2,D=8,H=2,d=4: each token keeps eight coordinates, divided into two learned head subspaces. Merge in the inverse order.",
+      "entity_ids": [
+        "head-geometry-1",
+        "head-geometry-2",
+        "head-geometry-3",
+        "head-geometry-4",
+        "head-geometry-5"
+      ],
+      "relationship_ids": [
+        "head-geometry-edge-1",
+        "head-geometry-edge-2",
+        "head-geometry-edge-3",
+        "head-geometry-edge-4"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "translation-masks",
+      "title": "Allowed keys are columns",
+      "description": "A score at [query,key] is usable only when its key is real and the objective permits it. Hide before softmax; zero score still receives probability.",
+      "entity_ids": [
+        "translation-masks-1",
+        "translation-masks-2",
+        "translation-masks-3"
+      ],
+      "relationship_ids": [
+        "translation-masks-edge-1",
+        "translation-masks-edge-2"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "target-shift",
+      "title": "Inputs and labels share a sequence, offset by one",
+      "description": "For BOS je vois EOS, decoder inputs are BOS je vois and labels are je vois EOS. EOS is learned; padded label positions use \u2212100.",
+      "entity_ids": [
+        "target-shift-1",
+        "target-shift-2",
+        "target-shift-3"
+      ],
+      "relationship_ids": [
+        "target-shift-edge-1",
+        "target-shift-edge-2"
+      ],
+      "layout": "mindmap"
+    },
+    {
+      "id": "sinusoidal-positions",
+      "title": "Position features are added to token features",
+      "description": "At position 0, sine coordinates are 0 and cosine coordinates 1. Different frequencies change with position; token identity and order remain separate inputs.",
+      "entity_ids": [
+        "sinusoidal-positions-1",
+        "sinusoidal-positions-2",
+        "sinusoidal-positions-3"
+      ],
+      "relationship_ids": [
+        "sinusoidal-positions-edge-1",
+        "sinusoidal-positions-edge-2"
+      ],
+      "layout": "grid"
+    },
+    {
+      "id": "encoder-decoder",
+      "title": "The decoder uses two information sources",
+      "description": "Source representations feed cross-attention as K/V; the evolving target representation supplies Q. Target self-attention remains causal.",
+      "entity_ids": [
+        "encoder-decoder-1",
+        "encoder-decoder-3",
+        "encoder-decoder-2",
+        "encoder-decoder-4",
+        "encoder-decoder-5",
+        "encoder-decoder-6"
+      ],
+      "relationship_ids": [
+        "encoder-decoder-edge-1",
+        "encoder-decoder-edge-2",
+        "encoder-decoder-edge-3",
+        "encoder-decoder-edge-4",
+        "encoder-decoder-edge-5"
+      ],
+      "layout": "grid"
+    },
+    {
+      "id": "token-weighted-update",
+      "title": "One update weights every target equally",
+      "description": "Microbatch A has two labels and B has six. Summing their loss sums and dividing by eight agrees with a full batch; averaging two means gives unequal target weights.",
+      "entity_ids": [
+        "token-weighted-update-1",
+        "token-weighted-update-2",
+        "token-weighted-update-3",
+        "token-weighted-update-4"
+      ],
+      "relationship_ids": [
+        "token-weighted-update-edge-1",
+        "token-weighted-update-edge-2",
+        "token-weighted-update-edge-3"
+      ],
+      "layout": "grid"
+    },
+    {
+      "id": "translation-generation",
+      "title": "Generation extends its own prefix",
+      "description": "Encode the source once. Recompute target-prefix states, use the last query logits, append one chosen ID, and track EOS separately for every row.",
+      "entity_ids": [
+        "translation-generation-1",
+        "translation-generation-2",
+        "translation-generation-3",
+        "translation-generation-4"
+      ],
+      "relationship_ids": [
+        "translation-generation-edge-1",
+        "translation-generation-edge-2",
+        "translation-generation-edge-3",
+        "translation-generation-edge-4"
+      ],
+      "layout": "grid"
+    },
+    {
+      "id": "recovery-generations",
+      "title": "Complete a generation last",
+      "description": "Write state and its hash manifest, verify them, then write completion metadata. Loading checks newest compatible complete generations and falls back when necessary.",
+      "entity_ids": [
+        "recovery-generations-1",
+        "recovery-generations-2",
+        "recovery-generations-3",
+        "recovery-generations-4",
+        "recovery-generations-5"
+      ],
+      "relationship_ids": [
+        "recovery-generations-edge-1",
+        "recovery-generations-edge-2",
+        "recovery-generations-edge-3",
+        "recovery-generations-edge-4"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "roberta-objectives",
+      "title": "One encoder, two supervision rules",
+      "description": "MLM predicts original IDs only at selected locations. QA reuses encoder representations to locate an answer in a supplied context; it does not generate arbitrary text.",
+      "entity_ids": [
+        "roberta-objectives-1",
+        "roberta-objectives-2",
+        "roberta-objectives-3"
+      ],
+      "relationship_ids": [
+        "roberta-objectives-edge-1",
+        "roberta-objectives-edge-2"
+      ],
+      "layout": "mindmap"
+    },
+    {
+      "id": "roberta-positions",
+      "title": "Padding-aware learned positions",
+      "description": "With PAD=1, IDs [0,7,2,1,1] map to positions [2,3,4,1,1]. Left padding does not shift the real-token position count.",
+      "entity_ids": [
+        "roberta-positions-1",
+        "roberta-positions-2",
+        "roberta-positions-3"
+      ],
+      "relationship_ids": [
+        "roberta-positions-edge-1",
+        "roberta-positions-edge-2"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "mlm-corruption",
+      "title": "Selection creates labels; branches alter inputs",
+      "description": "Select 15% of eligible ordinary real tokens and retain their original IDs. The figure branches after selection: exactly one corruption choice applies to each selected token; branches do not run sequentially.",
+      "entity_ids": [
+        "mlm-corruption-2",
+        "mlm-corruption-3",
+        "mlm-corruption-4",
+        "mlm-corruption-5"
+      ],
+      "relationship_ids": [
+        "mlm-corruption-edge-1",
+        "mlm-corruption-edge-2",
+        "mlm-corruption-edge-3"
+      ],
+      "layout": "mindmap"
+    },
+    {
+      "id": "roberta-block",
+      "title": "A bidirectional representation reaches a tied head",
+      "description": "Post-norm attention and FFN blocks retain [B,T,D]. The MLM transform returns width D, then the input embedding table projects to the vocabulary.",
+      "entity_ids": [
+        "roberta-block-1",
+        "roberta-block-2",
+        "roberta-block-3",
+        "roberta-block-4",
+        "roberta-block-5"
+      ],
+      "relationship_ids": [
+        "roberta-block-edge-1",
+        "roberta-block-edge-2",
+        "roberta-block-edge-3",
+        "roberta-block-edge-4"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "qa-windows",
+      "title": "One character answer may fit only some windows",
+      "description": "Use [start,end) character offsets. A window has a supervised answer only if it contains the entire span. Overlapping partial windows use ignored labels; they are not impossible-question examples.",
+      "entity_ids": [
+        "qa-windows-1",
+        "qa-windows-2",
+        "qa-windows-3",
+        "qa-windows-4"
+      ],
+      "relationship_ids": [
+        "qa-windows-edge-1",
+        "qa-windows-edge-2",
+        "qa-windows-edge-3"
+      ],
+      "layout": "grid"
+    },
+    {
+      "id": "qa-head",
+      "title": "Two coordinates per contextual token",
+      "description": "The QA linear head maps H [B,T,D] to Z [B,T,2]. Channel 0 supplies start logits, channel 1 end logits. Each endpoint normalizes over token positions.",
+      "entity_ids": [
+        "qa-head-1",
+        "qa-head-2",
+        "qa-head-3",
+        "qa-head-4"
+      ],
+      "relationship_ids": [
+        "qa-head-edge-1",
+        "qa-head-edge-2",
+        "qa-head-edge-3"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "qa-joint-span",
+      "title": "Choose a valid pair, then recover original text",
+      "description": "Search only context tokens, require start \u2264 end and bounded length, score the pair jointly, and compare candidates across windows of the same example.",
+      "entity_ids": [
+        "qa-joint-span-1",
+        "qa-joint-span-2",
+        "qa-joint-span-3",
+        "qa-joint-span-4"
+      ],
+      "relationship_ids": [
+        "qa-joint-span-edge-1",
+        "qa-joint-span-edge-2",
+        "qa-joint-span-edge-3"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "two-builds-to-gpt",
+      "title": "Carry tested contracts into a new objective",
+      "description": "Course 2 is a decoder-only autoregressive model. Tokenizer/split/mask/loss/recovery reasoning transfers; encoder weights do not automatically become a GPT checkpoint.",
+      "entity_ids": [
+        "two-builds-to-gpt-1",
+        "two-builds-to-gpt-2",
+        "two-builds-to-gpt-3",
+        "two-builds-to-gpt-4"
+      ],
+      "relationship_ids": [
+        "two-builds-to-gpt-edge-1",
+        "two-builds-to-gpt-edge-2",
+        "two-builds-to-gpt-edge-3"
+      ],
+      "layout": "grid"
+    },
+    {
+      "id": "task-contracts",
+      "title": "Three task contracts",
+      "description": "Compare three distinct input, visibility, target and inference contracts.",
+      "entity_ids": [
+        "task-contracts-1",
+        "task-contracts-2",
+        "task-contracts-3"
+      ],
+      "relationship_ids": [],
+      "layout": "grid"
+    },
+    {
+      "id": "translation-embeddings",
+      "title": "Separate symbol and classifier tables",
+      "description": "Separate source and target symbols meet through the encoder\u2013decoder; a separate head classifies the target vocabulary.",
+      "entity_ids": [
+        "translation-embeddings-1",
+        "translation-embeddings-2",
+        "translation-embeddings-3",
+        "translation-embeddings-4"
+      ],
+      "relationship_ids": [
+        "translation-embeddings-edge-1",
+        "translation-embeddings-edge-2",
+        "translation-embeddings-edge-3"
+      ],
+      "layout": "grid"
+    },
+    {
+      "id": "translation-ffn",
+      "title": "Shared position-wise nonlinear map",
+      "description": "Read alongside the worked calculation and explicit implementation boundaries in its lesson.",
+      "entity_ids": [
+        "translation-ffn-1",
+        "translation-ffn-2",
+        "translation-ffn-3"
+      ],
+      "relationship_ids": [
+        "translation-ffn-edge-1",
+        "translation-ffn-edge-2"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "residual-normalization",
+      "title": "Post-norm residual graph",
+      "description": "Read alongside the worked calculation and explicit implementation boundaries in its lesson.",
+      "entity_ids": [
+        "residual-normalization-1",
+        "residual-normalization-2",
+        "residual-normalization-3"
+      ],
+      "relationship_ids": [
+        "residual-normalization-edge-1",
+        "residual-normalization-edge-2"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "encoder-memory",
+      "title": "Encoder stack retains source coordinates",
+      "description": "Read alongside the worked calculation and explicit implementation boundaries in its lesson.",
+      "entity_ids": [
+        "encoder-memory-1",
+        "encoder-memory-2",
+        "encoder-memory-3"
+      ],
+      "relationship_ids": [
+        "encoder-memory-edge-1",
+        "encoder-memory-edge-2"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "decoder-retrieval",
+      "title": "Three decoder residual sublayers",
+      "description": "Read alongside the worked calculation and explicit implementation boundaries in its lesson.",
+      "entity_ids": [
+        "decoder-retrieval-1",
+        "decoder-retrieval-2",
+        "decoder-retrieval-3"
+      ],
+      "relationship_ids": [
+        "decoder-retrieval-edge-1",
+        "decoder-retrieval-edge-2"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "backbone-transfer",
+      "title": "Transfer starts a new task stage",
+      "description": "Read alongside the worked calculation and explicit implementation boundaries in its lesson.",
+      "entity_ids": [
+        "backbone-transfer-1",
+        "backbone-transfer-2",
+        "backbone-transfer-3"
+      ],
+      "relationship_ids": [
+        "backbone-transfer-edge-1",
+        "backbone-transfer-edge-2"
+      ],
+      "layout": "flow"
+    },
+    {
+      "id": "model-diagnosis",
+      "title": "Diagnose a violated model contract",
+      "description": "Read alongside the worked calculation and explicit implementation boundaries in its lesson.",
+      "entity_ids": [
+        "model-diagnosis-1",
+        "model-diagnosis-2",
+        "model-diagnosis-3"
+      ],
+      "relationship_ids": [
+        "model-diagnosis-edge-1",
+        "model-diagnosis-edge-2"
+      ],
+      "layout": "flow"
+    }
+  ],
+  "tables": [
+    {
+      "id": "tensor-contracts",
+      "title": "Name the axes before computing",
+      "columns": [
+        "Object",
+        "Shape",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "id": "ids",
+          "cells": [
+            "Token IDs",
+            "[B,T]",
+            "Integers select embedding rows; T is position count."
+          ],
+          "entity_ids": [],
+          "claim_ids": [
+            "arithmetic"
+          ]
+        },
+        {
+          "id": "hidden",
+          "cells": [
+            "Hidden states",
+            "[B,T,D]",
+            "D is features per token."
+          ],
+          "entity_ids": [],
+          "claim_ids": [
+            "arithmetic"
+          ]
+        },
+        {
+          "id": "scores",
+          "cells": [
+            "Head scores",
+            "[B,H,T,S]",
+            "T queries compare with S source keys."
+          ],
+          "entity_ids": [],
+          "claim_ids": [
+            "arithmetic"
+          ]
+        },
+        {
+          "id": "logits",
+          "cells": [
+            "Vocabulary logits",
+            "[B,T,V]",
+            "V candidate IDs at each query."
+          ],
+          "entity_ids": [],
+          "claim_ids": [
+            "arithmetic"
+          ]
+        },
+        {
+          "id": "qa",
+          "cells": [
+            "QA endpoints",
+            "[B,T] each",
+            "Start and end normalize over positions, not vocabulary."
+          ],
+          "entity_ids": [],
+          "claim_ids": [
+            "arithmetic"
+          ]
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "visibility",
+      "title": "Change the prediction task",
+      "description": "Select an objective and predict permitted key columns before choosing a library mask.",
+      "variables": [
+        {
+          "id": "task",
+          "label": "Objective",
+          "options": [
+            "source encoder",
+            "target decoder",
+            "cross attention",
+            "MLM"
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "when": {
+            "task": "source encoder"
+          },
+          "outcome": "All real source keys",
+          "narrative": "Each source position may use left and right real context.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "attention-contract"
+          ]
+        },
+        {
+          "when": {
+            "task": "target decoder"
+          },
+          "outcome": "Real target keys up to query t",
+          "narrative": "Future target labels must not be visible.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "attention-contract"
+          ]
+        },
+        {
+          "when": {
+            "task": "cross attention"
+          },
+          "outcome": "All real source keys",
+          "narrative": "Target queries read source columns; [T,S] may be rectangular.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "attention-contract"
+          ]
+        },
+        {
+          "when": {
+            "task": "MLM"
+          },
+          "outcome": "All real corrupted-input keys",
+          "narrative": "The selected label remains an original ID; right context is intended.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "attention-contract"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "corruption-branch",
+      "title": "Change the selected-token branch",
+      "description": "One ordinary token has already been selected; the original ID is 17. Change what appears in the input.",
+      "variables": [
+        {
+          "id": "branch",
+          "label": "Selected branch",
+          "options": [
+            "MASK",
+            "random ordinary",
+            "unchanged"
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "when": {
+            "branch": "MASK"
+          },
+          "outcome": "input MASK; label 17",
+          "narrative": "The hidden ID is reconstructed.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "roberta-architecture"
+          ]
+        },
+        {
+          "when": {
+            "branch": "random ordinary"
+          },
+          "outcome": "input drawn ordinary ID; label 17",
+          "narrative": "Random replacement is not a new target. With replacement permits repeats.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "roberta-architecture"
+          ]
+        },
+        {
+          "when": {
+            "branch": "unchanged"
+          },
+          "outcome": "input 17; label 17",
+          "narrative": "Unchanged selected tokens still contribute to the MLM objective.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "roberta-architecture"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "span-validity",
+      "title": "Reject an attractive invalid answer",
+      "description": "Suppose the highest separate endpoint scores suggest the following pair. Prediction must satisfy the context span contract.",
+      "variables": [
+        {
+          "id": "pair",
+          "label": "Candidate",
+          "options": [
+            "start 8, end 5",
+            "question token, context token",
+            "context 5..8, max length 3",
+            "context 5..7, max length 3"
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "when": {
+            "pair": "start 8, end 5"
+          },
+          "outcome": "Reject reversed span",
+          "narrative": "A substring requires start\u2264end.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "source-corrections"
+          ]
+        },
+        {
+          "when": {
+            "pair": "question token, context token"
+          },
+          "outcome": "Reject non-context endpoint",
+          "narrative": "Answer text comes from context only.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "source-corrections"
+          ]
+        },
+        {
+          "when": {
+            "pair": "context 5..8, max length 3"
+          },
+          "outcome": "Reject length 4",
+          "narrative": "Length is end\u2212start+1, including both endpoint tokens.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "source-corrections"
+          ]
+        },
+        {
+          "when": {
+            "pair": "context 5..7, max length 3"
+          },
+          "outcome": "Accept as a candidate",
+          "narrative": "Compare its joint score with other valid pairs before selecting it.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "source-corrections"
+          ]
+        }
+      ]
+    }
+  ],
+  "practice": [
+    {
+      "id": "start-practice-1",
+      "question": "A model receives an uncorrupted sentence, attends bidirectionally and predicts every original token. Is that the masked-language objective? Explain the leakage path.",
+      "answer": "No. At each supervised position the input contains the same target ID. A self-attention/residual path can copy it. MLM supplies a deliberately corrupted input and supervises original IDs only at selected positions; a bidirectional mask is legal under that corruption contract.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "start"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "start-transfer",
+      "question": "Translation and QA both return logits. Give their different class axes, target objects and inference constraints for a seven-token context and a vocabulary of 20.",
+      "answer": "Translation logits classify 20 vocabulary IDs at each decoder slot, conditioned on source and a causal prefix. QA supplies start/end scores over seven packed positions (or the complete packed length if question/special tokens are included); gold objects are endpoint positions and decoding must restrict ordered context spans. Equal use of cross-entropy does not make the target domains interchangeable.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "start"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "workspace-boundaries",
+      "question": "Two source ZIPs have matching filenames and tensor shapes, but one tokenizer swaps two ordinary IDs. Is a checkpoint compatible? What evidence establishes compatibility?",
+      "answer": "Not from shapes. The embedding/head rows now refer to different symbols. Verify source/config/runtime and the exact serialized tokenizer vocabulary/processing identity against the checkpoint before loading; matching byte hashes or a deliberately validated remapping establishes the required identity.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "workspace"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "workspace-transfer",
+      "question": "I want to experiment with another head width. Where should I make that change, and what distinguishes a reference run from learner completion?",
+      "answer": "Use a separate scratch/reference copy with its own recorded config and artifacts, preserving the existing learner child. Passing a reference import or author check verifies source behavior. Learner completion requires the learner implementation, explanation and task/recovery evidence specified by the milestone.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "workspace"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "tensors-practice-1",
+      "question": "For B=3,T=5,S=8,D=12,H=3, state Q/K/score/context/output shapes and FP32 score bytes for one cross-attention layer.",
+      "answer": "Head width is 4. Q [3,3,5,4], K/V [3,3,8,4], scores [3,3,5,8], head context [3,3,5,4], final output [3,5,12]. Scores contain 360 entries or 1440 FP32 bytes; this is not total training memory.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "tensors"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "tensors-transfer",
+      "question": "At fixed D=16, change H from two to four. Does a four-projection attention layer gain parameters? Does its conceptual score tensor gain entries?",
+      "answer": "Biased projection count remains 4*16^2+4*16=1088. Head width halves from eight to four. BHTS conceptual entries double for the same lengths, while the total dot-product feature work remains proportional to BTSD. Backend memory and wall time require measurement.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "tensors"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "learning-practice-1",
+      "question": "Two records contain two valid losses summing to 4 and four valid losses summing to 4. Compute token mean versus mean of record means.",
+      "answer": "Token mean is (4+4)/(2+4)=4/3. Record means are 2 and 1, whose mean is 1.5. The first weights every token equally; the second weights each record equally. Padding contributes to neither valid count.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "learning"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "learning-transfer",
+      "question": "For probabilities [.2,.5,.3], gold class zero and a batch denominator of five, derive the logit-row gradient. What is the gradient of an ignored row?",
+      "answer": "The hard-target gradient is ([.2,.5,.3]-[1,0,0])/5=[-.16,.10,.06]. It sums to zero. An ignored label row contributes zero loss and zero logit gradient under the reference CE contract; that does not establish its attention visibility.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "learning"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "tokenization-practice-1",
+      "question": "A saved target vocabulary contains BOS/EOS but an adapter adds them again after tokenizer post-processing. What does this change and how should it be checked?",
+      "answer": "It duplicates boundaries, creates incorrect prefixes/labels and consumes extra position capacity. Establish whether encode already supplies specials, add them exactly once, then assert the first/last IDs and a full shifted batch under the saved tokenizer identity.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "tokenization"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "tokenization-transfer",
+      "question": "The strings \u00e9 and e plus a combining accent look alike. Why may character/byte offsets differ even if an NFC-normalized tokenizer gives equal IDs?",
+      "answer": "They use different original code-point sequences and UTF-8 bytes. NFC may make modeled strings equal, but offsets for extractive answers must still address the original text through an explicit mapping. Equal normalized token IDs do not justify copying normalized offsets into the original string.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "tokenization"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "objectives-practice-1",
+      "question": "A source file contains a blank line while the paired target is nonblank. Why does dropping blanks independently create a wrong dataset?",
+      "answer": "Independent filtering shifts subsequent row alignment. Traverse both columns together, reject unequal file lengths, and apply acceptance/rejection to the pair. A complete traversal is needed to establish that no later mismatch exists.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "objectives"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "objectives-transfer",
+      "question": "A validation sentence is absent from training records, but its text was included when fitting the tokenizer. Which boundary was crossed, and what can the tiny two-combination validation fixture prove?",
+      "answer": "The declared training-only tokenizer-fit boundary was crossed: validation text influenced vocabulary/processing. The tiny fixture can diagnose specific composition behavior and pipeline invariants; it cannot establish general translation quality or official WMT performance.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "objectives"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "translation-embeddings-transfer",
+      "question": "With Vsrc=9,Vtgt=11,D=8, count source/target input tables plus a separate biased target head. How many unique parameters would target input/output tying save?",
+      "answer": "Tables have 72 and 88 parameters; the head has 88+11=99, totaling 259. Tying target table and head saves 88, leaving 171, provided the target row meaning and width match. Sharing one Parameter is required; copying values does not tie gradients.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "translation-embeddings"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "translation-embeddings-gradient",
+      "question": "IDs [2,2,3] use a table with PAD=0. Their upstream rows are [1,-2], [4,5], [-3,6]. Give the lookup gradient and explain what changes if the same table is an output head.",
+      "answer": "Lookup row 2 receives [5,3], row 3 [-3,6], and unused/PAD rows receive zero lookup gradient. A tied output head adds class-logit gradients across vocabulary rows, potentially including PAD; padding_idx suppresses only the embedding-lookup route.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "translation-embeddings"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "translation-positions-transfer",
+      "question": "For D=6, give the three frequencies and the entire position-zero vector. Are these values learned parameters in this reference?",
+      "answer": "Frequencies are 1, 10000^(-1/3) and 10000^(-2/3). Position zero is [0,1,0,1,0,1]. The table is a registered buffer, saved/moved with the model but excluded from optimizer parameters.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "translation-positions"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "translation-positions-offset",
+      "question": "After decoding six prefix tokens, I pass only the next token to the existing position module. Which position does it receive and what cache interface is missing?",
+      "answer": "It receives position zero because the module always slices from the beginning. Correct incremental execution needs the absolute offset six, aligned cached key coordinates/masks, capacity checks and identical parameter state. The existing reference instead recomputes the whole prefix.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "translation-positions"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "qkv-practice-1",
+      "question": "Hold Q/K fixed with weights [.25,.75]. Change values [2,6] to [2,10]. Which weights change, and what is the new scalar context?",
+      "answer": "No weights change because scores depend on Q/K. New context is .25*2+.75*10=8, versus 5 previously. Changing the underlying source state would generally alter K and V together, so the controlled payload-only claim would not apply.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "qkv"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "qkv-transfer",
+      "question": "For d=1, q=0, keys [2,-1], values [1,5], and loss equal to context, derive context, query gradient, key gradients and value gradients.",
+      "answer": "Weights are [.5,.5], context 3. Probability upstream [1,5] gives score gradients [-1,1]. Query gradient is -1*2+1*(-1)=-3. Both key gradients are zero since q=0. Value gradients are [.5,.5]. Equal weights do not imply a zero query gradient.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "qkv"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "heads-practice-1",
+      "question": "With B=2,D=12,H=3,S=7,T=4, give head width, Q/K/scores/context/final output shapes and scaling.",
+      "answer": "d=4 and scale denominator sqrt(4)=2. Q [2,3,4,4], K/V [2,3,7,4], scores [2,3,4,7], context [2,3,4,4], merged/projected output [2,4,12].",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "heads"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "heads-transfer",
+      "question": "A loop implementation slices each head\u2019s input-feature columns rather than projection output rows. Is it equivalent to packed projections? What should be compared besides outputs?",
+      "answer": "No. Packed heads each read all D input features through their own output-column map (stored weight rows). Input slicing restricts each head to a subset. Use correct stored-row slices, identical parameters and masks, then compare forward outputs, input gradients and all projection gradients under deterministic mode.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "heads"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "masks-practice-1",
+      "question": "Target queries have [2,4,D] and source memory [2,7,D]. What does passing a [2,4] target mask to cross-attention mean, and what should happen?",
+      "answer": "It describes the wrong key domain and must be rejected by shape validation. Supply the source validity mask [2,7], broadcasting over target query rows and heads; output length remains four.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "masks"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "masks-transfer",
+      "question": "For a new query at absolute position 5 and cached keys 0\u20265, the last key is padding. Give the legal row and explain why a fresh 1x6 lower triangle is wrong.",
+      "answer": "The legal row is [1,1,1,1,1,0]: compare absolute key/query positions and intersect padding validity. A fresh lower triangle permits only key zero because its local query index is zero, incorrectly discarding past keys.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "masks"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "bilingual-batches-practice-1",
+      "question": "Batch full targets [2,4,3] and [2,5,6,7,3], with PAD=1. Give shifted inputs, labels and valid count.",
+      "answer": "Padded rows are [2,4,3,1,1] and [2,5,6,7,3]. Inputs are [2,4,3,1] and [2,5,6,7]. Labels are [4,3,-100,-100] and [5,6,7,3]. There are six supervised tokens. The first row\u2019s EOS input is valid but has an ignored next label.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "bilingual-batches"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "bilingual-batches-transfer",
+      "question": "Why clone label/input slices before replacing PAD labels with -100? Can label ignore values be used as embedding IDs?",
+      "answer": "Sliced views can alias the full target or one another; an in-place replacement can corrupt input IDs. Clones establish separate ownership. -100 is an objective sentinel and is not a valid vocabulary address; input IDs retain tokenizer PAD and their own key-validity mask.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "bilingual-batches"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "translation-ffn-transfer",
+      "question": "For D=16 and expansion ratio three, count a biased two-layer FFN. Does perturbing token 2 change token 0 at this module\u2019s output under evaluation?",
+      "answer": "Hidden width is 48. Count is 2*16*48+48+16=1600. Token 0 is unchanged because the same feature map acts independently at each position; attention elsewhere can mix positions. Disable dropout or hold masks fixed to isolate this claim.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "translation-ffn"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "translation-ffn-gradient",
+      "question": "Remove GELU from a two-affine-layer FFN. Derive the resulting single map and explain why preserving dimensions does not preserve the nonlinear model.",
+      "answer": "Output becomes x(W1W2)+(b1W2+b2). This is one affine map, possibly rank-constrained by intermediate width. Removing GELU removes input-dependent gating and its derivative, changing the represented function despite matching input/output widths.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "translation-ffn"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "transformer-blocks-practice-1",
+      "question": "Set a post-norm block\u2019s sublayer update to zero for input [2,6], with gamma=1,beta=0,epsilon=1e-5. Is it identity?",
+      "answer": "No. Mean is four and variance four; output is [-2,2]/sqrt(4+1e-5), approximately [-.99999875,.99999875]. The post-norm identity route still passes through normalization. A pre-norm residual with a zero update retains the original input before any final normalization.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "transformer-blocks"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "transformer-blocks-transfer",
+      "question": "Someone normalizes [B,T,D] over T instead of D in a causal decoder. Why can this invalidate future isolation even if attention masks are correct?",
+      "answer": "Statistics for an earlier position can include later token representations, creating another future-information path. LayerNorm(D) normalizes each token\u2019s feature axis independently. Verify the normalized_shape and run whole-model future perturbations rather than trusting only attention-mask shape.",
+      "rubric": "Give the changed numerical or graph result, define its axes/state boundary, and identify a source assertion or perturbation that could falsify it.",
+      "objective_ids": [
+        "transformer-blocks"
+      ],
+      "claim_ids": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "encoder-stack-transfer",
+      "question": "Change valid source keys to [True,False,True], scores to [0,log(3),log(2)] and values to [[2,0],[0,4],[6,3]]. Calculate one attention output. What if the masked input ID changes but the supplied mask stays fixed across two encoder layers?",
+      "answer": "Allowed exponentials are 1 and 2, so weights are [1/3,0,2/3] and the value output is [14/3,2]. Changing the blocked key/value cannot affect real-query outputs. Attention excludes that key, and residual/feature LayerNorm/position-wise FFN preserve real-row equality inductively through depth. Padded query rows may remain nonzero; they must still be excluded as decoder keys.",
+      "rubric": "Renormalize only legal keys, work both output coordinates, state the fixed-mask/evaluation assumptions and distinguish key exclusion from zero query outputs.",
+      "objective_ids": [
+        "encoder-stack"
+      ],
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "encoder-stack-sharing-transfer",
+      "question": "At D=8 and FFN width 32 with biases and two affine LayerNorms, change encoder depth 1 to 3. How many extra parameters should appear? What happens if a list repeats one layer object three times?",
+      "answer": "One layer has MHA 4*8^2+4*8=288, FFN 2*8*32+32+8=552 and norms 2*(2*8)=32, total 872. Two new independent layers add 1744 learned scalars. Repeating one object ties the same 872 scalars across all calls; object identity and registered parameter count expose it. A ModuleList registers ownership but does not itself create independent copies.",
+      "rubric": "Derive each component count and verify actual distinct Parameter objects rather than equating repeated architecture with repeated parameters.",
+      "objective_ids": [
+        "encoder-stack"
+      ],
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "decoder-stack-transfer",
+      "question": "Use T=2 decoder positions and S=5 memory positions with source-valid [True,True,False,True,False]. Draw self/cross permission matrices and identify the residual operand around cross-attention. May the encoder read a later source token?",
+      "answer": "Decoder self permission is [[1,0],[1,1]] for its two valid shifted inputs. Cross rows both equal [1,1,0,1,0], shape 2 x 5; no target triangle is imposed on source memory. Q comes from target states, K/V from memory, and the residual operand is the target [B,2,D] stream. Complete-source encoder attention can read later source tokens because they are available conditioning information.",
+      "rubric": "Name every mask domain and stream, preserve the rectangular output length and connect diagonal permission to the shifted target contract.",
+      "objective_ids": [
+        "decoder-stack"
+      ],
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "decoder-stack-gradient-transfer",
+      "question": "Keep q=1, keys [0,log(3)], values [[2,0],[0,4]] but change upstream G to [1,1]. Calculate value/score gradients. If memory is detached, which model path disappears?",
+      "answer": "A=[.25,.75]. Value gradients are [[.25,.25],[.75,.75]]. Upstream attention-weight derivatives are [2,4], weighted mean 3.5, so score gradients are [-.375,.375]. Memory normally receives key and value projection paths, summed across decoder layers. Detach cuts their continuation into encoder parameters; decoder cross-projection and head gradients can remain, so a head gradient is insufficient.",
+      "rubric": "Compute the coupled row-softmax derivative and distinguish gradients into the stored memory from gradients into decoder projection parameters.",
+      "objective_ids": [
+        "decoder-stack"
+      ],
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-model-practice-1",
+      "question": "Keep the reference D 32/source vocabulary 10 and add three French vocabulary entries, changing Vt 12 to 15. Which arrays and counts change? Is an unchanged shape enough to prove compatible token meanings?",
+      "answer": "Target embeddings gain 3*32=96 entries; target head gains 3*32 weights plus 3 biases=99. Total grows 195 from 30796 to 30991. Source table, encoder/decoder blocks and fixed positions remain the same shapes. The affected target arrays require an explicit migration; equal sizes in another artifact still do not prove the same token-to-row mapping.",
+      "rubric": "Count lookup/output/bias terms separately, identify the unchanged owners and include vocabulary meaning in compatibility.",
+      "objective_ids": [
+        "translation-model"
+      ],
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-model-state-transfer",
+      "question": "Instead change only max_src_len 32 to 64 at D 32. What learned count and buffer count result, and can the old complete state dict load strictly?",
+      "answer": "Learned count stays 30796. The source position table gains 32*32=1024 fixed scalars, so total buffers grow 2048 to 3072 (4096 extra FP32 bytes). The full state includes that buffer and its changed shape; strict loading the old [32,32] table into [64,32] fails without an explicit compatible migration. Equal learned parameter count does not establish equal serialized state/configuration.",
+      "rubric": "Separate trainable and fixed state, calculate additional storage and explain strict state/config compatibility.",
+      "objective_ids": [
+        "translation-model"
+      ],
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-training-practice-1",
+      "question": "Microbatches now have 3 and 9 valid labels with loss sums 6 and 9. Calculate the token objective and the equal-microbatch alternative, then place gradient clearing, backward, clipping and optimizer/scheduler steps.",
+      "answer": "Correct token loss is (6+9)/12=1.25. Equal averaging of means gives (2+1)/2=1.5 and another gradient. Backpropagate each sum divided by 12, accumulate both under unchanged parameters, clip the complete gradient, step optimizer/scheduler once and clear at the start of the next group. Every source microbatch must have at least one target because token_statistics rejects zero-target chunks.",
+      "rubric": "Derive the actual denominator and specify one commit boundary, including the source helper's zero-target and retained-gradient behavior.",
+      "objective_ids": [
+        "translation-training"
+      ],
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-training-schedule-transfer",
+      "question": "Change a schedule to total 12,warmup 3,base rate .03. What rates do indices 0,1,2,3 produce? After the first optimizer/scheduler update, is the logged get_last_lr rate the one just used?",
+      "answer": "Multipliers are 1/3,2/3,1,1, so rates are .01,.02,.03,.03. LambdaLR initializes index 0 before the first update; that update uses .01, then the scheduler advances to index 1 and get_last_lr returns .02 for the next update. Restore both schedule state and the same defining total/warmup closure; changing total 12 to another value changes the experiment.",
+      "rubric": "Calculate all four rates, distinguish used/next indices and identify scheduler-defining identity fields.",
+      "objective_ids": [
+        "translation-training"
+      ],
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-generation-practice-1",
+      "question": "Three rows use BOS 2,EOS 3,PAD 1. At successive steps, active rows select [3,5,6], then [irrelevant,3,7], then [irrelevant,irrelevant,3]. What IDs are returned with max_len 4? What does an any-EOS stop lose?",
+      "answer": "Returned rows are [[2,3,1,1],[2,5,3,1],[2,6,7,3]]. Finished rows retain their first EOS and receive PAD on later steps. All three can finish at the third appended token, within a total length 4 including BOS. Stopping on any EOS after the first step truncates the latter rows before their completions; completion must be tracked per row.",
+      "rubric": "Trace each prefix and finished flag independently, preserve BOS/EOS/PAD ownership and apply the whole-sequence budget.",
+      "objective_ids": [
+        "translation-generation"
+      ],
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-generation-search-transfer",
+      "question": "Change probabilities to P(A)=.6,P(B)=.4,P(EOS|A)=.6,P(EOS|B)=.99. Compare greedy and a width-two beam for these short completions. Does the source implement this beam or cache earlier decoder K/V?",
+      "answer": "Greedy picks A then EOS, probability .36 and log score about -1.021651. The B/EOS completion has probability .396 and log score about -.926341, so a width-two search can retain it and prefer it. The actual source implements batched restricted greedy decoding, reuses encoder memory once and recomputes target prefixes; it has neither this beam search nor a decoder K/V cache.",
+      "rubric": "Compute complete sequence scores rather than first-token rankings and keep comparisons separate from implemented algorithms.",
+      "objective_ids": [
+        "translation-generation"
+      ],
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-evaluation-transfer",
+      "question": "Candidate a a a b c is compared with reference a b c d. Compute clipped unigram/bigram counts and two-order BLEU. Separately score an exact three-token prefix against a five-token reference under the same order/no-smoothing rule.",
+      "answer": "The repeated candidate has 3 matching unigrams out of 5 and 2 matching bigrams out of 4. With c 5,r 4, BP 1, BLEU 2=100*sqrt((3/5)*(2/4)) about 54.772256. The three-token exact prefix has both precisions 1 but BP=exp(1-5/3)=exp(-2/3), so score about 51.341712. Corpus counts aggregate before division; four-order/smoothing settings would change these numbers.",
+      "rubric": "Show count clipping and denominators, derive the length penalty and declare order/reference/smoothing settings.",
+      "objective_ids": [
+        "translation-evaluation"
+      ],
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "translation-evaluation-source-transfer",
+      "question": "Encoder gradients are finite and the six training translations are exact. Is useful source conditioning established? Specify a changed-source control while target prefixes/labels stay fixed and explain the two-pair holdout limit.",
+      "answer": "A graph gradient and a training fit are insufficient. Replace source IDs with another valid sentence and move its source mask together, keeping target prefix/labels/parameters/modes fixed. Compare NLL and generated lexical changes, then inspect controlled equivalent/contradictory sources to interpret the difference. Two held-out recombinations test a narrow template/domain; they do not estimate benchmark translation quality or calibration.",
+      "rubric": "Separate connectivity from behavior, define the controlled intervention and avoid overgeneralizing a small fixture or metric.",
+      "objective_ids": [
+        "translation-evaluation"
+      ],
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "checkpoints-and-colab-practice-1",
+      "question": "Verified update 12 exists, a newer update 20 generation is corrupt, and printed progress reached 23 before failure. Restore the older valid generation and perform 3 translation updates. What final update and presentation counters follow?",
+      "answer": "Restore 12, report the rejected newer generation and replay from the saved sampler/RNG/optimizer/schedule position. Three additional updates finish 15. For this fixed six-pair batch, cumulative counts are 90 example presentations,900 nonpadding input-token presentations and 450 supervised labels. Printed progress 23 does not survive without a verified compatible generation; replayed work is not new unique data.",
+      "rubric": "Identify the accepted durable boundary, calculate rollback and all task-specific counters, and include skipped-generation reporting.",
+      "objective_ids": [
+        "checkpoints-and-colab"
+      ],
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "full-state-resume",
+      "question": "Model weights fit the same shapes, but a resumed translation run changes its total schedule from 100 to 120. Is it exact continuation? Contrast it with new QA initialization from a compatible MLM backbone and with deleted-runtime proof.",
+      "answer": "Strict run/protocol identity rejects the changed schedule; loaded index alone cannot restore a new LambdaLR closure. A deliberate changed-duration run can be a recorded warm start, not the same trajectory. MLM-to-QA initialization is a new stage with matching backbone/tokenizer/configuration and new task optimizer/head state; QA resume restores its own full checkpoint and refuses a new initializer. Hosted proof additionally deletes the runtime and recreates exact source/runtime before resuming persistent verified state.",
+      "rubric": "Distinguish shape compatibility, full-state continuation, stage transfer and actual hosted survival evidence.",
+      "objective_ids": [
+        "checkpoints-and-colab"
+      ],
+      "claim_ids": [
+        "translation-architecture"
+      ]
+    },
+    {
+      "id": "bert-to-roberta-practice-1",
+      "question": "Change a real token to the right of an MLM target. Can the earlier prediction change? Compare this with next-token generation, and explain the intentional unchanged-input corruption branch.",
+      "answer": "Right context is legal for the bidirectional MLM encoder, so its earlier prediction can change. The same future access violates a causal next-token contract. Selected unchanged inputs retain original labels by an explicit denoising branch; they do not justify exposing every hidden target or treating MLM as an ordinary left-to-right sequence likelihood.",
+      "rubric": "Draw both visibility matrices; identify the objective and distinguish an intentional corruption branch from accidental target exposure.",
+      "objective_ids": [
+        "bert-to-roberta"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "bert-to-roberta-transfer",
+      "question": "A tiny encoder has the same hidden width as a pretrained RoBERTa model. Does changing the configuration name make it a compatible official checkpoint or reproduce the pretraining recipe?",
+      "answer": "No. Tokenizer row meanings, special IDs, position rules, parameter names/tables and configuration must match; hidden width alone is insufficient. Corpus, corruption, optimization and training budget define the measured recipe separately. The course's own-format tiny fixture establishes mechanics rather than official checkpoint interoperability or paper-scale quality.",
+      "rubric": "List at least two architecture/artifact contracts and two training-recipe contracts, with a concrete compatibility check.",
+      "objective_ids": [
+        "bert-to-roberta"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-tokens-and-positions-practice-1",
+      "question": "Predict positions for [1,1,0,7,2] with PAD 1. For capacity 64, how many position-table rows are needed, and does a wider padded physical row bypass the model's capacity guard?",
+      "answer": "Positions are [1,1,2,3,4]. Real tokens count cumulatively while pads retain1. The largest address for 64 real tokens is65, requiring66 rows. The current model also rejects physical width greater than 64; padding does not bypass that guard. This numbering belongs to the declared artifact/model profile.",
+      "rubric": "Derive real flags/cumulative counts, maximum address and row count; distinguish real counts from physical tensor width.",
+      "objective_ids": [
+        "roberta-tokens-and-positions"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-tokens-and-positions-transfer",
+      "question": "Keep an interior key blocked but replace its PAD ID with an ordinary ID: [0,7,1,8,2] becomes [0,7,9,8,2]. Must later real outputs stay fixed? What does the byte tokenizer imply for caf\u00e9 offsets?",
+      "answer": "Not necessarily: position_ids reads token IDs, so [2,3,1,4,5] becomes [2,3,4,5,6]. Later real position rows changed despite the false key mask. A clean mask-only test preserves position addresses. Byte-only caf\u00e9 has five symbols but four code points; its two \u00e9 symbols share [3,4). This own-format mapping is not an official tokenizer conversion.",
+      "rubric": "Calculate both position rows and name the confound; distinguish character/byte intervals and the artifact identity.",
+      "objective_ids": [
+        "roberta-tokens-and-positions"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "dynamic-mlm-corruption-practice-1",
+      "question": "Twelve selected positions contain9 MASK replacements,1 random replacement and2 unchanged inputs. What labels/count are used, and can unselected context positions receive gradients?",
+      "answer": "All12 positions retain their original IDs as supervised labels, including random and unchanged branches; denominator 12. Unselected direct vocabulary-logit gradients are zero, but contextual attention can carry selected-loss gradients into unselected keys/values and embedding rows. Visible MASK count is not the supervised count.",
+      "rubric": "Separate original labels, corrupted inputs, selected-logit derivatives and upstream contextual gradients.",
+      "objective_ids": [
+        "dynamic-mlm-corruption"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "dynamic-mlm-corruption-transfer",
+      "question": "With3 eligible tokens and rate 0.15, calculate zero-target probability. Does the reference force a target? What changes if a policy adds one whenever selection is empty?",
+      "answer": "P(K=0)=.85\u00b3=.614125. The reference does not force a target; zero-target groups consume RNG draws but do not advance optimizer/scheduler/global update. Adding one only when empty raises expected count from 0.45 to 1.064125, a changed distribution. The actual tiny trainer uses rate 0.35 and ordinary-only random replacements; those are declared departures.",
+      "rubric": "Work the probability and expected-count change, then identify the unchanged optimization state and advanced RNG state.",
+      "objective_ids": [
+        "dynamic-mlm-corruption"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-encoder-and-mlm-head-practice-1",
+      "question": "Why can a tied PAD embedding row receive gradient even though padding_idx suppresses lookup gradients? Does selected-only vocabulary loss restrict all backbone gradients to selected positions?",
+      "answer": "The shared table also scores every vocabulary class. Its output contribution sums (p_j\u2212target_j) times transformed hidden vectors over selected targets, including the PAD class. Lookup suppression affects only that path. Attention carries selected-loss signals into unselected context. Tying must be the same Parameter object, not two equal-valued tables.",
+      "rubric": "Derive both gradient paths and distinguish selected output positions from vocabulary rows and contextual input positions.",
+      "objective_ids": [
+        "roberta-encoder-and-mlm-head"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "roberta-encoder-and-mlm-head-transfer",
+      "question": "The V=30, D=8, C=8, one-layer model has 1326 parameters with a tied decoder. What count results if the vocabulary matrix is untied? Does this enable an official RoBERTa checkpoint to load?",
+      "answer": "Untying adds VD=240 independent scalars, giving 1566 under the same biases/norms. It changes parameter ownership and gradient paths, not just count. Official compatibility still requires matching vocabulary/positions/configuration/names and any embedding details; an untied table alone is not a conversion.",
+      "rubric": "Count the added table, explain ownership/gradients and identify the remaining artifact contracts.",
+      "objective_ids": [
+        "roberta-encoder-and-mlm-head"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "mlm-training-and-counting-practice-1",
+      "question": "Two microbatches have selected counts 2 and 6 and mean losses 1 and 3. Calculate the combined objective and place optimizer/scheduler steps. What if one has zero targets?",
+      "answer": "The sums are 2 and 18, so combined mean 20/8=2.5; equal mean averaging gives 2 and the wrong weighting. Backpropagate each sum/common count, accumulate and step optimizer/scheduler once. A zero-target microbatch contributes zero sum; if the whole group is empty, skip both steps while retaining consumed RNG/progress attempts.",
+      "rubric": "Calculate sums/counts and distinguish one update group from microbatch count and input-token count.",
+      "objective_ids": [
+        "mlm-training-and-counting"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "mlm-training-and-counting-transfer",
+      "question": "A fill_mask call returns five ordinary-token probabilities totaling 0.6. Must you renormalize them or call each candidate a complete word? Does repeating fixed-corruption evaluation cover all possible masks?",
+      "answer": "No. Returned probabilities retain the full-vocabulary normalization; omitted specials and unreturned ordinary classes hold remaining mass. Candidates may be byte/subword fragments, not whole words. The seed900 evaluation fixes a small corruption fixture, not an expectation over all patterns. Additional seeds/documents and an explicit official-source profile require separate measurements.",
+      "rubric": "Identify both omitted probability masses, token granularity and the scope of a fixed-mask measurement.",
+      "objective_ids": [
+        "mlm-training-and-counting"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "backbone-transfer-transfer",
+      "question": "After one MLM update, copy its backbone into QA. Which tensors should match, which parameters/state should remain new, and how does this differ from QA resume?",
+      "answer": "Every backbone embedding/norm/encoder tensor must match exactly under the declared compatible CPU profile. The new 66-parameter D=32 QA head remains its own initialization; QA AdamW moments/schedule/counters start fresh. Resume instead restores QA backbone/head plus optimizer/schedule/generators/progress and identity. Transfer equality is not proof of downstream quality improvement.",
+      "rubric": "Compare all registered tensors and inspect head ownership, optimizer state and stage counters.",
+      "objective_ids": [
+        "backbone-transfer"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "backbone-transfer-resume-case",
+      "question": "Two byte-BPE artifacts have 341 IDs but different merges. Can a backbone transfer use them interchangeably? What does the direct in-memory loader check, and can resume accept another --backbone?",
+      "answer": "No: equal size does not preserve row meanings. The checked artifact loader compares format/configuration/tokenizer fingerprint before strict backbone loading. load_mlm_backbone receives models only, so it checks architecture but cannot independently inspect tokenizer identity. The session rejects a new backbone during resume; its own full state is authoritative. Official artifacts need a separate compatible mapping.",
+      "rubric": "Distinguish size versus semantic identity, the two loader scopes and fresh initialization versus full-state continuation.",
+      "objective_ids": [
+        "backbone-transfer"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "qa-offsets-and-windows-practice-1",
+      "question": "Offsets are[(0,4),(4,8),(8,12)] and the answer interval is[4,8). Which inclusive token endpoints result? What label applies when a window contains only the first token?",
+      "answer": "Both endpoints are token 1: start uses left\u22644<right, end uses left<8\u2264right. The first token ends at4 and cannot contain the start. A first-token-only window has both labels \u2212100, not a fabricated token 0 or a learned no-answer target. Original context slicing remains half-open.",
+      "rubric": "Work both boundary inequalities and distinguish unavailable supervision from an answerability label.",
+      "objective_ids": [
+        "qa-offsets-and-windows"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "qa-offsets-and-windows-transfer",
+      "question": "For context a caf\u00e9 b, compare character/byte answer coordinates and duplicate offsets. With budget 11 and overlap 5, give the window stride and guaranteed maximum answer-token length under fixed-window coverage.",
+      "answer": "caf\u00e9 is character[2,6) and byte[2,7); the two \u00e9 bytes share character[5,6). Original slicing is authoritative; a window split between those byte symbols need not decode independently as valid UTF8. Stride 11\u22125=6. Worst-case containment requires L\u2264overlap+1=6, assuming ordinary end coverage; longer spans need another policy. Official-tokenizer offsets require their own profile checks.",
+      "rubric": "Name all coordinates and derive the stride/overlap condition without conflating tokens and characters.",
+      "objective_ids": [
+        "qa-offsets-and-windows"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "qa-head-and-fine-tuning-practice-1",
+      "question": "One four-position window has uniform start/end scores and gold endpoints1 and2. Calculate the loss and both logit gradients. If only two positions belong to context, is the current loss log 2?",
+      "answer": "Loss is log 4\u22481.386294. Start derivatives[.125,\u2212.375,.125,.125], end[.125,.125,\u2212.375,.125]. The current QA CE normalizes over all four packed positions, so it remains log 4; context-only restriction is decoding. A context-only loss is a distinct implementation/objective. Both endpoint contributions backpropagate into the shared backbone.",
+      "rubric": "Derive the half-averaged losses/gradients and identify current training versus decoding domains.",
+      "objective_ids": [
+        "qa-head-and-fine-tuning"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "qa-head-and-fine-tuning-transfer",
+      "question": "A QA batch has one supervised window and one unavailable window. What count/loss weighting applies, and does setting unavailable labels to BOS train the same objective? Can an official tokenizer be substituted under these weights?",
+      "answer": "Count 1, with the supervised start/end sums averaged by 2; the ignored window has zero direct endpoint derivative. BOS labels invent a different target and do not implement the declared ignored-window or no-answer policy. Tokenizer substitution requires matching row/position/layout identity or a separately tested conversion; the own-format weights are not automatically official-compatible.",
+      "rubric": "Show the denominator and ignored row derivative, then state the annotation/compatibility invariants.",
+      "objective_ids": [
+        "qa-head-and-fine-tuning"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "span-decoding-and-metrics-practice-1",
+      "question": "A gold span contains 20 tokens but the decoder permits16. Can better weights recover it? How do unseen QA quality and perfect seen-fixture EM differ?",
+      "answer": "No allowed candidate contains the full 20-token span. Change and report the cap/window policy, then rerun evaluation; separate coverage exclusion from learned scoring errors. Perfect EM on the eight training questions demonstrates fitting/decoding mechanics, not held-out or official SQuAD quality.",
+      "rubric": "Identify the excluded search set and separate task coverage, scoring and held-out evidence.",
+      "objective_ids": [
+        "span-decoding-and-metrics"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "span-decoding-and-metrics-transfer",
+      "question": "Why can adding a constant to all endpoint logits change the chosen overflow window without changing its endpoint probabilities? Compute F1 for red red blue versus red blue blue.",
+      "answer": "Within a window, softmax and pair ranking are invariant to endpoint-wide constants. The reference compares raw start+end scores across windows, which shift by both constants and can reorder candidates; calibration is not guaranteed. Multiset overlap2 over lengths3/3 gives precision/recall/F1=2/3 and EM 0 under the declared normalization. Official metric/data signatures remain separate.",
+      "rubric": "Prove the normalization cancellation only within a window and count duplicate tokens with multiset intersection.",
+      "objective_ids": [
+        "span-decoding-and-metrics"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "diagnosis-transfer",
+      "question": "Evaluation changes when a trailing blocked key is perturbed. Which conditions must be fixed before concluding a mask bug? Does no_grad disable dropout, and does clipping repair NaNs?",
+      "answer": "Fix source/config/weights, evaluation mode, masks and real-token position addresses; trailing tests avoid the interior PAD-to-real position confound. no_grad controls graph recording, not dropout mode. Clipping a finite vector limits norm but does not repair NaNs; the MLM/QA step lacks translation's explicit finite guard. Inspect the first invalid tensor before stepping.",
+      "rubric": "Choose an isolating perturbation and distinguish mode/graph/position and finite-gradient behavior.",
+      "objective_ids": [
+        "diagnosis"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "diagnosis-contract-case",
+      "question": "For B1,T5,D8,H2,V30 FP32, calculate hidden/explicit-score/logit storage. What changes when T doubles, and can these counts establish Colab GPU fit or official-model throughput?",
+      "answer": "Hidden 160 bytes, one explicit score array 200 bytes, logits 600 bytes. DoublingT doubles hidden/logits and quadruples explicit scores while parameters stay fixed. SDPA storage, backward/optimizer/runtime allocations and device peak memory are additional; actual throughput/hosted fit require measured resource/runtime profiles. These miniature counts do not describe official-scale performance.",
+      "rubric": "Calculate each named tensor and distinguish analytical size from measured peak memory/time.",
+      "objective_ids": [
+        "diagnosis"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "ready-for-gpt-practice-1",
+      "question": "Remove the translation encoder and cross-attention. Have you automatically obtained Course2's Small GPT, or a checkpoint compatible with an official GPT tokenizer?",
+      "answer": "No. Specify one text tokenizer/corpus, next-token shift, causal visibility, learned positions, pre-norm/GELU blocks, tying and bounded generation/recovery. Deleting source memory does not select those contracts or map vocabulary/parameter identities. Course2 is a new decoder-only experiment; official artifact conversion and instruction-following stages remain separate.",
+      "rubric": "Trace what is removed and name the remaining objective/architecture/artifact decisions.",
+      "objective_ids": [
+        "ready-for-gpt"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    },
+    {
+      "id": "ready-for-gpt-transfer",
+      "question": "Translation sum 10/count 5, MLM sum 6/selected 3 and QA start sum 6/end sum 2/window count 2 all give loss 2. Does this prove comparable quality? Which evidence advances learner or hosted gates?",
+      "answer": "No: objectives and prediction units differ. QA divides (6+2) by 2\u00d72; translation/MLM count their own valid targets. Author source checks and tiny outcomes establish stated local behavior. Learner implementation/explanation and held-out task evidence need their own records; deleted-runtime Drive recovery needs actual hosted restored/advanced updates. Tokenizer/source identity must remain explicit.",
+      "rubric": "Calculate the three denominators, distinguish evidence classes and name one concrete remaining acceptance check.",
+      "objective_ids": [
+        "ready-for-gpt"
+      ],
+      "claim_ids": [
+        "roberta-architecture"
+      ]
+    }
+  ],
+  "scenes": [],
+  "media": {},
+  "approval": null
+}

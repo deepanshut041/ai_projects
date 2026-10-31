@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "project_id": "attention-labs",
+  "slug": "attention-distributed",
+  "revision": "v1",
+  "files": {
+    "examples/ring.py": "755b06e00bfc41fc1e35f44c0efe286821f7bd39d1f53acb9bd3d0f56f2b0da9",
+    "images/ring-blocks.png": "290af3959ae302061f7b50ae605cf19f430e874a00b8bdfd90ac153a749c127a",
+    "images/ring-capacity.png": "348808e7567e991ab7a4499a93b956f38e7400516695c76df873ac29031a4764",
+    "images/ring-causal-work.svg": "dc609550bb877421077e9a7dd445be752b46df7ab7b613b22d695b37596865f4",
+    "images/ring-initial.svg": "7685f56f2d441283601e3499f75b52d78e209f10c2c6746a93b3038b6bda8b1e",
+    "images/worked-ring-balanced.svg": "6fcf4bf41404184822f9220bd016f8abae3acdd917a5b90531fc841ba8cb531d",
+    "images/worked-ring-normalization.svg": "877f9d72c7fffb61b5e2f5ba8e1722e2a90f3393be61d429edb8febec2b9f6e5",
+    "images/worked-ring-rounds.svg": "fe767831462eed854157a8746b015a60b5a9a13496b49c8355e33d141788211b",
+    "lesson.json": "2628530f3986c57e3884e088d7c0a7722a29695140d7a42285761df360d4fc1b",
+    "lesson.md": "0e48494ae389dab8b4bc1f17a0f3b1d8e7a3621fb8e3810a5603063d03533487",
+    "lessons/01-ring-attention.md": "24a121320181c4bd8f4c3a28f796aab2a430b7cc627660ff69531803deda6c4f",
+    "practice/review.md": "b103d697dcb623bad996baf35c4026593fa8329b89c36227ee9c726e9fade949",
+    "project/implementation.md": "23a81dae1bdde6ec91ee01cfa9a923d17a0d6b2ad5d29554ecbeef8b06fa3aa0",
+    "project/readiness.md": "3e031b86db1295ae97724e0549da3a1b1ef026c8105d741114d577f09a27b309",
+    "research.md": "ed0b1a8fb486e097fd33df3ff49fb0a9048332a3fd119e9806669f9ae1c7a547"
+  },
+  "validated_at": "2026-10-30T23:34:10.277786+00:00",
+  "fingerprint": "c86f7156b99d565cefdfd135433af4202919b0e317654f90896d60ee8eed667a"
+}

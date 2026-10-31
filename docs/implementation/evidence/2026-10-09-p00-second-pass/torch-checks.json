@@ -1,0 +1,36 @@
+{
+  "torch": "2.14.1+cpu",
+  "checks": [
+    "cross entropy gradient for each target",
+    "Adam values moments and zero-gradient continuation",
+    "global norm and returned pre-clipping value",
+    "actual scheduler rate before updates 1 2 20 21",
+    "LayerNorm variance denominator and constant vector",
+    "GELU Gaussian arithmetic versus library",
+    "dropout train outcomes and eval identity",
+    "valid token loss reduction and gradients"
+  ],
+  "new_inline_blocks": [
+    {
+      "lesson": "03-numbers.md",
+      "output": "[0.25, 0.75]\n0.287682\n"
+    },
+    {
+      "lesson": "04-autograd.md",
+      "output": "30.0 10.0\n16.0\n"
+    },
+    {
+      "lesson": "04-autograd.md",
+      "output": "[[4.0, 4.0, 4.0], [6.0, 6.0, 6.0]]\n[2.0, 2.0, 2.0]\n[[3.0, 4.0], [3.0, 4.0]]\n"
+    },
+    {
+      "lesson": "11-colab-and-handoff.md",
+      "output": "[(10, 20), (20, 30), (30, 40)]\n"
+    },
+    {
+      "lesson": "11-colab-and-handoff.md",
+      "output": "[-0.158655, 0.0, 0.841345]\n"
+    }
+  ],
+  "passed": true
+}

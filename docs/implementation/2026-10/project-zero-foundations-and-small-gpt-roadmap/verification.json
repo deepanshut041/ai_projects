@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-09",
+  "scope": "local documentation/roadmap delivery; no model/hosted run",
+  "checks": [
+    {
+      "argv": [
+        "npm",
+        "test"
+      ],
+      "owner": "ai_projects/docs",
+      "result": "passed",
+      "tests": 7
+    },
+    {
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "owner": "ai_projects/docs",
+      "result": "passed",
+      "records": 15,
+      "sources": 13
+    },
+    {
+      "argv": [
+        "npm",
+        "run",
+        "test:browser"
+      ],
+      "owner": "ai_projects/docs",
+      "result": "passed",
+      "records": 15,
+      "sources": 13
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--frozen",
+        "pytest",
+        "-q"
+      ],
+      "owner": "cli",
+      "result": "passed",
+      "tests": 64
+    },
+    {
+      "argv": [
+        "./ai",
+        "tui",
+        "--smoke"
+      ],
+      "result": "passed",
+      "ui": "ok"
+    },
+    {
+      "argv": [
+        "./ai",
+        "roadmap",
+        "--json"
+      ],
+      "result": "passed",
+      "current": "P00-M1 not-started"
+    },
+    {
+      "argv": [
+        "./ai",
+        "learn",
+        "list"
+      ],
+      "result": "passed",
+      "lessons": "preserved GPT-1 reference only; P00 lesson planned"
+    },
+    {
+      "argv": [
+        "node",
+        "cli/docs/architecture/render.mjs"
+      ],
+      "result": "passed",
+      "nodes": [
+        20,
+        21,
+        19
+      ]
+    },
+    {
+      "check": "preservation/local links/stable IDs/root layout/diagram source and XML",
+      "result": "passed",
+      "evidence": "preservation-checks.json"
+    },
+    {
+      "check": "live renderer refresh and P00/plan/historical metadata",
+      "result": "passed",
+      "action": "restarted only manager-owned project-docs service; same URL"
+    },
+    {
+      "check": "desktop/mobile visual inspection",
+      "result": "passed",
+      "evidence": "../../../verification/2026-10-09-project-zero/"
+    }
+  ],
+  "limitations": [
+    "No model repository/code/training",
+    "No measured resource fit or task metrics",
+    "No learner mastery assessment",
+    "No hosted Colab recovery",
+    "No external publication by this task"
+  ],
+  "final_documentation_suite": {
+    "tests": 7,
+    "records": 15,
+    "sources": 13,
+    "build": "passed",
+    "browser": "passed",
+    "diff_whitespace": "passed in Projects, Docs and CLI"
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "scope": "Separately assembled lesson snippets, with their own recorded source identity. Final exported-source proof is source-verification.json; these observations do not assert byte identity with complete reference files.",
+  "staged_source_hashes_verified": {
+    "prerequisite_mlp.py": true,
+    "prerequisite_checkpoint.py": true
+  },
+  "staged_restored_update": 4,
+  "staged_completed_update": 5,
+  "staged_report": {
+    "mode": "resume",
+    "session": "32c2cae15741",
+    "identity": {
+      "schema": 1,
+      "task": "opposite-sign-classification-v1",
+      "config": {
+        "input_features": 2,
+        "hidden_features": 8,
+        "num_classes": 2,
+        "batch_size": 16,
+        "accumulation_steps": 1,
+        "learning_rate": 0.03,
+        "warmup_steps": 20,
+        "total_steps": 1000,
+        "gradient_norm_limit": 1.0,
+        "seed": 7
+      },
+      "data_sha256": "39f1e7722ad285448f668112976a4de2b65c32533298c6ad558a65184a4f2b03",
+      "source_sha256": {
+        "prerequisite_mlp.py": "1aee554c109112d9c514e3020dbfd10e9c19c0beb8e6c3649aabf2ed692a5ade",
+        "prerequisite_checkpoint.py": "00050de6536874b973fef92d9c18c11ac3a92d570b713a918667ae2ecd4af27c"
+      },
+      "python": "3.12.13",
+      "torch": "2.14.1+cpu",
+      "numpy": "2.5.4",
+      "parameter_devices": [
+        "cpu"
+      ],
+      "parameter_dtypes": [
+        "torch.float32"
+      ],
+      "platform": "Linux",
+      "machine": "x86_64",
+      "threads": 1,
+      "matmul_precision": "highest",
+      "deterministic_algorithms": false,
+      "optimizer": {
+        "name": "Adam",
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08
+      },
+      "schedule": "linear-warmup-then-constant-v1"
+    },
+    "before": {
+      "split": "validation",
+      "loss": 0.7444226476881239,
+      "correct": 18,
+      "count": 36,
+      "accuracy": 0.5
+    },
+    "after": {
+      "split": "validation",
+      "loss": 0.7342292467753092,
+      "correct": 18,
+      "count": 36,
+      "accuracy": 0.5
+    },
+    "last_update": {
+      "step": 5,
+      "examples": 16,
+      "examples_seen": 80,
+      "loss": 0.7149477601051331,
+      "correct": 9,
+      "accuracy": 0.5625,
+      "learning_rate_used": 0.0075,
+      "gradient_norm_before_clip": 0.27164527773857117
+    },
+    "restored": {
+      "generation": "00000003-54c40485",
+      "step": 4,
+      "examples_seen": 64,
+      "skipped": []
+    },
+    "persistent_saves": [
+      {
+        "generation": "00000004-23ba51f0",
+        "step": 5,
+        "bytes": 26104,
+        "sha256": "b421d35a05d0f7c4175f91eeb837f74233a37bd1c3ae0163eeef891667729bb3",
+        "persistence_seconds": 0.013122100999680697,
+        "storage_budget_bytes": 8388608,
+        "free_reserve_bytes": 1048576,
+        "required_capacity_bytes": 90600,
+        "free_before_bytes": 14691831808
+      }
+    ],
+    "resources": {
+      "device": "cpu",
+      "precision": "fp32",
+      "parameters": 42,
+      "parameter_bytes": 168,
+      "process_peak_rss_bytes": 314494976,
+      "elapsed_seconds": 0.019439572999544907,
+      "completed_updates": 5
+    },
+    "remaining_updates": 995,
+    "hosted_execution": "unverified"
+  },
+  "hosted_execution": "unverified",
+  "passed": true
+}

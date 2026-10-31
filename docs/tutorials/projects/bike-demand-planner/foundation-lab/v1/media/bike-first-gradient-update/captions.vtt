@@ -1,0 +1,222 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:02.350
+The loss depends on the prediction,
+
+00:00:02.740 --> 00:00:04.790
+and the prediction
+depends on the parameters.
+
+00:00:05.380 --> 00:00:06.810
+We need both links.
+
+00:00:07.460 --> 00:00:12.160
+Differentiating half squared error with
+respect to prediction gives prediction
+
+00:00:12.160 --> 00:00:13.410
+minus target.
+
+00:00:14.180 --> 00:00:16.910
+The factor two from the
+square cancels the half.
+
+00:00:17.780 --> 00:00:22.170
+Increasing a weight changes the prediction
+in proportion to its matching input.
+
+00:00:22.880 --> 00:00:26.510
+Increasing the bias changes
+the prediction one for one.
+
+00:00:27.040 --> 00:00:31.760
+The chain rule multiplies the local loss
+slope by the local prediction slope,
+
+00:00:31.760 --> 00:00:34.570
+giving a separate derivative
+for each parameter.
+
+00:00:36.858 --> 00:00:38.508
+For target forty five,
+
+00:00:38.978 --> 00:00:43.388
+the residual is negative five
+and the inputs are one, two.
+
+00:00:44.138 --> 00:00:49.188
+The first weight gradient is negative
+five times one, giving negative five.
+
+00:00:49.338 --> 00:00:53.828
+The second is negative five times two,
+giving negative ten.
+
+00:00:54.658 --> 00:00:57.608
+The bias gradient is
+negative five times one.
+
+00:00:58.038 --> 00:01:02.958
+The second weight is more sensitive in
+this calculation because its input is
+
+00:01:02.958 --> 00:01:03.468
+larger.
+
+00:01:04.078 --> 00:01:07.108
+That does not establish greater
+usefulness of the feature.
+
+00:01:07.538 --> 00:01:11.618
+It shows how input scale enters the
+derivative of this particular forward
+
+00:01:11.618 --> 00:01:12.308
+path.
+
+00:01:14.442 --> 00:01:18.232
+Choose the demonstration learning
+rate zero point zero one.
+
+00:01:18.782 --> 00:01:22.492
+Gradient descent subtracts that
+rate times each derivative.
+
+00:01:23.142 --> 00:01:28.452
+Ten minus zero point zero one times
+negative five is ten point zero five.
+
+00:01:29.082 --> 00:01:34.192
+Five minus zero point zero one times
+negative ten is five point one zero.
+
+00:01:34.962 --> 00:01:38.192
+The bias similarly becomes
+twenty point zero five.
+
+00:01:38.922 --> 00:01:41.592
+Subtracting a negative
+produces these increases.
+
+00:01:42.442 --> 00:01:45.812
+Their direction fits this
+underprediction with positive inputs,
+
+00:01:46.282 --> 00:01:49.032
+but the rule to remember
+is gradient subtraction.
+
+00:01:49.342 --> 00:01:51.232
+The rate controls the size of the step.
+
+00:01:53.317 --> 00:01:55.847
+The source first forms the residual,
+
+00:01:56.337 --> 00:01:58.567
+weight gradients and bias gradient.
+
+00:01:59.017 --> 00:02:03.427
+Each new weight subtracts the same
+learning rate times its own gradient.
+
+00:02:03.957 --> 00:02:07.687
+The bias follows the same rule
+with its separate derivative.
+
+00:02:08.677 --> 00:02:13.127
+The update returns new values
+rather than modifying the old list.
+
+00:02:13.717 --> 00:02:16.477
+That makes before and after inspectable,
+
+00:02:16.477 --> 00:02:20.547
+and lets the alternative target
+start from the original state.
+
+00:02:21.077 --> 00:02:25.507
+Shape and finite-value checks
+guard this numerical contract.
+
+00:02:25.777 --> 00:02:30.367
+They do not replace the calculation or
+establish later forecasting quality.
+
+00:02:32.625 --> 00:02:34.945
+Hold the same inputs and target fixed,
+
+00:02:34.945 --> 00:02:38.295
+and run the new parameters
+through the forward rule.
+
+00:02:38.805 --> 00:02:42.415
+The first weighted contribution
+rises by zero point zero five.
+
+00:02:43.045 --> 00:02:48.315
+The second rises by two times
+zero point one, or zero point two.
+
+00:02:48.705 --> 00:02:51.655
+Add the bias increase
+of zero point zero five.
+
+00:02:52.525 --> 00:02:57.195
+The prediction rises by zero point three,
+reaching forty point three zero.
+
+00:02:58.105 --> 00:03:01.475
+Its remaining residual is
+negative four point seven zero,
+
+00:03:02.025 --> 00:03:05.195
+and half squared error is
+eleven point zero four five.
+
+00:03:06.045 --> 00:03:09.275
+This is a same-observation
+arithmetic check,
+
+00:03:09.365 --> 00:03:11.895
+not an unseen-hour performance result.
+
+00:03:13.983 --> 00:03:18.353
+What changes if the starting
+prediction already equals the target?
+
+00:03:19.043 --> 00:03:20.713
+The residual becomes zero,
+
+00:03:21.023 --> 00:03:24.473
+so both weight gradients and
+the bias gradient become zero.
+
+00:03:24.923 --> 00:03:28.233
+Subtracting their scaled values
+leaves the parameters unchanged.
+
+00:03:29.223 --> 00:03:31.493
+A zero learning rate also
+leaves them unchanged
+
+00:03:31.923 --> 00:03:33.203
+even when the residual is nonzero.
+
+00:03:33.203 --> 00:03:38.543
+The source checks these boundaries and
+compares analytic derivatives with central
+
+00:03:38.543 --> 00:03:40.813
+finite differences on another input.
+
+00:03:41.523 --> 00:03:45.363
+Our current successful step does not
+guarantee that every learning rate or
+
+00:03:45.363 --> 00:03:46.953
+later example improves.
+
+00:03:47.583 --> 00:03:51.273
+The next video changes the target
+while keeping the initial state fixed.
+

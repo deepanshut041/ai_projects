@@ -1,0 +1,13 @@
+# Attention source and Colab runner checkpoint
+
+Updated 23 October 2026, America/Toronto. This is the current result; the earlier grouped-cli/concept-notebook intermediate records are superseded.
+
+Six runnable scripts live directly in src: attention.py, tokenizer.py, prepare_data.py, train.py, inference.py and compute_bleu.py. Responsibility packages remain src/core, src/data, src/training and src/utils. src/cli and the redundant project-named namespace are removed. The attention calculation is byte-identical and fixed-seed demo outputs/weights match the original baseline.
+
+The user replaced the concept notebook with notebooks/attention_colab.ipynb. Its six operational code cells upload and verify a matching source ZIP/manifest, extract into a fresh runtime directory, bootstrap pinned uv, synchronize the locked Python 3.12.13 environment, record actual versions, run the demo and all tests, then download a result archive. The tutorial retains explanations, worked maths and original figures. Notebook outputs are cleared. The export directory contains the notebook alongside the 34-file source ZIP and matching manifest.
+
+Verified: all six exact notebook cells executed locally with only google.colab.files and /content mapped to a temporary test directory; real environment installation, demo and 35 tests pass with no skips. Downloaded evidence contents, repeat-upload isolation, archive/file hash failures and path-traversal rejection pass. Actual Google-hosted execution remains unverified. The wheel and restored 31-file source bundle each pass all 35 tests; the installed console and actual workspace launcher pass. Seven teaching snippets compile and three complete examples execute. Seventeen native reader checks, build and all three native browser suites pass. Focused root/prefix audits each pass 88 page/width checks, and the live managed reader serves the six-cell cleared notebook and direct-script setup on desktop/mobile.
+
+Current documentation, resource metadata, console/file entry points, tutorial source downloads and local learning records use this final structure. Captions, source provenance, locked dependencies and Bike source/results are preserved; the recovery archive hash is verified. Parts 2–3 remain placeholders. Learner review, model training and hosted recovery have not advanced. No commit or remote publication requested.
+
+Current evidence: colab-runner-verification.json, layout-verification.json, export-verification.json, teaching-verification.json, preservation-after.json, browser-root.json, browser-prefix.json and managed-reader.json. notebook-verification.json and 09-verify-notebook.py describe the removed concept notebook as historical verification only.

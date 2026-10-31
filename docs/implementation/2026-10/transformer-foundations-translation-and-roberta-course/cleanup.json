@@ -1,0 +1,27 @@
+{
+  "checked_at": "2026-10-12",
+  "temporary_files_removed": [
+    "transformer-course-coordination.md",
+    "course-foundation-notes.md",
+    "course-translation-notes.md",
+    "course-roberta-notes.md",
+    "course-review-notes.md",
+    "course-session-notes.md",
+    "course-translation-run.json",
+    "course-roberta-staged-evidence.json",
+    "transformer-course-before.json",
+    "integrate_transformer_course.py",
+    "verify_transformer_course.py",
+    "author_roberta_lessons.py",
+    "polish_roberta_lessons.py",
+    "refresh_roberta_code_blocks.py",
+    "verify_roberta_lessons.py",
+    "JXY5CmiK3LI-minutes.txt",
+    "UkBggwQsbF8-minutes.txt",
+    "DOqg_QxInd8-minutes.txt",
+    "course-roberta-staged-e023xjtr",
+    "transformer-course-session-source.zip",
+    "transformer-course-session-source.colab.ipynb"
+  ],
+  "retained": "Authored lessons/source/diagrams, selected evidence, ignored raw source/captions and final local source ZIP/Colab notebook."
+}

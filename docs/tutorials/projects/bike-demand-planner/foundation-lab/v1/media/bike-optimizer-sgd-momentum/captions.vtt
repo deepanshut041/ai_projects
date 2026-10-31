@@ -1,0 +1,249 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:04.350
+Let us follow the same real
+hour through two update rules.
+
+00:00:05.060 --> 00:00:08.690
+Monday, the third of January,
+twenty eleven, at eight,
+
+00:00:08.880 --> 00:00:11.550
+has target one hundred
+and fifty four rentals.
+
+00:00:12.480 --> 00:00:13.470
+Under our convention
+
+00:00:13.840 --> 00:00:17.410
+the request is issued at seven
+for the eight to nine interval.
+
+00:00:17.960 --> 00:00:20.630
+Its outcome stays separate
+from calendar inputs.
+
+00:00:21.440 --> 00:00:26.663
+We initialize zero weights and a bias of
+one hundred and forty three point seven
+
+00:00:26.663 --> 00:00:28.490
+nine, the training mean.
+
+00:00:29.080 --> 00:00:32.290
+These statistics use the
+completed twenty eleven window.
+
+00:00:32.640 --> 00:00:34.440
+We are inspecting a training calculation,
+
+00:00:34.440 --> 00:00:38.190
+rather than claiming they
+existed on January third.
+
+00:00:38.700 --> 00:00:43.030
+Repeat this one row twice
+at rate zero point zero one.
+
+00:00:43.520 --> 00:00:46.810
+The later dataset experiment
+uses all training rows.
+
+00:00:48.942 --> 00:00:51.892
+The residual is prediction minus target,
+
+00:00:52.302 --> 00:00:55.352
+so it is negative ten
+point two zero five five.
+
+00:00:55.782 --> 00:00:57.352
+Our forecast is too low.
+
+00:00:58.022 --> 00:01:02.452
+The standardized hour eight feature
+is four point seven seven six five.
+
+00:01:03.042 --> 00:01:06.312
+Multiplying it by the residual
+gives that coordinate gradient.
+
+00:01:06.802 --> 00:01:10.632
+The result is negative forty eight
+point seven four seven three.
+
+00:01:11.302 --> 00:01:14.752
+Subtracting a negative gradient
+increases the coefficient.
+
+00:01:15.422 --> 00:01:19.892
+The first weight becomes zero point
+four eight seven four seven three.
+
+00:01:20.622 --> 00:01:24.372
+The bias also increases,
+using the residual as its gradient.
+
+00:01:24.982 --> 00:01:26.992
+Every centered feature participates.
+
+00:01:27.962 --> 00:01:32.209
+Recomputing the complete dot product gives
+one hundred and forty eight point three
+
+00:01:32.209 --> 00:01:36.552
+seven four three rentals, not merely
+the contribution from hour eight.
+
+00:01:38.650 --> 00:01:42.680
+Plain SGD uses the current
+gradient as its direction.
+
+00:01:43.470 --> 00:01:48.270
+Our momentum convention adds the current
+gradient to ninety percent of the previous
+
+00:01:48.270 --> 00:01:49.200
+velocity.
+
+00:01:49.670 --> 00:01:53.640
+That buffer starts at zero,
+so the first updates agree exactly.
+
+00:01:54.090 --> 00:01:56.580
+There is no dampening or Nesterov step.
+
+00:01:57.110 --> 00:02:01.460
+On the second update we recalculate
+the derivative at the new parameters.
+
+00:02:02.130 --> 00:02:06.880
+The hour eight gradient is now negative
+twenty six point eight seven one four.
+
+00:02:07.590 --> 00:02:11.020
+Momentum remembers part of
+the larger first gradient.
+
+00:02:11.550 --> 00:02:16.121
+Its new velocity is zero point nine times
+negative forty eight point seven four
+
+00:02:16.121 --> 00:02:20.600
+seven three, plus negative twenty
+six point eight seven one four.
+
+00:02:21.310 --> 00:02:24.510
+The total is negative seventy
+point seven four four zero,
+
+00:02:24.510 --> 00:02:26.720
+before multiplying by the rate.
+
+00:02:28.858 --> 00:02:31.188
+SGD reaches hour eight
+
+00:02:31.598 --> 00:02:36.108
+weight zero point seven five
+six two after the second update.
+
+00:02:36.738 --> 00:02:41.408
+Its complete forecast is one hundred
+and fifty point eight nine eight nine.
+
+00:02:41.718 --> 00:02:47.162
+Momentum reaches weight one point
+one nine four nine and forecasts one
+
+00:02:47.162 --> 00:02:50.168
+hundred and fifty five
+point zero two zero eight.
+
+00:02:50.778 --> 00:02:52.428
+It has crossed the target,
+
+00:02:52.598 --> 00:02:55.908
+even though both rules used
+the same current derivative.
+
+00:02:56.798 --> 00:02:59.128
+The difference comes from
+remembered direction.
+
+00:03:00.538 --> 00:03:05.578
+The independently calculated scalar trace
+agrees with the runnable probe to floating
+
+00:03:05.578 --> 00:03:06.628
+point precision.
+
+00:03:07.218 --> 00:03:10.548
+This checks arithmetic rather
+than ranking the rules.
+
+00:03:11.178 --> 00:03:16.198
+Two repeated observations cannot establish
+which method forecasts a later dataset
+
+00:03:16.198 --> 00:03:16.688
+better.
+
+00:03:17.278 --> 00:03:20.768
+We measure that separately with
+fixed membership and paired seeds.
+
+00:03:23.025 --> 00:03:26.095
+Suppose the momentum
+coefficient becomes zero.
+
+00:03:26.505 --> 00:03:28.555
+The old buffer disappears
+from the equation,
+
+00:03:28.725 --> 00:03:31.315
+and each direction equals
+the current gradient.
+
+00:03:31.665 --> 00:03:33.255
+We recover SGD.
+
+00:03:33.825 --> 00:03:37.575
+With a persistent gradient and
+coefficient zero point nine,
+
+00:03:37.605 --> 00:03:40.935
+repeated additions approach
+ten times that gradient.
+
+00:03:41.225 --> 00:03:45.155
+This explains why matching numerical
+rates does not match movement.
+
+00:03:45.485 --> 00:03:47.935
+When the gradient changes sign,
+
+00:03:48.065 --> 00:03:51.075
+the old buffer can initially
+resist the new direction.
+
+00:03:51.665 --> 00:03:54.215
+That can carry us past a one row target.
+
+00:03:54.785 --> 00:04:00.155
+In the full dataset pilot, momentum
+selects a smaller base rate than SGD.
+
+00:04:00.345 --> 00:04:04.075
+We do not assume a universal best
+rate from a familiar default.
+
+00:04:04.785 --> 00:04:08.055
+The useful question is what
+state determines this step,
+
+00:04:08.145 --> 00:04:11.645
+and whether the measured result improves
+under the same work and information
+
+00:04:11.645 --> 00:04:12.395
+boundaries.
+
