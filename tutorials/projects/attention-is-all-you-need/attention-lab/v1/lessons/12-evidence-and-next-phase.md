@@ -1,53 +1,37 @@
-## Explain what works and prepare the next implementation
+## 11. Put attention back into the Transformer
 
-We can now follow an input through projections, head layout, scores, masks, normalized weights, retrieved values, concatenation and output projection. We can also explain a backward example. This completes the tutorial's current component scope. It does not fill the project's later placeholder files.
+We began with an English sentence and a decoder that must generate its French translation using the source and an available target prefix. We can now name the three information-sharing operations in that system and trace their outputs.
 
-### Use each check for the claim it can support
+| Location | Receiver Q | Available K/V | Information boundary |
+| --- | --- | --- | --- |
+| Encoder self-attention | Source representations entering the layer | The same source representations | All real source tokens are available |
+| Decoder self-attention | Target representations entering the layer | The same target representations | Real target-prefix tokens through the current input position |
+| Decoder cross-attention | Decoder states after its preceding sublayer | Final encoder memory | All real source tokens, regardless of target index |
 
-| Evidence | What it checks | What it does not establish |
-| --- | --- | --- |
-| Hand-calculated weighted average and raw-X example | Known numerical forward results | Learned word meaning |
-| Projection and matrix fixtures | Q/K/V orientation, bias, scores, context and head merge | Real-data generalization |
-| PyTorch MultiheadAttention comparison | A separate implementation gives matching outputs/weights with mapped parameters | Full encoder/decoder correctness |
-| Explicit/SDPA forward and gradient parity | Selected paths agree for exercised cases | GPU speed or universal bitwise equality |
-| Padding and future perturbations | Forbidden positions cannot affect protected outputs in those cases | Correct future data splitting or label alignment |
-| Entirely blocked and dropout tests | Defined edge behavior, finite gradients and train/eval distinction | Arbitrary malformed-input safety |
-| 35 existing tests and runnable demo | Current local component is executable and checked | Trained translation quality or learner mastery |
+The formula is shared, but vector origin and allowed connections determine its role. Describing a matrix only as “attention” without identifying those two facts leaves the important part unexplained.
 
-The code has been reorganized by responsibility; the attention module's numerical implementation and demo outputs are unchanged. Its captured source and [reference-run evidence](project/reference-runs.md) let us distinguish an existing application capability from a new authored explanation. The Colab runner's operational cells are verified locally; actual hosted execution is recorded separately from the attention tests and demo.
+### The surrounding network still has work to do
 
-### Draw the implemented computation without file-name memorization
+In the original 2017 Transformer, token embeddings and positional encodings enter stacked encoder/decoder layers. Encoder layers have self-attention and a position-wise feed-forward network. Decoder layers have causal self-attention, encoder–decoder attention and a position-wise feed-forward network. Sublayers use residual addition followed by LayerNorm in the original post-norm design. The final decoder representations pass through a vocabulary projection to predict the next token. [Paper, sections 3.1–3.5](https://arxiv.org/html/1706.03762v7).
 
-Start with `(B,S,D)` floating source vectors and optional `(B,T,D)` target vectors. Identify the query input. Apply separate Q/K/V projections; split D into H heads of width d. Draw score rows as queries and columns as keys, mark allowed pairs, normalize along keys, multiply values, reassemble query-major head features, and apply the output projection.
+Residual addition preserves a direct path for the receiving row alongside its computed update. The feed-forward network transforms features within each row; it does not replace attention's cross-position communication. Positional encodings supply order information that unrestricted attention alone lacks. LayerNorm controls per-row feature normalization. Those responsibilities make attention useful inside a model rather than turning the weighted-sum function into a complete translator.
 
-Then change one condition. If a source pad vector changes, which outputs must remain fixed? If a future target input changes, which causal outputs are protected? If only V changes, should the attention weights move? If all keys are blocked, why can the final output still be the output bias? These changed cases reveal whether the computation is understood more clearly than reciting class names.
+The title “Attention Is All You Need” describes the paper's replacement of recurrent/convolutional sequence mixing. It does not mean that embeddings, positions, feed-forward layers, residuals, normalization, output predictions or training objectives disappear.
 
-The [explanation practice](practice/explain-attention.md), [attention learning points](project/learning-points/01-attention.md) and [comparison record](project/comparisons/01-attention.md) provide worked answers and useful distinctions. No response is recorded as a learner assessment.
+### What each construction actually resolved
 
-### Part 2 will define real text before model expansion
+An independent row function had no neighbor-to-output path. A weighted sum created such a path. Query/key projections made the weights depend on current receiving and source representations; the value projection chose what traveled. Matrix multiplication retained one result per receiver. Heads allowed different projected feature groups to use different distributions. Padding and causal masks removed invalid information paths. Cross-attention connected decoder receivers to source memory. A loss supplied gradients to the shared parameters.
 
-The next implementation works in `src/tokenizer.py`, `src/prepare_data.py` and the package's tokenizer/data modules. Its first contract is one English/French pair transformed into reproducible integer sequences and a batch. Before acquisition, decide the official dataset/subset, license and split authority; pin its revision and record content identities. Fit a newly trained tokenizer only on the allowed training text and save its vocabulary/config identity.
+These are the reasons for the operations, not just their execution order. To explain a layer, start from its input ownership and allowed information, then follow a score, a normalized contribution and an output row.
 
-For an illustrative target `[BOS, je, bois, EOS]`, a conventional shifted example uses decoder input `[BOS, je, bois]` and labels `[je, bois, EOS]`. The labels are what each query position should predict. Padding needs both key-validity masks and a separate ignored-label rule. Record special token IDs and truncation/empty-example policy explicitly. These examples define questions for Part 2; they are not acquired token IDs or implemented collation results.
+### The exact local implementation boundary
 
-We will compare an actual pair before and after tokenization, print input/label rows beside each other, check masks and show which targets count in the loss. Source/target tokenizers have distinct identities in the planned video-following route. A sentence-length or vocabulary setting in a draft JSON file does not settle the data contract.
+The existing project contains the attention module, its demo, CPU checks and a Colab execution notebook. The ten standalone programs in this course make the arithmetic and parameter behavior inspectable. They do not supply a tokenizer, training corpus, complete Transformer, translation trainer or measured translation quality.
 
-### Part 3 will assemble and train a complete model
+The next implementation phase must establish actual source/target tokenization and batches: dataset/split identity, special tokens, input/label shift, source-key validity and target-loss exclusion. After that come the full model, training, decoding, evaluation and persistent recovery. Actual hosted execution remains a separate check.
 
-Only after data and batch contracts are implemented will the later phase add token embeddings, positions, residual paths, normalization, feed-forward blocks, encoder/decoder stacks and a vocabulary prediction head. The attention module becomes one ingredient in that architecture.
+The conceptual attention route ends here. The following setup page is a run/reference page. The [project return page](project/implementation.md), [learning points](project/learning-points/01-attention.md), [comparison review](project/comparisons/01-attention.md), [optional review questions](practice/explain-attention.md), [readiness](project/readiness.md) and [source/check record](project/reference-runs.md) support a return visit. The [whole-course teaching review](project/teaching-review.md) explains why this route was rebuilt.
 
-Training will need a token-loss denominator, optimizer/schedule, bounded profiles, explicit new/resume modes and persistent full-state checkpoint generations. Inference will need a start token, stopping rule and generation loop; evaluation will need a fixed held-out protocol and clearly configured BLEU. The current config files and Colab instructions describe intended work, not measured training/recovery capability.
-
-### Keep the completion states separate
-
-The [readiness record](project/readiness.md) marks setup and attention software checks as available, with learner review still open. Dataset/tokenizer, full model/training, translation metrics and actual Colab deleted-runtime recovery remain pending. We add those lessons when the corresponding implementation and evidence exist.
-
-This preserves a useful next action: review one complete attention trace now, then begin the data contract when moving to implementation. There is no need to recreate the project or restart a general Python course.
+The previous Attention videos were removed from this tutorial and its project notes at the learner's request on 26 October 2026. This rewritten explanation is available for review; technical verification does not establish its teaching acceptance or the learner's understanding.
 
 [[practice:handoff-check]]
-
-### Source and review downloads
-
-The [captured source bundle](code/source-bundle.json) contains exact UTF-8 file contents and hashes for the implementation, tests, notebook, lock and honest later placeholders. Its [file hashes](code/source-manifest.json) identify each captured file. Save that JSON file and the [restoration helper](examples/restore_source.py) into the same folder, then run `python restore_source.py /path/to/a/new-directory` there to restore a runnable project. The helper refuses an existing destination and verifies every hash before writing. Do not restore over a working project. The [drawing module](code/src/utils/attention_visuals.py) is available separately.
-
-Review: [setup learning points](project/learning-points/00-setup.md), [attention learning points](project/learning-points/01-attention.md), [setup comparisons](project/comparisons/00-setup.md), [attention comparisons](project/comparisons/01-attention.md), [implementation](project/implementation.md), [reference runs](project/reference-runs.md), [readiness](project/readiness.md), [practice](practice/explain-attention.md), [source research](research.md), [arithmetic probe](examples/arithmetic.py) and [component probe](examples/verify_component.py).

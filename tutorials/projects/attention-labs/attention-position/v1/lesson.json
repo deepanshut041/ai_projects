@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "project_id": "attention-labs",
+  "languages": [
+    "cpp",
+    "python"
+  ],
+  "examples": [],
+  "slug": "attention-position",
+  "revision": "v1",
+  "title": "Attention position: RoPE and ALiBi",
+  "question": "How can attention use token positions and relative distances?",
+  "topic_kind": "concept",
+  "level": "intermediate",
+  "prerequisites": [],
+  "created_at": "2026-10-30T22:35:52.382984+00:00",
+  "repository": {
+    "base_sha": "6114868d844022fb42d82a1e04d86b1cc51ba90b",
+    "name": "docs"
+  },
+  "objectives": [
+    {
+      "id": "rope-gap",
+      "text": "Derive and calculate the relative-position rotary identity."
+    },
+    {
+      "id": "rope-cache",
+      "text": "Implement paired rotations and retain correct positions during cached execution."
+    },
+    {
+      "id": "alibi-sign",
+      "text": "Calculate head-specific distance biases and their probability effect."
+    },
+    {
+      "id": "alibi-cache",
+      "text": "Preserve distance semantics across chunks and distinguish extrapolation evidence."
+    }
+  ],
+  "sources": [
+    {
+      "id": "vizuara-rope",
+      "kind": "external",
+      "title": "Vizuara RoPE worked explanation",
+      "url": "https://vizuara.medium.com/what-exactly-is-rotary-position-embedding-rope-59d616f02e0d",
+      "accessed_at": "2026-10-30",
+      "locator": "Complete public article and all thirteen figures",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    },
+    {
+      "id": "roformer-v5",
+      "kind": "external",
+      "title": "Su et al. RoFormer v5",
+      "url": "https://arxiv.org/html/2104.09864v5",
+      "accessed_at": "2026-10-30",
+      "locator": "Section 3, pair construction, relative identity and decay assumptions",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    },
+    {
+      "id": "alibi-v2",
+      "kind": "external",
+      "title": "Press et al. ALiBi v2",
+      "url": "https://arxiv.org/html/2108.12409v2",
+      "accessed_at": "2026-10-30",
+      "locator": "Section 3 and original Figures 1–3",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    },
+    {
+      "id": "alibi-code",
+      "kind": "external",
+      "title": "ALiBi authors implementation and explanation",
+      "url": "https://github.com/ofirpress/attention_with_linear_biases",
+      "accessed_at": "2026-10-30",
+      "locator": "README mechanism, fixed slopes and implementation links",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    }
+  ],
+  "claims": [
+    {
+      "id": "rope-claim",
+      "text": "RoPE rotates paired Q/K coordinates, preserves norms and gives the relative-position dot-product identity when content and frequency are held fixed.",
+      "status": "verified",
+      "source_ids": [
+        "vizuara-rope",
+        "roformer-v5"
+      ],
+      "proof_limit": "Stated mathematical assumptions and executed tiny reference; no learner, hosted or full-model result."
+    },
+    {
+      "id": "alibi-claim",
+      "text": "Causal ALiBi adds a fixed head-specific negative distance bias after content scaling; consistent absolute differences preserve cached/full execution equality.",
+      "status": "verified",
+      "source_ids": [
+        "alibi-v2",
+        "alibi-code"
+      ],
+      "proof_limit": "Stated mathematical assumptions and executed tiny reference; no learner, hosted or full-model result."
+    }
+  ],
+  "entities": [],
+  "relationships": [],
+  "chapters": [
+    {
+      "id": "rope",
+      "title": "RoPE: make the query-key comparison depend on distance",
+      "content_path": "lessons/01-rope.md",
+      "objective_ids": [
+        "rope-gap",
+        "rope-cache"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "rope-gap",
+        "rope-cache"
+      ]
+    },
+    {
+      "id": "alibi",
+      "title": "ALiBi: put a distance penalty directly in the scores",
+      "content_path": "lessons/02-alibi.md",
+      "objective_ids": [
+        "alibi-sign",
+        "alibi-cache"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "alibi-sign",
+        "alibi-cache"
+      ]
+    }
+  ],
+  "diagrams": [],
+  "tables": [],
+  "scenarios": [],
+  "practice": [
+    {
+      "id": "rope-gap",
+      "question": "Does shifting (query,key) positions from (3,1) to (5,3) preserve the rotated dot product?",
+      "answer": "Yes, with unrotated content and frequency fixed: both have n−m=−2. For unit vectors at frequency one the raw dot product is cos(2)≈−0.416147. This is a component identity, not an arbitrary complete-model shift-invariance claim.",
+      "rubric": "State what is held fixed and derive the position difference.",
+      "objective_ids": [
+        "rope-gap"
+      ],
+      "claim_ids": [
+        "rope-claim"
+      ]
+    },
+    {
+      "id": "rope-cache",
+      "question": "After caching positions 0–2, can the next two tokens use RoPE positions 0 and 1?",
+      "answer": "No. Under this uninterrupted absolute-position contract their positions are 3 and 4. Restarting changes comparisons with cached keys; already-rotated keys must not be rotated again.",
+      "rubric": "Explain the relative-angle error and state the correct positions.",
+      "objective_ids": [
+        "rope-cache"
+      ],
+      "claim_ids": [
+        "rope-claim"
+      ]
+    },
+    {
+      "id": "alibi-sign",
+      "question": "With equal content logits, slope 0.5 and distances 3 and 0, which key gets more weight and by what ratio?",
+      "answer": "The distance-zero key gets more weight. Its logit exceeds the older key by 1.5, so its probability is exp(1.5)≈4.481689 times as large. Different content logits can overcome this preference.",
+      "rubric": "Use the sign, distance and softmax ratio; avoid an unconditional oldest-token rejection claim.",
+      "objective_ids": [
+        "alibi-sign"
+      ],
+      "claim_ids": [
+        "alibi-claim"
+      ]
+    },
+    {
+      "id": "alibi-cache",
+      "question": "Can the queries in a two-token append restart their position IDs at zero while cached keys keep IDs 0–2?",
+      "answer": "No. Their uninterrupted positions are 3 and 4. Resetting only query positions changes distances and visibility. A shared shift of both query and key IDs preserves relative differences.",
+      "rubric": "State what may be shifted together and explain the cached/full equality condition.",
+      "objective_ids": [
+        "alibi-cache"
+      ],
+      "claim_ids": [
+        "alibi-claim"
+      ]
+    }
+  ],
+  "scenes": [],
+  "media": {},
+  "approval": null
+}

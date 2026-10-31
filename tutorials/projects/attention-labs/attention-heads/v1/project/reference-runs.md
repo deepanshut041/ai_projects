@@ -76,3 +76,5 @@ These are computed toy examples, not model results or learner answers. Run from 
 ```
 
 The separate packed PyTorch program was run on CPU float64 and checked output and query-gradient agreement with an explicit loop, plus invariance of earlier outputs to a changed future token. Detailed independent verification is saved in the owning implementation record.
+
+Sequential revision: head_loop.py registers two full causal heads and output mixing on [2,6,6], with 144 parameters. lecture8_equivalence.py copies every Q/K/V/output coefficient into the packed layer, reproduces all tensor shapes, compares outputs plus input/all-parameter gradients, and intervenes on future inputs. CPU float64 maximum forward difference is 2.22e-16 in the declared run. Browser timing screenshots are illustrative measurements, not a portable performance claim. Actual hosted Colab execution is pending.

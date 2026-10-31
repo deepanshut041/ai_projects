@@ -1,63 +1,82 @@
-## Let target queries retrieve source information
+## 8. Let the decoder read the encoded source
 
-Self-attention takes Q, K and V from one sequence. Translation also needs the developing target representation to retrieve information from the encoded source. The implemented cross-attention path changes where Q comes from while keeping keys and values aligned with source positions.
+Causal self-attention lets a decoder position use its allowed French prefix. That alone provides no path from the English sentence to the next prediction. We need a second attention operation that reads the encoder's source representations.
 
-### Trace the two input arguments by role
+For the row predicting “lisons”, the receiver is a decoder state built from its allowed prefix. The available memory consists of all valid encoded source rows. **Cross-attention** uses the decoder state to form Q and encoder memory to form K and V.
 
-In this project's final public interface:
-
-```python
-cross_output = layer(src, tgt=tgt, attention_mask=source_mask)
-```
-
-`src` supplies keys and values. `tgt` supplies queries. These names can be confusing if we assume “the first argument is always Q”; here it is not. In the final model, `src` for this call will be encoder representations rather than raw integer English IDs. `tgt` will be decoder representations, not labels. Those surrounding blocks have not been implemented.
-
-```mermaid
-flowchart LR
-    S[Source representations] --> K[Key projection]
-    S --> V[Value projection]
-    T[Target representations] --> Q[Query projection]
-    Q --> A[Target by source weights]
-    K --> A
-    A --> C[Context for each target position]
-    V --> C
-```
-
-### Calculate the rectangular shapes
-
-Let `B=2`, source length `S=5`, target length `T=3`, model width `D=12`, and `H=3`. After projection/splitting:
+### Follow the two streams into one output
 
 ```text
-Q:       (2,3,3,4)       batch, heads, target queries, width
-K and V: (2,3,5,4)       batch, heads, source keys/values, width
-scores:  (2,3,3,5)       target rows, source columns
-context: (2,3,3,4)
-merged:  (2,3,12)
-output:  (2,3,12)
+encoded English source rows ── W_K ── K
+                            └─ W_V ── V
+causal French prefix states ── W_Q ── Q
+
+Q K^T → source weights for each target receiver → weights V
 ```
 
-The public output follows target/query length. Five source positions do not imply five output rows. The mask is `(2,5)`, because it describes source keys; a `(2,3)` target padding mask cannot be substituted for it.
+The receiver's target position survives. The source-position axis is summed out. The gathered source features continue through decoder computation and eventually a vocabulary projection to support the next-token prediction. Cross-attention itself still returns features.
 
-![Cross-attention weights have target query rows and source key columns.](images/14-rectangular-cross-attention.png)
+![Two target receivers reading four source memory rows](images/26-cross-attention.svg)
 
-### Work one query independently
+### Why source and target lengths need not match
 
-Suppose a head's source keys are `[[1,0],[0,1],[1,1]]`, values are `[[2,0],[0,4],[2,4]]`, and its target query is `[1,0]`. Scores are `[1,0,1]/√2`. The first and third keys receive equal high weights; their values contribute differently to the two context coordinates.
+Our displayed source has four words while its target has five. Translation is not a one-source-row-to-one-target-row mapping. In the small program, use four source states and two target states to expose the rectangular geometry. The target states are chosen vectors for two receiving rows, not outputs of an implemented French decoder.
 
-If the third source position is padded, scores become `[1/√2,0,-∞]`. Weights become approximately `[0.669762,0.330238,0]`. The context becomes `[1.339523,1.320954]`. That one retrieved vector belongs to the target query. It is not a translated word, and it does not identify a single hard source alignment.
+With Q shaped `(2,2)` and K shaped `(4,2)`, scores and weights have shape `(2,4)`. Multiplying by V shaped `(4,2)` returns `(2,2)`: one gathered vector for each of the two target receivers.
 
-### Why no ordinary causal triangle over source positions?
+```python
+import math
+import torch
 
-For the intended completed-sentence translation task, the full English source is available before generating the French target. A target query can therefore retrieve any valid encoded source position. Applying `j≤i` between target and source indices would falsely treat unrelated position numbers as a time-availability relationship.
+def attend(q, k, v, allowed=None):
+    scores = (q @ k.transpose(-2, -1)) / math.sqrt(q.shape[-1])
+    if allowed is None:
+        allowed = torch.ones_like(scores, dtype=torch.bool)
+    allowed = torch.broadcast_to(allowed, scores.shape)
+    has_keys = allowed.any(dim=-1, keepdim=True)
+    scores = scores.masked_fill(~allowed, -torch.inf)
+    safe_scores = torch.where(has_keys, scores, torch.zeros_like(scores))
+    shifted = safe_scores - safe_scores.max(dim=-1, keepdim=True).values
+    exponentials = torch.exp(shifted)
+    weights = exponentials / exponentials.sum(dim=-1, keepdim=True)
+    weights = torch.where(has_keys, weights, torch.zeros_like(weights))
+    return weights @ v, weights
 
-The target's own self-attention still needs causality. Cross-attention and decoder self-attention sit at different points in a future decoder block and answer different visibility questions. A streaming translator with partial source availability would need a separate, explicit protocol; the current API does not claim to implement one.
+torch.set_printoptions(precision=6, sci_mode=False)
+src = torch.tensor([[1., 0.], [0., 1.], [1., 1.], [0., 0.]], dtype=torch.float64)
+tgt = torch.tensor([[1., 0.], [0., 1.]], dtype=torch.float64)
+w_q = torch.eye(2, dtype=src.dtype)
+w_k = torch.eye(2, dtype=src.dtype)
+w_v = 2 * torch.eye(2, dtype=src.dtype)
 
-### Inspect the checks and rejected calls
+q = tgt @ w_q
+k = src @ w_k
+v = src @ w_v
+context, weights = attend(q, k, v)
+print(weights.shape)
+print(context)
 
-The implementation verifies matching batch size, floating dtype, device and embedding width for source and target. Their sequence lengths can differ. Supplying `causal=True` together with `tgt` raises a clear error. A source mask with the wrong length is rejected before a misleading output can be interpreted.
+source_validity = torch.tensor([[True, True, True, False]])
+masked_context, _ = attend(q, k, v, source_validity)
+print(masked_context)
+```
 
-Tests map the same learned projection weights into PyTorch `nn.MultiheadAttention`, then compare both cross-attention outputs and per-head weights. Other tests perturb only padded source rows and require all target outputs to remain unchanged. These establish component behavior for the exercised tensors, not translation quality or trained word alignments.
+The first two familiar queries recover `[[1.339523,1.000000],[1.000000,1.339523]]`. If slot 3 is padding for a shorter source, excluding it gives `[[1.604448,1.197776],[1.197776,1.604448]]`. The numerical operation did not change; the origin and ownership of its vectors did.
+
+### Which masks belong here?
+
+The source key mask has four entries because there are four memory rows. A two-entry target-validity row cannot serve as that mask. Target padding and target-loss masking are separate responsibilities.
+
+Do not apply a target-time triangle over source indices. Source index 2 is not a future French token. The entire English source is available before generation. The decoder state supplying the query must already respect target causality; cross-attention may then read the full valid source. This is the encoder–decoder attention role described in [the paper's section 3.2.3](https://arxiv.org/html/1706.03762v7).
+
+### Connect the roles to the actual call
+
+The project calls the class as `layer(src, tgt=target_states)`. Here `src` means the memory that supplies K and V; `tgt` supplies Q. Without tgt, the same src supplies all three and the operation is self-attention. Output length follows tgt when it is supplied.
+
+The reusable class requires matching batch size, feature width, dtype and device, while source and target sequence lengths can differ. It rejects `causal=True` with tgt supplied because that flag implements a self-attention triangle, not a cross-sequence time relation.
+
+We have now located the three uses of attention: source-to-source, target-prefix-to-target-prefix, and target-to-source. Next we connect the translation objective to the parameters that control their comparisons and contributions.
+
+**Runnable copy:** [rectangular cross-attention and source mask](examples/walkthrough/08_cross.py).
 
 [[practice:cross-check]]
-
-We have now covered every attention mode the final reusable class exposes. The next lesson follows that class from its arguments through the explicit and efficient execution branches.

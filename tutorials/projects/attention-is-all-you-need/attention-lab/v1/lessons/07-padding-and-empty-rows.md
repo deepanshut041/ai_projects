@@ -1,57 +1,81 @@
-## Keep padding out of the retrieved information
+## 6. Padding: exclude storage rows from the information flow
 
-Sentences can have different lengths, but a batch tensor needs a rectangular layout. Padding fills the unused positions. Even a zero input can become a nonzero key or value after a biased projection, so padding cannot be made harmless by assuming its numeric entries are zero.
+We have built the gathering calculation for every position and allowed several independently weighted mixtures. So far every stored source row has been treated as available information. We now return to the translator around that calculation: batching introduces stored rows that do not belong to a sentence, so the information flow needs a boundary.
 
-### Give the mask one unambiguous meaning
-
-Our public mask has shape `(B,S)` and uses `True` or `1` for a **valid source key**. For a five-position source with three real tokens, one row is `[True,True,True,False,False]`. The mask names positions, not embedding coordinates.
-
-The builder converts it into `(B,1,1,S)` using `[:,None,None,:]`. Compared with scores `(B,H,T,S)`, the singleton head/query axes broadcast the same key validity across all heads and all queries in that example. Different examples can have different valid source lengths.
+The encoder will process batches of sentences. Our source has four displayed tokens; another source in the batch might have only three. A rectangular `(batch,positions,features)` tensor still needs the same stored position count for both examples, so the shorter one receives a padding row.
 
 ```text
-source validity:          [1, 1, 1, 0, 0]
-allowed key columns:
-query 0                  [1, 1, 1, 0, 0]
-query 1                  [1, 1, 1, 0, 0]
-query 2                  [1, 1, 1, 0, 0]
+Example A: real token | real token | real token | real token
+Example B: real token | real token | real token | PAD
+Validity B:    True   |    True    |    True    | False
 ```
 
-![Padding excludes key columns across query rows.](images/10-padding-mask-and-weights.png)
+The fourth row in example A is real even though our chosen vector is `[0,0]`; its validity is True. In example B, slot 3 stores padding with validity False. The validity metadata tells us which case we have; the numerical vector alone cannot.
 
-### Block scores before normalization
+Padding occupies memory but is not part of the source sentence. If attention treats it as another source position, it can alter the representations of real tokens. We must prevent that dependency.
 
-Suppose a query has unmasked scores `[0,0,10]`, but the third key is padding. If we apply softmax first, the padded position takes almost all the weight. Setting that weight to zero afterwards leaves a tiny sum, not a properly normalized distribution over the valid positions.
+### Even a zero value can contaminate an output
 
-Instead replace blocked scores with negative infinity before softmax: `[0,0,-∞]` becomes weights `[0.5,0.5,0]`. In the limit `exp(-∞)=0`, so blocked positions contribute nothing and the remaining valid keys share total mass one.
+The problem is not solved by making the padded value zero. Its key still contributes a score and an exponential to the softmax denominator. Some weight is spent on the padded position, reducing the weights assigned to real values. The output can change even though the padded value contributes no nonzero features directly.
 
-The explicit code uses `scores.masked_fill(~attention_mask, float('-inf'))`. The inversion matters because `masked_fill` receives positions to replace, whereas our incoming mask marks positions to allow. The comparison with `nn.MultiheadAttention` also inverts masks because its `key_padding_mask` marks blocked keys. Copying the same boolean tensor between these APIs without checking semantics reverses the contract.
+The right boundary is therefore **before normalization**. A boolean allowed mask states which query/key pairs exist for the calculation. This project uses `True` for allowed. For example B, `[True,True,True,False]` excludes source key 3 for every receiver.
 
-### A key mask does not clear padded query rows
+Replace forbidden scores with negative infinity. Their exponentials are zero, leaving only allowed positions in the denominator. For receiver 0, the scaled row changes from `[0.707107,0,0.707107,0]` to `[0.707107,0,0.707107,-inf]`. The weights become `[0.401112,0.197776,0.401112,0]` and context becomes `[1.604448,1.197776]`.
 
-For self-attention, padded source positions are also potential query positions. The current key mask stops others from retrieving their keys/values; it does not force their own output vectors to zero. A padded query can still retrieve real keys and pass through the output projection.
+Masking after softmax without renormalizing would keep the old weights on valid keys; masking the final context would be later still. Neither implements this normalized distribution over the allowed positions.
 
-That behavior is visible in the source and tests. The padding-isolation test compares real query outputs for self-attention; it does not demand zeros at padded query positions. A later translation loss must ignore padded target labels using its own policy. Key visibility and loss masking solve different problems.
+### Define what happens when nothing is allowed
 
-### Define the entirely blocked case explicitly
+Softmax of an all-negative-infinity row is undefined: subtracting its maximum encounters `-inf - (-inf)`. The project's explicit policy is zero weights and zero gathered context for a completely blocked receiver.
 
-For a row containing only blocked keys, ordinary softmax would see `[-∞,-∞,…]`, whose normalization is undefined. Our explicit function first detects `has_keys`, substitutes a finite score row for safe arithmetic and then replaces that row's weights with zero. Its context is zero, and the tests require finite outputs and gradients.
-
-There is another operation after context. If the merged context is zero and `out_proj` has bias b, the final output is `0@W_O+b=b`. Therefore “zero context” does not imply “zero module output”. In the all-blocked-row test, the final output equals the output projection's bias. This distinction avoids treating a valid implementation result as a bug.
-
-### Use a perturbation to test the information boundary
-
-Take the same layer and valid inputs twice. In one copy add 100 to every padded input vector. The outputs at real self-attention queries must agree; cross-attention outputs must all agree when its target queries are unchanged. This tests that padded keys/values cannot influence allowed results.
+The small function below implements the same policy. It substitutes safe temporary scores for empty rows, performs a finite softmax, then replaces those weight rows with zeros. It also accepts a different allowed row per receiver, which we will need for decoder causality.
 
 ```python
-changed = src.clone()
-changed[~mask] += 100
-first = layer(src, attention_mask=mask)
-second = layer(changed, attention_mask=mask)
-torch.testing.assert_close(first[mask], second[mask])
+import math
+import torch
+
+def attend(q, k, v, allowed=None):
+    scores = (q @ k.transpose(-2, -1)) / math.sqrt(q.shape[-1])
+    if allowed is None:
+        allowed = torch.ones_like(scores, dtype=torch.bool)
+    allowed = torch.broadcast_to(allowed, scores.shape)
+    has_keys = allowed.any(dim=-1, keepdim=True)
+    scores = scores.masked_fill(~allowed, -torch.inf)
+    safe_scores = torch.where(has_keys, scores, torch.zeros_like(scores))
+    shifted = safe_scores - safe_scores.max(dim=-1, keepdim=True).values
+    exponentials = torch.exp(shifted)
+    weights = exponentials / exponentials.sum(dim=-1, keepdim=True)
+    weights = torch.where(has_keys, weights, torch.zeros_like(weights))
+    return weights @ v, weights
+
+torch.set_printoptions(precision=6, sci_mode=False)
+x = torch.tensor([[1., 0.], [0., 1.], [1., 1.], [0., 0.]], dtype=torch.float64)
+valid_keys = torch.tensor([[True, True, True, False]])
+context, weights = attend(x, x, 2 * x, valid_keys)
+print(weights[0])
+print(context)
+
+changed = x.clone()
+changed[3] = torch.tensor([1000., -1000.], dtype=x.dtype)
+changed_context, _ = attend(changed, changed, 2 * changed, valid_keys)
+assert torch.allclose(changed_context[:3], context[:3])
+
+no_keys = torch.zeros((1, 4), dtype=torch.bool)
+empty_context, empty_weights = attend(x[:1], x, 2 * x, no_keys)
+print(empty_context)
+assert torch.equal(empty_weights, torch.zeros_like(empty_weights))
 ```
 
-Use evaluation mode or otherwise control randomness when comparing. With active dropout, two calls can differ even if padding is correctly excluded. Hold parameters, valid data and the query mask interpretation fixed; change only the forbidden information.
+For example B with source position 3 masked, contexts are `[[1.604448,1.197776],[1.197776,1.604448],[1.503490,1.503490],[1.333333,1.333333]]`. The final empty-memory check returns `[[0,0]]`.
+
+### Prove the excluded row cannot affect real receivers
+
+The program changes the padded row to `[1000,-1000]`, then recomputes attention. The first three outputs must stay unchanged. This checks the intended absence of influence, not merely the presence of a triangular picture or a zero in a printed tensor.
+
+Only the first three receivers are compared because changing X[3] also changes query 3. Masking **key 3** removes that row as a source of information; it does not freeze or delete its query. The original fourth context `[1.333333,1.333333]` is therefore consistent: the padded query still reads the three real keys.
+
+Keep three responsibilities separate. A key mask excludes source contributions. A target-loss mask later excludes padded prediction positions from the objective. An output projection can add its bias even when gathered context is zero. Confusing those boundaries leads to tests that look reassuring while checking the wrong behavior.
+
+**Runnable copy:** [padding, perturbation and empty-row checks](examples/walkthrough/06_padding.py).
 
 [[practice:padding-check]]
-
-Next we add a different restriction: a decoder position must not retrieve future target positions, even when those positions contain real tokens.

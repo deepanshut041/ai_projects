@@ -1,0 +1,25 @@
+{
+  "status": "resolved; production complete",
+  "previous_record": {
+    "prior_blocker": {
+      "configuration": {
+        "problem": "1Password mount timed out; unlock 1Password and approve access.",
+        "environment_file": "/home/lucifer/.config/ai-workspace/environment.env"
+      },
+      "local_render_prerequisites_ready": true,
+      "cloud_request_performed": false,
+      "finished_videos": 0,
+      "prepared_videos": 24,
+      "prepared_scenes": 148,
+      "preserved_source_files": 241,
+      "action_required": "Unlock 1Password and approve the configured AI Workspace Environment mount; then resume existing packages.",
+      "resume_record": "00-resume.md"
+    },
+    "environment_retry_resolved": true,
+    "cloud_production": "in progress",
+    "interrupted_request": "one lesson 6 code scene retried after explicit user authorization; completed",
+    "finished_delivery": "partial; all-video checks pending"
+  },
+  "unknown_operations_remaining": 0,
+  "all24_verified_and_playback_checked": true
+}

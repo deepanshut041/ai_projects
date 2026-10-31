@@ -1,0 +1,63 @@
+{
+  "verified_utc": "2026-10-24T18:30:02.159504+00:00",
+  "phase": "Rewritten text ready for learner review; text approval pending; videos gated.",
+  "reader_start": "http://127.0.0.1:4273/project_docs/projects/transformer-labs/attention-is-all-you-need/docs/implementation/01_attention-mechanism/02-notes-to-understanding/",
+  "tutorial_start": "http://127.0.0.1:4273/project_docs/records/tutorials/attention-is-all-you-need-attention-lab-v1/chapters/weighted/",
+  "design": [
+    "one contextual-information problem and one numerical fixture",
+    "eleven ordered teaching steps plus an optional setup reference",
+    "ten expanded, independently runnable Python blocks",
+    "every called project helper present in the block; full actual-class dependency closure",
+    "same numbers through scores, values, learned maps, heads, masks, cross-attention and query update"
+  ],
+  "code_checks": {
+    "programs": 10,
+    "all_passed": true,
+    "missing_local_callees": 0,
+    "protected_files_unchanged": 433,
+    "independent_arithmetic_and_finite_differences": "passed",
+    "frozen_actual_component_probe": "passed",
+    "existing_project_tests_passed": 35
+  },
+  "reader_checks": {
+    "unit_tests_passed": 21,
+    "ordinary_build": "passed",
+    "full_native_browser_suites": "passed after the substantive rewrite",
+    "final_focused_chapter_width_checks": 48,
+    "final_private_notes_width_checks": 4,
+    "bases": [
+      "/",
+      "/project_docs/"
+    ],
+    "widths": [
+      1440,
+      390
+    ],
+    "diagram_count_in_notes": 2,
+    "code_collapsed_or_vertically_clipped": false,
+    "copy_download_bytes": "match visible programs",
+    "navigation": "matches the conceptual sequence",
+    "math_errors": 0,
+    "print": "checked",
+    "screenshots": "Desktop start/full code, mobile chapter/practice, and print reviewed visually.",
+    "managed_reader": "Restarted; actual notes and first chapter return HTTP 200, show 10/1 complete Python blocks, and contain zero video players.",
+    "managed_evidence": ".ai/attention-text-rewrite/2026-10-24/managed-reader.json"
+  },
+  "media": {
+    "old_bindings_removed": 14,
+    "old_packages_preserved": 7,
+    "players_on_attention_pages": 0,
+    "new_generation_or_rendering_operations": 0,
+    "approval_required": "Explicit learner approval of text before replacing videos."
+  },
+  "recovery": "/mnt/projects/ai/.ai/attention-text-rewrite/2026-10-24",
+  "human_review": {
+    "approved": false,
+    "understanding_assessed": false
+  },
+  "limits": [
+    "Numerical/rendering checks do not approve teaching quality.",
+    "No model/data/training/hosted work was started.",
+    "No commit or external publication requested for this revision."
+  ]
+}

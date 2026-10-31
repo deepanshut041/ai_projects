@@ -23,7 +23,7 @@ export async function build({ local = false, directory = null, videoCatalog = nu
   }
   const catalog = validateCatalog(JSON.parse(await fs.readFile(path.join(root, 'catalog/sources.json'), 'utf8')));
   const projectLinks = new Map(Object.entries(tutorials.sourcePages).map(([source, file]) => [path.join(docsRoot, source), `${base}records/${file.replace(/\.md$/, '')}/`]));
-  for (const name of ['roadmap', 'progress', 'resume', 'decisions', 'COLAB', 'getting-started']) projectLinks.set(path.join(docsRoot, 'guide', name + '.md'), `${base}records/guides/${name === 'COLAB' ? 'colab' : name === 'getting-started' ? 'start-here' : name}/`);
+  for (const name of ['roadmap', 'progress', 'resume', 'decisions', 'COLAB', 'getting-started', 'attention-labs-route']) projectLinks.set(path.join(docsRoot, 'guide', name + '.md'), `${base}records/guides/${name === 'COLAB' ? 'colab' : name === 'getting-started' ? 'start-here' : name}/`);
   const library = await projectLibrary(path.resolve(docsRoot, '../projects'), base, { local, links: projectLinks });
   const tutorialLibrary = tutorialCollectionLibrary(records, library.groups, base);
   const videoRoutes = new Map(projectLinks);

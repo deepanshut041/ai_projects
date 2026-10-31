@@ -1,0 +1,34 @@
+{
+  "numeric": {
+    "passed": true,
+    "chapters": 12,
+    "complete_programs": 10,
+    "program_bytes_preserved": 10,
+    "protected_files_unchanged": 86,
+    "source_AST_parity": true,
+    "finite_difference_gradient": true,
+    "permutation_and_key_value_pairing": true,
+    "zero_value_denominator_contamination": true,
+    "detached_bindings": 22,
+    "removed_videos": 11,
+    "unrelated_bindings_preserved": 25,
+    "original_figures": 8,
+    "teaching_acceptance": "pending",
+    "new_videos": 0
+  },
+  "chapter_browser_checks": 48,
+  "notes_browser_checks": 4,
+  "figure_reviews": 8,
+  "complete_course_code_matches": true,
+  "practice_reveal": true,
+  "download_byte_comparisons": 6,
+  "unit_tests": {
+    "passed": 21,
+    "total": 21
+  },
+  "ordinary_build": "passed",
+  "local_root_build": "passed",
+  "local_prefix_reader": "verified",
+  "teaching_acceptance": "pending",
+  "generated_videos": 0
+}

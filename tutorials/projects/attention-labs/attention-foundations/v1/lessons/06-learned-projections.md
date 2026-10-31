@@ -1,37 +1,253 @@
-## 6. Separate comparison features from delivered content
+## 6. Learned self-attention: queries, keys and values
 
-The previous operation used the same row as a query, a key, and a value. That ties two decisions together: how useful a source appears in a comparison, and which information it delivers if selected. Three trainable linear projections let those jobs use different features.
+The six-word calculation returned one context vector per position. With those input vectors fixed, it had no parameter that could learn a more useful comparison or a different representation to deliver.
 
-### Name the roles after their jobs
+![Each starting embedding must become a representation informed by its context](images/original-slides/lecture-06-slide-02.png)
 
-![Separate learned projections create comparison requests, matching features and returned content](images/original-slides/lecture-06-slide-10.png)
+We still want $x^{(i)}\rightarrow z^{(i)}$. What changes is the numerical representation used for each job inside the operation.
 
-*Original diagram: [Vizuara, Lecture 6, slide 10](https://lecture6-attention-mechanisms.vercel.app/#/10). Captured from the linked presentation website. Open the image for full size.*
+![Scoring and self-attention connectivity now work together](images/original-slides/lecture-06-slide-03.png)
 
-Start at one token representation and follow its three branches. The query branch determines how that position asks, the key branch determines how a source can match, and the value branch determines the content delivered after matching. These are learned roles; the labels do not assign fixed linguistic meanings to coordinates.
+Scaled dot products answer how to compare; self-attention answers where the compared inputs come from. Now add learned projections to those choices.
 
-A query is the feature row used to request information. A key is the feature row it is compared with. A value is the content row included in the weighted mixture. These are learned numerical roles, not literal database records or guaranteed human-readable questions.
+![The staircase advances from raw-input self-attention to learned projections, before masks and heads](images/original-slides/lecture-06-slide-05.png)
+
+We will follow the same three passes: first a concrete failure of fixed comparisons, then every projection and one complete query, then the formula, variance experiment and reusable code.
+
+### A tie that a parameter can change
+
+![The sentence has two occurrences of it, referring to different nouns](images/original-slides/lecture-06-slide-08.png)
+
+“The dog chased the ball, but it couldn't catch it.” The first **it** refers to the dog; the second refers to the ball. This motivates two distinct questions. Can we learn to score **different source vectors** differently? And do the two occurrences of **it** have different information available to distinguish their requests?
+
+Start with the first question. Choose illustrative embeddings
+
+$$x_{\rm it}=[0.5,0.5,0.1],\quad x_{\rm dog}=[0.9,0.1,0.1],\quad
+x_{\rm ball}=[0.1,0.9,0.1].$$
+
+Raw dot products give $0.51$ for both dog and ball. With these embeddings held fixed, this isolated attention operation has no trainable comparison parameter to change the tie.
+
+![A diagonal key projection doubles the second coordinate and breaks the dog/ball tie](images/original-slides/lecture-06-slide-09.png)
+
+Keep the query fixed and choose
+
+$$W_K=\operatorname{diag}(1,2,1).$$
+
+The transformed keys are $k_{\rm dog}=[0.9,0.2,0.1]$ and $k_{\rm ball}=[0.1,1.8,0.1]$. Their query comparisons become
+
+$$q_{\rm it}\cdot k_{\rm dog}=0.45+0.10+0.01=0.56,$$
+
+$$q_{\rm it}\cdot k_{\rm ball}=0.05+0.90+0.01=0.96.$$
+
+The same matrix changes both source vectors, but their different coordinates cause different effects. A model can learn such a transformation through a task loss; here we selected one manually to make its effect inspectable.
+
+![With stretch one, the two key scores and weights are tied](images/original-slides/lecture-06-lab-tie.png)
+
+![With stretch two, ball receives a larger score and softmax weight](images/original-slides/lecture-06-lab-stretch.png)
+
+Read both levels of bars: the changed scores become unequal weights. The mouse control changes a parameter snapshot; it is not itself an optimization run.
+
+This fixes a tie between **different keys**. It does not, by itself, distinguish the two identical it embeddings. If two positions have identical features, shared projections and the same allowed memory, they get identical queries and outputs. Context from earlier layers, position information or different allowed memory supplies additional distinctions. We will not claim the diagonal matrix alone solves the complete pronoun task.
+
+### Give each input three separate jobs
+
+![One input branches into query, key and value projections](images/original-slides/lecture-06-slide-10.png)
+
+A **query** represents what the requesting position is looking for. A **key** supplies the comparison features of an available position. A **value** supplies the content to mix after matching. The database-lookup analogy helps remember the roles, but these are learned numerical features, not guaranteed human-readable questions or dictionary records.
+
+![Raw input comparisons and mixtures become comparisons and mixtures of transformed vectors](images/original-slides/lecture-06-slide-11.png)
+
+Follow the score path and content path separately. Query and key interact to determine routing weights; the value travels around that comparison and enters the final mixture. Changing only $W_V$ therefore changes content while leaving scores and weights fixed, provided $X,W_Q,W_K$ stay fixed.
+
+![The routing branches and delivered-content branch have different responsibilities](images/06-projections.svg)
 
 For row-vector inputs,
 
-$$Q=XW_Q,\quad K=XW_K,\quad V=XW_V,\qquad
-Z=\operatorname{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V.$$
+$$Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V.$$
 
-If $X$ has shape $N\times d_{\mathrm{in}}$, then $W_Q,W_K$ have shape $d_{\mathrm{in}}\times d_k$ and $W_V$ has shape $d_{\mathrm{in}}\times d_v$. Queries and keys must share the comparison width $d_k$; values can have a different width $d_v$. Output shape is $N\times d_v$.
+For $X\in\mathbb R^{N\times d_{\rm in}}$, take $W_Q,W_K\in\mathbb R^{d_{\rm in}\times d_k}$ and $W_V\in\mathbb R^{d_{\rm in}\times d_v}$. Queries and keys need the same comparison width. Values may have a different width; our upcoming numerical example chooses both widths as two.
 
-![Three projections separate the routing path and content path](images/06-projections.svg)
+### Freeze a five-word example and calculate every projection
 
-Changing $W_Q$ or $W_K$ can change routing weights. Changing only $W_V$ changes returned content while leaving the weights fixed. During training a task loss can update all of these parameters, but adding them does not automatically make attention sharp, linguistically correct, or different across repeated token identities.
+Use **The dog chased the ball**. This is a new five-word input, separate from the three-vector tie demonstration and the previous six-word example.
 
-### Project the same three rows
+| Token | Input |
+| --- | --- |
+| The | $[0.5,1.2,0.8]$ |
+| dog | $[1.1,0.3,0.7]$ |
+| chased | $[0.6,1.5,0.9]$ |
+| the | $[0.9,0.8,0.2]$ |
+| ball | $[1.2,1.7,0.5]$ |
 
-![The input matrix is multiplied by three distinct projection matrices](images/original-slides/lecture-06-slide-14.png)
+Choose one fixed snapshot of the trainable matrices:
 
-*Original diagram: [Vizuara, Lecture 6, slide 14](https://lecture6-attention-mechanisms.vercel.app/#/14). Captured from the linked presentation website. Open the image for full size.*
+$$W_Q=\begin{bmatrix}0.6&0.2\\0.1&0.7\\0.5&0.4\end{bmatrix},\quad
+W_K=\begin{bmatrix}0.3&0.6\\0.4&0.2\\0.7&0.5\end{bmatrix},\quad
+W_V=\begin{bmatrix}0.2&0.5\\0.8&0.1\\0.3&0.6\end{bmatrix}.$$
 
-The three products create Q, K and V before any query–key score is normalized. The source diagram uses a five-token input with its own parameter values. Below, we apply the same three-branch operation to our three rows and named matrices, so every resulting number can be checked independently.
+Each product has shape $(5\times3)(3\times2)=5\times2$.
 
-Take the input from Lesson 5 and the parameter snapshot
+![Three products project the five input positions into query, key and value coordinates](images/original-slides/lecture-06-slide-14.png)
+
+Count five positions in each result, whatever the schematic grid's drawn subdivisions suggest. Projection changes feature width, not sequence length. For The,
+
+$$q_{\rm The}=0.5[0.6,0.2]+1.2[0.1,0.7]+0.8[0.5,0.4]=[0.82,1.26].$$
+
+The complete result is:
+
+| Token | Query | Key | Value |
+| --- | --- | --- | --- |
+| The | $[0.82,1.26]$ | $[1.19,0.94]$ | $[1.30,0.85]$ |
+| dog | $[1.04,0.71]$ | $[0.94,1.07]$ | $[0.67,1.00]$ |
+| chased | $[0.96,1.53]$ | $[1.41,1.11]$ | $[1.59,0.99]$ |
+| the | $[0.72,0.82]$ | $[0.73,0.80]$ | $[0.88,0.65]$ |
+| ball | $[1.14,1.63]$ | $[1.39,1.31]$ | $[1.75,1.07]$ |
+
+The table preserves the two The/the positions separately. Sequence position identifies each row; a token label is not a unique row identifier.
+
+### Follow ball through score, scale and softmax
+
+![The ball query compares against all five keys, then scales and normalizes the row](images/original-slides/lecture-06-slide-16.png)
+
+Use $q_{\rm ball}=[1.14,1.63]$. Against the first key, the score is $1.14(1.19)+1.63(0.94)=2.8888$. Repeat for all five keys:
+
+| Source | Raw score | Scaled score | Weight |
+| --- | ---: | ---: | ---: |
+| The | 2.8888 | 2.042690 | 0.172734 |
+| dog | 2.8157 | 1.991001 | 0.164032 |
+| chased | 3.4167 | 2.415972 | 0.250895 |
+| the | 2.1362 | 1.510522 | 0.101452 |
+| ball | 3.7199 | 2.630367 | 0.310887 |
+
+The divisor is $\sqrt2$ because each query/key has two coordinates. Five counts source positions; three was the original input width. Neither is the scaling dimension here.
+
+![The interactive five-position score and weight bars for ball](images/original-slides/lecture-06-lab-ball.png)
+
+Ball and chased have the largest two weights in this selected snapshot. That is a property of these specified matrices, not evidence that training has discovered a verb/object relation. Learning can change the distribution and its usefulness without necessarily making it sharper.
+
+### Mix values, not the original input embeddings
+
+![Five value vectors contribute to ball's two-coordinate context](images/original-slides/lecture-06-slide-17.png)
+
+Compute
+
+$$z_{\rm ball}=\sum_{j=1}^{5}\alpha_{{\rm ball},j}v_j
+\approx[1.366709,0.957835].$$
+
+For its first coordinate, the contributions are the five weights multiplied by $1.30,0.67,1.59,0.88,1.75$, respectively. For its second, multiply by $0.85,1.00,0.99,0.65,1.07$. Keep unrounded weights until the final display. The two-decimal weights in the illustration sum to 0.99 due to rounding; do not renormalize or compute from them as if they were exact.
+
+The output has width two because the values have width two. Mixing the three-coordinate $x_j$ instead would give another operation and discard the learned content projection.
+
+### Check the scaling argument experimentally
+
+![Unscaled dot-product variance grows with dimension while the scaled variance stays near one](images/original-slides/lecture-06-slide-19.png)
+
+The horizontal axis changes comparison width. The vertical quantity here is **variance**, whose unscaled theoretical value is $d_k$ under independent, zero-mean, unit-variance coordinates. This differs from the typical-magnitude graph in Lecture 4, which grows like $\sqrt{d_k}$.
+
+![A sample of random pairs at width five gives raw variance near five and scaled variance near one](images/original-slides/lecture-06-lab-variance5.png)
+
+![At width one hundred the raw and scaled variances are on very different scales](images/original-slides/lecture-06-lab-variance100.png)
+
+Read both panels. They summarize the **same random dot products**, before and after division by $\sqrt{d_k}$. The interactive sample uses 500 pairs, so the reported estimates fluctuate when resampled. Our deterministic program below uses 20,000 pairs and measures about 5.02197 versus 1.00439 at width five, and 102.19674 versus 1.02197 at width one hundred.
+
+Finite samples need not equal the theoretical values. Learned or correlated features need not satisfy the sampling assumptions. Scaling controls one source of score magnitude; it does not guarantee a particular attention distribution or successful training.
+
+### Read the whole formula through its data flow
+
+$$Z=\operatorname{softmax}_{\rm keys}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V.$$
+
+![The input splits through three projections; queries and keys determine weights, which combine values](images/original-slides/lecture-06-slide-21.png)
+
+$QK^\top$ scores every query against every key. Dividing controls the comparison scale. Row-wise softmax creates a distribution over source positions. Multiplication by $V$ returns one value mixture per query. In this example, $X$ is $5\times3$, all three projections are $5\times2$, weights are $5\times5$, and output is $5\times2$. Use those labels to interpret the schematic; every projection and output still has five rows.
+
+### Put the tensor steps into reusable classes
+
+The complete file below has both explicit `nn.Parameter` matrices and `nn.Linear` projections. Parameters registered on an `nn.Module` are discoverable by an optimizer; random initialization alone does not train them. The forward call computes activations without updating the matrices.
+
+`nn.Linear` stores its coefficient matrix as output-by-input and applies its transpose. That is why matching our row-vector $XW$ snapshot requires copying `W.T` into its `.weight`. Both classes transpose only the last two key axes so the same code supports `[positions,features]` and `[batch,positions,features]` inputs.
+
+Complete file: [learned_attention.py](examples/learned_attention.py). Paste the full file into one Colab cell, or upload it and run `!python learned_attention.py`. It needs PyTorch and no other tutorial helper files.
+
+```python
+"""Five-word projection snapshot, two equivalent classes and a variance probe."""
+import math
+import torch
+from torch import nn
+
+
+class ParameterAttention(nn.Module):
+    def __init__(self, d_in, d_key, d_value):
+        super().__init__()
+        self.WQ = nn.Parameter(torch.rand(d_in, d_key, dtype=torch.float64))
+        self.WK = nn.Parameter(torch.rand(d_in, d_key, dtype=torch.float64))
+        self.WV = nn.Parameter(torch.rand(d_in, d_value, dtype=torch.float64))
+
+    def forward(self, x):
+        q, k, v = x @ self.WQ, x @ self.WK, x @ self.WV
+        weights = torch.softmax(q @ k.transpose(-2, -1) / math.sqrt(k.shape[-1]), dim=-1)
+        return weights @ v, weights
+
+
+class LinearLayerAttention(nn.Module):
+    # This name means linear projection layers, not recurrent linear attention.
+    def __init__(self, d_in, d_key, d_value):
+        super().__init__()
+        self.query = nn.Linear(d_in, d_key, bias=False, dtype=torch.float64)
+        self.key = nn.Linear(d_in, d_key, bias=False, dtype=torch.float64)
+        self.value = nn.Linear(d_in, d_value, bias=False, dtype=torch.float64)
+
+    def forward(self, x):
+        q, k, v = self.query(x), self.key(x), self.value(x)
+        weights = torch.softmax(q @ k.transpose(-2, -1) / math.sqrt(k.shape[-1]), dim=-1)
+        return weights @ v, weights
+
+
+if __name__ == '__main__':
+    torch.manual_seed(123)
+    x = torch.tensor([[.5, 1.2, .8], [1.1, .3, .7], [.6, 1.5, .9],
+                      [.9, .8, .2], [1.2, 1.7, .5]], dtype=torch.float64)
+    wq = torch.tensor([[.6, .2], [.1, .7], [.5, .4]], dtype=torch.float64)
+    wk = torch.tensor([[.3, .6], [.4, .2], [.7, .5]], dtype=torch.float64)
+    wv = torch.tensor([[.2, .5], [.8, .1], [.3, .6]], dtype=torch.float64)
+    q, k, v = x @ wq, x @ wk, x @ wv
+    scores = q @ k.T
+    weights = torch.softmax(scores / math.sqrt(2), dim=-1)
+    contexts = weights @ v
+    for name, matrix in [('Q', q), ('K', k), ('V', v), ('scores', scores),
+                         ('weights', weights), ('contexts', contexts)]:
+        print(name, matrix.tolist())
+    manual = sum((weights[-1, j] * v[j] for j in range(5)), torch.zeros(2, dtype=x.dtype))
+    torch.testing.assert_close(manual, contexts[-1], atol=1e-14, rtol=0)
+    explicit = ParameterAttention(3, 2, 2)
+    linear = LinearLayerAttention(3, 2, 2)
+    with torch.no_grad():
+        for dest, source in [(explicit.WQ, wq), (explicit.WK, wk), (explicit.WV, wv),
+                             (linear.query.weight, wq.T), (linear.key.weight, wk.T),
+                             (linear.value.weight, wv.T)]:
+            dest.copy_(source)
+    torch.testing.assert_close(explicit(x)[0], contexts, atol=1e-14, rtol=0)
+    torch.testing.assert_close(linear(x)[0], contexts, atol=1e-14, rtol=0)
+    batch = torch.stack([x, x + .1])
+    torch.testing.assert_close(explicit(batch)[0], linear(batch)[0], atol=1e-14, rtol=0)
+    torch.manual_seed(123)
+    for width in [5, 100]:
+        queries = torch.randn(20000, width, dtype=torch.float64)
+        keys = torch.randn(20000, width, dtype=torch.float64)
+        raw = (queries * keys).sum(dim=-1)
+        print('width', width, 'raw variance', raw.var(unbiased=False).item(),
+              'scaled variance', (raw / math.sqrt(width)).var(unbiased=False).item())
+    print('Both classes match the fixed snapshot, including the batch path.')
+```
+
+The fixed five-word outputs must match before comparing classes. The program copies the same snapshot into both classes, checks the tensor result, and checks a two-item batch. Independently initialized classes need not give equal values merely because they have the same shapes. `LinearLayerAttention` here means a class using linear projection layers; it is still **softmax attention**, not the later recurrent technique called linear attention.
+
+The lecture's notebook also follows a six-word input with seed 123. You can make that same structural comparison by supplying the six rows from Lesson 5 to either class: $Q,K,V,Z$ have six rows instead of five, but the learned comparison width stays two. Changing a random seed changes initial matrix entries and outputs, while preserving their declared shapes. It does not measure model quality.
+
+### Follow one actual gradient update on the compact fixture
+
+To connect “trainable” to a measured change, the next calculation uses our earlier three-row transfer fixture and one declared scalar loss. It isolates one parameter rather than claiming to train a translator.
+
+Return to the smaller three-row transfer fixture from Lesson 5 and use this parameter snapshot
 
 $$W_Q=\begin{bmatrix}1&0\\0&1\end{bmatrix},\quad
 W_K=\begin{bmatrix}1&1\\0&1\end{bmatrix},\quad
@@ -47,11 +263,8 @@ For source row 3, $[1,1]W_K=[1,2]$: its first output coordinate is $1\times1+1\t
 
 ### Follow the last query all the way through
 
-![A complete learned self-attention flow from input through Q/K/V to output](images/original-slides/lecture-06-slide-21.png)
 
-*Original diagram: [Vizuara, Lecture 6, slide 21](https://lecture6-attention-mechanisms.vercel.app/#/21). Captured from the linked presentation website. Open the image for full size.*
 
-Follow Q and K into the score matrix, then follow V around the comparison branch into the final value mixture. This bypass explains why changing a value projection can change delivered features without changing the attention weights. The matrix axes and widths below give the exact contract for our smaller worked example.
 
 The last query `[1,1]` scores the three keys as `[2,1,3]`. Divide by $\sqrt2$ to get approximately `[1.414214,0.707107,2.121320]`. Stable softmax gives
 
@@ -159,18 +372,16 @@ if __name__ == '__main__':
 
 Run `python3 examples/06_projections.py`. The output contains every projection, the final weight row, output, loss, derivative and updated result. A finite-difference check tests this local derivative; it does not prove that a complete training system works or that every learning rate reduces every objective.
 
-### A boundary the projections cannot remove
+### The next restriction: information available during generation
 
-If two positions begin with identical features and have identical allowed memory, position-free shared projections give them identical queries and the same attention output. A learned key matrix can break a tie between **different** key vectors; it cannot manufacture information that is absent from identical inputs. Context from earlier layers or information about position can distinguish positions, but those are additional inputs or mechanisms.
+![A future-position triangle will be removed from the attention matrix](images/original-slides/lecture-06-slide-25.png)
 
-For batch tensors, transpose only the last two axes of the key tensor: `k.transpose(-2,-1)`, not an ambiguous `.T` on a tensor with more than two dimensions. The head-layout course will make those axes explicit.
+Today every position can inspect the complete supplied sentence. Next-token generation requires a stricter contract: features used to predict the next token cannot depend on that answer or later tokens. The next lesson adds a visibility rule to the scores before normalization.
 
 [[practice:projection-check]]
 
-### The original lecture and slides
+### References
 
-[Vizuara Lecture 6](https://www.youtube.com/watch?v=wshXBhGItkM) motivates the Q/K/V projections. Its slides 10–18 separate the roles and work through projection, scoring and value mixing. This lesson adds a checked local parameter update and explicitly states what learned projections cannot infer from identical inputs.
+[Vizuara — The Attention Family, Lecture 6](https://www.youtube.com/watch?v=wshXBhGItkM) · [Presentation and diagrams](https://lecture6-attention-mechanisms.vercel.app/) · [Interactive projections and variance lab](https://lecture6-attention-lab.vercel.app/) · [Lecture Colab notebook](https://colab.research.google.com/drive/10DoLeN3FK9BqmCebRz3cdS5BrdEshbw2?usp=sharing).
 
-```presentation
-{"title":"Vizuara · Lecture 6 · Original presentation","url":"https://lecture6-attention-mechanisms.vercel.app/#/1"}
-```
+[Vaswani et al. — Attention Is All You Need, section 3.2](https://arxiv.org/abs/1706.03762).

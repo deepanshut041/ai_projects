@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="650" viewBox="0 0 1160 650" role="img"><title>Translate a token position without changing its logical order</title><desc>Zero-based token 11, block size P = 4, logical block table [37,12,91].</desc>
+<rect x="0" y="0" width="1160" height="650" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">Translate a token position without changing its logical order</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">Zero-based token 11, block size P = 4, logical block table [37,12,91].</text>
+<rect x="36" y="119" width="290" height="154" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="151" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#2563b9">Logical token</text>
+<text x="54" y="193" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">position t = 11</text>
+<rect x="402" y="119" width="350" height="154" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="420" y="151" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">Split its address</text>
+<text x="420" y="193" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">block = floor(11/4) = 2</text>
+<text x="420" y="224" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">offset = 11 mod 4 = 3</text>
+<rect x="828" y="119" width="296" height="154" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="846" y="151" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#16735e">Physical address</text>
+<text x="846" y="193" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">block table[2] = 91</text>
+<text x="846" y="224" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">read slot 3 in block 91</text>
+<line x1="332" y1="195" x2="395" y2="195" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="395.00,195.00 384.87,199.28 384.87,190.72" fill="#6846c7"/>
+<line x1="758" y1="195" x2="821" y2="195" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="821.00,195.00 810.87,199.28 810.87,190.72" fill="#6846c7"/>
+<rect x="36" y="331" width="250" height="55" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="46" y="367.85" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="start" fill="#6846c7">logical block</text>
+<rect x="286" y="331" width="265" height="55" rx="0" fill="#ede8fb" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="296" y="367.85" font-family="DejaVu Sans" font-size="22" font-weight="700" text-anchor="start" fill="#6846c7">physical block</text>
+<rect x="36" y="386" width="250" height="55" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="46" y="422.85" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">0</text>
+<rect x="286" y="386" width="265" height="55" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="296" y="422.85" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">37</text>
+<rect x="36" y="441" width="250" height="55" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="46" y="477.85" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">1</text>
+<rect x="286" y="441" width="265" height="55" rx="0" fill="#f1f4fa" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="296" y="477.85" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">12</text>
+<rect x="36" y="496" width="250" height="55" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="46" y="532.85" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">2</text>
+<rect x="286" y="496" width="265" height="55" rx="0" fill="#ffffff" stroke="#dfe3ee" stroke-width="1.5"/>
+<text x="296" y="532.85" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">91</text>
+<rect x="609" y="331" width="515" height="220" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="627" y="363" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#16735e">Physical block 91</text>
+<text x="680" y="410" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="middle" fill="#17253f">slot 0</text>
+<rect x="631" y="431" width="99" height="58" rx="12" fill="#edf0f7"/>
+<text x="680" y="469" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="middle" fill="#17253f">8</text>
+<text x="799" y="410" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="middle" fill="#17253f">slot 1</text>
+<rect x="750" y="431" width="99" height="58" rx="12" fill="#edf0f7"/>
+<text x="799" y="469" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="middle" fill="#17253f">9</text>
+<text x="918" y="410" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="middle" fill="#17253f">slot 2</text>
+<rect x="869" y="431" width="99" height="58" rx="12" fill="#edf0f7"/>
+<text x="918" y="469" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="middle" fill="#17253f">10</text>
+<text x="1037" y="410" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="middle" fill="#17253f">slot 3</text>
+<rect x="988" y="431" width="99" height="58" rx="12" fill="#e4f3ed" stroke="#16735e" stroke-width="1.5"/>
+<text x="1037" y="469" font-family="DejaVu Sans" font-size="25" font-weight="700" text-anchor="middle" fill="#16735e">11</text>
+<text x="36" y="607" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">The cells show absolute token positions 8…11. Physical block ID 91 is an allocation address.</text>
+</svg>

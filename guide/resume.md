@@ -1,11 +1,40 @@
 # Projects resume checkpoint
 
+## Standalone project execution — 2026-10-31
+
+Standalone project execution (2026-10-31): all eight runnable projects support native commands and the optional workspace CLI/TUI. Clean standalone source checks and all eight workspace launch checks pass. Inference Labs also passes a fresh independent-clone check without its parent umbrella or CLI. Collection guidance and future scaffolds require both routes; Bike uses its native unittest runner through the adapter. Documentation-only projects, learner checkpoints and model results remain unchanged.
+
+See the [native and workspace command table](standalone-projects.md) for current commands and verification limits.
+
+## TinyServe boilerplate — 2026-10-30
+
+TinyServe preparation (2026-10-30): Inference Labs is now an independent collection at `ai_projects/projects/inference_labs/`, with a learner-owned `tinyserve` boilerplate and local bare origin. Python 3.12.13, frozen tooling, status/setup/configuration launchers and Projects → Inference Labs TUI integration are verified. All 10 setup checks and 183 CLI tests pass; isolated wheel execution, a fresh source rebuild and six real TUI jobs at 80×24/120×36 pass. The learner will implement the model, cache, scheduler, kernels and API; no upstream engine is copied and no model/GPU/performance or learner gate is complete. Existing learner checkpoints remain unchanged. Next for TinyServe: choose the first small model and runtime when coding begins.
+
+See the [TinyServe setup record](../../../cli/docs/implementation/2026-10/tinyserve-boilerplate-and-inference-labs-tui/00-resume.md) and [project README](../../projects/inference_labs/tinyserve/README.md). This prepares a later implementation; the existing learning route is preserved.
+
+## Attention Labs worked visual completion — 2026-10-30
+
+Attention Labs worked visuals (2026-10-30): 27 original editable figures now fill the missing numerical and state transitions across all fourteen continuation tutorials. They explain retrieval weights, group wiring, positional changes, latent paths, softmax merges, sparse reach, recurrent writes, gate order, paged ownership and balanced ring rounds beside the matching math/code. Existing source visuals, Foundations, MHA and every reference program are preserved. There remain 22 lesson pages in eight categories. Learner/model/hosted checkpoints are unchanged.
+
+Follow the [ordered reading route](attention-labs-route.md). The [visual completion record](../implementation/2026-10/attention-labs-playlist-tutorial/13-original-visual-completion.md) owns the per-topic coverage and checks. Review one lesson and predict its changed case before continuing. The existing P00 learner checkpoint stays in force.
+
+## Attention Labs continuation — 2026-10-30
+
+Attention Labs continuation (2026-10-30): fourteen complete tutorials now extend the existing seven Foundations lessons and single MHA lesson, giving 22 lesson pages in eight categories. The ordered route covers KV caching, MQA, GQA, RoPE, ALiBi, MLA, FlashAttention, sparse/local/global/windows, linear attention, Performer, DeltaNet, Gated DeltaNet, PagedAttention and Ring Attention. Each new mechanism has worked math, source visuals, a complete locally checked reference, Colab instructions and transfer practice. Public Vizuara lessons and primary sources supply the material; source diagram errors are explained alongside corrected calculations. Original Lecture 9 remains excluded. Learner/model/hosted checkpoints are unchanged.
+
+Follow the [complete reading order](attention-labs-route.md); the [continuation record](../implementation/2026-10/attention-labs-playlist-tutorial/12-next-attention-topics.md) separates component checks from learner and hosted results. The earlier eight-page preparation entries below are historical.
+
+## Attention Labs: sequential teaching revision — 2026-10-30
+
+Attention Labs sequential revision (2026-10-30): Lectures 1–8 are revised in order across eight shared tutorial pages (seven Foundations lessons and one MHA lesson in Attention Heads), following the teacher's problem, diagrams, worked calculations and code progression. The lessons include 131 presentation/lab captures with explained bars, matrices and axes, restored six-word/five-word examples and runnable Colab-compatible references. Repeated provenance captions and four extra provenance JSON files are removed; attribution stays in references. Lecture 9 is excluded, MHA stays in Attention Heads, and model/learner/hosted checkpoints are unchanged.
+
+The [sequential review](../implementation/2026-10/attention-labs-playlist-tutorial/11-sequential-teaching-review.md) records each lecture and its checks. Continue with the revised Attention Foundations opening, then follow the existing lesson order into the separate Attention Heads route. Learner review remains pending.
+
 ## Separate Project Docs and Tutorials — 2026-10-30
 
 Projects Docs navigation (2026-10-30): the homepage and sidebar now separate Project Docs from Tutorials, with Foundations, Transformer Labs, Language Models, Quantization Lab and Attention Labs collections in both sections. Tutorial collection pages preserve all existing course/chapter URLs and authored ordering; record search has its own page. All 808 tutorial files are byte-preserved. Project, learner and hosted checkpoints are unchanged.
 
 Project documents continue under /projects/; tutorials now browse through /tutorials/{collection}/ before opening their existing lesson URLs. Search is at /search/. The [delivery record](../implementation/2026-10/separate-project-docs-and-tutorials-by-collection/00-resume.md) owns route, compatibility and browser evidence. This is reader organization; implementation and learner progress are preserved.
-
 
 ## Attention Labs inline presentation visuals — 2026-10-30
 
@@ -13,19 +42,55 @@ Attention Labs visual revision (2026-10-30): all ten Attention Foundations/Heads
 
 Continue at the [Attention Foundations tutorial](../tutorials/projects/attention-labs/attention-foundations/v1/lessons/01-context-and-map.md) or [Attention Heads](../tutorials/projects/attention-labs/attention-heads/v1/lessons/01-independent-heads.md). The [visual revision record](../implementation/2026-10/attention-labs-playlist-tutorial/08-visual-revision.md) owns source capture, placement and browser verification. This addresses tutorial presentation; attention implementation remains at its prepared boilerplate checkpoint.
 
-
 ## Attention Foundations build/test project — 2026-10-30
 
 Attention Foundations project preparation (2026-10-30): the existing attention-labs/attention-foundations child now has an explicit goal to build and independently test six basic single-head attention mechanisms, a six-phase route, locked Python 3.12.13 source boilerplate, workspace runners and a source-upload Colab notebook. All 18 scaffold checks and the six operational notebook cells pass locally; only the Colab file interface is simulated. Attention implementations, actual Google-hosted execution and learner review remain pending. MHA/GQA stay in attention-heads, shared tutorials stay in Docs, and existing learner/model checkpoints are preserved.
 
 Start from the [project goal](../../projects/attention-labs/attention-foundations/README.md) and [Colab instructions](../../projects/attention-labs/attention-foundations/COLAB.md). Next implementation action: specify one additive query/key/value retrieval, then implement and independently verify it. The [current setup record](../../projects/attention-labs/attention-foundations/docs/implementation/00_setup-build-goals-and-colab-runner/00-resume.md) separates preparation from learning and hosted evidence.
 
-
 ## Attention Labs shared tutorials — 2026-10-30
 
 Attention Labs preparation (2026-10-30): Attention Labs is an independent collection repository/submodule with one attention-foundations folder for Lectures 1–7 and a separate attention-heads folder for MHA and later GQA. Ten detailed lessons live in the shared Docs tutorials/projects/attention-labs tree. All eight English automatic subtitle/transcript texts and all 181 original slides were reviewed; each included lecture retains its original presentation viewer/link. The explanations, numerical fixtures, diagrams and Python/C++ references are original. Lecture 9 is excluded. Existing model source and learner/hosted checkpoints are unchanged.
 
 Start with [Attention Foundations](../tutorials/projects/attention-labs/attention-foundations/v1/lessons/01-context-and-map.md), then continue to [Attention Heads](../tutorials/projects/attention-labs/attention-heads/v1/lessons/01-independent-heads.md). The [owning record](../implementation/2026-10/attention-labs-playlist-tutorial/00-resume.md) separates source review, author checks and reader delivery. Next: review the worked route and its explanation prompts; no new learner milestone is recorded.
+
+## Attention example includes all four binary pairs — 27 October 2026
+
+Attention four-row example (2026-10-27): The tutorial now uses “We read books daily” with all four chosen binary pairs, including `[0,0]`. Dependent arithmetic, complete programs, diagrams and continuous notes are recalculated together. A real zero row is distinguished from masked padding. Videos remain removed; model source and learner/hosted checkpoints are unchanged. See [the follow-up record](../implementation/2026-10/attention-is-all-you-need-source-backed-tutorial/27-four-position-followup.md).
+
+## Quantization Lab website navigation restored — 2026-10-26
+
+Quantization Lab now appears on the Projects Docs homepage, all-collections page and sidebar. Both projects, their local phase/implementation records and the existing Document Assistant tutorial/video links are reachable. The collection had been omitted from the website registry despite being available in the TUI. All 22 native checks, root/prefixed builds and full desktop/mobile browser suites pass; the managed reader is restarted. See [the maintenance record](../implementation/2026-10/quantization-lab-docs-navigation/00-resume.md). Open Projects → Quantization Lab to continue. This maintenance does not change the learning checkpoint below.
+
+## Attention overview-to-depth refinement — 2026-10-26
+
+Attention tutorial progression (2026-10-26): The learner positively reviewed the detailed explanation and requested an overview followed by progressively deeper passes. The entry now shows the whole translation process, explains component jobs before naming them, locates attention and maps the chapter progression before opening numerical inputs. Accepted detailed calculations and all ten complete programs are retained; videos remain removed. Source and learner/hosted checkpoints are unchanged. See [the refinement record](../implementation/2026-10/attention-is-all-you-need-source-backed-tutorial/25-overview-to-depth-refinement.md). Next: review the revised opening and its progression into the existing detailed route.
+
+## Attention whole-course review and written revision — 2026-10-26
+
+Attention tutorial revision (2026-10-26): The learner rejected the explanation and videos and required an entire-course comparison. All twelve chapters and supporting pages are revised around translation inputs, missing information paths, design choices and actual execution, with eight original diagrams. All 22 bindings for eleven Attention videos are detached from the course and project notes. Earlier approval/playback records remain historical; current teaching acceptance is pending. Attention/Bike source and learner/hosted checkpoints are unchanged.
+
+The [chapter-by-chapter comparison](../implementation/2026-10/attention-is-all-you-need-source-backed-tutorial/18-whole-course-comparison.md) records the reviewed external tutorials and complete diagnosis. The current route starts at [the translation problem](../tutorials/projects/attention-is-all-you-need/attention-lab/v1/lessons/01-weighted-information.md). Next: review the revised explanation and identify any remaining missing causal transition. No replacement videos are produced.
+
+## Document Assistant captioned-video production — 2026-10-26
+
+All 24 captioned companions are delivered across phases 00–06: 156 editable worked scenes and 89:54 of finished video. Each verified local player appears before its matching lesson prose, with captions, transcript and download links. The route includes worked maths, complete displayed Python/C++ references, the actual scaffold helper chain and changed-condition reasoning. Finished-file speech/audio/captions and every-video root/prefixed/managed-reader desktop/mobile play, pause, seeking, transcript/download and print checks pass. All 241 pinned source files are byte-preserved. Actual Gemma/backend compatibility, full-model quantization/evaluation, the application, learner mastery and hosted execution remain pending. [Delivery record](../implementation/2026-10/document-assistant-all-phase-captioned-videos/11-delivery.md).
+
+## Document Assistant full-phase written tutorial — 2026-10-26
+
+The requested [Document Assistant course](../tutorials/projects/document-assistant/quantization-lab/v1/lessons/01-start.md) covers phases 00–06 through 24 connected lessons: document/evidence contracts, model compatibility and budgets, quantization/storage/error, calibration/AWQ/GPTQ mechanisms, quality/timing, cache/context, saved generations, service/application and final selection. Complete standalone teaching references, original figures, revealable transfer practice, sources/departures and a concrete implementation/readiness checklist accompany the route. All 24 references and 66 independent/extraction checks pass; reader verification belongs to the [authoring record](../implementation/2026-10/document-assistant-full-phase-tutorial/00-resume.md).
+
+This is written preparation requested for all phases. The actual project retains its status/setup/configuration TUI runners and pending model actions. Written preparation alone produced no weights, model results, learner mastery or hosted proof. Companion video delivery is recorded separately above. Next implementation action for this project is phase 00 compatibility/budget. The existing Attention learning continuation and prior evidence below remain unchanged.
+
+## Quantization Lab preparation — 2026-10-26
+
+[Quantization Lab](../../projects/quantization-lab/README.md) now has runnable boilerplates for document-assistant and compressed-semantic-search. Each has a Python 3.12.13 environment, lockfile, responsibility folders under src, direct/module/console commands and pinned current model configuration. All 19 scaffold checks, source/wheel builds and isolated installed execution pass; future model/data actions fail explicitly without creating outputs. Next for these projects: define a bounded model/encoder compatibility probe before adding backend dependencies or acquiring weights. No model compatibility, task result, application or learner gate is completed; the existing Attention learning continuation below remains unchanged. TUI integration is verified: Projects → Quantization Lab exposes both projects and status/check/configuration runners; six real TUI launches exit successfully at 80×24 and 120×36. The shared launcher also supports ai run document-assistant and ai run compressed-semantic-search.
+
+## Attention approved text and new section videos — 2026-10-24
+
+The learner explicitly approved the rewritten text before video production on 24 October 2026. Eleven new captioned videos contain 86 scenes and 47:02 of narration and worked visuals. They follow the same fixed example from the need for context through query/key comparisons, all positions, projections, heads, padding, causality, cross-attention, a gradient update, the complete actual implementation and its place in the Transformer. Every called project helper is shown before use. Each verified player appears before its matching notes section, with the same media in eleven corresponding tutorial chapters. Finished-file audio/speech/captions and root/prefixed desktop/mobile play, pause, seeking, transcript/download and print checks pass. The approved teaching body is preserved; only delivery-status footers reflect approval. Old rejected media remains archived. Attention source, Colab behavior and Bike results are unchanged; learner mastery, later model/training and hosted execution remain separate.
+
+Start at the Attention project understanding notes, section 1, then continue in order through section 11. The video-delivery record is implementation/2026-10/attention-is-all-you-need-source-backed-tutorial/16-approved-text-video-delivery.md.
 
 ## Local source handoff and generated-file cleanup — 2026-10-23
 

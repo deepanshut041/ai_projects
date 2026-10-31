@@ -1,68 +1,81 @@
-## Run several heads and reassemble their information
+## 5. Why use several attention heads?
 
-One head uses one learned query/key comparison space and one value transformation. Multiple heads let the layer compute several such retrievals in parallel. This is architectural capacity; it does not guarantee that different heads acquire distinct linguistic specialties.
+One head produces one distribution over source positions for each receiver. In our example, receiver 0 uses weights `[0.334881,0.165119,0.334881,0.165119]`. The first output feature and the second output feature both use that same distribution. W_V can change the content carried by a source row, but within this head the row still has one scalar contribution weight.
 
-### Split projected features while keeping all positions
+That is the restriction multiple heads relax. A layer can give different projected feature groups independently calculated distributions over positions, then combine the gathered features. It does not have to compress every relationship into one mixture.
 
-Choose `B=2`, `S=5`, model width `D=12` and `H=3` heads. Each head has `d=4` features. The public layer first projects X to three `(2,5,12)` tensors. `_heads` then performs:
+### What a head owns
+
+Each head has query, key and value features, its own scores and its own softmax distribution for each receiver. Every head can still read every permitted position. Heads divide projected **features**, not the sentence into segments.
+
+In the implementation, a single full-width projection produces all head features together, then a reshape labels which features belong to which head. This is equivalent to collecting separate per-head projection matrices side by side. Since projection happens before splitting, each head's features can depend on the whole input row.
+
+### Work the two heads for the same receiving position
+
+Keep X and the identity/doubling projections, but use two heads of width one. For receiver 0:
+
+| Calculation | Head 0 | Head 1 |
+| --- | --- | --- |
+| Query feature | `[1]` | `[0]` |
+| Keys at positions 0, 1, 2, 3 | `[1], [0], [1], [0]` | `[0], [1], [1], [0]` |
+| Values at positions 0, 1, 2, 3 | `[2], [0], [2], [0]` | `[0], [2], [2], [0]` |
+| Scores, scaled by sqrt(1) | `[1,0,1,0]` | `[0,0,0,0]` |
+| Weights | `[0.365529,0.134471,0.365529,0.134471]` | `[1/4,1/4,1/4,1/4]` |
+| Gathered feature | `1.462117` | `1.000000` |
+
+The second head averages because this particular receiver's second query feature is zero. It is not assigned a special language task. The first head prefers positions 0 and 2. The two gathered features therefore come from different mixtures of the same source positions.
+
+Concatenate them to get `[1.462117,1.000000]`, then apply W_O, the output projection. W_O is identity in this check so the two gathered features stay visible. In a trained model it can mix them into the next layer's feature space. It does not recalculate their attention weights.
+
+![One distribution in one head versus separately normalized distributions in two heads](images/24-head-layout.svg)
+
+### Follow the axes through the implementation
+
+Start with `(B,T,d_model)`. Reshape to `(B,T,H,d_head)` and transpose to `(B,H,T,d_head)`. Now each `(batch,head)` pair holds an ordinary position-by-feature attention problem. After gathering, transpose back to `(B,T,H,d_head)` **before** joining head features into each position's row.
 
 ```python
-x.reshape(batch, length, num_heads, head_dim).transpose(1, 2)
+import math
+import torch
+
+def attend(q, k, v):
+    scores = (q @ k.transpose(-2, -1)) / math.sqrt(q.shape[-1])
+    shifted = scores - scores.max(dim=-1, keepdim=True).values
+    exponentials = torch.exp(shifted)
+    weights = exponentials / exponentials.sum(dim=-1, keepdim=True)
+    return weights @ v, weights
+
+torch.set_printoptions(precision=6, sci_mode=False)
+x = torch.tensor([[[1., 0.], [0., 1.], [1., 1.], [0., 0.]]], dtype=torch.float64)
+w_q = torch.eye(2, dtype=x.dtype)
+w_k = torch.eye(2, dtype=x.dtype)
+w_v = 2 * torch.eye(2, dtype=x.dtype)
+w_out = torch.eye(2, dtype=x.dtype)
+q, k, v = x @ w_q, x @ w_k, x @ w_v
+
+batch, positions, width = x.shape
+heads = 2
+assert width % heads == 0
+head_width = width // heads
+q_heads = q.reshape(batch, positions, heads, head_width).transpose(1, 2)
+k_heads = k.reshape(batch, positions, heads, head_width).transpose(1, 2)
+v_heads = v.reshape(batch, positions, heads, head_width).transpose(1, 2)
+
+head_context, head_weights = attend(q_heads, k_heads, v_heads)
+joined = head_context.transpose(1, 2).reshape(batch, positions, width)
+output = joined @ w_out
+
+print(q_heads.shape)
+print(head_weights[0, 0, 0])
+print(head_weights[0, 1, 0])
+print(output[0])
 ```
 
-The intermediate shape is `(2,5,3,4)` and the result is `(2,3,5,4)`. We have separated head and feature axes, then moved the head axis before sequence. Every head still receives all five positions. We are not giving tokens 0–1 to head zero and tokens 2–3 to head one.
+The output rows are approximately `[1.462117,1.000000]`, `[1.000000,1.462117]`, `[1.462117,1.462117]` and `[1,1]`. They differ from the one-head results because the comparison features, per-head scaling and normalization groups changed. The reshape alone would not justify an improvement claim.
 
-![Head packing separates feature groups and preserves sequence positions.](images/07-head-packing.png)
+If you flatten while heads still precede positions, elements can end up in the wrong token row even though the final shape looks plausible. This is why the inverse transpose is part of correctness rather than cosmetic layout code.
 
-The constructor requires `D` to be positive and divisible by positive `H`. With `D=10,H=3`, equal-width heads do not fit, so this implementation raises `ValueError`. Some alternative architecture could use unequal heads; that is not the contract implemented here.
+At fixed model width, increasing H reduces each head's width. More independently weighted mixtures come with narrower per-head feature spaces. Neither a larger head count nor a diagram assigning “grammar” to one head and “meaning” to another establishes a better model. The paper motivates multiple representation subspaces; useful specializations and task quality require trained-model evidence. [Paper, section 3.2.2](https://arxiv.org/html/1706.03762v7).
 
-### Compare the readable loop with vectorized heads
-
-The earlier `MultiHeadAttention` class builds separate Q/K/V linear layers for each head and runs them in a Python loop. Each projection maps the full D-dimensional input to d features. The vectorized version stores all corresponding projection rows in one `nn.Linear(D,D)`, then splits its output.
-
-These are two organizations of compatible calculations. Stacking matching per-head parameter rows into the vectorized layer produces matching outputs and weights; the test `test_loop_heads_equal_vectorized_heads_with_matching_parameters` verifies that comparison. Comparing two separately initialized layers without copying their parameters would test different functions, not the loop/vectorization choice.
-
-### Trace attention inside each head
-
-For each batch/head, Q and K have shape `(5,4)`. Their score matrix has shape `(5,5)`, scaled by `√4`. Multiplying normalized weights by `(5,4)` values yields one `(5,4)` context. All heads together form `(B,H,S,d)=(2,3,5,4)`.
-
-For output query position zero, take its four-coordinate result from head zero, then from head one, then from head two. Concatenating those features produces a 12-coordinate row. Transpose the context back to `(B,S,H,d)` before flattening the final two axes:
-
-```python
-merged = context.transpose(1, 2).flatten(2)
-output = self.out_proj(merged)
-```
-
-Flattening `(B,H,S,d)` directly would combine the wrong logical axes. A shape that eventually reshapes to `(B,S,D)` is not proof that the elements retain their correct token/head ownership.
-
-### Work a small concatenation and output projection
-
-The separate two-head visualization uses two query positions. Head zero returns `[[1,0],[0,1]]`; head one returns `[[2,1],[1,2]]`. Concatenating along features yields:
-
-```text
-merged = [[1,0,2,1],
-          [0,1,1,2]]
-```
-
-The existing display fixture applies this controlled output map, with zero bias:
-
-```text
-W_O = [[1,0,1,0],
-       [0,1,0,1],
-       [1,0,0,1],
-       [0,1,1,0]]
-merged @ W_O = [[3,1,2,2],
-                [1,3,2,2]]
-```
-
-For example, the first row's third output is `1×1 + 0×0 + 2×0 + 1×1 = 2`. The operation combines head features at the same query position, rather than attending across positions again. `output_projection_example()` computes this through the actual layer's output projection, and the known-answer test verifies both merged and projected values.
-
-![The existing fixture concatenates head contexts before the output projection.](images/25-head-context-concatenation.png)
-
-### Count the final layer's parameters
-
-In the final `Attention` class, Q/K/V/output are each biased D-to-D linear maps. Each owns `D²` weights and `D` biases. Total count is `4(D²+D)`. The demo uses D=9, so the count is `4(81+9)=360`. Changing H while preserving D changes how features are partitioned and the scale used per head, but not this parameter count. Attention-score storage still grows with head count and the product of query/key lengths.
+**Runnable copy:** [two heads with visible score and value paths](examples/walkthrough/05_heads.py).
 
 [[practice:heads-check]]
-
-The layer now handles many positions and heads. Before applying it to variable-length batches, we must ensure that added padding positions cannot become useful keys.

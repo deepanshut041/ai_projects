@@ -1,5 +1,41 @@
 # Projects roadmap
 
+## Standalone project execution — 2026-10-31
+
+Standalone project execution (2026-10-31): all eight runnable projects support native commands and the optional workspace CLI/TUI. Clean standalone source checks and all eight workspace launch checks pass. Inference Labs also passes a fresh independent-clone check without its parent umbrella or CLI. Collection guidance and future scaffolds require both routes; Bike uses its native unittest runner through the adapter. Documentation-only projects, learner checkpoints and model results remain unchanged.
+
+See the [native and workspace command table](standalone-projects.md) for current commands and verification limits.
+
+## TinyServe boilerplate — 2026-10-30
+
+TinyServe preparation (2026-10-30): Inference Labs is now an independent collection at `ai_projects/projects/inference_labs/`, with a learner-owned `tinyserve` boilerplate and local bare origin. Python 3.12.13, frozen tooling, status/setup/configuration launchers and Projects → Inference Labs TUI integration are verified. All 10 setup checks and 183 CLI tests pass; isolated wheel execution, a fresh source rebuild and six real TUI jobs at 80×24/120×36 pass. The learner will implement the model, cache, scheduler, kernels and API; no upstream engine is copied and no model/GPU/performance or learner gate is complete. Existing learner checkpoints remain unchanged. Next for TinyServe: choose the first small model and runtime when coding begins.
+
+See the [TinyServe setup record](../../../cli/docs/implementation/2026-10/tinyserve-boilerplate-and-inference-labs-tui/00-resume.md) and [project README](../../projects/inference_labs/tinyserve/README.md). This prepares a later implementation; the existing learning route is preserved.
+
+## Attention Labs worked visual completion — 2026-10-30
+
+Attention Labs worked visuals (2026-10-30): 27 original editable figures now fill the missing numerical and state transitions across all fourteen continuation tutorials. They explain retrieval weights, group wiring, positional changes, latent paths, softmax merges, sparse reach, recurrent writes, gate order, paged ownership and balanced ring rounds beside the matching math/code. Existing source visuals, Foundations, MHA and every reference program are preserved. There remain 22 lesson pages in eight categories. Learner/model/hosted checkpoints are unchanged.
+
+Follow the [ordered reading route](attention-labs-route.md). The [visual completion record](../implementation/2026-10/attention-labs-playlist-tutorial/13-original-visual-completion.md) owns the per-topic coverage and checks. Review one lesson and predict its changed case before continuing. The existing P00 learner checkpoint stays in force.
+
+## Attention Labs continuation — 2026-10-30
+
+Attention Labs continuation (2026-10-30): fourteen complete tutorials now extend the existing seven Foundations lessons and single MHA lesson, giving 22 lesson pages in eight categories. The ordered route covers KV caching, MQA, GQA, RoPE, ALiBi, MLA, FlashAttention, sparse/local/global/windows, linear attention, Performer, DeltaNet, Gated DeltaNet, PagedAttention and Ring Attention. Each new mechanism has worked math, source visuals, a complete locally checked reference, Colab instructions and transfer practice. Public Vizuara lessons and primary sources supply the material; source diagram errors are explained alongside corrected calculations. Original Lecture 9 remains excluded. Learner/model/hosted checkpoints are unchanged.
+
+Follow the [complete reading order](attention-labs-route.md); the [continuation record](../implementation/2026-10/attention-labs-playlist-tutorial/12-next-attention-topics.md) separates component checks from learner and hosted results. The earlier eight-page preparation entries below are historical.
+
+## Attention Labs tutorial correction — 2026-10-30
+
+Attention Labs sequential revision (2026-10-30): Lectures 1–8 are revised in order across eight shared tutorial pages (seven Foundations lessons and one MHA lesson in Attention Heads), following the teacher's problem, diagrams, worked calculations and code progression. The lessons include 131 presentation/lab captures with explained bars, matrices and axes, restored six-word/five-word examples and runnable Colab-compatible references. Repeated provenance captions and four extra provenance JSON files are removed; attribution stays in references. Lecture 9 is excluded, MHA stays in Attention Heads, and model/learner/hosted checkpoints are unchanged.
+
+The tutorial correction changes preparation quality and delivery, not the current P00 learner checkpoint or the Attention Foundations implementation scaffold. MQA/GQA/MLA were subsequently added as separate Attention Heads lessons; see the current continuation above.
+
+## Attention approved text and new section videos — 2026-10-24
+
+The learner explicitly approved the rewritten text before video production on 24 October 2026. Eleven new captioned videos contain 86 scenes and 47:02 of narration and worked visuals. They follow the same fixed example from the need for context through query/key comparisons, all positions, projections, heads, padding, causality, cross-attention, a gradient update, the complete actual implementation and its place in the Transformer. Every called project helper is shown before use. Each verified player appears before its matching notes section, with the same media in eleven corresponding tutorial chapters. Finished-file audio/speech/captions and root/prefixed desktop/mobile play, pause, seeking, transcript/download and print checks pass. The approved teaching body is preserved; only delivery-status footers reflect approval. Old rejected media remains archived. Attention source, Colab behavior and Bike results are unchanged; learner mastery, later model/training and hosted execution remain separate.
+
+Start at the Attention project understanding notes, section 1, then continue in order through section 11. The video-delivery record is implementation/2026-10/attention-is-all-you-need-source-backed-tutorial/16-approved-text-video-delivery.md.
+
 ## Attention code understanding and section videos — 2026-10-23
 
 The project understanding notes now contain seven focused code/value walkthroughs (about 2,400 words), replacing the 8,240-word course concatenation. The “What the attention computation means” learning points now explain roles, axes, heads, masks, paths and gradients in connected prose, both locally and in the shared tutorial. Seven captioned code companions with 42 editable scenes total about 24 minutes. Each verified video appears immediately after its matching notes heading, before prose; seven corresponding course chapters reuse the same media. Actual root and prefixed browser checks exercise all seven players at desktop/mobile widths, seeking through beginning/middle/end, caption cues, transcripts/downloads and print behavior. Source, Colab runner and Bike results are preserved. No learner explanation, translation training or hosted recovery is inferred. Next: watch/read the Q/K/V and score/value sections, then explain one full query trace.

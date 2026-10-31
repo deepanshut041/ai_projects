@@ -11,6 +11,7 @@ export async function workspaceRecords(siteRoot, companionUrl, tutorialPages = {
     ['guide/progress.md', 'progress', 'Projects progress', 'Evidence and milestone states from the canonical learning ledger.'],
     ['guide/resume.md', 'resume', 'Resume Projects', 'The current project and concrete next action.'],
     ['guide/decisions.md', 'decisions', 'Projects decisions', 'Durable learning and ownership choices.'],
+    ['guide/attention-labs-route.md', 'attention-labs-route', 'Attention Labs reading route', 'The ordered attention tutorial continuation, grouped by mechanism and category.'],
     ['implementation/2026-10/project-zero-foundations-and-small-gpt-roadmap/02-implementation-plan.md', 'project-zero-plan', 'Project Zero and small GPT plan', 'Ground-up tokenizer, attention and complete Transformer milestones before a decoder-only text model.'],
     ['implementation/2026-10/llm-roadmap-review-and-gpt-1-starting-plan/02-implementation-plan.md', 'gpt-1-starting-plan', 'GPT-1 starting plan (historical reference)', 'Preserved earlier plan; the live P00-first roadmap supersedes this exact GPT-1 starting scope.'],
   ];
@@ -49,7 +50,7 @@ export async function workspaceRecords(siteRoot, companionUrl, tutorialPages = {
       if (targets.has(target)) return `[${label}](${path.posix.relative('guides', targets.get(target))}${fragment ? '#' + fragment : ''})`;
       const lesson = path.relative(owner, target).replaceAll(path.sep, '/').match(/^tutorials\/projects\/(p\d{2})\/([a-z][a-z0-9-]*)\/([a-z][a-z0-9-]*)\/lesson\.md$/);
       if (lesson) return `[${label}](../tutorials/${lesson[1]}-${lesson[2]}-${lesson[3]}.md${fragment ? '#' + fragment : ''})`;
-      if (target === path.resolve(owner, '../../ai_research/roadmap.md')) return `[${label}](${companionUrl})`;
+      if (companionUrl && target === path.resolve(owner, '../../ai_research/roadmap.md')) return `[${label}](${companionUrl})`;
       return `${label} (local workspace file: \`${href}\`)`;
     });
     const raw = `---\ntitle: ${JSON.stringify(title)}\ndescription: ${JSON.stringify(description)}\nupdated: ${JSON.stringify(updated)}\nstatus: "canonical workspace record"\ntags: ["guides", "roadmap"]\n---\n\n${body}`;

@@ -1,14 +1,12 @@
-# Explain and change the attention calculation
+# Explain what can influence an output
 
-Try each prediction before revealing the worked answer. These are the same review prompts used in the ordered lessons, gathered for a return visit. No human response or mastery result is retained.
+These optional questions examine the decisions developed in the [main route](lessons/01-weighted-information.md). Try a prediction before revealing the answer. The stored answers are reference explanations, not recorded learner responses.
 
 [[tutorial-practice:weighted-check]]
 
-[[tutorial-practice:setup-check]]
+[[tutorial-practice:softmax-check]]
 
 [[tutorial-practice:shapes-check]]
-
-[[tutorial-practice:softmax-check]]
 
 [[tutorial-practice:projections-check]]
 
@@ -20,8 +18,10 @@ Try each prediction before revealing the worked answer. These are the same revie
 
 [[tutorial-practice:cross-check]]
 
-[[tutorial-practice:interface-check]]
-
 [[tutorial-practice:gradient-check]]
 
+[[tutorial-practice:interface-check]]
+
 [[tutorial-practice:handoff-check]]
+
+[[tutorial-practice:setup-check]]

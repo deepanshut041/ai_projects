@@ -7,3 +7,5 @@ Source: Vizuara's The Attention Family playlist, lectures 1, 2, 3, 4, 5, 6, 7, p
 From this directory run the displayed `python3 examples/...` commands, and the displayed C++ command where applicable. Every helper is included in the package and shown before its first consequential use. The PyTorch packed reference, when present, uses its separately stated dependency and execution record.
 
 Author arithmetic and rendering checks are recorded in reference-runs.md and the owning implementation package. Learner explanation is unassessed. No dataset, fitted translator, benchmark, hosted notebook execution, model training or new learning milestone is implied.
+
+The revised reading route follows the teacher one lecture at a time, with complete worked examples and inline diagrams/charts. Attribution stays in references; source acquisition metadata is not part of the lesson. Project implementations and learner checkpoints are unchanged.

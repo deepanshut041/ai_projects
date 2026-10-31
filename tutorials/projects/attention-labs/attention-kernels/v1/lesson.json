@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "project_id": "attention-labs",
+  "languages": [
+    "cpp",
+    "python"
+  ],
+  "examples": [],
+  "slug": "attention-kernels",
+  "revision": "v1",
+  "title": "Attention execution: FlashAttention",
+  "question": "How can exact attention avoid storing every score and probability?",
+  "topic_kind": "concept",
+  "level": "advanced",
+  "prerequisites": [],
+  "created_at": "2026-10-30T22:46:28.669603+00:00",
+  "repository": {
+    "base_sha": "6114868d844022fb42d82a1e04d86b1cc51ba90b",
+    "name": "docs"
+  },
+  "objectives": [
+    {
+      "id": "flash-merge",
+      "text": "Derive a common-reference merge of partial softmax numerators and denominators."
+    },
+    {
+      "id": "flash-cost",
+      "text": "Separate exact dense arithmetic, intermediate storage and measured runtime."
+    }
+  ],
+  "sources": [
+    {
+      "id": "flash-original",
+      "kind": "external",
+      "title": "FlashAttention method",
+      "url": "https://arxiv.org/html/2205.14135v2",
+      "accessed_at": "2026-10-30",
+      "locator": "Section 3 and Algorithm 1",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    },
+    {
+      "id": "flash-workshop",
+      "kind": "external",
+      "title": "Vizuara Chapter 10",
+      "url": "https://vizuaraai.github.io/convolution-musical-journey/book.html",
+      "accessed_at": "2026-10-30",
+      "locator": "Chapter 10; fourteen figures",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    },
+    {
+      "id": "flash-2",
+      "kind": "external",
+      "title": "FlashAttention-2",
+      "url": "https://arxiv.org/abs/2307.08691",
+      "accessed_at": "2026-10-30",
+      "locator": "Abstract and algorithm overview",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    },
+    {
+      "id": "flash-3",
+      "kind": "external",
+      "title": "FlashAttention-3",
+      "url": "https://arxiv.org/html/2407.08608v2",
+      "accessed_at": "2026-10-30",
+      "locator": "Introduction",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    }
+  ],
+  "claims": [
+    {
+      "id": "flash-claim",
+      "text": "Common-maximum online accumulation reproduces dense attention including causal masks and derivatives within floating-point tolerance, without retaining the full score matrix.",
+      "status": "verified",
+      "source_ids": [
+        "flash-original",
+        "flash-workshop",
+        "flash-2",
+        "flash-3"
+      ],
+      "proof_limit": "Stated mathematical assumptions and executed tiny reference; no learner, hosted or full-model result."
+    }
+  ],
+  "entities": [],
+  "relationships": [],
+  "chapters": [
+    {
+      "id": "flash",
+      "title": "FlashAttention",
+      "content_path": "lessons/01-flash-attention.md",
+      "objective_ids": [
+        "flash-merge",
+        "flash-cost"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "flash-merge",
+        "flash-cost"
+      ]
+    }
+  ],
+  "diagrams": [],
+  "tables": [],
+  "scenarios": [],
+  "practice": [
+    {
+      "id": "flash-merge",
+      "question": "Can two block outputs be averaged equally?",
+      "answer": "Only in the special case that their softmax partition masses are equal. In general merge numerators and denominators after correcting maxima; then divide once.",
+      "rubric": "Name the lost denominator and the rescaling.",
+      "objective_ids": [
+        "flash-merge"
+      ],
+      "claim_ids": [
+        "flash-claim"
+      ]
+    },
+    {
+      "id": "flash-cost",
+      "question": "Does avoiding N-squared storage eliminate N-squared comparisons?",
+      "answer": "No. Dense attention still compares every allowed query/key pair. Tiling reduces intermediate storage and IO; sparse connectivity changes which pairs are computed.",
+      "rubric": "Distinguish pair count, storage and IO.",
+      "objective_ids": [
+        "flash-cost"
+      ],
+      "claim_ids": [
+        "flash-claim"
+      ]
+    }
+  ],
+  "scenes": [],
+  "media": {},
+  "approval": null
+}

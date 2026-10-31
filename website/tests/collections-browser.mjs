@@ -54,7 +54,7 @@ try{
   }
   await page.goto(origin+base);await ready();await page.keyboard.press('/');await page.waitForURL(origin+base+'search/');await ready();
   await page.getByRole('searchbox',{name:'Search records'}).fill('attention labs');
-  assert.equal(await page.locator('.record-card:visible[href*="/records/tutorials/attention-labs-"]').count(),2);
+  assert.equal(await page.locator('.record-card:visible[href*="/records/tutorials/attention-labs-"]').count(),tutorialLibrary.groups.find(group=>group.id==='attention-labs').courses.length);
   await page.getByRole('searchbox').fill('not-a-real-record-342233');assert.ok(await page.locator('#record-empty').isVisible());
  }
  await page.setViewportSize({width:1440,height:1000});await page.goto(origin+base+'tutorials/attention-labs/');await ready();

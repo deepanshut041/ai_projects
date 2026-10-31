@@ -1,60 +1,98 @@
-## Read attention as rows, columns and batches
+## 3. Keep one output per position and expose the matrix axes
 
-The demo runs. Now we need to explain why its matrices have their observed shapes. We will use rows as positions and columns as features, then add batch and head axes without changing the underlying dot product.
+One query gave position 0 a gathered vector. The encoder cannot stop with that one result: the next layer needs a sequence of representations, including an updated row for positions 1, 2 and 3. Repeat the same procedure with each input row supplying its own query.
 
-### One dot product answers one comparison
+All queries read the **same input** keys and values. Position 1 does not read position 0's newly computed output. This matters because it lets us calculate every row at once.
 
-For query `q=[1,2]` and key `k=[3,4]`, the dot product is `1×3 + 2×4 = 11`. Matching coordinates multiply and their products add. This requires the query and key to use the same coordinate dimension. The result is a scalar score, not a two-coordinate vector.
+### Each score cell has an owner
 
-For several query rows and key rows, matrix multiplication evaluates every pair. If `Q` has shape `(T,d)` and `K` has shape `(S,d)`, transpose the last two key axes to get `(d,S)`. Then:
-
-$$R=QK^\mathsf{T},\qquad R_{ij}=\sum_{r=0}^{d-1}Q_{ir}K_{jr},\qquad R\in\mathbb{R}^{T\times S}.$$
-
-Here `i` selects a query position, `j` selects a key position and `r` selects a feature coordinate. Each row answers “how does this query compare with each key?” Each column collects comparisons against one key. Softmax will later run across each row's key axis.
-
-### Work an unequal-shape multiplication
+Stack the queries into Q, keys into K and values into V. In our identity/doubling fixture, `Q=X`, `K=X`, `V=2X`. The product `Q @ K.T` is:
 
 ```text
-left = [[1,2,3],       right = [[ 7, 8],
-        [4,5,6]]               [ 9,10],
-                               [11,12]]
-
-(2×3) @ (3×2) -> (2×2)
-result[0,0] = 1×7 + 2×9 + 3×11 = 58
-result[0,1] = 1×8 + 2×10 + 3×12 = 64
-result       = [[58,64], [139,154]]
+                         source key
+                        0    1    2    3
+query 0, receives       [1    0    1    0]
+query 1, receives       [0    1    1    0]
+query 2, receives       [1    1    2    0]
+query 3, receives       [0    0    0    0]
 ```
 
-The shared inner dimension is consumed; the outer dimensions remain. Unequal shapes make a useful independent check because a wrong transpose cannot hide behind a square example. Our matrix-display tests check these exact numbers.
+Cell `(i,j)` compares receiver i with source j. A row answers “how does this receiver score all available positions?” A column answers “how do different receivers score this one available position?” We need the first question to obtain a mixture for each receiver, so softmax normalizes **across columns within each row**.
 
-![A highlighted row meets a highlighted column to form one result cell.](images/17-basic-matrix-product.png)
+![The score matrix, row-normalized weights and output rows with their dimensions](images/23-matrix-axes.svg)
 
-### Mix values using the key axis
+After scaling and softmax, the weight rows are approximately:
 
-Once a query has weights `A` of shape `(T,S)`, each row mixes `S` value vectors. If `V` has shape `(S,d_v)`, then `C=A@V` has shape `(T,d_v)`. It has one output row per query and one output coordinate per value feature.
+```text
+A = [[0.334881, 0.165119, 0.334881, 0.165119],
+     [0.165119, 0.334881, 0.334881, 0.165119],
+     [0.221181, 0.221181, 0.448581, 0.109057],
+     [0.250000, 0.250000, 0.250000, 0.250000]]
+```
 
-This explains why query and key lengths can differ. The first contraction compares query/key features. The second contracts key positions with their corresponding values. Queries and keys must agree in feature width; keys and values must agree in position count. The low-level mathematical operation can use a distinct value width. This project's public module projects all three to the same model width before splitting heads.
+The product `C = A @ V` sums over the available-position axis. It preserves the receiver axis and the value-feature axis:
 
-### Add batches and heads deliberately
+$$C_{im}=\sum_j A_{ij}V_{jm}.$$
 
-The public module receives `src` as `(B,S,D)`: batch count, source positions, model features. For self-attention the queries also have `S` positions. For cross-attention the target provides `(B,T,D)` queries.
+For example, `C[0,1]` is the **second feature received by query 0**. Its calculation is `A[0,0]×0 + A[0,1]×2 + A[0,2]×2 + A[0,3]×0`. No position disappeared merely because matrix multiplication was used.
 
-| Tensor | After splitting heads | Role |
+### Put the repeated computation in one function
+
+This function accepts queries and keys with the same comparison width, and paired keys/values with the same source-position count. All keys are available for now. `keepdim=True` retains a size-one column for each row's maximum and denominator, so each receiver uses its own normalization.
+
+```python
+import math
+import torch
+
+def attend(q, k, v):
+    scores = (q @ k.transpose(-2, -1)) / math.sqrt(q.shape[-1])
+    shifted = scores - scores.max(dim=-1, keepdim=True).values
+    exponentials = torch.exp(shifted)
+    weights = exponentials / exponentials.sum(dim=-1, keepdim=True)
+    context = weights @ v
+    return context, weights
+
+torch.set_printoptions(precision=6, sci_mode=False)
+x = torch.tensor([[1., 0.], [0., 1.], [1., 1.], [0., 0.]], dtype=torch.float64)
+q = x
+k = x
+v = 2 * x
+context, weights = attend(q, k, v)
+print(weights)
+print(context)
+
+batch_x = x.unsqueeze(0)
+batch_context, batch_weights = attend(batch_x, batch_x, 2 * batch_x)
+print(batch_context.shape)
+assert torch.allclose(batch_context[0], context)
+```
+
+The output rows are `[1.339523,1.000000]`, `[1.000000,1.339523]`, `[1.339523,1.339523]` and `[1,1]`. The fourth row started at zero but receives a nonzero context by averaging the four available values. They have different mixtures even though they read the same source rows. The first row is exactly chapter 2's calculation, now embedded in the full matrix.
+
+### Batch sequences without mixing them
+
+`unsqueeze(0)` adds a batch axis: `(4,2)` becomes `(1,4,2)`. The assertion checks that this wrapper preserves the result. For a batch of B independent examples, use:
+
+| Quantity | Shape | What the axes mean |
 | --- | --- | --- |
-| `q` | `(B,H,T,d)` | One query vector per batch/head/query position |
-| `k` | `(B,H,S,d)` | One key vector per batch/head/source position |
-| `v` | `(B,H,S,d)` | Values aligned with source keys |
-| `q @ k.transpose(-2,-1)` | `(B,H,T,S)` | All query/key scores per head |
-| `weights @ v` | `(B,H,T,d)` | Retrieved head contexts |
+| Q | `(B,T,d_k)` | example, receiving position, comparison feature |
+| K | `(B,S,d_k)` | example, available position, comparison feature |
+| V | `(B,S,d_v)` | example, available position, contributed feature |
+| Scores and A | `(B,T,S)` | example, receiver, available position |
+| C | `(B,T,d_v)` | example, receiver, received feature |
 
-Here `H` is head count and `d=D/H`. Batch/head axes remain separate. The final two axes participate in each matrix multiplication; PyTorch applies that product across compatible leading axes. For a four-dimensional tensor, `.T` reverses all axes and is not the operation we want. `.transpose(-2,-1)` exchanges only key positions and key features.
+The batch axis is carried through independently. It must never be flattened into S, which would allow one sentence to read another sentence's tokens. Query count T and source count S can differ; cross-attention will use that freedom.
 
-### Trace a concrete shape through the demo
+### Where does word order enter?
 
-For `B=3`, `S=5`, `D=9`, `H=3`, each head has width 3. Queries/keys/values become `(3,3,5,3)`. Scores become `(3,3,5,5)`. Weighted values return `(3,3,5,3)`. Reassembling the three heads restores `(3,5,9)`.
+There is a missing capability if we feed only token embeddings into this operation: unrestricted self-attention has no inherent notion of first, second, third or fourth. Reorder X's rows and its output rows reorder in the same way. Pairwise scores depend on vector content, not an invisible row-number feature.
 
-The public interface rejects integer token IDs because it expects floating-point representations. An integer matrix `(B,S)` is not interchangeable with embeddings `(B,S,D)`. Later tokenization and embedding layers will bridge those forms; they have not been implemented here.
+More precisely, for a permutation matrix P and no masks or positional signals, `Attention(PQ,PK,PV) = P Attention(Q,K,V)`. The matching keys and values move together. The operation treats a sequence as a collection of rows with corresponding outputs.
+
+Translation needs order. The original Transformer adds positional encodings to token embeddings before the encoder/decoder stacks. Then the input rows carry position information, so reordering tokens while assigning them their new positions changes more than a simple row permutation. The [paper's section 3.5](https://arxiv.org/html/1706.03762v7) specifies that component. Our numerical fixture isolates attention; it does not calculate positional encodings.
+
+The matrix calculation exposes another tradeoff: a length-n sequence has n² pair comparisons per head. Scores and weights can be computed in parallel, but parallelism does not remove that quadratic work or, in the explicit implementation, storage. This is why “can connect distant positions directly” should not be read as “free for arbitrarily long inputs”.
+
+**Runnable copy:** [all positions and batch check](examples/walkthrough/03_shapes.py).
 
 [[practice:shapes-check]]
-
-At this point the contractions are defined, but raw dot products can be negative, unbounded and hard to compare. The next lesson explains the transformation into usable weights.

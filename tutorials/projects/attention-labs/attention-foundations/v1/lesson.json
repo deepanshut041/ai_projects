@@ -291,31 +291,31 @@
   "objectives": [
     {
       "id": "map",
-      "text": "1. What information does a token need?"
+      "text": "1. A map of the attention family"
     },
     {
       "id": "summary",
-      "text": "2. Why one fixed summary can be difficult to use"
+      "text": "2. Before attention: build the translation machine"
     },
     {
       "id": "additive",
-      "text": "3. Build a context that depends on the current query"
+      "text": "3. Additive attention: let the decoder look back"
     },
     {
       "id": "scale",
-      "text": "4. Change the score while keeping retrieval intact"
+      "text": "4. Dot products, scale and the softmax bars"
     },
     {
       "id": "self",
-      "text": "5. Give every position a context from its own sequence"
+      "text": "5. Simplified self-attention: every word gets a context"
     },
     {
       "id": "projection",
-      "text": "6. Separate comparison features from delivered content"
+      "text": "6. Learned self-attention: queries, keys and values"
     },
     {
       "id": "causal",
-      "text": "7. Make the training information match generation"
+      "text": "7. Causal attention: hide the future, then apply dropout"
     }
   ],
   "sources": [
@@ -494,7 +494,7 @@
   "claims": [
     {
       "id": "map-claim",
-      "text": "1. What information does a token need?",
+      "text": "Attention mechanisms can be compared using the problem and design choice they change.",
       "source_ids": [
         "lecture-1-video",
         "lecture-1-slides"
@@ -569,7 +569,7 @@
   "chapters": [
     {
       "id": "map",
-      "title": "1. What information does a token need?",
+      "title": "1. A map of the attention family",
       "content_path": "lessons/01-context-and-map.md",
       "objective_ids": [
         "map"
@@ -583,7 +583,7 @@
     },
     {
       "id": "summary",
-      "title": "2. Why one fixed summary can be difficult to use",
+      "title": "2. Before attention: build the translation machine",
       "content_path": "lessons/02-fixed-summary.md",
       "objective_ids": [
         "summary"
@@ -597,7 +597,7 @@
     },
     {
       "id": "additive",
-      "title": "3. Build a context that depends on the current query",
+      "title": "3. Additive attention: let the decoder look back",
       "content_path": "lessons/03-additive-retrieval.md",
       "objective_ids": [
         "additive"
@@ -611,7 +611,7 @@
     },
     {
       "id": "scale",
-      "title": "4. Change the score while keeping retrieval intact",
+      "title": "4. Dot products, scale and the softmax bars",
       "content_path": "lessons/04-dot-products-and-scale.md",
       "objective_ids": [
         "scale"
@@ -625,7 +625,7 @@
     },
     {
       "id": "self",
-      "title": "5. Give every position a context from its own sequence",
+      "title": "5. Simplified self-attention: every word gets a context",
       "content_path": "lessons/05-one-sequence.md",
       "objective_ids": [
         "self"
@@ -639,7 +639,7 @@
     },
     {
       "id": "projection",
-      "title": "6. Separate comparison features from delivered content",
+      "title": "6. Learned self-attention: queries, keys and values",
       "content_path": "lessons/06-learned-projections.md",
       "objective_ids": [
         "projection"
@@ -653,7 +653,7 @@
     },
     {
       "id": "causal",
-      "title": "7. Make the training information match generation",
+      "title": "7. Causal attention: hide the future, then apply dropout",
       "content_path": "lessons/07-causality-and-dropout.md",
       "objective_ids": [
         "causal"
@@ -673,8 +673,8 @@
     {
       "id": "map-check",
       "question": "A layer is causal, uses a dot-product score and has multiple heads. Is that contradictory?",
-      "answer": "No. The score defines compatibility, causality defines permitted source positions, and the head arrangement defines separate or shared projections. These choices can coexist. Attention weights are over source positions; vocabulary probabilities belong to a later prediction head.",
-      "rubric": "Explain the three different questions and keep source positions separate from vocabulary entries.",
+      "answer": "No. Dot-product scoring measures compatibility, causality restricts available positions, and multiple heads arrange separately parameterized retrieval channels. These answer different questions and can coexist. Replacing an implementation kernel may preserve the same mathematical operation; changing connectivity changes its information paths.",
+      "rubric": "Explain the three jobs and distinguish changing the computation from changing its implementation.",
       "objective_ids": [
         "map"
       ],

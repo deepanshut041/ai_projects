@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="650" viewBox="0 0 1160 650" role="img"><title>A larger slope asks content to overcome a larger penalty</title><desc>Four-head power-of-two schedule; same content scores; causal distance d = i − j.</desc>
+<rect x="0" y="0" width="1160" height="650" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">A larger slope asks content to overcome a larger penalty</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">Four-head power-of-two schedule; same content scores; causal distance d = i − j.</text>
+<line x1="105" y1="135.0" x2="765" y2="135.0" stroke="#dce2ee"/>
+<text x="86" y="142.0" font-family="DejaVu Sans" font-size="19" font-weight="400" text-anchor="end" fill="#17253f">0</text>
+<line x1="105" y1="218.75" x2="765" y2="218.75" stroke="#dce2ee"/>
+<text x="86" y="225.75" font-family="DejaVu Sans" font-size="19" font-weight="400" text-anchor="end" fill="#17253f">-2</text>
+<line x1="105" y1="302.5" x2="765" y2="302.5" stroke="#dce2ee"/>
+<text x="86" y="309.5" font-family="DejaVu Sans" font-size="19" font-weight="400" text-anchor="end" fill="#17253f">-4</text>
+<line x1="105" y1="386.25" x2="765" y2="386.25" stroke="#dce2ee"/>
+<text x="86" y="393.25" font-family="DejaVu Sans" font-size="19" font-weight="400" text-anchor="end" fill="#17253f">-6</text>
+<line x1="105" y1="470.0" x2="765" y2="470.0" stroke="#dce2ee"/>
+<text x="86" y="477.0" font-family="DejaVu Sans" font-size="19" font-weight="400" text-anchor="end" fill="#17253f">-8</text>
+<text x="105.0" y="502" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="middle" fill="#17253f">0</text>
+<text x="270.0" y="502" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="middle" fill="#17253f">8</text>
+<text x="435.0" y="502" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="middle" fill="#17253f">16</text>
+<text x="600.0" y="502" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="middle" fill="#17253f">24</text>
+<text x="765.0" y="502" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="middle" fill="#17253f">32</text>
+<text x="105" y="113" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">bias</text>
+<text x="385" y="544" font-family="DejaVu Sans" font-size="21" font-weight="400" text-anchor="start" fill="#17253f">distance in tokens →</text>
+<line x1="105" y1="135" x2="765" y2="470.0" stroke="#2563b9" stroke-width="3.5"/>
+<text x="815" y="165" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#2563b9">head 0: m=0.25</text>
+<text x="815" y="194" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">at d=32: -8</text>
+<line x1="105" y1="135" x2="765" y2="218.75" stroke="#16735e" stroke-width="3.5"/>
+<text x="815" y="252" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#16735e">head 1: m=0.0625</text>
+<text x="815" y="281" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">at d=32: -2</text>
+<line x1="105" y1="135" x2="765" y2="155.9375" stroke="#b65a1c" stroke-width="3.5"/>
+<text x="815" y="339" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#b65a1c">head 2: m=0.015625</text>
+<text x="815" y="368" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">at d=32: -0.5</text>
+<line x1="105" y1="135" x2="765" y2="140.234375" stroke="#6846c7" stroke-width="3.5"/>
+<text x="815" y="426" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="start" fill="#6846c7">head 3: m=0.00390625</text>
+<text x="815" y="455" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">at d=32: -0.125</text>
+<text x="36" y="607" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">The bias belongs to each query head, even when GQA shares the retained keys and values.</text>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="600" viewBox="0 0 1160 600" role="img"><title>Two histories can leave exactly the same state</title><desc>Scalar key feature = 1 at every token; any positive scalar query feature.</desc>
+<rect x="0" y="0" width="1160" height="600" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">Two histories can leave exactly the same state</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">Scalar key feature = 1 at every token; any positive scalar query feature.</text>
+<rect x="36" y="127" width="330" height="145" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="159" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#2563b9">History A</text>
+<text x="56" y="210" font-family="DejaVu Sans" font-size="25" font-weight="400" text-anchor="start" fill="#17253f">values: 1, then 3</text>
+<rect x="36" y="338" width="330" height="145" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="370" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#b65a1c">History B</text>
+<text x="56" y="421" font-family="DejaVu Sans" font-size="25" font-weight="400" text-anchor="start" fill="#17253f">values: 2, then 2</text>
+<rect x="469" y="223" width="290" height="171" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="487" y="255" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">Identical summary</text>
+<text x="489" y="303" font-family="DejaVu Sans" font-size="25" font-weight="400" text-anchor="start" fill="#17253f">S = 4</text>
+<text x="489" y="334" font-family="DejaVu Sans" font-size="25" font-weight="400" text-anchor="start" fill="#17253f">z = 2</text>
+<line x1="372" y1="200" x2="462" y2="264" stroke="#2563b9" stroke-width="2.5"/>
+<polygon points="462.00,264.00 451.26,261.62 456.23,254.64" fill="#2563b9"/>
+<line x1="372" y1="411" x2="462" y2="353" stroke="#b65a1c" stroke-width="2.5"/>
+<polygon points="462.00,353.00 455.80,362.09 451.16,354.89" fill="#b65a1c"/>
+<rect x="852" y="223" width="272" height="220" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="870" y="255" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#16735e">Identical read</text>
+<text x="988" y="301" font-family="DejaVu Sans" font-size="24" font-weight="400" text-anchor="middle" fill="#17253f">query × 4</text>
+<line x1="880" y1="315" x2="1096" y2="315" stroke="#17253f" stroke-width="2"/>
+<text x="988" y="351" font-family="DejaVu Sans" font-size="24" font-weight="400" text-anchor="middle" fill="#17253f">query × 2</text>
+<text x="988" y="414" font-family="DejaVu Sans" font-size="24" font-weight="700" text-anchor="middle" fill="#16735e">y = 2</text>
+<line x1="765" y1="308" x2="845" y2="308" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="845.00,308.00 834.87,312.28 834.87,303.72" fill="#6846c7"/>
+<text x="36" y="553" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">The latest values differ (3 versus 2), but neither S nor z identifies a separate latest-token row.</text>
+</svg>

@@ -204,6 +204,65 @@ The configured narration access was restored and seven independently authored co
 
 Use pinned build-time explicit-language highlighting through each site's common Markdown renderer and keep matching dark/print token styles in both independent repositories. Highlight Research's generated JSON provenance as well as authored fences; extend Bash executable/option tokens for actual workspace commands. Preserve exact code text, escaped markup, plain/unknown/control blocks, inline code, diagrams, media and ordinary-export privacy. Check real desktop/mobile root/prefix pages, copying, scrolling and contrast. Starting the Research Docs reader is authorized by this UI request; scientific jobs remain outside its scope.
 
+## 2026-10-24 — Attention text approval before replacement videos
+
+The learner rejected the previous Attention teaching sequence and required complete visible helper definitions. Rebuild one motivated, ordered explanation around one numerical example, with every displayed Python program independently runnable. Put the full dependency closure of the project class after the small calculation. Remove the old video bindings while preserving original media/provenance. The explicit user gate is to finish the text and obtain approval before redoing videos. Author tests establish code/numerical properties and cannot grant that approval.
+
+
+## 2026-10-24 — Attention text approval precedes replacement videos
+
+The learner explicitly approved the rewritten text and requested new videos. Use eleven new packages following the approved example; show project helper definitions before calls and keep complete written programs visible. Preserve the rejected media as history. Verified local media delivery does not establish learner mastery or new translation/model/hosted results. See implementation/2026-10/attention-is-all-you-need-source-backed-tutorial/16-approved-text-video-delivery.md.
+
+## 2026-10-26 — Quantization Lab folder and starter proposals
+
+Create `projects/quantization-lab/` under Projects using corrected spelling and the existing hyphenated naming convention. Keep it an ordinary folder tracked by `ai_projects`; future implementations belong in ordinary child folders. Propose Quantization Playground before INT8 Digit Classifier, with project selection left pending. This request authorizes folder/document preparation; the existing learning checkpoint and model/research results stay unchanged. Reader and launcher integration are deferred until a project is selected.
+
+## 2026-10-26 — Practical real-model quantization projects
+
+Supersede the earlier toy quantizer and digit-classifier suggestions. The learner wants practical projects that apply quantization to real models and test the resulting tradeoffs. An 8B LLM was an example, not a chosen model or size requirement. The current proposals are Model Quantization and Deployment Bench and Quantization Quality Recovery; architecture, task, runtime and exact methods remain open until selection. No downloads, experiments or training have started.
+
+## 2026-10-26 — Research existing practice before proposing Quantization Lab projects
+
+The learner requested internet exploration of what people actually build. Replace the generic benchmark/recovery suggestions with two evidence-backed application proposals: Local Document Assistant Under a Memory Budget and Semantic Search With a Compressed Index. The README links reviewed upstream examples and distinguishes application designs from published results. Keep model/task choices open until selection. Treat weight compression, KV-cache compression and embedding-vector compression as separate controlled comparisons. Reuse the existing Semantic Notes Search as a later consumer; do not replace its planned encoder/fine-tuning scope. No implementation or experiment is started by the proposal research.
+
+## 2026-10-26 — Approve both Quantization Lab folders and current model targets
+
+The user approved creating a folder and README for each researched project and requested current models. Prepare `projects/quantization-lab/document-assistant/` and `compressed-semantic-search/` as ordinary tracked folders. Use planned starting targets Gemma 4 E4B instruction-tuned with E2B as a smaller capacity fallback, and EmbeddingGemma 2 for text-vector compression. Record exact official revisions, release references and model-specific precision/architecture constraints. Recheck releases before implementation, then freeze identities during each comparison. This preparation does not acquire model weights, validate local execution, start experiments or advance learner gates.
+
+## 2026-10-26 — Runnable Quantization Lab boilerplates
+
+The user requested boilerplate for both approved projects. Use independent Python 3.12.13 environments with locked development tooling and no model-runtime dependencies yet. Keep entry scripts directly under src and separate core/data/quantization/evaluation/utils responsibilities. Package the pinned configuration as a resource so installed execution does not depend on the caller working directory. Keep model/data commands explicitly unimplemented until their actual phase is built; setup status and tests must not imply model or application results. Private project-learning records stay ignored under docs, while public source/configuration stays packageable. Workspace launcher/reader registration remains outside this boilerplate change.
+
+## 2026-10-26 — Quantization Lab TUI run options
+
+The user requested TUI run options. Add quantization-lab to shared CLI nested discovery and collapsible project grouping, with project-owned source profiles exposing status, setup-check and configuration. Existing setup/build/test controls remain available. Include each profile in its source distribution. Launch commands through the existing frozen-environment argv planner and keep model/data work explicitly pending. The CLI-owned package is cli/docs/implementation/2026-10/quantization-lab-tui-launchers; no documentation-reader integration is implied.
+
+## 2026-10-26 — Document Assistant complete written teaching route
+
+The user requested the same detailed teaching standard as Attention, explicitly across all phases. Author a shared versioned 24-lesson Document Assistant course under tutorials/projects/document-assistant/quantization-lab/v1, with the full outline saved first, first-use worked maths, complete checked references, original figures, revealable practice and implementation/readiness records. Cover the proposed current Gemma 4 source while keeping exact backend support and model results pending. Tutorial fixture programs live in the tutorial package; actual model source remains its existing runnable scaffold. Keep the TUI available for real status/setup/config actions. Written course preparation does not enable model commands, create videos or advance the existing learner/hosted gates.
+
+
+## 2026-10-26 — Document Assistant all-phase companions delivered
+
+All 24 captioned companions are delivered across phases 00–06: 156 editable worked scenes and 89:54 of finished video. Each verified local player appears before its matching lesson prose, with captions, transcript and download links. The route includes worked maths, complete displayed Python/C++ references, the actual scaffold helper chain and changed-condition reasoning. Finished-file speech/audio/captions and every-video root/prefixed/managed-reader desktop/mobile play, pause, seeking, transcript/download and print checks pass. All 241 pinned source files are byte-preserved. Actual Gemma/backend compatibility, full-model quantization/evaluation, the application, learner mastery and hosted execution remain pending. One interrupted narration request was retried only after explicit user authorization. Source-faithful fixtures and verified media remain separate from actual model/application and learner/hosted results. See implementation/2026-10/document-assistant-all-phase-captioned-videos/11-delivery.md.
+
+## 2026-10-26 — Compare the entire Attention tutorial before rebuilding
+
+The learner rejected a paragraph-level response to the rejected Attention tutorial. Review all chapters, examples, visual placement, code/practice and supporting pages against primary authored attention tutorials. Rebuild from translation inputs/output and the missing cross-position dependency through the design reasons, math, code execution and task loss. Use only one relevant running task, retain exact complete runnable programs and make numerical stand-ins explicit. Remove every current Attention video attachment without destroying recoverable media. Prior approval and technical delivery receipts remain historical; no replacement production or teaching acceptance follows from tests. Keep current source, scientific results and learner/hosted checkpoints intact.
+
+## 2026-10-26 — Build depth from a whole-system overview
+
+The learner said the revised Attention details are good and requested a structural correction: overview first, then progressively deeper explanations that build on each other. Explain the complete task and component jobs before names or input layouts; locate attention conceptually, show the learning route, then open one calculation. Retain the accepted detailed explanations and exact programs, with focused transition improvements. Do not interpret an example sentence as the whole requested fix. Videos stay removed.
+
+## 2026-10-26 — Restore Quantization Lab in Projects Docs
+
+Register Quantization Lab in the website's ordered collection list, independently of the already configured TUI group. Reuse existing project README discovery, private local study records, tutorial route mapping and video attachments. Cover homepage/sidebar → collection → project → actual lesson/video in browser acceptance and preserve public/private export separation. The website fix requires no tutorial rewrites or media generation. The owning maintenance record is implementation/2026-10/quantization-lab-docs-navigation/00-resume.md.
+
+## 2026-10-27 — Include the zero row in the Attention fixture
+
+The learner requested four rows to remove the confusing omission of `[0,0]`. Extend the existing example to “We read books daily” and show `[1,0]`, `[0,1]`, `[1,1]`, `[0,0]`. Recalculate every dependent teaching representation and keep the accepted progression. Explain that binary pairs are chosen arithmetic inputs rather than an embedding rule, and distinguish a valid zero row from masked padding. Actual model source, media removal and learner/hosted boundaries remain unchanged.
+
+
 ## 2026-10-30 — Attention Labs grouping and subtitle-backed tutorial sources
 
 Create Attention Labs as an independent collection repository/submodule, with two ordinary child folders. Keep all basic single-head material in attention-foundations; MHA belongs in attention-heads with later GQA and related head/KV arrangements. Shared tutorial lessons, examples and figures live under docs/tutorials/projects/attention-labs, following the existing tutorial workflow. Go through the eight included lectures using their complete English automatic subtitle texts and original presentations, write independent prose/math/code, and retain the original hosted slide viewers with attribution. Omit Lecture 9 by its title label, despite the reversed playlist order. Raw source captions/captures stay ignored; compact provenance/hashes are eligible documentation. Do not infer trained-model, learner-mastery or hosted results from local component/reader checks.
@@ -219,3 +278,33 @@ The learner requested screenshots from the websites linked in the video descript
 ## 2026-10-30 — Separate documentation and tutorial collection browsers
 
 The user requested distinct Project Docs and Tutorials sections, each grouped by collection. Keep project document URLs under /projects/ and add tutorial collection pages under /tutorials/{collection}/ without changing course/chapter URLs or authored tutorial files. Show both section groups in the sidebar and retain a separate search route for guides/tutorials. Resolve current ownership from project folders, with retained mappings for frozen standalone courses. Adopt the existing pending Quantization Lab registration and its matching navigation acceptance as required dependencies for consistent five-collection browsing. Do not change model or learner milestones.
+
+2026-10-30 — Attention Labs tutorials follow the teacher one included lecture at a time, restoring complete diagrams, bars, worked examples and code before advancing. Attribution stays in references; extra provenance JSON and repeated source captions are omitted. Basic mechanisms stay together in Attention Foundations; MHA and later head/KV arrangements stay in Attention Heads. Lecture 9 remains excluded.
+
+## 2026-10-30 — Keep MHA in one tutorial
+
+At the learner's request, consolidate Tutorial 8's independent heads, packed tensor route and boundaries into one lesson in Attention Heads. Preserve its complete examples, figures and practice, and redirect both former chapter URLs. Future GQA and other head arrangements get separate tutorials in the same category.
+
+## Attention Labs continuation — 2026-10-30
+
+The learner accepted all recommended attention topics and selected Vizuara's other public lessons and matching visuals as sources. Author and check each mechanism sequentially, keeping one complete lesson file per mechanism under the appropriate shared Docs tutorial category. Preserve the one-page MHA lesson, the basic-attention category and original Lecture 9 exclusion. Use primary-author figures explicitly for ALiBi/Performer where no matching public Vizuara lesson is available; keep source attribution in references and no extra provenance JSON. Local component checks, reader delivery, learner review, full-model/GPU results and actual hosted Colab execution remain distinct.
+
+
+## 2026-10-30 — Original figures complete missing visual steps
+
+The learner explicitly authorizes original teaching figures when matching source figures are missing. Follow the same concrete problem, visual transformation, arithmetic and code progression, with original explanations. Keep source diagrams; add passive editable SVG boards using the checked reference inputs and explain their axes, colors, quantities and failure cases beside them. Review one mechanism before the next. Preserve one lesson file per mechanism, existing category boundaries, the Lecture 9 exclusion and end-reference attribution. No extra provenance JSON or video production. Figure preparation does not advance learner, model or hosted execution gates.
+
+
+## 2026-10-30 — TinyServe is a learner-built Inference Labs project
+
+Create `projects/inference_labs/tinyserve/` with the exact requested collection spelling. Inference Labs follows the independent collection repository/local-origin/gitlink pattern; tinyserve stays an ordinary child folder. The learner explicitly owns implementation of the inference engine. Setup provides only packaging, frozen development tooling, configuration, checks and TUI launchers. Keep serve.py and tinykernels.py as docstring-only starting files. Choose model/backend/device and lock runtime dependencies when implementation starts; do not copy the upstream engine or infer GPU/model correctness from setup checks.
+
+
+## 2026-10-31 — Workspace CLI is optional for every project
+
+The user requires each runnable project to work with and without the workspace CLI because collections are independent repositories. Projects own their manifests, locks, configuration, native entry points and tests; the CLI/TUI wraps those same interfaces. Require a clean independent checkout/source-copy check without workspace environment injection before declaring setup ready. Shared Docs links are optional context rather than runtime dependencies. New-project scaffolds document native and workspace commands. Bike's existing unittest suite is selected through project-owned native test arguments; no extra pytest dependency is needed. Planned-only projects retain their status until boilerplate is requested.
+
+
+## 2026-10-31 — Public AI Projects hosting and integrated Docs
+
+The user explicitly requests public GitHub publication under deepanshut041 and GitHub Pages, with proper ignore rules. They correct the proposed independent project_docs remote: Docs must live directly in ai_projects/docs. Merge the existing Docs history into the parent without discarding original files or histories; retain local recovery metadata. Five collection repositories remain independent, referenced with public HTTPS submodule URLs. Publish Pages from the parent's docs/website, excluding ignored private study records, datasets, weights, environments and local-only media. Public deployment does not advance learner or model checkpoints.

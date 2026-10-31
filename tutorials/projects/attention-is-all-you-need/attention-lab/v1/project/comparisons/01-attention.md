@@ -1,15 +1,20 @@
-# Compare attention choices through their consequences
+# Compare designs by their information paths
 
-| Comparison | Hold fixed | What changes or what to check |
+Use these comparisons after [the main route](lessons/01-weighted-information.md). The important difference is which inputs can influence which outputs, through which calculation.
+
+| Decision | What it permits or constrains | Consequence to check |
 | --- | --- | --- |
-| Raw Q=K=V versus learned projections | Input rows and attention formula | Learned affine maps create separate comparison/content spaces |
-| One head versus multiple heads | Declared model width and task | Head width/partitions and distributions; no promised head specialization |
-| Loop versus vectorized heads | Mapped identical parameters and inputs | Organization of equivalent calculations, checked values/weights |
-| Padding versus causality | Input sequence and model | Invalid keys versus future keys; combine with AND |
-| Self versus cross-attention | Public dtype/width conventions | Origin of queries and output length; source-aligned masks |
-| Explicit versus SDPA | Parameters, inputs, masks, dtype, dropout state | Numerics/gradients within tolerance; hardware speed needs measurements |
-| Pre-dropout weights versus used weights | Scores, probability and training state | Inspection weights stay normalized; context uses dropped/rescaled weights |
-| Zero context versus zero final output | Blocked row and model | Output projection bias remains |
-| Correct component versus successful translation | Exact claim being assessed | Full data/model/training/evaluation evidence still needed |
+| Independent row transform | Output i reads only input i | A neighbor-only change cannot alter that row |
+| Common average | Every receiver gets the same mixture | Communication exists, but the mixture is not receiver-dependent |
+| Query-dependent attention | Each receiver derives weights against available keys | A changed query can redistribute the same available values |
+| Recurrent communication | State passes sequentially through positions | Context is possible, with a position-dependent computation chain |
+| Separate Q/K/V maps | Selection and contributed content can differ | Halve only W_V: context halves with identical weights |
+| Multiple heads | Projected feature groups have separate distributions | All heads keep every allowed position; joining must preserve receivers |
+| Source padding mask | Storage-only key rows are absent from normalization | A padded-row perturbation cannot affect real receivers |
+| Target causal mask | Future target inputs cannot reveal labels | Test future perturbation while keeping those keys real |
+| Cross-attention | Target states retrieve from a separate source memory | Rectangular weights; source mask length follows memory |
+| Explicit/library execution | Two implementations of the same formula | Match exact state and evaluation inputs before comparing |
 
-The comparison is meaningful only when its controlled inputs are declared. Two random initializations are two different functions. A different output is not evidence that vectorization is wrong until the parameter mapping and axis layout match.
+A mask’s appearance does not establish isolation, and matching tensor shapes do not establish correct key/value pairing. Perturbations and row ownership make those properties concrete.
+
+Parallel attention still has n² pair comparisons for a length-n sequence. Parameter sharing across positions does not remove activation work, and increasing heads at fixed model width narrows each head. These are engineering tradeoffs, not automatic quality improvements.

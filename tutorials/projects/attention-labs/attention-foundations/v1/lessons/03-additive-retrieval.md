@@ -1,53 +1,137 @@
-## 3. Build a context that depends on the current query
+## 3. Additive attention: let the decoder look back
 
-We now retain every source state instead of handing off only the final one. The decoder's current need must influence which states contribute most. We represent that need by a query $s$, compare it with each available state $h_j$, normalize the comparisons, and use the resulting weights to combine the stored content.
+The baseline translation machine passed one final encoder state to its decoder. Keep that machine in view while we change one interface.
 
-### A context vector for each output step
+![A fixed context is the only source handoff in the baseline translation machine](images/original-slides/lecture-03-slide-02.png)
 
-![A source-state mixture weighted differently for each available token](images/original-slides/lecture-03-slide-09.png)
+The source-side limitation is the single middle arrow. We already computed intermediate encoder states; now retain them and let each decoding step choose how to combine them.
 
-*Original diagram: [Vizuara, Lecture 3, slide 9](https://lecture3-attention-mechanisms.vercel.app/#/9). Captured from the linked presentation website. Open the image for full size.*
+![Additive attention occupies the scoring category in the attention map](images/original-slides/lecture-03-slide-03.png)
 
-Each source state contributes its entire feature vector, multiplied by one scalar weight. The colored proportions describe contributions to one returned context, rather than probabilities that the decoder has already emitted those words. These are the source presentation’s four states; the worked calculation later uses our three retained rows.
+This lesson introduces one scoring method: **additive attention**, associated with Bahdanau, Cho and Bengio's 2014 translation work. We first understand its retrieval behavior, then the full decoding step, and only then open the scoring network. This remains a recurrent encoder–decoder, not yet a Transformer.
 
-For output step $t$ and source position $j$, write a scalar compatibility score as $e_{tj}=a(s_{t-1},h_j)$. The previous decoder state is the query in this convention. Another decoder implementation can order its internal updates differently; what matters here is that the query is available before this retrieval is computed.
+### Start with what changes: a weighted look back
 
-Convert the source-position scores into weights and a context:
+![The decoder writing chat gives the largest weight to cat](images/original-slides/lecture-03-slide-07.png)
 
-$$\alpha_{tj}=\frac{\exp(e_{tj})}{\sum_{r=1}^{N}\exp(e_{tr})},\qquad
+For “The cat sat today”, imagine a step that will produce **chat**. The illustrative retrieval weights are $[0.05,0.75,0.15,0.05]$. The strongest connection is to **cat**, while all four positions contribute. These numbers are **weights**, not raw scores: they are nonnegative and sum to one.
+
+The model does not need to know the answer “chat” before computing those weights. It already has a decoder state summarizing its previous output. That state asks the retrieval question; the retrieved context then helps predict the next token. Describing a picture as “the step writing chat” names the result of the step, not an extra input that gives away its target.
+
+![The encoder computes a state for every source position](images/original-slides/lecture-03-slide-08.png)
+
+Follow the same encoder chain as before, but keep every $h_j$. Each is a contextual state, not necessarily the original token embedding. In a one-directional encoder, $h_j$ summarizes a prefix ending at position $j$. Bahdanau's full system uses a bidirectional encoder, combining forward and backward annotations so each source position can carry surrounding context from both directions.
+
+### Multiply each whole vector, then add
+
+![Four source states contribute to a weighted sum, with the largest contribution assigned to cat](images/original-slides/lecture-03-slide-09.png)
+
+One scalar weight multiplies every coordinate of its source state. For the displayed four-position example,
+
+$$c_2=0.05h_1+0.75h_2+0.15h_3+0.05h_4.$$
+
+The answer has the same width as an $h$ vector. Saying the mixture is “75% cat” means the coefficient of the state at the cat position is $0.75$. It does not mean that 75% of the coordinates are reserved for cat, or that the probability of generating chat is $0.75$. Encoder states can already contain information from several words.
+
+![One fixed context is replaced by separate contexts c1, c2 and c3 for different output steps](images/original-slides/lecture-03-slide-10.png)
+
+Compare the two sides. The old context was reused unchanged. The new contexts can differ because their weights differ, even though they retrieve from the same retained encoder states. Attention has preserved the useful idea of a context vector while making its construction depend on the current request.
+
+For output step $t$, the general recipe is
+
+$$e_{tj}=a(s_{t-1},h_j),\qquad
+\alpha_{tj}=\frac{\exp(e_{tj})}{\sum_{r=1}^{N}\exp(e_{tr})},\qquad
 c_t=\sum_{j=1}^{N}\alpha_{tj}h_j.$$
 
-$N$ is the number of stored source positions. Each row of $\alpha$ belongs to one query and sums to one. The resulting $c_t$ has the same feature width as the stored states. We have not chosen an output word yet: a decoder update and vocabulary head still consume this context.
+Here $N$ counts source positions, $s_{t-1}$ is the already available decoder state, $e_{tj}$ is a raw scalar compatibility score, and $\alpha_{tj}$ is a normalized source-position weight. The three operations are **score, normalize, combine**. They define the softmax retrieval we develop in this foundations route; later attention alternatives can change that recipe.
 
-There is no circular requirement to know the next translated word before computing attention. The already available decoder state and previous output tokens form the query. Its retrieved context helps compute the next state and vocabulary logits; only then does the system choose the next token. During training, a reference next token supplies a target for the loss, rather than an input to this retrieval.
+### Put retrieval into one complete decoding step
 
-![A query produces scores, weights, and a returned context](images/03-additive-flow.svg)
+![Encoder states supply a changing context to a recurrent decoder that already has its previous state](images/original-slides/lecture-03-slide-13.png)
 
-### Why the score is called additive
+Suppose “Le” has been produced. The decoder state is $s_1$. The next context is $c_2$ because it supports the second output step. Source states and $s_1$ determine that context, and the decoder uses its available state, previous output token and retrieved information to produce a new state and vocabulary prediction.
 
-![Separate query and source projections meet at an addition before a nonlinear scalar scorer](images/original-slides/lecture-03-slide-24.png)
+![Every arrow in one step: source states and decoder query produce scores, weights, a context and vocabulary probabilities](images/original-slides/lecture-03-slide-14.png)
 
-*Original diagram: [Vizuara, Lecture 3, slide 24](https://lecture3-attention-mechanisms.vercel.app/#/24). Captured from the linked presentation website. Open the image for full size.*
+Open the middle path before following the output path:
 
-The two branches first project the decoder query and one source state to compatible widths. Their addition happens inside the scoring network, before tanh and the final scalar projection. It is separate from the weighted sum of values that happens after normalization.
+1. Apply the same scorer $f$ to $(s_1,h_1)$, $(s_1,h_2)$, $(s_1,h_3)$ and $(s_1,h_4)$. These are repeated calls with shared parameters.
+2. Normalize the four scores together. Scores $[0.3,3.0,1.4,0.3]$ give approximately $[0.05,0.75,0.15,0.05]$ after softmax.
+3. Multiply the four source states by those weights and add them to obtain $c_2$.
+4. Use the context and decoder features to compute vocabulary logits, normalize those logits over the French vocabulary, and choose a token according to the decoding rule.
 
-One possible learned scorer is
+There are **two different softmax operations**. The first distributes retrieval weight over source positions. The second distributes output probability over vocabulary entries. The diagram's $0.81$ for chat belongs to the second distribution and is an illustrative prediction, not another attention weight.
+
+For a dimension check, a context of width 768 and a decoder feature vector of width 768 concatenate to width **1,536**. A row-vector output matrix of shape $1536\times50000$ would yield 50,000 vocabulary logits. The context does not itself need 50,000 coordinates.
+
+The diagram gives a useful high-level output head. Exact decoder update order varies. In the original Bahdanau formulation, $s_{t-1}$ determines $c_t$, then the decoder update uses the previous state, previous target token and $c_t$; the output function consumes the required decoder/context features. Specify one order in code and avoid a circular dependency on an uncomputed state.
+
+### The next state changes the next request
+
+![Each recurrent decoder update incorporates a previous state, a previous output token and that step's context](images/original-slides/lecture-03-slide-15.png)
+
+The $s$ chain carries output history forward. A state after “Le chat” differs from a state after “Le”. It therefore sends a different request to the same source memory. The source sentence does not have to be encoded again for every target token.
+
+![The decoder loop repeats attention, context construction, prediction and state update](images/original-slides/lecture-03-slide-16.png)
+
+Follow the loop back to the scorer. It receives the new decoder state; it does not receive a newly translated source sentence or a new set of scoring parameters. During inference, the parameters stay fixed while activations, contexts and predictions change.
+
+![The chat step focuses on cat; the noir step focuses on black](images/original-slides/lecture-03-slide-17.png)
+
+Now use the source **The black cat**. For the chat step, the weights are $[0.10,0.15,0.75]$, so
+
+$$c_2=0.10h_{\rm The}+0.15h_{\rm black}+0.75h_{\rm cat}.$$
+
+For the noir step, they change to $[0.10,0.80,0.10]$:
+
+$$c_3=0.10h_{\rm The}+0.80h_{\rm black}+0.10h_{\rm cat}.$$
+
+The large coefficients move from the third source position to the second. That is dynamic retrieval. These example weights illustrate desirable alignment; they are not outputs from a trained model in this project.
+
+### Output length and order are free to differ
+
+![Three English words can produce two French words before an end token](images/original-slides/lecture-03-slide-18.png)
+
+“I am hungry” and “J'ai faim” have different displayed word counts. At each output step, attention can still consult all three source positions. The decoder stops on its end token; it does not stop because it has visited each source position once. A maximum output length prevents an unending decode if the model fails to stop.
+
+![The black cat becomes Le chat noir, with crossing retrieval connections](images/original-slides/lecture-03-slide-19.png)
+
+Read the French words in generation order. Le emphasizes The, chat emphasizes cat, and noir emphasizes black. The lines cross because the language changes noun/adjective order. A rule forcing output position $t$ to retrieve source position $t$ would prevent this behavior.
+
+![An alignment matrix stacks one row per output step and one column per source position](images/original-slides/lecture-03-slide-20.png)
+
+The rows are **Le, chat, noir**; the columns are **The, black, cat**. Each row sums to one. The bright cell in the second row is in the cat column, and the bright cell in the third row is in the black column. Nothing requires the columns to sum to one or the bright cells to follow the main diagonal.
+
+The matrix is square here because these examples happen to have equal source and target lengths. Two decoding steps over three source positions would instead produce a $2\times3$ matrix. Multiplying that by a $3\times d_h$ memory returns two contexts of width $d_h$.
+
+![The European Economic Area alignment illustrates reversed adjective order in French](images/original-slides/lecture-03-slide-21.png)
+
+Follow **Area → zone**, **Economic → économique**, and **European → européenne**. The strong cells run away from the main diagonal because French places the modifiers differently. An alignment picture makes a learned retrieval pattern inspectable. This redrawn teaching example is not an independently reproduced training result. Attention weights also need not be perfect word alignments or a complete explanation of a model's prediction.
+
+### Where the weights come from
+
+![Raw scores 2, 4, 1 and 3 become normalized attention weights through softmax](images/original-slides/lecture-03-slide-23.png)
+
+A score can be negative, positive, or larger than one; it need not sum to anything meaningful. Softmax exponentiates and normalizes the whole row. For $[2,4,1,3]$, the weights are approximately $[0.0871,0.6439,0.0321,0.2369]$. The printed lower row is schematic and does not equal the softmax of those four raw scores; use the recalculated values here for arithmetic. Their order follows the scores, all are positive, and their sum is one. A large weight can arise from a moderately sized score if the other scores are smaller: the comparisons are relative.
+
+### Open the additive scorer
+
+![Separate learned projections of a decoder state and source state are added, passed through tanh and reduced to one score](images/original-slides/lecture-03-slide-24.png)
+
+For this formula, write vectors as columns:
 
 $$a(s,h)=u^\top\tanh(W_ss+W_hh+b).$$
 
-For this formula only, the vectors are written as columns. If $s\in\mathbb R^{d_s}$, $h\in\mathbb R^{d_h}$ and the scorer's hidden width is $d_a$, the matrices have shapes $d_a\times d_s$ and $d_a\times d_h$, and $u,b\in\mathbb R^{d_a}$. The projections put query and source in a shared hidden space; they are added before the nonlinearity. That addition gives the scorer its name. Query and source widths need not be equal.
+If $s$ has width $d_s$, $h$ has width $d_h$, and the scoring network has hidden width $d_a$, then $W_s$ has shape $d_a\times d_s$, $W_h$ has shape $d_a\times d_h$, and $u,b$ have width $d_a$. The original vectors can have different widths; their projections must have the same width so they can be added.
 
-The tanh also matters. If it were removed, $u^\top W_ss$ would be the same scalar added to every source score for a fixed query. Softmax cancels a common additive offset, so that query contribution would not affect the relative weights. Nonlinear interaction prevents this simple cancellation.
+Follow the network in order. Each projection puts its input in the shared scoring space. **Addition** combines them, giving additive attention its name. Elementwise $\tanh$ introduces a nonlinear interaction, with outputs between minus one and one. The dot product with learned $u$ reduces the hidden vector to one scalar score. This final scoring vector is a model parameter; it is not the stored value vector that is averaged to build the context.
 
-The Bahdanau translation paper uses learned alignment and bidirectional encoder annotations. Our arithmetic isolates its scoring-and-retrieval idea; it does not implement that complete model or reproduce its training results. See the [original paper](https://arxiv.org/abs/1409.0473).
+Why keep the nonlinearity? Without it,
+
+$$a(s,h)=u^\top W_ss+u^\top W_hh+u^\top b.$$
+
+For one query, the query term is the same offset for every source position. Softmax cancels common offsets, so changing only $s$ would not change the relative weights in this separable scorer. The nonlinear interaction makes the request affect relative comparisons.
 
 ### A complete small calculation
-
-![One decoding step from stored encoder states through scores, weights, context and vocabulary prediction](images/original-slides/lecture-03-slide-14.png)
-
-*Original diagram: [Vizuara, Lecture 3, slide 14](https://lecture3-attention-mechanisms.vercel.app/#/14). Captured from the linked presentation website. Open the image for full size.*
-
-Read the middle path first: compare the available query with every state, normalize the scores, and combine those states. Only afterward does the output-side computation use the context to score vocabulary entries. The source uses four English positions and rounded displayed values; our calculation below independently checks three states and keeps source-position weights separate from vocabulary probabilities.
 
 We will reuse the hand-set memory
 
@@ -163,26 +247,18 @@ if __name__ == '__main__':
 
 Run `python3 examples/03_additive.py` from the package directory. The result includes the scores, weights and context above. It also changes the query to $s=1$, keeping the source states and parameters fixed, and obtains weights `[0.541045,0.206330,0.252626]`. The changed context comes from a new retrieval, not a new memory or a training step.
 
-### Read an alignment matrix correctly
+### Place the result back on the map
 
-![An alignment matrix whose output-step rows can select reordered source columns](images/original-slides/lecture-03-slide-20.png)
+![The scoring timeline moves from additive attention to dot-product and scaled dot-product attention](images/original-slides/lecture-03-slide-28.png)
 
-*Original diagram: [Vizuara, Lecture 3, slide 20](https://lecture3-attention-mechanisms.vercel.app/#/20). Captured from the linked presentation website. Open the image for full size.*
-
-Follow a row to see which source positions contribute to that output step; follow successive rows to see the retrieval change. The stronger cells need not form a diagonal when translation changes word order. This is a source illustration of alignment, not a learned result from our project or a requirement that attention always produces one-to-one matches.
-
-Stack the weights for several output steps. Rows are output-step queries; columns are source positions. A bright entry can indicate that one source position contributes strongly to that step's context. It is not necessarily a one-to-one word alignment or a proof of a linguistic relationship. Source and target tokenization can differ, soft mixtures can distribute information, and a trained decoder uses more than this matrix.
-
-The number of rows can differ from the number of columns. Generation still ends according to the decoder's output behavior, not when attention has used every column once. Nothing in row-wise normalization imposes a monotonic alignment or requires each source position to be selected exactly once.
-
-For a concrete rectangular case, stack the two weight rows computed above for $s=0$ and $s=1$. The result is a $2\times3$ matrix: two output-step queries, three source positions. Its rows sum to one, but a column has no such constraint. Multiplying it by the $3\times2$ memory produces two width-two contexts. If a decoder state has width three, concatenating one context with that state produces width five; a $5\times V_{\mathrm{out}}$ matrix can then produce one logit for each output vocabulary token. Attention normalization and vocabulary normalization have different axes even inside the same decoding step.
+We have filled the additive-scoring entry: a learned projection of each input, an addition, a nonlinearity and a scalar projection. The complete surrounding operation now has a purpose: a decoder can retrieve a different source mixture at each output step.
 
 [[practice:additive-check]]
 
-### The original lecture and slides
+Next we keep the retrieval pipeline and change the compatibility calculation. How cheaply can two compatible vectors produce a useful scalar score, and what happens when their feature width becomes large?
 
-[Vizuara Lecture 3](https://www.youtube.com/watch?v=6yIe4ekER14) supplies the additive-attention motivation and alignment discussion. The 28-slide presentation moves from retained source states to a full decoding step and then opens the scoring network. This lesson uses fresh coordinates and checks their arithmetic independently.
+### References
 
-```presentation
-{"title":"Vizuara · Lecture 3 · Original presentation","url":"https://lecture3-attention-mechanisms.vercel.app/#/1"}
-```
+[Vizuara — The Attention Family, Lecture 3](https://www.youtube.com/watch?v=6yIe4ekER14) · [Presentation and diagrams](https://lecture3-attention-mechanisms.vercel.app/).
+
+[Bahdanau, Cho and Bengio — Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/html/1409.0473v7), decoder/context equations and bidirectional annotations.

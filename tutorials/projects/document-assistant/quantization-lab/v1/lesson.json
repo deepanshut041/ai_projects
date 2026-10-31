@@ -1,0 +1,1487 @@
+{
+  "schema_version": 1,
+  "project_id": "document-assistant",
+  "languages": [
+    "cpp",
+    "python"
+  ],
+  "examples": [
+    {
+      "id": "reference-contract",
+      "language": "python",
+      "path": "examples/01_contract.py",
+      "purpose": "1. Start with an answer we can defend; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "good": {
+          "correct": true,
+          "valid_ids": true,
+          "supported": true
+        },
+        "wrong_source": {
+          "correct": true,
+          "valid_ids": true,
+          "supported": false
+        }
+      }
+    },
+    {
+      "id": "reference-scaffold",
+      "language": "python",
+      "path": "examples/02_scaffold_trace.py",
+      "purpose": "2. Know exactly what runs today; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "scope": "invoke with project root for live scaffold check",
+        "expected_exit_codes": [
+          0,
+          0,
+          0,
+          2
+        ]
+      }
+    },
+    {
+      "id": "reference-compatibility",
+      "language": "python",
+      "path": "examples/03_compatibility.py",
+      "purpose": "3. A model choice needs an executable compatibility proof; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "fixture_only": true,
+        "rejected": "Unproven capabilities: template_matches"
+      }
+    },
+    {
+      "id": "reference-memory",
+      "language": "python",
+      "path": "examples/04_memory_budget.py",
+      "purpose": "4. Budget the memory that is live at the same time; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "bf16_gib": 14.901,
+        "q4_gib": 4.191,
+        "total_gib": 9.191,
+        "fits": true,
+        "longer_cache_fits": false
+      }
+    },
+    {
+      "id": "reference-documents",
+      "language": "python",
+      "path": "examples/05_passages.py",
+      "purpose": "5. Make evidence survive parsing and reruns; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "count": 2,
+        "offsets": [
+          [
+            0,
+            28
+          ],
+          [
+            30,
+            46
+          ]
+        ],
+        "stable": true,
+        "changed_document_changes_ids": true
+      }
+    },
+    {
+      "id": "reference-splits",
+      "language": "python",
+      "path": "examples/06_splits.py",
+      "purpose": "6. Separate data roles and fit the actual prompt; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "disjoint": true,
+        "packed": [
+          "charge takes three hours"
+        ],
+        "seed": 17
+      }
+    },
+    {
+      "id": "reference-reference",
+      "language": "python",
+      "path": "examples/07_reference_decode.py",
+      "purpose": "7. Establish what the floating-point reference actually does; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "probabilities": [
+          0.25,
+          0.75
+        ],
+        "ids": [
+          0,
+          1
+        ],
+        "finish_reason": "eos"
+      }
+    },
+    {
+      "id": "reference-quantization",
+      "language": "python",
+      "path": "examples/08_scalar_quant.py",
+      "purpose": "8. Derive the integer grid instead of memorizing “INT4”; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "scale": 0.857143,
+        "zero": 2,
+        "codes": [
+          0,
+          1,
+          2,
+          3,
+          7,
+          7
+        ],
+        "restored": [
+          -1.714286,
+          -0.857143,
+          0.0,
+          0.857143,
+          4.285714,
+          4.285714
+        ]
+      }
+    },
+    {
+      "id": "reference-storage",
+      "language": "cpp",
+      "path": "examples/09_pack_int4.cpp",
+      "purpose": "9. Store four-bit codes as four-bit codes; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "bytes": [
+          248,
+          112,
+          3
+        ],
+        "count": 5,
+        "round_trip": true
+      }
+    },
+    {
+      "id": "reference-layer",
+      "language": "python",
+      "path": "examples/10_layer_error.py",
+      "purpose": "10. Follow a weight error into the layer output; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "float_output": [
+          1.98,
+          -2.55
+        ],
+        "quantized_output": [
+          1.0,
+          -3.5
+        ],
+        "delta": [
+          -0.98,
+          -0.95
+        ]
+      }
+    },
+    {
+      "id": "reference-artifacts",
+      "language": "python",
+      "path": "examples/11_artifact_plan.py",
+      "purpose": "11. Turn weight formats into an identifiable comparison; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "confounds": [
+          "tokenizer_sha",
+          "placement"
+        ],
+        "classification": "deployment_comparison"
+      }
+    },
+    {
+      "id": "reference-calibration",
+      "language": "python",
+      "path": "examples/12_calibration.py",
+      "purpose": "12. Learn which weight errors the inputs amplify; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "gram": [
+          [
+            16.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0
+          ]
+        ],
+        "same_weight_mse": true,
+        "output_mse": [
+          1.0,
+          0.0625
+        ]
+      }
+    },
+    {
+      "id": "reference-scaling",
+      "language": "python",
+      "path": "examples/13_activation_scaling.py",
+      "purpose": "13. Protect a sensitive channel through an equivalent scaling; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "scale_loss": {
+          "1": 0.9216,
+          "2": 0.9216,
+          "4": 0.0036,
+          "8": 0.81
+        },
+        "best_first_channel_scale": 4,
+        "scope": "ternary teaching grid"
+      }
+    },
+    {
+      "id": "reference-compensation",
+      "language": "python",
+      "path": "examples/14_compensation.py",
+      "purpose": "14. Derive why later weights can compensate for an earlier rounding error; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "fixed_error": 0.25,
+        "compensation": -0.25,
+        "before": 0.25,
+        "after": 0.125
+      }
+    },
+    {
+      "id": "reference-precision",
+      "language": "python",
+      "path": "examples/15_precision_budget.py",
+      "purpose": "15. Spend precision where the declared budget permits; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "recipe": [
+          [
+            4,
+            32
+          ],
+          [
+            8,
+            32
+          ]
+        ],
+        "bytes": 848,
+        "loss": 0.1,
+        "budget": 900
+      }
+    },
+    {
+      "id": "reference-quality",
+      "language": "python",
+      "path": "examples/16_quality.py",
+      "purpose": "16. Score the answer the application promises; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "total": 3,
+        "answerable": 2,
+        "unanswerable": 1,
+        "correct": 1,
+        "supported": 1,
+        "unsupported_answer": 1,
+        "false_refusal": 1,
+        "correct_refusal": 0,
+        "truncated": 1
+      }
+    },
+    {
+      "id": "reference-timing",
+      "language": "python",
+      "path": "examples/17_timing.py",
+      "purpose": "17. Give every latency number a start, an end and a workload; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "end_to_end_s": 2.7,
+        "runtime_ttft_s": 0.5,
+        "user_ttft_s": 0.7,
+        "decode_tokens_s": 2.0,
+        "prefill_tokens_s": 250.0,
+        "p95_fixture_s": 9,
+        "measured": false
+      }
+    },
+    {
+      "id": "reference-cache",
+      "language": "python",
+      "path": "examples/18_cache_budget.py",
+      "purpose": "18. Derive cache growth from the state actually stored; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "lengths": [
+          512,
+          2048,
+          4096
+        ],
+        "bytes": [
+          786432,
+          2359296,
+          4456448
+        ],
+        "scope": "deduplicated logical cache fixture"
+      }
+    },
+    {
+      "id": "reference-cache-quant",
+      "language": "python",
+      "path": "examples/19_cache_error.py",
+      "purpose": "19. Change cache precision without changing the weight experiment; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "base": 3.0,
+        "key_error_output": 3.6,
+        "value_error_output": 3.75,
+        "probabilities": [
+          0.25,
+          0.75
+        ]
+      }
+    },
+    {
+      "id": "reference-recovery",
+      "language": "python",
+      "path": "examples/20_recovery.py",
+      "purpose": "20. Save a candidate that can be verified after restart; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "loaded": "gen-0001",
+        "rejected": [
+          "gen-0002"
+        ],
+        "partial_ignored": true,
+        "scope": "integrity demo; not durable model storage"
+      }
+    },
+    {
+      "id": "reference-boundary",
+      "language": "python",
+      "path": "examples/21_answer_boundary.py",
+      "purpose": "21. Give inference a request and response boundary; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "backend": "fixture",
+        "reset_count": 3,
+        "invalid_citation_rejected": true
+      }
+    },
+    {
+      "id": "reference-application",
+      "language": "python",
+      "path": "examples/22_local_app.py",
+      "purpose": "22. Connect a local interface that exposes the evidence and limits; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "http_status": 200,
+        "bad_request_status": 400,
+        "result": {
+          "backend": "fixture",
+          "model_executed": false,
+          "answer": "3 hours",
+          "citations": [
+            "lumen-1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "reference-selection",
+      "language": "python",
+      "path": "examples/23_selection.py",
+      "purpose": "23. Freeze the choice before opening final results; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "selected": null,
+        "paired_mean": 0.0,
+        "bootstrap_range": [
+          -1.0,
+          1.0
+        ],
+        "resamples": 256
+      }
+    },
+    {
+      "id": "reference-handoff",
+      "language": "python",
+      "path": "examples/24_handoff.py",
+      "purpose": "24. Connect every phase to evidence that someone else can inspect; complete authored teaching reference, not model inference",
+      "expected_output": {
+        "complete": false,
+        "missing": [
+          "compatibility",
+          "frozen_data",
+          "float_reference",
+          "q8_comparison",
+          "q4_comparison",
+          "calibration_study",
+          "context_study",
+          "saved_application",
+          "fresh_process_recovery",
+          "final_evaluation"
+        ],
+        "next_phase": "00 — compatibility and budget",
+        "learner_review": "pending"
+      }
+    }
+  ],
+  "slug": "quantization-lab",
+  "revision": "v1",
+  "title": "Document Assistant: understand and build every quantization phase",
+  "question": "How do we build an evidence-grounded local document assistant, quantize its model, compare quality and resources fairly, manage context memory and reload a supported application?",
+  "topic_kind": "repo",
+  "level": "advanced",
+  "prerequisites": [
+    "Comfort reading Python and C++; no Python syntax primer required.",
+    "Basic arithmetic; matrix axes, sums, softmax, quadratic derivatives and units are taught at first use.",
+    "Actual model execution requires a separate supported runtime/environment after phase-00 checks."
+  ],
+  "created_at": "2026-10-26T08:43:37.620063+00:00",
+  "repository": {
+    "base_sha": "f8938bf2bbfd17f44e29d7e600393433a1eb97de",
+    "name": "docs"
+  },
+  "objectives": [
+    {
+      "id": "explain-contract",
+      "text": "1. Start with an answer we can defend"
+    },
+    {
+      "id": "explain-scaffold",
+      "text": "2. Know exactly what runs today"
+    },
+    {
+      "id": "explain-compatibility",
+      "text": "3. A model choice needs an executable compatibility proof"
+    },
+    {
+      "id": "explain-memory",
+      "text": "4. Budget the memory that is live at the same time"
+    },
+    {
+      "id": "explain-documents",
+      "text": "5. Make evidence survive parsing and reruns"
+    },
+    {
+      "id": "explain-splits",
+      "text": "6. Separate data roles and fit the actual prompt"
+    },
+    {
+      "id": "explain-reference",
+      "text": "7. Establish what the floating-point reference actually does"
+    },
+    {
+      "id": "explain-quantization",
+      "text": "8. Derive the integer grid instead of memorizing “INT4”"
+    },
+    {
+      "id": "explain-storage",
+      "text": "9. Store four-bit codes as four-bit codes"
+    },
+    {
+      "id": "explain-layer",
+      "text": "10. Follow a weight error into the layer output"
+    },
+    {
+      "id": "explain-artifacts",
+      "text": "11. Turn weight formats into an identifiable comparison"
+    },
+    {
+      "id": "explain-calibration",
+      "text": "12. Learn which weight errors the inputs amplify"
+    },
+    {
+      "id": "explain-scaling",
+      "text": "13. Protect a sensitive channel through an equivalent scaling"
+    },
+    {
+      "id": "explain-compensation",
+      "text": "14. Derive why later weights can compensate for an earlier rounding error"
+    },
+    {
+      "id": "explain-precision",
+      "text": "15. Spend precision where the declared budget permits"
+    },
+    {
+      "id": "explain-quality",
+      "text": "16. Score the answer the application promises"
+    },
+    {
+      "id": "explain-timing",
+      "text": "17. Give every latency number a start, an end and a workload"
+    },
+    {
+      "id": "explain-cache",
+      "text": "18. Derive cache growth from the state actually stored"
+    },
+    {
+      "id": "explain-cache-quant",
+      "text": "19. Change cache precision without changing the weight experiment"
+    },
+    {
+      "id": "explain-recovery",
+      "text": "20. Save a candidate that can be verified after restart"
+    },
+    {
+      "id": "explain-boundary",
+      "text": "21. Give inference a request and response boundary"
+    },
+    {
+      "id": "explain-application",
+      "text": "22. Connect a local interface that exposes the evidence and limits"
+    },
+    {
+      "id": "explain-selection",
+      "text": "23. Freeze the choice before opening final results"
+    },
+    {
+      "id": "explain-handoff",
+      "text": "24. Connect every phase to evidence that someone else can inspect"
+    }
+  ],
+  "sources": [
+    {
+      "id": "config-source",
+      "kind": "local",
+      "title": "Actual pinned configuration loader",
+      "path": "src/core/config.py",
+      "start": 1,
+      "end": 44,
+      "sha256": "f25837210737f4c44f41198ce7928161a375abd4742ad96074d27e1c81048d4d",
+      "excerpt_sha256": "f25837210737f4c44f41198ce7928161a375abd4742ad96074d27e1c81048d4d",
+      "excerpt_path": "evidence/config-source.txt",
+      "base_sha": "4013627331c881a12082f71b2861a4d631b68443",
+      "working_tree": true,
+      "repository_path": "ai_projects/projects/quantization-lab/document-assistant"
+    },
+    {
+      "id": "workflow-source",
+      "kind": "local",
+      "title": "Explicit pending model actions",
+      "path": "src/core/workflow.py",
+      "start": 1,
+      "end": 14,
+      "sha256": "174639b698a2fc4ea3e3eb9c35f431325989f453811a8ece307c95a7372d2709",
+      "excerpt_sha256": "174639b698a2fc4ea3e3eb9c35f431325989f453811a8ece307c95a7372d2709",
+      "excerpt_path": "evidence/workflow-source.txt",
+      "base_sha": "4013627331c881a12082f71b2861a4d631b68443",
+      "working_tree": true,
+      "repository_path": "ai_projects/projects/quantization-lab/document-assistant"
+    },
+    {
+      "id": "command-source",
+      "kind": "local",
+      "title": "Actual read-only command dispatcher",
+      "path": "src/utils/commands.py",
+      "start": 1,
+      "end": 47,
+      "sha256": "b05c749c00fbe785793e1388615832143aea2c1591f1afd39797d677e44ce971",
+      "excerpt_sha256": "b05c749c00fbe785793e1388615832143aea2c1591f1afd39797d677e44ce971",
+      "excerpt_path": "evidence/command-source.txt",
+      "base_sha": "4013627331c881a12082f71b2861a4d631b68443",
+      "working_tree": true,
+      "repository_path": "ai_projects/projects/quantization-lab/document-assistant"
+    },
+    {
+      "id": "entry-source",
+      "kind": "local",
+      "title": "Thin direct entry point",
+      "path": "src/document_assistant.py",
+      "start": 1,
+      "end": 5,
+      "sha256": "75e4a7157d0a08a34422e00647f0b5243e687849c3049cb9373e91044a8aba92",
+      "excerpt_sha256": "75e4a7157d0a08a34422e00647f0b5243e687849c3049cb9373e91044a8aba92",
+      "excerpt_path": "evidence/entry-source.txt",
+      "base_sha": "4013627331c881a12082f71b2861a4d631b68443",
+      "working_tree": true,
+      "repository_path": "ai_projects/projects/quantization-lab/document-assistant"
+    },
+    {
+      "id": "project-config",
+      "kind": "local",
+      "title": "Pinned source model and proposed budgets",
+      "path": "src/core/project.toml",
+      "start": 1,
+      "end": 17,
+      "sha256": "51d0de85b35a6610a1ee50956411806e76e4484aa9db90f4207021a53a3975c5",
+      "excerpt_sha256": "51d0de85b35a6610a1ee50956411806e76e4484aa9db90f4207021a53a3975c5",
+      "excerpt_path": "evidence/project-config.txt",
+      "base_sha": "4013627331c881a12082f71b2861a4d631b68443",
+      "working_tree": true,
+      "repository_path": "ai_projects/projects/quantization-lab/document-assistant"
+    },
+    {
+      "id": "gemma-config",
+      "kind": "external",
+      "title": "Pinned Gemma 4 E4B configuration",
+      "url": "https://huggingface.co/google/gemma-4-E4B-it/raw/ee0ef6023621cff504d758262d4e04895a5af4a2/config.json",
+      "accessed_at": "2026-10-26",
+      "locator": "text_config and top-level architecture at exact model revision",
+      "proof_limit": "Metadata only; not weights or verified backend allocation"
+    },
+    {
+      "id": "gemma-card",
+      "kind": "external",
+      "title": "Official Gemma 4 E4B model card",
+      "url": "https://huggingface.co/google/gemma-4-E4B-it/tree/ee0ef6023621cff504d758262d4e04895a5af4a2",
+      "accessed_at": "2026-10-26",
+      "locator": "README/model card at pinned revision",
+      "proof_limit": "Publisher intent; no local model inference"
+    },
+    {
+      "id": "llama-gemma",
+      "kind": "external",
+      "title": "Pinned llama.cpp Gemma 4 architecture source",
+      "url": "https://github.com/ggml-org/llama.cpp/blob/9b8446b91434e0c0cdc293baf0b29c099eaaa0c7/src/models/gemma4.cpp",
+      "accessed_at": "2026-10-26",
+      "locator": "Architecture implementation at named source commit",
+      "proof_limit": "Source presence does not prove conversion/device/runtime compatibility"
+    },
+    {
+      "id": "llama-quantize",
+      "kind": "external",
+      "title": "Pinned llama.cpp quantization documentation",
+      "url": "https://github.com/ggml-org/llama.cpp/blob/9b8446b91434e0c0cdc293baf0b29c099eaaa0c7/tools/quantize/README.md",
+      "accessed_at": "2026-10-26",
+      "locator": "Quantizer workflow and preset names",
+      "proof_limit": "Conditional future protocol; no model conversion executed"
+    },
+    {
+      "id": "onnx-quantize",
+      "kind": "external",
+      "title": "ONNX QuantizeLinear operator specification",
+      "url": "https://onnx.ai/onnx/operators/onnx__QuantizeLinear.html",
+      "accessed_at": "2026-10-26",
+      "locator": "ONNX 1.24 operator docs; integer rounding and saturation",
+      "proof_limit": "Operator semantics reference; not every model format's implementation"
+    },
+    {
+      "id": "gguf",
+      "kind": "external",
+      "title": "GGUF container specification",
+      "url": "https://github.com/ggml-org/ggml/blob/master/docs/gguf.md",
+      "accessed_at": "2026-10-26",
+      "locator": "Header, metadata, tensor offsets/alignment and types; accessed 2026-10-26",
+      "proof_limit": "Container specification only; teaching nibble layout is not GGUF"
+    },
+    {
+      "id": "awq-paper",
+      "kind": "external",
+      "title": "AWQ paper",
+      "url": "https://arxiv.org/html/2306.00978v6",
+      "accessed_at": "2026-10-26",
+      "locator": "Section 3; equivalent channel scaling and activation-aware method",
+      "proof_limit": "Mechanism reference; toy ternary grid is an authored departure"
+    },
+    {
+      "id": "awq-code",
+      "kind": "external",
+      "title": "AWQ scale implementation",
+      "url": "https://github.com/mit-han-lab/llm-awq/blob/d6e797a42b9ef7778de8ee2352116e0f48a78d61/awq/quantize/auto_scale.py",
+      "accessed_at": "2026-10-26",
+      "locator": "Scale folding and search at named commit",
+      "proof_limit": "Not executed; no Gemma support established"
+    },
+    {
+      "id": "gptq-paper",
+      "kind": "external",
+      "title": "GPTQ paper",
+      "url": "https://arxiv.org/html/2210.17323v2",
+      "accessed_at": "2026-10-26",
+      "locator": "Sections 3–4; layer reconstruction and second-order method",
+      "proof_limit": "Toy constrained derivation omits production algorithm"
+    },
+    {
+      "id": "gptq-code",
+      "kind": "external",
+      "title": "GPTQ implementation",
+      "url": "https://github.com/IST-DASLab/gptq/blob/2d65066eeb06a5c9ff5184d8cebdf33662c67faf/gptq.py",
+      "accessed_at": "2026-10-26",
+      "locator": "Damping/Cholesky/block quantization code at named commit",
+      "proof_limit": "Source inspection; not a validated Gemma exporter"
+    },
+    {
+      "id": "kivi-paper",
+      "kind": "external",
+      "title": "KIVI paper",
+      "url": "https://arxiv.org/html/2402.02750v2",
+      "accessed_at": "2026-10-26",
+      "locator": "Section 3; key/value axes and residual cache ideas",
+      "proof_limit": "No reported paper speedups/quality treated as our results"
+    },
+    {
+      "id": "kivi-code",
+      "kind": "external",
+      "title": "KIVI implementation",
+      "url": "https://github.com/jy-yuan/KIVI",
+      "accessed_at": "2026-10-26",
+      "locator": "README model/hardware requirements; accessed 2026-10-26",
+      "proof_limit": "Not proof of selected architecture/Intel support"
+    },
+    {
+      "id": "longbench",
+      "kind": "external",
+      "title": "LongBench task source",
+      "url": "https://github.com/THUDM/LongBench/blob/main/LongBench/README.md",
+      "accessed_at": "2026-10-26",
+      "locator": "Public task definitions/data references; accessed 2026-10-26",
+      "proof_limit": "Candidate data source; no subset acquired or scored"
+    },
+    {
+      "id": "hf-cache",
+      "kind": "external",
+      "title": "Transformers cache guide",
+      "url": "https://huggingface.co/docs/transformers/main/en/kv_cache",
+      "accessed_at": "2026-10-26",
+      "locator": "Cache strategy support table; accessed 2026-10-26",
+      "proof_limit": "Version-sensitive guidance; no API/backend support assumed"
+    },
+    {
+      "id": "llama-imatrix",
+      "kind": "external",
+      "title": "Pinned llama.cpp importance collector documentation",
+      "url": "https://github.com/ggml-org/llama.cpp/blob/9b8446b91434e0c0cdc293baf0b29c099eaaa0c7/tools/imatrix/README.md",
+      "accessed_at": "2026-10-26",
+      "locator": "Collector invocation and importance file format at named source commit",
+      "proof_limit": "Conditional protocol only; no calibration/model execution or support proof"
+    }
+  ],
+  "claims": [
+    {
+      "id": "scaffold-state",
+      "text": "Actual source implements read-only setup actions and explicit pending model actions.",
+      "source_ids": [
+        "command-source",
+        "workflow-source",
+        "config-source"
+      ],
+      "status": "verified",
+      "proof_limit": "Inspected source and separately executed scaffold checks; no model execution"
+    },
+    {
+      "id": "model-architecture",
+      "text": "The pinned model configuration requires hybrid/shared-cache and embedding-aware accounting.",
+      "source_ids": [
+        "gemma-config"
+      ],
+      "status": "documented",
+      "proof_limit": "Configuration metadata; actual runtime allocations unmeasured"
+    },
+    {
+      "id": "numeric-references",
+      "text": "The worked integer, layer, scaling, quadratic and cache numbers are authored illustrative references.",
+      "source_ids": [],
+      "status": "illustrative",
+      "proof_limit": "Exact runnable fixture assertions plus separate numerical audit; not measured Gemma behavior"
+    },
+    {
+      "id": "advanced-methods",
+      "text": "AWQ, GPTQ and KIVI motivate different weight/cache mechanisms.",
+      "source_ids": [
+        "awq-paper",
+        "gptq-paper",
+        "kivi-paper"
+      ],
+      "status": "documented",
+      "proof_limit": "Toy teaching references deliberately omit full algorithms, exporters and kernels"
+    },
+    {
+      "id": "runtime-support",
+      "text": "Compatibility and quality/resource results for the exact model/backend remain unknown.",
+      "source_ids": [
+        "llama-gemma",
+        "project-config"
+      ],
+      "status": "unknown",
+      "proof_limit": "No model weights, conversion, calibration or full inference executed"
+    }
+  ],
+  "entities": [],
+  "relationships": [],
+  "chapters": [
+    {
+      "id": "contract",
+      "title": "1. Start with an answer we can defend",
+      "content_path": "lessons/01-start.md",
+      "objective_ids": [
+        "explain-contract"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "contract-transfer"
+      ]
+    },
+    {
+      "id": "scaffold",
+      "title": "2. Know exactly what runs today",
+      "content_path": "lessons/02-scaffold.md",
+      "objective_ids": [
+        "explain-scaffold"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "scaffold-transfer"
+      ]
+    },
+    {
+      "id": "compatibility",
+      "title": "3. A model choice needs an executable compatibility proof",
+      "content_path": "lessons/03-compatibility.md",
+      "objective_ids": [
+        "explain-compatibility"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "compatibility-transfer"
+      ]
+    },
+    {
+      "id": "memory",
+      "title": "4. Budget the memory that is live at the same time",
+      "content_path": "lessons/04-memory.md",
+      "objective_ids": [
+        "explain-memory"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [
+        "budget-choices"
+      ],
+      "practice_ids": [
+        "memory-transfer"
+      ]
+    },
+    {
+      "id": "documents",
+      "title": "5. Make evidence survive parsing and reruns",
+      "content_path": "lessons/05-documents.md",
+      "objective_ids": [
+        "explain-documents"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "documents-transfer"
+      ]
+    },
+    {
+      "id": "splits",
+      "title": "6. Separate data roles and fit the actual prompt",
+      "content_path": "lessons/06-data-splits.md",
+      "objective_ids": [
+        "explain-splits"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "splits-transfer"
+      ]
+    },
+    {
+      "id": "reference",
+      "title": "7. Establish what the floating-point reference actually does",
+      "content_path": "lessons/07-reference-generation.md",
+      "objective_ids": [
+        "explain-reference"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "reference-transfer"
+      ]
+    },
+    {
+      "id": "quantization",
+      "title": "8. Derive the integer grid instead of memorizing “INT4”",
+      "content_path": "lessons/08-quantization.md",
+      "objective_ids": [
+        "explain-quantization"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "quantization-transfer"
+      ]
+    },
+    {
+      "id": "storage",
+      "title": "9. Store four-bit codes as four-bit codes",
+      "content_path": "lessons/09-storage.md",
+      "objective_ids": [
+        "explain-storage"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "storage-transfer"
+      ]
+    },
+    {
+      "id": "layer",
+      "title": "10. Follow a weight error into the layer output",
+      "content_path": "lessons/10-layer-error.md",
+      "objective_ids": [
+        "explain-layer"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "layer-transfer"
+      ]
+    },
+    {
+      "id": "artifacts",
+      "title": "11. Turn weight formats into an identifiable comparison",
+      "content_path": "lessons/11-artifacts.md",
+      "objective_ids": [
+        "explain-artifacts"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "artifacts-transfer"
+      ]
+    },
+    {
+      "id": "calibration",
+      "title": "12. Learn which weight errors the inputs amplify",
+      "content_path": "lessons/12-calibration.md",
+      "objective_ids": [
+        "explain-calibration"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "calibration-transfer"
+      ]
+    },
+    {
+      "id": "scaling",
+      "title": "13. Protect a sensitive channel through an equivalent scaling",
+      "content_path": "lessons/13-activation-scaling.md",
+      "objective_ids": [
+        "explain-scaling"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "scaling-transfer"
+      ]
+    },
+    {
+      "id": "compensation",
+      "title": "14. Derive why later weights can compensate for an earlier rounding error",
+      "content_path": "lessons/14-second-order.md",
+      "objective_ids": [
+        "explain-compensation"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "compensation-transfer"
+      ]
+    },
+    {
+      "id": "precision",
+      "title": "15. Spend precision where the declared budget permits",
+      "content_path": "lessons/15-precision-selection.md",
+      "objective_ids": [
+        "explain-precision"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "precision-transfer"
+      ]
+    },
+    {
+      "id": "quality",
+      "title": "16. Score the answer the application promises",
+      "content_path": "lessons/16-task-quality.md",
+      "objective_ids": [
+        "explain-quality"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "quality-transfer"
+      ]
+    },
+    {
+      "id": "timing",
+      "title": "17. Give every latency number a start, an end and a workload",
+      "content_path": "lessons/17-performance.md",
+      "objective_ids": [
+        "explain-timing"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "timing-transfer"
+      ]
+    },
+    {
+      "id": "cache",
+      "title": "18. Derive cache growth from the state actually stored",
+      "content_path": "lessons/18-kv-cache.md",
+      "objective_ids": [
+        "explain-cache"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "cache-transfer"
+      ]
+    },
+    {
+      "id": "cache-quant",
+      "title": "19. Change cache precision without changing the weight experiment",
+      "content_path": "lessons/19-cache-quantization.md",
+      "objective_ids": [
+        "explain-cache-quant"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "cache-quant-transfer"
+      ]
+    },
+    {
+      "id": "recovery",
+      "title": "20. Save a candidate that can be verified after restart",
+      "content_path": "lessons/20-persistence.md",
+      "objective_ids": [
+        "explain-recovery"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "recovery-transfer"
+      ]
+    },
+    {
+      "id": "boundary",
+      "title": "21. Give inference a request and response boundary",
+      "content_path": "lessons/21-answer-service.md",
+      "objective_ids": [
+        "explain-boundary"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "boundary-transfer"
+      ]
+    },
+    {
+      "id": "application",
+      "title": "22. Connect a local interface that exposes the evidence and limits",
+      "content_path": "lessons/22-application.md",
+      "objective_ids": [
+        "explain-application"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "application-transfer"
+      ]
+    },
+    {
+      "id": "selection",
+      "title": "23. Freeze the choice before opening final results",
+      "content_path": "lessons/23-final-evaluation.md",
+      "objective_ids": [
+        "explain-selection"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "selection-transfer"
+      ]
+    },
+    {
+      "id": "handoff",
+      "title": "24. Connect every phase to evidence that someone else can inspect",
+      "content_path": "lessons/24-handoff.md",
+      "objective_ids": [
+        "explain-handoff"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "handoff-transfer"
+      ]
+    }
+  ],
+  "diagrams": [],
+  "tables": [],
+  "scenarios": [
+    {
+      "id": "budget-choices",
+      "title": "Explore the illustrative memory budget",
+      "description": "Change weight storage and cache allowance while capacity stays 12 GiB, workspace 1 GiB and reserve 2 GiB. No model is executed.",
+      "variables": [
+        {
+          "id": "weights",
+          "label": "Weight representation",
+          "options": [
+            "BF16",
+            "toy Q4"
+          ]
+        },
+        {
+          "id": "cache",
+          "label": "Cache allowance",
+          "options": [
+            "2 GiB",
+            "8 GiB"
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "when": {
+            "weights": "BF16",
+            "cache": "2 GiB"
+          },
+          "outcome": "Exceeds capacity: 19.901 GiB including reserve",
+          "narrative": "Weight payload plus stated metadata, cache allowance, workspace and reserve; actual backend peaks remain unmeasured.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "numeric-references"
+          ]
+        },
+        {
+          "when": {
+            "weights": "BF16",
+            "cache": "8 GiB"
+          },
+          "outcome": "Exceeds capacity: 25.901 GiB including reserve",
+          "narrative": "Weight payload plus stated metadata, cache allowance, workspace and reserve; actual backend peaks remain unmeasured.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "numeric-references"
+          ]
+        },
+        {
+          "when": {
+            "weights": "toy Q4",
+            "cache": "2 GiB"
+          },
+          "outcome": "Fits: 9.191 GiB including reserve",
+          "narrative": "Weight payload plus stated metadata, cache allowance, workspace and reserve; actual backend peaks remain unmeasured.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "numeric-references"
+          ]
+        },
+        {
+          "when": {
+            "weights": "toy Q4",
+            "cache": "8 GiB"
+          },
+          "outcome": "Exceeds capacity: 15.191 GiB including reserve",
+          "narrative": "Weight payload plus stated metadata, cache allowance, workspace and reserve; actual backend peaks remain unmeasured.",
+          "active_entity_ids": [],
+          "claim_ids": [
+            "numeric-references"
+          ]
+        }
+      ]
+    }
+  ],
+  "practice": [
+    {
+      "id": "contract-transfer",
+      "question": "An answer says “3 hours and a five-year warranty,” citing lumen-1. Which checks can pass, and what still fails?",
+      "answer": "The charging fact matches and lumen-1 is a valid ID. The warranty claim is absent from the supplied evidence, so complete-answer support fails. The first exact fixture scorer is insufficient for this extra-claim case; review all material claims or use a stricter declared evaluator.",
+      "rubric": "Distinguish fact correctness, ID membership and semantic support; name the fixture limitation.",
+      "objective_ids": [
+        "explain-contract"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "scaffold-transfer",
+      "question": "The TUI status runner exits 0 and prints Gemma 4. May we mark model compatibility verified?",
+      "answer": "No. It validated/read configuration and printed the planned source. It did not load weights or generate tokens. Keep model_execution_verified false; answer remains exit 2. Compatibility needs actual load/template/EOS/placement/reload receipts.",
+      "rubric": "Trace status through config/dispatcher and name missing runtime evidence.",
+      "objective_ids": [
+        "explain-scaffold"
+      ],
+      "claim_ids": []
+    },
+    {
+      "id": "compatibility-transfer",
+      "question": "A backend loads the weights, but its template adds a different generation prefix. Is this the same frozen prompt experiment?",
+      "answer": "No. Visible question equality does not establish token-sequence equality. Capture rendered messages/template/token IDs, fix or separately version the template policy, then repeat the compatibility probe before comparing artifacts.",
+      "rubric": "Explain why template identity changes the input, rather than treating load success as enough.",
+      "objective_ids": [
+        "explain-compatibility"
+      ],
+      "claim_ids": []
+    },
+    {
+      "id": "memory-transfer",
+      "question": "Using the four-bit fixture, what happens when cache allowance grows from 2 to 8 GiB?",
+      "answer": "Weights remain 4.191 GiB. Add 8 GiB cache, 1 GiB workspace and 2 GiB reserve: 15.191 GiB exceeds 12 GiB. The 6 GiB increase is independent of weight compression. A measured backend allocation may differ from this budget model.",
+      "rubric": "Use the same pool and units; include reserve exactly once and distinguish estimate from measurement.",
+      "objective_ids": [
+        "explain-memory"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "documents-transfer",
+      "question": "Two identical paragraphs occur in one manual. Why does the forward search cursor matter?",
+      "answer": "Searching from the document start each time would attach both records to the first occurrence. Searching after the prior interval preserves occurrence offsets. The invariant D[start:end] equals passage text still needs the correct occurrence identity; retain full document digest and offset convention.",
+      "rubric": "Identify repeated-content ambiguity and Unicode character versus byte/token offsets.",
+      "objective_ids": [
+        "explain-documents"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "splits-transfer",
+      "question": "Question A and B use different labels but the same manual. Can A calibrate/tune while B is a document-disjoint final example?",
+      "answer": "No. Split document groups before questions. Shared text/facts violate this protocol even if labels differ. Group duplicate/related manual versions, freeze membership and keep final labels separate. A transductive design is possible only as a separately declared protocol.",
+      "rubric": "State the unit of splitting and why hidden labels alone do not prevent overlap.",
+      "objective_ids": [
+        "explain-splits"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "reference-transfer",
+      "question": "Add 1000 to every logit. What should change in softmax and greedy choice?",
+      "answer": "In exact arithmetic neither changes: a common exponential factor cancels. Subtracting max avoids overflow. Ties still need a deterministic policy and floating implementations can differ at tiny margins. A changed next token can alter later history.",
+      "rubric": "Derive shift cancellation and distinguish local numerical invariance from full runtime determinism.",
+      "objective_ids": [
+        "explain-reference"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "quantization-transfer",
+      "question": "With s=0.5, z=0 and integer codes -7 through 7, encode 1.25 and 10 using ties-to-even.",
+      "answer": "1.25/0.5=2.5 rounds to even code 2, reconstructing 1.0 with error -0.25. 10/0.5=20 clips to 7, reconstructing 3.5 with error -6.5. The half-step bound applies to unclipped nearest rounding, not the clipped outlier.",
+      "rubric": "Show division, rounding, clipping and reconstruction separately.",
+      "objective_ids": [
+        "explain-quantization"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "storage-transfer",
+      "question": "Why do five four-bit codes need the count as well as three bytes?",
+      "answer": "Three bytes contain six nibbles. The unused last nibble is padding, so decoding all six would invent an element. Preserve shape/count. Also preserve scale/zero point to recover real values; packing alone only recovers codes.",
+      "rubric": "Compute ceil(5/2)=3 and identify shape and numeric metadata.",
+      "objective_ids": [
+        "explain-storage"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "layer-transfer",
+      "question": "Keep E from Lesson 10 but change x from [4,1] to [1,4]. Predict the output errors.",
+      "answer": "Row 1 becomes -0.24(1)-0.02(4)=-0.32. Row 2 becomes -0.24(1)+0.01(4)=-0.20. Weight MSE is unchanged, but output error changes because the input weights error columns differently.",
+      "rubric": "Use E x with correct row/column axes, not the old output difference.",
+      "objective_ids": [
+        "explain-layer"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "artifacts-transfer",
+      "question": "Q4 uses a GPU and BF16 uses the CPU. What can their timing comparison establish?",
+      "answer": "It compares two deployment configurations. Quality on matched questions remains informative, but a timing difference cannot isolate weight quantization because placement changed. Keep a same-runtime/placement mechanism comparison where feasible and report the cross-placement row separately.",
+      "rubric": "Name the confound and preserve useful evidence without claiming a causal mechanism.",
+      "objective_ids": [
+        "explain-artifacts"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "calibration-transfer",
+      "question": "Duplicate every calibration sample once. What happens to G and average reconstruction loss?",
+      "answer": "Neither changes because numerator and sample count both double. A sum would double; the mean does not. The observations are not new independent information, so duplication does not improve uncertainty or rank coverage.",
+      "rubric": "Explain the denominator and distinguish data volume from independent evidence.",
+      "objective_ids": [
+        "explain-calibration"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "scaling-transfer",
+      "question": "Apply scale [4,1] to weights but forget inverse input scaling. Is the float operation preserved?",
+      "answer": "No. W becomes [0.96,1.02] while x remains [4,1], giving 4.86 instead of 1.98. The identity requires multiplying weights by S and input by S inverse. Exact float equivalence does not imply equal quantized reconstruction.",
+      "rubric": "Calculate the counterexample and state both sides of the identity.",
+      "objective_ids": [
+        "explain-scaling"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "compensation-transfer",
+      "question": "For G=[[4,0],[0,2]] and fixed e1=0.25, what e2 minimizes loss?",
+      "answer": "e2=0 because the cross term is zero. Derivative is 4 e2; a nonzero second error only adds loss. The minimum is 4(0.25)^2=0.25. Correlation, not merely a large diagonal, makes nonzero compensation useful.",
+      "rubric": "Use the constrained derivative and explain the missing cross term.",
+      "objective_ids": [
+        "explain-compensation"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "precision-transfer",
+      "question": "The byte cap falls from 900 to 700 in Lesson 15. Can the 848-byte winner remain selected?",
+      "answer": "No. Reapply feasibility. The 848-byte choice fails, and both group-32/four-bit layers cost 720 and fail too. First layer four-bit/group-128 plus second four-bit/group-32 costs 528+144=672 and fits, with proxy loss 0.12+0.30=0.42. Both group-128 costs 660 with loss 0.52. Enumerating the choices selects 672 bytes under the 700-byte cap; do not preserve the prior winner or silently relax the cap.",
+      "rubric": "Reject the prior winner, count metadata and enumerate rather than silently relax the cap.",
+      "objective_ids": [
+        "explain-precision"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "quality-transfer",
+      "question": "A run omits the two questions that crashed. May the evaluator report a score on only its remaining IDs?",
+      "answer": "Not as the frozen full comparison. Reject membership mismatch or retain explicit failure rows under a predeclared policy. Preserve the full denominator and raw failures. A partial-run score can be descriptive if labeled partial with completed/expected counts.",
+      "rubric": "Explain alignment, failure retention and denominator rather than hiding missing work.",
+      "objective_ids": [
+        "explain-quality"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "timing-transfer",
+      "question": "Five output tokens arrive between t1=0.7 and tn=2.7. Is the defined decode rate 2.5 tokens/s?",
+      "answer": "No. The first token is present at t1, leaving four inter-token intervals. The specified rate is (5-1)/(2.7-0.7)=2 tokens/s. A different tokens-over-runtime metric may use another denominator but must be named distinctly.",
+      "rubric": "Identify the observed interval and count, and handle n=1 as undefined for this metric.",
+      "objective_ids": [
+        "explain-timing"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "cache-transfer",
+      "question": "At T=4096 the sliding owner still retains 512 tokens. What changes if batch doubles?",
+      "answer": "Under the same-length independent-sequence fixture both owner allocations double, from 4,456,448 to 8,912,896 bytes. Sliding retention stays 512 per sequence. Physical page/static allocation and sharing policies still require actual backend inspection.",
+      "rubric": "Count owners once per declared sharing relation and batch/token axes correctly.",
+      "objective_ids": [
+        "explain-cache"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "cache-quant-transfer",
+      "question": "With probabilities [0.25,0.75], change values from [0,4] to [2,4] while holding keys fixed.",
+      "answer": "Probabilities stay the same. Output changes from 3 to 0.25(2)+0.75(4)=3.5, so delta is 0.5. A key change would instead alter scores and renormalize the whole mixture. Do not attribute both pathways to one value-error formula.",
+      "rubric": "Compute the weighted value error and keep key probabilities fixed.",
+      "objective_ids": [
+        "explain-cache-quant"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "recovery-transfer",
+      "question": "Newest complete generation is corrupt and no older verified generation exists. What should the loader do?",
+      "answer": "Fail with no verified generation and retain rejection reasons. It must not label corrupt bytes loaded or silently choose a different source model. Atomic publication prevents partial visibility; integrity and compatibility still need checks, and crash durability is separate.",
+      "rubric": "Name explicit failure/fallback semantics and avoid claiming hash checks prove model quality.",
+      "objective_ids": [
+        "explain-recovery"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "boundary-transfer",
+      "question": "A malformed response raises during citation validation. Which lifecycle action must still occur?",
+      "answer": "The request-owned sequence/cache must reset or release in finally, then the error remains an error. Do not fabricate a refusal. A begin failure on another active session needs ownership-aware handling rather than blindly resetting someone else's state.",
+      "rubric": "Trace try/finally and distinguish response validation from semantic support.",
+      "objective_ids": [
+        "explain-boundary"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "application-transfer",
+      "question": "The loopback demo returns 200 and “3 hours.” What evidence of an LLM application does that provide?",
+      "answer": "Only the tested HTTP fixture boundary. Its response states backend=fixture and model_executed=false. It proves parsing/response/error/shutdown behavior for that named fixture, not arbitrary document QA, Gemma loading, browser UX or model quality.",
+      "rubric": "Identify exactly what ran and the missing model/application evidence.",
+      "objective_ids": [
+        "explain-application"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "selection-transfer",
+      "question": "Q8 passes quality but exceeds memory; Q4 fits memory but misses the frozen quality threshold. Which wins?",
+      "answer": "Neither is feasible, so choose none. A smaller context, another model/placement or revised threshold creates a new decision/protocol version; it does not retroactively pass the original criteria. Final labels stay unopened during that revision.",
+      "rubric": "Apply all constraints jointly and keep development selection separate from final assessment.",
+      "objective_ids": [
+        "explain-selection"
+      ],
+      "claim_ids": [
+        "numeric-references"
+      ]
+    },
+    {
+      "id": "handoff-transfer",
+      "question": "All teaching examples pass. Which real implementation phase is complete?",
+      "answer": "No model phase is completed by those checks. They verify authored arithmetic/contracts. The existing scaffold is runnable; actual compatibility, frozen data, model artifacts/results, context study and saved application remain pending. Begin phase 00 and attach real receipts before advancing its state.",
+      "rubric": "Separate software/reference checks, model results, learner explanation and hosted execution.",
+      "objective_ids": [
+        "explain-handoff"
+      ],
+      "claim_ids": []
+    }
+  ],
+  "scenes": [],
+  "media": {},
+  "approval": null
+}

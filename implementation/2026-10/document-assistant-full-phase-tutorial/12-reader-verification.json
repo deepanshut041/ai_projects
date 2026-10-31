@@ -1,0 +1,58 @@
+{
+  "scope": "local written tutorial reader only",
+  "native_tests": {
+    "passed": 21,
+    "failed": 0
+  },
+  "full_browser_suite": {
+    "records": 208,
+    "project_pages": 125,
+    "syntax_pages": 170,
+    "passed": true,
+    "coverage": [
+      "records/search/filters/downloads/links/print/mobile",
+      "projects/navigation/mermaid/private-export",
+      "existing videos/playback/captions",
+      "syntax/exact-source/scroll/contrast"
+    ]
+  },
+  "focused": {
+    "root": {
+      "label": "root",
+      "base": "/",
+      "pages": 34,
+      "chapters": 24,
+      "practice": 24,
+      "links": 195,
+      "math": 450,
+      "figures": 20,
+      "svgIssues": [],
+      "errors": [],
+      "print": "generated"
+    },
+    "prefix": {
+      "label": "prefix",
+      "base": "/project_docs/",
+      "pages": 34,
+      "chapters": 24,
+      "practice": 24,
+      "links": 195,
+      "math": 450,
+      "figures": 20,
+      "svgIssues": [],
+      "errors": [],
+      "print": "generated"
+    }
+  },
+  "visual_review": {
+    "figures": 10,
+    "equations": [
+      "affine grid",
+      "quadratic matrix",
+      "cache dimensions"
+    ],
+    "desktop_mobile": true,
+    "remaining_issues": []
+  },
+  "no_model_execution": true
+}

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
-import { projectLibrary } from '../scripts/projects.mjs';
+import { projectLibrary, collectionCards, projectsSidebar } from '../scripts/projects.mjs';
 import { serve } from '../scripts/serve.mjs';
 import { renderer, videoDefinition } from '../scripts/content.mjs';
 
@@ -56,6 +56,35 @@ test('project collections discover docs locally, preserve relative links and kee
     const next = path.join(projects, 'foundations/another');
     await write(path.join(next, 'README.md'), '# Another project\n\nNewly added.');
     assert.equal((await projectLibrary(projects, '/')).groups[0].projects.length, 2, 'New folders need no hand-maintained registry');
+  } finally { await fs.rm(temporary, { recursive: true, force: true }); }
+});
+
+test('Quantization Lab is reachable from collections, projects and the existing tutorial in both builds', async () => {
+  const temporary = await fs.mkdtemp(path.join(os.tmpdir(), 'quantization-reader-'));
+  try {
+    const projects = path.join(temporary, 'projects');
+    const group = path.join(projects, 'quantization-lab');
+    const write = async (file, text) => { await fs.mkdir(path.dirname(file), { recursive: true }); await fs.writeFile(file, text); };
+    const lesson = path.join(temporary, 'docs/tutorials/assistant/lessons/01-start.md');
+    await write(path.join(group, 'README.md'), '# Quantization Lab\n\n[Document Assistant](document-assistant/README.md) [Compressed Search](compressed-semantic-search/README.md)');
+    await write(path.join(group, 'document-assistant/README.md'), '# Document Assistant\n\n[Start the tutorial](../../../docs/tutorials/assistant/lessons/01-start.md)');
+    await write(path.join(group, 'compressed-semantic-search/README.md'), '# Compressed Semantic Search\n\nSearch with a smaller index.');
+    await write(path.join(group, 'document-assistant/docs/implementation/00_setup/00-resume.md'), '# Setup\n\nPRIVATE QUANTIZATION NOTES');
+    for (const base of ['/', '/project_docs/']) {
+      for (const local of [false, true]) {
+        const courseURL = `${base}records/tutorials/assistant/chapters/start/`;
+        const library = await projectLibrary(projects, base, { local, links: new Map([[lesson, courseURL]]) });
+        const collection = library.groups.find(item => item.id === 'quantization-lab');
+        assert.ok(collection, 'The project collection must be discoverable');
+        assert.equal(collection.projects.length, 2);
+        assert.ok(collectionCards(library.groups).includes(`href="${base}projects/quantization-lab/"`));
+        assert.ok(projectsSidebar(library, base).includes(`href="${base}projects/quantization-lab/"`));
+        const assistant = collection.projects.find(item => item.id === 'document-assistant');
+        assert.ok(collection.overview.html.includes(`href="${assistant.url}"`));
+        assert.ok(assistant.overview.html.includes(`href="${courseURL}"`), 'Project README must lead to the real lesson route');
+        assert.equal(library.pages.some(page => page.raw.includes('PRIVATE QUANTIZATION NOTES')), local);
+      }
+    }
   } finally { await fs.rm(temporary, { recursive: true, force: true }); }
 });
 

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="570" viewBox="0 0 1160 570" role="img"><title>Count transfers with the same start and end boundary</title><desc>N = 8, d = 4, FP16; Q/K/V already in HBM; ignore small normalization-state transfers.</desc>
+<rect x="0" y="0" width="1160" height="570" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">Count transfers with the same start and end boundary</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">N = 8, d = 4, FP16; Q/K/V already in HBM; ignore small normalization-state transfers.</text>
+<text x="36" y="190" font-family="DejaVu Sans" font-size="23" font-weight="700" text-anchor="start" fill="#17253f">three-stage</text>
+<rect x="285" y="159" width="175.0" height="49" rx="0" fill="#2563b9"/>
+<text x="372.5" y="191" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="middle" fill="#ffffff">192</text>
+<rect x="460.0" y="159" width="466.6666666666667" height="49" rx="0" fill="#6846c7"/>
+<text x="693.3333333333334" y="191" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="middle" fill="#ffffff">512</text>
+<rect x="926.6666666666667" y="159" width="58.333333333333336" height="49" rx="0" fill="#16735e"/>
+<text x="955.8333333333334" y="191" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="middle" fill="#ffffff">64</text>
+<text x="1004" y="191" font-family="DejaVu Sans" font-size="23" font-weight="700" text-anchor="start" fill="#17253f">768 B</text>
+<text x="36" y="335" font-family="DejaVu Sans" font-size="23" font-weight="700" text-anchor="start" fill="#17253f">query-outer tiled</text>
+<rect x="285" y="304" width="291.6666666666667" height="49" rx="0" fill="#2563b9"/>
+<text x="430.83333333333337" y="336" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="middle" fill="#ffffff">320</text>
+<rect x="576.6666666666667" y="304" width="58.333333333333336" height="49" rx="0" fill="#16735e"/>
+<text x="605.8333333333334" y="336" font-family="DejaVu Sans" font-size="20" font-weight="700" text-anchor="middle" fill="#ffffff">64</text>
+<text x="1004" y="336" font-family="DejaVu Sans" font-size="23" font-weight="700" text-anchor="start" fill="#17253f">384 B</text>
+<rect x="36" y="438" width="22" height="22" rx="2" fill="#2563b9"/>
+<text x="70" y="458" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">input reads</text>
+<rect x="400" y="438" width="22" height="22" rx="2" fill="#6846c7"/>
+<text x="434" y="458" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">score/probability traffic</text>
+<rect x="855" y="438" width="22" height="22" rx="2" fill="#16735e"/>
+<text x="889" y="458" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">output write</text>
+<text x="36" y="518" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">Tiled input traffic = Q 64 B + repeated KV 256 B. This is a toy ledger, not measured latency.</text>
+</svg>

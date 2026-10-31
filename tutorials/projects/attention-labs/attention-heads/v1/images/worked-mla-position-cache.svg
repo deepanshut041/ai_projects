@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="780" viewBox="0 0 1160 780" role="img"><title>A complete decoupled cache keeps two objects</title><desc>Tiny reference: two heads, content width 2 + positional width 2 → divide combined score by 2.</desc>
+<rect x="0" y="0" width="1160" height="780" rx="0" fill="#f8f8fd"/>
+<rect x="0" y="0" width="1160" height="8" rx="0" fill="#6846c7"/>
+<text x="36" y="48" font-family="DejaVu Sans" font-size="28" font-weight="700" text-anchor="start" fill="#17253f">A complete decoupled cache keeps two objects</text>
+<text x="36" y="81" font-family="DejaVu Sans" font-size="18" font-weight="400" text-anchor="start" fill="#53617b">Tiny reference: two heads, content width 2 + positional width 2 → divide combined score by 2.</text>
+<rect x="36" y="120" width="343" height="105" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="152" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#2563b9">Current content query</text>
+<text x="54" y="197" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">qC UKᵀ per head</text>
+<rect x="36" y="268" width="343" height="105" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="300" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#2563b9">Retained content</text>
+<text x="54" y="345" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">C [2,5,3] = 240 B</text>
+<rect x="36" y="447" width="343" height="105" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="479" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">Current positional query</text>
+<text x="54" y="524" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">qR, rotated at query position</text>
+<rect x="36" y="595" width="343" height="105" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="54" y="627" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">Retained positional keys</text>
+<text x="54" y="672" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">kR [2,5,2] = 160 B</text>
+<rect x="442" y="180" width="304" height="112" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="460" y="212" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#2563b9">Content dot product</text>
+<text x="462" y="258" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">(qC UKᵀ) Cᵀ</text>
+<rect x="442" y="505" width="304" height="112" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="460" y="537" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#6846c7">Position dot product</text>
+<text x="462" y="583" font-family="DejaVu Sans" font-size="23" font-weight="400" text-anchor="start" fill="#17253f">qR (kR)ᵀ</text>
+<line x1="384" y1="173" x2="435" y2="214" stroke="#2563b9" stroke-width="2.5"/>
+<polygon points="435.00,214.00 424.42,210.99 429.79,204.31" fill="#2563b9"/>
+<line x1="384" y1="320" x2="435" y2="260" stroke="#2563b9" stroke-width="2.5"/>
+<polygon points="435.00,260.00 431.70,270.49 425.17,264.95" fill="#2563b9"/>
+<line x1="384" y1="500" x2="435" y2="537" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="435.00,537.00 424.28,534.52 429.31,527.58" fill="#6846c7"/>
+<line x1="384" y1="647" x2="435" y2="590" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="435.00,590.00 431.44,600.41 425.05,594.69" fill="#6846c7"/>
+<rect x="824" y="282" width="300" height="241" rx="12" fill="#ffffff" stroke="#d9deec" stroke-width="1.5"/>
+<text x="842" y="314" font-family="DejaVu Sans" font-size="21" font-weight="700" text-anchor="start" fill="#16735e">One retrieval</text>
+<text x="844" y="365" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">add the two scores</text>
+<text x="844" y="396" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">divide by 2; mask</text>
+<text x="844" y="427" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">softmax → a</text>
+<text x="844" y="458" font-family="DejaVu Sans" font-size="22" font-weight="400" text-anchor="start" fill="#17253f">context = (a C) UV</text>
+<line x1="752" y1="236" x2="818" y2="330" stroke="#2563b9" stroke-width="2.5"/>
+<polygon points="818.00,330.00 808.67,324.17 815.68,319.25" fill="#2563b9"/>
+<line x1="752" y1="560" x2="818" y2="479" stroke="#6846c7" stroke-width="2.5"/>
+<polygon points="818.00,479.00 814.92,489.56 808.28,484.15" fill="#6846c7"/>
+<text x="36" y="748" font-family="DejaVu Sans" font-size="20" font-weight="400" text-anchor="start" fill="#17253f">Retained payload = 240 + 160 = 400 bytes. Values use C; the value path is not rotated.</text>
+</svg>

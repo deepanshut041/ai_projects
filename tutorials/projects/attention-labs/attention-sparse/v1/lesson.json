@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "project_id": "attention-labs",
+  "languages": [
+    "cpp",
+    "python"
+  ],
+  "examples": [],
+  "slug": "attention-sparse",
+  "revision": "v1",
+  "title": "Attention connectivity: local, global and sliding windows",
+  "question": "Which query/key pairs must be visible, and what can be forgotten?",
+  "topic_kind": "concept",
+  "level": "advanced",
+  "prerequisites": [],
+  "created_at": "2026-10-30T22:49:35.217286+00:00",
+  "repository": {
+    "base_sha": "6114868d844022fb42d82a1e04d86b1cc51ba90b",
+    "name": "docs"
+  },
+  "objectives": [
+    {
+      "id": "sparse-global",
+      "text": "Build global/local visibility without causal leakage."
+    },
+    {
+      "id": "sparse-depth",
+      "text": "Derive exact reachability and cache retention from the chosen graph."
+    }
+  ],
+  "sources": [
+    {
+      "id": "sparse-workshop",
+      "kind": "external",
+      "title": "Vizuara windows",
+      "url": "https://vizuaraai.github.io/convolution-musical-journey/book.html",
+      "accessed_at": "2026-10-30",
+      "locator": "Chapter 9.1–9.2",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    },
+    {
+      "id": "longformer",
+      "kind": "external",
+      "title": "Longformer attention patterns",
+      "url": "https://arxiv.org/html/2004.05150v2",
+      "accessed_at": "2026-10-30",
+      "locator": "Section 3 and Figure 2",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
+    }
+  ],
+  "claims": [
+    {
+      "id": "sparse-claim",
+      "text": "Selected-key retrieval matches a dense masked reference; causal globals, rolling-cache retention and self-inclusive receptive-field counts follow the declared connectivity.",
+      "status": "verified",
+      "source_ids": [
+        "sparse-workshop",
+        "longformer"
+      ],
+      "proof_limit": "Stated mathematical assumptions and executed tiny reference; no learner, hosted or full-model result."
+    }
+  ],
+  "entities": [],
+  "relationships": [],
+  "chapters": [
+    {
+      "id": "sparse",
+      "title": "Local, global and sliding-window attention",
+      "content_path": "lessons/01-sparse-local-global.md",
+      "objective_ids": [
+        "sparse-global",
+        "sparse-depth"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "sparse-global",
+        "sparse-depth"
+      ]
+    }
+  ],
+  "diagrams": [],
+  "tables": [],
+  "scenarios": [],
+  "practice": [
+    {
+      "id": "sparse-global",
+      "question": "Can a causal global token at position zero collect the complete future document?",
+      "answer": "No. It can collect only keys at positions zero or earlier. Symmetric encoder global attention would leak the future in this decoder setting.",
+      "rubric": "Intersect global visibility with causality.",
+      "objective_ids": [
+        "sparse-global"
+      ],
+      "claim_ids": [
+        "sparse-claim"
+      ]
+    },
+    {
+      "id": "sparse-depth",
+      "question": "For W=3,L=4, what is the largest causal input span including self?",
+      "answer": "1+4*(3-1)=9 positions, clipped at the sequence start. This is possible reachability, not guaranteed retrieval quality.",
+      "rubric": "Use W-1 and distinguish reachability from learned information.",
+      "objective_ids": [
+        "sparse-depth"
+      ],
+      "claim_ids": [
+        "sparse-claim"
+      ]
+    }
+  ],
+  "scenes": [],
+  "media": {},
+  "approval": null
+}

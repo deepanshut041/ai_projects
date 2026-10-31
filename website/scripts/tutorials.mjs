@@ -202,12 +202,15 @@ ${pages.filter(page => page.kind === 'support').map(page => `- [${page.title}](/
 [Read or print all lessons](/records/${completeFile.replace(/\.md$/, '')}/) · [Download complete Markdown](/${url}/lesson.md)
 `);
       for (const [source, file] of pageSources) sourcePages[`tutorials/${relative}/${source}`] = file;
-      if (projectArea && project.id === 'P00' && data.slug === 'transformer-foundations' && data.revision === 'v1') {
-        for (const [from, to] of Object.entries(p00LegacyRoutes)) {
-          const target = `${id}/${to}.md`;
-          if (!pages.some(page => page.file === target)) throw new Error('Missing consolidated tutorial redirect target');
-          redirects.push({ from: `records/${id}/${from}/`, to: `records/${id}/${to}/` });
-        }
+      const legacyRoutes = projectArea && data.revision === 'v1'
+        ? project.id === 'P00' && data.slug === 'transformer-foundations' ? p00LegacyRoutes
+          : project.id === 'attention-labs' && data.slug === 'attention-heads'
+            ? { 'chapters/layout': 'chapters/heads', 'chapters/boundary': 'chapters/heads' } : {}
+        : {};
+      for (const [from, to] of Object.entries(legacyRoutes)) {
+        const target = `${id}/${to}.md`;
+        if (!pages.some(page => page.file === target)) throw new Error('Missing consolidated tutorial redirect target');
+        redirects.push({ from: `records/${id}/${from}/`, to: `records/${id}/${to}/` });
       }
       for (const [position, page] of pages.entries()) {
         const courseNumber = sequence.includes(relative) ? sequence.indexOf(relative) + courseNumberStart : null;

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "project_id": "attention-labs",
+  "slug": "attention-sparse",
+  "revision": "v1",
+  "files": {
+    "examples/sparse.py": "a59a85745d153079b5dfbab1639cc9d601b8174561817fc9e883821874b1af95",
+    "images/pattern-dilated.png": "be5f17da6ce1438a7de579f3cf17b7720787d1642b2072eb3a9e7c5c9870696f",
+    "images/pattern-full.png": "9f86bece7efaa685136ca69864c185d2b8972f9508bc2d0bb8b0f8a22bb5f7f4",
+    "images/pattern-global.png": "9938835ba8e8d259cc9585ff27048c2e39a6b0fa88bfb58fe3745d2c43fa0428",
+    "images/pattern-window.png": "ce105d4bfa8e6251eb30dd0a9ff12a85ffc747f523a6b41de7f6a5aec41f6f42",
+    "images/window-1.png": "25618b3f0c7fc9933c61fa27dfb2ab8f5a50ed14a3d45d8aa81e2d238e5686b0",
+    "images/window-2.png": "a085eae73d2e5954768f86bd642c47533a6f4866c219763ce9ecb86623363740",
+    "images/window-3.png": "83e42a0ab06a6898d2f9d7623531c66427ddfd34b88bcc26bcde4948471cea3a",
+    "images/window-4.png": "8e6d7ba34fa51ee8e0d6f3e5f1c67ef174fb40f82c74d70ad310976c6fa3630b",
+    "images/worked-sparse-reach-slots.svg": "77f53d48e09129cf6c11e804a4da4ad2ef2097842808874f5cf13c5222b666a9",
+    "images/worked-sparse-visibility.svg": "f1f560f1eeeaa8ec85cc95026b64e2d90b00fedc1139687dfc8d124bd797a313",
+    "lesson.json": "69b387d373f97cc3a161340691d6bca527985f4a51a2ac77c03e1ea9202b30fc",
+    "lesson.md": "a7d7a67c76403be77a9eb6b57c7c3aa21188f616df7c4d89e671485530fe1222",
+    "lessons/01-sparse-local-global.md": "211c53d9c56c1d5825712f60cae79c96ba23e7668f5907b870bb1b785b42962c",
+    "practice/review.md": "b103d697dcb623bad996baf35c4026593fa8329b89c36227ee9c726e9fade949",
+    "project/implementation.md": "23a81dae1bdde6ec91ee01cfa9a923d17a0d6b2ad5d29554ecbeef8b06fa3aa0",
+    "project/readiness.md": "3e031b86db1295ae97724e0549da3a1b1ef026c8105d741114d577f09a27b309",
+    "research.md": "065f5e14d1080d4db33e965458aa9fa4a5cacb4dba8afc6a8e41ddcdaafc4708"
+  },
+  "validated_at": "2026-10-30T23:34:09.964124+00:00",
+  "fingerprint": "ca1ddb466d75f92ed9ae024481b5f7c2b42baa064cf00601b33a42309973c5aa"
+}

@@ -1,69 +1,117 @@
-## Begin with the information a query retrieves
+## 1. The whole picture, then the first attention calculation
 
-The eventual application translates English into French. Before a model can choose French words, it needs a way to combine information from different positions. That is the component already implemented in this project. We will start with its smallest meaningful output, follow the numbers into the Python implementation, and stop before claiming that a translation model exists.
+We want a model that receives an English sentence and produces its French translation. For the sentence **“We read books daily”**, a possible target is **“Nous lisons des livres quotidiennement.”** Keep that whole job in view while we open up the model. We will first see how the pieces work together, then examine one operation inside them, and finally return to the complete design.
 
-For a first session, work through this calculation and the local setup in lesson 2. You should be able to explain why the result changes when the weights change. Later lessons unpack how the module creates those weights, runs several heads, excludes padding and future positions, and propagates gradients.
+### The whole translation process
 
-### Two pieces of information, one requested result
+The model needs to do two connected jobs. First, it must turn the English input into information useful for producing the translation. That information must preserve more than a list of isolated words: the relationships between positions matter too.
 
-Suppose two positions carry the value vectors `[2, 4]` and `[6, 8]`. Each vector has two coordinates. These are deliberately chosen numbers, not word embeddings or rental observations. If a query gives each position weight one half, the retrieved vector is:
+Second, it must use that source information to build the French output. It generates a piece of text, called a **token**, then uses the output so far when choosing the next token. Tokens can be words or parts of words; use whole words in this first picture so the process is easy to follow.
 
-$$c=0.5[2,4]+0.5[6,8]=[4,6].$$
+The English source is available before translation begins. The French output grows as generation proceeds. After producing “Nous”, the model must decide what comes next using both the English input and the French prefix it has already produced. After producing “lisons”, that token joins the prefix for the following decision.
 
-Work coordinate by coordinate: the first output is `0.5×2 + 0.5×6 = 4`; the second is `0.5×4 + 0.5×8 = 6`. We combine whole vectors with one weight per position. We do not separately choose a different position distribution for each coordinate within this head.
+![The whole translation process: read the source, generate the next token and extend the output](images/20-translation-task.svg)
 
-If the weights become `[0.75, 0.25]`, the result becomes `[3,5]`. It moves towards the first value. This is what retrieval means here: construct a new representation from the available value vectors. It is not a database lookup returning an unchanged row, and it is not yet a probability distribution over French words.
+We call the part that builds source representations the **encoder**. We call the part that uses them and the target prefix to build the output the **decoder**. These names label the two jobs in the picture. We will open their internal computations only as the explanation needs them.
 
-![Equal weights combine two value vectors coordinate by coordinate.](images/01-weighted-values.png)
+### Where attention fits in that picture
 
-### Separate three roles before introducing the implementation
+Both jobs need a way to select and combine information. While building a source representation, one position can benefit from information at other source positions. While producing a target token, the model can benefit from its available target prefix and the encoded source. **Attention is the operation we will study for making those connections.**
 
-A **query** describes what one output position is looking for. A **key** provides the coordinates against which that query is compared. A **value** carries the information mixed into the output. The keys and values have corresponding positions: key zero's score determines how much value zero contributes.
+At a broad level it does three things: compare a receiving position with available positions, turn those comparisons into contribution weights, then combine the contributed information into a new vector. Later network operations use that vector. The same basic calculation can serve different places in the translator by changing where its inputs come from and which connections are allowed.
 
-Think of these as numerical roles. The familiar search-language interpretation can help us remember them, but it does not prove that a particular coordinate encodes a linguistic concept. The current examples use synthetic vectors and random or hand-set weights.
+Training gives the model examples of source sentences and reference translations. It compares next-token predictions with the reference and adjusts the shared parameters controlling its calculations. That is how the comparisons and contributions can become useful for translation. We will follow that learning signal after understanding the forward calculation.
 
-```mermaid
-flowchart LR
-    Q[One query] --> S[Compare with every allowed key]
-    K[Keys] --> S
-    S --> A[Normalize scores into weights]
-    A --> C[Weighted sum of values]
-    V[Values] --> C
-    C --> O[One retrieved vector]
-```
+### How we will open the model, one level at a time
 
-The arrows describe computation. A query-key comparison produces a scalar score for each key. Normalization makes a row of weights. Those weights mix the values. With many queries, we repeat the same logical operation for every query position, using matrix multiplication to do the work together.
+| Pass through the explanation | What we build on |
+| --- | --- |
+| This chapter: one information-sharing step | Start with the whole task, then inspect input rows and a weighted contribution |
+| Chapters 2–3: choose information for each position | Calculate the weights from the input, then repeat the understood calculation for every receiver |
+| Chapters 4–5: make the choices flexible | Examine learnable transformations and several separately weighted mixtures |
+| Chapters 6–8: place the operation in the translator | Restrict unavailable information, then connect the target side to the source side |
+| Chapters 9–10: connect learning and implementation | Follow the error back to parameters, then trace the actual reusable class |
+| Chapter 11: return to the whole architecture | Reassemble the roles after their internal operations are understood |
 
-### Produce the first result with the real function
+Each pass answers a question left by the previous one. For now, we will narrow our attention to source representations and build one information-sharing calculation. We will return to target generation when the same operation is understood.
 
-After the setup in the next lesson, run this from the project directory. It imports the actual low-level function rather than reimplementing its expected answer:
+The local project already implements attention; its tokenizer, full encoder/decoder and translation trainer remain future work. The overview locates the component we are studying within the intended system. The final setup page is an optional run reference.
+
+### First zoom: how text becomes rows of numbers
+
+A tokenizer splits text into tokens and assigns each token an integer ID. An embedding table uses each ID to select a learned vector. The integer is an address in that table, not a numerical measure of the word. Real tokenizers can split a word into several tokens; for this diagram only, use one token per displayed word.
+
+The first encoder layer receives one vector per source token, with positional information added. Stack these rows into a matrix called **X**. Here there are four displayed tokens. With d features per token, X has shape `(4,d)`. At later encoder layers, the rows are the preceding layer's outputs instead of fresh embeddings.
+
+We have moved from the whole translation process to the input of one source-side layer. Its rows are numerical representations, and the operation we study will return numerical representations. Keep that level separate from the decoder's eventual next-token prediction while we inspect what happens between these rows.
+
+### Why processing each row separately is insufficient
+
+Suppose we apply the same neural network f independently to every source row:
+
+$$h_0=f(x_0),\qquad h_1=f(x_1),\qquad h_2=f(x_2),\qquad h_3=f(x_3).$$
+
+The row for “read” is transformed, but the calculation of that row has never read the rows for “We”, “books” or “daily”. It can learn complicated functions of its own input features and still have no route for receiving information from those other positions.
+
+There is a direct way to check this claim: keep x_1 fixed and change x_0. The expression `h_1 = f(x_1)` cannot change. Stacking more row-independent layers does not create the missing connection. We need a computation in which an output at position i can depend on input rows at other positions j.
+
+This distinction explains **context** in this course. A contextual representation has been computed using information from other permitted positions. Calling a vector an embedding or making it wider does not, by itself, create that dependency.
+
+### How could we add communication?
+
+One option is to average all source vectors and give that summary to every position. This does transmit information across rows, but every position receives the same mixture. A position cannot choose a different source of information because its own state has no influence on the weights.
+
+A recurrent network offers another route: it passes a state through positions in sequence. Attention was also used in recurrent encoder–decoder translation models to let a decoder read different source states at different output steps, instead of relying only on one fixed source summary. The Transformer goes further: its self-attention layers let positions exchange information directly, without a recurrence through token positions. These are different developments; the Transformer did not invent the general attention idea. [Earlier attention motivation](https://arxiv.org/abs/1409.0473), [Transformer design](https://arxiv.org/html/1706.03762v7).
+
+For our encoder, the design we will examine is this: **keep the sequence of rows, and let each position receive its own weighted combination of information from the available rows.** The weights will depend on the input. Several positions can calculate their combinations in parallel because they read the layer's input rows, rather than waiting for one another's newly computed outputs.
+
+![Independent row processing versus information gathered from other rows](images/21-communication.svg)
+
+### First understand what a contribution means
+
+Before choosing the weights, inspect what they do. We will use one small numerical fixture throughout the course. It stands in for four source-position representations inside a layer:
+
+| Source position | Input row X | Information available to contribute, V |
+| --- | --- | --- |
+| 0, “We” | `[1,0]` | `[2,0]` |
+| 1, “read” | `[0,1]` | `[0,2]` |
+| 2, “books” | `[1,1]` | `[2,2]` |
+| 3, “daily” | `[0,0]` | `[0,0]` |
+
+These four rows show all four pairs made from 0 and 1, including `[0,0]`. We chose them to make the arithmetic easy to inspect; attention does not require every pair to appear, and real embeddings can contain arbitrary real numbers. The zero row is a valid input in this fixture, not a padding marker.
+
+These are chosen numbers for checking arithmetic. The labels track which source row owns which vector; the coordinates are not trained representations of those words. We use `V = 2X` here, and will make that transformation and the selection rule explicit in the next chapters. A contributed vector is called a **value**.
+
+Suppose one receiving position is assigned weights `[0.4,0.2,0.3,0.1]`. Its gathered vector is:
+
+$$c=0.4[2,0]+0.2[0,2]+0.3[2,2]+0.1[0,0]=[1.4,1.0].$$
+
+The contribution from position 0 is `[0.8,0]`; position 1 contributes `[0,0.4]`; position 2 contributes `[0.6,0.6]`; position 3 contributes `[0,0]`. Its weight is 0.1, but multiplying a zero value still gives zeros. Add all four contributions coordinate by coordinate. One scalar weight controls the **whole value row**. The result has two features because the contributed values have two features.
+
+This vector is often called the **context vector** for that receiving position. The word “context” now names a calculation we can point to: information from several source rows has entered one output row. Nothing in `[1.4,1.0]` is a token ID or a French word.
+
+### Run exactly that calculation
+
+The code uses PyTorch as a numerical array library. `weights[:, None]` makes a column so each scalar multiplies its matching value row. `sum(dim=0)` adds the rows. The final matrix product is the same weighted sum in compact notation.
 
 ```python
 import torch
-from core.attention import scaled_dot_product_attention
 
-q = torch.zeros(1, 1, 2)  # one batch, one query, two coordinates
-k = torch.eye(2).unsqueeze(0)  # two keys
-v = torch.tensor([[[2., 4.], [6., 8.]]])
-context, weights = scaled_dot_product_attention(q, k, v)
-print(weights)   # [[[0.5, 0.5]]]
-print(context)   # [[[4.0, 6.0]]]
+values = torch.tensor([[2., 0.], [0., 2.], [2., 2.], [0., 0.]], dtype=torch.float64)
+weights = torch.tensor([0.4, 0.2, 0.3, 0.1], dtype=torch.float64)
+
+contributions = weights[:, None] * values
+context = contributions.sum(dim=0)
+
+print(contributions)
+print(context)
+print(weights @ values)
 ```
 
-Every dot product with the zero query is zero. Exponentiating the two equal scores gives equal positive numbers, and dividing each by their sum gives one half. Lesson 4 develops that normalization in detail. The output has one vector because the input had one query, even though there were two keys and two values.
+An ordinary average of these values gives `[1,1]`. Selecting position 0 alone gives `[2,0]`. Our supplied weights produce `[1.4,1]`. Those are three different ways to gather the same available information.
 
-### What normalized weights guarantee
+The unresolved design question is now precise: **how should a receiving position calculate its weights from the input?** Hand-written weights cannot adapt to a new sentence. The next chapter derives the query/key comparison that makes the mixture depend on the current representations.
 
-Before dropout, an ordinary nonempty attention row has nonnegative weights summing to one. Each context coordinate is therefore between the smallest and largest corresponding value coordinate. This is a property of this weighted combination. The complete attention module later applies learned projections and an output projection, so its final output need not lie between the original input coordinates.
-
-An entirely blocked row is a separate case. Our implementation returns zero attention weights and zero context rather than trying to normalize an empty set. The final output projection can still add a bias. We will trace that distinction in lesson 7.
+**Runnable copy:** [weighted sum](examples/walkthrough/01_weighted.py). [Setup and run commands](lessons/02-project-setup.md) are a separate reference.
 
 [[practice:weighted-check]]
-
-### Keep the current project boundary visible
-
-The source currently accepts floating-point vectors. There is no implemented text tokenizer, vocabulary lookup or complete encoder/decoder stack. It can demonstrate how representations interact; it cannot turn the sentence “I like tea” into a trained French translation.
-
-The [implementation record](project/implementation.md) records what exists. The [source register](research.md) identifies the actual files and references. Keep the [review questions](practice/explain-attention.md) for later explanation in your own words; reading a worked answer is not an assessed learner result.
-
-Next we will reproduce this component in the locked environment and identify exactly which files run it.

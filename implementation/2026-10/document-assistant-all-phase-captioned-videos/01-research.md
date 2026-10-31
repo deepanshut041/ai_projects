@@ -1,0 +1,5 @@
+# Inspected references and scope
+
+Read canonical tutorial-video coordinator, project-tutorial-video and project-learning-video workflows, explanation brief, shared provider/render/attachment runbook and pinned ExplainRoo AGENTS. Read accepted Attention delivery/verification records and editable projections scenes/script. Attention used focused worked clips, editable equations/code, cue-bound highlights, clean16:9 visuals, captions, complete helper definitions before callers and actual root/prefix desktop/mobile media checks. Reuse that teaching/delivery style, with Document Assistant's own example and claims.
+
+The Document Assistant course has24 lessons across phases00–06 and complete standalone references. Production explains those checked components and future implementation contracts; no Gemma weights/runtime/QA results are invented. All model experiments/application and learner/hosted gates remain pending. The user's explicit video request authorizes necessary media operations within this course; the current obstacle is environment availability, not missing task authorization.

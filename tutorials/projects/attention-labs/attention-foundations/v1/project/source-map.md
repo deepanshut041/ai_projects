@@ -12,7 +12,9 @@
 
 Lecture numbers come from the video titles; the playlist is displayed in reverse order. Lecture 9 is excluded. One additional unavailable playlist entry was hidden by YouTube; its unknown content is not reconstructed.
 
-The complete presentations remain available from Vizuara’s original hosts. Selected diagram regions are captured in Chrome and embedded beside the matching explanations, with lecture/slide attribution and full-size links. The [visual source record](project/visual-provenance.json) records their source figure URLs, capture hashes and placements. The tutorial prose, numerical fixtures, code and the separately identified SVG teaching figures are original. All eight English automatic subtitle/transcript texts were read from opening through closing and compared with the complete presentations. DownSub supplied timed VTT files for Lectures 1–8. Lecture 6 was also retrieved through Transcript.you; all 1,417 segment texts match the DownSub copy. Raw captions stay in the ignored workspace source archive.
+The references above identify the original lectures and presentations. The current lessons follow the spoken teaching sequence and include every distinct presentation teaching diagram, plus the interactive bars and matrices used to explain the mechanism. Tables are also reproduced as accessible text. Repeated figures and decorative title art do not need duplicate captures. Attribution stays in references; no provenance JSON is part of the reading route.
+
+The complete English automatic captions were read alongside the presentations, including live code explanations. DownSub supplied all eight timed subtitle files. Lecture 6 was also checked against Transcript.you. Automatic recognition can be wrong; technical wording and arithmetic are checked against the visible examples and primary references. This does not claim a frame-by-frame audiovisual audit.
 
 | Lecture | Caption segments | First–last caption timestamp | Acquisition |
 | --- | --- | --- | --- |
@@ -24,4 +26,3 @@ The complete presentations remain available from Vizuara’s original hosts. Sel
 | 6 | 1417 | 00:00:00.760–00:49:22.200 | [DownSub](https://downsub.com/) |
 | 7 | 1358 | 00:00:00.880–00:51:23.920 | [DownSub](https://downsub.com/) |
 
-Automatic recognition is fallible. Slide/paper checks resolve technical terms; the transcript review does not establish an error-free transcription or full audiovisual audit. Compact source hashes and format details are in [source-provenance.json](project/source-provenance.json).

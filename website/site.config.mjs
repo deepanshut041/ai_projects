@@ -1,9 +1,9 @@
 export default {
   title: 'AI Projects',
   description: 'AI Projects: implement and train known small models, inspect behavior, and track understanding.',
-  base: process.env.SITE_BASE ?? '/project_docs/',
-  repository: process.env.SITE_REPOSITORY ?? '',
-  companionUrl: process.env.COMPANION_URL ?? 'http://127.0.0.1:4274/research_docs/',
+  base: process.env.SITE_BASE ?? '/ai_projects/',
+  repository: process.env.SITE_REPOSITORY ?? 'deepanshut041/ai_projects',
+  companionUrl: process.env.COMPANION_URL ?? '',
   companionLabel: 'Research',
   area: 'Projects',
 };

@@ -261,3 +261,5 @@ These are computed toy examples, not model results or learner answers. Run from 
 ```
 
 The separate packed PyTorch program was run on CPU float64 and checked output and query-gradient agreement with an explicit loop, plus invariance of earlier outputs to a changed future token. Detailed independent verification is saved in the owning implementation record.
+
+Sequential revision: dimension_probe.py repeats the explicit one-query/two-key experiment; six_word_attention.py reproduces all six-word norms/scores/weights/contexts; learned_attention.py checks the complete five-word snapshot, both module forms, batching and variance; causal_attention.py checks visibility, mask-order equivalence, underflow and train/eval dropout. All were executed locally. The six-word result also agrees with an independent 45-digit Decimal calculation and the displayed float64 PyTorch cell. Original small-fixture programs remain unchanged. Actual hosted Colab execution is pending.

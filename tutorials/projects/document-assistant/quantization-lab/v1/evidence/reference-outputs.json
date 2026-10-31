@@ -1,0 +1,258 @@
+{
+  "01_contract.py": {
+    "good": {
+      "correct": true,
+      "valid_ids": true,
+      "supported": true
+    },
+    "wrong_source": {
+      "correct": true,
+      "valid_ids": true,
+      "supported": false
+    }
+  },
+  "02_scaffold_trace.py": {
+    "scope": "invoke with project root for live scaffold check",
+    "expected_exit_codes": [
+      0,
+      0,
+      0,
+      2
+    ]
+  },
+  "03_compatibility.py": {
+    "fixture_only": true,
+    "rejected": "Unproven capabilities: template_matches"
+  },
+  "04_memory_budget.py": {
+    "bf16_gib": 14.901,
+    "q4_gib": 4.191,
+    "total_gib": 9.191,
+    "fits": true,
+    "longer_cache_fits": false
+  },
+  "05_passages.py": {
+    "count": 2,
+    "offsets": [
+      [
+        0,
+        28
+      ],
+      [
+        30,
+        46
+      ]
+    ],
+    "stable": true,
+    "changed_document_changes_ids": true
+  },
+  "06_splits.py": {
+    "disjoint": true,
+    "packed": [
+      "charge takes three hours"
+    ],
+    "seed": 17
+  },
+  "07_reference_decode.py": {
+    "probabilities": [
+      0.25,
+      0.75
+    ],
+    "ids": [
+      0,
+      1
+    ],
+    "finish_reason": "eos"
+  },
+  "08_scalar_quant.py": {
+    "scale": 0.857143,
+    "zero": 2,
+    "codes": [
+      0,
+      1,
+      2,
+      3,
+      7,
+      7
+    ],
+    "restored": [
+      -1.714286,
+      -0.857143,
+      0.0,
+      0.857143,
+      4.285714,
+      4.285714
+    ]
+  },
+  "09_pack_int4.cpp": {
+    "bytes": [
+      248,
+      112,
+      3
+    ],
+    "count": 5,
+    "round_trip": true
+  },
+  "10_layer_error.py": {
+    "float_output": [
+      1.98,
+      -2.55
+    ],
+    "quantized_output": [
+      1.0,
+      -3.5
+    ],
+    "delta": [
+      -0.98,
+      -0.95
+    ]
+  },
+  "11_artifact_plan.py": {
+    "confounds": [
+      "tokenizer_sha",
+      "placement"
+    ],
+    "classification": "deployment_comparison"
+  },
+  "12_calibration.py": {
+    "gram": [
+      [
+        16.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "same_weight_mse": true,
+    "output_mse": [
+      1.0,
+      0.0625
+    ]
+  },
+  "13_activation_scaling.py": {
+    "scale_loss": {
+      "1": 0.9216,
+      "2": 0.9216,
+      "4": 0.0036,
+      "8": 0.81
+    },
+    "best_first_channel_scale": 4,
+    "scope": "ternary teaching grid"
+  },
+  "14_compensation.py": {
+    "fixed_error": 0.25,
+    "compensation": -0.25,
+    "before": 0.25,
+    "after": 0.125
+  },
+  "15_precision_budget.py": {
+    "recipe": [
+      [
+        4,
+        32
+      ],
+      [
+        8,
+        32
+      ]
+    ],
+    "bytes": 848,
+    "loss": 0.1,
+    "budget": 900
+  },
+  "16_quality.py": {
+    "total": 3,
+    "answerable": 2,
+    "unanswerable": 1,
+    "correct": 1,
+    "supported": 1,
+    "unsupported_answer": 1,
+    "false_refusal": 1,
+    "correct_refusal": 0,
+    "truncated": 1
+  },
+  "17_timing.py": {
+    "end_to_end_s": 2.7,
+    "runtime_ttft_s": 0.5,
+    "user_ttft_s": 0.7,
+    "decode_tokens_s": 2.0,
+    "prefill_tokens_s": 250.0,
+    "p95_fixture_s": 9,
+    "measured": false
+  },
+  "18_cache_budget.py": {
+    "lengths": [
+      512,
+      2048,
+      4096
+    ],
+    "bytes": [
+      786432,
+      2359296,
+      4456448
+    ],
+    "scope": "deduplicated logical cache fixture"
+  },
+  "19_cache_error.py": {
+    "base": 3.0,
+    "key_error_output": 3.6,
+    "value_error_output": 3.75,
+    "probabilities": [
+      0.25,
+      0.75
+    ]
+  },
+  "20_recovery.py": {
+    "loaded": "gen-0001",
+    "rejected": [
+      "gen-0002"
+    ],
+    "partial_ignored": true,
+    "scope": "integrity demo; not durable model storage"
+  },
+  "21_answer_boundary.py": {
+    "backend": "fixture",
+    "reset_count": 3,
+    "invalid_citation_rejected": true
+  },
+  "22_local_app.py": {
+    "http_status": 200,
+    "bad_request_status": 400,
+    "result": {
+      "backend": "fixture",
+      "model_executed": false,
+      "answer": "3 hours",
+      "citations": [
+        "lumen-1"
+      ]
+    }
+  },
+  "23_selection.py": {
+    "selected": null,
+    "paired_mean": 0.0,
+    "bootstrap_range": [
+      -1.0,
+      1.0
+    ],
+    "resamples": 256
+  },
+  "24_handoff.py": {
+    "complete": false,
+    "missing": [
+      "compatibility",
+      "frozen_data",
+      "float_reference",
+      "q8_comparison",
+      "q4_comparison",
+      "calibration_study",
+      "context_study",
+      "saved_application",
+      "fresh_process_recovery",
+      "final_evaluation"
+    ],
+    "next_phase": "00 \u2014 compatibility and budget",
+    "learner_review": "pending"
+  }
+}

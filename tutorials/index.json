@@ -147,12 +147,26 @@
       ]
     },
     {
+      "id": "document-assistant",
+      "title": "Document Assistant",
+      "status": "full-phase-written-tutorial-available",
+      "lessons": [
+        "projects/document-assistant/quantization-lab/v1"
+      ]
+    },
+    {
       "id": "attention-labs",
       "title": "Attention Labs",
-      "status": "foundations-and-mha-written-tutorial-available",
+      "status": "tutorials-available",
       "lessons": [
         "projects/attention-labs/attention-foundations/v1",
-        "projects/attention-labs/attention-heads/v1"
+        "projects/attention-labs/attention-heads/v1",
+        "projects/attention-labs/attention-inference/v1",
+        "projects/attention-labs/attention-position/v1",
+        "projects/attention-labs/attention-kernels/v1",
+        "projects/attention-labs/attention-sparse/v1",
+        "projects/attention-labs/attention-linear/v1",
+        "projects/attention-labs/attention-distributed/v1"
       ]
     }
   ],

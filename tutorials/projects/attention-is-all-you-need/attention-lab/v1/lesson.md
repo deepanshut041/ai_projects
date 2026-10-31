@@ -1,949 +1,1319 @@
-# Attention Is All You Need: from weighted averages to reusable attention
+# Attention: from the translation problem to the actual computation
 
-How do input vectors become masked multi-head attention outputs, and what remains before English-to-French translation?
+How does a translation model share information between positions, why does it use queries, keys, values, heads and masks, and how does the actual attention code implement those decisions?
 
 Learning material for attention-is-all-you-need. Model implementation/training and learner mastery are separate states.
 
-**Outcomes:** Explain a query-weighted value mixture and its proof boundary.; Reproduce the existing environment and distinguish runnable components from placeholders.; Trace score and context axes through rectangular batched attention.; Derive stable softmax and head-width scaling.; Work learned Q/K/V maps, bias orientation and value mixing.; Explain separate/vectorized heads, correct reassembly and parameter counts.; Explain key masks, all-blocked behavior and perturbation isolation.; Intersect causal/padding restrictions and diagnose future leakage.; Trace source keys/values and target queries through rectangular attention.; Explain the final API and explicit/SDPA/dropout execution branches.; Derive and independently verify a query gradient and update.; State the evidence boundaries and concrete next data-phase requirements..
+**Outcomes:** 1. The whole picture, then the first attention calculation; 2. Derive one attention output from the input rows; 3. Keep one output per position and expose the matrix axes; 4. What the learned projections can change; 5. Why use several attention heads?; 6. Padding: exclude storage rows from the information flow; 7. Decoder causality: match training to what generation can know; 8. Let the decoder read the encoded source; 9. How the translation error reaches attention; 10. Trace one call through the actual project implementation; 11. Put attention back into the Transformer; Reference — run and inspect the existing attention project.
 
-## Begin with the information a query retrieves
+## 1. The whole picture, then the first attention calculation
 
-The eventual application translates English into French. Before a model can choose French words, it needs a way to combine information from different positions. That is the component already implemented in this project. We will start with its smallest meaningful output, follow the numbers into the Python implementation, and stop before claiming that a translation model exists.
+We want a model that receives an English sentence and produces its French translation. For the sentence **“We read books daily”**, a possible target is **“Nous lisons des livres quotidiennement.”** Keep that whole job in view while we open up the model. We will first see how the pieces work together, then examine one operation inside them, and finally return to the complete design.
 
-For a first session, work through this calculation and the local setup in lesson 2. You should be able to explain why the result changes when the weights change. Later lessons unpack how the module creates those weights, runs several heads, excludes padding and future positions, and propagates gradients.
+### The whole translation process
 
-### Two pieces of information, one requested result
+The model needs to do two connected jobs. First, it must turn the English input into information useful for producing the translation. That information must preserve more than a list of isolated words: the relationships between positions matter too.
 
-Suppose two positions carry the value vectors `[2, 4]` and `[6, 8]`. Each vector has two coordinates. These are deliberately chosen numbers, not word embeddings or rental observations. If a query gives each position weight one half, the retrieved vector is:
+Second, it must use that source information to build the French output. It generates a piece of text, called a **token**, then uses the output so far when choosing the next token. Tokens can be words or parts of words; use whole words in this first picture so the process is easy to follow.
 
-$$c=0.5[2,4]+0.5[6,8]=[4,6].$$
+The English source is available before translation begins. The French output grows as generation proceeds. After producing “Nous”, the model must decide what comes next using both the English input and the French prefix it has already produced. After producing “lisons”, that token joins the prefix for the following decision.
 
-Work coordinate by coordinate: the first output is `0.5×2 + 0.5×6 = 4`; the second is `0.5×4 + 0.5×8 = 6`. We combine whole vectors with one weight per position. We do not separately choose a different position distribution for each coordinate within this head.
+![The whole translation process: read the source, generate the next token and extend the output](images/20-translation-task.svg)
 
-If the weights become `[0.75, 0.25]`, the result becomes `[3,5]`. It moves towards the first value. This is what retrieval means here: construct a new representation from the available value vectors. It is not a database lookup returning an unchanged row, and it is not yet a probability distribution over French words.
+We call the part that builds source representations the **encoder**. We call the part that uses them and the target prefix to build the output the **decoder**. These names label the two jobs in the picture. We will open their internal computations only as the explanation needs them.
 
-![Equal weights combine two value vectors coordinate by coordinate.](images/01-weighted-values.png)
+### Where attention fits in that picture
 
-### Separate three roles before introducing the implementation
+Both jobs need a way to select and combine information. While building a source representation, one position can benefit from information at other source positions. While producing a target token, the model can benefit from its available target prefix and the encoded source. **Attention is the operation we will study for making those connections.**
 
-A **query** describes what one output position is looking for. A **key** provides the coordinates against which that query is compared. A **value** carries the information mixed into the output. The keys and values have corresponding positions: key zero's score determines how much value zero contributes.
+At a broad level it does three things: compare a receiving position with available positions, turn those comparisons into contribution weights, then combine the contributed information into a new vector. Later network operations use that vector. The same basic calculation can serve different places in the translator by changing where its inputs come from and which connections are allowed.
 
-Think of these as numerical roles. The familiar search-language interpretation can help us remember them, but it does not prove that a particular coordinate encodes a linguistic concept. The current examples use synthetic vectors and random or hand-set weights.
+Training gives the model examples of source sentences and reference translations. It compares next-token predictions with the reference and adjusts the shared parameters controlling its calculations. That is how the comparisons and contributions can become useful for translation. We will follow that learning signal after understanding the forward calculation.
 
-```mermaid
-flowchart LR
-    Q[One query] --> S[Compare with every allowed key]
-    K[Keys] --> S
-    S --> A[Normalize scores into weights]
-    A --> C[Weighted sum of values]
-    V[Values] --> C
-    C --> O[One retrieved vector]
-```
+### How we will open the model, one level at a time
 
-The arrows describe computation. A query-key comparison produces a scalar score for each key. Normalization makes a row of weights. Those weights mix the values. With many queries, we repeat the same logical operation for every query position, using matrix multiplication to do the work together.
+| Pass through the explanation | What we build on |
+| --- | --- |
+| This chapter: one information-sharing step | Start with the whole task, then inspect input rows and a weighted contribution |
+| Chapters 2–3: choose information for each position | Calculate the weights from the input, then repeat the understood calculation for every receiver |
+| Chapters 4–5: make the choices flexible | Examine learnable transformations and several separately weighted mixtures |
+| Chapters 6–8: place the operation in the translator | Restrict unavailable information, then connect the target side to the source side |
+| Chapters 9–10: connect learning and implementation | Follow the error back to parameters, then trace the actual reusable class |
+| Chapter 11: return to the whole architecture | Reassemble the roles after their internal operations are understood |
 
-### Produce the first result with the real function
+Each pass answers a question left by the previous one. For now, we will narrow our attention to source representations and build one information-sharing calculation. We will return to target generation when the same operation is understood.
 
-After the setup in the next lesson, run this from the project directory. It imports the actual low-level function rather than reimplementing its expected answer:
+The local project already implements attention; its tokenizer, full encoder/decoder and translation trainer remain future work. The overview locates the component we are studying within the intended system. The final setup page is an optional run reference.
+
+### First zoom: how text becomes rows of numbers
+
+A tokenizer splits text into tokens and assigns each token an integer ID. An embedding table uses each ID to select a learned vector. The integer is an address in that table, not a numerical measure of the word. Real tokenizers can split a word into several tokens; for this diagram only, use one token per displayed word.
+
+The first encoder layer receives one vector per source token, with positional information added. Stack these rows into a matrix called **X**. Here there are four displayed tokens. With d features per token, X has shape `(4,d)`. At later encoder layers, the rows are the preceding layer's outputs instead of fresh embeddings.
+
+We have moved from the whole translation process to the input of one source-side layer. Its rows are numerical representations, and the operation we study will return numerical representations. Keep that level separate from the decoder's eventual next-token prediction while we inspect what happens between these rows.
+
+### Why processing each row separately is insufficient
+
+Suppose we apply the same neural network f independently to every source row:
+
+$$h_0=f(x_0),\qquad h_1=f(x_1),\qquad h_2=f(x_2),\qquad h_3=f(x_3).$$
+
+The row for “read” is transformed, but the calculation of that row has never read the rows for “We”, “books” or “daily”. It can learn complicated functions of its own input features and still have no route for receiving information from those other positions.
+
+There is a direct way to check this claim: keep x_1 fixed and change x_0. The expression `h_1 = f(x_1)` cannot change. Stacking more row-independent layers does not create the missing connection. We need a computation in which an output at position i can depend on input rows at other positions j.
+
+This distinction explains **context** in this course. A contextual representation has been computed using information from other permitted positions. Calling a vector an embedding or making it wider does not, by itself, create that dependency.
+
+### How could we add communication?
+
+One option is to average all source vectors and give that summary to every position. This does transmit information across rows, but every position receives the same mixture. A position cannot choose a different source of information because its own state has no influence on the weights.
+
+A recurrent network offers another route: it passes a state through positions in sequence. Attention was also used in recurrent encoder–decoder translation models to let a decoder read different source states at different output steps, instead of relying only on one fixed source summary. The Transformer goes further: its self-attention layers let positions exchange information directly, without a recurrence through token positions. These are different developments; the Transformer did not invent the general attention idea. [Earlier attention motivation](https://arxiv.org/abs/1409.0473), [Transformer design](https://arxiv.org/html/1706.03762v7).
+
+For our encoder, the design we will examine is this: **keep the sequence of rows, and let each position receive its own weighted combination of information from the available rows.** The weights will depend on the input. Several positions can calculate their combinations in parallel because they read the layer's input rows, rather than waiting for one another's newly computed outputs.
+
+![Independent row processing versus information gathered from other rows](images/21-communication.svg)
+
+### First understand what a contribution means
+
+Before choosing the weights, inspect what they do. We will use one small numerical fixture throughout the course. It stands in for four source-position representations inside a layer:
+
+| Source position | Input row X | Information available to contribute, V |
+| --- | --- | --- |
+| 0, “We” | `[1,0]` | `[2,0]` |
+| 1, “read” | `[0,1]` | `[0,2]` |
+| 2, “books” | `[1,1]` | `[2,2]` |
+| 3, “daily” | `[0,0]` | `[0,0]` |
+
+These four rows show all four pairs made from 0 and 1, including `[0,0]`. We chose them to make the arithmetic easy to inspect; attention does not require every pair to appear, and real embeddings can contain arbitrary real numbers. The zero row is a valid input in this fixture, not a padding marker.
+
+These are chosen numbers for checking arithmetic. The labels track which source row owns which vector; the coordinates are not trained representations of those words. We use `V = 2X` here, and will make that transformation and the selection rule explicit in the next chapters. A contributed vector is called a **value**.
+
+Suppose one receiving position is assigned weights `[0.4,0.2,0.3,0.1]`. Its gathered vector is:
+
+$$c=0.4[2,0]+0.2[0,2]+0.3[2,2]+0.1[0,0]=[1.4,1.0].$$
+
+The contribution from position 0 is `[0.8,0]`; position 1 contributes `[0,0.4]`; position 2 contributes `[0.6,0.6]`; position 3 contributes `[0,0]`. Its weight is 0.1, but multiplying a zero value still gives zeros. Add all four contributions coordinate by coordinate. One scalar weight controls the **whole value row**. The result has two features because the contributed values have two features.
+
+This vector is often called the **context vector** for that receiving position. The word “context” now names a calculation we can point to: information from several source rows has entered one output row. Nothing in `[1.4,1.0]` is a token ID or a French word.
+
+### Run exactly that calculation
+
+The code uses PyTorch as a numerical array library. `weights[:, None]` makes a column so each scalar multiplies its matching value row. `sum(dim=0)` adds the rows. The final matrix product is the same weighted sum in compact notation.
 
 ```python
 import torch
-from core.attention import scaled_dot_product_attention
 
-q = torch.zeros(1, 1, 2)  # one batch, one query, two coordinates
-k = torch.eye(2).unsqueeze(0)  # two keys
-v = torch.tensor([[[2., 4.], [6., 8.]]])
-context, weights = scaled_dot_product_attention(q, k, v)
-print(weights)   # [[[0.5, 0.5]]]
-print(context)   # [[[4.0, 6.0]]]
+values = torch.tensor([[2., 0.], [0., 2.], [2., 2.], [0., 0.]], dtype=torch.float64)
+weights = torch.tensor([0.4, 0.2, 0.3, 0.1], dtype=torch.float64)
+
+contributions = weights[:, None] * values
+context = contributions.sum(dim=0)
+
+print(contributions)
+print(context)
+print(weights @ values)
 ```
 
-Every dot product with the zero query is zero. Exponentiating the two equal scores gives equal positive numbers, and dividing each by their sum gives one half. Lesson 4 develops that normalization in detail. The output has one vector because the input had one query, even though there were two keys and two values.
+An ordinary average of these values gives `[1,1]`. Selecting position 0 alone gives `[2,0]`. Our supplied weights produce `[1.4,1]`. Those are three different ways to gather the same available information.
 
-### What normalized weights guarantee
+The unresolved design question is now precise: **how should a receiving position calculate its weights from the input?** Hand-written weights cannot adapt to a new sentence. The next chapter derives the query/key comparison that makes the mixture depend on the current representations.
 
-Before dropout, an ordinary nonempty attention row has nonnegative weights summing to one. Each context coordinate is therefore between the smallest and largest corresponding value coordinate. This is a property of this weighted combination. The complete attention module later applies learned projections and an output projection, so its final output need not lie between the original input coordinates.
+**Runnable copy:** [weighted sum](examples/walkthrough/01_weighted.py). [Setup and run commands](lessons/02-project-setup.md) are a separate reference.
 
-An entirely blocked row is a separate case. Our implementation returns zero attention weights and zero context rather than trying to normalize an empty set. The final output projection can still add a bias. We will trace that distinction in lesson 7.
-
-### Predict or explain: If weights change from [0.5,0.5] to [0.75,0.25] for values [2,4] and [6,8], what is retrieved?
+### Predict or explain: Keep input row 1 fixed and change row 0. Can h_1=f(x_1) change? What new path does attention provide?
 
 <details data-practice-id="weighted-check"><summary>Reveal worked answer and rubric</summary>
 
-The context becomes [3,5]: compute each coordinate with the same position weights. This is a toy retrieved vector, not a token prediction.
+The row-independent h_1 cannot change because its expression does not use x_0. Attention can make output row 1 depend on value 0 and its score against key 0, subject to the allowed mask. This provides a possible dependency, not a guarantee that every input perturbation changes the result.
 
-**Rubric:** Keep values fixed and show both coordinate sums.
+**Rubric:** Identify the actual input-to-output path, rather than saying only that attention adds context.
 
 </details>
 
 
 
-### Keep the current project boundary visible
 
-The source currently accepts floating-point vectors. There is no implemented text tokenizer, vocabulary lookup or complete encoder/decoder stack. It can demonstrate how representations interact; it cannot turn the sentence “I like tea” into a trained French translation.
+## 2. Derive one attention output from the input rows
 
-The [implementation record](project/implementation.md) records what exists. The [source register](research.md) identifies the actual files and references. Keep the [review questions](practice/explain-attention.md) for later explanation in your own words; reading a worked answer is not an assessed learner result.
+Chapter 1 showed how a position can gather information once contribution weights are supplied. We now open the part that was missing: how to calculate those weights from the current input. Stay with one receiving position first; chapter 3 will repeat the same calculation for the whole sequence.
 
-Next we will reproduce this component in the locked environment and identify exactly which files run it.
+Our source-side layer receives X, the input rows established in chapter 1. We want an output at position i that gathers useful information from other source positions. To calculate it, we need two things: a rule for assigning a weight to each source position, and the information that position will contribute after it receives a weight.
 
+These are separate jobs. The features useful for deciding **whether to read a row** need not be the features useful for **what to pass onward**. We therefore give each input row three transformed versions.
 
-## Reproduce the existing project and read its boundaries
+### Where queries, keys and values come from
 
-We have a concrete result to reproduce: equal attention over two values gives `[4,6]`. Now we need to know where that function lives, which environment runs it, and which apparent project entry points are still empty. This is a walkthrough of the existing setup, not an instruction to create another project.
+For input row x_i, calculate `q_i = x_i W_Q`, `k_i = x_i W_K` and `v_i = x_i W_V`. The W matrices are model parameters, shared across all positions. They will be adjusted during training. For one receiving position i, use:
 
-### Use the existing ordinary project folder
-
-From workspace home, the folder is `ai_projects/projects/transformer-labs/attention-is-all-you-need/`. It is tracked by the `ai_projects` repository. Continue the existing project. Its implementation is grouped directly below `src/`: `core`, `data`, `training` and `utils`, alongside direct runnable scripts. The former outer project-named namespace has been removed; installation exposes these responsibility packages.
-
-```bash
-cd /mnt/projects/ai/ai_projects/projects/transformer-labs/attention-is-all-you-need
-uv sync --frozen
-uv run --frozen python src/attention.py
-uv run --frozen pytest -q
-```
-
-The first command selects the project as the working directory. `uv sync --frozen` installs the versions already recorded in `uv.lock` without resolving a new dependency set. It can create or reconcile the ignored `.venv/`; it does not train a model. The next command runs the demo. The last runs the numerical and interface tests available in the environment. The locked Python requirement is 3.12; `.python-version`, `pyproject.toml` and `uv.lock` travel together.
-
-Linux currently uses a CPU PyTorch build. A machine having a GPU does not make this environment a GPU training environment. The checked runtime is PyTorch 2.14.1+cpu. Later training needs an explicit device/environment decision and measurement.
-
-### Keep code grouped by responsibility
-
-The original project-named directory under src was a conventional namespace for installation. This application now uses responsibility packages directly below src, as requested. `core` owns attention/model/configuration; `data` owns tokenizers and dataset handling; `training` owns fitting/recovery; `utils` owns graph/display helpers. Runnable commands live directly under `src/`, with no `cli/` folder. Each group is importable after `uv sync`. The Colab notebook runs the Python entry point and tests in their own locked environment.
-
-```text
-src/
-  attention.py              Runnable attention demo
-  tokenizer.py              Future tokenizer preparation command
-  prepare_data.py           Future dataset preparation command
-  train.py                  Future training command
-  inference.py              Future translation command
-  compute_bleu.py           Future BLEU command
-  core/                     attention.py, model.py, config.py
-  data/                     tokenizer.py, dataset.py
-  training/                 trainer.py, checkpoint.py
-  utils/                    attention_visuals.py
-notebooks/
-  attention_colab.ipynb
-```
-
-Hatch's source mapping installs these groups without an extra outer project namespace. The console command `uv run --frozen attention-demo` and the file command `uv run --frozen python src/attention.py` call the same demo. Plot helpers keep generated images in the source project's ignored `runs/attention-visuals/` directory; `configure(output_dir=...)` selects an explicit destination for an installed standalone copy.
-
-### Know which file owns which responsibility
-
-| File | What it does now | What to inspect |
+| Vector | Comes from | Job in this output |
 | --- | --- | --- |
-| `src/attention.py` | Exposes the attention classes and runs the demonstration | `run_demo`, its fixed seed, shape checks and path comparison |
-| `src/core/attention.py` | Implements the reusable numerical component | Projections, head packing, masks, attention and output projection |
-| `src/utils/attention_visuals.py` | Builds figures and interactive displays | Hand-set numerical examples and plotting helpers |
-| `notebooks/attention_colab.ipynb` | Runs the Python project on Google Colab | Source upload/verification, locked setup, demo, tests and downloadable logs |
-| `tests/test_attention.py` | Checks values, gradients, masks and interfaces | Independent PyTorch reference and perturbation cases |
-| `tests/test_attention_visuals.py` | Checks the matrix examples | Known answers and preservation of random state |
-| `src/tokenizer.py`, `src/prepare_data.py`, `src/train.py`, `src/inference.py`, `src/compute_bleu.py` | Comment-only destinations for later videos | No tokenizer, data processing, training, translation or BLEU execution yet |
+| Query q_i | The receiving row x_i through W_Q | Supplies one side of every comparison for receiver i |
+| Key k_j | Available row x_j through W_K | Supplies the other side of the comparison with position j |
+| Value v_j | That same available row x_j through W_V | Supplies the features multiplied by position j's eventual weight |
 
-The modules `src/core/model.py`, `src/core/config.py`, `src/data/dataset.py`, `src/data/tokenizer.py`, `src/training/trainer.py` and `src/training/checkpoint.py` are also placeholders. A successful exit from an empty Python script does not establish that its named function works. Read its source before interpreting a launcher result.
+A score against key j controls the contribution from value j. Keep that pairing: a high score against key 2 does not select value 0. “Query” and “key” name their roles in this comparison; no explicit question sentence or database is needed.
 
-### Read the demo's output as evidence
+For the retained fixture, set `W_Q = I`, `W_K = I`, `W_V = 2I`, where I is the identity matrix. This gives exactly the X and V from chapter 1. We are choosing parameter settings so we can inspect one computation, rather than claiming that these settings were learned.
 
-With seed 7, the demo prints the weighted average, attention on raw inputs, separate/vectorized head outputs, causal weights and cross-attention. Encoder and decoder attention outputs have shape `(3,5,9)`; the cross-attention output is `(3,7,9)`. Its largest reported explicit/SDPA difference in this CPU run is approximately `1.19e-7`.
+![One receiver compared with every key, then gathering the paired values](images/22-one-query.svg)
 
-`PASS` means the selected numerical comparisons and perturbation assertion succeeded. The printed floating-point vectors come from randomly initialized attention parameters. They are not translated tokens or a measured task score. We have a working component demonstration and independent tests, not a fitted language system.
+### Trace position 0 all the way through
 
-### Run the project on Google Colab
+Its query is `q_0 = [1,0]`. The keys are `[1,0]`, `[0,1]`, `[1,1]`, `[0,0]`. A dot product combines matching feature products into one scalar:
 
-The Colab notebook is an execution runner. Open `notebooks/attention_colab.ipynb` using **File → Upload notebook** in [Google Colab](https://colab.research.google.com/), select CPU, and run the cells in order. At the prompt, upload the matching source ZIP and manifest from workspace `.ai/exports/attention-is-all-you-need/`. The export also contains a standalone copy of the notebook.
+$$q_0\cdot k_0=1\times1+0\times0=1.$$
 
-Its six code cells verify source hashes and paths, create a fresh extraction, install uv 0.10.10 and the locked Python 3.12.13 environment, record actual versions, launch `src/attention.py`, run all component/matrix checks, and download a result archive. The notebook kernel coordinates subprocesses; it does not import Colab's preinstalled PyTorch as the project runtime. The current lock selects CPU PyTorch. Actual hosted execution is still unverified; local checks exercise the operational cells with a simulated Colab file interface.
+The four comparisons are `[1,0,1,0]`. Positions 1 and 3 have lower scores; positions 0 and 2 tie. A score is a learned compatibility calculation. It is not a dictionary-similarity label or a probability yet.
 
-The former concept notebook has been removed. Read this tutorial for the worked explanations, maths and original figures. Graph helpers remain under `src/utils/`; there is one numerical implementation under `src/core/`.
+Scaled dot-product attention divides each score by the square root of the query/key feature width. Our width is two, so the scaled row is `[0.707107,0,0.707107,0]`. To see why this factor exists, suppose the coordinates of q and k are independent, zero-mean and unit-variance at initialization. Summing d products gives dot-product variance d. Dividing by `sqrt(d)` keeps that variance at one under those assumptions. Otherwise, wider comparisons can start with very large score differences and nearly saturated softmax weights. This is an initialization rationale, not a guarantee about every trained vector.
 
-For a complete local test run, include the existing visualization dependencies:
+### Convert relative scores into contribution weights
 
-```bash
-uv sync --frozen --extra notebook
-uv run --frozen --extra notebook pytest -q
-```
+We need a separate set of nonnegative weights for this receiver, with total weight one. Softmax takes each exponentiated score and divides by the total for this row:
 
-With that extra, all 35 tests should run: 25 attention cases and 10 visualization-maths cases. A run reporting a skipped visualization module has not checked those ten cases. The extra retains local Jupyter tools as well as Matplotlib and ipywidgets, but opening a local notebook is no longer part of the study route.
+$$a_{0j}=\frac{\exp(s_{0j})}{\exp(s_{00})+\exp(s_{01})+\exp(s_{02})+\exp(s_{03})}.$$
 
-### Diagnose a setup problem at its source
+The exponentials are about `[2.028115,1,2.028115,1]`. Their total is `6.056230`. The resulting weights are `[0.334881,0.165119,0.334881,0.165119]`.
 
-If `torch` cannot be imported, verify that the command ran through the project's `uv` environment. If the package cannot be imported, check the working directory and installation before adding arbitrary `sys.path` edits. If a matrix shape is rejected, the later lessons explain the accepted tensor contract. Do not resolve a numerical failure by changing expected values until the calculation is understood.
+Now complete the weighted sum from chapter 1, using these calculated weights:
 
-The [reference-run record](project/reference-runs.md) distinguishes commands actually checked from proposed commands. The [setup learning points](project/learning-points/00-setup.md) and [setup comparisons](project/comparisons/00-setup.md) explain environment versus model readiness.
-
-### Predict or explain: The train.py placeholder exits successfully. Has the translation model been trained?
-
-<details data-practice-id="setup-check"><summary>Reveal worked answer and rubric</summary>
-
-No. Its source is comment-only. Process success without model work is not a training result; inspect source and recorded outputs.
-
-**Rubric:** Separate environment readiness, executed component tests and task results.
-
-</details>
-
-
-
-Next we will read the tensor axes, because most attention mistakes are understandable once we can say which axis represents queries, keys and features.
-
-
-## Read attention as rows, columns and batches
-
-The demo runs. Now we need to explain why its matrices have their observed shapes. We will use rows as positions and columns as features, then add batch and head axes without changing the underlying dot product.
-
-### One dot product answers one comparison
-
-For query `q=[1,2]` and key `k=[3,4]`, the dot product is `1×3 + 2×4 = 11`. Matching coordinates multiply and their products add. This requires the query and key to use the same coordinate dimension. The result is a scalar score, not a two-coordinate vector.
-
-For several query rows and key rows, matrix multiplication evaluates every pair. If `Q` has shape `(T,d)` and `K` has shape `(S,d)`, transpose the last two key axes to get `(d,S)`. Then:
-
-$$R=QK^\mathsf{T},\qquad R_{ij}=\sum_{r=0}^{d-1}Q_{ir}K_{jr},\qquad R\in\mathbb{R}^{T\times S}.$$
-
-Here `i` selects a query position, `j` selects a key position and `r` selects a feature coordinate. Each row answers “how does this query compare with each key?” Each column collects comparisons against one key. Softmax will later run across each row's key axis.
-
-### Work an unequal-shape multiplication
-
-```text
-left = [[1,2,3],       right = [[ 7, 8],
-        [4,5,6]]               [ 9,10],
-                               [11,12]]
-
-(2×3) @ (3×2) -> (2×2)
-result[0,0] = 1×7 + 2×9 + 3×11 = 58
-result[0,1] = 1×8 + 2×10 + 3×12 = 64
-result       = [[58,64], [139,154]]
-```
-
-The shared inner dimension is consumed; the outer dimensions remain. Unequal shapes make a useful independent check because a wrong transpose cannot hide behind a square example. Our matrix-display tests check these exact numbers.
-
-![A highlighted row meets a highlighted column to form one result cell.](images/17-basic-matrix-product.png)
-
-### Mix values using the key axis
-
-Once a query has weights `A` of shape `(T,S)`, each row mixes `S` value vectors. If `V` has shape `(S,d_v)`, then `C=A@V` has shape `(T,d_v)`. It has one output row per query and one output coordinate per value feature.
-
-This explains why query and key lengths can differ. The first contraction compares query/key features. The second contracts key positions with their corresponding values. Queries and keys must agree in feature width; keys and values must agree in position count. The low-level mathematical operation can use a distinct value width. This project's public module projects all three to the same model width before splitting heads.
-
-### Add batches and heads deliberately
-
-The public module receives `src` as `(B,S,D)`: batch count, source positions, model features. For self-attention the queries also have `S` positions. For cross-attention the target provides `(B,T,D)` queries.
-
-| Tensor | After splitting heads | Role |
+| Available position | Weight | Weighted value contribution |
 | --- | --- | --- |
-| `q` | `(B,H,T,d)` | One query vector per batch/head/query position |
-| `k` | `(B,H,S,d)` | One key vector per batch/head/source position |
-| `v` | `(B,H,S,d)` | Values aligned with source keys |
-| `q @ k.transpose(-2,-1)` | `(B,H,T,S)` | All query/key scores per head |
-| `weights @ v` | `(B,H,T,d)` | Retrieved head contexts |
+| 0 | 0.334881 | approximately `[0.669762,0]` |
+| 1 | 0.165119 | approximately `[0,0.330238]` |
+| 2 | 0.334881 | approximately `[0.669762,0.669762]` |
+| 3 | 0.165119 | `[0,0]` |
 
-Here `H` is head count and `d=D/H`. Batch/head axes remain separate. The final two axes participate in each matrix multiplication; PyTorch applies that product across compatible leading axes. For a four-dimensional tensor, `.T` reverses all axes and is not the operation we want. `.transpose(-2,-1)` exchanges only key positions and key features.
+Adding the unrounded contributions gives `c_0 = [1.339523,1.000000]`. This output has acquired information from other positions, but its relative contributions depend on the receiving row through q_0. That is the input-dependent communication we wanted.
 
-### Trace a concrete shape through the demo
+### Implement the same chain
 
-For `B=3`, `S=5`, `D=9`, `H=3`, each head has width 3. Queries/keys/values become `(3,3,5,3)`. Scores become `(3,3,5,5)`. Weighted values return `(3,3,5,3)`. Reassembling the three heads restores `(3,5,9)`.
+The program writes this one-query calculation directly. `query @ keys.T` performs all four comparisons. Subtracting the maximum score before exponentiating changes neither the final weights nor their ratios: the common factor cancels in the numerator and denominator. It avoids needlessly large exponentials.
 
-The public interface rejects integer token IDs because it expects floating-point representations. An integer matrix `(B,S)` is not interchangeable with embeddings `(B,S,D)`. Later tokenization and embedding layers will bridge those forms; they have not been implemented here.
+```python
+import math
+import torch
 
-### Predict or explain: For B=2, H=3, T=3, S=5 and d=4, what are score and context shapes?
+torch.set_printoptions(precision=6, sci_mode=False)
+query = torch.tensor([1., 0.], dtype=torch.float64)
+keys = torch.tensor([[1., 0.], [0., 1.], [1., 1.], [0., 0.]], dtype=torch.float64)
+values = torch.tensor([[2., 0.], [0., 2.], [2., 2.], [0., 0.]], dtype=torch.float64)
 
-<details data-practice-id="shapes-check"><summary>Reveal worked answer and rubric</summary>
+raw_scores = query @ keys.T
+scores = raw_scores / math.sqrt(query.shape[-1])
+shifted_scores = scores - scores.max()
+positive_weights = torch.exp(shifted_scores)
+weights = positive_weights / positive_weights.sum()
+context = weights @ values
 
-Scores are (2,3,3,5). Context is (2,3,3,4), and merged output width is H*d=12. Keys/values share S; output follows T.
-
-**Rubric:** Name the contracted axes and output ownership.
-
-</details>
-
-
-
-At this point the contractions are defined, but raw dot products can be negative, unbounded and hard to compare. The next lesson explains the transformation into usable weights.
-
-
-## Turn comparisons into normalized attention weights
-
-We can now form every query-key score. The next question is why the implementation scales those scores and uses softmax before multiplying by values. We will first keep Q, K and V equal to the input, so no learned projection hides the arithmetic.
-
-### An input can fill all three roles
-
-Take two input rows `X=[[1,0],[0,1]]`. Their dot-product matrix `X@X.T` is the identity: each row has score 1 against itself and 0 against the other. These numbers encode this chosen geometry; they are not a discovered relationship between words.
-
-The implementation divides scores by the square root of query/key feature width. Width is 2, so the first score row becomes `[1/√2,0]`, approximately `[0.707107,0]`.
-
-Softmax converts a row `s` into weights:
-
-$$a_j=\frac{\exp(s_j)}{\sum_{\ell=0}^{S-1}\exp(s_\ell)}.$$
-
-The exponential is positive. Dividing each positive number by the sum makes weights add to one, provided the row contains at least one finite allowed score. The subscript `j` selects a key; the denominator sums over the keys available to this query. Do not normalize across query rows or across independent batch examples.
-
-### Calculate the whole raw-input example
-
-For the first row, `exp(0.707107)≈2.028115` and `exp(0)=1`. The denominator is about `3.028115`. The weights are approximately `[0.669762,0.330238]`. The second row reverses them.
-
-```text
-A ≈ [[0.669762, 0.330238],
-     [0.330238, 0.669762]]
-
-C = A @ X = A
+print(raw_scores)
+print(weights)
+print(context)
 ```
 
-The last equality is a special property of choosing identity-valued inputs. With different values, the same weights produce a different context. Attention weights and retrieved information are related but distinct objects. The existing known-answer test checks both for this example.
+### What changes when the receiving state changes?
 
-![The two matrix products with Q, K and V all equal to X.](images/27-unprojected-scores.png)
+Hold K and V fixed and use query `[0,1]`. Scores become `[0,1,1,0]`, and the gathered result becomes `[1.000000,1.339523]`. The memory is identical; the receiver's comparison changed. Query `[0,0]` gives four equal scores, weights `[0.25,0.25,0.25,0.25]` and the ordinary average `[1,1]`. This is also what the fourth input row produces as a receiver in this identity-projection fixture.
 
-### Why use an exponential rather than the raw scores?
+As a source, its zero key has score zero, so its exponential is 1 and its weight is positive. Its zero value contributes zeros, while its presence still changes the denominator. A zero input is therefore not automatically ignored; chapter 6 will show how a mask explicitly excludes padding.
 
-Raw scores might be `[-2,0,2]`; they cannot directly serve as nonnegative normalized weights. Softmax yields approximately `[0.015876,0.117310,0.866813]`. Larger relative scores get more weight while smaller scores retain a contribution. Other weighting rules could be designed; softmax is the rule implemented here.
+This also explains why Q/K/V are useful roles rather than three interchangeable names for an embedding. Changing Q can redistribute weights. Changing V with Q and K fixed changes the content without redistributing weights. Chapter 4 examines the parameter maps that control those choices.
 
-A score difference has a precise consequence: `a_i/a_j = exp(s_i-s_j)`. Adding the same constant to every score leaves all differences and weights unchanged. Multiplying all scores by a positive factor does change their differences and concentration.
+We used only one receiving row here. The encoder must retain an output for every source position, so next we arrange the same calculation into matrices. The formula and scaling follow [the original paper, section 3.2.1](https://arxiv.org/html/1706.03762v7).
 
-For `[0,0]`, weights are `[0.5,0.5]`. For `[0,ln(3)]`, exponentials are `[1,3]`, so weights are `[0.25,0.75]`. For `[0,2ln(3)]`, the second exponential becomes 9 and weights become `[0.1,0.9]`. There is no threshold that turns these weights into a hard selected token.
+**Runnable copy:** [one query through scores, weights and contributions](examples/walkthrough/02_softmax.py).
 
-### Keep normalization numerically stable
-
-Exponentials of very large floating-point scores can overflow. Subtracting the row maximum before exponentiating gives the same weights because the common factor cancels:
-
-$$\frac{e^{s_j-m}}{\sum_\ell e^{s_\ell-m}}=\frac{e^{s_j}}{\sum_\ell e^{s_\ell}}.$$
-
-For `[1000,1000+ln(3)]`, a naive `exp` calculation can fail, but the maximum-shifted calculation still gives `[0.25,0.75]`. The code uses PyTorch's `softmax`, rather than writing an unstable raw exponential division in the model. This does not make NaN inputs meaningful or normalize an entirely blocked row; those need separate handling.
-
-### Why scale by the head width?
-
-A dot product adds `d` coordinate products. Under the explanatory assumption that coordinates have zero mean, unit variance and suitable independence, each product has variance one and the sum has variance `d`. Dividing by `√d` brings that variance to one. These assumptions motivate the rule; they are not a measurement that learned coordinates remain independent.
-
-Large score differences push softmax toward saturation, where its derivative for a dominant probability approaches zero. Scaling reduces one source of dimension-dependent score growth. It is not cosine normalization: Q and K are not divided by their norms. It also does not guarantee stable training on arbitrary data.
-
-![Head width changes the distribution of unscaled dot products.](images/05-head-width-scaling.png)
-
-In the source, the scale is `q.shape[-1] ** -0.5`. After splitting heads this last dimension is `d=D/H`, not the whole model width D and not sequence length S. With `D=12,H=3`, the divisor is `√4=2`. Dividing by `√12` would change the weights even if the output shape still looked correct.
-
-### Predict or explain: What changes if [0,ln(3)] becomes [1000,1000+ln(3)]? What if it becomes [0,2ln(3)]?
+### Predict or explain: Hold K and V fixed but replace q=[1,0] with q=[0,0]. Explain the entire consequence.
 
 <details data-practice-id="softmax-check"><summary>Reveal worked answer and rubric</summary>
 
-The common shift preserves [0.25,0.75]. Doubling score differences produces [0.1,0.9]. Subtract a maximum for stable exponentiation.
+All four dot products become zero, so softmax assigns 1/4 to each key and the context becomes [1,1]. The available content is unchanged; the receiving comparison now treats every key equally. The zero source row remains valid and takes part in normalization.
 
-**Rubric:** Separate additive invariance from multiplicative concentration.
+**Rubric:** Follow query → scores → normalized weights → both value features.
 
 </details>
 
 
 
-Next we replace the fixed Q=K=V choice with learned affine projections. That gives the model parameters through which useful comparison and content representations can eventually be learned.
 
+## 3. Keep one output per position and expose the matrix axes
 
-## Learn separate query, key and value representations
+One query gave position 0 a gathered vector. The encoder cannot stop with that one result: the next layer needs a sequence of representations, including an updated row for positions 1, 2 and 3. Repeat the same procedure with each input row supplying its own query.
 
-Raw input attention forces each input coordinate to do three jobs. The implemented layers instead create Q, K and V using separate learned transformations. We will use the same three-token, two-feature fixture as `projection_example()` in `src/utils/attention_visuals.py`, and follow it through to retrieved values.
+All queries read the **same input** keys and values. Position 1 does not read position 0's newly computed output. This matters because it lets us calculate every row at once.
 
-### Begin with the input rows and an affine map
+### Each score cell has an owner
 
-Use `X=[[1,0],[0,1],[1,1]]`. Each row is one position with two input features. An affine projection multiplies by a weight matrix and adds a bias vector to every row. For the teaching convention:
-
-$$Q=XW_Q+b_Q,\qquad K=XW_K+b_K,\qquad V=XW_V+b_V.$$
-
-The bias broadcasts across positions; it is not a separately learned number for each sentence position. Q and K determine comparisons; V determines the content mixed by those comparisons. Their parameter sets are distinct, even when their shapes are equal.
-
-The fixture uses the following right-multiplication matrices:
+Stack the queries into Q, keys into K and values into V. In our identity/doubling fixture, `Q=X`, `K=X`, `V=2X`. The product `Q @ K.T` is:
 
 ```text
-W_Q = [[1,0],     W_K = [[1,1],     W_V = [[2,0],
-       [1,1]]            [0,-1]]            [0,3]]
-b_Q = [0,0]      b_K = [0,0]        b_V = [0.5,-0.5]
+                         source key
+                        0    1    2    3
+query 0, receives       [1    0    1    0]
+query 1, receives       [0    1    1    0]
+query 2, receives       [1    1    2    0]
+query 3, receives       [0    0    0    0]
 ```
 
-### Derive all three projected matrices
+Cell `(i,j)` compares receiver i with source j. A row answers “how does this receiver score all available positions?” A column answers “how do different receivers score this one available position?” We need the first question to obtain a mixture for each receiver, so softmax normalizes **across columns within each row**.
 
-The first query row is `[1,0]@W_Q=[1,0]`; the second is `[0,1]@W_Q=[1,1]`; the third adds those rows and becomes `[2,1]`.
+![The score matrix, row-normalized weights and output rows with their dimensions](images/23-matrix-axes.svg)
+
+After scaling and softmax, the weight rows are approximately:
 
 ```text
-Q = [[1,0],      K = [[1, 1],      V = [[2.5,-0.5],
-     [1,1],           [0,-1],           [0.5, 2.5],
-     [2,1]]           [1, 0]]           [2.5, 2.5]]
+A = [[0.334881, 0.165119, 0.334881, 0.165119],
+     [0.165119, 0.334881, 0.334881, 0.165119],
+     [0.221181, 0.221181, 0.448581, 0.109057],
+     [0.250000, 0.250000, 0.250000, 0.250000]]
 ```
 
-For V's first row, matrix multiplication produces `[2,0]`; adding `[0.5,-0.5]` gives `[2.5,-0.5]`. The same bias is added to all three rows. A negative value coordinate is valid: probabilities must be nonnegative, but representation coordinates need not be.
+The product `C = A @ V` sums over the available-position axis. It preserves the receiver axis and the value-feature axis:
 
-![The actual controlled query projection, with a highlighted row and column.](images/18-query-projection.png)
+$$C_{im}=\sum_j A_{ij}V_{jm}.$$
 
-![The value projection includes a row-broadcast bias.](images/20-value-projection.png)
+For example, `C[0,1]` is the **second feature received by query 0**. Its calculation is `A[0,0]×0 + A[0,1]×2 + A[0,2]×2 + A[0,3]×0`. No position disappeared merely because matrix multiplication was used.
 
-### Connect the written matrix to nn.Linear storage
+### Put the repeated computation in one function
 
-PyTorch stores `nn.Linear` weights as `(output_features,input_features)`, and evaluates `x @ weight.T + bias`. Our displayed `W_Q` is the transpose of `layer.query.weight`. The fixture deliberately returns `projection.weight.T` for the matrix walkthrough. Confusing storage orientation with the mathematical right-multiplication convention is an easy error when both dimensions are two.
+This function accepts queries and keys with the same comparison width, and paired keys/values with the same source-position count. All keys are available for now. `keepdim=True` retains a size-one column for each row's maximum and denominator, so each receiver uses its own normalization.
 
-The fixture writes explicit parameters into an instance of the actual `SingleHeadAttention` class, computes the intermediate projections and checks its output against the same low-level attention operation. It constructs the temporary layer inside `torch.random.fork_rng`, so displaying a controlled example does not consume the caller's model-initialization RNG sequence.
+```python
+import math
+import torch
 
-### Use those queries and keys to obtain scores
+def attend(q, k, v):
+    scores = (q @ k.transpose(-2, -1)) / math.sqrt(q.shape[-1])
+    shifted = scores - scores.max(dim=-1, keepdim=True).values
+    exponentials = torch.exp(shifted)
+    weights = exponentials / exponentials.sum(dim=-1, keepdim=True)
+    context = weights @ v
+    return context, weights
 
-Transpose K into columns, then multiply:
+torch.set_printoptions(precision=6, sci_mode=False)
+x = torch.tensor([[1., 0.], [0., 1.], [1., 1.], [0., 0.]], dtype=torch.float64)
+q = x
+k = x
+v = 2 * x
+context, weights = attend(q, k, v)
+print(weights)
+print(context)
 
-```text
-K.T = [[1, 0,1],
-       [1,-1,0]]
-Q @ K.T = [[1, 0,1],
-           [2,-1,1],
-           [3,-1,2]]
+batch_x = x.unsqueeze(0)
+batch_context, batch_weights = attend(batch_x, batch_x, 2 * batch_x)
+print(batch_context.shape)
+assert torch.allclose(batch_context[0], context)
 ```
 
-For example, query row `[1,1]` against key row `[0,-1]` gives `1×0 + 1×(-1)=-1`. Divide each score by `√2` and apply row-wise softmax. For the first query, the scaled scores are `[1/√2,0,1/√2]`.
+The output rows are `[1.339523,1.000000]`, `[1.000000,1.339523]`, `[1.339523,1.339523]` and `[1,1]`. The fourth row started at zero but receives a nonzero context by averaging the four available values. They have different mixtures even though they read the same source rows. The first row is exactly chapter 2's calculation, now embedded in the full matrix.
 
-Let `α=exp(1/√2)≈2.028115`. Its first weight row is `[α,1,α]/(2α+1)`, approximately `[0.401112,0.197776,0.401112]`.
+### Batch sequences without mixing them
 
-### Mix the projected values, not the original inputs
+`unsqueeze(0)` adds a batch axis: `(4,2)` becomes `(1,4,2)`. The assertion checks that this wrapper preserves the result. For a batch of B independent examples, use:
 
-The first context coordinate is `(5α+0.5)/(2α+1)≈2.104448`. Its second coordinate is `(2α+2.5)/(2α+1)≈1.296664`. Work the numerator from the actual V rows:
+| Quantity | Shape | What the axes mean |
+| --- | --- | --- |
+| Q | `(B,T,d_k)` | example, receiving position, comparison feature |
+| K | `(B,S,d_k)` | example, available position, comparison feature |
+| V | `(B,S,d_v)` | example, available position, contributed feature |
+| Scores and A | `(B,T,S)` | example, receiver, available position |
+| C | `(B,T,d_v)` | example, receiver, received feature |
 
-```text
-c_0[0] = a_00×2.5 + a_01×0.5 + a_02×2.5
-c_0[1] = a_00×(-0.5) + a_01×2.5 + a_02×2.5
+The batch axis is carried through independently. It must never be flattened into S, which would allow one sentence to read another sentence's tokens. Query count T and source count S can differ; cross-attention will use that freedom.
+
+### Where does word order enter?
+
+There is a missing capability if we feed only token embeddings into this operation: unrestricted self-attention has no inherent notion of first, second, third or fourth. Reorder X's rows and its output rows reorder in the same way. Pairwise scores depend on vector content, not an invisible row-number feature.
+
+More precisely, for a permutation matrix P and no masks or positional signals, `Attention(PQ,PK,PV) = P Attention(Q,K,V)`. The matching keys and values move together. The operation treats a sequence as a collection of rows with corresponding outputs.
+
+Translation needs order. The original Transformer adds positional encodings to token embeddings before the encoder/decoder stacks. Then the input rows carry position information, so reordering tokens while assigning them their new positions changes more than a simple row permutation. The [paper's section 3.5](https://arxiv.org/html/1706.03762v7) specifies that component. Our numerical fixture isolates attention; it does not calculate positional encodings.
+
+The matrix calculation exposes another tradeoff: a length-n sequence has n² pair comparisons per head. Scores and weights can be computed in parallel, but parallelism does not remove that quadratic work or, in the explicit implementation, storage. This is why “can connect distant positions directly” should not be read as “free for arbitrarily long inputs”.
+
+**Runnable copy:** [all positions and batch check](examples/walkthrough/03_shapes.py).
+
+### Predict or explain: You reorder K rows but leave V in its old order. Shapes still match. Why is the calculation wrong?
+
+<details data-practice-id="shapes-check"><summary>Reveal worked answer and rubric</summary>
+
+A weight calculated against key j now multiplies content from a different source row. Keys and values must move together. With paired K/V permutations the summed result for fixed Q is unchanged; permuting Q as well reorders output receivers. Positional information is a separate input.
+
+**Rubric:** Explain source pairing and receiver ownership; shape agreement alone is insufficient.
+
+</details>
+
+
+
+
+## 4. What the learned projections can change
+
+We can now trace an input matrix to one output row per position. Our parameter choices were simple: Q and K copy X, while V doubles it. A useful model needs to adapt both its comparison rule and the information carried by each contribution. This is the responsibility of the projection parameters.
+
+### Separate model parameters from this input's activations
+
+$$Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V.$$
+
+W_Q, W_K and W_V persist between examples. Q, K, V, scores, attention weights A and context C are calculated anew for each input. In particular, the entries of A are **not a table of persistent parameters indexed by sentence positions**. A is produced by the current input and learned projections.
+
+Each W is shared across positions. For a model width d and a single head with comparison width d_k, W_Q and W_K have shape `(d,d_k)`; W_V has shape `(d,d_v)`. The matrices do not acquire extra parameter rows when the sentence becomes longer. The sequence length controls the number of activation rows and pair comparisons.
+
+### Why not use the same transformed vector for every job?
+
+Consider one score before scaling:
+
+$$q_i k_j^T = x_i W_Q W_K^T x_j^T.$$
+
+The receiving row and available row enter through different matrices. This permits an asymmetric relation: position i reading j need not receive the same score as j reading i. If Q=K, the raw self-attention score matrix is symmetric; its row-normalized weights still need not be symmetric because different rows can have different denominators. Separate query/key maps remove the raw-score symmetry constraint as well.
+
+The value projection has a different purpose. Once the comparison assigns weight A_ij, V decides which features travel from source j to receiver i. Requiring the content features to equal the comparison features would unnecessarily tie those choices together. Separate maps provide capacity to learn them separately; they do not guarantee a particular linguistic specialization.
+
+### A controlled change that isolates the value path
+
+Use the identity/doubling settings again so the starting output stays recognizable. Then halve only W_V. Q, K, scores and A are untouched. V halves, so every C row halves. That is a direct consequence of `C = A @ V`, rather than a new selection decision.
+
+```python
+import math
+import torch
+
+def attend(q, k, v):
+    scores = (q @ k.transpose(-2, -1)) / math.sqrt(q.shape[-1])
+    shifted = scores - scores.max(dim=-1, keepdim=True).values
+    exponentials = torch.exp(shifted)
+    weights = exponentials / exponentials.sum(dim=-1, keepdim=True)
+    return weights @ v, weights
+
+torch.set_printoptions(precision=6, sci_mode=False)
+x = torch.tensor([[1., 0.], [0., 1.], [1., 1.], [0., 0.]], dtype=torch.float64)
+w_q = torch.eye(2, dtype=x.dtype)
+w_k = torch.eye(2, dtype=x.dtype)
+w_v = 2 * torch.eye(2, dtype=x.dtype)
+
+q = x @ w_q
+k = x @ w_k
+v = x @ w_v
+context, weights = attend(q, k, v)
+print(q)
+print(k)
+print(v)
+print(context[0])
+
+half_context, same_weights = attend(q, k, x @ (w_v / 2))
+assert torch.allclose(same_weights, weights)
+assert torch.allclose(half_context, context / 2)
 ```
 
-![Normalized weights multiply V to create context rows.](images/24-weights-times-values.png)
+The original first context remains `[1.339523,1.000000]`. After the isolated value change it is approximately `[0.669762,0.500000]`, with exactly the same attention weights. Changing X instead would generally affect all three roles at once, so it would be a poor way to isolate the value projection.
 
-The two high-weight positions do not have the same values, so equal retrieval weight does not mean identical contributions in each coordinate. A contribution is weight times value. The [numerical probes](examples/arithmetic.py) check this arithmetic independently; the project visualization tests verify the fixture's Q, K, V, scores, weights and first context.
+Changing W_Q can change several receivers because the same matrix transforms all their rows. In chapter 9, the first input row `[1,0]` produces a gradient on W_Q's first row. That update can also affect the query for input row `[1,1]`; it is not a private parameter belonging only to token position 0.
 
-### Predict a controlled change
+### Connect the notation to the implementation
 
-Hold Q and K fixed and add `[1,-2]` to every V row. Each ordinary normalized context row shifts by `[1,-2]`, because its weights sum to one. The attention weights do not change. This isolates comparison from content; changing the original X instead can affect all three projections at once.
+Our handwritten notation multiplies a row on the right, `x @ W`. PyTorch's `nn.Linear` stores its matrix in the transposed convention and evaluates `x @ weight.T + bias`. To copy a general handwritten W into the layer, copy `W.T`. Identity matrices hide that distinction, so it is worth making the orientation explicit now.
 
-Changing a Q/K parameter can redistribute weights and therefore affect many output coordinates. Changing a V parameter alters the available content. All three can receive gradients from a later loss, but they are not learned by this hand-set demonstration.
+The project's `q_proj`, `k_proj`, `v_proj` and `out_proj` are affine layers with biases. Their parameters become useful only when a loss and optimizer adjust them. Calling a forward pass with identity maps demonstrates the computation; it does not train those maps. We will trace the learning path after locating encoder and decoder attention.
 
-### Predict or explain: Hold Q/K fixed and add [1,-2] to every value row. What changes in a normalized nonempty row?
+These separate maps also make multiple heads possible. Instead of forcing every output feature to use one shared distribution over source positions, we can compute several distributions in projected feature groups. That is the next design question.
+
+**Runnable copy:** [projections and isolated value change](examples/walkthrough/04_projections.py).
+
+### Predict or explain: Halve W_V for every input. Which quantities change, and is this the same kind of state as an attention-weight row?
 
 <details data-practice-id="projections-check"><summary>Reveal worked answer and rubric</summary>
 
-Weights are unchanged; context shifts by [1,-2] because each weight row sums to one. Output projection may transform that shift.
+For fixed X and Q/K maps, V and C halve while scores and A stay the same. W_V is a persistent shared parameter; A is recomputed from each input. The parameter change therefore applies to subsequent examples as well.
 
-**Rubric:** State the normalized/pre-dropout/nonempty conditions and distinguish context from final output.
+**Rubric:** Separate content from selection, and shared model parameters from input-dependent activations.
 
 </details>
 
 
 
-We now have one complete head. The next lesson shows how multiple heads share the same input positions while producing separate comparisons and contexts.
 
+## 5. Why use several attention heads?
 
-## Run several heads and reassemble their information
+One head produces one distribution over source positions for each receiver. In our example, receiver 0 uses weights `[0.334881,0.165119,0.334881,0.165119]`. The first output feature and the second output feature both use that same distribution. W_V can change the content carried by a source row, but within this head the row still has one scalar contribution weight.
 
-One head uses one learned query/key comparison space and one value transformation. Multiple heads let the layer compute several such retrievals in parallel. This is architectural capacity; it does not guarantee that different heads acquire distinct linguistic specialties.
+That is the restriction multiple heads relax. A layer can give different projected feature groups independently calculated distributions over positions, then combine the gathered features. It does not have to compress every relationship into one mixture.
 
-### Split projected features while keeping all positions
+### What a head owns
 
-Choose `B=2`, `S=5`, model width `D=12` and `H=3` heads. Each head has `d=4` features. The public layer first projects X to three `(2,5,12)` tensors. `_heads` then performs:
+Each head has query, key and value features, its own scores and its own softmax distribution for each receiver. Every head can still read every permitted position. Heads divide projected **features**, not the sentence into segments.
+
+In the implementation, a single full-width projection produces all head features together, then a reshape labels which features belong to which head. This is equivalent to collecting separate per-head projection matrices side by side. Since projection happens before splitting, each head's features can depend on the whole input row.
+
+### Work the two heads for the same receiving position
+
+Keep X and the identity/doubling projections, but use two heads of width one. For receiver 0:
+
+| Calculation | Head 0 | Head 1 |
+| --- | --- | --- |
+| Query feature | `[1]` | `[0]` |
+| Keys at positions 0, 1, 2, 3 | `[1], [0], [1], [0]` | `[0], [1], [1], [0]` |
+| Values at positions 0, 1, 2, 3 | `[2], [0], [2], [0]` | `[0], [2], [2], [0]` |
+| Scores, scaled by sqrt(1) | `[1,0,1,0]` | `[0,0,0,0]` |
+| Weights | `[0.365529,0.134471,0.365529,0.134471]` | `[1/4,1/4,1/4,1/4]` |
+| Gathered feature | `1.462117` | `1.000000` |
+
+The second head averages because this particular receiver's second query feature is zero. It is not assigned a special language task. The first head prefers positions 0 and 2. The two gathered features therefore come from different mixtures of the same source positions.
+
+Concatenate them to get `[1.462117,1.000000]`, then apply W_O, the output projection. W_O is identity in this check so the two gathered features stay visible. In a trained model it can mix them into the next layer's feature space. It does not recalculate their attention weights.
+
+![One distribution in one head versus separately normalized distributions in two heads](images/24-head-layout.svg)
+
+### Follow the axes through the implementation
+
+Start with `(B,T,d_model)`. Reshape to `(B,T,H,d_head)` and transpose to `(B,H,T,d_head)`. Now each `(batch,head)` pair holds an ordinary position-by-feature attention problem. After gathering, transpose back to `(B,T,H,d_head)` **before** joining head features into each position's row.
 
 ```python
-x.reshape(batch, length, num_heads, head_dim).transpose(1, 2)
+import math
+import torch
+
+def attend(q, k, v):
+    scores = (q @ k.transpose(-2, -1)) / math.sqrt(q.shape[-1])
+    shifted = scores - scores.max(dim=-1, keepdim=True).values
+    exponentials = torch.exp(shifted)
+    weights = exponentials / exponentials.sum(dim=-1, keepdim=True)
+    return weights @ v, weights
+
+torch.set_printoptions(precision=6, sci_mode=False)
+x = torch.tensor([[[1., 0.], [0., 1.], [1., 1.], [0., 0.]]], dtype=torch.float64)
+w_q = torch.eye(2, dtype=x.dtype)
+w_k = torch.eye(2, dtype=x.dtype)
+w_v = 2 * torch.eye(2, dtype=x.dtype)
+w_out = torch.eye(2, dtype=x.dtype)
+q, k, v = x @ w_q, x @ w_k, x @ w_v
+
+batch, positions, width = x.shape
+heads = 2
+assert width % heads == 0
+head_width = width // heads
+q_heads = q.reshape(batch, positions, heads, head_width).transpose(1, 2)
+k_heads = k.reshape(batch, positions, heads, head_width).transpose(1, 2)
+v_heads = v.reshape(batch, positions, heads, head_width).transpose(1, 2)
+
+head_context, head_weights = attend(q_heads, k_heads, v_heads)
+joined = head_context.transpose(1, 2).reshape(batch, positions, width)
+output = joined @ w_out
+
+print(q_heads.shape)
+print(head_weights[0, 0, 0])
+print(head_weights[0, 1, 0])
+print(output[0])
 ```
 
-The intermediate shape is `(2,5,3,4)` and the result is `(2,3,5,4)`. We have separated head and feature axes, then moved the head axis before sequence. Every head still receives all five positions. We are not giving tokens 0–1 to head zero and tokens 2–3 to head one.
+The output rows are approximately `[1.462117,1.000000]`, `[1.000000,1.462117]`, `[1.462117,1.462117]` and `[1,1]`. They differ from the one-head results because the comparison features, per-head scaling and normalization groups changed. The reshape alone would not justify an improvement claim.
 
-![Head packing separates feature groups and preserves sequence positions.](images/07-head-packing.png)
+If you flatten while heads still precede positions, elements can end up in the wrong token row even though the final shape looks plausible. This is why the inverse transpose is part of correctness rather than cosmetic layout code.
 
-The constructor requires `D` to be positive and divisible by positive `H`. With `D=10,H=3`, equal-width heads do not fit, so this implementation raises `ValueError`. Some alternative architecture could use unequal heads; that is not the contract implemented here.
+At fixed model width, increasing H reduces each head's width. More independently weighted mixtures come with narrower per-head feature spaces. Neither a larger head count nor a diagram assigning “grammar” to one head and “meaning” to another establishes a better model. The paper motivates multiple representation subspaces; useful specializations and task quality require trained-model evidence. [Paper, section 3.2.2](https://arxiv.org/html/1706.03762v7).
 
-### Compare the readable loop with vectorized heads
+**Runnable copy:** [two heads with visible score and value paths](examples/walkthrough/05_heads.py).
 
-The earlier `MultiHeadAttention` class builds separate Q/K/V linear layers for each head and runs them in a Python loop. Each projection maps the full D-dimensional input to d features. The vectorized version stores all corresponding projection rows in one `nn.Linear(D,D)`, then splits its output.
-
-These are two organizations of compatible calculations. Stacking matching per-head parameter rows into the vectorized layer produces matching outputs and weights; the test `test_loop_heads_equal_vectorized_heads_with_matching_parameters` verifies that comparison. Comparing two separately initialized layers without copying their parameters would test different functions, not the loop/vectorization choice.
-
-### Trace attention inside each head
-
-For each batch/head, Q and K have shape `(5,4)`. Their score matrix has shape `(5,5)`, scaled by `√4`. Multiplying normalized weights by `(5,4)` values yields one `(5,4)` context. All heads together form `(B,H,S,d)=(2,3,5,4)`.
-
-For output query position zero, take its four-coordinate result from head zero, then from head one, then from head two. Concatenating those features produces a 12-coordinate row. Transpose the context back to `(B,S,H,d)` before flattening the final two axes:
-
-```python
-merged = context.transpose(1, 2).flatten(2)
-output = self.out_proj(merged)
-```
-
-Flattening `(B,H,S,d)` directly would combine the wrong logical axes. A shape that eventually reshapes to `(B,S,D)` is not proof that the elements retain their correct token/head ownership.
-
-### Work a small concatenation and output projection
-
-The separate two-head visualization uses two query positions. Head zero returns `[[1,0],[0,1]]`; head one returns `[[2,1],[1,2]]`. Concatenating along features yields:
-
-```text
-merged = [[1,0,2,1],
-          [0,1,1,2]]
-```
-
-The existing display fixture applies this controlled output map, with zero bias:
-
-```text
-W_O = [[1,0,1,0],
-       [0,1,0,1],
-       [1,0,0,1],
-       [0,1,1,0]]
-merged @ W_O = [[3,1,2,2],
-                [1,3,2,2]]
-```
-
-For example, the first row's third output is `1×1 + 0×0 + 2×0 + 1×1 = 2`. The operation combines head features at the same query position, rather than attending across positions again. `output_projection_example()` computes this through the actual layer's output projection, and the known-answer test verifies both merged and projected values.
-
-![The existing fixture concatenates head contexts before the output projection.](images/25-head-context-concatenation.png)
-
-### Count the final layer's parameters
-
-In the final `Attention` class, Q/K/V/output are each biased D-to-D linear maps. Each owns `D²` weights and `D` biases. Total count is `4(D²+D)`. The demo uses D=9, so the count is `4(81+9)=360`. Changing H while preserving D changes how features are partitioned and the scale used per head, but not this parameter count. Attention-score storage still grows with head count and the product of query/key lengths.
-
-### Predict or explain: Can head-major context be flattened directly to recover query-major features?
+### Predict or explain: Would giving head 0 only the first half of a sentence implement the head split shown here?
 
 <details data-practice-id="heads-check"><summary>Reveal worked answer and rubric</summary>
 
-No. Transpose (B,H,T,d) to (B,T,H,d), then flatten H and d. Preserving element count alone does not preserve token ownership.
+No. The shown split assigns projected feature groups to heads while each head retains every permitted source position. Different heads can normalize different distributions over the same positions. Splitting sentence positions would remove information paths instead.
 
-**Rubric:** Trace one query row across all heads.
+**Rubric:** Name the split axis, retained source axis and independently normalized distributions.
 
 </details>
 
 
 
-The layer now handles many positions and heads. Before applying it to variable-length batches, we must ensure that added padding positions cannot become useful keys.
 
+## 6. Padding: exclude storage rows from the information flow
 
-## Keep padding out of the retrieved information
+We have built the gathering calculation for every position and allowed several independently weighted mixtures. So far every stored source row has been treated as available information. We now return to the translator around that calculation: batching introduces stored rows that do not belong to a sentence, so the information flow needs a boundary.
 
-Sentences can have different lengths, but a batch tensor needs a rectangular layout. Padding fills the unused positions. Even a zero input can become a nonzero key or value after a biased projection, so padding cannot be made harmless by assuming its numeric entries are zero.
-
-### Give the mask one unambiguous meaning
-
-Our public mask has shape `(B,S)` and uses `True` or `1` for a **valid source key**. For a five-position source with three real tokens, one row is `[True,True,True,False,False]`. The mask names positions, not embedding coordinates.
-
-The builder converts it into `(B,1,1,S)` using `[:,None,None,:]`. Compared with scores `(B,H,T,S)`, the singleton head/query axes broadcast the same key validity across all heads and all queries in that example. Different examples can have different valid source lengths.
+The encoder will process batches of sentences. Our source has four displayed tokens; another source in the batch might have only three. A rectangular `(batch,positions,features)` tensor still needs the same stored position count for both examples, so the shorter one receives a padding row.
 
 ```text
-source validity:          [1, 1, 1, 0, 0]
-allowed key columns:
-query 0                  [1, 1, 1, 0, 0]
-query 1                  [1, 1, 1, 0, 0]
-query 2                  [1, 1, 1, 0, 0]
+Example A: real token | real token | real token | real token
+Example B: real token | real token | real token | PAD
+Validity B:    True   |    True    |    True    | False
 ```
 
-![Padding excludes key columns across query rows.](images/10-padding-mask-and-weights.png)
+The fourth row in example A is real even though our chosen vector is `[0,0]`; its validity is True. In example B, slot 3 stores padding with validity False. The validity metadata tells us which case we have; the numerical vector alone cannot.
 
-### Block scores before normalization
+Padding occupies memory but is not part of the source sentence. If attention treats it as another source position, it can alter the representations of real tokens. We must prevent that dependency.
 
-Suppose a query has unmasked scores `[0,0,10]`, but the third key is padding. If we apply softmax first, the padded position takes almost all the weight. Setting that weight to zero afterwards leaves a tiny sum, not a properly normalized distribution over the valid positions.
+### Even a zero value can contaminate an output
 
-Instead replace blocked scores with negative infinity before softmax: `[0,0,-∞]` becomes weights `[0.5,0.5,0]`. In the limit `exp(-∞)=0`, so blocked positions contribute nothing and the remaining valid keys share total mass one.
+The problem is not solved by making the padded value zero. Its key still contributes a score and an exponential to the softmax denominator. Some weight is spent on the padded position, reducing the weights assigned to real values. The output can change even though the padded value contributes no nonzero features directly.
 
-The explicit code uses `scores.masked_fill(~attention_mask, float('-inf'))`. The inversion matters because `masked_fill` receives positions to replace, whereas our incoming mask marks positions to allow. The comparison with `nn.MultiheadAttention` also inverts masks because its `key_padding_mask` marks blocked keys. Copying the same boolean tensor between these APIs without checking semantics reverses the contract.
+The right boundary is therefore **before normalization**. A boolean allowed mask states which query/key pairs exist for the calculation. This project uses `True` for allowed. For example B, `[True,True,True,False]` excludes source key 3 for every receiver.
 
-### A key mask does not clear padded query rows
+Replace forbidden scores with negative infinity. Their exponentials are zero, leaving only allowed positions in the denominator. For receiver 0, the scaled row changes from `[0.707107,0,0.707107,0]` to `[0.707107,0,0.707107,-inf]`. The weights become `[0.401112,0.197776,0.401112,0]` and context becomes `[1.604448,1.197776]`.
 
-For self-attention, padded source positions are also potential query positions. The current key mask stops others from retrieving their keys/values; it does not force their own output vectors to zero. A padded query can still retrieve real keys and pass through the output projection.
+Masking after softmax without renormalizing would keep the old weights on valid keys; masking the final context would be later still. Neither implements this normalized distribution over the allowed positions.
 
-That behavior is visible in the source and tests. The padding-isolation test compares real query outputs for self-attention; it does not demand zeros at padded query positions. A later translation loss must ignore padded target labels using its own policy. Key visibility and loss masking solve different problems.
+### Define what happens when nothing is allowed
 
-### Define the entirely blocked case explicitly
+Softmax of an all-negative-infinity row is undefined: subtracting its maximum encounters `-inf - (-inf)`. The project's explicit policy is zero weights and zero gathered context for a completely blocked receiver.
 
-For a row containing only blocked keys, ordinary softmax would see `[-∞,-∞,…]`, whose normalization is undefined. Our explicit function first detects `has_keys`, substitutes a finite score row for safe arithmetic and then replaces that row's weights with zero. Its context is zero, and the tests require finite outputs and gradients.
-
-There is another operation after context. If the merged context is zero and `out_proj` has bias b, the final output is `0@W_O+b=b`. Therefore “zero context” does not imply “zero module output”. In the all-blocked-row test, the final output equals the output projection's bias. This distinction avoids treating a valid implementation result as a bug.
-
-### Use a perturbation to test the information boundary
-
-Take the same layer and valid inputs twice. In one copy add 100 to every padded input vector. The outputs at real self-attention queries must agree; cross-attention outputs must all agree when its target queries are unchanged. This tests that padded keys/values cannot influence allowed results.
+The small function below implements the same policy. It substitutes safe temporary scores for empty rows, performs a finite softmax, then replaces those weight rows with zeros. It also accepts a different allowed row per receiver, which we will need for decoder causality.
 
 ```python
-changed = src.clone()
-changed[~mask] += 100
-first = layer(src, attention_mask=mask)
-second = layer(changed, attention_mask=mask)
-torch.testing.assert_close(first[mask], second[mask])
+import math
+import torch
+
+def attend(q, k, v, allowed=None):
+    scores = (q @ k.transpose(-2, -1)) / math.sqrt(q.shape[-1])
+    if allowed is None:
+        allowed = torch.ones_like(scores, dtype=torch.bool)
+    allowed = torch.broadcast_to(allowed, scores.shape)
+    has_keys = allowed.any(dim=-1, keepdim=True)
+    scores = scores.masked_fill(~allowed, -torch.inf)
+    safe_scores = torch.where(has_keys, scores, torch.zeros_like(scores))
+    shifted = safe_scores - safe_scores.max(dim=-1, keepdim=True).values
+    exponentials = torch.exp(shifted)
+    weights = exponentials / exponentials.sum(dim=-1, keepdim=True)
+    weights = torch.where(has_keys, weights, torch.zeros_like(weights))
+    return weights @ v, weights
+
+torch.set_printoptions(precision=6, sci_mode=False)
+x = torch.tensor([[1., 0.], [0., 1.], [1., 1.], [0., 0.]], dtype=torch.float64)
+valid_keys = torch.tensor([[True, True, True, False]])
+context, weights = attend(x, x, 2 * x, valid_keys)
+print(weights[0])
+print(context)
+
+changed = x.clone()
+changed[3] = torch.tensor([1000., -1000.], dtype=x.dtype)
+changed_context, _ = attend(changed, changed, 2 * changed, valid_keys)
+assert torch.allclose(changed_context[:3], context[:3])
+
+no_keys = torch.zeros((1, 4), dtype=torch.bool)
+empty_context, empty_weights = attend(x[:1], x, 2 * x, no_keys)
+print(empty_context)
+assert torch.equal(empty_weights, torch.zeros_like(empty_weights))
 ```
 
-Use evaluation mode or otherwise control randomness when comparing. With active dropout, two calls can differ even if padding is correctly excluded. Hold parameters, valid data and the query mask interpretation fixed; change only the forbidden information.
+For example B with source position 3 masked, contexts are `[[1.604448,1.197776],[1.197776,1.604448],[1.503490,1.503490],[1.333333,1.333333]]`. The final empty-memory check returns `[[0,0]]`.
 
-### Predict or explain: All keys are blocked. Why can the module return a nonzero vector?
+### Prove the excluded row cannot affect real receivers
+
+The program changes the padded row to `[1000,-1000]`, then recomputes attention. The first three outputs must stay unchanged. This checks the intended absence of influence, not merely the presence of a triangular picture or a zero in a printed tensor.
+
+Only the first three receivers are compared because changing X[3] also changes query 3. Masking **key 3** removes that row as a source of information; it does not freeze or delete its query. The original fourth context `[1.333333,1.333333]` is therefore consistent: the padded query still reads the three real keys.
+
+Keep three responsibilities separate. A key mask excludes source contributions. A target-loss mask later excludes padded prediction positions from the objective. An output projection can add its bias even when gathered context is zero. Confusing those boundaries leads to tests that look reassuring while checking the wrong behavior.
+
+**Runnable copy:** [padding, perturbation and empty-row checks](examples/walkthrough/06_padding.py).
+
+### Predict or explain: If a padded value is [0,0], can it still change real-token outputs when its key is not masked?
 
 <details data-practice-id="padding-check"><summary>Reveal worked answer and rubric</summary>
 
-The context is zero, but a biased output projection returns its bias. Also, a source key mask does not normally zero padded query outputs.
+Yes. Its score still contributes an exponential to the softmax denominator, reducing the weights on real keys. Exclude it before normalization. The key mask does not delete query rows, and target-loss masking remains separate.
 
-**Rubric:** Separate visibility, context, output projection and loss masking.
+**Rubric:** Trace denominator contamination instead of looking only for a nonzero padded contribution.
 
 </details>
 
 
 
-Next we add a different restriction: a decoder position must not retrieve future target positions, even when those positions contain real tokens.
 
+## 7. Decoder causality: match training to what generation can know
 
-## Stop a decoder query from reading its future
+Return to our translation task. When generating “Nous lisons des livres quotidiennement”, the decoder has the source sentence, but it does not yet have the target tokens it is supposed to predict. After “Nous”, it must predict “lisons” using the prefix that exists so far.
 
-Padding asks whether a source position contains a real token. Causality asks whether a real position is allowed to influence the current query. The decoder needs both questions answered independently.
+During training, the complete reference translation is available. We would like to train all target positions together in a matrix, but we must prevent a position from using a future reference token as an input shortcut.
 
-### Match the mask to the prediction task
+### Show the exact input and label alignment
 
-In a future teacher-forced translation batch, a target prefix may be laid out as `[BOS, je, bois]` with labels `[je, bois, EOS]`. The representation at input position zero will predict `je`; it may read BOS but must not read later input positions that reveal the answer. This is an illustrative contract for the later data phase, not an implemented tokenizer or training batch.
+BOS denotes a beginning token; EOS denotes an ending token. Continue to use whole displayed words only to show ownership; the eventual tokenizer decides actual token boundaries.
 
-For self-attention with equal query/key lengths L, query i can read key j when `j≤i`. With L=4:
+| Decoder position | Input token at this position | Desired next token | Allowed target-input prefix |
+| --- | --- | --- | --- |
+| 0 | BOS | Nous | BOS |
+| 1 | Nous | lisons | BOS, Nous |
+| 2 | lisons | des | BOS, Nous, lisons |
+| 3 | des | livres | BOS, Nous, lisons, des |
+| 4 | livres | quotidiennement | BOS, Nous, lisons, des, livres |
+| 5 | quotidiennement | EOS | BOS, Nous, lisons, des, livres, quotidiennement |
+
+At position 1, the label is “lisons”. Input position 2 contains exactly that token. Without a restriction, position 1 could read it through self-attention and make a prediction using information unavailable at generation time. This is the concrete leakage path the causal mask must remove.
+
+The rule is `key_index <= query_index`. It allows the current input token because the prediction at that row is for the **next** token. The label shift and the mask work together; a mask does not repair unshifted labels.
+
+![Training input, next-token labels and the allowed causal pairs](images/25-decoder-causality.svg)
+
+### Apply the rule to the same four-row arithmetic fixture
+
+To keep every number inspectable, use the first four-position mask pattern with our existing numerical X. These rows now stand in for decoder states; they are not literal embeddings of the tokens in the table.
 
 ```text
-             key position
-             0 1 2 3
-query 0      1 0 0 0
-query 1      1 1 0 0
-query 2      1 1 1 0
-query 3      1 1 1 1
+             key 0  key 1  key 2  key 3
+query 0       True  False  False  False
+query 1       True   True  False  False
+query 2       True   True   True  False
+query 3       True   True   True   True
 ```
 
-The diagonal is allowed: the current input token is part of the available prefix. Whether that token is already a future answer depends on the data shift. A correct triangular attention mask cannot repair incorrectly aligned decoder inputs and labels.
+Query 0 reads only value 0, so its gathered vector is `[2,0]`. Query 1 compares only keys 0 and 1 and receives `[0.660477,1.339523]`. Query 2 can use keys 0–2 and receives `[1.503490,1.503490]`. Query 3 can use all four keys and receives `[1,1]`. The algorithm is the masked attention from chapter 6 with a different allowed matrix.
 
-### Combine padding and temporal visibility with AND
+```python
+import math
+import torch
 
-If source/key validity is `[1,1,0,0]`, intersect that row with each causal row:
+def attend(q, k, v, allowed=None):
+    scores = (q @ k.transpose(-2, -1)) / math.sqrt(q.shape[-1])
+    if allowed is None:
+        allowed = torch.ones_like(scores, dtype=torch.bool)
+    allowed = torch.broadcast_to(allowed, scores.shape)
+    has_keys = allowed.any(dim=-1, keepdim=True)
+    scores = scores.masked_fill(~allowed, -torch.inf)
+    safe_scores = torch.where(has_keys, scores, torch.zeros_like(scores))
+    shifted = safe_scores - safe_scores.max(dim=-1, keepdim=True).values
+    exponentials = torch.exp(shifted)
+    weights = exponentials / exponentials.sum(dim=-1, keepdim=True)
+    weights = torch.where(has_keys, weights, torch.zeros_like(weights))
+    return weights @ v, weights
 
-```text
-query 0      1 0 0 0
-query 1      1 1 0 0
-query 2      1 1 0 0
-query 3      1 1 0 0
+torch.set_printoptions(precision=6, sci_mode=False)
+x = torch.tensor([[1., 0.], [0., 1.], [1., 1.], [0., 0.]], dtype=torch.float64)
+positions = torch.arange(x.shape[0])
+causal = positions[None, :] <= positions[:, None]
+context, weights = attend(x, x, 2 * x, causal)
+print(causal)
+print(context)
+
+changed = x.clone()
+changed[2] = torch.tensor([1000., -1000.], dtype=x.dtype)
+changed_context, _ = attend(changed, changed, 2 * changed, causal)
+assert torch.allclose(changed_context[:2], context[:2])
+
+valid_keys = torch.tensor([True, True, True, False])
+combined = causal & valid_keys[None, :]
+combined_context, _ = attend(x, x, 2 * x, combined)
+print(combined_context)
 ```
 
-Using OR would allow keys that satisfy either condition, including future valid tokens or padded past tokens. The builder uses `allowed & triangle` for exactly this reason. Its causal triangle broadcasts across batch and heads, then intersects with each example's padding constraints.
+### Check future independence separately from padding
 
-![The explicit path shows scores and weights before and after visibility restrictions.](images/11-mask-score-weight-trace.png)
+The perturbation changes position 2 while keeping all four positions real. Outputs at positions 0 and 1 must remain unchanged. This tests causality itself. If padding already hid position 2, an unchanged result would not independently prove that the causal rule worked.
 
-### Follow the source branch
+In a separate padding example, let position 3 be padding. Combine restrictions with AND: a key must be both real and no later than the query. Query 3 then reads positions 0–2 and returns `[1.333333,1.333333]`. The first three outputs keep their earlier causal results.
 
-`make_attention_mask` checks equal query/key lengths for this simple causal self-attention contract, creates a lower-triangular boolean tensor and intersects it with any padding mask. The public `Attention.forward` rejects supplying both cross-attention target queries and `causal=True`. It does not silently invent a rectangular prefix-alignment policy.
+The source encoder usually can read the whole valid English sentence: those tokens were supplied before translation began. Target self-attention must obey the prefix boundary. Training can calculate many target rows together under that restriction; generation still constructs the next token sequentially. Parallel matrix computation during training does not imply that the complete translation is already known at inference time. [Paper, decoder stack and attention applications](https://arxiv.org/html/1706.03762v7).
 
-When the efficient path has no padding mask and weights are not requested, `_context` lets SDPA handle the causal triangle using `is_causal=True`. When padding is supplied, it constructs the combined explicit mask and sets the SDPA causal flag accordingly. These branches must represent the same allowed pairs, which is one reason both outputs and gradients are compared in tests.
+**Runnable copy:** [causal pairs and future perturbation](examples/walkthrough/07_causal.py).
 
-### Prove something stronger than a triangular picture
-
-A mask heatmap shows intent. A controlled perturbation tests effect. Keep the first three positions fixed and change positions 3 onward by a large value. With the layer in evaluation mode and identical parameters, outputs at positions 0–2 must remain unchanged under causal self-attention.
-
-![Changing future tokens leaves protected earlier outputs unchanged.](images/12-future-token-isolation.png)
-
-The existing tests run this isolation check for explicit and efficient paths. Without a causal mask, earlier positions are generally free to change because they can retrieve later keys/values. “Generally” is deliberate: a degenerate zero-parameter layer could ignore them even when visibility is allowed. Passing one accidental no-change case would not by itself prove masking.
-
-### Left padding exposes a useful boundary case
-
-A sequence beginning with invalid keys can create causal query rows with no allowed keys. For validity `[0,0,1,1,1]`, the first two causal rows are entirely blocked. The empty-row handling from lesson 7 matters here; merely avoiding an entirely empty sentence is insufficient.
-
-Causality also does not supply positional information. If we permute source tokens in an unpositioned encoder, attention has no independently supplied notion of original order. Later positional embeddings/encodings and full model wiring must define that information. We have implemented the visibility mechanism, not the full target prediction system.
-
-### Predict or explain: A query is position two and valid keys are [1,1,0,1]. Which keys may it read causally?
+### Predict or explain: At decoder input position 1 containing Nous, which token is the label, and why must input position 2 be blocked?
 
 <details data-practice-id="causal-check"><summary>Reveal worked answer and rubric</summary>
 
-Keys zero and one only: [1,1,0,0]. The current key is padding and key three is future. Intersect validity and j<=i.
+The label is lisons; input position 2 already contains lisons during teacher-forced training. Reading it would reveal the answer unavailable at generation time. Allow input keys 0 and 1, and shift labels separately. Padding is a different restriction.
 
-**Rubric:** Use AND and identify both reasons for exclusion.
+**Rubric:** Identify the exact cheating path and reconcile the current-position allowance with next-token labels.
 
 </details>
 
 
 
-Next we let a target query retrieve from a different source sequence. Its score matrix becomes rectangular, and the source has a different visibility contract from the target prefix.
 
+## 8. Let the decoder read the encoded source
 
-## Let target queries retrieve source information
+Causal self-attention lets a decoder position use its allowed French prefix. That alone provides no path from the English sentence to the next prediction. We need a second attention operation that reads the encoder's source representations.
 
-Self-attention takes Q, K and V from one sequence. Translation also needs the developing target representation to retrieve information from the encoded source. The implemented cross-attention path changes where Q comes from while keeping keys and values aligned with source positions.
+For the row predicting “lisons”, the receiver is a decoder state built from its allowed prefix. The available memory consists of all valid encoded source rows. **Cross-attention** uses the decoder state to form Q and encoder memory to form K and V.
 
-### Trace the two input arguments by role
-
-In this project's final public interface:
-
-```python
-cross_output = layer(src, tgt=tgt, attention_mask=source_mask)
-```
-
-`src` supplies keys and values. `tgt` supplies queries. These names can be confusing if we assume “the first argument is always Q”; here it is not. In the final model, `src` for this call will be encoder representations rather than raw integer English IDs. `tgt` will be decoder representations, not labels. Those surrounding blocks have not been implemented.
-
-```mermaid
-flowchart LR
-    S[Source representations] --> K[Key projection]
-    S --> V[Value projection]
-    T[Target representations] --> Q[Query projection]
-    Q --> A[Target by source weights]
-    K --> A
-    A --> C[Context for each target position]
-    V --> C
-```
-
-### Calculate the rectangular shapes
-
-Let `B=2`, source length `S=5`, target length `T=3`, model width `D=12`, and `H=3`. After projection/splitting:
+### Follow the two streams into one output
 
 ```text
-Q:       (2,3,3,4)       batch, heads, target queries, width
-K and V: (2,3,5,4)       batch, heads, source keys/values, width
-scores:  (2,3,3,5)       target rows, source columns
-context: (2,3,3,4)
-merged:  (2,3,12)
-output:  (2,3,12)
+encoded English source rows ── W_K ── K
+                            └─ W_V ── V
+causal French prefix states ── W_Q ── Q
+
+Q K^T → source weights for each target receiver → weights V
 ```
 
-The public output follows target/query length. Five source positions do not imply five output rows. The mask is `(2,5)`, because it describes source keys; a `(2,3)` target padding mask cannot be substituted for it.
+The receiver's target position survives. The source-position axis is summed out. The gathered source features continue through decoder computation and eventually a vocabulary projection to support the next-token prediction. Cross-attention itself still returns features.
 
-![Cross-attention weights have target query rows and source key columns.](images/14-rectangular-cross-attention.png)
+![Two target receivers reading four source memory rows](images/26-cross-attention.svg)
 
-### Work one query independently
+### Why source and target lengths need not match
 
-Suppose a head's source keys are `[[1,0],[0,1],[1,1]]`, values are `[[2,0],[0,4],[2,4]]`, and its target query is `[1,0]`. Scores are `[1,0,1]/√2`. The first and third keys receive equal high weights; their values contribute differently to the two context coordinates.
+Our displayed source has four words while its target has five. Translation is not a one-source-row-to-one-target-row mapping. In the small program, use four source states and two target states to expose the rectangular geometry. The target states are chosen vectors for two receiving rows, not outputs of an implemented French decoder.
 
-If the third source position is padded, scores become `[1/√2,0,-∞]`. Weights become approximately `[0.669762,0.330238,0]`. The context becomes `[1.339523,1.320954]`. That one retrieved vector belongs to the target query. It is not a translated word, and it does not identify a single hard source alignment.
+With Q shaped `(2,2)` and K shaped `(4,2)`, scores and weights have shape `(2,4)`. Multiplying by V shaped `(4,2)` returns `(2,2)`: one gathered vector for each of the two target receivers.
 
-### Why no ordinary causal triangle over source positions?
+```python
+import math
+import torch
 
-For the intended completed-sentence translation task, the full English source is available before generating the French target. A target query can therefore retrieve any valid encoded source position. Applying `j≤i` between target and source indices would falsely treat unrelated position numbers as a time-availability relationship.
+def attend(q, k, v, allowed=None):
+    scores = (q @ k.transpose(-2, -1)) / math.sqrt(q.shape[-1])
+    if allowed is None:
+        allowed = torch.ones_like(scores, dtype=torch.bool)
+    allowed = torch.broadcast_to(allowed, scores.shape)
+    has_keys = allowed.any(dim=-1, keepdim=True)
+    scores = scores.masked_fill(~allowed, -torch.inf)
+    safe_scores = torch.where(has_keys, scores, torch.zeros_like(scores))
+    shifted = safe_scores - safe_scores.max(dim=-1, keepdim=True).values
+    exponentials = torch.exp(shifted)
+    weights = exponentials / exponentials.sum(dim=-1, keepdim=True)
+    weights = torch.where(has_keys, weights, torch.zeros_like(weights))
+    return weights @ v, weights
 
-The target's own self-attention still needs causality. Cross-attention and decoder self-attention sit at different points in a future decoder block and answer different visibility questions. A streaming translator with partial source availability would need a separate, explicit protocol; the current API does not claim to implement one.
+torch.set_printoptions(precision=6, sci_mode=False)
+src = torch.tensor([[1., 0.], [0., 1.], [1., 1.], [0., 0.]], dtype=torch.float64)
+tgt = torch.tensor([[1., 0.], [0., 1.]], dtype=torch.float64)
+w_q = torch.eye(2, dtype=src.dtype)
+w_k = torch.eye(2, dtype=src.dtype)
+w_v = 2 * torch.eye(2, dtype=src.dtype)
 
-### Inspect the checks and rejected calls
+q = tgt @ w_q
+k = src @ w_k
+v = src @ w_v
+context, weights = attend(q, k, v)
+print(weights.shape)
+print(context)
 
-The implementation verifies matching batch size, floating dtype, device and embedding width for source and target. Their sequence lengths can differ. Supplying `causal=True` together with `tgt` raises a clear error. A source mask with the wrong length is rejected before a misleading output can be interpreted.
+source_validity = torch.tensor([[True, True, True, False]])
+masked_context, _ = attend(q, k, v, source_validity)
+print(masked_context)
+```
 
-Tests map the same learned projection weights into PyTorch `nn.MultiheadAttention`, then compare both cross-attention outputs and per-head weights. Other tests perturb only padded source rows and require all target outputs to remain unchanged. These establish component behavior for the exercised tensors, not translation quality or trained word alignments.
+The first two familiar queries recover `[[1.339523,1.000000],[1.000000,1.339523]]`. If slot 3 is padding for a shorter source, excluding it gives `[[1.604448,1.197776],[1.197776,1.604448]]`. The numerical operation did not change; the origin and ownership of its vectors did.
 
-### Predict or explain: Source length is five and target length three. Which length controls output, and which controls the mask?
+### Which masks belong here?
+
+The source key mask has four entries because there are four memory rows. A two-entry target-validity row cannot serve as that mask. Target padding and target-loss masking are separate responsibilities.
+
+Do not apply a target-time triangle over source indices. Source index 2 is not a future French token. The entire English source is available before generation. The decoder state supplying the query must already respect target causality; cross-attention may then read the full valid source. This is the encoder–decoder attention role described in [the paper's section 3.2.3](https://arxiv.org/html/1706.03762v7).
+
+### Connect the roles to the actual call
+
+The project calls the class as `layer(src, tgt=target_states)`. Here `src` means the memory that supplies K and V; `tgt` supplies Q. Without tgt, the same src supplies all three and the operation is self-attention. Output length follows tgt when it is supplied.
+
+The reusable class requires matching batch size, feature width, dtype and device, while source and target sequence lengths can differ. It rejects `causal=True` with tgt supplied because that flag implements a self-attention triangle, not a cross-sequence time relation.
+
+We have now located the three uses of attention: source-to-source, target-prefix-to-target-prefix, and target-to-source. Next we connect the translation objective to the parameters that control their comparisons and contributions.
+
+**Runnable copy:** [rectangular cross-attention and source mask](examples/walkthrough/08_cross.py).
+
+### Predict or explain: A decoder has five receiving rows and the encoder has four memory rows. What are the weight/output position axes, and may the last source row be read by target row 0?
 
 <details data-practice-id="cross-check"><summary>Reveal worked answer and rubric</summary>
 
-Output has three query positions. The source key mask has length five. Queries come from tgt, keys/values from src.
+Weights have shape (B,H,5,4); output has shape (B,5,d_model) in this class. All valid source rows may be read even at target row 0, because the source was available before generation. The target query must already obey its own prefix boundary.
 
-**Rubric:** Distinguish representation role from argument order.
-
-</details>
-
-
-
-We have now covered every attention mode the final reusable class exposes. The next lesson follows that class from its arguments through the explicit and efficient execution branches.
-
-
-## Follow the reusable Attention class from call to output
-
-The earlier classes expose the progression from a single head to separate and vectorized heads. The final `Attention` class is the interface intended for the later encoder/decoder. We can now read its methods in execution order and explain every tensor transformation without treating a library call as a black box.
-
-### State the contract before the call
-
-The constructor takes `embedding_dimension`, `num_heads`, `attn_dropout`, and the keyword-only `fused_attn`. It owns four biased projections named `q_proj`, `k_proj`, `v_proj` and `out_proj`. Those names are deliberately retained for the later model code.
-
-`forward(src, tgt=None, attention_mask=None, causal=False, *, need_weights=False)` accepts floating `(B,S,D)` source vectors and optional `(B,T,D)` target/query vectors. The mask is `(B,S)` and True means an allowed key. Without target vectors it performs self-attention. With them it performs cross-attention and rejects `causal=True`.
-
-### Follow the method in six steps
-
-| Step | Actual operation | What to explain |
-| --- | --- | --- |
-| 1 | `_validate_inputs` | Shape, dtype/device/batch agreement and source-mask length |
-| 2 | `query_input = src if tgt is None else tgt` | Which sequence determines output positions |
-| 3 | Q/K/V projection, then `_heads` | Full-width affine maps and head feature grouping |
-| 4 | `_context` | Visibility, scaling, softmax/value mix and attention dropout |
-| 5 | `context.transpose(1,2).flatten(2)` | Restore query-major layout and concatenate head features |
-| 6 | `out_proj` | Mix head information at each query position |
-
-The complete frozen module is available as [attention.py](code/src/core/attention.py). The demo is a separate [top-level file](code/src/attention.py), and [the tests](code/tests/test_attention.py) show supported/rejected behavior. These are captured source copies for reading/download; the application remains owned by its project directory.
-
-### Run the three modes with one layer
-
-From the project environment, this is a complete small component example:
-
-```python
-import torch
-from core.attention import Attention
-
-torch.manual_seed(7)
-src = torch.randn(2, 5, 12)
-tgt = torch.randn(2, 3, 12)
-mask = torch.tensor([[1,1,1,0,0], [1,1,1,1,0]], dtype=torch.bool)
-layer = Attention(12, 3).eval()
-with torch.inference_mode():
-    encoded = layer(src, attention_mask=mask)
-    prefix = layer(src, attention_mask=mask, causal=True)
-    retrieved = layer(src, tgt=tgt, attention_mask=mask)
-    inspected, weights = layer(src, attention_mask=mask, need_weights=True)
-print(encoded.shape, prefix.shape)  # both torch.Size([2, 5, 12])
-print(retrieved.shape)              # torch.Size([2, 3, 12])
-print(weights.shape)                # torch.Size([2, 3, 5, 5])
-torch.testing.assert_close(encoded, inspected, atol=1e-6, rtol=1e-5)
-```
-
-This intentionally uses one layer only to inspect its API. A complete translation architecture will use separately owned modules in its encoder and decoder; these four calls do not assemble a Transformer.
-
-### Explain what “efficient path” means here
-
-With `fused_attn=True` and no request for weights, `_context` calls `torch.nn.functional.scaled_dot_product_attention`. With `fused_attn=False`, or when `need_weights=True`, it performs the score, mask, softmax and value operations explicitly. Asking for the weights therefore changes which implementation path is used, while preserving the intended numerical function when dropout is disabled.
-
-![The demo compares explicit and SDPA outputs with matched parameters.](images/15-explicit-fused-parity.png)
-
-To compare paths, initialize one layer, copy its state into the other and use identical inputs, masks and dtype. The tests compare float64 outputs and gradients with tight tolerances. The demo uses float32 and allows floating-point rounding differences. A maximum difference near `1e-7` is a numerical observation; it is not a speed measurement.
-
-The SDPA backend selects a suitable kernel for the actual device and inputs. The current CPU check does not prove that GPU FlashAttention ran, that it would be faster, or that memory use improved on another device. Keep the implementation-choice claim separate from a measured hardware result. The [PyTorch API reference](https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html) records the underlying call's semantics.
-
-### Dropout requires an explicit training-state decision
-
-Attention dropout randomly removes/rescales selected weights used to form context during training. In the explicit helper, the returned inspection weights are the normalized values before dropout. Thus a row of returned weights can sum to one even when the weights actually used for context have a different sum in that sampled call.
-
-The functional SDPA API uses the supplied dropout probability directly. Our wrapper passes `self.attn_dropout` in training mode and `0.0` in evaluation mode. Simply calling `.eval()` would not automatically rewrite an unrelated raw functional call; the wrapper's argument choice is essential.
-
-The tests use dropout probability one to make a diagnostic extreme: training context becomes zero and final output equals the output bias. In evaluation mode the same layer returns deterministic attention results. This is a test fixture, not a recommended training setting.
-
-### Choose the right observation tool
-
-Use the explicit path or `need_weights=True` when explaining scores and distributions. Use the default path when exercising the intended production-facing component interface. Preserve exact source/parameters and record what changed before comparing outputs. The [attention comparisons](project/comparisons/01-attention.md) collect these distinctions.
-
-### Predict or explain: Does fused_attn=True prove that GPU FlashAttention was used? What changes with need_weights=True?
-
-<details data-practice-id="interface-check"><summary>Reveal worked answer and rubric</summary>
-
-No. SDPA selects a backend for actual device/inputs; current evidence is CPU. Requesting weights selects the explicit calculation in this wrapper.
-
-**Rubric:** Separate code path, backend identity and measured performance.
+**Rubric:** Trace Q versus K/V origin and avoid imposing target time on source indices.
 
 </details>
 
 
 
-The forward path is clear. We next ask whether a loss can send meaningful gradients through that retrieval calculation, without pretending that one derivative check is a trained translator.
 
+## 9. How the translation error reaches attention
 
-## Follow an error backward through attention
+Q/K/V projections were chosen by hand in our worked calculation. A trained translator must learn parameters that help predict the reference translation. To see where that learning signal comes from, follow the decoder beyond attention.
 
-A component used in training needs more than plausible forward outputs. Its parameters and inputs must receive the derivatives of the chosen loss. We will derive one scalar query example, verify it with autograd and finite differences, then connect that evidence to the existing parameter-gradient tests.
+### Start with the actual task objective
 
-### Define a tiny loss and all of its inputs
+For the target row whose prefix ends in “Nous”, the desired next token is “lisons”. Let h_t be that row's final decoder representation. A vocabulary projection calculates logits `z_t = h_t W_U + b_U`, one score for each possible target token. Softmax converts those scores into a next-token distribution p_t. Cross-entropy penalizes low probability on the reference token:
 
-Use one scalar query q, keys `[1,-1]` and values `[2,6]`. Head width is one, so the scale is one. The scores are `[q,-q]`. Let a be the weight on the first key; the other weight is `1-a`:
+$$L_t=-\log p_t[\text{reference token}].$$
 
-$$a=\frac{e^q}{e^q+e^{-q}},\qquad c=2a+6(1-a)=6-4a.$$
+The derivative with respect to logits is `p_t - one_hot(reference token)`. That error flows backward through the vocabulary map, decoder computation, attention outputs, value contributions and query/key comparisons. W_Q, W_K and W_V can all receive gradients. No training file needs to say “this head should attend to source position 2”. Their selection behavior can be learned indirectly from the token-prediction objective.
 
-Choose an illustrative desired context `y=5` and half squared error `L=(c-y)^2/2`. This loss is a numerical probe for the attention computation. The eventual translation task will use vocabulary logits and token loss, not an asserted target representation of five.
+![Task loss flowing back through decoder features to attention parameters](images/27-learning-path.svg)
 
-At q=0, both scores are zero, a=0.5 and c=4. The loss is 0.5. We want the next small step to move the context upward toward five, which means placing more weight on value six and less on value two.
+This is the real-model learning path. The full translation model is not implemented locally yet. We will magnify one part of that path with a controlled objective on the gathered vector, so its derivative can be calculated completely instead of invoking a missing decoder.
 
-### Derive the query gradient in pieces
+### Isolate one retrieval error
 
-For a general softmax row, `∂a_j/∂s_l = a_j(δ_jl-a_l)`, where δ is one when indices match and zero otherwise. This follows by differentiating the exponential numerator and the shared sum denominator. It captures both effects: increasing one score changes its own numerator and every probability's denominator.
+Keep our first query, keys and values. For this derivative probe only, set a desired context `t = [2,0]`. The current context is `[1.339523,1.000000]`, so use half squared error:
 
-Here the two scores depend on q with slopes +1 and -1. Therefore:
+$$L=\tfrac12\sum_m(c_m-t_m)^2\approx0.718115.$$
 
-$$\frac{da}{dq}=a(1-a)+(-a(1-a))(-1)=2a(1-a).$$
+The error vector `r = c-t` is approximately `[-0.660477,1.000000]`. The first feature is too small and the second too large. Giving more relative weight to value `[2,0]` would help both errors. Increasing every score equally would do nothing, because the common shift cancels in softmax.
 
-At q=0 this is 0.5. Because `c=6-4a`, `dc/dq=-4×0.5=-2`. The loss slope with respect to context is `dL/dc=c-y=-1`. The chain rule multiplies the local slopes:
+We are not assigning this desired context to the translation of “We”. It is a local objective chosen to expose the mechanism by which an error changes retrieval.
 
-$$\frac{dL}{dq}=\frac{dL}{dc}\frac{dc}{dq}=(-1)(-2)=2.$$
+### Differentiate the computation, one dependency at a time
 
-A gradient tells us how the loss changes for a small increase in q. It is positive, so gradient descent decreases q. With step size 0.1, `q_new=0-0.1×2=-0.2`. The first weight becomes about 0.401312; context becomes about 4.394751 and loss about 0.183163. Moving the query in this direction raises the weight on the larger value and reduces this chosen loss.
+From the squared loss, `dL/dc = r`. Since `c = sum_j a_j v_j`, increasing weight a_j changes c in direction v_j, giving `dL/da_j = r dot v_j`.
 
-### Verify the derivative using the actual helper
+Weights are coupled by the softmax denominator. Its derivative is `da_l/ds_j = a_l(delta_lj-a_j)`, where delta_lj is one when l=j and zero otherwise. Combining the terms gives:
+
+$$\frac{\partial L}{\partial s_j}=a_j\,r\cdot(v_j-c).$$
+
+The subtraction of c accounts for redistributing weight away from the current mixture when a source score increases. It is the reason we cannot treat each weight as an independent knob.
+
+Finally, `s_j = q dot k_j / sqrt(2)`, so:
+
+$$\nabla_q L=\sum_j\frac{\partial L}{\partial s_j}\frac{k_j}{\sqrt2}
+\approx[-0.206595,0.353553].$$
+
+This gradient describes how the chosen loss changes for small query changes. Gradient descent subtracts it: increase the first query coordinate and decrease the second. The direction follows from this fixture and objective, rather than being an intrinsic property of the word or query role.
+
+### Update a shared parameter and inspect the consequence
+
+The code makes W_Q trainable and holds W_K/W_V fixed, isolating the query path. `backward()` computes the gradient; it does not update parameters. The explicit subtraction inside `no_grad()` performs the update.
 
 ```python
+import math
 import torch
-from core.attention import scaled_dot_product_attention
 
-q = torch.tensor([[[0.]]], dtype=torch.float64, requires_grad=True)
-k = torch.tensor([[[1.], [-1.]]], dtype=torch.float64)
-v = torch.tensor([[[2.], [6.]]], dtype=torch.float64, requires_grad=True)
-context, weights = scaled_dot_product_attention(q, k, v)
-loss = 0.5 * (context - 5).square().sum()
+def attend(q, k, v):
+    scores = (q @ k.transpose(-2, -1)) / math.sqrt(q.shape[-1])
+    shifted = scores - scores.max(dim=-1, keepdim=True).values
+    exponentials = torch.exp(shifted)
+    weights = exponentials / exponentials.sum(dim=-1, keepdim=True)
+    return weights @ v, weights
+
+torch.set_printoptions(precision=6, sci_mode=False)
+x = torch.tensor([[1., 0.], [0., 1.], [1., 1.], [0., 0.]], dtype=torch.float64)
+w_q = torch.eye(2, dtype=x.dtype).requires_grad_()
+w_k = torch.eye(2, dtype=x.dtype)
+w_v = 2 * torch.eye(2, dtype=x.dtype)
+target = torch.tensor([[2., 0.]], dtype=x.dtype)
+
+q = x[:1] @ w_q
+k, v = x @ w_k, x @ w_v
+context, weights = attend(q, k, v)
+loss = 0.5 * ((context - target) ** 2).sum()
 loss.backward()
-print(context.item(), loss.item())  # 4.0, 0.5
-print(q.grad.item())               # 2.0
-print(v.grad.flatten().tolist())   # [-0.5, -0.5]
+
+print(context.detach())
+print(loss.item())
+print(w_q.grad)
+
+with torch.no_grad():
+    new_w_q = w_q - 0.1 * w_q.grad
+    new_context, new_weights = attend(x[:1] @ new_w_q, k, v)
+    new_loss = 0.5 * ((new_context - target) ** 2).sum()
+
+print(new_context)
+print(new_loss.item())
+assert new_loss < loss.detach()
 ```
 
-The value gradients follow directly: each value contributes to c with coefficient 0.5, so its loss derivative is `(-1)×0.5=-0.5`. Both values could move upward to improve this toy loss. In this particular zero-query fixture, some other gradients can be zero for a legitimate mathematical reason. “All gradients must be nonzero” is not a general correctness criterion.
+Input row 0 is `[1,0]`, so it selects W_Q's first row. That row receives gradient `[-0.206595,0.353553]`; the second row receives zero in this one-query probe. A rate of 0.1 changes the query to about `[1.020660,-0.035355]`, the context to `[1.345969,0.987501]`, and the probe loss to `0.701457`.
 
-![Gradient flow through the attention module and its learned projections.](images/16-gradient-flow.png)
+In a full training step, gradients from many target positions and examples accumulate into shared parameter matrices before the optimizer update. A later example calculates new attention weights with the updated parameters. Attention weights are intermediate results, not parameters that the optimizer directly stores for each token pair.
 
-### Check the slope independently of the backward program
+The local loss decrease verifies this derivative path. Translation quality requires the actual token objective, complete model, data, repeated updates and held-out evaluation. We can now read the reusable class knowing both what its forward pass computes and how its parameters could receive a task signal.
 
-For a small ε, estimate the derivative with central differences: `[L(q+ε)-L(q-ε)]/(2ε)`. Using ε=`1e-6` around zero gives approximately 2. This calculation reevaluates forward losses instead of using the graph's backward rule, so it can detect a plausible incorrect gradient implementation.
+**Runnable copy:** [one query-projection update](examples/walkthrough/09_gradient.py).
 
-Too small an ε can amplify floating-point cancellation; too large an ε measures curvature over a wider interval. Use float64 and compare within a declared tolerance. A finite-difference agreement at one point is bounded evidence, so retain other fixtures rather than declaring every shape or dtype correct.
-
-### Connect the probe to learned parameters
-
-In the public module, Q/K/V depend on affine weights. For one row, `q=xW_Q+b_Q` in the displayed convention. The chain rule sends the query gradient through that map to x, W and b; shared parameter contributions from multiple positions/examples accumulate. Output projection, value mixing and the score path each contribute their own derivative routes.
-
-The existing tests create explicit and SDPA layers with identical parameters, calculate the same squared-output objective, call backward, and compare input and parameter gradients. Cross-attention also checks target-query input gradients. Combined with PyTorch's independent forward reference and analytic probes, this is stronger than checking that `.backward()` merely returns without raising an exception.
-
-No optimizer, real translation dataset, training loop or translation-quality experiment is implemented by this tutorial. The q update above is an isolated arithmetic check. It explains why a learnable attention module can receive a useful update; it does not establish that a full model has learned a language.
-
-### Predict or explain: At q=0 with keys [1,-1], values [2,6] and desired context five, which query direction decreases half squared error?
+### Predict or explain: Does translation training need a hand-written desired context vector or an attention-map label?
 
 <details data-practice-id="gradient-check"><summary>Reveal worked answer and rubric</summary>
 
-Decrease q: c=4, dL/dq=2, so gradient descent moves q negative and increases weight on value six. A step of 0.1 gives q=-0.2.
+Ordinary next-token training uses reference token labels. Cross-entropy gradients flow from vocabulary logits through decoder representations into attention parameters. The course’s [2,0] desired context is an isolated derivative probe. A decrease in that probe loss does not establish useful translation.
 
-**Rubric:** Explain all three slopes and separate this probe from real translation training.
+**Rubric:** Connect actual task supervision to shared projections and distinguish the local probe objective.
 
 </details>
 
 
 
-The final lesson gathers the evidence and states the exact next data-phase handoff, keeping mathematical understanding, source correctness and task performance distinct.
 
+## 10. Trace one call through the actual project implementation
 
-## Explain what works and prepare the next implementation
+The small programs exposed the attention calculation. The actual module adds a reusable interface: it validates input, owns projections, arranges heads, builds masks, selects an execution path and applies the output projection. Read it as that sequence of responsibilities.
 
-We can now follow an input through projections, head layout, scores, masks, normalized weights, retrieved values, concatenation and output projection. We can also explain a backward example. This completes the tutorial's current component scope. It does not fill the project's later placeholder files.
+The source is `src/core/attention.py`. We will run `layer(src, need_weights=True)` with `src` shaped `(1,4,2)`, one head, identity query/key/output maps, doubled value map and zero biases. Those settings must reproduce the four context rows already derived.
 
-### Use each check for the claim it can support
+### First follow the data, before the complete source
 
-| Evidence | What it checks | What it does not establish |
+Calling an `nn.Module` runs its `forward` through PyTorch's module machinery. In this class, that forward call takes the following path:
+
+| Stage | Actual owner | Data and consequence in this call |
 | --- | --- | --- |
-| Hand-calculated weighted average and raw-X example | Known numerical forward results | Learned word meaning |
-| Projection and matrix fixtures | Q/K/V orientation, bias, scores, context and head merge | Real-data generalization |
-| PyTorch MultiheadAttention comparison | A separate implementation gives matching outputs/weights with mapped parameters | Full encoder/decoder correctness |
-| Explicit/SDPA forward and gradient parity | Selected paths agree for exercised cases | GPU speed or universal bitwise equality |
-| Padding and future perturbations | Forbidden positions cannot affect protected outputs in those cases | Correct future data splitting or label alignment |
-| Entirely blocked and dropout tests | Defined edge behavior, finite gradients and train/eval distinction | Arbitrary malformed-input safety |
-| 35 existing tests and runnable demo | Current local component is executable and checked | Trained translation quality or learner mastery |
+| Validate | `_validate_inputs`, `_sequence` | Require a floating-point `(batch,nonempty sequence,2)` src. A supplied tgt must share batch, dtype and device; source validity must match src's first two axes. |
+| Choose receiver | `Attention.forward` | No tgt was supplied, so `query_input = src`. With tgt supplied, only the query origin changes. |
+| Project | `q_proj`, `k_proj`, `v_proj` | Produce Q=X, K=X, V=2X, each `(1,4,2)` here. The actual layers also own biases. |
+| Arrange heads | `_heads` | Reshape then transpose each projection to `(1,1,4,2)`: batch, head, position, feature. Position 0's query stays `[1,0]`. |
+| Build availability | `_context` → `make_attention_mask` | Neither padding nor causality was supplied, so the mask is None. Every query may read every key. |
+| Calculate | `_context` → `scaled_dot_product_attention` | Requesting weights chooses the explicit path. Scores/weights have shape `(1,1,4,4)`; context has `(1,1,4,2)`. |
+| Rejoin | `Attention.forward` | Transpose to put positions before heads, then flatten head features. Shape returns to `(1,4,2)`. |
+| Output map | `out_proj` | Apply the identity output map and zero bias. Return output plus weights because they were requested. |
 
-The code has been reorganized by responsibility; the attention module's numerical implementation and demo outputs are unchanged. Its captured source and [reference-run evidence](project/reference-runs.md) let us distinguish an existing application capability from a new authored explanation. The Colab runner's operational cells are verified locally; actual hosted execution is recorded separately from the attention tests and demo.
+Follow just output `[0,0]`: the first query `[1,0]` scores the four keys, obtains `[0.334881,0.165119,0.334881,0.165119]`, gathers `[1.339523,1.000000]`, and passes through the identity output map unchanged. The class is packaging the calculation we already understand.
 
-### Draw the implemented computation without file-name memorization
+### Follow a second call with a different information boundary
 
-Start with `(B,S,D)` floating source vectors and optional `(B,T,D)` target vectors. Identify the query input. Apply separate Q/K/V projections; split D into H heads of width d. Draw score rows as queries and columns as keys, mark allowed pairs, normalize along keys, multiply values, reassemble query-major head features, and apply the output projection.
+With source validity `[True,True,True,False]`, `make_attention_mask` expands the source key row to `(B,1,1,S)`. Broadcasting shares that rule across heads and receivers. A causal self-attention request additionally supplies a `(1,1,T,S)` lower triangle; AND combines the restrictions.
 
-Then change one condition. If a source pad vector changes, which outputs must remain fixed? If a future target input changes, which causal outputs are protected? If only V changes, should the attention weights move? If all keys are blocked, why can the final output still be the output bias? These changed cases reveal whether the computation is understood more clearly than reciting class names.
+With tgt supplied, Q has tgt's position count while K/V retain src's position count. The output follows tgt. The class rejects causal cross-attention rather than interpreting a self-attention triangle as a relation between unrelated source and target indices.
 
-The [explanation practice](practice/explain-attention.md), [attention learning points](project/learning-points/01-attention.md) and [comparison record](project/comparisons/01-attention.md) provide worked answers and useful distinctions. No response is recorded as a learner assessment.
+These branches explain the API arguments. `src` is memory, `tgt` optionally supplies receivers, `attention_mask` describes valid source keys, and `causal` restricts self-attention's target-time information flow.
 
-### Part 2 will define real text before model expansion
+### Understand the explicit and library paths
 
-The next implementation works in `src/tokenizer.py`, `src/prepare_data.py` and the package's tokenizer/data modules. Its first contract is one English/French pair transformed into reproducible integer sequences and a batch. Before acquisition, decide the official dataset/subset, license and split authority; pin its revision and record content identities. Fit a newly trained tokenizer only on the allowed training text and save its vocabulary/config identity.
+The explicit helper computes scores, replaces disallowed entries, handles empty rows, applies softmax and gathers V. It returns weights from **before dropout**. During training, context uses dropped-and-rescaled weights, so the gathered result need not remain a convex average even though returned inspection weights sum to one on valid rows.
 
-For an illustrative target `[BOS, je, bois, EOS]`, a conventional shifted example uses decoder input `[BOS, je, bois]` and labels `[je, bois, EOS]`. The labels are what each query position should predict. Padding needs both key-validity masks and a separate ignored-label rule. Record special token IDs and truncation/empty-example policy explicitly. These examples define questions for Part 2; they are not acquired token IDs or implemented collation results.
+The optional PyTorch `F.scaled_dot_product_attention` path computes the same operation through a library implementation. `need_weights=True` forces the explicit branch so those intermediate weights can be inspected. Without a padding mask, the library can apply a causal rule internally; with padding, the code builds the combined mask. Evaluation explicitly passes dropout probability zero to the library. [PyTorch SDPA interface](https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html).
 
-We will compare an actual pair before and after tokenization, print input/label rows beside each other, check masks and show which targets count in the loss. Source/target tokenizers have distinct identities in the planned video-following route. A sentence-length or vocabulary setting in a draft JSON file does not settle the data contract.
+To compare the paths, copy the **same parameters** into both layers and use the same inputs, mask, dtype and evaluation mode. Two independently randomized layers are different functions and are not a useful parity check. The program below performs the controlled comparison on CPU; it does not measure GPU speed.
 
-### Part 3 will assemble and train a complete model
+### Complete exact definitions and executable call
 
-Only after data and batch contracts are implemented will the later phase add token embeddings, positions, residual paths, normalization, feed-forward blocks, encoder/decoder stacks and a vocabulary prediction head. The attention module becomes one ingredient in that architecture.
+Every project helper called by `Attention` is included below, in dependency order. `_dimensions` checks constructor head widths; the other helpers implement the call path above. This complete source is available here so the walkthrough does not depend on an unseen notebook cell or import from a missing file.
 
-Training will need a token-loss denominator, optimizer/schedule, bounded profiles, explicit new/resume modes and persistent full-state checkpoint generations. Inference will need a start token, stopping rule and generation loop; evaluation will need a fixed held-out protocol and clearly configured BLEU. The current config files and Colab instructions describe intended work, not measured training/recovery capability.
+```python
+from __future__ import annotations
 
-### Keep the completion states separate
+import torch
+from torch import Tensor, nn
+from torch.nn import functional as F
 
-The [readiness record](project/readiness.md) marks setup and attention software checks as available, with learner review still open. Dataset/tokenizer, full model/training, translation metrics and actual Colab deleted-runtime recovery remain pending. We add those lessons when the corresponding implementation and evidence exist.
+def _dimensions(embed_dim: int, num_heads: int) -> int:
+    """Check that equal-width heads fit the embedding and return head width."""
+    if embed_dim <= 0 or num_heads <= 0 or embed_dim % num_heads:
+        raise ValueError("embedding dimension must be positive and divisible by num_heads")
+    return embed_dim // num_heads
 
-This preserves a useful next action: review one complete attention trace now, then begin the data contract when moving to implementation. There is no need to recreate the project or restart a general Python course.
+def _sequence(x: Tensor, embed_dim: int, name: str) -> None:
+    """Validate a floating-point (batch, sequence, embedding) tensor."""
+    if x.ndim != 3 or x.shape[-1] != embed_dim or x.shape[1] == 0:
+        raise ValueError(f"{name} must have shape (batch, nonempty sequence, {embed_dim})")
+    if not x.is_floating_point():
+        raise TypeError(f"{name} must contain floating-point embeddings")
 
-### Predict or explain: Do passing attention tests establish a trained translator or a completed learner review?
+def make_attention_mask(
+    attention_mask: Tensor | None,
+    query_length: int,
+    key_length: int,
+    *,
+    causal: bool = False,
+    device: torch.device | str | None = None,
+) -> Tensor | None:
+    """Build the allowed query-key pairs from padding and causal constraints.
+
+    attention_mask has shape (batch, keys), with True/1 for valid source keys.
+    Padding produces a (batch, 1, 1, keys) mask that broadcasts across heads
+    and queries. Causality combines it with a lower triangle, so query i can
+    read only keys j <= i. The query and key lengths must then be equal.
+
+    Return None when neither constraint is present. A padding mask excludes
+    key columns; it does not zero the outputs of padded query positions.
+    """
+    allowed = None
+    if attention_mask is not None:
+        if attention_mask.ndim != 2 or attention_mask.shape[1] != key_length:
+            raise ValueError("attention_mask must have shape (batch, source sequence)")
+        if attention_mask.dtype != torch.bool:
+            if not torch.all((attention_mask == 0) | (attention_mask == 1)):
+                raise ValueError("attention_mask values must be boolean or 0/1")
+        if device is None:
+            device = attention_mask.device
+        allowed = attention_mask.to(device=device, dtype=torch.bool)[:, None, None, :]
+    if causal:
+        if query_length != key_length:
+            raise ValueError("causal attention requires self-attention with equal lengths")
+        triangle = torch.ones(query_length, key_length, dtype=torch.bool, device=device).tril()
+        triangle = triangle[None, None, :, :]
+        allowed = triangle if allowed is None else allowed & triangle
+    return allowed
+
+def scaled_dot_product_attention(
+    q: Tensor,
+    k: Tensor,
+    v: Tensor,
+    attention_mask: Tensor | None = None,
+    *,
+    dropout_p: float = 0.0,
+    training: bool = False,
+) -> tuple[Tensor, Tensor]:
+    """Compute softmax(Q K^T / sqrt(head_dim)) V and return context and weights.
+
+    q has shape (..., queries, head_dim), k has (..., keys, head_dim), and
+    v has (..., keys, value_dim). The result has (..., queries, value_dim)
+    shape; weights have (..., queries, keys) shape.
+
+    The boolean mask must broadcast to the scores, with True for allowed
+    pairs. Softmax runs across keys. Fully blocked rows produce zero weights
+    and context. Returned weights are before dropout, so valid rows sum to
+    one even when dropout is applied to the weights used for the context.
+    """
+    scores = (q @ k.transpose(-2, -1)) * q.shape[-1] ** -0.5
+    has_keys = None
+    if attention_mask is not None:
+        scores = scores.masked_fill(~attention_mask, float("-inf"))
+        has_keys = attention_mask.any(dim=-1, keepdim=True)
+        # softmax([-inf, ...]) is undefined. Replace only fully blocked rows.
+        scores = torch.where(has_keys, scores, 0.0)
+    weights = scores.softmax(dim=-1)
+    if has_keys is not None:
+        weights = torch.where(has_keys, weights, 0.0)
+    context = F.dropout(weights, p=dropout_p, training=training) @ v
+    return context, weights
+
+def _heads(x: Tensor, num_heads: int, head_dim: int) -> Tensor:
+    """Split (batch, sequence, embedding) into (batch, heads, sequence, width)."""
+    batch, length, _ = x.shape
+    return x.reshape(batch, length, num_heads, head_dim).transpose(1, 2)
+
+def _context(
+    q: Tensor, k: Tensor, v: Tensor, attention_mask: Tensor | None,
+    *, causal: bool, dropout_p: float, training: bool,
+    fused_attn: bool, need_weights: bool,
+) -> tuple[Tensor, Tensor | None]:
+    """Select SDPA or explicit attention with the same masking and dropout rules.
+
+    Requesting weights selects the explicit path. SDPA handles a causal mask
+    internally when no padding mask is present; otherwise combine the masks
+    before the call. Dropout applies only during training.
+    """
+    mask = make_attention_mask(
+        attention_mask, q.shape[-2], k.shape[-2],
+        # SDPA can build its own causal mask when there is no padding mask.
+        causal=causal and not (fused_attn and not need_weights and attention_mask is None),
+        device=q.device,
+    )
+    if fused_attn and not need_weights:
+        context = F.scaled_dot_product_attention(
+            q, k, v, attn_mask=mask,
+            dropout_p=dropout_p if training else 0.0,
+            is_causal=causal and attention_mask is None,
+        )
+        return context, None
+    return scaled_dot_product_attention(q, k, v, mask, dropout_p=dropout_p, training=training)
+
+def _validate_inputs(src, tgt, attention_mask, embed_dim):
+    """Check embedding shapes, matching batches/devices/dtypes and source mask."""
+    _sequence(src, embed_dim, "src")
+    if tgt is not None:
+        _sequence(tgt, embed_dim, "tgt")
+        if tgt.shape[0] != src.shape[0] or tgt.dtype != src.dtype or tgt.device != src.device:
+            raise ValueError("src and tgt must share batch size, dtype and device")
+    if attention_mask is not None and attention_mask.shape != src.shape[:2]:
+        raise ValueError("attention_mask must have shape (batch, source sequence)")
+
+class Attention(nn.Module):
+    """Multi-head attention supporting self-attention and cross-attention.
+
+    src: (batch, source length, embedding_dimension)
+    tgt: optional (batch, target length, embedding_dimension)
+    attention_mask: optional (batch, source length), True/1 = allowed key
+
+    Without tgt, all three projections use src. With tgt, queries come from
+    tgt and keys/values come from src, so output length follows tgt. Split
+    each projection into equal-width heads, compute attention, concatenate
+    the head contexts and apply out_proj to mix them.
+
+    causal=True applies only to self-attention. Padding masks always refer
+    to source keys, with True/1 meaning allowed. The default fused path uses
+    PyTorch SDPA; fused_attn=False computes scores and weights explicitly.
+    Dropout applies only during training. need_weights=True uses the explicit
+    path and returns (output, weights), with weights shaped
+    (batch, heads, query_length, source_length).
+    """
+
+    def __init__(self, embedding_dimension=768, num_heads=12, attn_dropout=0.0,
+                 *, fused_attn=True):
+        super().__init__()
+        self.head_dim = _dimensions(embedding_dimension, num_heads)
+        if not 0 <= attn_dropout <= 1:
+            raise ValueError("attn_dropout must lie between zero and one")
+        self.embedding_dimension = embedding_dimension
+        self.num_heads, self.attn_dropout = num_heads, attn_dropout
+        self.fused_attn = fused_attn
+        self.q_proj = nn.Linear(embedding_dimension, embedding_dimension)
+        self.k_proj = nn.Linear(embedding_dimension, embedding_dimension)
+        self.v_proj = nn.Linear(embedding_dimension, embedding_dimension)
+        self.out_proj = nn.Linear(embedding_dimension, embedding_dimension)
+
+    def forward(self, src, tgt=None, attention_mask=None, causal=False, *, need_weights=False):
+        _validate_inputs(src, tgt, attention_mask, self.embedding_dimension)
+        if tgt is not None and causal:
+            raise ValueError("causal masking is only supported for self-attention")
+        query_input = src if tgt is None else tgt
+        q = _heads(self.q_proj(query_input), self.num_heads, self.head_dim)
+        k = _heads(self.k_proj(src), self.num_heads, self.head_dim)
+        v = _heads(self.v_proj(src), self.num_heads, self.head_dim)
+        context, weights = _context(
+            q, k, v, attention_mask, causal=causal,
+            dropout_p=self.attn_dropout, training=self.training,
+            fused_attn=self.fused_attn, need_weights=need_weights,
+        )
+        output = self.out_proj(context.transpose(1, 2).flatten(2))
+        return (output, weights) if need_weights else output
+
+# Reproduce the same one-head example through the actual project class.
+torch.set_printoptions(precision=6, sci_mode=False)
+src = torch.tensor([[[1., 0.], [0., 1.], [1., 1.], [0., 0.]]], dtype=torch.float64)
+layer = Attention(embedding_dimension=2, num_heads=1, fused_attn=False).double()
+with torch.no_grad():
+    layer.q_proj.weight.copy_(torch.eye(2, dtype=src.dtype))
+    layer.k_proj.weight.copy_(torch.eye(2, dtype=src.dtype))
+    layer.v_proj.weight.copy_(2 * torch.eye(2, dtype=src.dtype))
+    layer.out_proj.weight.copy_(torch.eye(2, dtype=src.dtype))
+    for projection in [layer.q_proj, layer.k_proj, layer.v_proj, layer.out_proj]:
+        projection.bias.zero_()
+layer.eval()
+output, weights = layer(src, need_weights=True)
+print(output[0])
+
+fast_layer = Attention(embedding_dimension=2, num_heads=1, fused_attn=True).double()
+fast_layer.load_state_dict(layer.state_dict())
+fast_layer.eval()
+fast_output = fast_layer(src)
+assert torch.allclose(fast_output, output, atol=1e-12, rtol=1e-12)
+```
+
+The output is:
+
+```text
+[[1.339523, 1.000000],
+ [1.000000, 1.339523],
+ [1.339523, 1.339523],
+ [1.000000, 1.000000]]
+```
+
+The final assertion compares the optimized call with this explicit result using the same state. The definitions are checked against the actual project source by syntax tree, not merely by their names.
+
+For an all-blocked request, the helper returns zero gathered context. The later biased `out_proj` can still return its bias. Likewise a key mask does not delete padded query rows. These outcomes follow from where each responsibility sits in the call path.
+
+**Runnable copy:** [complete actual class and controlled execution](examples/walkthrough/10_interface.py). The [captured source](evidence/attention-source.txt) records the inspected implementation.
+
+### Predict or explain: The class is configured with fused_attn=True, but the call requests need_weights=True. Which path runs, and what must be matched to compare paths?
+
+<details data-practice-id="interface-check"><summary>Reveal worked answer and rubric</summary>
+
+Requesting weights selects the explicit helper. A valid comparison copies the same parameters and fixes input, masks, dtype and evaluation mode. Evaluation supplies zero dropout to the library path. Two random layer initializations are not the same function.
+
+**Rubric:** Follow the actual branch condition and identify controlled comparison inputs.
+
+</details>
+
+
+
+
+## 11. Put attention back into the Transformer
+
+We began with an English sentence and a decoder that must generate its French translation using the source and an available target prefix. We can now name the three information-sharing operations in that system and trace their outputs.
+
+| Location | Receiver Q | Available K/V | Information boundary |
+| --- | --- | --- | --- |
+| Encoder self-attention | Source representations entering the layer | The same source representations | All real source tokens are available |
+| Decoder self-attention | Target representations entering the layer | The same target representations | Real target-prefix tokens through the current input position |
+| Decoder cross-attention | Decoder states after its preceding sublayer | Final encoder memory | All real source tokens, regardless of target index |
+
+The formula is shared, but vector origin and allowed connections determine its role. Describing a matrix only as “attention” without identifying those two facts leaves the important part unexplained.
+
+### The surrounding network still has work to do
+
+In the original 2017 Transformer, token embeddings and positional encodings enter stacked encoder/decoder layers. Encoder layers have self-attention and a position-wise feed-forward network. Decoder layers have causal self-attention, encoder–decoder attention and a position-wise feed-forward network. Sublayers use residual addition followed by LayerNorm in the original post-norm design. The final decoder representations pass through a vocabulary projection to predict the next token. [Paper, sections 3.1–3.5](https://arxiv.org/html/1706.03762v7).
+
+Residual addition preserves a direct path for the receiving row alongside its computed update. The feed-forward network transforms features within each row; it does not replace attention's cross-position communication. Positional encodings supply order information that unrestricted attention alone lacks. LayerNorm controls per-row feature normalization. Those responsibilities make attention useful inside a model rather than turning the weighted-sum function into a complete translator.
+
+The title “Attention Is All You Need” describes the paper's replacement of recurrent/convolutional sequence mixing. It does not mean that embeddings, positions, feed-forward layers, residuals, normalization, output predictions or training objectives disappear.
+
+### What each construction actually resolved
+
+An independent row function had no neighbor-to-output path. A weighted sum created such a path. Query/key projections made the weights depend on current receiving and source representations; the value projection chose what traveled. Matrix multiplication retained one result per receiver. Heads allowed different projected feature groups to use different distributions. Padding and causal masks removed invalid information paths. Cross-attention connected decoder receivers to source memory. A loss supplied gradients to the shared parameters.
+
+These are the reasons for the operations, not just their execution order. To explain a layer, start from its input ownership and allowed information, then follow a score, a normalized contribution and an output row.
+
+### The exact local implementation boundary
+
+The existing project contains the attention module, its demo, CPU checks and a Colab execution notebook. The ten standalone programs in this course make the arithmetic and parameter behavior inspectable. They do not supply a tokenizer, training corpus, complete Transformer, translation trainer or measured translation quality.
+
+The next implementation phase must establish actual source/target tokenization and batches: dataset/split identity, special tokens, input/label shift, source-key validity and target-loss exclusion. After that come the full model, training, decoding, evaluation and persistent recovery. Actual hosted execution remains a separate check.
+
+The conceptual attention route ends here. The following setup page is a run/reference page. The [project return page](project/implementation.md), [learning points](project/learning-points/01-attention.md), [comparison review](project/comparisons/01-attention.md), [optional review questions](practice/explain-attention.md), [readiness](project/readiness.md) and [source/check record](project/reference-runs.md) support a return visit. The [whole-course teaching review](project/teaching-review.md) explains why this route was rebuilt.
+
+The previous Attention videos were removed from this tutorial and its project notes at the learner's request on 26 October 2026. This rewritten explanation is available for review; technical verification does not establish its teaching acceptance or the learner's understanding.
+
+### Predict or explain: Why does the Transformer retain a position-wise feed-forward layer after adding attention, and where does order come from?
 
 <details data-practice-id="handoff-check"><summary>Reveal worked answer and rubric</summary>
 
-No. They establish exercised local component properties. Tokenizer/data, full model/training/evaluation and actual human explanations remain separate evidence.
+Attention shares information between permitted positions. The feed-forward layer applies a nonlinear feature transformation within each row, while residual/norm sublayers organize updates. Positional input supplies order information that unrestricted attention alone lacks. These components have distinct responsibilities.
 
-**Rubric:** Name at least one missing implementation artifact and one missing evidence class.
+**Rubric:** Explain the separate operations in the architecture rather than treating attention as the complete model.
 
 </details>
 
 
 
-### Source and review downloads
 
-The [captured source bundle](code/source-bundle.json) contains exact UTF-8 file contents and hashes for the implementation, tests, notebook, lock and honest later placeholders. Its [file hashes](code/source-manifest.json) identify each captured file. Save that JSON file and the [restoration helper](examples/restore_source.py) into the same folder, then run `python restore_source.py /path/to/a/new-directory` there to restore a runnable project. The helper refuses an existing destination and verifies every hash before writing. Do not restore over a working project. The [drawing module](code/src/utils/attention_visuals.py) is available separately.
+## Reference — run and inspect the existing attention project
 
-Review: [setup learning points](project/learning-points/00-setup.md), [attention learning points](project/learning-points/01-attention.md), [setup comparisons](project/comparisons/00-setup.md), [attention comparisons](project/comparisons/01-attention.md), [implementation](project/implementation.md), [reference runs](project/reference-runs.md), [readiness](project/readiness.md), [practice](practice/explain-attention.md), [source research](research.md), [arithmetic probe](examples/arithmetic.py) and [component probe](examples/verify_component.py).
+Use this page when you want to execute the calculation from [the first lesson](lessons/01-weighted-information.md). The conceptual route is readable without environment setup.
+
+### Run the implemented component and all existing checks
+
+```bash
+cd /mnt/projects/ai/ai_projects/projects/transformer-labs/attention-is-all-you-need
+uv sync --frozen --extra notebook
+uv run --frozen python src/attention.py
+uv run --frozen --extra notebook pytest -q
+```
+
+The project is an existing ordinary folder tracked by `ai_projects`. `uv sync --frozen` uses its lockfile rather than resolving a new dependency set. The notebook extra supplies the visualization dependencies so the full set includes all 25 attention and 10 visualization-maths cases. A skipped visualization module does not check those ten cases.
+
+The locked environment uses Python 3.12.13 and CPU PyTorch 2.14.1. A GPU being installed does not change the selected runtime. This command runs a component demo, not a translator.
+
+### Run one complete teaching program
+
+The ten displayed Python programs include their own imports, inputs and called helper definitions. The local copies live in `docs/tutorial-assets/walkthrough/`:
+
+```bash
+uv run --frozen python docs/tutorial-assets/walkthrough/01_weighted.py
+uv run --frozen python docs/tutorial-assets/walkthrough/10_interface.py
+```
+
+The first prints the weighted contributions and context `[1.5,1]`. The last reproduces the all-position attention result through the complete actual class and checks its explicit/library paths.
+
+For an exported tutorial package, [the restore script](examples/restore_source.py) rebuilds the captured project described by [the source bundle](code/source-bundle.json). From the tutorial package root:
+
+```bash
+python3 examples/restore_source.py restored-project
+uv run --project restored-project --frozen python examples/walkthrough/01_weighted.py
+```
+
+### Find the owner of a behavior
+
+| Location | Responsibility |
+| --- | --- |
+| `src/core/attention.py` | Actual attention formula, projections, head layout, masks and interface |
+| `src/attention.py` | Runnable component demo; also available as `attention-demo` |
+| `src/utils/attention_visuals.py` | Original matrix examples and display helpers |
+| `tests/test_attention.py` | Values, gradients, masks, interface and independent PyTorch-reference checks |
+| `tests/test_attention_visuals.py` | Known answers for numerical visualization fixtures |
+| `notebooks/attention_colab.ipynb` | Source upload/verification, locked environment, demo/tests and downloadable logs |
+
+Runnable scripts live directly under src; reusable groups are `core`, `data`, `training` and `utils`. The tokenizer/data/model/trainer/checkpoint destinations are placeholders for later implementation. An empty named script exiting successfully does not establish that its advertised model action exists.
+
+### Interpret the demo output
+
+The demo uses a fixed seed and prints weighted sums, head calculations, causal weights and cross-attention. Its random-parameter encoder/decoder outputs have shape `(3,5,9)` and cross-attention has `(3,7,9)`. Printed vectors are feature activations, not translated words. Path-agreement checks compare identical computations; they do not measure translation quality or hardware speed.
+
+### Use the existing Colab runner
+
+Upload `notebooks/attention_colab.ipynb` into [Google Colab](https://colab.research.google.com/) and follow its source-archive/manifest upload instructions. Matching local exports live in workspace `.ai/exports/attention-is-all-you-need/`. Its six operational code cells verify files, extract source, install the locked runtime, record versions, run the demo/tests and download logs. The notebook kernel coordinates subprocesses rather than silently substituting Colab's preinstalled PyTorch.
+
+Previous checks exercised those operational cells locally with a simulated Colab file interface. Actual Google-hosted execution and recovery after runtime deletion remain unverified.
+
+### Diagnose a failure at the responsible boundary
+
+If torch cannot import, inspect the selected project environment. If the package cannot import, check the working directory and installation. If dimensions fail, use the tensor contracts in chapters 3 and 10. If a numerical assertion fails, trace the intermediate inputs and operation before changing expected values. Do not treat a successful setup command as a training result.
+
+The [reference record](project/reference-runs.md) identifies author checks, including [independent scalar arithmetic](examples/arithmetic.py) and [actual-component probes](examples/verify_component.py). The [setup learning points](project/learning-points/00-setup.md) and [setup comparisons](project/comparisons/00-setup.md) remain available for environment review. These optional checks support the written route; they are not prerequisite lessons.
+
+### Predict or explain: The demo and 35 tests pass. What has been checked, and what would still be needed to claim translation quality?
+
+<details data-practice-id="setup-check"><summary>Reveal worked answer and rubric</summary>
+
+Those runs check the implemented component, known arithmetic and exercised interfaces. Translation quality needs actual tokenizer/data, full encoder/decoder, trained parameters, decoding and fixed evaluation. A placeholder script exiting successfully or local Colab simulation supplies none of those results.
+
+**Rubric:** Separate component evidence from task execution and held-out evaluation.
+
+</details>
+
+
 
 
 ## Evidence and proof limits
@@ -961,5 +1331,10 @@ Review: [setup learning points](project/learning-points/00-setup.md), [attention
 - [Existing independent attention checks](evidence/attention-tests.txt) — captured excerpt SHA256 ff43f76756f3eea31019082fd26c80e345633fe835655de18a56dd093c833758
 - [Original matrix fixtures and drawing code](evidence/visual-source.txt) — captured excerpt SHA256 bf17257e3ef4978248f2ac2783b482527643a6c2aa6c17ed2eefaaf7bdb37af9
 - [Known answers for visual examples](evidence/visual-tests.txt) — captured excerpt SHA256 c66b0dabce011a15edea61fac60332315ba9fea952d966adc21e470e87267efb
-- [Attention Is All You Need, v7](https://arxiv.org/html/1706.03762v7) — Sections 3.2.1-3.2.3; component mathematics and roles; checked 2026-10-23
+- [Attention Is All You Need, v7](https://arxiv.org/html/1706.03762v7) — Sections 1–4: motivation, architecture, attention roles, positions and complexity; checked 2026-10-26
 - [PyTorch 2.14 SDPA API](https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html) — Mask semantics, dropout argument and backend selection; checked 2026-10-23
+- [The Illustrated Transformer — Jay Alammar](https://jalammar.github.io/illustrated-transformer/) — High-level model, tensors, scalar/matrix attention, heads, decoder and training; editorial comparison only; checked 2026-10-26
+- [The Annotated Transformer — Harvard NLP, inspected 2018 version](https://nlp.seas.harvard.edu/2018/04/03/attention.html) — Model Architecture, Attention, Applications of Attention, Training and decoding; historical implementation, not current install instructions; checked 2026-10-26
+- [Dive into Deep Learning — Q/K/V](https://d2l.ai/chapter_attention-mechanisms-and-transformers/queries-keys-values.html) — Attention pooling roles and visualization; editorial comparison; checked 2026-10-26
+- [Dive into Deep Learning — Bahdanau attention](https://d2l.ai/chapter_attention-mechanisms-and-transformers/bahdanau-attention.html) — Encoder/decoder bottleneck and adaptive source retrieval; editorial comparison; checked 2026-10-26
+- [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/abs/1409.0473) — Abstract and proposed source retrieval versus fixed-length source representation; checked 2026-10-26

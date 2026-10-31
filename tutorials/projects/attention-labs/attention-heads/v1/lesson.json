@@ -79,8 +79,8 @@
   ],
   "slug": "attention-heads",
   "revision": "v1",
-  "title": "Attention heads: multi-head attention and tensor layouts",
-  "question": "How do independent heads combine, and how can a packed tensor compute the same result?",
+  "title": "Attention heads: MHA, MQA, GQA and MLA",
+  "question": "How do independent, shared, grouped and latent key/value representations change retrieval and retained state?",
   "topic_kind": "concept",
   "level": "intermediate",
   "prerequisites": [
@@ -104,22 +104,46 @@
     {
       "id": "boundary",
       "text": "3. Keep head arrangements separate from other attention choices"
+    },
+    {
+      "id": "mqa-patterns",
+      "text": "Explain why shared keys/values can yield different query-head distributions."
+    },
+    {
+      "id": "mqa-memory",
+      "text": "Derive MQA parameter/cache counts and distinguish sharing from an equivalent MHA conversion."
+    },
+    {
+      "id": "gqa-map",
+      "text": "Construct and test the query-to-KV mapping and cache dimensions."
+    },
+    {
+      "id": "gqa-conversion",
+      "text": "Separate equivalent grouped execution from checkpoint conversion and quality claims."
+    },
+    {
+      "id": "mla-absorb",
+      "text": "Trace a latent score/value factorization without changing logits."
+    },
+    {
+      "id": "mla-position",
+      "text": "Count decoupled positional state and preserve absolute positions."
     }
   ],
   "sources": [
     {
       "id": "lecture-8-video",
       "kind": "external",
-      "title": "Vizuara \u00b7 The Attention Family \u00b7 Lecture 8 \u00b7 video",
+      "title": "Vizuara · The Attention Family · Lecture 8 · video",
       "url": "https://www.youtube.com/watch?v=IOmg660SvmM",
       "accessed_at": "2026-10-30",
-      "locator": "Video page/description and full English automatic caption text, 00:00:00.880\u201301:11:30.400",
+      "locator": "Video page/description and full English automatic caption text, 00:00:00.880–01:11:30.400",
       "proof_limit": "Full automatic caption/transcript text read alongside all slides. Recognition errors are checked against slides and primary references; this is not a frame-by-frame audiovisual audit."
     },
     {
       "id": "lecture-8-slides",
       "kind": "external",
-      "title": "Vizuara \u00b7 The Attention Family \u00b7 Lecture 8 \u00b7 slides",
+      "title": "Vizuara · The Attention Family · Lecture 8 · slides",
       "url": "https://lecture8-attention-mechanisms.vercel.app/",
       "accessed_at": "2026-10-30",
       "locator": "Complete original Slidev presentation, 22 slides",
@@ -128,7 +152,7 @@
     {
       "id": "bahdanau",
       "kind": "external",
-      "title": "Bahdanau et al. \u00b7 Neural Machine Translation by Jointly Learning to Align and Translate",
+      "title": "Bahdanau et al. · Neural Machine Translation by Jointly Learning to Align and Translate",
       "url": "https://arxiv.org/abs/1409.0473",
       "accessed_at": "2026-10-30",
       "locator": "Alignment model and source-memory motivation",
@@ -137,7 +161,7 @@
     {
       "id": "luong",
       "kind": "external",
-      "title": "Luong et al. \u00b7 Effective Approaches to Attention-based Neural Machine Translation",
+      "title": "Luong et al. · Effective Approaches to Attention-based Neural Machine Translation",
       "url": "https://aclanthology.org/D15-1166/",
       "accessed_at": "2026-10-30",
       "locator": "Global attention and score alternatives",
@@ -146,29 +170,65 @@
     {
       "id": "transformer",
       "kind": "external",
-      "title": "Vaswani et al. \u00b7 Attention Is All You Need",
+      "title": "Vaswani et al. · Attention Is All You Need",
       "url": "https://arxiv.org/html/1706.03762v7",
       "accessed_at": "2026-10-30",
-      "locator": "Sections 3.2.1\u20133.2.3 and the scaling assumptions",
+      "locator": "Sections 3.2.1–3.2.3 and the scaling assumptions",
       "proof_limit": "Primary reference or textbook explanation inspected; not an experiment reproduced here."
     },
     {
       "id": "d2l",
       "kind": "external",
-      "title": "Dive into Deep Learning \u00b7 Attention Scoring Functions",
+      "title": "Dive into Deep Learning · Attention Scoring Functions",
       "url": "https://d2l.ai/chapter_attention-mechanisms-and-transformers/attention-scoring-functions.html",
       "accessed_at": "2026-10-30",
-      "locator": "Sections 11.3.2\u201311.3.4: masked normalization, scaled dot product, additive scoring",
+      "locator": "Sections 11.3.2–11.3.4: masked normalization, scaled dot product, additive scoring",
       "proof_limit": "Primary reference or textbook explanation inspected; not an experiment reproduced here."
     },
     {
       "id": "gqa",
       "kind": "external",
-      "title": "Ainslie et al. \u00b7 GQA, version 3",
+      "title": "Ainslie et al. · GQA, version 3",
       "url": "https://arxiv.org/abs/2305.13245v3",
       "accessed_at": "2026-10-30",
       "locator": "Abstract: MHA, intermediate grouped KV heads and MQA definitions only; model results not reproduced",
       "proof_limit": "Primary reference or textbook explanation inspected; not an experiment reproduced here."
+    },
+    {
+      "id": "mqa-paper",
+      "kind": "external",
+      "title": "Shazeer Fast Transformer Decoding v1",
+      "url": "https://arxiv.org/html/1911.02150v1",
+      "accessed_at": "2026-10-30",
+      "locator": "Sections 2–3 and incremental attention state",
+      "proof_limit": "Primary algorithm, not reproduced full-model quality or speed."
+    },
+    {
+      "id": "vizuara-heads",
+      "kind": "external",
+      "title": "Vizuara Inference Engineering Chapter 8",
+      "url": "https://vizuaraai.github.io/convolution-musical-journey/book.html",
+      "accessed_at": "2026-10-30",
+      "locator": "Sections 8.1–8.4; figures 8.1–8.3",
+      "proof_limit": "Original workshop visuals reviewed; no complete spoken audit of older DeepSeek videos."
+    },
+    {
+      "id": "gqa-v3",
+      "kind": "external",
+      "title": "Ainslie et al. GQA v3",
+      "url": "https://arxiv.org/html/2305.13245v3",
+      "accessed_at": "2026-10-30",
+      "locator": "Sections 2.1–2.2 and 3, grouping and conversion",
+      "proof_limit": "Primary method; full-model results not reproduced."
+    },
+    {
+      "id": "deepseek-v2",
+      "kind": "external",
+      "title": "DeepSeek-V2 MLA method",
+      "url": "https://arxiv.org/html/2405.04434v5",
+      "accessed_at": "2026-10-30",
+      "locator": "Sections 2.1.2–2.1.4; Figure 3",
+      "proof_limit": "Inspected teaching/method source; local component checks do not reproduce full-model quality or GPU performance."
     }
   ],
   "claims": [
@@ -201,6 +261,35 @@
       ],
       "status": "illustrative",
       "proof_limit": "Original small worked example and stated mathematical assumptions. Source review and executed author checks do not establish a trained model or learner mastery."
+    },
+    {
+      "id": "mqa-claim",
+      "text": "MQA keeps independent query heads and shares one key/value head; equal-parameter loop and broadcast computations agree.",
+      "status": "verified",
+      "source_ids": [
+        "mqa-paper",
+        "vizuara-heads"
+      ],
+      "proof_limit": "Declared local component and mathematical contract; no model-quality or speed result."
+    },
+    {
+      "id": "gqa-claim",
+      "text": "Contiguous equal groups select KV head floor(h/R); group endpoints are MQA and MHA, while mean-pooling conversion is not a general output-preserving identity.",
+      "status": "verified",
+      "source_ids": [
+        "gqa-v3",
+        "vizuara-heads"
+      ],
+      "proof_limit": "Exact grouping contract and local output/gradient/cache checks; no trained-quality claim."
+    },
+    {
+      "id": "mla-claim",
+      "text": "For fixed factorized coefficients, expanded and latent-domain MLA retrieval agree with decoupled positional scores; both latent and positional keys must be counted.",
+      "status": "verified",
+      "source_ids": [
+        "deepseek-v2"
+      ],
+      "proof_limit": "Stated mathematical assumptions and executed tiny reference; no learner, hosted or full-model result."
     }
   ],
   "entities": [],
@@ -208,44 +297,68 @@
   "chapters": [
     {
       "id": "heads",
-      "title": "1. Several independent mixtures, then one output",
+      "title": "8. Multi-head attention",
       "content_path": "lessons/01-independent-heads.md",
       "objective_ids": [
-        "heads"
-      ],
-      "diagram_ids": [],
-      "table_ids": [],
-      "scenario_ids": [],
-      "practice_ids": [
-        "heads-check"
-      ]
-    },
-    {
-      "id": "layout",
-      "title": "2. Pack independent heads without changing the operation",
-      "content_path": "lessons/02-packed-layout.md",
-      "objective_ids": [
-        "layout"
-      ],
-      "diagram_ids": [],
-      "table_ids": [],
-      "scenario_ids": [],
-      "practice_ids": [
-        "layout-check"
-      ]
-    },
-    {
-      "id": "boundary",
-      "title": "3. Keep head arrangements separate from other attention choices",
-      "content_path": "lessons/03-head-layout-boundaries.md",
-      "objective_ids": [
+        "heads",
+        "layout",
         "boundary"
       ],
       "diagram_ids": [],
       "table_ids": [],
       "scenario_ids": [],
       "practice_ids": [
+        "heads-check",
+        "layout-check",
         "boundary-check"
+      ]
+    },
+    {
+      "id": "mqa",
+      "title": "Multi-query attention: many questions, one stored memory",
+      "content_path": "lessons/02-multi-query-attention.md",
+      "objective_ids": [
+        "mqa-patterns",
+        "mqa-memory"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "mqa-patterns",
+        "mqa-memory"
+      ]
+    },
+    {
+      "id": "gqa",
+      "title": "Grouped-query attention: choose who shares memory",
+      "content_path": "lessons/03-grouped-query-attention.md",
+      "objective_ids": [
+        "gqa-map",
+        "gqa-conversion"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "gqa-map",
+        "gqa-conversion"
+      ]
+    },
+    {
+      "id": "mla",
+      "title": "Multi-head latent attention",
+      "content_path": "lessons/04-multi-head-latent-attention.md",
+      "objective_ids": [
+        "mla-absorb",
+        "mla-position"
+      ],
+      "diagram_ids": [],
+      "table_ids": [],
+      "scenario_ids": [],
+      "practice_ids": [
+        "mla-absorb",
+        "mla-position"
       ]
     }
   ],
@@ -287,6 +400,78 @@
       ],
       "claim_ids": [
         "boundary-claim"
+      ]
+    },
+    {
+      "id": "mqa-patterns",
+      "question": "If every head uses the same K and V, must its output be identical?",
+      "answer": "No. Distinct query vectors can give distinct score rows, softmax distributions and value mixtures. Equal queries and masks would give equal retrievals. Shared memory alone does not force equal queries.",
+      "rubric": "Explain the roles of Q versus K/V and use the scalar example.",
+      "objective_ids": [
+        "mqa-patterns"
+      ],
+      "claim_ids": [
+        "mqa-claim"
+      ]
+    },
+    {
+      "id": "mqa-memory",
+      "question": "At fixed head width, what happens when eight query heads share one KV head instead of eight?",
+      "answer": "The retained KV payload becomes one eighth as large. The query-head count remains eight; score calculations still exist for all eight. This is an architectural restriction, not a guarantee of unchanged pretrained-MHA outputs or eightfold wall-clock speed.",
+      "rubric": "Separate stored bytes, operation count, model behavior and measured latency.",
+      "objective_ids": [
+        "mqa-memory"
+      ],
+      "claim_ids": [
+        "mqa-claim"
+      ]
+    },
+    {
+      "id": "gqa-map",
+      "question": "For eight query heads and two contiguous KV groups, which KV head does query head 5 use?",
+      "answer": "Each group contains four query heads. floor(5/4)=1, so query head 5 uses KV head 1 in zero-based indexing. It must not be assigned by h mod G for this mapping.",
+      "rubric": "State the indexing convention and the complete grouping rule.",
+      "objective_ids": [
+        "gqa-map"
+      ],
+      "claim_ids": [
+        "gqa-claim"
+      ]
+    },
+    {
+      "id": "gqa-conversion",
+      "question": "Does mean-pooling an arbitrary pretrained MHA checkpoint into GQA preserve all outputs?",
+      "answer": "No. Sharing reduces independent K/V parameters, and softmax does not commute with averaging. Uptraining/evaluation is separate from the exact identity between grouped and expanded execution of an already specified GQA.",
+      "rubric": "Distinguish architecture conversion from equivalent execution and explain nonlinearity.",
+      "objective_ids": [
+        "gqa-conversion"
+      ],
+      "claim_ids": [
+        "gqa-claim"
+      ]
+    },
+    {
+      "id": "mla-absorb",
+      "question": "Can you average MHA heads and call the result an exact MLA conversion?",
+      "answer": "No. Absorption is exact inside a specified factorized model; choosing a low-rank bottleneck constrains the coefficients and requires separate adaptation/evaluation.",
+      "rubric": "Distinguish architecture approximation from algebraic associativity.",
+      "objective_ids": [
+        "mla-absorb"
+      ],
+      "claim_ids": [
+        "mla-claim"
+      ]
+    },
+    {
+      "id": "mla-position",
+      "question": "For B=1,T=10,r=4,dr=2,float32, what is retained per layer?",
+      "answer": "10*(4+2)*4=240 bytes of latent plus positional-key payload. Queries are not retained; metadata is additional.",
+      "rubric": "Include the positional key and distinguish payload from allocation.",
+      "objective_ids": [
+        "mla-position"
+      ],
+      "claim_ids": [
+        "mla-claim"
       ]
     }
   ],
