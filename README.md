@@ -1,5 +1,37 @@
 # AI Projects
 
+[Tutorial website](https://deepanshut041.github.io/ai_projects/) · [Documentation](docs/README.md)
+
+Clone the project catalog, tutorials and all five collections:
+
+```bash
+git clone --recurse-submodules https://github.com/deepanshut041/ai_projects.git
+cd ai_projects
+```
+
+Each runnable project has native setup/run/test commands in its README. The optional workspace CLI lives outside this repository. To preview the tutorials using Node.js 24:
+
+```bash
+cd docs/website
+npm ci
+npm run build
+npm run preview
+```
+
+GitHub Pages publishes the public build from `docs/website` on pushes to `main`. Docs is part of this repository; project collections retain their own histories. Datasets, weights, environments, private project notes and local-only videos are excluded.
+
+GitHub publication (2026-10-31): Docs is an ordinary tracked folder inside ai_projects. Publish the umbrella and its five independent collection repositories under deepanshut041; build GitHub Pages from docs/website at /ai_projects/. Preserve ignored private records and runtime assets. This changes hosting and Docs ownership only; learner and model checkpoints are unchanged.
+
+Standalone project execution (2026-10-31): all eight runnable projects support native commands and the optional workspace CLI/TUI. Clean standalone source checks and all eight workspace launch checks pass. Inference Labs also passes a fresh independent-clone check without its parent umbrella or CLI. Collection guidance and future scaffolds require both routes; Bike uses its native unittest runner through the adapter. Documentation-only projects, learner checkpoints and model results remain unchanged.
+
+TinyServe preparation (2026-10-30): Inference Labs is now an independent collection at `ai_projects/projects/inference_labs/`, with a learner-owned `tinyserve` boilerplate and local bare origin. Python 3.12.13, frozen tooling, status/setup/configuration launchers and Projects → Inference Labs TUI integration are verified. All 10 setup checks and 183 CLI tests pass; isolated wheel execution, a fresh source rebuild and six real TUI jobs at 80×24/120×36 pass. The learner will implement the model, cache, scheduler, kernels and API; no upstream engine is copied and no model/GPU/performance or learner gate is complete. Existing learner checkpoints remain unchanged. Next for TinyServe: choose the first small model and runtime when coding begins.
+
+Attention Labs worked visuals (2026-10-30): 27 original editable figures now fill the missing numerical and state transitions across all fourteen continuation tutorials. They explain retrieval weights, group wiring, positional changes, latent paths, softmax merges, sparse reach, recurrent writes, gate order, paged ownership and balanced ring rounds beside the matching math/code. Existing source visuals, Foundations, MHA and every reference program are preserved. There remain 22 lesson pages in eight categories. Learner/model/hosted checkpoints are unchanged.
+
+Attention Labs continuation (2026-10-30): fourteen complete tutorials now extend the existing seven Foundations lessons and single MHA lesson, giving 22 lesson pages in eight categories. The ordered route covers KV caching, MQA, GQA, RoPE, ALiBi, MLA, FlashAttention, sparse/local/global/windows, linear attention, Performer, DeltaNet, Gated DeltaNet, PagedAttention and Ring Attention. Each new mechanism has worked math, source visuals, a complete locally checked reference, Colab instructions and transfer practice. Public Vizuara lessons and primary sources supply the material; source diagram errors are explained alongside corrected calculations. Original Lecture 9 remains excluded. Learner/model/hosted checkpoints are unchanged.
+
+Attention Labs sequential revision (2026-10-30): Lectures 1–8 are revised in order across eight shared tutorial pages (seven Foundations lessons and one MHA lesson in Attention Heads), following the teacher's problem, diagrams, worked calculations and code progression. The lessons include 131 presentation/lab captures with explained bars, matrices and axes, restored six-word/five-word examples and runnable Colab-compatible references. Repeated provenance captions and four extra provenance JSON files are removed; attribution stays in references. Lecture 9 is excluded, MHA stays in Attention Heads, and model/learner/hosted checkpoints are unchanged.
+
 Projects Docs navigation (2026-10-30): the homepage and sidebar now separate Project Docs from Tutorials, with Foundations, Transformer Labs, Language Models, Quantization Lab and Attention Labs collections in both sections. Tutorial collection pages preserve all existing course/chapter URLs and authored ordering; record search has its own page. All 808 tutorial files are byte-preserved. Project, learner and hosted checkpoints are unchanged.
 
 Attention Labs visual revision (2026-10-30): all ten Attention Foundations/Heads lessons now include 27 attributed diagram screenshots captured in Chrome from the presentation websites linked by the original lectures. Each appears beside its matching explanation with a full-size link and exact slide provenance; complete previews avoid cropped blank margins on mobile. The checked numerical examples and authored figures are retained, source-example differences and simplified claims are explained, and Lecture 9 remains excluded. Project implementations and learner/hosted checkpoints are unchanged.
@@ -9,6 +41,18 @@ Attention Foundations project preparation (2026-10-30): the existing attention-l
 Attention Labs preparation (2026-10-30): Attention Labs is an independent collection repository/submodule with one attention-foundations folder for Lectures 1–7 and a separate attention-heads folder for MHA and later GQA. Ten detailed lessons live in the shared Docs tutorials/projects/attention-labs tree. All eight English automatic subtitle/transcript texts and all 181 original slides were reviewed; each included lecture retains its original presentation viewer/link. The explanations, numerical fixtures, diagrams and Python/C++ references are original. Lecture 9 is excluded. Existing model source and learner/hosted checkpoints are unchanged.
 
 Collection ownership (2026-10-30): Foundations, Transformer Labs and Quantization Lab are independent Git repositories, registered as submodules at `ai_projects/projects/{foundations,transformer-labs,quantization-lab}`. Individual projects remain ordinary folders inside their collection. Language Models remains owned directly by ai_projects. Local bare origins live in workspace `.ai/repositories/`. Commit collection changes first, copy new commits to the local origin with `git push origin main`, then commit the updated gitlinks in ai_projects. Existing source, environments, private records, learner checkpoints and the Docs submodule are preserved. This supersedes earlier ordinary-collection ownership guidance.
+
+Attention four-row example (2026-10-27): The tutorial now uses “We read books daily” with all four chosen binary pairs, including `[0,0]`. Dependent arithmetic, complete programs, diagrams and continuous notes are recalculated together. A real zero row is distinguished from masked padding. Videos remain removed; model source and learner/hosted checkpoints are unchanged.
+
+Attention tutorial progression (2026-10-26): The learner positively reviewed the detailed explanation and requested an overview followed by progressively deeper passes. The entry now shows the whole translation process, explains component jobs before naming them, locates attention and maps the chapter progression before opening numerical inputs. Accepted detailed calculations and all ten complete programs are retained; videos remain removed. Source and learner/hosted checkpoints are unchanged.
+
+Document Assistant videos delivered (2026-10-26): All 24 captioned companions are delivered across phases 00–06: 156 editable worked scenes and 89:54 of finished video. Each verified local player appears before its matching lesson prose, with captions, transcript and download links. The route includes worked maths, complete displayed Python/C++ references, the actual scaffold helper chain and changed-condition reasoning. Finished-file speech/audio/captions and every-video root/prefixed/managed-reader desktop/mobile play, pause, seeking, transcript/download and print checks pass. All 241 pinned source files are byte-preserved. Actual Gemma/backend compatibility, full-model quantization/evaluation, the application, learner mastery and hosted execution remain pending. See the [existing production record](docs/implementation/2026-10/document-assistant-all-phase-captioned-videos/00-resume.md).
+
+Document Assistant tutorial (2026-10-26): [Document Assistant](docs/tutorials/projects/document-assistant/quantization-lab/v1/lessons/01-start.md) now has a complete written route across all seven planned phases: 24 connected lessons, worked maths, complete executable Python/C++ references, ten original figures, revealable practice and implementation/readiness records. Declared references and 66 independent/extraction checks pass. The existing project remains runnable boilerplate; model/backend compatibility, data, full-model quantization/evaluation, application, learner review and hosted execution remain pending. Written preparation preserves Attention/Bike evidence and the current learning checkpoint.
+
+## Attention approved text and new section videos — 2026-10-24
+
+The learner explicitly approved the rewritten text before video production on 24 October 2026. Eleven new captioned videos contain 86 scenes and 47:02 of narration and worked visuals. They follow the same fixed example from the need for context through query/key comparisons, all positions, projections, heads, padding, causality, cross-attention, a gradient update, the complete actual implementation and its place in the Transformer. Every called project helper is shown before use. Each verified player appears before its matching notes section, with the same media in eleven corresponding tutorial chapters. Finished-file audio/speech/captions and root/prefixed desktop/mobile play, pause, seeking, transcript/download and print checks pass. The approved teaching body is preserved; only delivery-status footers reflect approval. Old rejected media remains archived. Attention source, Colab behavior and Bike results are unchanged; learner mastery, later model/training and hosted execution remain separate.
 
 Attention code-understanding revision (2026-10-23): project notes contain seven focused implementation/value walkthroughs and fuller private/shared learning points. Seven captioned code videos (42 scenes, about 24 minutes) are verified and play before their matching notes sections, with the same media available in seven matching tutorial chapters. Numerical/source checks, finished-file speech/audio/captions and actual root/prefixed desktop/mobile play/pause/seeking checks pass. Source, Colab behavior and Bike results are preserved; learner review and later translation/training/hosted gates remain pending.
 
@@ -87,6 +131,8 @@ P00 learning entry (2026-10-09): begin with [Lesson 1 — make one prediction](d
 
 Future tutorial standard (2026-10-09): the canonical workspace `$developer-learning-tutorials` skill now carries the integrated P00 teaching contract, maths-at-first-use guidance, practical lesson/project templates and a four-pass review. New topic scaffolds use one lessons/ route and a project area; lesson count follows scope. P00-M1 and its next learner action remain unchanged.
 
+
+Quantization Lab preparation (2026-10-26): both [Quantization Lab](projects/quantization-lab/README.md) projects now have runnable Python boilerplates, independent Python 3.12.13 environments, locked tooling and pinned Gemma 4 / EmbeddingGemma 2 configuration. All 19 scaffold checks, source/wheel builds and isolated installed checks pass. Model/backend compatibility, acquisition, quantization, task evaluation and applications remain pending. The current learning checkpoint is unchanged. Both projects are available in Projects → Quantization Lab in the workspace TUI, with status/setup/configuration runners.
 
 ## Current project context
 

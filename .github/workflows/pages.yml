@@ -1,0 +1,53 @@
+name: Publish tutorials to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: docs/website/package-lock.json
+      - run: npm ci
+        working-directory: docs/website
+      - run: npm test
+        working-directory: docs/website
+      - name: Build public tutorials and project overviews
+        run: npm run build
+        working-directory: docs/website
+        env:
+          SITE_BASE: /ai_projects/
+          SITE_REPOSITORY: deepanshut041/ai_projects
+          COMPANION_URL: ''
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/website/dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
